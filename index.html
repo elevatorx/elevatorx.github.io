@@ -41,21 +41,19 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=98">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=98">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=98">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=98">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=98">
+<link rel="manifest" href="/manifest.webmanifest?v=98">
 
-
-
-
-<link rel="icon" type="image/png" href="elevatorx-icon-v69.png?v=96">
-<link rel="apple-touch-icon" href="elevatorx-icon-v69.png?v=96">
-<link rel="apple-touch-icon" sizes="180x180" href="elevatorx-icon-v69.png?v=96">
-
+<meta name="theme-color" content="#f6f7fb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="ElevatorX">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ElevatorX">
-<link rel="manifest" href="manifest.webmanifest?v=96">
-<meta name="theme-color" content="#f6f7fb">
-<meta name="mobile-web-app-capable" content="yes">
-
 
 <style>
 html.darkRoot{
@@ -4824,28 +4822,137 @@ background:#374151;
 
 
 
-/* Paket v95 — Alt bar yenileme */
+/* Paket v93 — Alt bar + üst arama filtre premium cila */
+.searchRow{
+position:relative!important;
+gap:10px!important;
+align-items:center!important;
+margin:14px 0 14px!important;
+}
+
+#arama{
+height:60px!important;
+padding:0 18px 0 48px!important;
+border-radius:22px!important;
+border:1px solid rgba(226,232,240,.95)!important;
+background:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 17px center,
+linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.98))!important;
+box-shadow:
+0 12px 30px rgba(15,23,42,.06),
+inset 0 1px 0 rgba(255,255,255,.95)!important;
+font-size:16px!important;
+font-weight:750!important;
+letter-spacing:-.15px!important;
+color:#0f172a!important;
+outline:none!important;
+transition:border-color .22s ease, box-shadow .22s ease, transform .16s ease!important;
+}
+
+#arama::placeholder{
+color:#9aa4b2!important;
+font-weight:700!important;
+}
+
+#arama:focus{
+border-color:rgba(59,130,246,.42)!important;
+box-shadow:
+0 14px 34px rgba(37,99,235,.10),
+0 0 0 4px rgba(59,130,246,.10),
+inset 0 1px 0 rgba(255,255,255,.98)!important;
+}
+
+.filterBtn{
+width:112px!important;
+height:60px!important;
+border:none!important;
+border-radius:22px!important;
+background:linear-gradient(180deg,#ffffff,#f8fbff)!important;
+border:1px solid rgba(226,232,240,.95)!important;
+color:#2563eb!important;
+font-size:16px!important;
+font-weight:900!important;
+letter-spacing:-.2px!important;
+box-shadow:
+0 12px 30px rgba(15,23,42,.06),
+inset 0 1px 0 rgba(255,255,255,.95)!important;
+transition:transform .16s ease, box-shadow .22s ease, border-color .22s ease, color .22s ease!important;
+}
+
+.filterBtn:active{
+transform:scale(.97)!important;
+box-shadow:0 8px 22px rgba(15,23,42,.08)!important;
+}
+
+.aiBtn{
+width:60px!important;
+height:60px!important;
+border-radius:22px!important;
+border:1px solid rgba(255,255,255,.9)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(245,247,251,.94))!important;
+box-shadow:
+0 12px 32px rgba(15,23,42,.08),
+0 16px 34px rgba(59,130,246,.08),
+inset 0 1px 0 rgba(255,255,255,.96)!important;
+transition:transform .16s ease, box-shadow .22s ease!important;
+}
+
+.aiBtn img{
+width:42px!important;
+height:42px!important;
+border-radius:16px!important;
+box-shadow:
+0 0 18px rgba(99,102,241,.22),
+0 0 28px rgba(59,130,246,.14)!important;
+}
+
+.aiBtn:active{
+transform:scale(.96)!important;
+}
+
+.filterPanel{
+margin-top:6px!important;
+padding:12px!important;
+border-radius:22px!important;
+background:rgba(255,255,255,.76)!important;
+border:1px solid rgba(226,232,240,.95)!important;
+box-shadow:0 18px 38px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.92)!important;
+backdrop-filter:blur(20px) saturate(145%)!important;
+-webkit-backdrop-filter:blur(20px) saturate(145%)!important;
+}
+
+.filterChip{
+background:rgba(248,250,252,.92)!important;
+border:1px solid rgba(226,232,240,.92)!important;
+border-radius:15px!important;
+font-weight:850!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+
+.filterChip.active{
+background:linear-gradient(180deg,#eff6ff,#dbeafe)!important;
+border-color:rgba(96,165,250,.75)!important;
+color:#1d4ed8!important;
+box-shadow:0 10px 20px rgba(59,130,246,.12), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
 .tabbar{
 position:fixed!important;
 left:50%!important;
 transform:translateX(-50%)!important;
 bottom:calc(10px + env(safe-area-inset-bottom))!important;
-width:min(388px,calc(100vw - 22px))!important;
-height:76px!important;
-display:grid!important;
-grid-template-columns:1fr 1fr 72px 1fr!important;
-align-items:end!important;
-justify-items:center!important;
-padding:0 12px 8px!important;
-border-radius:30px!important;
-border:1px solid rgba(255,255,255,.9)!important;
-background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,250,253,.92))!important;
+width:min(390px,calc(100vw - 24px))!important;
+height:86px!important;
+padding:0 14px 10px!important;
+border-radius:32px!important;
+border:1px solid rgba(255,255,255,.84)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(246,248,252,.85))!important;
 box-shadow:
-0 16px 36px rgba(15,23,42,.10),
-0 6px 14px rgba(15,23,42,.05),
-inset 0 1px 0 rgba(255,255,255,.97)!important;
-backdrop-filter:blur(22px) saturate(150%)!important;
--webkit-backdrop-filter:blur(22px) saturate(150%)!important;
+0 20px 50px rgba(15,23,42,.14),
+0 10px 22px rgba(15,23,42,.06),
+inset 0 1px 0 rgba(255,255,255,.96)!important;
+backdrop-filter:blur(26px) saturate(165%)!important;
+-webkit-backdrop-filter:blur(26px) saturate(165%)!important;
 overflow:visible!important;
 }
 
@@ -4853,39 +4960,19 @@ overflow:visible!important;
 content:"";
 position:absolute;
 inset:1px;
-border-radius:29px;
+border-radius:31px;
 pointer-events:none;
-background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 44%);
+background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 36%);
 opacity:.9;
-}
-
-.tabbar .tabGap{
-width:72px!important;
-height:1px!important;
-pointer-events:none!important;
 }
 
 .tabbar .tabItem{
 position:relative!important;
-width:100%!important;
-min-width:0!important;
-height:58px!important;
-display:flex!important;
-flex-direction:column!important;
-align-items:center!important;
-justify-content:flex-end!important;
-padding:0 0 7px!important;
-margin:0!important;
-border-radius:18px!important;
+height:64px!important;
+padding:0 0 8px!important;
+border-radius:22px!important;
+transition:transform .16s ease, color .18s ease, opacity .18s ease!important;
 color:#7b8494!important;
-transition:transform .14s ease,color .18s ease,opacity .18s ease!important;
-transform:none!important;
-}
-
-.tabbar .tabItem[data-tab="bakim"],
-.tabbar .tabItem[data-tab="apartman"],
-.tabbar .tabItem[data-tab="profil"]{
-transform:none!important;
 }
 
 .tabbar .tabItem:active{
@@ -4893,100 +4980,107 @@ transform:translateY(1px) scale(.985)!important;
 }
 
 .tabbar .tabItem.activeTab{
-color:#2f6fed!important;
+color:#2563eb!important;
 }
 
 .tabbar .tabItem.activeTab::before{
 content:"";
 position:absolute;
-left:6px; right:6px; top:7px; bottom:2px;
-border-radius:16px;
-background:linear-gradient(180deg,rgba(59,130,246,.10),rgba(59,130,246,.04));
-border:1px solid rgba(191,219,254,.7);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.82);
+left:8px; right:8px; top:8px; bottom:3px;
+border-radius:18px;
+background:linear-gradient(180deg,rgba(59,130,246,.11),rgba(59,130,246,.05));
+border:1px solid rgba(147,197,253,.45);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.75);
 z-index:0;
 }
 
 .tabbar .tabIcon,
-.tabbar .tabText{position:relative!important;z-index:1!important}
+.tabbar .tabText{
+position:relative!important;
+z-index:1!important;
+}
 
 .tabbar .tabIcon{
-width:23px!important;
-height:23px!important;
-margin:0 0 4px!important;
+width:24px!important;
+height:24px!important;
+margin:0 0 5px!important;
 }
 
 .tabbar .tabText{
-font-size:11px!important;
-font-weight:860!important;
-letter-spacing:-.12px!important;
-line-height:1.02!important;
-white-space:nowrap!important;
-text-align:center!important;
+font-size:12px!important;
+font-weight:880!important;
+letter-spacing:-.15px!important;
 }
 
 .tabbar .middleButton{
-position:absolute!important;
-left:50%!important;
-top:-14px!important;
-transform:translateX(-50%)!important;
-width:56px!important;
-height:56px!important;
+width:64px!important;
+height:64px!important;
+top:-19px!important;
 border-radius:50%!important;
-background:linear-gradient(180deg,#5d92ff,#3c74f1)!important;
-border:3px solid rgba(247,249,252,.98)!important;
+background:linear-gradient(180deg,#4f8cff,#2f6fed)!important;
+border:4px solid rgba(245,247,251,.96)!important;
 box-shadow:
-0 14px 28px rgba(47,111,237,.24),
-0 6px 14px rgba(15,23,42,.10),
-inset 0 1px 0 rgba(255,255,255,.42)!important;
-font-size:34px!important;
+0 16px 34px rgba(47,111,237,.34),
+0 8px 18px rgba(15,23,42,.12),
+inset 0 1px 0 rgba(255,255,255,.45)!important;
+font-size:38px!important;
 font-weight:300!important;
-line-height:1!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-z-index:3!important;
 }
 
 .tabbar .middleButton::after{
 content:"";
 position:absolute;
-inset:-5px;
+inset:-6px;
 border-radius:50%;
 pointer-events:none;
-border:1px solid rgba(191,219,254,.45);
+border:1px solid rgba(191,219,254,.55);
 }
 
 .tabbar .middleButton:active{
 transform:translateX(-50%) scale(.94)!important;
 }
 
+body.darkMode #arama{
+background:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 17px center,
+linear-gradient(180deg,rgba(21,27,38,.96),rgba(15,20,29,.96))!important;
+border-color:rgba(255,255,255,.08)!important;
+color:#f8fafc!important;
+box-shadow:0 12px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #arama::placeholder{color:#7c8797!important}
+
+body.darkMode #arama:focus{
+border-color:rgba(96,165,250,.45)!important;
+box-shadow:0 14px 34px rgba(0,0,0,.28), 0 0 0 4px rgba(59,130,246,.12), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .filterBtn,
+body.darkMode .aiBtn,
+body.darkMode .filterPanel,
 body.darkMode .tabbar{
-background:linear-gradient(180deg,rgba(21,27,38,.94),rgba(15,20,29,.94))!important;
+background:linear-gradient(180deg,rgba(21,27,38,.92),rgba(15,20,29,.92))!important;
 border-color:rgba(255,255,255,.08)!important;
 box-shadow:0 16px 34px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.05)!important;
 }
 
-body.darkMode .tabbar .tabItem{color:#98a5b4!important}
-body.darkMode .tabbar .tabItem.activeTab{color:#84b8ff!important}
-body.darkMode .tabbar .tabItem.activeTab::before{
-background:linear-gradient(180deg,rgba(37,99,235,.15),rgba(37,99,235,.07))!important;
-border-color:rgba(59,130,246,.26)!important;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
-}
-body.darkMode .tabbar .middleButton{border-color:rgba(18,24,35,.96)!important}
+body.darkMode .filterBtn{color:#7db2ff!important}
+body.darkMode .filterChip{background:#111722!important;border-color:#263241!important;color:#a7b0bf!important}
+body.darkMode .filterChip.active{background:linear-gradient(180deg,#10243f,#16335a)!important;border-color:#24589b!important;color:#8fc0ff!important}
+body.darkMode .tabbar .tabItem{color:#96a2b2!important}
+body.darkMode .tabbar .tabItem.activeTab{color:#7db2ff!important}
+body.darkMode .tabbar .tabItem.activeTab::before{background:linear-gradient(180deg,rgba(37,99,235,.16),rgba(37,99,235,.08))!important;border-color:rgba(59,130,246,.32)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important}
+body.darkMode .tabbar .middleButton{border-color:rgba(17,23,34,.95)!important}
 
 @media(max-width:430px){
-.tabbar{
-width:min(392px,calc(100vw - 18px))!important;
-height:74px!important;
-grid-template-columns:1fr 1fr 70px 1fr!important;
-padding:0 10px 8px!important;
-}
-.tabbar .tabGap{width:70px!important}
-.tabbar .tabItem{height:56px!important}
-.tabbar .tabText{font-size:10.5px!important}
-.tabbar .middleButton{width:54px!important;height:54px!important;top:-13px!important;font-size:33px!important}
+.searchRow{gap:8px!important}
+#arama{height:58px!important;padding-left:46px!important}
+.filterBtn{width:104px!important;height:58px!important;font-size:15px!important}
+.aiBtn{width:58px!important;height:58px!important;border-radius:21px!important}
+.aiBtn img{width:40px!important;height:40px!important}
+.tabbar{width:min(392px,calc(100vw - 20px))!important;height:84px!important;padding-bottom:10px!important}
+.tabbar .middleButton{width:62px!important;height:62px!important;font-size:37px!important}
 }
 
 </style>
@@ -4997,7 +5091,7 @@ OneSignalDeferred.push(async function(OneSignal) {
   try {
     await OneSignal.init({
       appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "OneSignalSDKWorker.js",
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
       serviceWorkerParam: {
         scope: "/"
       },
@@ -5022,7 +5116,7 @@ OneSignalDeferred.push(async function(OneSignal) {
   try {
     await OneSignal.init({
       appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "OneSignalSDKWorker.js",
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
       serviceWorkerParam: {
         scope: "/"
       },
@@ -5081,7 +5175,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="elevatorx-icon-v69.png?v=96" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=98" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5091,7 +5185,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="elevatorx-icon-v69.png?v=96" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=98" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5425,8 +5519,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.0.96";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=96", location.href).href;
+const APP_VERSION = "v1.0.99";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=75", location.href).href;
 
 function hideSplash(){
 
@@ -8326,8 +8420,9 @@ logo:pdfProfilLogo()
 
 function odemeMakbuzuPdf(i){
 
-let a = data[i];
+haptic("medium");
 
+let a = data[i];
 if(!a) return;
 
 let profil = profilBilgileri();
@@ -8341,15 +8436,19 @@ new Date().getFullYear() +
 "-" +
 String(i + 1).padStart(4,"0");
 
-let odemeTarihi =
-a.odemeTarihi || bugun();
-
+let odemeTarihi = a.odemeTarihi || bugun();
 
 let pdfMarka = pdfFirmaBilgi();
-let pdfFirma = pdfMarka.firma;
+let pdfFirma = pdfMarka.firma || servisFirma;
 let pdfLogo = pdfMarka.logo;
-let pdfSorumlu = pdfMarka.ad;
-let pdfTel = pdfMarka.telefon;
+let pdfSorumlu = pdfMarka.ad || servisAd;
+let pdfTel = pdfMarka.telefon || servisTel;
+
+let aptAd = ayHtml(a.ad || "-");
+let yonetici = ayHtml(a.yonetici || "-");
+let telefon = ayHtml(a.tel || "-");
+let odeme = ayHtml(odemeTarihi);
+let tutar = `${Number(a.ucret || 0).toLocaleString("tr-TR")} ₺`;
 
 let w = window.open("");
 
@@ -8358,157 +8457,141 @@ toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.")
 return;
 }
 
+w.document.open();
 w.document.write(`
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ödeme Makbuzu - ElevatorX</title>
-
+<title>Ödeme Alındı Makbuzu - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:26px}
-.page{max-width:840px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
-.topBand{height:10px;background:linear-gradient(90deg,#007aff,#60a5fa,#34c759)}
-.header{padding:28px 30px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
-.brand{display:flex;align-items:center;gap:14px}.brand img{width:52px;height:52px;border-radius:16px;object-fit:cover}.brandTitle{font-size:25px;font-weight:900;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:700;margin-top:2px}
-.reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
-.titleBox{padding:26px 30px 18px}.docTitle{font-size:30px;font-weight:900;letter-spacing:-.6px;margin:0}.docDesc{margin:8px 0 0;color:#6b7280;font-size:15px;line-height:1.45}
-.statusBox{margin:8px 30px 24px;border-radius:22px;padding:18px;display:flex;gap:14px;align-items:flex-start}.statusBlue{background:#eff6ff;border:1px solid #dbeafe}.statusGreen{background:#eaf8f0;border:1px solid #c9efd7}
-.statusIcon{width:36px;height:36px;border-radius:50%;color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;flex-shrink:0}.iconBlue{background:#007aff}.iconGreen{background:#34c759}
-.statusTitle{font-size:18px;font-weight:900;margin-bottom:4px}.titleBlue{color:#1d4ed8}.titleGreen{color:#168a3a}.statusText{font-size:14px;line-height:1.45;color:#4b5563}
-.infoGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 30px 26px}.infoCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:16px;min-height:78px}.label{font-size:12px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;color:#8a94a6;margin-bottom:7px}.value{font-size:18px;font-weight:850;color:#111827;line-height:1.25;word-break:break-word}.amountCard{grid-column:1/-1;background:linear-gradient(135deg,#effaf3,#f8fffb);border-color:#d6f4df}.amountCard .value{font-size:32px;color:#168a3a}
-.noteBox{margin:0 30px 28px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;padding:18px}.noteTitle{font-size:14px;font-weight:900;color:#111827;margin-bottom:8px}.noteText{font-size:14px;color:#4b5563;line-height:1.6;white-space:pre-wrap}
-.checkList{margin:0 30px 28px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.checkItem{background:#fff;border:1px solid #edf0f5;border-radius:16px;padding:13px 14px;font-size:13px;font-weight:800;color:#4b5563;display:flex;align-items:center;gap:9px}.checkDot{width:18px;height:18px;border-radius:50%;background:#eaf8f0;color:#22a859;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 30px 26px}.summaryCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:16px}.summaryLabel{font-size:12px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;color:#8a94a6;margin-bottom:8px}.summaryValue{font-size:26px;font-weight:950;letter-spacing:-.5px;color:#111827}
-.section{margin:0 30px 18px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;overflow:hidden}.sectionTitle{padding:16px 18px;font-size:17px;font-weight:950;border-bottom:1px solid #edf0f5;background:#fff}.list{padding:14px 18px;font-size:14px;color:#4b5563;line-height:1.8}.listItem{padding:7px 0;border-bottom:1px solid rgba(229,231,235,.8)}.listItem:last-child{border-bottom:none}.empty{color:#9ca3af;font-style:italic}
-.signatureArea{padding:6px 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:22px}.signatureBox{border-top:1.5px solid #cfd5df;padding-top:10px;font-size:13px;color:#6b7280;font-weight:800;text-align:center}
-.footer{background:#f8fafc;padding:18px 30px;display:flex;justify-content:space-between;gap:16px;font-size:12px;color:#8a94a6;line-height:1.5;border-top:1px solid #eef0f4;margin-top:10px}.printBtn{position:fixed;right:24px;bottom:24px;background:#007aff;color:white;border:none;border-radius:999px;padding:14px 20px;font-size:15px;font-weight:900;box-shadow:0 12px 28px rgba(0,122,255,.28)}
-@page{size:A4;margin:7mm}
-.pdfBackBtn{position:fixed;left:16px;top:16px;z-index:9999;border:none;border-radius:999px;background:#ffffff;color:#111827;padding:12px 16px;font-size:15px;font-weight:900;box-shadow:0 10px 30px rgba(15,23,42,.16)}
-@media print{html,body{background:#fff!important;padding:0!important;margin:0!important;zoom:.72}.page{max-width:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}.topBand{height:5px!important}.header{padding:12px 18px 10px!important}.brandTitle{font-size:18px!important}.brandSub{font-size:10.5px!important}.reportMeta{font-size:10px!important}.titleBox{padding:12px 18px 8px!important}.docTitle{font-size:22px!important}.docDesc{font-size:12px!important;margin-top:4px!important}.statusBox{margin:6px 18px 10px!important;padding:10px!important;border-radius:14px!important}.statusIcon{width:26px!important;height:26px!important;font-size:15px!important}.statusTitle{font-size:14px!important}.statusText{font-size:11.5px!important;line-height:1.32!important}.infoGrid{padding:0 18px 10px!important;gap:7px!important}.infoCard{padding:9px 10px!important;min-height:auto!important;border-radius:12px!important}.label{font-size:9.5px!important;margin-bottom:3px!important}.value{font-size:13px!important}.amountCard .value,.summaryValue{font-size:20px!important}.noteBox{margin:0 18px 10px!important;padding:10px!important;border-radius:12px!important}.noteTitle{font-size:11px!important;margin-bottom:4px!important}.noteText,.list{font-size:10.5px!important;line-height:1.35!important}.checkList{margin:0 18px 10px!important;gap:6px!important}.checkItem{padding:7px 8px!important;font-size:10.5px!important;border-radius:10px!important}.checkDot{width:14px!important;height:14px!important;font-size:9px!important}.signatureArea{padding:4px 18px 10px!important;gap:12px!important}.signatureBox{font-size:10px!important;padding-top:6px!important}.footer{padding:8px 18px!important;font-size:9.5px!important}.summaryGrid{padding:0 18px 10px!important;gap:7px!important}.summaryCard{padding:10px!important;border-radius:12px!important}.summaryLabel{font-size:9.5px!important;margin-bottom:3px!important}.section{margin:0 18px 8px!important;border-radius:12px!important}.sectionTitle{padding:8px 10px!important;font-size:12px!important}.list{padding:7px 10px!important}.listItem{padding:3px 0!important}.printBtn,.pdfBackBtn{display:none!important}}
-@media(max-width:720px){body{padding:14px}.header,.footer{flex-direction:column;align-items:flex-start;text-align:left}.reportMeta{text-align:left}.summaryGrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){.infoGrid,.checkList,.signatureArea{grid-template-columns:1fr}.signatureArea{gap:34px}}
-@media(max-width:480px){.summaryGrid{grid-template-columns:1fr}}
-
-/* PDF one page + back button fix v73 */
-.backBtn{position:fixed;left:16px;top:16px;z-index:9999;border:none;border-radius:999px;background:#fff;color:#111827;padding:11px 15px;font-size:14px;font-weight:900;box-shadow:0 10px 30px rgba(15,23,42,.16)}
-@page{size:A4;margin:6mm}
+:root{--ink:#0f172a;--muted:#64748b;--line:#dbe5ef;--soft:#f8fafc;--green:#16a34a;--green2:#22c55e;--blue:#2563eb}
+html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#0b1120;color:var(--ink)}
+body{padding:18px}
+.screenTop{max-width:850px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff}
+.screenTop h1{font-size:22px;margin:0;font-weight:900;letter-spacing:-.4px}
+.screenBtn{border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;padding:11px 15px;font-weight:900;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.paper{width:min(100%,850px);margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.accent{height:7px;background:linear-gradient(90deg,#60a5fa,#2563eb,#22c55e)}
+.inner{padding:24px 28px 22px}
+.header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:15px;object-fit:cover;border:1px solid var(--line)}
+.brandTitle{font-size:23px;font-weight:950;letter-spacing:-.35px}
+.brandSub{font-size:12px;color:var(--muted);font-weight:750;margin-top:3px}
+.meta{text-align:right;font-size:12px;color:var(--muted);line-height:1.45;font-weight:750}.meta b{color:var(--ink)}
+.hero{margin:18px 0 14px;border-radius:24px;background:linear-gradient(135deg,#ecfdf5,#f8fffb);border:1px solid #bbf7d0;padding:20px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:center}
+.kicker{display:inline-flex;border-radius:999px;background:#dcfce7;color:#15803d;padding:7px 11px;font-size:10.5px;font-weight:950;letter-spacing:.35px;text-transform:uppercase;margin-bottom:10px}
+.title{font-size:27px;font-weight:950;letter-spacing:-.7px;margin:0}
+.desc{font-size:12.5px;line-height:1.45;color:#475569;margin:6px 0 0}
+.amountBox{background:#fff;border:1px solid #bbf7d0;border-radius:20px;padding:15px 16px;text-align:right;box-shadow:0 10px 22px rgba(22,163,74,.08)}
+.amountLabel{font-size:10px;color:#64748b;font-weight:950;text-transform:uppercase;letter-spacing:.35px;margin-bottom:7px}
+.amountValue{font-size:32px;line-height:1;font-weight:950;color:#15803d;letter-spacing:-.7px}
+.statusLine{margin-top:8px;font-size:12px;font-weight:850;color:#15803d}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:10px 12px}
+.label{font-size:9.5px;font-weight:950;color:#8a94a6;text-transform:uppercase;letter-spacing:.28px;margin-bottom:5px}
+.value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}
+.note{border:1px solid #dbeafe;background:linear-gradient(180deg,#f8fbff,#f1f7ff);border-radius:18px;padding:13px 15px;margin-top:12px}
+.noteTitle{font-size:12px;font-weight:950;margin-bottom:5px}.noteText{font-size:12px;color:#475569;line-height:1.45}
+.signature{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.signBox{border-top:1.6px solid #cbd5e1;text-align:center;padding-top:9px;color:#64748b;font-size:11.5px;font-weight:850;line-height:1.35}
+.footer{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;border-top:1px solid var(--line);margin-top:16px;padding-top:10px;color:#94a3b8;font-size:9.5px;line-height:1.35}
+.actionBar{max-width:850px;margin:14px auto 0;display:flex;justify-content:flex-end}
+.printBtn{border:0;border-radius:16px;background:#16a34a;color:#fff;font-weight:950;padding:13px 18px;box-shadow:0 15px 30px rgba(22,163,74,.26)}
+@page{size:A4;margin:0}
 @media print{
-html,body{background:#fff!important;margin:0!important;padding:0!important;zoom:.56!important}
-.page{max-width:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important;overflow:hidden!important}
-.topBand{height:4px!important}
-.header{padding:7px 13px 6px!important;gap:8px!important}
-.brand{gap:8px!important}
-.brand img{width:32px!important;height:32px!important;border-radius:10px!important;object-fit:cover!important}
-.brandTitle{font-size:15px!important;letter-spacing:-.2px!important}
-.brandSub{font-size:8.8px!important;margin-top:1px!important}
-.reportMeta{font-size:8.5px!important;line-height:1.25!important}
-.titleBox{padding:7px 13px 5px!important}
-.docTitle{font-size:18.5px!important;letter-spacing:-.25px!important}
-.docDesc{font-size:9.3px!important;line-height:1.18!important;margin-top:3px!important}
-.statusBox{margin:4px 13px 6px!important;padding:7px!important;border-radius:10px!important;gap:7px!important}
-.statusIcon{width:21px!important;height:21px!important;font-size:11px!important}
-.statusTitle{font-size:11.5px!important;margin-bottom:1px!important}
-.statusText{font-size:9px!important;line-height:1.15!important}
-.infoGrid{grid-template-columns:repeat(3,1fr)!important;padding:0 13px 6px!important;gap:4px!important}
-.infoCard{padding:6px 7px!important;min-height:34px!important;border-radius:9px!important}
-.amountCard{grid-column:auto!important}
-.label{font-size:7.4px!important;margin-bottom:1px!important;letter-spacing:.1px!important}
-.value{font-size:10.3px!important;line-height:1.08!important}
-.amountCard .value,.summaryValue{font-size:15px!important}
-.noteBox{margin:0 13px 6px!important;padding:7px!important;border-radius:9px!important}
-.noteTitle{font-size:8.8px!important;margin-bottom:2px!important}
-.noteText,.list{font-size:8.4px!important;line-height:1.15!important}
-.checkList{margin:0 13px 6px!important;grid-template-columns:repeat(2,1fr)!important;gap:3px!important}
-.checkItem{padding:4px 5px!important;font-size:8.2px!important;border-radius:7px!important;gap:4px!important}
-.checkDot{width:10px!important;height:10px!important;font-size:6.5px!important}
-.signatureArea{padding:2px 13px 6px!important;gap:8px!important}
-.signatureBox{font-size:7.8px!important;padding-top:3px!important}
-.footer{padding:5px 13px!important;font-size:7.6px!important;line-height:1.15!important;margin-top:2px!important}
-.summaryGrid{grid-template-columns:repeat(3,1fr)!important;padding:0 13px 6px!important;gap:4px!important}
-.summaryCard{padding:7px!important;border-radius:9px!important}
-.summaryLabel{font-size:7.4px!important;margin-bottom:1px!important}
-.section{margin:0 13px 5px!important;border-radius:9px!important}
-.sectionTitle{padding:5px 7px!important;font-size:9.5px!important}
-.list{padding:4px 7px!important}
-.listItem{padding:1px 0!important}
-.printBtn,.backBtn,.pdfBackBtn{display:none!important}
+html,body{width:210mm!important;height:260mm!important;background:#fff!important;overflow:hidden!important;margin:0!important;padding:0!important}
+.screenTop,.actionBar{display:none!important}
+.paper{width:184mm!important;height:235mm!important;margin:7mm auto 0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important}
+.accent{height:3mm!important}
+.inner{padding:7mm 8mm!important;height:232mm!important;overflow:hidden!important}
+.header{padding-bottom:4mm!important}
+.logo{width:12mm!important;height:12mm!important;border-radius:3mm!important}
+.brandTitle{font-size:15pt!important}.brandSub{font-size:7.2pt!important}
+.meta{font-size:7.4pt!important;line-height:1.25!important}
+.hero{margin:4mm 0 3mm!important;padding:4mm!important;border-radius:4mm!important;grid-template-columns:1fr 45mm!important;gap:4mm!important}
+.kicker{font-size:6.8pt!important;padding:2mm 3mm!important;margin-bottom:2mm!important}
+.title{font-size:17pt!important}.desc{font-size:7.4pt!important;line-height:1.25!important}
+.amountBox{padding:3.2mm!important;border-radius:4mm!important}.amountLabel{font-size:6pt!important;margin-bottom:1.2mm!important}.amountValue{font-size:20pt!important}.statusLine{font-size:7.2pt!important;margin-top:1.5mm!important}
+.grid{gap:2mm!important;margin-top:2.5mm!important}.card{padding:2.3mm!important;border-radius:3mm!important}.label{font-size:6pt!important;margin-bottom:.8mm!important}.value{font-size:8pt!important}
+.note{padding:2.8mm 3mm!important;border-radius:3mm!important;margin-top:2.5mm!important}.noteTitle{font-size:7pt!important;margin-bottom:.8mm!important}.noteText{font-size:7.2pt!important;line-height:1.25!important}
+.signature{gap:6mm!important;margin-top:7mm!important}.signBox{font-size:7pt!important;padding-top:2mm!important}
+.footer{font-size:6pt!important;margin-top:5mm!important;padding-top:2mm!important}
 }
-
 </style>
-
 </head>
 <body>
+<div class="screenTop">
+<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<h1>Ödeme Alındı Makbuzu</h1>
+<button class="screenBtn" onclick="window.print()">Yazdır</button>
+</div>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-
-<div class="page">
-<div class="topBand"></div>
-
+<div class="paper">
+<div class="accent"></div>
+<div class="inner">
 <div class="header">
 <div class="brand">
-<img src="${pdfLogo}">
+<img class="logo" src="${pdfLogo}">
 <div>
-<div class="brandTitle">${pdfFirma}</div>
-<div class="brandSub">ElevatorX • Asansör takip sistemi</div>
+<div class="brandTitle">${ayHtml(pdfFirma)}</div>
+<div class="brandSub">${ayHtml(APP_NAME)} • Dijital tahsilat makbuzu</div>
 </div>
 </div>
-<div class="reportMeta">
-<b>Makbuz No:</b> ${raporNo}<br>
-<b>Tarih:</b> ${bugun()}
+<div class="meta">
+<b>Makbuz No:</b> ${ayHtml(raporNo)}<br>
+<b>Belge Tarihi:</b> ${ayHtml(bugun())}<br>
+<b>Ödeme Tarihi:</b> ${odeme}
 </div>
 </div>
 
-<div class="titleBox">
-<h1 class="docTitle">Ödeme Alındı Makbuzu</h1>
-<p class="docDesc">Bu belge, ilgili apartmana ait bakım/tahsilat ücretinin alındığını göstermek amacıyla oluşturulmuştur.</p>
-</div>
-
-<div class="statusBox statusGreen">
-<div class="statusIcon iconGreen">✓</div>
+<div class="hero">
 <div>
-<div class="statusTitle titleGreen">Ödeme Alındı</div>
-<div class="statusText">${a.ad || "-"} için ${a.ucret || 0} ₺ tutarındaki ödeme ${odemeTarihi} tarihinde tahsil edilmiştir.</div>
+<div class="kicker">Tahsilat kaydı oluşturuldu</div>
+<h1 class="title">Ödeme Alındı Makbuzu</h1>
+<div class="desc">${aptAd} için bakım/tahsilat ücreti ${odeme} tarihinde kayıt altına alınmıştır.</div>
+</div>
+<div class="amountBox">
+<div class="amountLabel">Tahsil Edilen Tutar</div>
+<div class="amountValue">${tutar}</div>
+<div class="statusLine">✓ Ödeme Alındı</div>
 </div>
 </div>
 
-<div class="infoGrid">
-<div class="infoCard"><div class="label">Apartman</div><div class="value">${a.ad || "-"}</div></div>
-<div class="infoCard"><div class="label">Yönetici</div><div class="value">${a.yonetici || "-"}</div></div>
-<div class="infoCard"><div class="label">Telefon</div><div class="value">${a.tel || "-"}</div></div>
-<div class="infoCard"><div class="label">Ödeme Tarihi</div><div class="value">${odemeTarihi}</div></div>
-<div class="infoCard amountCard"><div class="label">Tahsil Edilen Tutar</div><div class="value">${a.ucret || 0} ₺</div></div>
+<div class="grid">
+<div class="card"><div class="label">Apartman / Site</div><div class="value">${aptAd}</div></div>
+<div class="card"><div class="label">Yönetici</div><div class="value">${yonetici}</div></div>
+<div class="card"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
+<div class="card"><div class="label">Ödeme Tarihi</div><div class="value">${odeme}</div></div>
 </div>
 
-<div class="noteBox">
+<div class="note">
 <div class="noteTitle">Açıklama</div>
-<div class="noteText">Ödeme kaydı ${pdfFirma} tarafından oluşturulmuş, ElevatorX üzerinde kayıt altına alınmıştır. Bu makbuz bilgilendirme amacı taşır.</div>
+<div class="noteText">Bu makbuz, ödeme bilgisinin ElevatorX sistemi üzerinde kayıt altına alındığını göstermek amacıyla oluşturulmuştur.</div>
 </div>
 
-<div class="signatureArea">
-<div class="signatureBox">${pdfFirma}<br>${pdfSorumlu}</div>
-<div class="signatureBox">Müşteri / Yönetici<br>İmza</div>
+<div class="signature">
+<div class="signBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu)}</div>
+<div class="signBox">Müşteri / Yönetici<br>İmza</div>
 </div>
-
 
 <div class="footer">
-<div>© 2026 ${APP_NAME}. Tüm hakları saklıdır.<br>Sürüm ${APP_VERSION} • Destek: supportelevatorx@gmail.com</div><div>Asansör takip sistemi</div>
+<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>supportelevatorx@gmail.com</div>
+<div>Bu belge ElevatorX sistemi üzerinden oluşturulmuştur.</div>
+</div>
+</div>
 </div>
 
-
-</div>
-
-<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
-
+<div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
 </body>
 </html>
-
 `);
-
+w.document.close();
 }
+
 
 
 
@@ -8534,30 +8617,38 @@ let bakimTarihi = a.bakimTarihi || bugun();
 let durum = a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Raporu";
 
 let pdfMarka = pdfFirmaBilgi();
-let pdfFirma = pdfMarka.firma;
+let pdfFirma = pdfMarka.firma || servisFirma;
 let pdfLogo = pdfMarka.logo;
-let pdfSorumlu = pdfMarka.ad;
-let pdfTel = pdfMarka.telefon;
+let pdfSorumlu = pdfMarka.ad || servisAd;
+let pdfTel = pdfMarka.telefon || servisTel;
 
 let sonChecklist = sonBakimChecklist(a);
 let checklistItems =
 sonChecklist && Array.isArray(sonChecklist.items) && sonChecklist.items.length
 ? sonChecklist.items
 : [
-"Genel görünüm kontrol edildi",
-"Kapı ve kilit sistemleri kontrol edildi",
-"Elektrik panosu ve bağlantılar kontrol edildi",
-"Fren sistemi kontrol edildi",
-"Güvenlik devreleri kontrol edildi",
-"Kumanda paneli ve gösterge kontrol edildi"
+"Genel çalışma kontrolü",
+"Kapı kilidi ve kapı hareket kontrolü",
+"Kabin hareket ve seviye kontrolü",
+"Buton / gösterge kontrolü",
+"Güvenlik devresi kontrolü",
+"Makine dairesi / pano görsel kontrolü",
+"Temizlik ve yağlama kontrolü",
+"Teknik not / uyarı kontrolü"
 ];
 
-let bakimChecklistPdfHtml = checklistItems.map(function(item){
-return `<div class="checkItem"><span class="checkDot">✓</span><span>${ayHtml(item)}</span></div>`;
+let shownChecklist = checklistItems.slice(0,8);
+let extraChecklist = Math.max(checklistItems.length - shownChecklist.length, 0);
+let checklistCol1 = shownChecklist.filter((_,idx)=>idx % 2 === 0);
+let checklistCol2 = shownChecklist.filter((_,idx)=>idx % 2 === 1);
+let checklistList = function(arr){
+return arr.map(function(item){
+return `<li>${ayHtml(item)}</li>`;
 }).join("");
+};
 
 let checklistNotu = sonChecklist && sonChecklist.note && String(sonChecklist.note).trim()
-? ayHtml(sonChecklist.note)
+? ayHtml(String(sonChecklist.note).trim().slice(0,180))
 : "";
 
 let aptAd = ayHtml(a.ad || "-");
@@ -8567,10 +8658,10 @@ let bakimGunu = ayHtml(a.bakimGunu || "-");
 let sonBakim = ayHtml(a.bakimTarihi || "-");
 let ucret = `${Number(a.ucret || 0).toLocaleString("tr-TR")} ₺`;
 let teknikNot = a.not && String(a.not).trim()
-? ayHtml(a.not)
+? ayHtml(String(a.not).trim().slice(0,220))
 : "Herhangi bir teknik not eklenmemiştir.";
+
 let durumText = `${aptAd} için bakım işlemi ${ayHtml(bakimTarihi)} tarihinde ${ayHtml(pdfFirma)} tarafından kayıt altına alınmıştır.`;
-let checklistCount = checklistItems.length;
 
 let w = window.open("");
 
@@ -8585,257 +8676,169 @@ w.document.write(`
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bakım Servis Raporu - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
-:root{
---bg:#070b12;
---bg2:#111827;
---line:#e6ebf2;
---soft:#f8fafc;
---text:#111827;
---muted:#6b7280;
---blue:#0a84ff;
---green:#34c759;
-}
-html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#0a0f18,#0f1724 60%,#0a0d14);color:var(--text)}
-body{padding:18px 14px 34px}
-.viewerTop{max-width:920px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
-.viewerTitle{flex:1;text-align:center;min-width:0}
-.viewerTitle h1{margin:0;font-size:28px;letter-spacing:-.6px;font-weight:900}
-.viewerTitle p{margin:5px 0 0;color:rgba(255,255,255,.62);font-size:15px;font-weight:700}
-.viewerBtn{border:none;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;padding:12px 16px;font-size:14px;font-weight:900;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.08)}
-.viewerBtn:active{transform:scale(.97)}
-.page{max-width:900px;margin:0 auto;background:#fff;border-radius:30px;box-shadow:0 24px 70px rgba(0,0,0,.25);overflow:hidden}
-.topBand{height:8px;background:linear-gradient(90deg,#0a84ff,#60a5fa,#34c759)}
-.header{padding:24px 28px 18px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
-.brand{display:flex;gap:14px;align-items:center}
-.brand img{width:50px;height:50px;border-radius:16px;object-fit:cover;flex-shrink:0;background:#fff}
-.brandText{min-width:0}
-.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.45px;line-height:1.08}
-.brandSub{margin-top:4px;font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.22px}
-.reportMeta{min-width:180px;text-align:right;font-size:13px;color:var(--muted);line-height:1.65}
-.reportMeta b{color:var(--text)}
-.titleWrap{padding:22px 28px 12px}
-.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:950;letter-spacing:.35px;text-transform:uppercase;margin-bottom:12px}
-.docTitle{margin:0;font-size:31px;line-height:1.05;letter-spacing:-.7px;font-weight:950}
-.docDesc{margin:9px 0 0;font-size:14px;line-height:1.55;color:var(--muted);max-width:680px}
-.statusBox{margin:4px 28px 18px;padding:18px;border-radius:22px;background:linear-gradient(135deg,#eff6ff,#f8fbff);border:1px solid #dbeafe;display:flex;gap:14px;align-items:flex-start}
-.statusIcon{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex-shrink:0;box-shadow:0 8px 20px rgba(10,132,255,.20)}
-.statusTextWrap{min-width:0}
-.statusTitle{font-size:18px;font-weight:950;color:#1d4ed8;margin-bottom:4px}
-.statusText{font-size:14px;color:#475569;line-height:1.5}
-.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 28px 18px}
-.infoCard{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:15px 16px;min-height:84px}
-.infoLabel{font-size:11px;font-weight:950;color:#8a94a6;letter-spacing:.35px;text-transform:uppercase;margin-bottom:7px}
-.infoValue{font-size:17px;font-weight:850;line-height:1.28;color:var(--text);word-break:break-word}
-.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 28px 18px}
-.summaryCard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}
-.summaryLabel{font-size:11px;font-weight:950;color:#8a94a6;letter-spacing:.35px;text-transform:uppercase;margin-bottom:7px}
-.summaryValue{font-size:26px;font-weight:950;letter-spacing:-.6px;color:var(--text);line-height:1}
-.summaryValue.green{color:#168a3a}
-.summarySub{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.4;font-weight:700}
-.section{margin:0 28px 18px;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
-.sectionHead{padding:16px 18px;border-bottom:1px solid var(--line);background:#fcfdff;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.sectionTitle{font-size:17px;font-weight:950;letter-spacing:-.25px;color:var(--text)}
-.sectionMeta{font-size:12px;color:var(--muted);font-weight:800}
-.checkList{padding:14px 16px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.checkItem{border:1px solid var(--line);background:var(--soft);border-radius:16px;padding:12px 13px;display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:800;color:#475569;line-height:1.4}
-.checkDot{width:18px;height:18px;border-radius:50%;background:#eaf8f0;color:#168a3a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:950;flex-shrink:0;margin-top:1px}
-.noteBox{padding:14px 16px 16px}
-.noteCard{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:16px}
-.noteTitle{font-size:13px;font-weight:950;color:var(--text);margin-bottom:7px}
-.noteText{font-size:14px;line-height:1.6;color:#475569;white-space:pre-wrap;word-break:break-word}
-.dualGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:0 28px 18px}
-.signatureWrap{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 18px 16px}
-.signatureTitle{font-size:16px;font-weight:950;margin:0 0 14px}
-.signatureGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.signatureBox{border-top:1.6px solid #cfd5df;padding-top:10px;text-align:center;font-size:13px;line-height:1.5;color:var(--muted);font-weight:850}
-.serviceBox{background:linear-gradient(135deg,#effaf3,#f9fffb);border:1px solid #d6f4df;border-radius:22px;padding:18px}
-.serviceBox .serviceTitle{font-size:16px;font-weight:950;color:#168a3a;margin:0 0 12px}
-.serviceList{display:grid;gap:10px}
-.serviceRow{display:flex;justify-content:space-between;gap:12px;font-size:13px;line-height:1.4}
-.serviceRow b{color:var(--text)}
-.footer{padding:16px 28px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:flex-start;background:#fcfdff;color:#8a94a6;font-size:11.5px;line-height:1.55}
-.actionBar{max-width:900px;margin:16px auto 0;display:flex;gap:10px;justify-content:flex-end}
-.actionBtn{border:none;border-radius:16px;padding:14px 18px;background:#fff;color:#111827;font-size:14px;font-weight:900;box-shadow:0 12px 28px rgba(0,0,0,.12)}
-.actionBtn.primary{background:var(--blue);color:#fff;box-shadow:0 16px 30px rgba(10,132,255,.28)}
-@page{size:A4;margin:10mm}
-@media(max-width:760px){
-body{padding:12px}
-.viewerTitle h1{font-size:24px}
-.header,.titleWrap,.statusBox,.infoGrid,.summaryGrid,.dualGrid,.footer{padding-left:18px;padding-right:18px}
-.header{padding-top:18px;padding-bottom:14px;flex-direction:column;align-items:flex-start}
-.reportMeta{text-align:left;min-width:0}
-.infoGrid,.summaryGrid,.dualGrid,.checkList,.signatureGrid{grid-template-columns:1fr}
-.section,.statusBox{margin-left:18px;margin-right:18px}
-.actionBar{padding:0 4px;justify-content:stretch;display:grid;grid-template-columns:1fr 1fr}
-.actionBtn{width:100%}
-}
+:root{--ink:#0f172a;--muted:#64748b;--line:#dbe5ef;--soft:#f8fafc;--blue:#2563eb;--green:#16a34a}
+html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#0b1120;color:var(--ink)}
+body{padding:18px}
+.screenTop{max-width:850px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff}
+.screenTop h1{font-size:22px;margin:0;font-weight:900;letter-spacing:-.4px}
+.screenBtn{border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;padding:11px 15px;font-weight:900;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.paper{width:min(100%,850px);margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.accent{height:7px;background:linear-gradient(90deg,#60a5fa,#2563eb,#22c55e)}
+.inner{padding:23px 28px 21px}
+.header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;object-fit:cover;border:1px solid var(--line)}
+.brandTitle{font-size:23px;font-weight:950;letter-spacing:-.35px}.brandSub{font-size:12px;color:var(--muted);font-weight:750;margin-top:3px}
+.meta{text-align:right;font-size:12px;color:var(--muted);line-height:1.45;font-weight:750}.meta b{color:var(--ink)}
+.titleRow{display:grid;grid-template-columns:1fr 210px;gap:14px;align-items:stretch;margin:16px 0 12px}
+.kicker{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;padding:7px 11px;font-size:10.5px;font-weight:950;letter-spacing:.35px;text-transform:uppercase;margin-bottom:9px}
+.title{font-size:26px;font-weight:950;letter-spacing:-.65px;margin:0}.desc{font-size:12px;color:#475569;line-height:1.4;margin:6px 0 0}
+.statusBox{border:1px solid #bfdbfe;border-radius:18px;background:linear-gradient(180deg,#f8fbff,#eff6ff);padding:14px 15px;display:flex;gap:10px;align-items:flex-start}
+.statusIcon{width:26px;height:26px;border-radius:50%;background:#2f80ed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:950;flex:0 0 auto}
+.statusTitle{font-size:14px;font-weight:950;color:#1d4ed8;margin-bottom:4px}.statusText{font-size:11.5px;color:#475569;line-height:1.35}
+.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.infoCard{border:1px solid var(--line);border-radius:13px;background:var(--soft);padding:9px 10px}
+.label{font-size:9px;font-weight:950;color:#8a94a6;letter-spacing:.28px;text-transform:uppercase;margin-bottom:5px}
+.value{font-size:12.7px;font-weight:850;line-height:1.22;word-break:break-word}
+.summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:9px}
+.summary .value{font-size:18px;color:var(--green);font-weight:950}
+.section{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:10px;background:#fff}
+.sectionHead{padding:10px 12px;background:#fcfdff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.sectionTitle{font-size:13px;font-weight:950}.sectionMeta{font-size:10.5px;color:var(--muted);font-weight:800}
+.checkWrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px}
+.checkCol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.checkCol li{position:relative;border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:6px 8px 6px 25px;font-size:10.7px;font-weight:800;color:#334155;line-height:1.25}
+.checkCol li::before{content:"✓";position:absolute;left:8px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:#dcfce7;color:#15803d;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:950}
+.noteGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:9px;margin-top:10px}
+.noteCard,.serviceCard{border:1px solid var(--line);border-radius:16px;background:var(--soft);padding:11px 12px}
+.noteTitle{font-size:11px;font-weight:950;margin-bottom:5px}.noteText{font-size:11.2px;color:#475569;line-height:1.35}
+.serviceRows{display:grid;gap:6px}.serviceRow{display:flex;justify-content:space-between;gap:10px;font-size:10.7px;color:#475569}.serviceRow b{color:var(--ink)}
+.signature{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}
+.signBox{border-top:1.5px solid #cbd5e1;text-align:center;padding-top:8px;color:#64748b;font-size:11px;font-weight:850;line-height:1.35}
+.footer{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;border-top:1px solid var(--line);margin-top:12px;padding-top:9px;color:#94a3b8;font-size:9.5px;line-height:1.35}
+.actionBar{max-width:850px;margin:14px auto 0;display:flex;justify-content:flex-end}
+.printBtn{border:0;border-radius:16px;background:#2563eb;color:#fff;font-weight:950;padding:13px 18px;box-shadow:0 15px 30px rgba(37,99,235,.26)}
+@page{size:A4;margin:0}
 @media print{
-html,body{background:#fff!important}
-body{padding:0!important;margin:0!important}
-.viewerTop,.actionBar{display:none!important}
-.page{max-width:none!important;margin:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
-.topBand{height:4px!important}
-.header{padding:11mm 11mm 7mm!important;gap:10px!important;align-items:flex-start!important}
-.brand img{width:38px!important;height:38px!important;border-radius:12px!important}
-.brandTitle{font-size:17px!important}
-.brandSub{font-size:9px!important;margin-top:2px!important}
-.reportMeta{font-size:9.5px!important;line-height:1.4!important;min-width:auto!important}
-.titleWrap{padding:0 11mm 5mm!important}
-.kicker{font-size:8.8px!important;padding:5px 9px!important;margin-bottom:7px!important}
-.docTitle{font-size:19px!important;letter-spacing:-.25px!important}
-.docDesc{font-size:10px!important;line-height:1.35!important;margin-top:4px!important}
-.statusBox{margin:0 11mm 5mm!important;padding:9px!important;border-radius:12px!important;gap:8px!important}
-.statusIcon{width:22px!important;height:22px!important;font-size:11px!important}
-.statusTitle{font-size:11.5px!important;margin-bottom:2px!important}
-.statusText{font-size:9px!important;line-height:1.3!important}
-.infoGrid{padding:0 11mm 5mm!important;gap:5px!important;grid-template-columns:repeat(3,1fr)!important}
-.infoCard{padding:7px 8px!important;min-height:40px!important;border-radius:10px!important}
-.infoLabel,.summaryLabel{font-size:7.2px!important;margin-bottom:2px!important;letter-spacing:.14px!important}
-.infoValue{font-size:10px!important;line-height:1.2!important}
-.summaryGrid{padding:0 11mm 5mm!important;gap:5px!important}
-.summaryCard{padding:8px!important;border-radius:10px!important}
-.summaryValue{font-size:15px!important}
-.summarySub{font-size:8px!important;margin-top:4px!important;line-height:1.25!important}
-.section{margin:0 11mm 5mm!important;border-radius:12px!important}
-.sectionHead{padding:8px 10px!important}
-.sectionTitle{font-size:10.5px!important}
-.sectionMeta{font-size:8px!important}
-.checkList{padding:8px 10px!important;gap:5px!important;grid-template-columns:repeat(2,1fr)!important}
-.checkItem{padding:6px 7px!important;border-radius:9px!important;font-size:8.2px!important;gap:5px!important;line-height:1.25!important}
-.checkDot{width:12px!important;height:12px!important;font-size:7px!important}
-.noteBox{padding:8px 10px 10px!important}
-.noteCard{padding:9px!important;border-radius:10px!important}
-.noteTitle{font-size:8.8px!important;margin-bottom:3px!important}
-.noteText{font-size:8.4px!important;line-height:1.3!important}
-.dualGrid{padding:0 11mm 5mm!important;gap:5px!important;grid-template-columns:1.1fr .9fr!important}
-.signatureWrap,.serviceBox{padding:9px!important;border-radius:12px!important}
-.signatureTitle,.serviceBox .serviceTitle{font-size:10px!important;margin-bottom:7px!important}
-.signatureGrid{gap:8px!important}
-.signatureBox{font-size:8px!important;padding-top:5px!important}
-.serviceList{gap:6px!important}
-.serviceRow{font-size:8px!important;line-height:1.25!important}
-.footer{padding:7px 11mm 8mm!important;font-size:7.5px!important;line-height:1.25!important}
+html,body{width:210mm!important;height:260mm!important;background:#fff!important;overflow:hidden!important;margin:0!important;padding:0!important}
+.screenTop,.actionBar{display:none!important}
+.paper{width:184mm!important;height:235mm!important;margin:7mm auto 0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important}
+.accent{height:3mm!important}.inner{padding:6.5mm 8mm!important;height:232mm!important;overflow:hidden!important}
+.header{padding-bottom:3.5mm!important}.logo{width:12mm!important;height:12mm!important;border-radius:3mm!important}.brandTitle{font-size:15pt!important}.brandSub{font-size:7.2pt!important}.meta{font-size:7.3pt!important;line-height:1.25!important}
+.titleRow{grid-template-columns:1fr 52mm!important;gap:3mm!important;margin:3.5mm 0 2.8mm!important}.kicker{font-size:6.6pt!important;padding:1.8mm 3mm!important;margin-bottom:1.8mm!important}.title{font-size:16.5pt!important}.desc{font-size:7pt!important;line-height:1.25!important}.statusBox{padding:3mm!important;border-radius:3.5mm!important}.statusIcon{width:6.5mm!important;height:6.5mm!important;font-size:8pt!important}.statusTitle{font-size:8.8pt!important}.statusText{font-size:6.8pt!important;line-height:1.22!important}
+.infoGrid{gap:1.8mm!important}.infoCard{padding:2.1mm!important;border-radius:2.8mm!important}.label{font-size:5.8pt!important;margin-bottom:.7mm!important}.value{font-size:7.5pt!important}
+.summary{gap:1.8mm!important;margin-top:1.8mm!important}.summary .value{font-size:11pt!important}
+.section{margin-top:2.2mm!important;border-radius:3.4mm!important}.sectionHead{padding:2.2mm 2.8mm!important}.sectionTitle{font-size:8pt!important}.sectionMeta{font-size:6.5pt!important}.checkWrap{gap:2mm!important;padding:2.2mm 2.8mm!important}.checkCol{gap:1.2mm!important}.checkCol li{padding:1.6mm 1.8mm 1.6mm 6.2mm!important;border-radius:2.4mm!important;font-size:6.7pt!important;line-height:1.18!important}.checkCol li::before{left:1.8mm!important;width:3mm!important;height:3mm!important;font-size:5.5pt!important}
+.noteGrid{gap:2mm!important;margin-top:2.2mm!important}.noteCard,.serviceCard{padding:2.4mm!important;border-radius:3.4mm!important}.noteTitle{font-size:6.8pt!important;margin-bottom:.8mm!important}.noteText,.serviceRow{font-size:6.6pt!important;line-height:1.22!important}.serviceRows{gap:1.2mm!important}
+.signature{gap:6mm!important;margin-top:5mm!important}.signBox{font-size:6.8pt!important;padding-top:1.8mm!important}
+.footer{font-size:5.8pt!important;margin-top:3mm!important;padding-top:1.8mm!important}
 }
 </style>
 </head>
 <body>
-<div class="viewerTop">
-<button class="viewerBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-<div class="viewerTitle"><h1>Bakım Servis Raporu</h1><p>${ayHtml(APP_NAME)} • düzenlenmiş rapor görünümü</p></div>
-<button class="viewerBtn" onclick="window.print()">Yazdır</button>
+<div class="screenTop">
+<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<h1>Bakım Servis Raporu</h1>
+<button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
-<div class="page">
-<div class="topBand"></div>
+
+<div class="paper">
+<div class="accent"></div>
+<div class="inner">
 <div class="header">
 <div class="brand">
-<img src="${pdfLogo}">
-<div class="brandText">
+<img class="logo" src="${pdfLogo}">
+<div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
-<div class="brandSub">ElevatorX • Asansör bakım servis raporu</div>
+<div class="brandSub">${ayHtml(APP_NAME)} • Asansör bakım servis raporu</div>
 </div>
 </div>
-<div class="reportMeta">
+<div class="meta">
 <b>Rapor No:</b> ${ayHtml(raporNo)}<br>
 <b>Belge Tarihi:</b> ${ayHtml(bugun())}<br>
 <b>Bakım Tarihi:</b> ${ayHtml(bakimTarihi)}
 </div>
 </div>
-<div class="titleWrap">
-<div class="kicker">Servis Kaydı Oluşturuldu</div>
-<h1 class="docTitle">Bakım Servis Raporu</h1>
-<p class="docDesc">Bu belge, ilgili asansör için gerçekleştirilen bakım / kontrol işleminin kayıt altına alınması amacıyla oluşturulmuştur. Rapor içeriği ElevatorX sistemi üzerinden hazırlanmıştır.</p>
+
+<div class="titleRow">
+<div>
+<div class="kicker">Servis kaydı oluşturuldu</div>
+<h1 class="title">Bakım Servis Raporu</h1>
+<p class="desc">Bu belge ilgili asansör için gerçekleştirilen bakım ve kontrol işleminin kayıt altına alınması amacıyla oluşturulmuştur.</p>
 </div>
 <div class="statusBox">
 <div class="statusIcon">✓</div>
-<div class="statusTextWrap">
+<div>
 <div class="statusTitle">${ayHtml(durum)}</div>
 <div class="statusText">${durumText}</div>
 </div>
 </div>
+</div>
+
 <div class="infoGrid">
-<div class="infoCard"><div class="infoLabel">Apartman / Site</div><div class="infoValue">${aptAd}</div></div>
-<div class="infoCard"><div class="infoLabel">Yönetici</div><div class="infoValue">${yonetici}</div></div>
-<div class="infoCard"><div class="infoLabel">Telefon</div><div class="infoValue">${telefon}</div></div>
-<div class="infoCard"><div class="infoLabel">Bakım Günü</div><div class="infoValue">${bakimGunu}</div></div>
-<div class="infoCard"><div class="infoLabel">Son Bakım Tarihi</div><div class="infoValue">${sonBakim}</div></div>
-<div class="infoCard"><div class="infoLabel">Bakım Ücreti</div><div class="infoValue">${ucret}</div></div>
+<div class="infoCard"><div class="label">Apartman / Site</div><div class="value">${aptAd}</div></div>
+<div class="infoCard"><div class="label">Yönetici</div><div class="value">${yonetici}</div></div>
+<div class="infoCard"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
+<div class="infoCard"><div class="label">Bakım Günü</div><div class="value">${bakimGunu}</div></div>
+<div class="infoCard"><div class="label">Son Bakım Tarihi</div><div class="value">${sonBakim}</div></div>
+<div class="infoCard"><div class="label">Bakım Ücreti</div><div class="value">${ucret}</div></div>
 </div>
-<div class="summaryGrid">
-<div class="summaryCard">
-<div class="summaryLabel">Kontrol Maddesi</div>
-<div class="summaryValue">${checklistCount}</div>
-<div class="summarySub">Bakım checklist maddesi rapora işlendi.</div>
+
+<div class="summary">
+<div class="infoCard"><div class="label">Kontrol Maddesi</div><div class="value">${shownChecklist.length}</div></div>
+<div class="infoCard"><div class="label">Servis Sorumlusu</div><div class="value" style="font-size:13px;color:#0f172a">${ayHtml(pdfSorumlu)}</div></div>
+<div class="infoCard"><div class="label">Durum</div><div class="value">Kayıtlı</div></div>
 </div>
-<div class="summaryCard">
-<div class="summaryLabel">Servis Sorumlusu</div>
-<div class="summaryValue" style="font-size:18px;line-height:1.15">${ayHtml(pdfSorumlu || servisAd)}</div>
-<div class="summarySub">Bakım kaydını oluşturan yetkili kişi.</div>
-</div>
-<div class="summaryCard">
-<div class="summaryLabel">Durum</div>
-<div class="summaryValue green">Kayıtlı</div>
-<div class="summarySub">Bakım işlemi sistemde kayıt altına alındı.</div>
-</div>
-</div>
+
 <div class="section">
 <div class="sectionHead">
 <div class="sectionTitle">Yapılan Kontroller</div>
-<div class="sectionMeta">Checklist • ${checklistCount} madde</div>
+<div class="sectionMeta">Checklist • ${shownChecklist.length} madde${extraChecklist ? ` • +${extraChecklist} ek` : ``}</div>
 </div>
-<div class="checkList">
-${bakimChecklistPdfHtml}
+<div class="checkWrap">
+<ul class="checkCol">${checklistList(checklistCol1)}</ul>
+<ul class="checkCol">${checklistList(checklistCol2)}</ul>
 </div>
 </div>
-<div class="dualGrid">
-<div class="section" style="margin:0">
-<div class="sectionHead">
-<div class="sectionTitle">Teknik Notlar</div>
-<div class="sectionMeta">Servis açıklaması</div>
-</div>
-<div class="noteBox">
+
+<div class="noteGrid">
 <div class="noteCard">
 <div class="noteTitle">Teknik Açıklama</div>
-<div class="noteText">${teknikNot}</div>
+<div class="noteText">${teknikNot}${checklistNotu ? `<br><b>Checklist Notu:</b> ${checklistNotu}` : ``}</div>
 </div>
-${checklistNotu ? `<div class="noteCard" style="margin-top:10px"><div class="noteTitle">Checklist Notu</div><div class="noteText">${checklistNotu}</div></div>` : ``}
-</div>
-</div>
-<div class="serviceBox">
-<div class="serviceTitle">Servis Bilgileri</div>
-<div class="serviceList">
-<div class="serviceRow"><span>Firma</span><b>${ayHtml(pdfFirma || servisFirma)}</b></div>
-<div class="serviceRow"><span>Sorumlu</span><b>${ayHtml(pdfSorumlu || servisAd)}</b></div>
-<div class="serviceRow"><span>Telefon</span><b>${ayHtml(pdfTel || servisTel || "-")}</b></div>
-<div class="serviceRow"><span>Oluşturma Tarihi</span><b>${ayHtml(bugun())}</b></div>
+<div class="serviceCard">
+<div class="noteTitle">Servis Bilgileri</div>
+<div class="serviceRows">
+<div class="serviceRow"><span>Firma</span><b>${ayHtml(pdfFirma)}</b></div>
+<div class="serviceRow"><span>Sorumlu</span><b>${ayHtml(pdfSorumlu)}</b></div>
+<div class="serviceRow"><span>Telefon</span><b>${ayHtml(pdfTel || "-")}</b></div>
 <div class="serviceRow"><span>Sistem</span><b>${ayHtml(APP_NAME)} ${ayHtml(APP_VERSION)}</b></div>
 </div>
 </div>
 </div>
-<div class="signatureWrap" style="margin:0 28px 18px">
-<div class="signatureTitle">Onay / İmza Alanı</div>
-<div class="signatureGrid">
-<div class="signatureBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu || servisAd)}</div>
-<div class="signatureBox">Müşteri / Yönetici<br>İmza</div>
+
+<div class="signature">
+<div class="signBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu)}</div>
+<div class="signBox">Müşteri / Yönetici<br>İmza</div>
 </div>
-</div>
+
 <div class="footer">
-<div>© 2026 ${ayHtml(APP_NAME)}. Tüm hakları saklıdır.<br>Sürüm ${ayHtml(APP_VERSION)} • Destek: supportelevatorx@gmail.com</div>
-<div>Bu belge ElevatorX sistemleri üzerinden oluşturulmuştur.</div>
+<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>supportelevatorx@gmail.com</div>
+<div>Bu belge ElevatorX sistemi üzerinden oluşturulmuştur.</div>
 </div>
 </div>
-<div class="actionBar">
-<button class="actionBtn" onclick="if(navigator.share){navigator.share({title:'Bakım Servis Raporu',text:'Bakım Servis Raporu',url:location.href}).catch(()=>{})}else{window.print()}">Paylaş</button>
-<button class="actionBtn primary" onclick="window.print()">PDF / Yazdır</button>
 </div>
+
+<div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
 </body>
 </html>
 `);
 w.document.close();
 }
+
 
 
 
