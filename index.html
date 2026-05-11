@@ -45,13 +45,17 @@ document.documentElement.classList.add("darkRoot");
 
 
 
-<link rel="icon" type="image/png" href="elevatorx-icon-v69.png?v=75">
-<link rel="apple-touch-icon" href="elevatorx-icon-v69.png?v=75">
-<link rel="apple-touch-icon" sizes="180x180" href="elevatorx-icon-v69.png?v=75">
+<link rel="icon" type="image/png" href="elevatorx-icon-v69.png?v=96">
+<link rel="apple-touch-icon" href="elevatorx-icon-v69.png?v=96">
+<link rel="apple-touch-icon" sizes="180x180" href="elevatorx-icon-v69.png?v=96">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ElevatorX">
+<link rel="manifest" href="manifest.webmanifest?v=96">
+<meta name="theme-color" content="#f6f7fb">
+<meta name="mobile-web-app-capable" content="yes">
+
 
 <style>
 html.darkRoot{
@@ -4818,6 +4822,173 @@ html.darkRoot .checklistHandle{
 background:#374151;
 }
 
+
+
+/* Paket v95 — Alt bar yenileme */
+.tabbar{
+position:fixed!important;
+left:50%!important;
+transform:translateX(-50%)!important;
+bottom:calc(10px + env(safe-area-inset-bottom))!important;
+width:min(388px,calc(100vw - 22px))!important;
+height:76px!important;
+display:grid!important;
+grid-template-columns:1fr 1fr 72px 1fr!important;
+align-items:end!important;
+justify-items:center!important;
+padding:0 12px 8px!important;
+border-radius:30px!important;
+border:1px solid rgba(255,255,255,.9)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,250,253,.92))!important;
+box-shadow:
+0 16px 36px rgba(15,23,42,.10),
+0 6px 14px rgba(15,23,42,.05),
+inset 0 1px 0 rgba(255,255,255,.97)!important;
+backdrop-filter:blur(22px) saturate(150%)!important;
+-webkit-backdrop-filter:blur(22px) saturate(150%)!important;
+overflow:visible!important;
+}
+
+.tabbar::before{
+content:"";
+position:absolute;
+inset:1px;
+border-radius:29px;
+pointer-events:none;
+background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 44%);
+opacity:.9;
+}
+
+.tabbar .tabGap{
+width:72px!important;
+height:1px!important;
+pointer-events:none!important;
+}
+
+.tabbar .tabItem{
+position:relative!important;
+width:100%!important;
+min-width:0!important;
+height:58px!important;
+display:flex!important;
+flex-direction:column!important;
+align-items:center!important;
+justify-content:flex-end!important;
+padding:0 0 7px!important;
+margin:0!important;
+border-radius:18px!important;
+color:#7b8494!important;
+transition:transform .14s ease,color .18s ease,opacity .18s ease!important;
+transform:none!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"],
+.tabbar .tabItem[data-tab="apartman"],
+.tabbar .tabItem[data-tab="profil"]{
+transform:none!important;
+}
+
+.tabbar .tabItem:active{
+transform:translateY(1px) scale(.985)!important;
+}
+
+.tabbar .tabItem.activeTab{
+color:#2f6fed!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+content:"";
+position:absolute;
+left:6px; right:6px; top:7px; bottom:2px;
+border-radius:16px;
+background:linear-gradient(180deg,rgba(59,130,246,.10),rgba(59,130,246,.04));
+border:1px solid rgba(191,219,254,.7);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.82);
+z-index:0;
+}
+
+.tabbar .tabIcon,
+.tabbar .tabText{position:relative!important;z-index:1!important}
+
+.tabbar .tabIcon{
+width:23px!important;
+height:23px!important;
+margin:0 0 4px!important;
+}
+
+.tabbar .tabText{
+font-size:11px!important;
+font-weight:860!important;
+letter-spacing:-.12px!important;
+line-height:1.02!important;
+white-space:nowrap!important;
+text-align:center!important;
+}
+
+.tabbar .middleButton{
+position:absolute!important;
+left:50%!important;
+top:-14px!important;
+transform:translateX(-50%)!important;
+width:56px!important;
+height:56px!important;
+border-radius:50%!important;
+background:linear-gradient(180deg,#5d92ff,#3c74f1)!important;
+border:3px solid rgba(247,249,252,.98)!important;
+box-shadow:
+0 14px 28px rgba(47,111,237,.24),
+0 6px 14px rgba(15,23,42,.10),
+inset 0 1px 0 rgba(255,255,255,.42)!important;
+font-size:34px!important;
+font-weight:300!important;
+line-height:1!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+z-index:3!important;
+}
+
+.tabbar .middleButton::after{
+content:"";
+position:absolute;
+inset:-5px;
+border-radius:50%;
+pointer-events:none;
+border:1px solid rgba(191,219,254,.45);
+}
+
+.tabbar .middleButton:active{
+transform:translateX(-50%) scale(.94)!important;
+}
+
+body.darkMode .tabbar{
+background:linear-gradient(180deg,rgba(21,27,38,.94),rgba(15,20,29,.94))!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:0 16px 34px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar .tabItem{color:#98a5b4!important}
+body.darkMode .tabbar .tabItem.activeTab{color:#84b8ff!important}
+body.darkMode .tabbar .tabItem.activeTab::before{
+background:linear-gradient(180deg,rgba(37,99,235,.15),rgba(37,99,235,.07))!important;
+border-color:rgba(59,130,246,.26)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+body.darkMode .tabbar .middleButton{border-color:rgba(18,24,35,.96)!important}
+
+@media(max-width:430px){
+.tabbar{
+width:min(392px,calc(100vw - 18px))!important;
+height:74px!important;
+grid-template-columns:1fr 1fr 70px 1fr!important;
+padding:0 10px 8px!important;
+}
+.tabbar .tabGap{width:70px!important}
+.tabbar .tabItem{height:56px!important}
+.tabbar .tabText{font-size:10.5px!important}
+.tabbar .middleButton{width:54px!important;height:54px!important;top:-13px!important;font-size:33px!important}
+}
+
 </style>
 
 <script>
@@ -4826,9 +4997,9 @@ OneSignalDeferred.push(async function(OneSignal) {
   try {
     await OneSignal.init({
       appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "ay-panel/OneSignalSDKWorker.js",
+      serviceWorkerPath: "OneSignalSDKWorker.js",
       serviceWorkerParam: {
-        scope: "/ay-panel/"
+        scope: "/"
       },
       autoResubscribe: true,
       notifyButton: {
@@ -4851,9 +5022,9 @@ OneSignalDeferred.push(async function(OneSignal) {
   try {
     await OneSignal.init({
       appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "ay-panel/OneSignalSDKWorker.js",
+      serviceWorkerPath: "OneSignalSDKWorker.js",
       serviceWorkerParam: {
-        scope: "/ay-panel/"
+        scope: "/"
       },
       autoResubscribe: true,
       notifyButton: {
@@ -4910,7 +5081,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="elevatorx-icon-v69.png?v=75" alt="ElevatorX logo">
+<img class="splashNewLogo" src="elevatorx-icon-v69.png?v=96" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -4920,7 +5091,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="elevatorx-icon-v69.png?v=75" alt="ElevatorX logo">
+<img class="headerNewLogo" src="elevatorx-icon-v69.png?v=96" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5254,8 +5425,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.0.92";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=75", location.href).href;
+const APP_VERSION = "v1.0.96";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=96", location.href).href;
 
 function hideSplash(){
 
@@ -8360,44 +8531,36 @@ new Date().getFullYear() +
 String(i + 1).padStart(4,"0");
 
 let bakimTarihi = a.bakimTarihi || bugun();
-let durum = a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Kaydı";
+let durum = a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Raporu";
 
 let pdfMarka = pdfFirmaBilgi();
-let pdfFirma = pdfMarka.firma || servisFirma;
+let pdfFirma = pdfMarka.firma;
 let pdfLogo = pdfMarka.logo;
-let pdfSorumlu = pdfMarka.ad || servisAd;
-let pdfTel = pdfMarka.telefon || servisTel;
+let pdfSorumlu = pdfMarka.ad;
+let pdfTel = pdfMarka.telefon;
 
 let sonChecklist = sonBakimChecklist(a);
 let checklistItems =
 sonChecklist && Array.isArray(sonChecklist.items) && sonChecklist.items.length
 ? sonChecklist.items
 : [
-"Genel çalışma kontrolü",
-"Kapı kilidi ve kapı hareket kontrolü",
-"Kabin hareket ve seviye kontrolü",
-"Buton / gösterge kontrolü",
-"Güvenlik devresi kontrolü",
-"Makine dairesi / pano görsel kontrolü",
-"Temizlik ve yağlama kontrolü",
-"Teknik not / uyarı kontrolü"
+"Genel görünüm kontrol edildi",
+"Kapı ve kilit sistemleri kontrol edildi",
+"Elektrik panosu ve bağlantılar kontrol edildi",
+"Fren sistemi kontrol edildi",
+"Güvenlik devreleri kontrol edildi",
+"Kumanda paneli ve gösterge kontrol edildi"
 ];
 
-let checklistCount = checklistItems.length;
-let printChecklist = checklistItems.slice(0,8);
-if(checklistItems.length > 8){
-printChecklist.push("Ek kontrol maddeleri sistem kayıtlarında mevcuttur.");
-}
-let checklistHtml = printChecklist.map(function(item, idx){
-return `<tr><td class="tick">✓</td><td>${ayHtml(item)}</td></tr>`;
+let bakimChecklistPdfHtml = checklistItems.map(function(item){
+return `<div class="checkItem"><span class="checkDot">✓</span><span>${ayHtml(item)}</span></div>`;
 }).join("");
 
 let checklistNotu = sonChecklist && sonChecklist.note && String(sonChecklist.note).trim()
 ? ayHtml(sonChecklist.note)
 : "";
 
-let aptAdRaw = a.ad || "-";
-let aptAd = ayHtml(aptAdRaw);
+let aptAd = ayHtml(a.ad || "-");
 let yonetici = ayHtml(a.yonetici || "-");
 let telefon = ayHtml(a.tel || "-");
 let bakimGunu = ayHtml(a.bakimGunu || "-");
@@ -8406,9 +8569,8 @@ let ucret = `${Number(a.ucret || 0).toLocaleString("tr-TR")} ₺`;
 let teknikNot = a.not && String(a.not).trim()
 ? ayHtml(a.not)
 : "Herhangi bir teknik not eklenmemiştir.";
-
 let durumText = `${aptAd} için bakım işlemi ${ayHtml(bakimTarihi)} tarihinde ${ayHtml(pdfFirma)} tarafından kayıt altına alınmıştır.`;
-let olusturma = ayHtml(bugun());
+let checklistCount = checklistItems.length;
 
 let w = window.open("");
 
@@ -8424,213 +8586,247 @@ w.document.write(`
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Bakım Servis Raporu - ${ayHtml(APP_NAME)}</title>
+<title>Bakım Servis Raporu - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
 :root{
---ink:#111827;
---muted:#64748b;
+--bg:#070b12;
+--bg2:#111827;
+--line:#e6ebf2;
 --soft:#f8fafc;
---line:#dbe4ee;
---blue:#2563eb;
---blueSoft:#eff6ff;
---green:#16a34a;
+--text:#111827;
+--muted:#6b7280;
+--blue:#0a84ff;
+--green:#34c759;
 }
-html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#0b1120;color:var(--ink)}
-body{padding:18px 14px 30px}
-.viewerTop{max-width:900px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
+html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#0a0f18,#0f1724 60%,#0a0d14);color:var(--text)}
+body{padding:18px 14px 34px}
+.viewerTop{max-width:920px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
 .viewerTitle{flex:1;text-align:center;min-width:0}
-.viewerTitle h1{margin:0;font-size:26px;letter-spacing:-.55px;font-weight:900}
-.viewerTitle p{margin:5px 0 0;color:rgba(255,255,255,.64);font-size:14px;font-weight:700}
+.viewerTitle h1{margin:0;font-size:28px;letter-spacing:-.6px;font-weight:900}
+.viewerTitle p{margin:5px 0 0;color:rgba(255,255,255,.62);font-size:15px;font-weight:700}
 .viewerBtn{border:none;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;padding:12px 16px;font-size:14px;font-weight:900;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.08)}
 .viewerBtn:active{transform:scale(.97)}
-.reportPage{width:min(100%,900px);margin:0 auto;background:#fff;border-radius:24px;box-shadow:0 26px 70px rgba(0,0,0,.26);overflow:hidden}
-.accent{height:7px;background:linear-gradient(90deg,#60a5fa,#2563eb 45%,#22c55e)}
-.reportInner{padding:26px 30px 22px}
-.head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:14px}
-.brand{display:flex;align-items:center;gap:12px;min-width:0}
-.brand img{width:48px;height:48px;border-radius:14px;border:1px solid var(--line);object-fit:cover;background:#fff;flex:none}
-.brandName{font-size:24px;font-weight:950;letter-spacing:-.45px;line-height:1.05}
-.brandSub{margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}
-.meta{font-size:12.5px;line-height:1.45;color:var(--muted);font-weight:700;text-align:right;min-width:178px}
-.meta b{color:var(--ink)}
-.titleRow{display:grid;grid-template-columns:1fr 245px;gap:16px;align-items:stretch;padding:15px 0 12px}
-.kicker{display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;background:var(--blueSoft);color:var(--blue);font-size:11px;font-weight:950;letter-spacing:.35px;text-transform:uppercase;margin-bottom:9px}
-.docTitle{margin:0;font-size:29px;font-weight:950;letter-spacing:-.75px;line-height:1.05}
-.docText{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.42;max-width:560px}
-.statusBox{background:linear-gradient(180deg,#f8fbff,#eff6ff);border:1px solid #d8e6ff;border-radius:18px;padding:13px 14px;display:flex;flex-direction:column;justify-content:center}
-.statusLine{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:950;color:#1d4ed8}
-.statusIcon{width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:13px;font-weight:900;flex:none}
-.statusDesc{margin-top:8px;color:#475569;font-size:11.5px;line-height:1.35}
-.infoTable,.checkTable,.serviceTable{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
-.infoTable th,.infoTable td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}
-.infoTable th{width:16%;background:var(--soft);color:#8a94a6;font-size:10.3px;letter-spacing:.3px;text-transform:uppercase;font-weight:950}
-.infoTable td{width:17.33%;font-size:13.5px;font-weight:850;line-height:1.25;color:var(--ink);word-break:break-word}
-.infoTable tr:last-child th,.infoTable tr:last-child td{border-bottom:0}
-.infoTable th:last-child,.infoTable td:last-child{border-right:0}
-.sectionTitle{display:flex;align-items:center;justify-content:space-between;margin:12px 0 7px;font-size:14px;font-weight:950;letter-spacing:-.2px;color:var(--ink)}
-.sectionTitle span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:0}
-.checkTable td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 10px;font-size:12px;font-weight:800;color:#334155;line-height:1.28;vertical-align:middle;background:#fff}
-.checkTable tr:nth-child(even) td{background:#fbfdff}
-.checkTable tr:last-child td{border-bottom:0}
-.checkTable .tick{width:28px;text-align:center;color:var(--green);font-weight:950;font-size:13px;background:#f0fdf4}
-.noteBox{border:1px solid var(--line);border-radius:16px;background:var(--soft);padding:10px 12px;min-height:45px}
-.noteHead{font-size:10.5px;font-weight:950;color:#8a94a6;letter-spacing:.28px;text-transform:uppercase;margin-bottom:4px}
-.noteText{font-size:12px;line-height:1.4;color:#475569;font-weight:750;white-space:pre-wrap;word-break:break-word}
-.bottom{display:grid;grid-template-columns:1fr 260px;gap:10px;margin-top:12px;align-items:stretch}
-.serviceTable th,.serviceTable td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;font-size:11.5px;line-height:1.25}
-.serviceTable th{background:var(--soft);color:#8a94a6;text-transform:uppercase;letter-spacing:.25px;font-size:9.8px;font-weight:950;width:24%}
-.serviceTable td{font-weight:850;color:#334155;width:26%}
-.serviceTable tr:last-child th,.serviceTable tr:last-child td{border-bottom:0}
-.signBox{border:1px solid var(--line);border-radius:16px;background:#fff;padding:11px 12px}
-.signTitle{font-size:13px;font-weight:950;margin-bottom:13px;color:var(--ink)}
-.signGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.signLine{border-top:1.5px solid #cbd5e1;text-align:center;padding-top:8px;font-size:11px;line-height:1.3;color:#64748b;font-weight:850;min-height:44px}
-.footer{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-top:12px;padding-top:9px;border-top:1px solid var(--line);font-size:10px;line-height:1.35;color:#94a3b8;font-weight:700}
+.page{max-width:900px;margin:0 auto;background:#fff;border-radius:30px;box-shadow:0 24px 70px rgba(0,0,0,.25);overflow:hidden}
+.topBand{height:8px;background:linear-gradient(90deg,#0a84ff,#60a5fa,#34c759)}
+.header{padding:24px 28px 18px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.brand{display:flex;gap:14px;align-items:center}
+.brand img{width:50px;height:50px;border-radius:16px;object-fit:cover;flex-shrink:0;background:#fff}
+.brandText{min-width:0}
+.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.45px;line-height:1.08}
+.brandSub{margin-top:4px;font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.22px}
+.reportMeta{min-width:180px;text-align:right;font-size:13px;color:var(--muted);line-height:1.65}
+.reportMeta b{color:var(--text)}
+.titleWrap{padding:22px 28px 12px}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:950;letter-spacing:.35px;text-transform:uppercase;margin-bottom:12px}
+.docTitle{margin:0;font-size:31px;line-height:1.05;letter-spacing:-.7px;font-weight:950}
+.docDesc{margin:9px 0 0;font-size:14px;line-height:1.55;color:var(--muted);max-width:680px}
+.statusBox{margin:4px 28px 18px;padding:18px;border-radius:22px;background:linear-gradient(135deg,#eff6ff,#f8fbff);border:1px solid #dbeafe;display:flex;gap:14px;align-items:flex-start}
+.statusIcon{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex-shrink:0;box-shadow:0 8px 20px rgba(10,132,255,.20)}
+.statusTextWrap{min-width:0}
+.statusTitle{font-size:18px;font-weight:950;color:#1d4ed8;margin-bottom:4px}
+.statusText{font-size:14px;color:#475569;line-height:1.5}
+.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 28px 18px}
+.infoCard{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:15px 16px;min-height:84px}
+.infoLabel{font-size:11px;font-weight:950;color:#8a94a6;letter-spacing:.35px;text-transform:uppercase;margin-bottom:7px}
+.infoValue{font-size:17px;font-weight:850;line-height:1.28;color:var(--text);word-break:break-word}
+.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 28px 18px}
+.summaryCard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}
+.summaryLabel{font-size:11px;font-weight:950;color:#8a94a6;letter-spacing:.35px;text-transform:uppercase;margin-bottom:7px}
+.summaryValue{font-size:26px;font-weight:950;letter-spacing:-.6px;color:var(--text);line-height:1}
+.summaryValue.green{color:#168a3a}
+.summarySub{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.4;font-weight:700}
+.section{margin:0 28px 18px;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.sectionHead{padding:16px 18px;border-bottom:1px solid var(--line);background:#fcfdff;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sectionTitle{font-size:17px;font-weight:950;letter-spacing:-.25px;color:var(--text)}
+.sectionMeta{font-size:12px;color:var(--muted);font-weight:800}
+.checkList{padding:14px 16px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.checkItem{border:1px solid var(--line);background:var(--soft);border-radius:16px;padding:12px 13px;display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:800;color:#475569;line-height:1.4}
+.checkDot{width:18px;height:18px;border-radius:50%;background:#eaf8f0;color:#168a3a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:950;flex-shrink:0;margin-top:1px}
+.noteBox{padding:14px 16px 16px}
+.noteCard{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:16px}
+.noteTitle{font-size:13px;font-weight:950;color:var(--text);margin-bottom:7px}
+.noteText{font-size:14px;line-height:1.6;color:#475569;white-space:pre-wrap;word-break:break-word}
+.dualGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:0 28px 18px}
+.signatureWrap{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 18px 16px}
+.signatureTitle{font-size:16px;font-weight:950;margin:0 0 14px}
+.signatureGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.signatureBox{border-top:1.6px solid #cfd5df;padding-top:10px;text-align:center;font-size:13px;line-height:1.5;color:var(--muted);font-weight:850}
+.serviceBox{background:linear-gradient(135deg,#effaf3,#f9fffb);border:1px solid #d6f4df;border-radius:22px;padding:18px}
+.serviceBox .serviceTitle{font-size:16px;font-weight:950;color:#168a3a;margin:0 0 12px}
+.serviceList{display:grid;gap:10px}
+.serviceRow{display:flex;justify-content:space-between;gap:12px;font-size:13px;line-height:1.4}
+.serviceRow b{color:var(--text)}
+.footer{padding:16px 28px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:flex-start;background:#fcfdff;color:#8a94a6;font-size:11.5px;line-height:1.55}
 .actionBar{max-width:900px;margin:16px auto 0;display:flex;gap:10px;justify-content:flex-end}
 .actionBtn{border:none;border-radius:16px;padding:14px 18px;background:#fff;color:#111827;font-size:14px;font-weight:900;box-shadow:0 12px 28px rgba(0,0,0,.12)}
-.actionBtn.primary{background:var(--blue);color:#fff;box-shadow:0 16px 30px rgba(37,99,235,.28)}
-@media screen and (max-width:760px){
+.actionBtn.primary{background:var(--blue);color:#fff;box-shadow:0 16px 30px rgba(10,132,255,.28)}
+@page{size:A4;margin:10mm}
+@media(max-width:760px){
 body{padding:12px}
-.viewerTitle h1{font-size:23px}
-.reportInner{padding:18px}
-.head,.titleRow,.bottom{grid-template-columns:1fr}
-.meta{text-align:left;min-width:0}
-.infoTable,.infoTable tbody,.infoTable tr,.infoTable th,.infoTable td{display:block;width:100%}
-.infoTable th,.infoTable td{border-right:0}
-.infoTable td{border-bottom:1px solid var(--line)}
-.infoTable tr:last-child td:last-child{border-bottom:0}
-.actionBar{display:grid;grid-template-columns:1fr 1fr}
+.viewerTitle h1{font-size:24px}
+.header,.titleWrap,.statusBox,.infoGrid,.summaryGrid,.dualGrid,.footer{padding-left:18px;padding-right:18px}
+.header{padding-top:18px;padding-bottom:14px;flex-direction:column;align-items:flex-start}
+.reportMeta{text-align:left;min-width:0}
+.infoGrid,.summaryGrid,.dualGrid,.checkList,.signatureGrid{grid-template-columns:1fr}
+.section,.statusBox{margin-left:18px;margin-right:18px}
+.actionBar{padding:0 4px;justify-content:stretch;display:grid;grid-template-columns:1fr 1fr}
 .actionBtn{width:100%}
 }
-@page{size:A4 portrait;margin:7mm}
 @media print{
-*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-html,body{background:#fff!important;margin:0!important;padding:0!important;width:auto!important;height:auto!important;overflow:hidden!important}
+html,body{background:#fff!important}
+body{padding:0!important;margin:0!important}
 .viewerTop,.actionBar{display:none!important}
-.reportPage{width:100%!important;max-width:none!important;margin:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;break-after:avoid!important;page-break-after:avoid!important}
-.accent{height:2.5mm!important}
-.reportInner{padding:5mm 7mm 4mm!important;overflow:hidden!important}
-.head{grid-template-columns:1fr 45mm!important;gap:6mm!important;padding-bottom:3mm!important}
-.brand img{width:12mm!important;height:12mm!important;border-radius:3mm!important}
-.brandName{font-size:15pt!important;line-height:1.02!important}
-.brandSub{font-size:7.4pt!important;margin-top:1mm!important}
-.meta{font-size:7.6pt!important;line-height:1.26!important;min-width:0!important;text-align:right!important}
-.titleRow{grid-template-columns:1fr 58mm!important;gap:5mm!important;padding:3.2mm 0 2.8mm!important}
-.kicker{font-size:6.8pt!important;padding:1.8mm 3.2mm!important;margin-bottom:1.8mm!important}
-.docTitle{font-size:17pt!important;line-height:1.02!important}
-.docText{font-size:7.5pt!important;line-height:1.25!important;margin-top:1.2mm!important}
-.statusBox{border-radius:3.2mm!important;padding:3mm!important}
-.statusLine{font-size:9.2pt!important;gap:2mm!important}
-.statusIcon{width:6.2mm!important;height:6.2mm!important;font-size:8pt!important}
-.statusDesc{font-size:7pt!important;line-height:1.23!important;margin-top:1.8mm!important}
-.infoTable{border-radius:3mm!important}
-.infoTable th,.infoTable td{padding:2.1mm 2.5mm!important}
-.infoTable th{font-size:6.2pt!important;width:15%!important;display:table-cell!important}
-.infoTable td{font-size:8pt!important;width:18.3%!important;display:table-cell!important;line-height:1.15!important}
-.infoTable tbody,.infoTable tr{display:table-row!important}
-.sectionTitle{margin:2.8mm 0 1.5mm!important;font-size:9pt!important}
-.sectionTitle span{font-size:6.8pt!important}
-.checkTable{border-radius:3mm!important}
-.checkTable td{padding:1.7mm 2.2mm!important;font-size:7.2pt!important;line-height:1.18!important}
-.checkTable .tick{width:7mm!important;font-size:8pt!important}
-.noteBox{border-radius:3mm!important;padding:2.2mm 2.6mm!important;min-height:0!important}
-.noteHead{font-size:6.3pt!important;margin-bottom:.8mm!important}
-.noteText{font-size:7.2pt!important;line-height:1.22!important;max-height:14mm!important;overflow:hidden!important}
-.bottom{grid-template-columns:1fr 58mm!important;gap:2.5mm!important;margin-top:3mm!important}
-.serviceTable{border-radius:3mm!important}
-.serviceTable th,.serviceTable td{padding:1.8mm 2.1mm!important;font-size:6.9pt!important;line-height:1.15!important;display:table-cell!important}
-.serviceTable th{font-size:5.9pt!important;width:23%!important}
-.signBox{border-radius:3mm!important;padding:2.4mm!important}
-.signTitle{font-size:8.1pt!important;margin-bottom:4mm!important}
-.signGrid{gap:2.5mm!important}
-.signLine{font-size:6.8pt!important;line-height:1.2!important;padding-top:2mm!important;min-height:12mm!important}
-.footer{margin-top:3mm!important;padding-top:2mm!important;font-size:6.4pt!important;line-height:1.18!important}
+.page{max-width:none!important;margin:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+.topBand{height:4px!important}
+.header{padding:11mm 11mm 7mm!important;gap:10px!important;align-items:flex-start!important}
+.brand img{width:38px!important;height:38px!important;border-radius:12px!important}
+.brandTitle{font-size:17px!important}
+.brandSub{font-size:9px!important;margin-top:2px!important}
+.reportMeta{font-size:9.5px!important;line-height:1.4!important;min-width:auto!important}
+.titleWrap{padding:0 11mm 5mm!important}
+.kicker{font-size:8.8px!important;padding:5px 9px!important;margin-bottom:7px!important}
+.docTitle{font-size:19px!important;letter-spacing:-.25px!important}
+.docDesc{font-size:10px!important;line-height:1.35!important;margin-top:4px!important}
+.statusBox{margin:0 11mm 5mm!important;padding:9px!important;border-radius:12px!important;gap:8px!important}
+.statusIcon{width:22px!important;height:22px!important;font-size:11px!important}
+.statusTitle{font-size:11.5px!important;margin-bottom:2px!important}
+.statusText{font-size:9px!important;line-height:1.3!important}
+.infoGrid{padding:0 11mm 5mm!important;gap:5px!important;grid-template-columns:repeat(3,1fr)!important}
+.infoCard{padding:7px 8px!important;min-height:40px!important;border-radius:10px!important}
+.infoLabel,.summaryLabel{font-size:7.2px!important;margin-bottom:2px!important;letter-spacing:.14px!important}
+.infoValue{font-size:10px!important;line-height:1.2!important}
+.summaryGrid{padding:0 11mm 5mm!important;gap:5px!important}
+.summaryCard{padding:8px!important;border-radius:10px!important}
+.summaryValue{font-size:15px!important}
+.summarySub{font-size:8px!important;margin-top:4px!important;line-height:1.25!important}
+.section{margin:0 11mm 5mm!important;border-radius:12px!important}
+.sectionHead{padding:8px 10px!important}
+.sectionTitle{font-size:10.5px!important}
+.sectionMeta{font-size:8px!important}
+.checkList{padding:8px 10px!important;gap:5px!important;grid-template-columns:repeat(2,1fr)!important}
+.checkItem{padding:6px 7px!important;border-radius:9px!important;font-size:8.2px!important;gap:5px!important;line-height:1.25!important}
+.checkDot{width:12px!important;height:12px!important;font-size:7px!important}
+.noteBox{padding:8px 10px 10px!important}
+.noteCard{padding:9px!important;border-radius:10px!important}
+.noteTitle{font-size:8.8px!important;margin-bottom:3px!important}
+.noteText{font-size:8.4px!important;line-height:1.3!important}
+.dualGrid{padding:0 11mm 5mm!important;gap:5px!important;grid-template-columns:1.1fr .9fr!important}
+.signatureWrap,.serviceBox{padding:9px!important;border-radius:12px!important}
+.signatureTitle,.serviceBox .serviceTitle{font-size:10px!important;margin-bottom:7px!important}
+.signatureGrid{gap:8px!important}
+.signatureBox{font-size:8px!important;padding-top:5px!important}
+.serviceList{gap:6px!important}
+.serviceRow{font-size:8px!important;line-height:1.25!important}
+.footer{padding:7px 11mm 8mm!important;font-size:7.5px!important;line-height:1.25!important}
 }
 </style>
 </head>
 <body>
 <div class="viewerTop">
 <button class="viewerBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-<div class="viewerTitle"><h1>Bakım Servis Raporu</h1><p>${ayHtml(APP_NAME)} • tek sayfa kurumsal form</p></div>
+<div class="viewerTitle"><h1>Bakım Servis Raporu</h1><p>${ayHtml(APP_NAME)} • düzenlenmiş rapor görünümü</p></div>
 <button class="viewerBtn" onclick="window.print()">Yazdır</button>
 </div>
-
-<div class="reportPage">
-<div class="accent"></div>
-<div class="reportInner">
-<div class="head">
+<div class="page">
+<div class="topBand"></div>
+<div class="header">
 <div class="brand">
 <img src="${pdfLogo}">
-<div>
-<div class="brandName">${ayHtml(pdfFirma)}</div>
-<div class="brandSub">${ayHtml(APP_NAME)} • Asansör bakım servis raporu</div>
+<div class="brandText">
+<div class="brandTitle">${ayHtml(pdfFirma)}</div>
+<div class="brandSub">ElevatorX • Asansör bakım servis raporu</div>
 </div>
 </div>
-<div class="meta">
+<div class="reportMeta">
 <b>Rapor No:</b> ${ayHtml(raporNo)}<br>
-<b>Belge Tarihi:</b> ${olusturma}<br>
+<b>Belge Tarihi:</b> ${ayHtml(bugun())}<br>
 <b>Bakım Tarihi:</b> ${ayHtml(bakimTarihi)}
 </div>
 </div>
-
-<div class="titleRow">
-<div>
-<div class="kicker">Servis kaydı oluşturuldu</div>
+<div class="titleWrap">
+<div class="kicker">Servis Kaydı Oluşturuldu</div>
 <h1 class="docTitle">Bakım Servis Raporu</h1>
-<p class="docText">Bu form, ilgili asansör için yapılan bakım ve kontrol işleminin kayıt altına alınması amacıyla oluşturulmuştur.</p>
+<p class="docDesc">Bu belge, ilgili asansör için gerçekleştirilen bakım / kontrol işleminin kayıt altına alınması amacıyla oluşturulmuştur. Rapor içeriği ElevatorX sistemi üzerinden hazırlanmıştır.</p>
 </div>
 <div class="statusBox">
-<div class="statusLine"><span class="statusIcon">✓</span>${ayHtml(durum)}</div>
-<div class="statusDesc">${durumText}</div>
+<div class="statusIcon">✓</div>
+<div class="statusTextWrap">
+<div class="statusTitle">${ayHtml(durum)}</div>
+<div class="statusText">${durumText}</div>
 </div>
 </div>
-
-<table class="infoTable">
-<tr>
-<th>Apartman / Site</th><td>${aptAd}</td>
-<th>Yönetici</th><td>${yonetici}</td>
-<th>Telefon</th><td>${telefon}</td>
-</tr>
-<tr>
-<th>Bakım Günü</th><td>${bakimGunu}</td>
-<th>Son Bakım</th><td>${sonBakim}</td>
-<th>Bakım Ücreti</th><td>${ucret}</td>
-</tr>
-</table>
-
-<div class="sectionTitle">Yapılan Kontroller <span>Checklist • ${checklistCount} madde</span></div>
-<table class="checkTable">
-${checklistHtml}
-</table>
-
-<div class="sectionTitle">Teknik Notlar <span>Servis açıklaması</span></div>
+<div class="infoGrid">
+<div class="infoCard"><div class="infoLabel">Apartman / Site</div><div class="infoValue">${aptAd}</div></div>
+<div class="infoCard"><div class="infoLabel">Yönetici</div><div class="infoValue">${yonetici}</div></div>
+<div class="infoCard"><div class="infoLabel">Telefon</div><div class="infoValue">${telefon}</div></div>
+<div class="infoCard"><div class="infoLabel">Bakım Günü</div><div class="infoValue">${bakimGunu}</div></div>
+<div class="infoCard"><div class="infoLabel">Son Bakım Tarihi</div><div class="infoValue">${sonBakim}</div></div>
+<div class="infoCard"><div class="infoLabel">Bakım Ücreti</div><div class="infoValue">${ucret}</div></div>
+</div>
+<div class="summaryGrid">
+<div class="summaryCard">
+<div class="summaryLabel">Kontrol Maddesi</div>
+<div class="summaryValue">${checklistCount}</div>
+<div class="summarySub">Bakım checklist maddesi rapora işlendi.</div>
+</div>
+<div class="summaryCard">
+<div class="summaryLabel">Servis Sorumlusu</div>
+<div class="summaryValue" style="font-size:18px;line-height:1.15">${ayHtml(pdfSorumlu || servisAd)}</div>
+<div class="summarySub">Bakım kaydını oluşturan yetkili kişi.</div>
+</div>
+<div class="summaryCard">
+<div class="summaryLabel">Durum</div>
+<div class="summaryValue green">Kayıtlı</div>
+<div class="summarySub">Bakım işlemi sistemde kayıt altına alındı.</div>
+</div>
+</div>
+<div class="section">
+<div class="sectionHead">
+<div class="sectionTitle">Yapılan Kontroller</div>
+<div class="sectionMeta">Checklist • ${checklistCount} madde</div>
+</div>
+<div class="checkList">
+${bakimChecklistPdfHtml}
+</div>
+</div>
+<div class="dualGrid">
+<div class="section" style="margin:0">
+<div class="sectionHead">
+<div class="sectionTitle">Teknik Notlar</div>
+<div class="sectionMeta">Servis açıklaması</div>
+</div>
 <div class="noteBox">
-<div class="noteHead">Teknik Açıklama</div>
-<div class="noteText">${teknikNot}${checklistNotu ? `\nChecklist Notu: ${checklistNotu}` : ``}</div>
+<div class="noteCard">
+<div class="noteTitle">Teknik Açıklama</div>
+<div class="noteText">${teknikNot}</div>
 </div>
-
-<div class="bottom">
-<table class="serviceTable">
-<tr><th>Servis Firması</th><td>${ayHtml(pdfFirma || servisFirma)}</td><th>Sorumlu Kişi</th><td>${ayHtml(pdfSorumlu || servisAd)}</td></tr>
-<tr><th>Telefon</th><td>${ayHtml(pdfTel || servisTel || "-")}</td><th>Oluşturma</th><td>${olusturma}</td></tr>
-</table>
-<div class="signBox">
-<div class="signTitle">Onay / İmza</div>
-<div class="signGrid">
-<div class="signLine">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu || servisAd)}</div>
-<div class="signLine">Müşteri / Yönetici<br>İmza</div>
+${checklistNotu ? `<div class="noteCard" style="margin-top:10px"><div class="noteTitle">Checklist Notu</div><div class="noteText">${checklistNotu}</div></div>` : ``}
 </div>
 </div>
+<div class="serviceBox">
+<div class="serviceTitle">Servis Bilgileri</div>
+<div class="serviceList">
+<div class="serviceRow"><span>Firma</span><b>${ayHtml(pdfFirma || servisFirma)}</b></div>
+<div class="serviceRow"><span>Sorumlu</span><b>${ayHtml(pdfSorumlu || servisAd)}</b></div>
+<div class="serviceRow"><span>Telefon</span><b>${ayHtml(pdfTel || servisTel || "-")}</b></div>
+<div class="serviceRow"><span>Oluşturma Tarihi</span><b>${ayHtml(bugun())}</b></div>
+<div class="serviceRow"><span>Sistem</span><b>${ayHtml(APP_NAME)} ${ayHtml(APP_VERSION)}</b></div>
 </div>
-
+</div>
+</div>
+<div class="signatureWrap" style="margin:0 28px 18px">
+<div class="signatureTitle">Onay / İmza Alanı</div>
+<div class="signatureGrid">
+<div class="signatureBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu || servisAd)}</div>
+<div class="signatureBox">Müşteri / Yönetici<br>İmza</div>
+</div>
+</div>
 <div class="footer">
-<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>supportelevatorx@gmail.com</div>
-<div>Bu belge ${ayHtml(APP_NAME)} sistemleri üzerinden oluşturulmuştur.</div>
+<div>© 2026 ${ayHtml(APP_NAME)}. Tüm hakları saklıdır.<br>Sürüm ${ayHtml(APP_VERSION)} • Destek: supportelevatorx@gmail.com</div>
+<div>Bu belge ElevatorX sistemleri üzerinden oluşturulmuştur.</div>
 </div>
 </div>
-</div>
-
 <div class="actionBar">
 <button class="actionBtn" onclick="if(navigator.share){navigator.share({title:'Bakım Servis Raporu',text:'Bakım Servis Raporu',url:location.href}).catch(()=>{})}else{window.print()}">Paylaş</button>
 <button class="actionBtn primary" onclick="window.print()">PDF / Yazdır</button>
@@ -8640,8 +8836,6 @@ ${checklistHtml}
 `);
 w.document.close();
 }
-
-
 
 
 
