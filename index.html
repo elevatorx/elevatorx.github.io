@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=111">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=111">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=111">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=111">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=111">
-<link rel="manifest" href="/manifest.webmanifest?v=111">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=112">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=112">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=112">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=112">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=112">
+<link rel="manifest" href="/manifest.webmanifest?v=112">
 
 <meta name="theme-color" content="#f6f7fb">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5303,7 +5303,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=111" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=112" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5313,7 +5313,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=111" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=112" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5498,7 +5498,7 @@ onchange="yedektenYukle(event)">
 <div class="profileFooterSmall">
 © 2026 ElevatorX. Tüm hakları saklıdır.<br>
 Asansör takip sistemi<br>
-Sürüm v1.0.87<br>
+<span data-app-version>Sürüm</span><br>
 Destek: supportelevatorx@gmail.com
 </div>
 
@@ -5649,8 +5649,17 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.1.1";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=111", location.href).href;
+const APP_VERSION = "v1.1.2";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=112", location.href).href;
+
+
+function profilSurumGuncelle(){
+
+document.querySelectorAll("[data-app-version]").forEach(function(el){
+el.textContent = "Sürüm " + APP_VERSION;
+});
+
+}
 
 function hideSplash(){
 
@@ -6966,6 +6975,64 @@ sonParcalar = `
 `;
 }
 
+
+let sicilKayitlar = [];
+
+if(Array.isArray(a.kayitlar)){
+a.kayitlar.forEach(function(k){
+let metin = gecmisMetinTemizle(k);
+let tarih = gecmisTarihBul(k);
+let tip = gecmisTipi(k);
+
+if(metin){
+sicilKayitlar.push({
+tarih:tarih,
+islem:tip.etiket,
+aciklama:metin
+});
+}
+});
+}
+
+if(Array.isArray(a.parcalar)){
+a.parcalar.forEach(function(p){
+let ad = p && p.ad ? String(p.ad).trim() : "";
+if(!ad) return;
+
+let varMi = sicilKayitlar.some(function(k){
+return String(k.aciklama || "").toLowerCase().includes(ad.toLowerCase());
+});
+
+if(!varMi){
+sicilKayitlar.push({
+tarih:p.tarih || "-",
+islem:"Parça",
+aciklama:"Parça değişti: " + ad
+});
+}
+});
+}
+
+let sonSicilKayitlari = sicilKayitlar.slice().reverse().slice(0,6);
+
+let sicilKayitSatirlari = sonSicilKayitlari.length
+? sonSicilKayitlari.map(function(k,idx){
+return `
+<tr>
+<td>${idx + 1}</td>
+<td>${ayHtml(k.tarih || "-")}</td>
+<td>${ayHtml(k.islem || "-")}</td>
+<td>${ayHtml(k.aciklama || "-")}</td>
+</tr>
+`;
+}).join("")
+: `
+<tr>
+<td colspan="4" class="emptyCell">Henüz bakım / işlem kaydı yok</td>
+</tr>
+`;
+
+
 let w = window.open("");
 
 if(!w){
@@ -7371,6 +7438,24 @@ td{font-size:8.5px!important;padding:6px!important}
 <div class="stat green"><div class="statLabel">Parça Kaydı</div><div class="statValue">${parcaSayisi}</div></div>
 <div class="stat orange"><div class="statLabel">Parça Tutarı</div><div class="statValue">${parcaTutarFormat(parcaToplam)}</div></div>
 <div class="stat"><div class="statLabel">Bakım Ücreti</div><div class="statValue">${ayHtml(a.ucret || 0)} ₺</div></div>
+</div>
+
+
+<div class="section">
+<div class="sectionTitle">Son Bakım / İşlem Kayıtları</div>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Tarih</th>
+<th>İşlem</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+${sicilKayitSatirlari}
+</tbody>
+</table>
 </div>
 
 <div class="section">
@@ -10419,6 +10504,7 @@ result.classList.add("show");
 document.addEventListener("DOMContentLoaded",()=>{
 
 temaUygula();
+profilSurumGuncelle();
 setAktifTab("apartman");
 setTimeout(guncellemeKontrolEt,2400);
 
