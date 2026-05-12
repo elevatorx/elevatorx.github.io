@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=98">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=98">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=98">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=98">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=98">
-<link rel="manifest" href="/manifest.webmanifest?v=98">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=111">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=111">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=111">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=111">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=111">
+<link rel="manifest" href="/manifest.webmanifest?v=111">
 
 <meta name="theme-color" content="#f6f7fb">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5083,6 +5083,134 @@ body.darkMode .tabbar .middleButton{border-color:rgba(17,23,34,.95)!important}
 .tabbar .middleButton{width:62px!important;height:62px!important;font-size:37px!important}
 }
 
+
+/* ElevatorX v1.1.1 - Güncelleme Bildirimi */
+.updateBanner{
+position:fixed;
+top:calc(env(safe-area-inset-top,0px) + 12px);
+left:50%;
+transform:translateX(-50%) translateY(-18px) scale(.98);
+width:min(392px,calc(100vw - 24px));
+z-index:999998;
+opacity:0;
+pointer-events:none;
+transition:opacity .24s ease, transform .24s ease;
+}
+
+.updateBanner.show{
+opacity:1;
+pointer-events:auto;
+transform:translateX(-50%) translateY(0) scale(1);
+}
+
+.updateBannerInner{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:10px 10px 10px 14px;
+border-radius:22px;
+background:rgba(255,255,255,.88);
+border:1px solid rgba(255,255,255,.92);
+box-shadow:
+0 18px 40px rgba(15,23,42,.18),
+inset 0 1px 0 rgba(255,255,255,.88);
+backdrop-filter:blur(22px) saturate(180%);
+-webkit-backdrop-filter:blur(22px) saturate(180%);
+}
+
+.updateBannerText{
+display:flex;
+align-items:center;
+gap:10px;
+min-width:0;
+}
+
+.updateDot{
+width:34px;
+height:34px;
+border-radius:14px;
+background:linear-gradient(145deg,#2563eb,#22c55e);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:950;
+font-size:17px;
+box-shadow:0 10px 22px rgba(37,99,235,.26);
+flex:0 0 auto;
+}
+
+.updateTitle{
+font-size:13px;
+font-weight:950;
+letter-spacing:-.15px;
+color:#0f172a;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.updateSub{
+font-size:11px;
+font-weight:800;
+color:#64748b;
+margin-top:2px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.updateActions{
+display:flex;
+align-items:center;
+gap:6px;
+flex:0 0 auto;
+}
+
+.updateNowBtn{
+border:0;
+border-radius:15px;
+padding:9px 11px;
+background:#0f172a;
+color:#fff;
+font-size:12px;
+font-weight:950;
+box-shadow:0 10px 22px rgba(15,23,42,.18);
+}
+
+.updateCloseBtn{
+width:32px;
+height:32px;
+border:0;
+border-radius:13px;
+background:rgba(15,23,42,.07);
+color:#64748b;
+font-size:16px;
+font-weight:950;
+}
+
+body.darkMode .updateBannerInner{
+background:rgba(17,24,39,.86);
+border-color:rgba(255,255,255,.08);
+box-shadow:
+0 18px 42px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+body.darkMode .updateTitle{
+color:#f8fafc;
+}
+
+body.darkMode .updateSub{
+color:#9ca3af;
+}
+
+body.darkMode .updateCloseBtn{
+background:rgba(255,255,255,.08);
+color:#cbd5e1;
+}
+
 </style>
 
 <script>
@@ -5175,7 +5303,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=98" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=111" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5185,7 +5313,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=98" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=111" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5461,6 +5589,8 @@ Destek: supportelevatorx@gmail.com
 </div>
 
 <div id="toast" class="toast"></div>
+<div id="updateBanner" class="updateBanner" aria-live="polite"></div>
+
 
 <div id="aiOverlay" class="aiOverlay" onclick="ayAsistanKapatDis(event)">
 
@@ -5519,8 +5649,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.1.0";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=75", location.href).href;
+const APP_VERSION = "v1.1.1";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=111", location.href).href;
 
 function hideSplash(){
 
@@ -5608,6 +5738,132 @@ t.classList.add("show");
 setTimeout(()=>{
 t.classList.remove("show");
 },1800);
+
+}
+
+
+function versiyonParcala(v){
+
+return String(v || "")
+.replace(/^v/i,"")
+.split(".")
+.map(n=>parseInt(n,10) || 0);
+
+}
+
+function versiyonDahaYeniMi(uzak, mevcut){
+
+let a = versiyonParcala(uzak);
+let b = versiyonParcala(mevcut);
+let len = Math.max(a.length,b.length);
+
+for(let i=0;i<len;i++){
+let x = a[i] || 0;
+let y = b[i] || 0;
+
+if(x > y) return true;
+if(x < y) return false;
+}
+
+return false;
+
+}
+
+function updateBannerKapat(){
+
+let el = document.getElementById("updateBanner");
+if(el){
+el.classList.remove("show");
+}
+
+}
+
+function updateBannerGoster(yeniSurum){
+
+let el = document.getElementById("updateBanner");
+if(!el) return;
+
+el.innerHTML = `
+<div class="updateBannerInner">
+  <div class="updateBannerText">
+    <div class="updateDot">↻</div>
+    <div>
+      <div class="updateTitle">Yeni sürüm mevcut: ${ayHtml(yeniSurum)}</div>
+      <div class="updateSub">Güncellemek için dokunun.</div>
+    </div>
+  </div>
+  <div class="updateActions">
+    <button class="updateNowBtn" onclick="elevatorXGuncelle('${ayHtml(yeniSurum)}')">Güncelle</button>
+    <button class="updateCloseBtn" onclick="updateBannerKapat()">×</button>
+  </div>
+</div>
+`;
+
+el.classList.add("show");
+
+}
+
+async function elevatorXGuncelle(yeniSurum){
+
+try{
+haptic("success");
+}catch(e){}
+
+try{
+toast("Yeni sürüm yükleniyor...");
+}catch(e){}
+
+try{
+if("caches" in window){
+let cacheNames = await caches.keys();
+await Promise.all(cacheNames.map(name=>caches.delete(name)));
+}
+}catch(e){
+console.warn("ElevatorX cache temizleme uyarısı:", e);
+}
+
+let url = new URL("index.html", location.href);
+url.searchParams.set("v", String(yeniSurum || APP_VERSION).replace(/[^\d]/g,"") || Date.now());
+url.searchParams.set("refresh", Date.now());
+
+setTimeout(()=>{
+location.replace(url.href);
+},350);
+
+}
+
+async function guncellemeKontrolEt(){
+
+if(location.protocol === "file:") return;
+
+try{
+
+let kontrolUrl = new URL("index.html", location.href);
+kontrolUrl.searchParams.set("updateCheck", Date.now());
+
+let cevap = await fetch(kontrolUrl.href,{
+cache:"no-store",
+headers:{
+"Cache-Control":"no-cache"
+}
+});
+
+if(!cevap.ok) return;
+
+let html = await cevap.text();
+let eslesme = html.match(/const\s+APP_VERSION\s*=\s*["']([^"']+)["']/);
+
+if(!eslesme || !eslesme[1]) return;
+
+let uzakSurum = eslesme[1];
+
+if(uzakSurum !== APP_VERSION && versiyonDahaYeniMi(uzakSurum,APP_VERSION)){
+updateBannerGoster(uzakSurum);
+}
+
+}catch(e){
+console.warn("ElevatorX sürüm kontrolü başarısız:", e);
+}
 
 }
 
@@ -10164,6 +10420,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 temaUygula();
 setAktifTab("apartman");
+setTimeout(guncellemeKontrolEt,2400);
 
 });
 
