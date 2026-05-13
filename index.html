@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=114">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=114">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=114">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=114">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=114">
-<link rel="manifest" href="/manifest.webmanifest?v=114">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=115">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=115">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=115">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=115">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=115">
+<link rel="manifest" href="/manifest.webmanifest?v=115">
 
 <meta name="theme-color" content="#f6f7fb">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5409,7 +5409,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=114" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=115" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5419,7 +5419,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=114" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=115" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5755,8 +5755,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.1.4";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=114", location.href).href;
+const APP_VERSION = "v1.1.5";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=115", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6142,6 +6142,8 @@ return {
 tutar:Number(o.tutar || 0),
 tarih:o.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun(),
 aciklama:o.aciklama || "",
+tip:o.tip || "",
+kalem:o.kalem || "",
 createdAt:o.createdAt || ""
 };
 });
@@ -6152,6 +6154,8 @@ return [{
 tutar:Number(a.ucret || 0),
 tarih:a.odemeTarihi,
 aciklama:"Eski ödeme kaydı",
+tip:"bakim",
+kalem:"Aylık bakım ücreti",
 createdAt:""
 }];
 }
@@ -6178,6 +6182,97 @@ createdAt:new Date().toISOString()
 }
 
 }
+
+
+function odemeTipNormalize(tip){
+
+let t = String(tip || "").toLowerCase().trim();
+
+if(t.startsWith("p") || t.includes("par")){
+return "parca";
+}
+
+if(t.startsWith("b") || t.includes("bak")){
+return "bakim";
+}
+
+return "cari";
+
+}
+
+function odemeTipEtiket(tip){
+
+let t = odemeTipNormalize(tip);
+
+if(t === "parca") return "Parça / İşlem Ödemesi";
+if(t === "bakim") return "Bakım Ücreti Ödemesi";
+return "Cari Tahsilat";
+
+}
+
+function odemeMakbuzBaslik(tip){
+
+let t = odemeTipNormalize(tip);
+
+if(t === "parca") return "Parça Ödeme Makbuzu";
+if(t === "bakim") return "Bakım Ödeme Makbuzu";
+return "Cari Tahsilat Makbuzu";
+
+}
+
+function sonParcaAdi(a){
+
+if(!a || !Array.isArray(a.parcalar) || !a.parcalar.length){
+return "";
+}
+
+let p = a.parcalar[0] || {};
+return String(p.ad || "").trim();
+
+}
+
+function odemeTipTahminEt(odeme){
+
+let aciklama = String((odeme && odeme.aciklama) || "").toLowerCase();
+
+if(odeme && odeme.tip){
+return odemeTipNormalize(odeme.tip);
+}
+
+if(aciklama.includes("parça") || aciklama.includes("parca") || aciklama.includes("lamba") || aciklama.includes("kart") || aciklama.includes("fotosel") || aciklama.includes("kapı") || aciklama.includes("kapi")){
+return "parca";
+}
+
+if(aciklama.includes("bakım") || aciklama.includes("bakim")){
+return "bakim";
+}
+
+return "cari";
+
+}
+
+function odemeKalemMetni(odeme,a){
+
+let tip = odemeTipTahminEt(odeme);
+let aciklama = String((odeme && odeme.aciklama) || "").trim();
+
+if(aciklama){
+return aciklama;
+}
+
+if(tip === "parca"){
+let p = sonParcaAdi(a);
+return p ? "Parça ödemesi: " + p : "Parça / işlem ödemesi";
+}
+
+if(tip === "bakim"){
+return "Aylık bakım ücreti";
+}
+
+return "Genel cari tahsilat";
+
+}
+
 
 function cariOzet(a){
 
@@ -8994,8 +9089,8 @@ odemeleriHazirla(a);
 
 let cari = cariOzet(a);
 
-if(cari.beklenen > 0 && cari.kalanPozitif <= 0){
-toast("Ödeme makbuzu oluşturuldu");
+if(cari.beklenen > 0 && cari.kalanPozitif <= 0 && cari.toplam > 0){
+toast("Son ödeme makbuzu oluşturuldu");
 odemeMakbuzuPdf(i);
 return;
 }
@@ -9020,12 +9115,38 @@ return;
 }
 
 let tarih = prompt("Ödeme tarihi", bugun()) || bugun();
-let aciklama = prompt("Açıklama", cari.kalanPozitif > tutar ? "Kısmi ödeme alındı" : "Ödeme alındı") || "";
+
+let varsayilanTip =
+cari.parcaToplam > 0 && cari.bakimUcreti > 0
+? "parça"
+: (cari.parcaToplam > 0 ? "parça" : "bakım");
+
+let tipGiris = prompt(
+"Ödeme türü yazın: bakım / parça / cari",
+varsayilanTip
+);
+
+if(tipGiris === null){
+toast("Ödeme kaydı iptal edildi");
+return;
+}
+
+let tip = odemeTipNormalize(tipGiris);
+let sonParca = sonParcaAdi(a);
+
+let varsayilanAciklama =
+tip === "parca"
+? (sonParca ? "Parça ödemesi: " + sonParca : "Parça / işlem ödemesi")
+: (tip === "bakim" ? "Bakım ücreti tahsilatı" : "Cari tahsilat");
+
+let aciklama = prompt("Makbuz açıklaması", varsayilanAciklama) || varsayilanAciklama;
 
 let yeniOdeme = {
 tutar:tutar,
 tarih:tarih.trim(),
 aciklama:aciklama.trim(),
+tip:tip,
+kalem:aciklama.trim(),
 createdAt:new Date().toISOString()
 };
 
@@ -9045,7 +9166,7 @@ a.kayitlar = [];
 }
 
 a.kayitlar.push(
-"Ödeme alındı: " + tutarFormat(tutar) + " (" + yeniOdeme.tarih + ")"
+"Ödeme alındı: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + yeniOdeme.tarih + ")"
 );
 
 if(yeniCari.kalanPozitif > 0){
@@ -9056,7 +9177,7 @@ a.kayitlar.push(
 
 kaydet();
 
-toast(yeniCari.kalanPozitif > 0 ? "Kısmi ödeme kaydedildi" : "Ödeme tamamlandı");
+toast(tip === "parca" ? "Parça ödemesi kaydedildi" : (yeniCari.kalanPozitif > 0 ? "Kısmi ödeme kaydedildi" : "Ödeme tamamlandı"));
 
 odemeMakbuzuPdf(i,yeniOdeme);
 
@@ -9158,6 +9279,7 @@ return `
 <tr>
 <td>${idx + 1}</td>
 <td>${ayHtml(o.tarih || "-")}</td>
+<td>${ayHtml(odemeTipEtiket(odemeTipTahminEt(o)))}</td>
 <td>${tutarFormat(o.tutar || 0)}</td>
 <td>${ayHtml(o.aciklama || "-")}</td>
 </tr>
@@ -9165,7 +9287,7 @@ return `
 }).join("")
 : `
 <tr>
-<td colspan="4" class="emptyCell">Henüz tahsilat kaydı yok</td>
+<td colspan="5" class="emptyCell">Henüz tahsilat kaydı yok</td>
 </tr>
 `;
 
@@ -9257,7 +9379,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 <div class="section">
 <div class="sectionTitle">Tahsilat Geçmişi</div>
 <table>
-<thead><tr><th>No</th><th>Tarih</th><th>Tutar</th><th>Açıklama</th></tr></thead>
+<thead><tr><th>No</th><th>Tarih</th><th>Tür</th><th>Tutar</th><th>Açıklama</th></tr></thead>
 <tbody>${odemeSatirlari}</tbody>
 </table>
 </div>
@@ -9311,9 +9433,12 @@ let odemeler = cari.odemeler;
 let aktifOdeme = sonOdeme || (odemeler.length ? odemeler[0] : {
 tutar:cari.toplam,
 tarih:cari.sonOdeme || a.odemeTarihi || bugun(),
-aciklama:"Ödeme kaydı"
+aciklama:"Ödeme kaydı",
+tip:"cari",
+kalem:"Ödeme kaydı"
 });
 
+let odemeTip = odemeTipTahminEt(aktifOdeme);
 let odemeTarihi = aktifOdeme.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun();
 
 let pdfMarka = pdfFirmaBilgi();
@@ -9327,15 +9452,17 @@ let yonetici = ayHtml(a.yonetici || "-");
 let telefon = ayHtml(a.tel || "-");
 let odeme = ayHtml(odemeTarihi);
 let tahsilEdilen = tutarFormat(aktifOdeme.tutar || 0);
-let toplamTahsil = tutarFormat(cari.toplam);
-let bakimUcreti = tutarFormat(cari.bakimUcreti);
-let parcaTutari = tutarFormat(cari.parcaToplam);
-let toplamBorc = tutarFormat(cari.beklenen);
-let kalanBakiye = cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
-let durumText = cari.kalanPozitif > 0 ? "Kısmi Ödeme" : "Tamamlandı";
-let durumAciklama = cari.kalanPozitif > 0
-? `${aptAd} için ${tahsilEdilen} tahsil edilmiş, ${tutarFormat(cari.kalanPozitif)} bakiye kalmıştır. Toplam borca bakım ve parça kalemleri dahildir.`
-: `${aptAd} için ödeme tamamlanmış ve cari bakiye kapatılmıştır.`;
+let tahsilatTuru = odemeTipEtiket(odemeTip);
+let makbuzBaslik = odemeMakbuzBaslik(odemeTip);
+let ilgiliIslem = ayHtml(odemeKalemMetni(aktifOdeme,a));
+let cariDurumu = cari.kalanPozitif > 0 ? "Cari açık" : (cari.alacak > 0 ? "Fazla ödeme" : "Cari kapalı");
+let durumText = "Tahsilat Kaydı";
+let durumAciklama =
+odemeTip === "parca"
+? `${aptAd} için ${tahsilEdilen} tutarında parça / işlem ödemesi tahsil edilmiştir.`
+: (odemeTip === "bakim"
+? `${aptAd} için ${tahsilEdilen} tutarında bakım ücreti tahsilatı kaydedilmiştir.`
+: `${aptAd} için ${tahsilEdilen} tutarında cari tahsilat kaydedilmiştir.`);
 
 let w = window.open("");
 
@@ -9351,7 +9478,7 @@ w.document.write(`
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ödeme Makbuzu - ElevatorX</title>
+<title>${makbuzBaslik} - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
 :root{--ink:#0f172a;--muted:#64748b;--line:#dbe5ef;--soft:#f8fafc;--green:#16a34a;--green2:#22c55e;--blue:#2563eb;--orange:#ea580c}
@@ -9380,8 +9507,7 @@ body{padding:18px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
 .card{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:10px 12px}
 .label{font-size:9.5px;font-weight:950;color:#8a94a6;text-transform:uppercase;letter-spacing:.28px;margin-bottom:5px}
-.value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}
-.value.debt{color:var(--orange)}.value.ok{color:var(--green)}.value.info{color:var(--blue)}
+.value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}.value.info{color:#2563eb}.value.ok{color:#16a34a}
 .note{border:1px solid #dbeafe;background:linear-gradient(180deg,#f8fbff,#f1f7ff);border-radius:18px;padding:13px 15px;margin-top:12px}
 .noteTitle{font-size:12px;font-weight:950;margin-bottom:5px}.noteText{font-size:12px;color:#475569;line-height:1.45}
 .signature{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
@@ -9414,7 +9540,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-<h1>Ödeme Makbuzu</h1>
+<h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
 
@@ -9439,13 +9565,13 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <div class="hero">
 <div>
 <div class="kicker">${ayHtml(durumText)}</div>
-<h1 class="title">Ödeme Makbuzu</h1>
+<h1 class="title">${ayHtml(makbuzBaslik)}</h1>
 <div class="desc">${durumAciklama}</div>
 </div>
 <div class="amountBox">
 <div class="amountLabel">Bu Tahsilat</div>
 <div class="amountValue">${tahsilEdilen}</div>
-<div class="statusLine">✓ ${ayHtml(durumText)}</div>
+<div class="statusLine">✓ Kaydedildi</div>
 </div>
 </div>
 
@@ -9453,16 +9579,16 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <div class="card"><div class="label">Apartman / Site</div><div class="value">${aptAd}</div></div>
 <div class="card"><div class="label">Yönetici</div><div class="value">${yonetici}</div></div>
 <div class="card"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
-<div class="card"><div class="label">Bakım Ücreti</div><div class="value">${bakimUcreti}</div></div>
-<div class="card"><div class="label">Parça Tutarı</div><div class="value debt">${parcaTutari}</div></div>
-<div class="card"><div class="label">Toplam Borç</div><div class="value">${toplamBorc}</div></div>
-<div class="card"><div class="label">Toplam Tahsilat</div><div class="value info">${toplamTahsil}</div></div>
-<div class="card"><div class="label">Kalan Bakiye</div><div class="value ${cari.kalanPozitif > 0 ? "debt" : "ok"}">${kalanBakiye}</div></div>
+<div class="card"><div class="label">Tahsilat Türü</div><div class="value info">${ayHtml(tahsilatTuru)}</div></div>
+<div class="card"><div class="label">İlgili İşlem</div><div class="value">${ilgiliIslem}</div></div>
+<div class="card"><div class="label">Bu Tahsilat</div><div class="value ok">${tahsilEdilen}</div></div>
+<div class="card"><div class="label">Ödeme Tarihi</div><div class="value">${odeme}</div></div>
+<div class="card"><div class="label">Cari Durumu</div><div class="value">${ayHtml(cariDurumu)}</div></div>
 </div>
 
 <div class="note">
 <div class="noteTitle">Açıklama</div>
-<div class="noteText">${aktifOdeme.aciklama ? ayHtml(aktifOdeme.aciklama) : "Bu makbuz, ödeme bilgisinin ElevatorX sistemi üzerinde kayıt altına alındığını göstermek amacıyla oluşturulmuştur."}</div>
+<div class="noteText">Bu makbuz yalnızca yukarıda belirtilen tahsilat işlemi için düzenlenmiştir. Bakım ücreti, parça kalemleri ve genel borç durumu için ayrıca Cari Hesap Özeti kullanılabilir.</div>
 </div>
 
 <div class="signature">
