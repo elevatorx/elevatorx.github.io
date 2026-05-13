@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=112">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=112">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=112">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=112">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=112">
-<link rel="manifest" href="/manifest.webmanifest?v=112">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=113">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=113">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=113">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=113">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=113">
+<link rel="manifest" href="/manifest.webmanifest?v=113">
 
 <meta name="theme-color" content="#f6f7fb">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5211,6 +5211,103 @@ background:rgba(255,255,255,.08);
 color:#cbd5e1;
 }
 
+
+/* ElevatorX v1.1.3 - Cari Hesap / Kısmi Ödeme */
+.payPartial{
+background:#eff6ff;
+color:#2563eb;
+}
+
+.payOver{
+background:#f0fdf4;
+color:#15803d;
+}
+
+.cariBox{
+margin-top:14px;
+border-radius:22px;
+padding:15px;
+background:linear-gradient(145deg,#f8fafc,#eef6ff);
+border:1px solid #e2e8f0;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.82);
+}
+
+.cariHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.cariTitle{
+font-size:15px;
+font-weight:950;
+color:#0f172a;
+letter-spacing:-.15px;
+}
+
+.cariStatus{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:6px 9px;
+border-radius:999px;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
+}
+
+.cariStatus.waiting{background:#fff7ed;color:#ea580c}
+.cariStatus.partial{background:#eff6ff;color:#2563eb}
+.cariStatus.paid{background:#ecfdf5;color:#16a34a}
+.cariStatus.over{background:#f0fdf4;color:#15803d}
+
+.cariGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+}
+
+.cariMini{
+background:rgba(255,255,255,.76);
+border:1px solid rgba(226,232,240,.88);
+border-radius:16px;
+padding:11px;
+}
+
+.cariMiniLabel{
+font-size:10px;
+font-weight:950;
+color:#8a94a6;
+text-transform:uppercase;
+letter-spacing:.28px;
+margin-bottom:5px;
+}
+
+.cariMiniValue{
+font-size:16px;
+font-weight:950;
+color:#0f172a;
+letter-spacing:-.2px;
+}
+
+.cariMiniValue.debt{color:#ea580c}
+.cariMiniValue.ok{color:#16a34a}
+.cariMiniValue.info{color:#2563eb}
+
+.cariHint{
+margin-top:10px;
+font-size:12px;
+font-weight:750;
+color:#64748b;
+line-height:1.4;
+}
+
+@media(max-width:390px){
+.cariGrid{grid-template-columns:1fr}
+}
+
 </style>
 
 <script>
@@ -5303,7 +5400,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=112" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=113" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5313,7 +5410,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=112" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=113" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5649,8 +5746,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.1.2";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=112", location.href).href;
+const APP_VERSION = "v1.1.3";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=113", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6018,16 +6115,160 @@ let p = a.parcalar[0];
 return (p.ad || "Parça") + (p.tarih ? " • " + p.tarih : "");
 }
 
+
+function tutarFormat(tutar){
+
+let n = Number(tutar || 0);
+return n.toLocaleString("tr-TR") + " ₺";
+
+}
+
+function odemeListesi(a){
+
+if(!a) return [];
+
+if(Array.isArray(a.odemeler) && a.odemeler.length){
+return a.odemeler.map(function(o){
+return {
+tutar:Number(o.tutar || 0),
+tarih:o.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun(),
+aciklama:o.aciklama || "",
+createdAt:o.createdAt || ""
+};
+});
+}
+
+if(a.odemeTarihi){
+return [{
+tutar:Number(a.ucret || 0),
+tarih:a.odemeTarihi,
+aciklama:"Eski ödeme kaydı",
+createdAt:""
+}];
+}
+
+return [];
+
+}
+
+function odemeleriHazirla(a){
+
+if(!a) return;
+
+if(!Array.isArray(a.odemeler)){
+a.odemeler = [];
+}
+
+if(a.odemeTarihi && a.odemeler.length === 0){
+a.odemeler.push({
+tutar:Number(a.ucret || 0),
+tarih:a.odemeTarihi,
+aciklama:"Eski ödeme kaydı",
+createdAt:new Date().toISOString()
+});
+}
+
+}
+
+function cariOzet(a){
+
+let beklenen = Number(a && a.ucret ? a.ucret : 0);
+let odemeler = odemeListesi(a);
+let toplam = odemeler.reduce(function(t,o){
+return t + Number(o.tutar || 0);
+},0);
+
+let kalan = beklenen - toplam;
+let kalanPozitif = Math.max(kalan,0);
+let alacak = kalan < 0 ? Math.abs(kalan) : 0;
+
+let durum = "Bekliyor";
+let durumClass = "waiting";
+
+if(toplam > 0 && kalan > 0){
+durum = "Kısmi Ödeme";
+durumClass = "partial";
+}
+
+if(beklenen > 0 && kalan <= 0 && toplam > 0){
+durum = "Tamamlandı";
+durumClass = "paid";
+}
+
+if(alacak > 0){
+durum = "Fazla Ödeme";
+durumClass = "over";
+}
+
+let sonOdeme = odemeler.length ? (odemeler[0].tarih || "") : "";
+
+return {
+beklenen:beklenen,
+toplam:toplam,
+kalan:kalan,
+kalanPozitif:kalanPozitif,
+alacak:alacak,
+durum:durum,
+durumClass:durumClass,
+sonOdeme:sonOdeme,
+odemeler:odemeler
+};
+
+}
+
+function cariOzetHtml(a){
+
+let c = cariOzet(a);
+let kalanText = c.alacak > 0 ? "Alacak: " + tutarFormat(c.alacak) : "Kalan: " + tutarFormat(c.kalanPozitif);
+let kalanClass = c.kalanPozitif > 0 ? "debt" : "ok";
+
+return `
+<div class="cariBox">
+  <div class="cariHead">
+    <div class="cariTitle">Cari Hesap Özeti</div>
+    <div class="cariStatus ${c.durumClass}">${c.durum}</div>
+  </div>
+  <div class="cariGrid">
+    <div class="cariMini">
+      <div class="cariMiniLabel">Bakım Ücreti</div>
+      <div class="cariMiniValue">${tutarFormat(c.beklenen)}</div>
+    </div>
+    <div class="cariMini">
+      <div class="cariMiniLabel">Tahsil Edilen</div>
+      <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
+    </div>
+    <div class="cariMini">
+      <div class="cariMiniLabel">${c.alacak > 0 ? "Alacak" : "Kalan Bakiye"}</div>
+      <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
+    </div>
+  </div>
+  <div class="cariHint">${kalanText}. Yönetici borç sorduğunda bu ekran veya Cari Hesap Özeti PDF'i kullanılabilir.</div>
+</div>
+`;
+
+}
+
+
 function toplamTahsilat(){
 return data.reduce((toplam,a)=>{
-return toplam + (a.odemeTarihi ? Number(a.ucret || 0) : 0);
+return toplam + cariOzet(a).toplam;
 },0);
 }
 
 function odemeBadge(a){
 
-if(a.odemeTarihi){
+let c = cariOzet(a);
+
+if(c.alacak > 0){
+return `<span class="payBadge payOver">Fazla Ödeme</span>`;
+}
+
+if(c.beklenen > 0 && c.kalanPozitif <= 0 && c.toplam > 0){
 return `<span class="payBadge payPaid">Ödeme Alındı</span>`;
+}
+
+if(c.toplam > 0 && c.kalanPozitif > 0){
+return `<span class="payBadge payPartial">Kısmi Ödeme</span>`;
 }
 
 return `<span class="payBadge payWaiting">Ödeme Bekliyor</span>`;
@@ -6243,7 +6484,7 @@ return true;
 }
 
 if(aktifFiltre === "unpaid"){
-return !a.odemeTarihi;
+return cariOzet(a).kalanPozitif > 0;
 }
 
 if(aktifFiltre === "today"){
@@ -6440,6 +6681,8 @@ ucret: Number(ucret.value)||0,
 bakimGunu: bakimGunu.value,
 not: not.value || "",
 odemeTarihi:"",
+sonOdemeTarihi:"",
+odemeler:[],
 bakimTarihi:"",
 kayitlar:[]
 });
@@ -6612,6 +6855,7 @@ filtreli.forEach((item,sira)=>{
 let a = item.a;
 let i = item.i;
 let d = durumBilgisi(a);
+let cari = cariOzet(a);
 let colorClass = "c" + (sira % 5);
 
 h += `
@@ -6635,7 +6879,8 @@ ${d.durum}
 </span><br>
 ${odemeBadge(a)}<br>
 <span class="kartDate">${kartTarih(a.bakimGunu)}</span><br>
-${a.ucret || 0} ₺
+${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}<br>
+<span class="kartDate">Kalan: ${tutarFormat(cari.kalanPozitif)}</span>
 </div>
 
 <div class="arrow">›</div>
@@ -8500,6 +8745,7 @@ aktifDetay = i;
 
 let a = data[i];
 let d = durumBilgisi(a);
+let cari = cariOzet(a);
 
 searchArea.style.display="none";
 filterPanel.style.display="none";
@@ -8509,7 +8755,7 @@ profilPanel.style.display="none";
 detayPanel.style.display="block";
 
 let odemeText =
-a.odemeTarihi ? "Ödeme Alındı" : "Ödeme Al";
+cari.kalanPozitif > 0 ? "Ödeme Al" : "Makbuz Oluştur";
 
 let bakimText =
 a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Yapıldı";
@@ -8555,18 +8801,23 @@ ${d.durum}
 </div>
 
 <div class="infoCard">
-<span class="infoLabel">Ücret</span>
-<span class="infoValue">${a.ucret || 0} ₺</span>
+<span class="infoLabel">Bakım Ücreti</span>
+<span class="infoValue">${tutarFormat(cari.beklenen)}</span>
+</div>
+
+<div class="infoCard">
+<span class="infoLabel">Tahsil Edilen</span>
+<span class="infoValue small">${tutarFormat(cari.toplam)}</span>
+</div>
+
+<div class="infoCard">
+<span class="infoLabel">Kalan Bakiye</span>
+<span class="infoValue small">${cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif)}</span>
 </div>
 
 <div class="infoCard">
 <span class="infoLabel">Bakım Günü</span>
 <span class="infoValue small">${a.bakimGunu || "-"}</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Ödeme</span>
-<span class="infoValue small">${a.odemeTarihi || "-"}</span>
 </div>
 
 <div class="infoCard">
@@ -8580,11 +8831,13 @@ ${d.durum}
 ${a.not || "Teknik not yok"}
 </div>
 
+${cariOzetHtml(a)}
+
 ${parcaGecmisiHtml(i)}
 
 <div class="detailGrid">
 
-<button class="green ${a.odemeTarihi ? "done" : ""}" onclick="odeme(${i})">
+<button class="green ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
 ${odemeText}
 </button>
 
@@ -8601,6 +8854,10 @@ Sil
 </button>
 
 </div>
+
+<button class="sicilPdfBtn" onclick="cariHesapPdf(${i})">
+Cari Hesap Özeti
+</button>
 
 <button class="sicilPdfBtn" onclick="sicilKartiPdf(${i})">
 Asansör Sicil Kartı
@@ -8683,23 +8940,78 @@ function odeme(i){
 
 haptic("success");
 
-if(data[i].odemeTarihi){
+let a = data[i];
+if(!a) return;
+
+odemeleriHazirla(a);
+
+let cari = cariOzet(a);
+
+if(cari.beklenen > 0 && cari.kalanPozitif <= 0){
 toast("Ödeme makbuzu oluşturuldu");
 odemeMakbuzuPdf(i);
 return;
 }
 
-data[i].odemeTarihi = bugun();
+let varsayilan = cari.kalanPozitif > 0 ? cari.kalanPozitif : (Number(a.ucret || 0) || 0);
 
-data[i].kayitlar.push(
-"Ödeme alındı (" + bugun() + ")"
+let giris = prompt(
+"Tahsil edilen tutar ₺",
+String(varsayilan)
 );
+
+if(giris === null){
+toast("Ödeme kaydı iptal edildi");
+return;
+}
+
+let tutar = Number(String(giris).replace(",", "."));
+
+if(!tutar || tutar <= 0){
+toast("Geçerli bir tutar girilmedi");
+return;
+}
+
+let tarih = prompt("Ödeme tarihi", bugun()) || bugun();
+let aciklama = prompt("Açıklama", cari.kalanPozitif > tutar ? "Kısmi ödeme alındı" : "Ödeme alındı") || "";
+
+let yeniOdeme = {
+tutar:tutar,
+tarih:tarih.trim(),
+aciklama:aciklama.trim(),
+createdAt:new Date().toISOString()
+};
+
+a.odemeler.unshift(yeniOdeme);
+a.sonOdemeTarihi = yeniOdeme.tarih;
+
+let yeniCari = cariOzet(a);
+
+if(yeniCari.kalanPozitif <= 0 && yeniCari.toplam > 0){
+a.odemeTarihi = yeniOdeme.tarih;
+}else{
+a.odemeTarihi = "";
+}
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Ödeme alındı: " + tutarFormat(tutar) + " (" + yeniOdeme.tarih + ")"
+);
+
+if(yeniCari.kalanPozitif > 0){
+a.kayitlar.push(
+"Kısmi ödeme - Kalan bakiye: " + tutarFormat(yeniCari.kalanPozitif) + " (" + yeniOdeme.tarih + ")"
+);
+}
 
 kaydet();
 
-toast("Ödeme alındı");
+toast(yeniCari.kalanPozitif > 0 ? "Kısmi ödeme kaydedildi" : "Ödeme tamamlandı");
 
-odemeMakbuzuPdf(i);
+odemeMakbuzuPdf(i,yeniOdeme);
 
 if(aktifDetay !== null && data[aktifDetay]){
 detayAc(aktifDetay);
@@ -8755,7 +9067,154 @@ logo:pdfProfilLogo()
 };
 }
 
-function odemeMakbuzuPdf(i){
+
+function cariHesapPdf(i){
+
+haptic("medium");
+
+let a = data[i];
+if(!a) return;
+
+let profil = profilBilgileri();
+let servisFirma = profil.firma || APP_NAME;
+let servisAd = profil.ad || "Teknik Servis";
+let servisTel = profil.telefon || "";
+
+let pdfMarka = pdfFirmaBilgi();
+let pdfFirma = pdfMarka.firma || servisFirma;
+let pdfLogo = pdfMarka.logo;
+let pdfSorumlu = pdfMarka.ad || servisAd;
+
+let cari = cariOzet(a);
+let odemeSatirlari = cari.odemeler.length
+? cari.odemeler.map(function(o,idx){
+return `
+<tr>
+<td>${idx + 1}</td>
+<td>${ayHtml(o.tarih || "-")}</td>
+<td>${tutarFormat(o.tutar || 0)}</td>
+<td>${ayHtml(o.aciklama || "-")}</td>
+</tr>
+`;
+}).join("")
+: `
+<tr>
+<td colspan="4" class="emptyCell">Henüz tahsilat kaydı yok</td>
+</tr>
+`;
+
+let raporNo =
+"AY-CARI-" +
+new Date().getFullYear() +
+"-" +
+String(i + 1).padStart(4,"0");
+
+let kalanBaslik = cari.alacak > 0 ? "Alacak" : "Kalan Bakiye";
+let kalanDeger = cari.alacak > 0 ? tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
+let yoneticiMesaj = cari.kalanPozitif > 0
+? `${a.ad || "-"} için güncel kalan bakiye ${tutarFormat(cari.kalanPozitif)} olarak görünmektedir.`
+: `${a.ad || "-"} için güncel cari bakiye kapalı görünmektedir.`;
+
+let w = window.open("");
+
+if(!w){
+toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
+return;
+}
+
+w.document.open();
+w.document.write(`
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cari Hesap Özeti - ElevatorX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:24px}
+.page{max-width:840px;margin:0 auto;background:white;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
+.topBand{height:10px;background:linear-gradient(90deg,#111827,#2563eb,#22c55e)}
+.header{padding:26px 30px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
+.brand{display:flex;align-items:center;gap:14px}.brand img{width:52px;height:52px;border-radius:16px;object-fit:cover}.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:750;margin-top:2px}
+.reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
+.hero{margin:24px 30px 16px;background:linear-gradient(145deg,#111827,#1f2937);border-radius:26px;padding:22px;color:#fff}
+.kicker{font-size:12px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.65;margin-bottom:8px}.docTitle{font-size:31px;font-weight:950;letter-spacing:-.7px;margin:0}.docDesc{font-size:14px;color:#d1d5db;margin:8px 0 0;line-height:1.45}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 30px 18px}.stat{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:15px}.statLabel{font-size:11px;font-weight:950;text-transform:uppercase;color:#8a94a6;margin-bottom:7px}.statValue{font-size:20px;font-weight:950;color:#111827}.stat.green .statValue{color:#16a34a}.stat.orange .statValue{color:#ea580c}.stat.blue .statValue{color:#2563eb}
+.section{margin:0 30px 18px;background:#fff;border:1px solid #edf0f5;border-radius:20px;overflow:hidden}.sectionTitle{padding:16px 18px;font-size:17px;font-weight:950;border-bottom:1px solid #edf0f5;background:#f8fafc}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px 12px;border-bottom:1px solid #edf0f5;text-align:left}th{font-size:11px;text-transform:uppercase;letter-spacing:.35px;color:#8a94a6;background:#fcfdff}.emptyCell{text-align:center;color:#9ca3af;font-style:italic;padding:18px}
+.noteBox{margin:0 30px 22px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;padding:18px}.noteTitle{font-size:14px;font-weight:950;margin-bottom:7px}.noteText{font-size:14px;color:#4b5563;line-height:1.55;white-space:pre-wrap}
+.signatureArea{padding:0 30px 24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.signatureBox{height:74px;border-top:1.5px solid #d1d5db;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#6b7280;font-size:13px;font-weight:800;padding-bottom:6px}
+.footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
+@page{size:A4;margin:0}
+@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:16px}.stats{margin:0 22px 14px;gap:8px}.section{margin:0 22px 14px}.noteBox{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.footer{margin:0 22px 18px}.docTitle{font-size:25px}.statValue{font-size:16px}th,td{padding:8px 9px;font-size:11px}}
+</style>
+</head>
+<body>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<div class="page">
+<div class="topBand"></div>
+<div class="header">
+<div class="brand">
+<img src="${pdfLogo}">
+<div>
+<div class="brandTitle">${ayHtml(pdfFirma)}</div>
+<div class="brandSub">${ayHtml(APP_NAME)} • Cari hesap özeti</div>
+</div>
+</div>
+<div class="reportMeta">
+<b>Rapor No:</b> ${ayHtml(raporNo)}<br>
+<b>Tarih:</b> ${ayHtml(bugun())}
+</div>
+</div>
+
+<div class="hero">
+<div class="kicker">Cari Hesap</div>
+<h1 class="docTitle">${ayHtml(a.ad || "-")}</h1>
+<div class="docDesc">${ayHtml(yoneticiMesaj)}</div>
+</div>
+
+<div class="stats">
+<div class="stat"><div class="statLabel">Bakım Ücreti</div><div class="statValue">${tutarFormat(cari.beklenen)}</div></div>
+<div class="stat blue"><div class="statLabel">Tahsil Edilen</div><div class="statValue">${tutarFormat(cari.toplam)}</div></div>
+<div class="stat ${cari.kalanPozitif > 0 ? "orange" : "green"}"><div class="statLabel">${kalanBaslik}</div><div class="statValue">${kalanDeger}</div></div>
+<div class="stat green"><div class="statLabel">Durum</div><div class="statValue">${ayHtml(cari.durum)}</div></div>
+</div>
+
+<div class="section">
+<div class="sectionTitle">Tahsilat Geçmişi</div>
+<table>
+<thead><tr><th>No</th><th>Tarih</th><th>Tutar</th><th>Açıklama</th></tr></thead>
+<tbody>${odemeSatirlari}</tbody>
+</table>
+</div>
+
+<div class="noteBox">
+<div class="noteTitle">Yöneticiye Bilgi Notu</div>
+<div class="noteText">${ayHtml(yoneticiMesaj)}</div>
+</div>
+
+<div class="signatureArea">
+<div class="signatureBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu)}</div>
+<div class="signatureBox">Müşteri / Yönetici<br>İmza</div>
+</div>
+
+<div class="footer">
+<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>supportelevatorx@gmail.com</div>
+<div>Cari hesap özeti</div>
+</div>
+</div>
+<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+</body>
+</html>
+`);
+w.document.close();
+
+toast("Cari hesap özeti oluşturuldu");
+
+}
+
+
+function odemeMakbuzuPdf(i,sonOdeme){
 
 haptic("medium");
 
@@ -8773,7 +9232,15 @@ new Date().getFullYear() +
 "-" +
 String(i + 1).padStart(4,"0");
 
-let odemeTarihi = a.odemeTarihi || bugun();
+let cari = cariOzet(a);
+let odemeler = cari.odemeler;
+let aktifOdeme = sonOdeme || (odemeler.length ? odemeler[0] : {
+tutar:cari.toplam,
+tarih:cari.sonOdeme || a.odemeTarihi || bugun(),
+aciklama:"Ödeme kaydı"
+});
+
+let odemeTarihi = aktifOdeme.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun();
 
 let pdfMarka = pdfFirmaBilgi();
 let pdfFirma = pdfMarka.firma || servisFirma;
@@ -8785,7 +9252,14 @@ let aptAd = ayHtml(a.ad || "-");
 let yonetici = ayHtml(a.yonetici || "-");
 let telefon = ayHtml(a.tel || "-");
 let odeme = ayHtml(odemeTarihi);
-let tutar = `${Number(a.ucret || 0).toLocaleString("tr-TR")} ₺`;
+let tahsilEdilen = tutarFormat(aktifOdeme.tutar || 0);
+let toplamTahsil = tutarFormat(cari.toplam);
+let bakimUcreti = tutarFormat(cari.beklenen);
+let kalanBakiye = cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
+let durumText = cari.kalanPozitif > 0 ? "Kısmi Ödeme" : "Tamamlandı";
+let durumAciklama = cari.kalanPozitif > 0
+? `${aptAd} için ${tahsilEdilen} tahsil edilmiş, ${tutarFormat(cari.kalanPozitif)} bakiye kalmıştır.`
+: `${aptAd} için ödeme tamamlanmış ve cari bakiye kapatılmıştır.`;
 
 let w = window.open("");
 
@@ -8801,10 +9275,10 @@ w.document.write(`
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ödeme Alındı Makbuzu - ElevatorX</title>
+<title>Ödeme Makbuzu - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
-:root{--ink:#0f172a;--muted:#64748b;--line:#dbe5ef;--soft:#f8fafc;--green:#16a34a;--green2:#22c55e;--blue:#2563eb}
+:root{--ink:#0f172a;--muted:#64748b;--line:#dbe5ef;--soft:#f8fafc;--green:#16a34a;--green2:#22c55e;--blue:#2563eb;--orange:#ea580c}
 html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#0b1120;color:var(--ink)}
 body{padding:18px}
 .screenTop{max-width:850px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff}
@@ -8831,6 +9305,7 @@ body{padding:18px}
 .card{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:10px 12px}
 .label{font-size:9.5px;font-weight:950;color:#8a94a6;text-transform:uppercase;letter-spacing:.28px;margin-bottom:5px}
 .value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}
+.value.debt{color:var(--orange)}.value.ok{color:var(--green)}.value.info{color:var(--blue)}
 .note{border:1px solid #dbeafe;background:linear-gradient(180deg,#f8fbff,#f1f7ff);border-radius:18px;padding:13px 15px;margin-top:12px}
 .noteTitle{font-size:12px;font-weight:950;margin-bottom:5px}.noteText{font-size:12px;color:#475569;line-height:1.45}
 .signature{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
@@ -8863,7 +9338,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-<h1>Ödeme Alındı Makbuzu</h1>
+<h1>Ödeme Makbuzu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
 
@@ -8887,14 +9362,14 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 
 <div class="hero">
 <div>
-<div class="kicker">Tahsilat kaydı oluşturuldu</div>
-<h1 class="title">Ödeme Alındı Makbuzu</h1>
-<div class="desc">${aptAd} için bakım/tahsilat ücreti ${odeme} tarihinde kayıt altına alınmıştır.</div>
+<div class="kicker">${ayHtml(durumText)}</div>
+<h1 class="title">Ödeme Makbuzu</h1>
+<div class="desc">${durumAciklama}</div>
 </div>
 <div class="amountBox">
-<div class="amountLabel">Tahsil Edilen Tutar</div>
-<div class="amountValue">${tutar}</div>
-<div class="statusLine">✓ Ödeme Alındı</div>
+<div class="amountLabel">Bu Tahsilat</div>
+<div class="amountValue">${tahsilEdilen}</div>
+<div class="statusLine">✓ ${ayHtml(durumText)}</div>
 </div>
 </div>
 
@@ -8902,12 +9377,14 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <div class="card"><div class="label">Apartman / Site</div><div class="value">${aptAd}</div></div>
 <div class="card"><div class="label">Yönetici</div><div class="value">${yonetici}</div></div>
 <div class="card"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
-<div class="card"><div class="label">Ödeme Tarihi</div><div class="value">${odeme}</div></div>
+<div class="card"><div class="label">Bakım Ücreti</div><div class="value">${bakimUcreti}</div></div>
+<div class="card"><div class="label">Toplam Tahsilat</div><div class="value info">${toplamTahsil}</div></div>
+<div class="card"><div class="label">Kalan Bakiye</div><div class="value ${cari.kalanPozitif > 0 ? "debt" : "ok"}">${kalanBakiye}</div></div>
 </div>
 
 <div class="note">
 <div class="noteTitle">Açıklama</div>
-<div class="noteText">Bu makbuz, ödeme bilgisinin ElevatorX sistemi üzerinde kayıt altına alındığını göstermek amacıyla oluşturulmuştur.</div>
+<div class="noteText">${aktifOdeme.aciklama ? ayHtml(aktifOdeme.aciklama) : "Bu makbuz, ödeme bilgisinin ElevatorX sistemi üzerinde kayıt altına alındığını göstermek amacıyla oluşturulmuştur."}</div>
 </div>
 
 <div class="signature">
@@ -9193,16 +9670,20 @@ let buAyBakim =
 data.filter(a=>tarihBuAyMi(a.bakimTarihi));
 
 let buAyOdeme =
-data.filter(a=>tarihBuAyMi(a.odemeTarihi));
+data.filter(a=>odemeListesi(a).some(o=>tarihBuAyMi(o.tarih)));
 
 let tahsilat =
-buAyOdeme.reduce((t,a)=>t + Number(a.ucret || 0),0);
+data.reduce((t,a)=>{
+return t + odemeListesi(a)
+.filter(o=>tarihBuAyMi(o.tarih))
+.reduce((ara,o)=>ara + Number(o.tutar || 0),0);
+},0);
 
 let bekleyen =
-data.filter(a=>!a.odemeTarihi);
+data.filter(a=>cariOzet(a).kalanPozitif > 0);
 
 let bekleyenTutar =
-bekleyen.reduce((t,a)=>t + Number(a.ucret || 0),0);
+bekleyen.reduce((t,a)=>t + cariOzet(a).kalanPozitif,0);
 
 let geciken =
 data.filter(a=>
@@ -9346,8 +9827,8 @@ html,body{background:#fff!important;margin:0!important;padding:0!important;zoom:
 <div class="summaryGrid">
 <div class="summaryCard"><div class="summaryLabel">Toplam Apartman</div><div class="summaryValue">${data.length}</div></div>
 <div class="summaryCard"><div class="summaryLabel">Bu Ay Bakım</div><div class="summaryValue">${buAyBakim.length}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Bu Ay Tahsilat</div><div class="summaryValue">${tahsilat} ₺</div></div>
-<div class="summaryCard"><div class="summaryLabel">Bekleyen Ödeme</div><div class="summaryValue">${bekleyenTutar} ₺</div></div>
+<div class="summaryCard"><div class="summaryLabel">Bu Ay Tahsilat</div><div class="summaryValue">${tutarFormat(tahsilat)}</div></div>
+<div class="summaryCard"><div class="summaryLabel">Bekleyen Ödeme</div><div class="summaryValue">${tutarFormat(bekleyenTutar)}</div></div>
 <div class="summaryCard"><div class="summaryLabel">Geciken Bakım</div><div class="summaryValue">${geciken.length}</div></div>
 <div class="summaryCard"><div class="summaryLabel">Teknik Notlu</div><div class="summaryValue">${notlu.length}</div></div>
 </div>
@@ -9357,11 +9838,11 @@ ${buAyBakim.length ? buAyBakim.map(a=>`<div class="listItem">${a.ad || "-"} — 
 </div></div>
 
 <div class="section"><div class="sectionTitle">Ödeme Alınanlar</div><div class="list">
-${buAyOdeme.length ? buAyOdeme.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.ucret || 0} ₺ — ${a.odemeTarihi || "-"}</div>`).join("") : `<div class="empty">Bu ay ödeme kaydı yok.</div>`}
+${buAyOdeme.length ? buAyOdeme.map(a=>`<div class="listItem">${a.ad || "-"} — ${tutarFormat(odemeListesi(a).filter(o=>tarihBuAyMi(o.tarih)).reduce((t,o)=>t+Number(o.tutar||0),0))} — ${cariOzet(a).durum}</div>`).join("") : `<div class="empty">Bu ay ödeme kaydı yok.</div>`}
 </div></div>
 
 <div class="section"><div class="sectionTitle">Bekleyen Ödemeler</div><div class="list">
-${bekleyen.length ? bekleyen.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.ucret || 0} ₺</div>`).join("") : `<div class="empty">Bekleyen ödeme yok.</div>`}
+${bekleyen.length ? bekleyen.map(a=>`<div class="listItem">${a.ad || "-"} — Kalan: ${tutarFormat(cariOzet(a).kalanPozitif)} / Ücret: ${tutarFormat(cariOzet(a).beklenen)}</div>`).join("") : `<div class="empty">Bekleyen ödeme yok.</div>`}
 </div></div>
 
 <div class="section"><div class="sectionTitle">Geciken Bakımlar</div><div class="list">
