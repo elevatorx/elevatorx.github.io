@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=113">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=113">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=113">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=113">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=113">
-<link rel="manifest" href="/manifest.webmanifest?v=113">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=114">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=114">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=114">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=114">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=114">
+<link rel="manifest" href="/manifest.webmanifest?v=114">
 
 <meta name="theme-color" content="#f6f7fb">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5296,6 +5296,15 @@ letter-spacing:-.2px;
 .cariMiniValue.ok{color:#16a34a}
 .cariMiniValue.info{color:#2563eb}
 
+.cariGridFour{
+grid-template-columns:repeat(4,1fr);
+}
+
+@media(max-width:430px){
+.cariGridFour{grid-template-columns:repeat(2,1fr)}
+}
+
+
 .cariHint{
 margin-top:10px;
 font-size:12px;
@@ -5400,7 +5409,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <div id="splash">
 <div class="splashWrap">
-<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=113" alt="ElevatorX logo">
+<img class="splashNewLogo" src="/elevatorx-icon-v69.png?v=114" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark">Elevator<span>X</span></div>
 </div>
 </div>
@@ -5410,7 +5419,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=113" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=114" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -5746,8 +5755,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.1.3";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=113", location.href).href;
+const APP_VERSION = "v1.1.4";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=114", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6172,7 +6181,37 @@ createdAt:new Date().toISOString()
 
 function cariOzet(a){
 
-let beklenen = Number(a && a.ucret ? a.ucret : 0);
+let bakimUcreti = Number(a && a.ucret ? a.ucret : 0);
+let parcaToplam = parcaToplamTutar(a);
+let beklenen = bakimUcreti + parcaToplam;
+let kalemler = [];
+
+if(bakimUcreti > 0){
+kalemler.push({
+tip:"Bakım",
+tarih:(a && (a.bakimTarihi || a.bakimGunu)) || "-",
+aciklama:"Aylık bakım ücreti",
+tutar:bakimUcreti
+});
+}
+
+if(a && Array.isArray(a.parcalar)){
+a.parcalar.forEach(function(p){
+let tutar = Number(p && p.tutar ? p.tutar : 0);
+if(tutar <= 0) return;
+
+let adet = p.adet ? " • Adet: " + p.adet : "";
+let not = p.not ? " • " + p.not : "";
+
+kalemler.push({
+tip:"Parça",
+tarih:(p && p.tarih) || "-",
+aciklama:"Parça değişimi: " + ((p && p.ad) || "Parça") + adet + not,
+tutar:tutar
+});
+});
+}
+
 let odemeler = odemeListesi(a);
 let toplam = odemeler.reduce(function(t,o){
 return t + Number(o.tutar || 0);
@@ -6203,7 +6242,10 @@ durumClass = "over";
 let sonOdeme = odemeler.length ? (odemeler[0].tarih || "") : "";
 
 return {
+bakimUcreti:bakimUcreti,
+parcaToplam:parcaToplam,
 beklenen:beklenen,
+kalemler:kalemler,
 toplam:toplam,
 kalan:kalan,
 kalanPozitif:kalanPozitif,
@@ -6228,20 +6270,25 @@ return `
     <div class="cariTitle">Cari Hesap Özeti</div>
     <div class="cariStatus ${c.durumClass}">${c.durum}</div>
   </div>
-  <div class="cariGrid">
+  <div class="cariGrid cariGridFour">
     <div class="cariMini">
-      <div class="cariMiniLabel">Bakım Ücreti</div>
-      <div class="cariMiniValue">${tutarFormat(c.beklenen)}</div>
+      <div class="cariMiniLabel">Bakım</div>
+      <div class="cariMiniValue">${tutarFormat(c.bakimUcreti)}</div>
     </div>
     <div class="cariMini">
-      <div class="cariMiniLabel">Tahsil Edilen</div>
+      <div class="cariMiniLabel">Parça</div>
+      <div class="cariMiniValue debt">${tutarFormat(c.parcaToplam)}</div>
+    </div>
+    <div class="cariMini">
+      <div class="cariMiniLabel">Tahsil</div>
       <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
     </div>
     <div class="cariMini">
-      <div class="cariMiniLabel">${c.alacak > 0 ? "Alacak" : "Kalan Bakiye"}</div>
+      <div class="cariMiniLabel">${c.alacak > 0 ? "Alacak" : "Kalan"}</div>
       <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
     </div>
   </div>
+  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Parça değişim tutarları da cari hesaba otomatik işlenir.</div>
   <div class="cariHint">${kalanText}. Yönetici borç sorduğunda bu ekran veya Cari Hesap Özeti PDF'i kullanılabilir.</div>
 </div>
 `;
@@ -8402,12 +8449,12 @@ data[i].kayitlar = [];
 }
 
 data[i].kayitlar.push(
-"Parça değişti: " + ad.trim() + " (" + bugun() + ")"
+"Parça değişti: " + ad.trim() + " • Tutar: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
 );
 
 kaydet();
 detayAc(i);
-toast("Parça geçmişine eklendi");
+toast(tutar > 0 ? "Parça geçmişine ve cari hesaba eklendi" : "Parça geçmişine eklendi");
 }
 
 function parcaSil(i,idx){
@@ -8801,7 +8848,7 @@ ${d.durum}
 </div>
 
 <div class="infoCard">
-<span class="infoLabel">Bakım Ücreti</span>
+<span class="infoLabel">Toplam Borç</span>
 <span class="infoValue">${tutarFormat(cari.beklenen)}</span>
 </div>
 
@@ -9086,6 +9133,25 @@ let pdfLogo = pdfMarka.logo;
 let pdfSorumlu = pdfMarka.ad || servisAd;
 
 let cari = cariOzet(a);
+
+let kalemSatirlari = cari.kalemler.length
+? cari.kalemler.map(function(k,idx){
+return `
+<tr>
+<td>${idx + 1}</td>
+<td>${ayHtml(k.tarih || "-")}</td>
+<td>${ayHtml(k.tip || "-")}</td>
+<td>${ayHtml(k.aciklama || "-")}</td>
+<td>${tutarFormat(k.tutar || 0)}</td>
+</tr>
+`;
+}).join("")
+: `
+<tr>
+<td colspan="5" class="emptyCell">Henüz borç kalemi yok</td>
+</tr>
+`;
+
 let odemeSatirlari = cari.odemeler.length
 ? cari.odemeler.map(function(o,idx){
 return `
@@ -9174,10 +9240,18 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </div>
 
 <div class="stats">
-<div class="stat"><div class="statLabel">Bakım Ücreti</div><div class="statValue">${tutarFormat(cari.beklenen)}</div></div>
+<div class="stat"><div class="statLabel">Toplam Borç</div><div class="statValue">${tutarFormat(cari.beklenen)}</div></div>
+<div class="stat orange"><div class="statLabel">Parça Tutarı</div><div class="statValue">${tutarFormat(cari.parcaToplam)}</div></div>
 <div class="stat blue"><div class="statLabel">Tahsil Edilen</div><div class="statValue">${tutarFormat(cari.toplam)}</div></div>
 <div class="stat ${cari.kalanPozitif > 0 ? "orange" : "green"}"><div class="statLabel">${kalanBaslik}</div><div class="statValue">${kalanDeger}</div></div>
-<div class="stat green"><div class="statLabel">Durum</div><div class="statValue">${ayHtml(cari.durum)}</div></div>
+</div>
+
+<div class="section">
+<div class="sectionTitle">Borç Kalemleri</div>
+<table>
+<thead><tr><th>No</th><th>Tarih</th><th>Tip</th><th>Açıklama</th><th>Tutar</th></tr></thead>
+<tbody>${kalemSatirlari}</tbody>
+</table>
 </div>
 
 <div class="section">
@@ -9254,11 +9328,13 @@ let telefon = ayHtml(a.tel || "-");
 let odeme = ayHtml(odemeTarihi);
 let tahsilEdilen = tutarFormat(aktifOdeme.tutar || 0);
 let toplamTahsil = tutarFormat(cari.toplam);
-let bakimUcreti = tutarFormat(cari.beklenen);
+let bakimUcreti = tutarFormat(cari.bakimUcreti);
+let parcaTutari = tutarFormat(cari.parcaToplam);
+let toplamBorc = tutarFormat(cari.beklenen);
 let kalanBakiye = cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
 let durumText = cari.kalanPozitif > 0 ? "Kısmi Ödeme" : "Tamamlandı";
 let durumAciklama = cari.kalanPozitif > 0
-? `${aptAd} için ${tahsilEdilen} tahsil edilmiş, ${tutarFormat(cari.kalanPozitif)} bakiye kalmıştır.`
+? `${aptAd} için ${tahsilEdilen} tahsil edilmiş, ${tutarFormat(cari.kalanPozitif)} bakiye kalmıştır. Toplam borca bakım ve parça kalemleri dahildir.`
 : `${aptAd} için ödeme tamamlanmış ve cari bakiye kapatılmıştır.`;
 
 let w = window.open("");
@@ -9378,6 +9454,8 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 <div class="card"><div class="label">Yönetici</div><div class="value">${yonetici}</div></div>
 <div class="card"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
 <div class="card"><div class="label">Bakım Ücreti</div><div class="value">${bakimUcreti}</div></div>
+<div class="card"><div class="label">Parça Tutarı</div><div class="value debt">${parcaTutari}</div></div>
+<div class="card"><div class="label">Toplam Borç</div><div class="value">${toplamBorc}</div></div>
 <div class="card"><div class="label">Toplam Tahsilat</div><div class="value info">${toplamTahsil}</div></div>
 <div class="card"><div class="label">Kalan Bakiye</div><div class="value ${cari.kalanPozitif > 0 ? "debt" : "ok"}">${kalanBakiye}</div></div>
 </div>
