@@ -41,18 +41,18 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=121">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=121">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=121">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=121">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=121">
-<link rel="manifest" href="/manifest.webmanifest?v=121">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=123">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=123">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=123">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=123">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=123">
+<link rel="manifest" href="/manifest.webmanifest?v=123">
 
-<meta name="theme-color" content="#f6f7fb">
+<meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="ElevatorX">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ElevatorX">
 
 <style>
@@ -5793,6 +5793,54 @@ animation:none!important;
 }
 }
 
+
+/* v1.2.3 iOS splash safe-area fix */
+html{
+background:#020817!important;
+}
+
+body{
+background:#020817;
+}
+
+html.appBooted:not(.darkRoot),
+body.appBooted:not(.darkMode){
+background:#f6f7fb;
+}
+
+body.darkMode,
+html.darkRoot{
+background:#0b0f17!important;
+}
+
+#splash{
+position:fixed!important;
+top:calc(env(safe-area-inset-top) * -1)!important;
+right:0!important;
+bottom:calc(env(safe-area-inset-bottom) * -1)!important;
+left:0!important;
+width:100vw!important;
+height:auto!important;
+min-height:calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom))!important;
+padding-top:env(safe-area-inset-top)!important;
+padding-bottom:env(safe-area-inset-bottom)!important;
+background:
+radial-gradient(circle at 50% 43%,rgba(0,122,255,.28),transparent 29%),
+radial-gradient(circle at 78% 14%,rgba(14,165,233,.20),transparent 30%),
+linear-gradient(180deg,#020817 0%,#06152b 44%,#020817 100%)!important;
+}
+
+#splash::before{
+top:calc(-80px - env(safe-area-inset-top))!important;
+height:calc(100% + 160px + env(safe-area-inset-top) + env(safe-area-inset-bottom))!important;
+}
+
+#splash .splashMotion{
+top:calc(env(safe-area-inset-top) * -1)!important;
+bottom:calc(env(safe-area-inset-bottom) * -1)!important;
+height:auto!important;
+}
+
 </style>
 
 <script>
@@ -5941,10 +5989,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=121" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=123" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.2.1</div>
+<div class="motionSplashVersion" data-splash-version>v1.2.3</div>
 </div>
 </div>
 
@@ -5953,7 +6001,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=121" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=123" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -6134,11 +6182,11 @@ placeholder="Bilgi yaz..."></textarea>
   </span>
 </button>
 
-<button class="profileActionCard" onclick="guncellemeKontrolEt(); toast('Güncelleme kontrol edildi')">
+<button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
   <span class="profileActionIcon">↻</span>
   <span class="profileActionText">
-    <b>Güncelleme Kontrolü</b>
-    <em>Uygulama sürümünü ve cache durumunu kontrol et.</em>
+    <b>Uygulamayı Yenile</b>
+    <em>Cache temizleyip güncel sürümü yeniden aç.</em>
   </span>
 </button>
 
@@ -6328,8 +6376,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.2.1";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=121", location.href).href;
+const APP_VERSION = "v1.2.3";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=123", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6408,8 +6456,9 @@ localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
 let url = new URL("index.html", location.href);
-url.searchParams.set("v","121");
+url.searchParams.set("v","123");
 url.searchParams.set("hard",Date.now());
+url.searchParams.set("nocache",Math.random().toString(36).slice(2));
 location.replace(url.href);
 
 }
@@ -6559,25 +6608,86 @@ haptic("success");
 }catch(e){}
 
 try{
-toast("Yeni sürüm yükleniyor...");
+toast("Güncelleme hazırlanıyor...");
 }catch(e){}
+
+try{
+localStorage.setItem("elevatorxUpdatingTo", String(yeniSurum || APP_VERSION));
+localStorage.setItem("elevatorxUpdateStartedAt", String(Date.now()));
+}catch(e){}
+
+try{
+if("serviceWorker" in navigator){
+let regs = await navigator.serviceWorker.getRegistrations();
+await Promise.all(regs.map(function(reg){
+return reg.unregister();
+}));
+}
+}catch(e){
+console.warn("ElevatorX service worker temizleme uyarısı:", e);
+}
 
 try{
 if("caches" in window){
 let cacheNames = await caches.keys();
-await Promise.all(cacheNames.map(name=>caches.delete(name)));
+await Promise.all(cacheNames.map(function(name){
+return caches.delete(name);
+}));
 }
 }catch(e){
 console.warn("ElevatorX cache temizleme uyarısı:", e);
 }
 
-let url = new URL("index.html", location.href);
-url.searchParams.set("v", String(yeniSurum || APP_VERSION).replace(/[^\d]/g,"") || Date.now());
-url.searchParams.set("refresh", Date.now());
+try{
+if(window.indexedDB && indexedDB.databases){
+let dbs = await indexedDB.databases();
+await Promise.all(
+dbs
+.filter(function(db){
+return db && db.name && String(db.name).toLowerCase().includes("workbox");
+})
+.map(function(db){
+return new Promise(function(resolve){
+let req = indexedDB.deleteDatabase(db.name);
+req.onsuccess = req.onerror = req.onblocked = function(){ resolve(); };
+});
+})
+);
+}
+}catch(e){
+console.warn("ElevatorX indexedDB cache temizleme uyarısı:", e);
+}
 
-setTimeout(()=>{
+let temizSurum = String(yeniSurum || APP_VERSION).replace(/[^\d]/g,"") || String(Date.now());
+
+let url = new URL("index.html", location.href);
+url.searchParams.set("v", temizSurum);
+url.searchParams.set("hard", Date.now());
+url.searchParams.set("nocache", Math.random().toString(36).slice(2));
+
+try{
+await fetch(url.href,{
+cache:"reload",
+headers:{
+"Cache-Control":"no-cache, no-store, must-revalidate",
+"Pragma":"no-cache"
+}
+});
+}catch(e){}
+
+try{
+toast("Yeni sürüm açılıyor...");
+}catch(e){}
+
+setTimeout(function(){
 location.replace(url.href);
-},350);
+},450);
+
+setTimeout(function(){
+try{
+location.reload();
+}catch(e){}
+},1800);
 
 }
 
@@ -6593,7 +6703,8 @@ kontrolUrl.searchParams.set("updateCheck", Date.now());
 let cevap = await fetch(kontrolUrl.href,{
 cache:"no-store",
 headers:{
-"Cache-Control":"no-cache"
+"Cache-Control":"no-cache, no-store, must-revalidate",
+"Pragma":"no-cache"
 }
 });
 
@@ -6606,7 +6717,20 @@ if(!eslesme || !eslesme[1]) return;
 
 let uzakSurum = eslesme[1];
 
-if(uzakSurum !== APP_VERSION && versiyonDahaYeniMi(uzakSurum,APP_VERSION)){
+try{
+let hedef = localStorage.getItem("elevatorxUpdatingTo") || "";
+if(hedef && hedef === APP_VERSION){
+localStorage.removeItem("elevatorxUpdatingTo");
+localStorage.removeItem("elevatorxUpdateStartedAt");
+}
+}catch(e){}
+
+if(uzakSurum === APP_VERSION){
+updateBannerKapat();
+return;
+}
+
+if(versiyonDahaYeniMi(uzakSurum,APP_VERSION)){
 updateBannerGoster(uzakSurum);
 }
 
