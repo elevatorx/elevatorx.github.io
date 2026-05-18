@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=123">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=123">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=123">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=123">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=123">
-<link rel="manifest" href="/manifest.webmanifest?v=123">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=124">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=124">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=124">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=124">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=124">
+<link rel="manifest" href="/manifest.webmanifest?v=124">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5989,10 +5989,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=123" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=124" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.2.3</div>
+<div class="motionSplashVersion" data-splash-version>v1.2.4</div>
 </div>
 </div>
 
@@ -6001,7 +6001,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=123" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=124" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -6185,8 +6185,8 @@ placeholder="Bilgi yaz..."></textarea>
 <button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
   <span class="profileActionIcon">↻</span>
   <span class="profileActionText">
-    <b>Uygulamayı Yenile</b>
-    <em>Cache temizleyip güncel sürümü yeniden aç.</em>
+    <b>Yedekle & Yenile</b>
+    <em>Önce yedek indirir, sonra güncel sürümü açar.</em>
   </span>
 </button>
 
@@ -6204,6 +6204,7 @@ placeholder="Bilgi yaz..."></textarea>
   <div class="profileSystemRows">
     <div><span>Durum</span><b id="profilGuncellemeDurumu">Güncel</b></div>
     <div><span>Otomatik yedek</span><b id="autoBackupInfo">Otomatik yedek hazırlanıyor...</b></div>
+    <div><span>Yedek uyarısı</span><b>Uygulamayı silmeden önce dosya yedeği al</b></div>
     <div><span>Destek</span><b>supportelevatorx@gmail.com</b></div>
   </div>
 </div>
@@ -6376,8 +6377,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.2.3";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=123", location.href).href;
+const APP_VERSION = "v1.2.4";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=124", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6456,7 +6457,7 @@ localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
 let url = new URL("index.html", location.href);
-url.searchParams.set("v","123");
+url.searchParams.set("v","124");
 url.searchParams.set("hard",Date.now());
 url.searchParams.set("nocache",Math.random().toString(36).slice(2));
 location.replace(url.href);
@@ -6606,6 +6607,25 @@ async function elevatorXGuncelle(yeniSurum){
 try{
 haptic("success");
 }catch(e){}
+
+try{
+toast("Önce güncel yedek hazırlanıyor...");
+}catch(e){}
+
+try{
+
+let yedek = yedekVeriOlustur("guncelleme-oncesi");
+
+await yedekDosyasiOlusturVeIndir(yedek,{
+prefix:"elevatorx-guncelleme-oncesi",
+paylas:false
+});
+
+localStorage.setItem("elevatorxLastPreUpdateBackupAt", yedek.olusturmaTarihi);
+
+}catch(err){
+console.warn("Güncelleme öncesi yedek oluşturulamadı:",err);
+}
 
 try{
 toast("Güncelleme hazırlanıyor...");
@@ -7284,11 +7304,49 @@ let saat = d.toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"});
 return tarih + " • " + saat;
 }
 
-function autoYedekVerisi(){
+
+function yedekDosyaTarihEtiketi(){
+
+let d = new Date();
+
+return (
+d.getFullYear() + "-" +
+String(d.getMonth() + 1).padStart(2,"0") + "-" +
+String(d.getDate()).padStart(2,"0") + "_" +
+String(d.getHours()).padStart(2,"0") + "-" +
+String(d.getMinutes()).padStart(2,"0") + "-" +
+String(d.getSeconds()).padStart(2,"0")
+);
+
+}
+
+function yedekVeriOlustur(tur){
+
+let acikBakiye = 0;
+
+try{
+acikBakiye = data.reduce(function(t,a){
+return t + cariOzet(a).kalanPozitif;
+},0);
+}catch(e){
+acikBakiye = 0;
+}
+
+let tahsilat = 0;
+
+try{
+tahsilat = toplamTahsilat();
+}catch(e){
+tahsilat = 0;
+}
+
 return {
-surum:"1.1.5-auto-backup",
-tur:"otomatik",
+surum:APP_VERSION,
+yedekTipi:tur || "manuel",
 olusturmaTarihi:new Date().toISOString(),
+apartmanSayisi:Array.isArray(data) ? data.length : 0,
+toplamTahsilat:tahsilat,
+acikBakiye:acikBakiye,
 apartmanlar:data,
 profil:{
 ad:localStorage.getItem("profilAd") || (typeof profilAd !== "undefined" ? profilAd.value : "") || "",
@@ -7300,6 +7358,117 @@ kapakFoto:localStorage.getItem("coverPhoto") || ""
 },
 tema:localStorage.getItem("tema") || "light"
 };
+
+}
+
+async function yedekDosyasiOlusturVeIndir(yedek,ayar){
+
+ayar = ayar || {};
+
+let dosyaAdi =
+(ayar.prefix || "elevatorx-yedek") + "-" + yedekDosyaTarihEtiketi() + ".json";
+
+let json =
+JSON.stringify(yedek,null,2);
+
+let blob =
+new Blob([json],{type:"application/json;charset=utf-8"});
+
+if(ayar.paylas !== false){
+
+try{
+
+let file =
+new File([blob], dosyaAdi, {type:"application/json"});
+
+if(
+navigator.share &&
+navigator.canShare &&
+navigator.canShare({files:[file]})
+){
+
+await navigator.share({
+files:[file],
+title:"ElevatorX Yedeği",
+text:"ElevatorX veri yedeği"
+});
+
+return {
+ok:true,
+dosyaAdi:dosyaAdi,
+paylasildi:true
+};
+
+}
+
+}catch(err){
+console.warn("ElevatorX yedek paylaşım ekranı açılamadı:",err);
+}
+
+}
+
+let url =
+URL.createObjectURL(blob);
+
+let link =
+document.createElement("a");
+
+link.href = url;
+link.download = dosyaAdi;
+link.rel = "noopener";
+link.style.display = "none";
+
+document.body.appendChild(link);
+link.click();
+
+setTimeout(function(){
+try{
+URL.revokeObjectURL(url);
+link.remove();
+}catch(err){}
+},1600);
+
+return {
+ok:true,
+dosyaAdi:dosyaAdi,
+paylasildi:false
+};
+
+}
+
+function yedekBilgiMetni(yedek,apartmanSayisi){
+
+let tarih = "-";
+
+if(yedek && yedek.olusturmaTarihi){
+try{
+tarih = new Date(yedek.olusturmaTarihi).toLocaleString("tr-TR");
+}catch(e){
+tarih = yedek.olusturmaTarihi;
+}
+}
+
+let acik = yedek && typeof yedek.acikBakiye !== "undefined"
+? tutarFormat(Number(yedek.acikBakiye || 0))
+: "-";
+
+let tahsilat = yedek && typeof yedek.toplamTahsilat !== "undefined"
+? tutarFormat(Number(yedek.toplamTahsilat || 0))
+: "-";
+
+return (
+"Yedek bilgisi:\\n" +
+"Tarih: " + tarih + "\\n" +
+"Apartman: " + apartmanSayisi + "\\n" +
+"Tahsilat: " + tahsilat + "\\n" +
+"Açık bakiye: " + acik + "\\n\\n" +
+"Bu yedeği geri yüklemek istiyor musun?"
+);
+
+}
+
+function autoYedekVerisi(){
+return yedekVeriOlustur("otomatik");
 }
 
 function autoYedekBilgiGuncelle(){
@@ -10825,85 +10994,26 @@ async function yedekle(){
 
 haptic("medium");
 
-let yedek = {
-surum:"1.1.5-auto-backup",
-olusturmaTarihi:new Date().toISOString(),
-apartmanlar:data,
-profil:{
-ad:localStorage.getItem("profilAd") || profilAd.value || "",
-firma:localStorage.getItem("profilFirma") || profilFirma.value || "",
-telefon:localStorage.getItem("profilTelefon") || (window.profilTelefon ? profilTelefon.value : "") || "",
-bio:localStorage.getItem("profilBio") || profilBio.value || "",
-profilFoto:localStorage.getItem("profilePhoto") || "",
-kapakFoto:localStorage.getItem("coverPhoto") || ""
-},
-tema:localStorage.getItem("tema") || "light"
-};
-
-let tarih =
-new Date()
-.toISOString()
-.split("T")[0];
-
-let dosyaAdi =
-"elevatorx-yedek-" + tarih + ".json";
-
-let json =
-JSON.stringify(yedek,null,2);
-
-let blob = new Blob(
-[json],
-{type:"application/json;charset=utf-8"}
-);
+let yedek = yedekVeriOlustur("manuel");
 
 try{
 
-let file =
-new File([blob], dosyaAdi, {type:"application/json"});
-
-if(
-navigator.share &&
-navigator.canShare &&
-navigator.canShare({files:[file]})
-){
-
-await navigator.share({
-files:[file],
-title:"ElevatorX Yedeği",
-text:"ElevatorX veri yedeği"
+let sonuc =
+await yedekDosyasiOlusturVeIndir(yedek,{
+prefix:"elevatorx-yedek",
+paylas:true
 });
 
-toast("Yedek paylaşım ekranı açıldı");
-return;
+localStorage.setItem("elevatorxLastManualBackupAt", yedek.olusturmaTarihi);
 
-}
+toast(sonuc.paylasildi ? "Yedek paylaşım ekranı açıldı" : "Yedek indirildi");
 
 }catch(err){
-console.warn("ElevatorX yedek paylaşım ekranı açılamadı:",err);
+
+console.warn("ElevatorX yedek oluşturma hatası:",err);
+toast("Yedek oluşturulamadı");
+
 }
-
-let url =
-URL.createObjectURL(blob);
-
-let link =
-document.createElement("a");
-
-link.href = url;
-link.download = dosyaAdi;
-link.rel = "noopener";
-link.style.display = "none";
-
-document.body.appendChild(link);
-link.click();
-
-setTimeout(function(){
-try{
-URL.revokeObjectURL(url);
-link.remove();
-}catch(err){}
-},1200);
-
-toast("Yedek indirildi");
 
 }
 
@@ -10925,19 +11035,19 @@ try{
 let yedek =
 JSON.parse(e.target.result);
 
+let yeniData =
+Array.isArray(yedek)
+? yedek
+: (yedek.apartmanlar || []);
+
 let onay =
-confirm("Yedekten geri yükleme yapılsın mı? Mevcut kayıtlar değişebilir.");
+confirm(yedekBilgiMetni(yedek,yeniData.length));
 
 if(!onay){
 toast("Geri yükleme iptal edildi");
 event.target.value = "";
 return;
 }
-
-let yeniData =
-Array.isArray(yedek)
-? yedek
-: (yedek.apartmanlar || []);
 
 data = yeniData;
 
@@ -10979,6 +11089,8 @@ localStorage.setItem("tema",yedek.tema);
 temaUygula();
 }
 
+localStorage.setItem("elevatorxLastRestoreAt", new Date().toISOString());
+
 aktifDetay = null;
 profilPanel.style.display = "none";
 detayPanel.style.display = "none";
@@ -10994,6 +11106,7 @@ toast("Yedek geri yüklendi");
 
 }catch(err){
 
+console.warn("Yedek dosyası okunamadı:",err);
 toast("Yedek dosyası okunamadı");
 
 }
