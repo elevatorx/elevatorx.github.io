@@ -6966,6 +6966,100 @@ font-size:30px!important;
 }
 }
 
+
+
+/* === v1.3.4 - Yeni Apartman Butonu Görünür Fix === */
+#addApartmentFab,
+.addApartmentFab{
+position:fixed!important;
+right:max(20px,calc(env(safe-area-inset-right,0px) + 20px))!important;
+bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+height:48px!important;
+min-width:122px!important;
+padding:0 17px 0 13px!important;
+border:1px solid rgba(255,255,255,.78)!important;
+border-radius:999px!important;
+background:linear-gradient(180deg,#4c8cff 0%,#2f6ff0 100%)!important;
+color:#fff!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+gap:9px!important;
+font-size:14px!important;
+font-weight:900!important;
+letter-spacing:-.2px!important;
+line-height:1!important;
+box-shadow:
+0 16px 34px rgba(47,111,240,.30),
+0 8px 18px rgba(15,23,42,.13),
+inset 0 1px 0 rgba(255,255,255,.42)!important;
+z-index:10080!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+opacity:0!important;
+pointer-events:none!important;
+transform:translateY(10px) scale(.96)!important;
+transition:opacity .18s ease, transform .18s ease!important;
+}
+
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:24px!important;
+height:24px!important;
+border-radius:50%!important;
+background:rgba(255,255,255,.18)!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+font-size:22px!important;
+font-weight:500!important;
+line-height:1!important;
+margin-top:-1px!important;
+}
+
+body.apartmanTabActive:not(.formOpen) #addApartmentFab,
+body.apartmanTabActive:not(.formOpen) .addApartmentFab,
+html.apartmanTabActive body:not(.formOpen) #addApartmentFab,
+html.apartmanTabActive body:not(.formOpen) .addApartmentFab{
+opacity:1!important;
+pointer-events:auto!important;
+transform:translateY(0) scale(1)!important;
+}
+
+#addApartmentFab:active,
+.addApartmentFab:active{
+transform:translateY(1px) scale(.96)!important;
+}
+
+body.darkMode #addApartmentFab,
+html.darkRoot #addApartmentFab,
+body.darkMode .addApartmentFab,
+html.darkRoot .addApartmentFab{
+border-color:rgba(255,255,255,.10)!important;
+box-shadow:
+0 16px 34px rgba(47,111,240,.24),
+0 8px 18px rgba(0,0,0,.24),
+inset 0 1px 0 rgba(255,255,255,.30)!important;
+}
+
+@media(max-width:430px){
+#addApartmentFab,
+.addApartmentFab{
+right:18px!important;
+bottom:calc(96px + env(safe-area-inset-bottom,0px))!important;
+height:46px!important;
+min-width:116px!important;
+padding:0 16px 0 12px!important;
+font-size:13.5px!important;
+}
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:23px!important;
+height:23px!important;
+font-size:21px!important;
+}
+}
+
 </style>
 
 <script>
@@ -7117,7 +7211,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.3.3</div>
+<div class="motionSplashVersion" data-splash-version>v1.3.4</div>
 </div>
 </div>
 
@@ -7558,7 +7652,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.3.3";
+const APP_VERSION = "v1.3.4";
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
