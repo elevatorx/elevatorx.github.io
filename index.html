@@ -6277,6 +6277,292 @@ max-width:none;
 }
 }
 
+
+
+/* === v1.2.6 - Yeni Apartman Ekle Premium Form === */
+.aptFormCard{
+background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+border:1px solid rgba(229,231,235,.9);
+border-radius:30px;
+padding:18px;
+box-shadow:
+0 18px 40px rgba(15,23,42,.06),
+inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.aptFormHero{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:16px;
+}
+
+.formKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.55px;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:7px;
+}
+
+.formTitleCompact{
+margin-bottom:6px;
+font-size:28px;
+line-height:1.06;
+}
+
+.formDesc{
+font-size:13px;
+line-height:1.42;
+color:#6b7280;
+max-width:260px;
+}
+
+.formHeroIcon{
+width:52px;
+height:52px;
+border-radius:18px;
+background:#eef4ff;
+color:#007aff;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+.formHeroIcon svg{
+width:24px;
+height:24px;
+display:block;
+}
+
+.aptFormSection{
+background:rgba(246,247,251,.85);
+border:1px solid rgba(229,231,235,.88);
+border-radius:22px;
+padding:14px;
+margin-top:12px;
+}
+
+.sectionMiniTitle{
+font-size:13px;
+font-weight:900;
+letter-spacing:.2px;
+color:#111827;
+margin-bottom:10px;
+}
+
+.inputGrid{
+display:grid;
+gap:10px;
+}
+
+.inputGrid.twoCol{
+grid-template-columns:1fr 1fr;
+}
+
+.fieldWrap{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.fieldLabel{
+font-size:12px;
+font-weight:850;
+color:#8b95a7;
+padding-left:2px;
+}
+
+.inputShell{
+display:flex;
+align-items:center;
+gap:10px;
+background:white;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:0 14px;
+min-height:56px;
+box-sizing:border-box;
+transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+box-shadow:0 8px 22px rgba(15,23,42,.035);
+}
+
+.textareaShell{
+align-items:flex-start;
+padding-top:13px;
+padding-bottom:13px;
+min-height:116px;
+}
+
+.inputShell:focus-within{
+border-color:rgba(0,122,255,.45);
+box-shadow:0 0 0 4px rgba(0,122,255,.10), 0 10px 26px rgba(15,23,42,.05);
+transform:translateY(-1px);
+}
+
+.fieldIcon{
+width:28px;
+height:28px;
+border-radius:10px;
+background:#f4f7fb;
+color:#6b7280;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+}
+
+.fieldIcon svg{
+width:15px;
+height:15px;
+display:block;
+}
+
+.aptFormCard .fieldInput,
+.aptFormCard textarea.fieldInput{
+width:100%;
+margin:0;
+padding:0;
+border:none;
+background:transparent;
+box-shadow:none;
+border-radius:0;
+font-size:15.5px;
+font-weight:700;
+color:#111827;
+}
+
+.aptFormCard .fieldInput::placeholder,
+.aptFormCard textarea.fieldInput::placeholder{
+color:#a1a1aa;
+font-weight:600;
+}
+
+.aptFormCard textarea.fieldInput{
+min-height:88px;
+resize:none;
+line-height:1.5;
+}
+
+.helperLine{
+margin-top:7px;
+font-size:12px;
+color:#8b95a7;
+line-height:1.4;
+}
+
+.formSaveBtn{
+margin-top:14px;
+height:58px;
+border-radius:20px;
+font-size:18px;
+font-weight:900;
+box-shadow:0 16px 28px rgba(52,199,89,.18);
+}
+
+.saveHint{
+margin-top:10px;
+font-size:12.5px;
+font-weight:800;
+color:#8b95a7;
+text-align:center;
+line-height:1.45;
+}
+
+body.darkMode .aptFormCard{
+background:linear-gradient(180deg,rgba(21,27,38,.98),rgba(16,21,31,.98));
+border-color:#263241;
+box-shadow:0 16px 38px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+body.darkMode .formDesc,
+body.darkMode .fieldLabel,
+body.darkMode .helperLine,
+body.darkMode .saveHint{
+color:#9aa5b5;
+}
+
+body.darkMode .formHeroIcon{
+background:#12223a;
+color:#60a5fa;
+}
+
+body.darkMode .aptFormSection{
+background:rgba(15,20,29,.95);
+border-color:#263241;
+}
+
+body.darkMode .sectionMiniTitle{
+color:#f8fafc;
+}
+
+body.darkMode .inputShell{
+background:#151b26;
+border-color:#263241;
+box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+
+body.darkMode .inputShell:focus-within{
+border-color:rgba(96,165,250,.45);
+box-shadow:0 0 0 4px rgba(96,165,250,.11), 0 10px 26px rgba(0,0,0,.22);
+}
+
+body.darkMode .fieldIcon{
+background:#0f141d;
+color:#9aa5b5;
+}
+
+body.darkMode .aptFormCard .fieldInput,
+body.darkMode .aptFormCard textarea.fieldInput{
+color:#f8fafc;
+}
+
+body.darkMode .aptFormCard .fieldInput::placeholder,
+body.darkMode .aptFormCard textarea.fieldInput::placeholder{
+color:#6f7a89;
+}
+
+@media(max-width:430px){
+.aptFormCard{
+padding:16px;
+border-radius:28px;
+}
+.formTitleCompact{
+font-size:25px;
+}
+.formHeroIcon{
+width:48px;
+height:48px;
+border-radius:16px;
+}
+.inputGrid.twoCol{
+grid-template-columns:1fr;
+}
+.aptFormSection{
+padding:12px;
+border-radius:20px;
+}
+.inputShell{
+min-height:54px;
+padding:0 13px;
+border-radius:17px;
+}
+.textareaShell{
+min-height:108px;
+padding-top:12px;
+padding-bottom:12px;
+}
+.formSaveBtn{
+height:56px;
+font-size:17px;
+border-radius:18px;
+}
+}
+
 </style>
 
 <script>
@@ -6474,18 +6760,102 @@ onclick="temaDegistir()">
 
 </div>
 
-<div id="formBox" class="card" style="display:none">
+<div id="formBox" class="card aptFormCard" style="display:none">
 
-<div id="formTitle" class="formTitle">Yeni Apartman Ekle</div>
+<div class="aptFormHero">
+<div>
+<div class="formKicker">Premium Kayıt</div>
+<div id="formTitle" class="formTitle formTitleCompact">Yeni Apartman Ekle</div>
+<div id="formSubtext" class="formDesc">Yeni müşteri kaydı oluşturun ve bakım takibini başlatın.</div>
+</div>
+<div class="formHeroIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 20V10.8C4 10.45 4.18 10.13 4.47 9.95L11.47 5.45C11.79 5.24 12.21 5.24 12.53 5.45L19.53 9.95C19.82 10.13 20 10.45 20 10.8V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 20V15.5C9 14.95 9.45 14.5 10 14.5H14C14.55 14.5 15 14.95 15 15.5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
 
-<input id="ad" placeholder="Apartman adı">
-<input id="yonetici" placeholder="Yönetici">
-<input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon" onclick="rehberdenTelefonSec(event,'tel','yonetici')">
-<input id="ucret" placeholder="Ücret">
-<input type="date" id="bakimGunu">
-<textarea id="not" placeholder="Teknik not..."></textarea>
+<div class="aptFormSection">
+<div class="sectionMiniTitle">Apartman Bilgileri</div>
+<div class="inputGrid">
 
-<button class="green" onclick="kaydetApartman()">Kaydet</button>
+<div class="fieldWrap">
+<div class="fieldLabel">Apartman Adı</div>
+<div class="inputShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 20V7C6 6.45 6.45 6 7 6H17C17.55 6 18 6.45 18 7V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 10H9.01M9 13H9.01M9 16H9.01M12 10H12.01M12 13H12.01M12 16H12.01M15 10H15.01M15 13H15.01M15 16H15.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+</div>
+<input id="ad" class="fieldInput" placeholder="Apartman adı" autocomplete="organization">
+</div>
+</div>
+
+<div class="fieldWrap">
+<div class="fieldLabel">Yönetici</div>
+<div class="inputShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12C13.66 12 15 10.66 15 9C15 7.34 13.66 6 12 6C10.34 6 9 7.34 9 9C9 10.66 10.34 12 12 12Z" stroke="currentColor" stroke-width="1.8"/><path d="M6.5 18.5C7.66 16.74 9.68 15.75 12 15.75C14.32 15.75 16.34 16.74 17.5 18.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</div>
+<input id="yonetici" class="fieldInput" placeholder="Yönetici adı" autocomplete="name">
+</div>
+</div>
+
+<div class="fieldWrap">
+<div class="fieldLabel">Telefon</div>
+<div class="inputShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.8 5.5H10.2L11.2 8.7C11.31 9.05 11.22 9.43 10.97 9.69L9.6 11.05C10.33 12.36 11.43 13.46 12.74 14.19L14.1 12.82C14.36 12.57 14.74 12.48 15.09 12.59L18.3 13.59V16C18.3 16.83 17.63 17.5 16.8 17.5H16.2C10.98 17.5 6.8 13.32 6.8 8.1V7C6.8 6.17 7.47 5.5 8.3 5.5H7.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<input id="tel" class="fieldInput" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefon numarası" onclick="rehberdenTelefonSec(event,'tel','yonetici')">
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="aptFormSection">
+<div class="sectionMiniTitle">Bakım ve Ücret Bilgileri</div>
+<div class="inputGrid twoCol">
+
+<div class="fieldWrap">
+<div class="fieldLabel">Aylık Ücret</div>
+<div class="inputShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15 8.2C14.5 7.42 13.41 6.9 12.2 6.9C10.61 6.9 9.32 7.8 9.32 8.92C9.32 10.03 10.61 10.94 12.2 10.94C13.79 10.94 15.08 11.84 15.08 12.96C15.08 14.08 13.79 14.98 12.2 14.98C10.99 14.98 9.9 14.46 9.4 13.68" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<input id="ucret" class="fieldInput" inputmode="decimal" placeholder="Örn. 1500">
+</div>
+</div>
+
+<div class="fieldWrap">
+<div class="fieldLabel">Bakım Günü</div>
+<div class="inputShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4.5V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 4.5V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5.5 8.5H18.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="5.5" y="6.5" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+</div>
+<input type="date" id="bakimGunu" class="fieldInput">
+</div>
+</div>
+
+</div>
+<div class="helperLine">Bakım günü kaydı, bakım listesi ve geciken kontrol ekranlarında kullanılır.</div>
+</div>
+
+<div class="aptFormSection">
+<div class="sectionMiniTitle">Notlar</div>
+<div class="fieldWrap">
+<div class="fieldLabel">Teknik Not</div>
+<div class="inputShell textareaShell">
+<div class="fieldIcon" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 17H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="5.5" y="4.5" width="13" height="15" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+</div>
+<textarea id="not" class="fieldInput" placeholder="Teknik not, cihaz durumu veya özel bilgi ekleyin..."></textarea>
+</div>
+</div>
+</div>
+
+<button id="formSaveBtn" class="green formSaveBtn" onclick="kaydetApartman()">Kaydet</button>
+<div class="saveHint">Kayıt sonrası apartman, bakım takibi ve ödeme akışına otomatik olarak eklenir.</div>
 
 </div>
 
@@ -8026,8 +8396,7 @@ goster();
 
 if(formBox.style.display=="none"){
 
-formTitle.innerText =
-editIndex === null ? "Yeni Apartman Ekle" : "Apartman Bilgilerini Düzenle";
+guncelleApartmanFormDurumu();
 
 formBox.style.display="block";
 
@@ -8172,6 +8541,25 @@ goster();
 toast("Telefon bilgisi güncellendi");
 }
 
+function guncelleApartmanFormDurumu(){
+
+let eklemeModu = editIndex === null;
+
+formTitle.innerText =
+eklemeModu ? "Yeni Apartman Ekle" : "Apartman Bilgilerini Düzenle";
+
+if(window.formSubtext){
+formSubtext.innerText = eklemeModu
+? "Yeni müşteri kaydı oluşturun ve bakım takibini başlatın."
+: "Kayıt bilgilerini güncelleyin; mevcut veriler korunur.";
+}
+
+if(window.formSaveBtn){
+formSaveBtn.innerText = eklemeModu ? "Kaydet" : "Güncelle";
+}
+
+}
+
 function kaydetApartman(){
 
 haptic("success");
@@ -8215,7 +8603,7 @@ bakimGunu.value="";
 not.value="";
 
 editIndex=null;
-formTitle.innerText = "Yeni Apartman Ekle";
+guncelleApartmanFormDurumu();
 formBox.style.display="none";
 
 kaydet();
@@ -10473,7 +10861,7 @@ bakimGunu.value = a.bakimGunu || "";
 not.value = a.not || "";
 
 editIndex = i;
-formTitle.innerText = "Apartman Bilgilerini Düzenle";
+guncelleApartmanFormDurumu();
 
 searchArea.style.display="flex";
 detayPanel.style.display="none";
