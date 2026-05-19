@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=124">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=124">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=124">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=124">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=124">
-<link rel="manifest" href="/manifest.webmanifest?v=124">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=125">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=125">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=125">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=125">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=125">
+<link rel="manifest" href="/manifest.webmanifest?v=125">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5841,6 +5841,442 @@ bottom:calc(env(safe-area-inset-bottom) * -1)!important;
 height:auto!important;
 }
 
+
+/* v1.2.5 Apartman Detay Premium Düzen */
+.detailPremiumHero{
+padding:18px 16px 132px!important;
+background:
+radial-gradient(circle at top right,rgba(0,122,255,.13),transparent 34%),
+linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.92))!important;
+border:1px solid rgba(226,232,240,.92);
+box-shadow:0 18px 44px rgba(15,23,42,.07);
+}
+
+.detailBackBtn{
+position:relative!important;
+top:auto!important;
+left:auto!important;
+margin-bottom:14px!important;
+width:auto!important;
+display:inline-flex!important;
+align-items:center!important;
+justify-content:center!important;
+padding:10px 14px!important;
+border-radius:999px!important;
+background:rgba(15,23,42,.06)!important;
+color:#0f172a!important;
+box-shadow:none!important;
+}
+
+.detailHeroTop{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:14px;
+}
+
+.detailHeroText{
+min-width:0;
+text-align:left;
+}
+
+.detailKicker{
+font-size:10.5px;
+font-weight:950;
+letter-spacing:.15em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:6px;
+}
+
+.detailPremiumHero .detailTitle{
+font-size:31px!important;
+line-height:1.05!important;
+letter-spacing:-.8px!important;
+margin:0!important;
+text-align:left!important;
+word-break:break-word;
+}
+
+.detailSubLine{
+margin-top:8px;
+font-size:12.5px;
+font-weight:850;
+color:#64748b;
+}
+
+.detailHeroBadge{
+white-space:nowrap;
+box-shadow:0 10px 22px rgba(15,23,42,.08);
+}
+
+.detailBalanceCard{
+border-radius:26px;
+padding:16px;
+margin:12px 0 12px;
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:12px;
+text-align:left;
+color:#fff;
+position:relative;
+overflow:hidden;
+box-shadow:0 18px 36px rgba(15,23,42,.14);
+}
+
+.detailBalanceCard::after{
+content:"";
+position:absolute;
+right:-42px;
+top:-42px;
+width:128px;
+height:128px;
+border-radius:50%;
+background:rgba(255,255,255,.15);
+}
+
+.detailBalanceDebt{
+background:linear-gradient(145deg,#7c2d12,#ea580c);
+}
+
+.detailBalanceOk{
+background:linear-gradient(145deg,#064e3b,#16a34a);
+}
+
+.detailBalanceCard div,
+.detailBalanceCard em{
+position:relative;
+z-index:1;
+}
+
+.detailBalanceCard span{
+display:block;
+font-size:11px;
+font-weight:950;
+letter-spacing:.13em;
+text-transform:uppercase;
+opacity:.76;
+margin-bottom:6px;
+}
+
+.detailBalanceCard strong{
+display:block;
+font-size:29px;
+font-weight:950;
+letter-spacing:-.7px;
+line-height:1;
+}
+
+.detailBalanceCard em{
+font-style:normal;
+font-size:12px;
+font-weight:850;
+opacity:.82;
+line-height:1.35;
+text-align:right;
+max-width:150px;
+}
+
+.detailMiniStats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+margin:0 0 13px;
+}
+
+.detailMiniStats div{
+border-radius:18px;
+background:rgba(255,255,255,.78);
+border:1px solid rgba(226,232,240,.92);
+padding:12px 9px;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.82);
+min-width:0;
+}
+
+.detailMiniStats span{
+display:block;
+font-size:10px;
+font-weight:950;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#94a3b8;
+margin-bottom:5px;
+}
+
+.detailMiniStats b{
+display:block;
+font-size:12px;
+font-weight:950;
+color:#0f172a;
+line-height:1.18;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.premiumDetailInfo{
+grid-template-columns:repeat(2,1fr)!important;
+gap:10px!important;
+margin-top:2px!important;
+}
+
+.premiumDetailInfo .infoCard{
+border-radius:20px!important;
+background:rgba(255,255,255,.82)!important;
+border:1px solid rgba(226,232,240,.92)!important;
+box-shadow:0 10px 26px rgba(15,23,42,.04)!important;
+}
+
+.premiumDetailNote{
+border-radius:22px!important;
+background:rgba(241,245,249,.78)!important;
+border:1px solid rgba(226,232,240,.92)!important;
+color:#475569!important;
+font-weight:750;
+}
+
+.detailActionSection,
+.detailReportSection{
+margin-top:14px;
+border-radius:26px;
+background:rgba(255,255,255,.82);
+border:1px solid rgba(226,232,240,.92);
+box-shadow:0 14px 34px rgba(15,23,42,.045);
+padding:14px;
+text-align:left;
+}
+
+.detailSectionHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:11px;
+}
+
+.detailSectionHead span{
+display:block;
+font-size:10.5px;
+font-weight:950;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:4px;
+}
+
+.detailSectionHead b{
+display:block;
+font-size:16px;
+font-weight:950;
+letter-spacing:-.25px;
+color:#0f172a;
+}
+
+.detailPrimaryActions{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.detailActionCard{
+border:0;
+border-radius:20px;
+padding:13px;
+display:flex;
+align-items:center;
+gap:11px;
+text-align:left;
+color:#0f172a;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.92);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+transition:transform .16s ease, box-shadow .16s ease;
+}
+
+.detailActionCard:active,
+.detailReportCard:active{
+transform:scale(.98);
+}
+
+.detailActionIcon{
+width:40px;
+height:40px;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:19px;
+font-weight:950;
+flex:0 0 auto;
+background:#eff6ff;
+color:#007aff;
+}
+
+.detailActionCard b,
+.detailReportCard b{
+display:block;
+font-size:14px;
+font-weight:950;
+line-height:1.14;
+}
+
+.detailActionCard em,
+.detailReportCard em{
+display:block;
+font-style:normal;
+font-size:11.5px;
+font-weight:750;
+color:#64748b;
+line-height:1.25;
+margin-top:4px;
+}
+
+.payAction .detailActionIcon{
+background:#ecfdf5;
+color:#16a34a;
+}
+
+.maintAction .detailActionIcon{
+background:#eff6ff;
+color:#2563eb;
+}
+
+.editAction .detailActionIcon{
+background:#f1f5f9;
+color:#475569;
+}
+
+.detailReportGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.detailReportCard{
+border:0;
+border-radius:20px;
+padding:13px 10px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.92);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+text-align:left;
+min-height:96px;
+}
+
+.detailReportCard span{
+width:34px;
+height:34px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#fff;
+box-shadow:0 8px 18px rgba(15,23,42,.05);
+margin-bottom:9px;
+}
+
+.detailDangerZone{
+margin-top:14px;
+padding:12px;
+border-radius:22px;
+background:rgba(254,242,242,.72);
+border:1px solid rgba(254,202,202,.82);
+}
+
+.detailDeleteBtn{
+width:100%;
+border:0;
+border-radius:18px;
+padding:13px 14px;
+font-size:14px;
+font-weight:950;
+background:#ef4444;
+color:#fff;
+box-shadow:0 12px 24px rgba(239,68,68,.18);
+}
+
+body.darkMode .detailPremiumHero,
+html.darkRoot .detailPremiumHero{
+background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94))!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:0 18px 44px rgba(0,0,0,.22)!important;
+}
+
+body.darkMode .detailBackBtn,
+html.darkRoot .detailBackBtn{
+background:rgba(255,255,255,.08)!important;
+color:#f8fafc!important;
+}
+
+body.darkMode .detailSubLine,
+html.darkRoot .detailSubLine{
+color:#94a3b8!important;
+}
+
+body.darkMode .detailMiniStats div,
+html.darkRoot .detailMiniStats div,
+body.darkMode .premiumDetailInfo .infoCard,
+html.darkRoot .premiumDetailInfo .infoCard,
+body.darkMode .detailActionSection,
+html.darkRoot .detailActionSection,
+body.darkMode .detailReportSection,
+html.darkRoot .detailReportSection,
+body.darkMode .detailActionCard,
+html.darkRoot .detailActionCard,
+body.darkMode .detailReportCard,
+html.darkRoot .detailReportCard{
+background:rgba(17,24,39,.82)!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+body.darkMode .detailMiniStats b,
+html.darkRoot .detailMiniStats b,
+body.darkMode .detailSectionHead b,
+html.darkRoot .detailSectionHead b,
+body.darkMode .detailActionCard b,
+html.darkRoot .detailActionCard b,
+body.darkMode .detailReportCard b,
+html.darkRoot .detailReportCard b{
+color:#f8fafc!important;
+}
+
+body.darkMode .premiumDetailNote,
+html.darkRoot .premiumDetailNote{
+background:rgba(15,23,42,.86)!important;
+border-color:rgba(255,255,255,.08)!important;
+color:#cbd5e1!important;
+}
+
+body.darkMode .detailDangerZone,
+html.darkRoot .detailDangerZone{
+background:rgba(127,29,29,.18)!important;
+border-color:rgba(248,113,113,.16)!important;
+}
+
+@media(max-width:380px){
+.detailPremiumHero{
+padding-left:12px!important;
+padding-right:12px!important;
+}
+.detailReportGrid{
+grid-template-columns:1fr;
+}
+.detailMiniStats{
+grid-template-columns:1fr;
+}
+.detailBalanceCard{
+align-items:flex-start;
+flex-direction:column;
+}
+.detailBalanceCard em{
+text-align:left;
+max-width:none;
+}
+}
+
 </style>
 
 <script>
@@ -5989,10 +6425,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=124" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.2.4</div>
+<div class="motionSplashVersion" data-splash-version>v1.2.5</div>
 </div>
 </div>
 
@@ -6001,7 +6437,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=124" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -6377,8 +6813,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.2.4";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=124", location.href).href;
+const APP_VERSION = "v1.2.5";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -6457,7 +6893,7 @@ localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
 let url = new URL("index.html", location.href);
-url.searchParams.set("v","124");
+url.searchParams.set("v","125");
 url.searchParams.set("hard",Date.now());
 url.searchParams.set("nocache",Math.random().toString(36).slice(2));
 location.replace(url.href);
@@ -8230,7 +8666,6 @@ return `
 <div class="partsHistoryHead">
 <div class="partsHistoryTitle">Parça Değişim Geçmişi</div>
 <div class="partsHistoryActions">
-<button class="partsPdfBtn" onclick="parcaGecmisiPdf(${i})">PDF</button>
 <button class="partsAddBtn" onclick="parcaEkle(${i})">+ Parça Ekle</button>
 </div>
 </div>
@@ -9835,109 +10270,181 @@ a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Yapıldı";
 let telTemiz =
 (a.tel || "").replace(/\s/g,"");
 
+let kalanText =
+cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
+
+let cariDurumClass =
+cari.kalanPozitif > 0 ? "detailBalanceDebt" : "detailBalanceOk";
+
+let sonParca =
+sonParcaBilgisi(a);
+
 detayPanel.innerHTML = `
 
-<div class="detailHero">
+<div class="detailHero detailPremiumHero">
 
-<button class="detailTopBtn" onclick="geriDon()">
+<button class="detailTopBtn detailBackBtn" onclick="geriDon()">
 ← Geri
 </button>
 
-<div class="detailTitle">
-${a.ad || "-"}
+<div class="detailHeroTop">
+  <div class="detailHeroText">
+    <div class="detailKicker">Apartman Detay</div>
+    <div class="detailTitle">
+    ${ayHtml(a.ad || "-")}
+    </div>
+    <div class="detailSubLine">
+    Kod: ${apartmanKodu(i)} • ${ayHtml(cari.durum)}
+    </div>
+  </div>
+
+  <span class="badge ${d.badgeClass} detailHeroBadge">
+  ${d.durum}
+  </span>
 </div>
 
-<div style="margin-bottom:14px;">
-<span class="badge ${d.badgeClass}">
-${d.durum}
-</span>
+<div class="detailBalanceCard ${cariDurumClass}">
+  <div>
+    <span>Güncel Cari</span>
+    <strong>${kalanText}</strong>
+  </div>
+  <em>Toplam borç ${tutarFormat(cari.beklenen)} • Tahsil ${tutarFormat(cari.toplam)}</em>
 </div>
 
-<div class="detailInfoGrid">
-
-<div class="infoCard sicilInfoCard">
-<span class="infoLabel">Apartman Kodu</span>
-<span class="infoValue">${apartmanKodu(i)}</span>
+<div class="detailMiniStats">
+  <div>
+    <span>Bakım</span>
+    <b>${a.bakimTarihi || "-"}</b>
+  </div>
+  <div>
+    <span>Bakım Günü</span>
+    <b>${a.bakimGunu || "-"}</b>
+  </div>
+  <div>
+    <span>Son Parça</span>
+    <b>${ayHtml(sonParca || "-")}</b>
+  </div>
 </div>
+
+<div class="detailInfoGrid premiumDetailInfo">
 
 <div class="infoCard">
 <span class="infoLabel">Yönetici</span>
-<span class="infoValue">${a.yonetici || "-"}</span>
+<span class="infoValue">${ayHtml(a.yonetici || "-")}</span>
 </div>
 
 <div class="infoCard">
 <span class="infoLabel">Telefon</span>
 <span class="infoValue small">
-<a class="infoPhone" href="tel:${telTemiz}">${a.tel || "-"}</a>
+<a class="infoPhone" href="tel:${telTemiz}">${ayHtml(a.tel || "-")}</a>
 </span>
 </div>
 
 <div class="infoCard">
-<span class="infoLabel">Toplam Borç</span>
-<span class="infoValue">${tutarFormat(cari.beklenen)}</span>
+<span class="infoLabel">Apartman Kodu</span>
+<span class="infoValue">${apartmanKodu(i)}</span>
 </div>
 
 <div class="infoCard">
-<span class="infoLabel">Tahsil Edilen</span>
-<span class="infoValue small">${tutarFormat(cari.toplam)}</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Kalan Bakiye</span>
-<span class="infoValue small">${cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif)}</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Bakım Günü</span>
-<span class="infoValue small">${a.bakimGunu || "-"}</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Son Bakım</span>
-<span class="infoValue small">${a.bakimTarihi || "-"}</span>
+<span class="infoLabel">Cari Durumu</span>
+<span class="infoValue small">${ayHtml(cari.durum)}</span>
 </div>
 
 </div>
 
-<div class="detailNote">
-${a.not || "Teknik not yok"}
+<div class="detailNote premiumDetailNote">
+${ayHtml(a.not || "Teknik not yok")}
 </div>
 
 ${cariOzetHtml(a)}
 
-${parcaGecmisiHtml(i)}
+<div class="detailActionSection">
+  <div class="detailSectionHead">
+    <div>
+      <span>Hızlı İşlemler</span>
+      <b>Günlük saha işlemleri</b>
+    </div>
+  </div>
 
-<div class="detailGrid">
+  <div class="detailPrimaryActions">
 
-<button class="green ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
-${odemeText}
-</button>
+    <button class="detailActionCard payAction ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
+      <span class="detailActionIcon">₺</span>
+      <span>
+        <b>${odemeText}</b>
+        <em>Tahsilat / makbuz</em>
+      </span>
+    </button>
 
-<button class="blue ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
-${bakimText}
-</button>
+    <button class="detailActionCard maintAction ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
+      <span class="detailActionIcon">✓</span>
+      <span>
+        <b>${bakimText}</b>
+        <em>Bakım raporu</em>
+      </span>
+    </button>
 
-<button class="gray" onclick="duzenle(${i})">
-Düzenle
-</button>
+    <button class="detailActionCard editAction" onclick="duzenle(${i})">
+      <span class="detailActionIcon">✎</span>
+      <span>
+        <b>Düzenle</b>
+        <em>Apartman bilgileri</em>
+      </span>
+    </button>
 
-<button class="red" onclick="sil(${i})">
-Sil
-</button>
-
+  </div>
 </div>
 
-<button class="sicilPdfBtn" onclick="cariHesapPdf(${i})">
-Cari Hesap Özeti
-</button>
+${parcaGecmisiHtml(i)}
 
-<button class="sicilPdfBtn" onclick="sicilKartiPdf(${i})">
-Asansör Sicil Kartı
-</button>
+<div class="detailReportSection">
+  <div class="detailSectionHead">
+    <div>
+      <span>PDF Merkezi</span>
+      <b>Yöneticiye gönderilecek belgeler</b>
+    </div>
+  </div>
 
-<button onclick="pdf(${i})">
-PDF Oluştur
+  <div class="detailReportGrid">
+
+    <button class="detailReportCard" onclick="pdf(${i})">
+      <span>📄</span>
+      <b>Bakım Raporu</b>
+      <em>Servis / bakım PDF</em>
+    </button>
+
+    <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
+      <span>₺</span>
+      <b>Ödeme Makbuzu</b>
+      <em>Son tahsilat belgesi</em>
+    </button>
+
+    <button class="detailReportCard" onclick="cariHesapPdf(${i})">
+      <span>📊</span>
+      <b>Cari Özeti</b>
+      <em>Borç ve tahsilat</em>
+    </button>
+
+    <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
+      <span>🪪</span>
+      <b>Sicil Kartı</b>
+      <em>Asansör kayıt kartı</em>
+    </button>
+
+    <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
+      <span>🔩</span>
+      <b>Parça Geçmişi</b>
+      <em>Değişen parçalar</em>
+    </button>
+
+  </div>
+</div>
+
+<div class="detailDangerZone">
+<button class="detailDeleteBtn" onclick="sil(${i})">
+Kaydı Sil
 </button>
+</div>
 
 </div>
 
