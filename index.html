@@ -7060,6 +7060,58 @@ font-size:21px!important;
 }
 }
 
+
+
+/* === v1.3.5 - + Yeni bar hatası compact pill fix === */
+#addApartmentFab,
+.addApartmentFab{
+width:auto!important;
+max-width:max-content!important;
+min-width:104px!important;
+height:42px!important;
+left:auto!important;
+right:max(18px,calc(env(safe-area-inset-right,0px) + 18px))!important;
+bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
+padding:0 15px 0 11px!important;
+margin:0!important;
+margin-top:0!important;
+border-radius:999px!important;
+gap:8px!important;
+font-size:13.5px!important;
+font-weight:900!important;
+line-height:1!important;
+box-sizing:border-box!important;
+}
+
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:22px!important;
+height:22px!important;
+min-width:22px!important;
+font-size:20px!important;
+}
+
+@media(max-width:430px){
+#addApartmentFab,
+.addApartmentFab{
+width:auto!important;
+max-width:max-content!important;
+min-width:100px!important;
+height:40px!important;
+right:16px!important;
+bottom:calc(94px + env(safe-area-inset-bottom,0px))!important;
+padding:0 14px 0 10px!important;
+font-size:13px!important;
+}
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:21px!important;
+height:21px!important;
+min-width:21px!important;
+font-size:19px!important;
+}
+}
+
 </style>
 
 <script>
@@ -7211,7 +7263,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.3.4</div>
+<div class="motionSplashVersion" data-splash-version>v1.3.5</div>
 </div>
 </div>
 
@@ -7652,7 +7704,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.3.4";
+const APP_VERSION = "v1.3.5";
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
