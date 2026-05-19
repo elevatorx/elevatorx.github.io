@@ -7117,7 +7117,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.3.2</div>
+<div class="motionSplashVersion" data-splash-version>v1.3.3</div>
 </div>
 </div>
 
@@ -7470,8 +7470,8 @@ Destek: supportelevatorx@gmail.com
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="4.5" y="3.5" width="15" height="17" rx="4.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M8 12.4L10.6 15L16.4 9.2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="4.7" y="3.8" width="14.6" height="16.4" rx="4" stroke="currentColor" stroke-width="1.9"/>
+<path d="M8.1 12.2L10.6 14.8L16.1 9.1" stroke="currentColor" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </span>
 <span class="tabText">Bakım</span>
@@ -7480,30 +7480,29 @@ Destek: supportelevatorx@gmail.com
 <button type="button" class="tabItem activeTab" data-tab="apartman" onclick="anaSayfa()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="5" y="4" width="14" height="16" rx="3.6" stroke="currentColor" stroke-width="1.9"/>
-<path d="M9 8.5H9.01M15 8.5H15.01M9 12.5H9.01M15 12.5H15.01M9 16.5H9.01M15 16.5H15.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="5.2" y="4.2" width="13.6" height="15.6" rx="3.4" stroke="currentColor" stroke-width="1.9"/>
+<path d="M9 8.6H9.01M15 8.6H15.01M9 12.4H9.01M15 12.4H15.01M9 16.2H9.01M15 16.2H15.01" stroke="currentColor" stroke-width="2.15" stroke-linecap="round"/>
 </svg>
 </span>
 <span class="tabText">Apartmanlar</span>
 </button>
 
-<button type="button" class="middleButton" onclick="formAc()" aria-label="Yeni apartman ekle">
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-</svg>
-</button>
-
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="8.2" r="3.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M5.5 18.6C6.7 15.9 9 14.5 12 14.5C15 14.5 17.3 15.9 18.5 18.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+<circle cx="12" cy="8.2" r="3.15" stroke="currentColor" stroke-width="1.9"/>
+<path d="M5.7 18.4C6.9 15.9 9.1 14.5 12 14.5C14.9 14.5 17.1 15.9 18.3 18.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
 </svg>
 </span>
 <span class="tabText">Profil</span>
 </button>
 
 </div>
+
+<button type="button" id="addApartmentFab" class="addApartmentFab" onclick="formAc()" aria-label="Yeni apartman ekle">
+<span class="addFabIcon" aria-hidden="true">+</span>
+<span>Yeni</span>
+</button>
 
 
 <div id="legalModal" class="legalModal">
@@ -7559,7 +7558,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.3.2";
+const APP_VERSION = "v1.3.3";
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
@@ -8002,6 +8001,11 @@ items.forEach(item=>{
 item.classList.remove("activeTab");
 });
 
+document.documentElement.classList.toggle("apartmanTabActive", tab === "apartman");
+if(document.body){
+document.body.classList.toggle("apartmanTabActive", tab === "apartman");
+}
+
 if(!tab) return;
 
 let aktif =
@@ -8012,6 +8016,14 @@ aktif.classList.add("activeTab");
 }
 
 }
+
+
+
+document.addEventListener("DOMContentLoaded",function(){
+let aktif = document.querySelector(".tabItem.activeTab");
+let tab = aktif ? aktif.getAttribute("data-tab") : "apartman";
+setAktifTab(tab);
+});
 
 function localVeriKaydet(){
 localStorage.setItem(
@@ -8781,6 +8793,8 @@ guncelleApartmanFormDurumu();
 
 formBox.style.display="block";
 
+document.body.classList.add("formOpen");
+
 animateIn(formBox,"screenFadeUp");
 
 window.scrollTo({
@@ -8791,6 +8805,7 @@ behavior:"smooth"
 }else{
 
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 
 }
 
@@ -8986,6 +9001,7 @@ not.value="";
 editIndex=null;
 guncelleApartmanFormDurumu();
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 
 kaydet();
 
@@ -9235,6 +9251,7 @@ setAktifTab("bakim");
 searchArea.style.display="none";
 filterPanel.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 detayPanel.style.display="none";
 profilPanel.style.display="none";
 liste.style.display="block";
@@ -11027,6 +11044,7 @@ searchArea.style.display="none";
 filterPanel.style.display="none";
 liste.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 profilPanel.style.display="none";
 detayPanel.style.display="block";
 
@@ -12482,6 +12500,280 @@ height:25px!important;
 }
 }
 
+
+
+/* === v1.3.3 - 3 Sekmeli Tab Bar + Ayrı Yeni Butonu === */
+.tabbar{
+position:fixed!important;
+left:50%!important;
+right:auto!important;
+bottom:calc(10px + env(safe-area-inset-bottom))!important;
+transform:translateX(-50%)!important;
+width:min(382px,calc(100vw - 24px))!important;
+height:76px!important;
+padding:8px 10px 10px!important;
+box-sizing:border-box!important;
+display:grid!important;
+grid-template-columns:1fr 1fr 1fr!important;
+align-items:center!important;
+justify-items:center!important;
+gap:6px!important;
+border-radius:28px!important;
+border:1px solid rgba(255,255,255,.72)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(247,249,253,.80))!important;
+box-shadow:
+0 16px 38px rgba(15,23,42,.12),
+0 6px 16px rgba(15,23,42,.055),
+inset 0 1px 0 rgba(255,255,255,.95)!important;
+backdrop-filter:blur(24px) saturate(170%)!important;
+-webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+overflow:visible!important;
+z-index:10020!important;
+}
+
+.tabbar::before{
+content:""!important;
+position:absolute!important;
+inset:1px!important;
+border-radius:27px!important;
+pointer-events:none!important;
+background:linear-gradient(180deg,rgba(255,255,255,.52),rgba(255,255,255,0) 45%)!important;
+opacity:.8!important;
+}
+
+.tabbar .middleButton,
+.tabbar .tabGap{
+display:none!important;
+}
+
+.tabbar .tabItem{
+position:relative!important;
+left:auto!important;
+right:auto!important;
+top:auto!important;
+bottom:auto!important;
+transform:none!important;
+width:100%!important;
+height:58px!important;
+margin:0!important;
+padding:0!important;
+display:flex!important;
+flex-direction:column!important;
+align-items:center!important;
+justify-content:center!important;
+gap:5px!important;
+background:transparent!important;
+border:0!important;
+border-radius:20px!important;
+color:#7d8796!important;
+font:inherit!important;
+line-height:1!important;
+box-sizing:border-box!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"],
+.tabbar .tabItem[data-tab="apartman"],
+.tabbar .tabItem[data-tab="profil"]{
+position:relative!important;
+left:auto!important;
+right:auto!important;
+bottom:auto!important;
+width:100%!important;
+grid-column:auto!important;
+padding:0!important;
+}
+
+.tabbar .tabItem:active{
+transform:scale(.975)!important;
+opacity:.82!important;
+}
+
+.tabbar .tabItem.activeTab{
+color:#0b7cff!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+content:""!important;
+position:absolute!important;
+left:5px!important;
+right:5px!important;
+top:4px!important;
+bottom:4px!important;
+border-radius:18px!important;
+background:linear-gradient(180deg,rgba(0,122,255,.11),rgba(0,122,255,.045))!important;
+border:1px solid rgba(125,178,255,.34)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+z-index:0!important;
+}
+
+.tabbar .tabIcon,
+.tabbar .tabText{
+position:relative!important;
+z-index:1!important;
+}
+
+.tabbar .tabIcon{
+width:23px!important;
+height:23px!important;
+margin:0!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+}
+
+.tabbar .tabSvg{
+width:100%!important;
+height:100%!important;
+display:block!important;
+stroke:currentColor!important;
+fill:none!important;
+}
+
+.tabbar .tabText{
+display:block!important;
+font-size:11px!important;
+font-weight:880!important;
+letter-spacing:-.14px!important;
+line-height:1!important;
+white-space:nowrap!important;
+text-align:center!important;
+}
+
+.addApartmentFab{
+position:fixed!important;
+right:max(18px,calc(env(safe-area-inset-right,0px) + 18px))!important;
+bottom:calc(96px + env(safe-area-inset-bottom))!important;
+height:46px!important;
+padding:0 16px 0 13px!important;
+border:1px solid rgba(255,255,255,.72)!important;
+border-radius:999px!important;
+background:linear-gradient(180deg,#4b8cff,#2f6ff0)!important;
+color:#fff!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+gap:8px!important;
+font-size:14px!important;
+font-weight:900!important;
+letter-spacing:-.2px!important;
+box-shadow:
+0 14px 28px rgba(47,111,240,.26),
+0 6px 15px rgba(15,23,42,.12),
+inset 0 1px 0 rgba(255,255,255,.42)!important;
+z-index:10018!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+opacity:0!important;
+pointer-events:none!important;
+transform:translateY(10px) scale(.96)!important;
+transition:opacity .18s ease, transform .18s ease!important;
+}
+
+.addApartmentFab .addFabIcon{
+width:22px!important;
+height:22px!important;
+border-radius:50%!important;
+background:rgba(255,255,255,.18)!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+font-size:20px!important;
+font-weight:500!important;
+line-height:1!important;
+}
+
+body.apartmanTabActive:not(.formOpen) .addApartmentFab{
+opacity:1!important;
+pointer-events:auto!important;
+transform:translateY(0) scale(1)!important;
+}
+
+.addApartmentFab:active{
+transform:translateY(1px) scale(.96)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+background:linear-gradient(180deg,rgba(22,28,39,.88),rgba(13,18,27,.82))!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:
+0 16px 38px rgba(0,0,0,.34),
+0 7px 18px rgba(0,0,0,.2),
+inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar::before,
+html.darkRoot .tabbar::before{
+background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+color:#94a1b2!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+color:#7db2ff!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab::before,
+html.darkRoot .tabbar .tabItem.activeTab::before{
+background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
+border-color:rgba(96,165,250,.28)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+body.darkMode .addApartmentFab,
+html.darkRoot .addApartmentFab{
+border-color:rgba(255,255,255,.10)!important;
+box-shadow:
+0 14px 30px rgba(47,111,240,.22),
+0 6px 16px rgba(0,0,0,.22),
+inset 0 1px 0 rgba(255,255,255,.30)!important;
+}
+
+body::after{
+height:calc(110px + env(safe-area-inset-bottom))!important;
+background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 38%,#f6f7fb 100%)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 38%,#0b0f17 100%)!important;
+}
+
+@media(max-width:430px){
+.tabbar{
+width:min(368px,calc(100vw - 20px))!important;
+height:74px!important;
+padding:8px 9px 9px!important;
+border-radius:27px!important;
+}
+.tabbar::before{
+border-radius:26px!important;
+}
+.tabbar .tabItem{
+height:56px!important;
+}
+.tabbar .tabIcon{
+width:22px!important;
+height:22px!important;
+}
+.tabbar .tabText{
+font-size:10.7px!important;
+}
+.addApartmentFab{
+right:18px!important;
+bottom:calc(92px + env(safe-area-inset-bottom))!important;
+height:44px!important;
+padding:0 15px 0 12px!important;
+font-size:13.5px!important;
+}
+}
+
 </style>
 
 </head>
@@ -12700,6 +12992,7 @@ searchArea.style.display="flex";
 profilPanel.style.display="none";
 detayPanel.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 liste.style.display="block";
 goster();
 
@@ -12764,6 +13057,7 @@ aktifDetay = null;
 searchArea.style.display="none";
 filterPanel.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 detayPanel.style.display="none";
 liste.style.display="none";
 profilPanel.style.display="block";
