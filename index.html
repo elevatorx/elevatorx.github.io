@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=144">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=144">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=144">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=144">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=144">
-<link rel="manifest" href="/manifest.webmanifest?v=144">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=145">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=145">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=145">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=145">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=145">
+<link rel="manifest" href="/manifest.webmanifest?v=145">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6566,6 +6566,274 @@ border-radius:18px;
 }
 }
 
+
+
+/* === v1.4.5 APP LAYOUT LOCK — gerçek ana CSS içine sabitlendi ===
+   Neden gerekli: Daha önce bazı tabbar / +Yeni düzeltmeleri PDF şablonu içindeki <style> bloğuna eklenmişti;
+   o blok uygulama ekranını etkilemediği için alt bar her güncellemede eski kurallara geri kayıyordu. */
+.aiBtn,
+#aiOverlay{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.searchRow{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+
+#arama{
+  flex:1 1 auto!important;
+  width:auto!important;
+  min-width:0!important;
+}
+
+.filterBtn{
+  flex:0 0 118px!important;
+  width:118px!important;
+}
+
+.tabGap,
+.middleButton{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.tabbar,
+.tabbar *{
+  box-sizing:border-box!important;
+}
+
+.tabbar,
+.tabbar button{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+.tabbar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  width:min(360px,calc(100vw - 36px))!important;
+  height:74px!important;
+  padding:8px 10px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+  border-radius:28px!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(246,248,252,.84))!important;
+  box-shadow:0 18px 42px rgba(15,23,42,.12),0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  backdrop-filter:blur(24px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+  overflow:visible!important;
+  z-index:10020!important;
+}
+
+.tabbar .tabItem{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:58px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:20px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  background:transparent!important;
+  color:#7d8796!important;
+  font:inherit!important;
+  line-height:1!important;
+  text-align:center!important;
+  box-shadow:none!important;
+}
+
+.tabbar .tabItem.activeTab{
+  color:#2f6ff0!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.12),rgba(47,111,240,.05))!important;
+  border:1px solid rgba(125,178,255,.36)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+
+.tabbar .tabIcon{
+  width:22px!important;
+  height:22px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:currentColor!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.tabbar .tabSvg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  stroke:currentColor!important;
+  fill:none!important;
+}
+
+.tabbar .tabText{
+  display:block!important;
+  font-size:11px!important;
+  font-weight:860!important;
+  letter-spacing:-.12px!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+}
+
+#quickAddBtn.quickAddBtn{
+  position:fixed!important;
+  left:auto!important;
+  right:18px!important;
+  top:auto!important;
+  bottom:calc(102px + env(safe-area-inset-bottom,0px))!important;
+  transform:none!important;
+  width:auto!important;
+  min-width:108px!important;
+  max-width:132px!important;
+  height:46px!important;
+  padding:0 16px!important;
+  margin:0!important;
+  display:none!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border:1px solid rgba(255,255,255,.38)!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
+  color:#fff!important;
+  font:inherit!important;
+  font-weight:900!important;
+  line-height:1!important;
+  text-decoration:none!important;
+  box-shadow:0 16px 34px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.13),inset 0 1px 0 rgba(255,255,255,.44)!important;
+  z-index:10080!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  overflow:hidden!important;
+}
+
+#quickAddBtn.quickAddBtn.quickAddVisible{
+  display:inline-flex!important;
+}
+
+#quickAddBtn.quickAddBtn span{
+  width:24px!important;
+  height:24px!important;
+  min-width:24px!important;
+  border-radius:50%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:rgba(255,255,255,.18)!important;
+  color:#fff!important;
+  font-size:22px!important;
+  line-height:1!important;
+  font-weight:850!important;
+  margin:0!important;
+}
+
+#quickAddBtn.quickAddBtn b{
+  display:block!important;
+  font-size:14px!important;
+  font-weight:900!important;
+  letter-spacing:-.12px!important;
+  color:#fff!important;
+  white-space:nowrap!important;
+  margin:0!important;
+}
+
+.container{
+  padding-bottom:calc(170px + env(safe-area-inset-bottom,0px))!important;
+}
+
+body::after{
+  height:calc(124px + env(safe-area-inset-bottom,0px))!important;
+  background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 40%,#f6f7fb 100%)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  background:linear-gradient(180deg,rgba(22,28,39,.90),rgba(13,18,27,.84))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+  color:#94a1b2!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#7db2ff!important;
+  background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
+  border-color:rgba(96,165,250,.28)!important;
+}
+
+body.darkMode #quickAddBtn.quickAddBtn,
+html.darkRoot #quickAddBtn.quickAddBtn{
+  background:linear-gradient(180deg,#4b82f3 0%,#2563eb 100%)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 16px 34px rgba(37,99,235,.28),0 8px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+  background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 40%,#0b0f17 100%)!important;
+}
+
+@media(max-width:430px){
+  .filterBtn{
+    flex:0 0 110px!important;
+    width:110px!important;
+  }
+  .tabbar{
+    width:min(348px,calc(100vw - 34px))!important;
+    height:72px!important;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+    padding:7px 9px!important;
+  }
+  .tabbar .tabItem{
+    height:56px!important;
+  }
+  .tabbar .tabText{
+    font-size:10.6px!important;
+  }
+  #quickAddBtn.quickAddBtn{
+    right:16px!important;
+    bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
+    height:46px!important;
+    min-width:104px!important;
+    max-width:126px!important;
+    padding:0 16px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -6715,10 +6983,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=145" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.4</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.5</div>
 </div>
 </div>
 
@@ -6727,7 +6995,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=145" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7159,9 +7427,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.4";
+const APP_VERSION = "v1.4.5";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=145", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7239,7 +7507,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.4").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.5").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
