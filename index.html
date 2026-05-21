@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=125">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=125">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=125">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=125">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=125">
-<link rel="manifest" href="/manifest.webmanifest?v=125">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=144">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=144">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=144">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=144">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=144">
+<link rel="manifest" href="/manifest.webmanifest?v=144">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -54,6 +54,9 @@ document.documentElement.classList.add("darkRoot");
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ElevatorX">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <style>
 html.darkRoot{
@@ -6715,7 +6718,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.3</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.4</div>
 </div>
 </div>
 
@@ -7156,7 +7159,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.3";
+const APP_VERSION = "v1.4.4";
+window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
@@ -7235,8 +7239,9 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.4").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
-url.searchParams.set("v","125");
+url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
 url.searchParams.set("nocache",Math.random().toString(36).slice(2));
 location.replace(url.href);
