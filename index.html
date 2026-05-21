@@ -6676,7 +6676,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 })();
 </script>
 
-<!-- v1.4.1 - index sync fix: cari düzenleme doğru index.html içine işlendi -->
+<!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 </head>
 
 <body>
@@ -6715,7 +6715,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=125" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.1</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.2</div>
 </div>
 </div>
 
@@ -7156,7 +7156,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.1";
+const APP_VERSION = "v1.4.2";
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=125", location.href).href;
 
 
@@ -7882,7 +7882,9 @@ a.odemeTarihi = "";
 
 function cariOzet(a){
 
-let bakimUcreti = Number(a && a.ucret ? a.ucret : 0);
+let anlasmaUcreti = Number(a && a.ucret ? a.ucret : 0);
+let bakimBorcuAktif = !!(a && a.bakimTarihi);
+let bakimUcreti = bakimBorcuAktif ? anlasmaUcreti : 0;
 let parcaToplam = parcaToplamTutar(a);
 let eskiBakiyeToplami = eskiBakiyeToplam(a);
 let beklenen = bakimUcreti + parcaToplam + eskiBakiyeToplami;
@@ -7891,7 +7893,7 @@ let kalemler = [];
 if(bakimUcreti > 0){
 kalemler.push({
 tip:"Bakım",
-tarih:(a && (a.bakimTarihi || a.bakimGunu)) || "-",
+tarih:(a && a.bakimTarihi) || "-",
 aciklama:"Aylık bakım ücreti",
 tutar:bakimUcreti
 });
@@ -7958,6 +7960,8 @@ durumClass = "over";
 let sonOdeme = odemeler.length ? (odemeler[0].tarih || "") : "";
 
 return {
+anlasmaUcreti:anlasmaUcreti,
+bakimBorcuAktif:bakimBorcuAktif,
 bakimUcreti:bakimUcreti,
 parcaToplam:parcaToplam,
 eskiBakiyeToplami:eskiBakiyeToplami,
@@ -8009,7 +8013,7 @@ return `
       <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
     </div>
   </div>
-  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Eski bakiye ve parça değişim tutarları cari hesaba otomatik işlenir.</div>
+  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Bakım ücreti, yalnızca Bakım Yapıldı denince cariye eklenir.</div>
   <div class="cariHint">${kalanText}. Yönetici borç sorduğunda bu ekran veya Cari Hesap Özeti PDF'i kullanılabilir.</div>
   ${Number.isInteger(i) ? `
   <div class="cariEditActions">
@@ -8468,6 +8472,10 @@ return toplam + cariOzet(a).toplam;
 function odemeBadge(a){
 
 let c = cariOzet(a);
+
+if(c.beklenen <= 0 && c.toplam <= 0){
+return `<span class="payBadge payPaid">Borç Yok</span>`;
+}
 
 if(c.alacak > 0){
 return `<span class="payBadge payOver">Fazla Ödeme</span>`;
@@ -11433,7 +11441,7 @@ let tarih = prompt("Ödeme tarihi", bugun()) || bugun();
 let varsayilanTip =
 cari.parcaToplam > 0 && cari.bakimUcreti > 0
 ? "parça"
-: (cari.parcaToplam > 0 ? "parça" : "bakım");
+: (cari.parcaToplam > 0 ? "parça" : (cari.bakimUcreti > 0 ? "bakım" : "cari"));
 
 let tipGiris = prompt(
 "Ödeme türü yazın: bakım / parça / cari",
@@ -12532,6 +12540,21 @@ right:16px!important;
 bottom:calc(88px + env(safe-area-inset-bottom))!important;
 height:46px!important;
 padding:0 16px!important;
+}
+}
+
+
+
+/* === v1.4.2 - Bakım borcu fix + Yeni buton konum fix === */
+.quickAddBtn{
+right:20px!important;
+bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+}
+
+@media(max-width:430px){
+.quickAddBtn{
+right:18px!important;
+bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
 }
 }
 
