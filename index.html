@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=145">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=145">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=145">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=145">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=145">
-<link rel="manifest" href="/manifest.webmanifest?v=145">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=125">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=149">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=125">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=125">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=125">
+<link rel="manifest" href="/manifest.webmanifest?v=149">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -54,9 +54,6 @@ document.documentElement.classList.add("darkRoot");
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ElevatorX">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 <style>
 html.darkRoot{
@@ -6568,272 +6565,737 @@ border-radius:18px;
 
 
 
-/* === v1.4.5 APP LAYOUT LOCK — gerçek ana CSS içine sabitlendi ===
-   Neden gerekli: Daha önce bazı tabbar / +Yeni düzeltmeleri PDF şablonu içindeki <style> bloğuna eklenmişti;
-   o blok uygulama ekranını etkilemediği için alt bar her güncellemede eski kurallara geri kayıyordu. */
+/* === v1.2.9 - Header Wordmark Premium Shine === */
+.headerBrand{
+gap:12px!important;
+}
+
+.headerNewLogo{
+width:40px!important;
+height:40px!important;
+border-radius:13px!important;
+box-shadow:0 10px 24px rgba(15,23,42,.10)!important;
+}
+
+.elevatorXWordmark{
+position:relative!important;
+display:inline-block!important;
+overflow:hidden!important;
+padding:.10em .08em .12em 0!important;
+font-weight:920!important;
+letter-spacing:-1.15px!important;
+line-height:1!important;
+}
+
+.headerBrand .elevatorXWordmark{
+font-size:28px!important;
+}
+
+.splashBrand.elevatorXWordmark{
+font-size:40px!important;
+margin-top:18px!important;
+}
+
+.headerBrand .elevatorXWordmark::after,
+.splashBrand.elevatorXWordmark::after{
+content:"";
+position:absolute;
+top:-42%;
+left:-58%;
+width:34%;
+height:190%;
+pointer-events:none;
+background:linear-gradient(110deg,
+rgba(255,255,255,0) 0%,
+rgba(255,255,255,0) 28%,
+rgba(255,255,255,.10) 38%,
+rgba(255,255,255,.92) 50%,
+rgba(255,255,255,.10) 62%,
+rgba(255,255,255,0) 72%,
+rgba(255,255,255,0) 100%);
+transform:skewX(-22deg) translateX(-230%);
+opacity:.95;
+mix-blend-mode:screen;
+animation:elevatorXSheenSweep 5.8s cubic-bezier(.22,.61,.36,1) infinite;
+}
+
+.splashBrand.elevatorXWordmark::after{
+animation-duration:6.3s;
+animation-delay:.55s;
+opacity:.9;
+}
+
+@keyframes elevatorXSheenSweep{
+0%, 18%{
+transform:skewX(-22deg) translateX(-240%);
+opacity:0;
+}
+28%{
+opacity:.96;
+}
+46%{
+transform:skewX(-22deg) translateX(420%);
+opacity:.92;
+}
+54%,100%{
+transform:skewX(-22deg) translateX(420%);
+opacity:0;
+}
+}
+
+body.darkMode .headerBrand .elevatorXWordmark::after,
+html.darkRoot .headerBrand .elevatorXWordmark::after,
+body.darkMode .splashBrand.elevatorXWordmark::after,
+html.darkRoot .splashBrand.elevatorXWordmark::after{
+background:linear-gradient(110deg,
+rgba(255,255,255,0) 0%,
+rgba(255,255,255,0) 26%,
+rgba(147,197,253,.14) 39%,
+rgba(255,255,255,.98) 50%,
+rgba(147,197,253,.18) 61%,
+rgba(255,255,255,0) 73%,
+rgba(255,255,255,0) 100%);
+mix-blend-mode:screen;
+}
+
+
+
+/* === v1.3.0 - Luna temizliği + iPhone alt siyah alan fix === */
+html{
+background:#f6f7fb!important;
+min-height:100%;
+}
+
+body{
+min-height:100dvh;
+background:#f6f7fb!important;
+}
+
+html.darkRoot,
+body.darkMode{
+background:#0b0f17!important;
+}
+
 .aiBtn,
 #aiOverlay{
+display:none!important;
+visibility:hidden!important;
+pointer-events:none!important;
+}
+
+.searchRow{
+display:flex!important;
+align-items:center!important;
+gap:12px!important;
+}
+
+#arama{
+flex:1 1 auto!important;
+width:auto!important;
+min-width:0!important;
+}
+
+.filterBtn{
+flex:0 0 118px!important;
+width:118px!important;
+}
+
+body::after{
+content:"";
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:calc(126px + env(safe-area-inset-bottom));
+background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 34%,#f6f7fb 100%);
+z-index:9990;
+pointer-events:none;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 34%,#0b0f17 100%);
+}
+
+.tabbar{
+z-index:10000!important;
+}
+
+@media(max-width:430px){
+.searchRow{gap:10px!important;}
+.filterBtn{
+flex-basis:110px!important;
+width:110px!important;
+}
+}
+
+
+
+/* === v1.3.1 - Apple Vari Minimal Premium Tab Bar === */
+.tabbar{
+position:fixed!important;
+left:50%!important;
+right:auto!important;
+bottom:calc(8px + env(safe-area-inset-bottom))!important;
+transform:translateX(-50%)!important;
+width:min(368px,calc(100vw - 28px))!important;
+height:70px!important;
+padding:0 12px 7px!important;
+box-sizing:border-box!important;
+display:grid!important;
+grid-template-columns:1fr 1fr 66px 1fr!important;
+align-items:end!important;
+justify-items:center!important;
+gap:0!important;
+border-radius:28px!important;
+border:1px solid rgba(255,255,255,.72)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(247,249,253,.76))!important;
+box-shadow:
+0 14px 34px rgba(15,23,42,.12),
+0 6px 14px rgba(15,23,42,.05),
+inset 0 1px 0 rgba(255,255,255,.92)!important;
+backdrop-filter:blur(24px) saturate(170%)!important;
+-webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+overflow:visible!important;
+z-index:10020!important;
+}
+
+.tabbar::before{
+content:""!important;
+position:absolute!important;
+inset:1px!important;
+border-radius:27px!important;
+pointer-events:none!important;
+background:linear-gradient(180deg,rgba(255,255,255,.46),rgba(255,255,255,0) 42%)!important;
+opacity:.75!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
+.tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
+.tabbar .tabGap{grid-column:3!important;}
+.tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
+
+.tabbar .tabItem{
+position:relative!important;
+width:100%!important;
+min-width:0!important;
+height:56px!important;
+margin:0!important;
+padding:0 0 6px!important;
+display:flex!important;
+flex-direction:column!important;
+align-items:center!important;
+justify-content:center!important;
+gap:3px!important;
+line-height:1!important;
+font-size:11px!important;
+font-weight:850!important;
+letter-spacing:-.15px!important;
+color:#7d8796!important;
+border-radius:20px!important;
+transition:transform .16s ease, color .18s ease, opacity .18s ease!important;
+box-sizing:border-box!important;
+}
+
+.tabbar .tabItem:active{
+transform:translateY(1px) scale(.975)!important;
+opacity:.82!important;
+}
+
+.tabbar .tabItem.activeTab{
+color:#0b7cff!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+content:""!important;
+position:absolute!important;
+left:10px!important;
+right:10px!important;
+top:7px!important;
+bottom:5px!important;
+border-radius:17px!important;
+background:linear-gradient(180deg,rgba(0,122,255,.105),rgba(0,122,255,.045))!important;
+border:1px solid rgba(125,178,255,.34)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+z-index:0!important;
+}
+
+.tabbar .tabIcon,
+.tabbar .tabText{
+position:relative!important;
+z-index:1!important;
+}
+
+.tabbar .tabIcon{
+width:22px!important;
+height:22px!important;
+margin:0!important;
+}
+
+.tabbar .tabText{
+display:block!important;
+white-space:nowrap!important;
+text-align:center!important;
+font-size:11px!important;
+font-weight:880!important;
+line-height:1!important;
+}
+
+.tabbar .tabGap{
+width:66px!important;
+height:1px!important;
+pointer-events:none!important;
+}
+
+.tabbar .middleButton{
+position:absolute!important;
+left:50%!important;
+top:-12px!important;
+transform:translateX(-50%)!important;
+width:54px!important;
+height:54px!important;
+min-width:54px!important;
+min-height:54px!important;
+font-size:31px!important;
+font-weight:330!important;
+line-height:1!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+border-radius:50%!important;
+color:#ffffff!important;
+background:linear-gradient(180deg,#4b8cff 0%,#2f6ff0 100%)!important;
+border:3px solid rgba(247,249,253,.96)!important;
+box-shadow:
+0 12px 26px rgba(47,111,240,.30),
+0 6px 14px rgba(15,23,42,.12),
+inset 0 1px 0 rgba(255,255,255,.46)!important;
+z-index:3!important;
+}
+
+.tabbar .middleButton::after{
+content:""!important;
+position:absolute!important;
+inset:-5px!important;
+border-radius:50%!important;
+pointer-events:none!important;
+border:1px solid rgba(191,219,254,.46)!important;
+opacity:.85!important;
+}
+
+.tabbar .middleButton:active{
+transform:translateX(-50%) scale(.93)!important;
+}
+
+body::after{
+height:calc(104px + env(safe-area-inset-bottom))!important;
+background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 38%,#f6f7fb 100%)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 38%,#0b0f17 100%)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+background:linear-gradient(180deg,rgba(22,28,39,.82),rgba(13,18,27,.78))!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:
+0 14px 34px rgba(0,0,0,.34),
+0 6px 14px rgba(0,0,0,.18),
+inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar::before,
+html.darkRoot .tabbar::before{
+background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 42%)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+color:#93a0b1!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+color:#7db2ff!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab::before,
+html.darkRoot .tabbar .tabItem.activeTab::before{
+background:linear-gradient(180deg,rgba(59,130,246,.15),rgba(59,130,246,.07))!important;
+border-color:rgba(96,165,250,.28)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+body.darkMode .tabbar .middleButton,
+html.darkRoot .tabbar .middleButton{
+border-color:rgba(13,18,27,.96)!important;
+}
+
+@media(max-width:430px){
+.tabbar{
+width:min(362px,calc(100vw - 24px))!important;
+height:68px!important;
+padding:0 10px 7px!important;
+grid-template-columns:1fr 1fr 62px 1fr!important;
+border-radius:27px!important;
+}
+.tabbar::before{border-radius:26px!important;}
+.tabbar .tabItem{
+height:54px!important;
+font-size:10.5px!important;
+padding-bottom:5px!important;
+}
+.tabbar .tabIcon{
+width:21px!important;
+height:21px!important;
+}
+.tabbar .tabText{
+font-size:10.5px!important;
+}
+.tabbar .tabGap{width:62px!important;}
+.tabbar .middleButton{
+width:52px!important;
+height:52px!important;
+min-width:52px!important;
+min-height:52px!important;
+top:-11px!important;
+font-size:30px!important;
+}
+}
+
+
+
+/* === v1.3.4 - Yeni Apartman Butonu Görünür Fix === */
+#addApartmentFab,
+.addApartmentFab{
+position:fixed!important;
+right:max(20px,calc(env(safe-area-inset-right,0px) + 20px))!important;
+bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+height:48px!important;
+min-width:122px!important;
+padding:0 17px 0 13px!important;
+border:1px solid rgba(255,255,255,.78)!important;
+border-radius:999px!important;
+background:linear-gradient(180deg,#4c8cff 0%,#2f6ff0 100%)!important;
+color:#fff!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+gap:9px!important;
+font-size:14px!important;
+font-weight:900!important;
+letter-spacing:-.2px!important;
+line-height:1!important;
+box-shadow:
+0 16px 34px rgba(47,111,240,.30),
+0 8px 18px rgba(15,23,42,.13),
+inset 0 1px 0 rgba(255,255,255,.42)!important;
+z-index:10080!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+opacity:0!important;
+pointer-events:none!important;
+transform:translateY(10px) scale(.96)!important;
+transition:opacity .18s ease, transform .18s ease!important;
+}
+
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:24px!important;
+height:24px!important;
+border-radius:50%!important;
+background:rgba(255,255,255,.18)!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+font-size:22px!important;
+font-weight:500!important;
+line-height:1!important;
+margin-top:-1px!important;
+}
+
+body.apartmanTabActive:not(.formOpen) #addApartmentFab,
+body.apartmanTabActive:not(.formOpen) .addApartmentFab,
+html.apartmanTabActive body:not(.formOpen) #addApartmentFab,
+html.apartmanTabActive body:not(.formOpen) .addApartmentFab{
+opacity:1!important;
+pointer-events:auto!important;
+transform:translateY(0) scale(1)!important;
+}
+
+#addApartmentFab:active,
+.addApartmentFab:active{
+transform:translateY(1px) scale(.96)!important;
+}
+
+body.darkMode #addApartmentFab,
+html.darkRoot #addApartmentFab,
+body.darkMode .addApartmentFab,
+html.darkRoot .addApartmentFab{
+border-color:rgba(255,255,255,.10)!important;
+box-shadow:
+0 16px 34px rgba(47,111,240,.24),
+0 8px 18px rgba(0,0,0,.24),
+inset 0 1px 0 rgba(255,255,255,.30)!important;
+}
+
+@media(max-width:430px){
+#addApartmentFab,
+.addApartmentFab{
+right:18px!important;
+bottom:calc(96px + env(safe-area-inset-bottom,0px))!important;
+height:46px!important;
+min-width:116px!important;
+padding:0 16px 0 12px!important;
+font-size:13.5px!important;
+}
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:23px!important;
+height:23px!important;
+font-size:21px!important;
+}
+}
+
+
+
+/* === v1.3.5 - + Yeni bar hatası compact pill fix === */
+#addApartmentFab,
+.addApartmentFab{
+width:auto!important;
+max-width:max-content!important;
+min-width:104px!important;
+height:42px!important;
+left:auto!important;
+right:max(18px,calc(env(safe-area-inset-right,0px) + 18px))!important;
+bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
+padding:0 15px 0 11px!important;
+margin:0!important;
+margin-top:0!important;
+border-radius:999px!important;
+gap:8px!important;
+font-size:13.5px!important;
+font-weight:900!important;
+line-height:1!important;
+box-sizing:border-box!important;
+}
+
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:22px!important;
+height:22px!important;
+min-width:22px!important;
+font-size:20px!important;
+}
+
+@media(max-width:430px){
+#addApartmentFab,
+.addApartmentFab{
+width:auto!important;
+max-width:max-content!important;
+min-width:100px!important;
+height:40px!important;
+right:16px!important;
+bottom:calc(94px + env(safe-area-inset-bottom,0px))!important;
+padding:0 14px 0 10px!important;
+font-size:13px!important;
+}
+#addApartmentFab .addFabIcon,
+.addApartmentFab .addFabIcon{
+width:21px!important;
+height:21px!important;
+min-width:21px!important;
+font-size:19px!important;
+}
+}
+
+
+
+/* === v1.4.9 HARD UI LOCK — profil arama gizle + alt siyah fix + Luna kapalı === */
+html:not(.darkRoot),
+body:not(.darkMode){
+  background:#f6f7fb!important;
+  min-height:100%!important;
+}
+body:not(.darkMode){
+  color:#0f172a!important;
+}
+body:not(.darkMode)::before{
+  content:""!important;
+  position:fixed!important;
+  left:0!important; right:0!important; bottom:0!important;
+  height:calc(180px + env(safe-area-inset-bottom))!important;
+  background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 28%,#f6f7fb 100%)!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+body.darkMode::before,
+html.darkRoot body::before{
+  content:""!important;
+  position:fixed!important;
+  left:0!important; right:0!important; bottom:0!important;
+  height:calc(180px + env(safe-area-inset-bottom))!important;
+  background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 28%,#0b0f17 100%)!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+.container,.header,.tabbar,.quickAddBtn,.addApartmentFab{position:relative;z-index:2;}
+.container{
+  padding-bottom:calc(170px + env(safe-area-inset-bottom))!important;
+  min-height:calc(100dvh - 170px)!important;
+}
+/* Luna tamamen kapalı */
+.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+/* Arama sadece apartman ekranında */
+body.profileMode #searchArea,
+body.profileMode #filterPanel,
+body.bakimMode #searchArea,
+body.bakimMode #filterPanel{
   display:none!important;
   visibility:hidden!important;
   pointer-events:none!important;
 }
-
+body.apartmanMode #searchArea{
+  display:flex!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+body.apartmanMode #filterPanel.open,
+body.apartmanMode #filterPanel.show{
+  display:flex!important;
+}
 .searchRow{
   display:flex!important;
   align-items:center!important;
   gap:12px!important;
+  width:100%!important;
 }
-
-#arama{
+.searchRow input{
   flex:1 1 auto!important;
-  width:auto!important;
   min-width:0!important;
 }
-
+.searchRow .filterBtn,
 .filterBtn{
-  flex:0 0 118px!important;
-  width:118px!important;
+  flex:0 0 112px!important;
+  width:112px!important;
+  min-width:112px!important;
 }
-
-.tabGap,
-.middleButton{
+/* Tab bar son söz: 3 sekme, orta büyük + yok */
+.tabbar .middleButton,
+.tabbar .tabGap,
+.middleButton,
+.tabGap{
   display:none!important;
   visibility:hidden!important;
   pointer-events:none!important;
 }
-
-.tabbar,
-.tabbar *{
-  box-sizing:border-box!important;
-}
-
-.tabbar,
-.tabbar button{
-  -webkit-appearance:none!important;
-  appearance:none!important;
-}
-
 .tabbar{
   position:fixed!important;
   left:50%!important;
   right:auto!important;
-  top:auto!important;
-  bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  bottom:calc(10px + env(safe-area-inset-bottom))!important;
   transform:translateX(-50%)!important;
-  width:min(360px,calc(100vw - 36px))!important;
+  width:min(366px,calc(100vw - 48px))!important;
   height:74px!important;
-  padding:8px 10px!important;
-  margin:0!important;
-  display:flex!important;
+  padding:9px 10px!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
   align-items:center!important;
-  justify-content:space-between!important;
   gap:8px!important;
   border-radius:28px!important;
-  border:1px solid rgba(255,255,255,.78)!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(246,248,252,.84))!important;
-  box-shadow:0 18px 42px rgba(15,23,42,.12),0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(246,248,252,.84))!important;
+  box-shadow:0 18px 42px rgba(15,23,42,.13),0 8px 18px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.95)!important;
   backdrop-filter:blur(24px) saturate(170%)!important;
   -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
-  overflow:visible!important;
+  overflow:hidden!important;
   z-index:10020!important;
 }
-
 .tabbar .tabItem{
   position:relative!important;
   inset:auto!important;
   transform:none!important;
-  flex:1 1 0!important;
   width:auto!important;
   min-width:0!important;
-  max-width:none!important;
-  height:58px!important;
-  margin:0!important;
+  height:54px!important;
   padding:0!important;
+  margin:0!important;
   border:0!important;
-  border-radius:20px!important;
+  background:transparent!important;
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
   justify-content:center!important;
   gap:4px!important;
-  background:transparent!important;
-  color:#7d8796!important;
-  font:inherit!important;
-  line-height:1!important;
+  color:#7c8797!important;
   text-align:center!important;
-  box-shadow:none!important;
+  line-height:1!important;
 }
-
+.tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;left:auto!important;right:auto!important;}
+.tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;padding-top:0!important;}
+.tabbar .tabItem[data-tab="profil"]{grid-column:3!important;left:auto!important;right:auto!important;}
 .tabbar .tabItem.activeTab{
   color:#2f6ff0!important;
-  background:linear-gradient(180deg,rgba(47,111,240,.12),rgba(47,111,240,.05))!important;
+  border-radius:20px!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.13),rgba(47,111,240,.06))!important;
   border:1px solid rgba(125,178,255,.36)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.74)!important;
 }
-
-.tabbar .tabIcon{
-  width:22px!important;
-  height:22px!important;
-  margin:0!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  color:currentColor!important;
-  background:none!important;
-  border:0!important;
-  box-shadow:none!important;
+.tabbar .tabItem.activeTab::before{display:none!important;content:none!important;}
+.tabbar .tabIcon{width:22px!important;height:22px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0!important;}
+.tabbar .tabText{font-size:11px!important;font-weight:880!important;letter-spacing:-.12px!important;white-space:nowrap!important;}
+body.darkMode .tabbar,html.darkRoot .tabbar{
+  background:linear-gradient(180deg,rgba(22,28,39,.9),rgba(13,18,27,.84))!important;
+  border-color:rgba(255,255,255,.08)!important;
 }
-
-.tabbar .tabSvg{
-  width:100%!important;
-  height:100%!important;
-  display:block!important;
-  stroke:currentColor!important;
-  fill:none!important;
-}
-
-.tabbar .tabText{
-  display:block!important;
-  font-size:11px!important;
-  font-weight:860!important;
-  letter-spacing:-.12px!important;
-  white-space:nowrap!important;
-  color:currentColor!important;
-}
-
-#quickAddBtn.quickAddBtn{
+body.darkMode .tabbar .tabItem,html.darkRoot .tabbar .tabItem{color:#94a1b2!important;}
+body.darkMode .tabbar .tabItem.activeTab,html.darkRoot .tabbar .tabItem.activeTab{color:#7db2ff!important;background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;border-color:rgba(96,165,250,.28)!important;}
+/* + Yeni butonu: tab bar üstü compact capsule */
+.quickAddBtn,.addApartmentFab,#quickAddBtn{
   position:fixed!important;
+  right:22px!important;
   left:auto!important;
-  right:18px!important;
-  top:auto!important;
-  bottom:calc(102px + env(safe-area-inset-bottom,0px))!important;
-  transform:none!important;
+  bottom:calc(98px + env(safe-area-inset-bottom))!important;
   width:auto!important;
-  min-width:108px!important;
-  max-width:132px!important;
+  min-width:0!important;
+  max-width:max-content!important;
   height:46px!important;
-  padding:0 16px!important;
-  margin:0!important;
-  display:none!important;
-  flex-direction:row!important;
+  padding:0 18px 0 13px!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:999px!important;
   align-items:center!important;
   justify-content:center!important;
-  gap:8px!important;
-  border:1px solid rgba(255,255,255,.38)!important;
-  border-radius:999px!important;
+  gap:9px!important;
   background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
   color:#fff!important;
-  font:inherit!important;
+  font-size:16px!important;
   font-weight:900!important;
-  line-height:1!important;
-  text-decoration:none!important;
-  box-shadow:0 16px 34px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.13),inset 0 1px 0 rgba(255,255,255,.44)!important;
-  z-index:10080!important;
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-  -webkit-appearance:none!important;
-  appearance:none!important;
-  overflow:hidden!important;
+  letter-spacing:-.18px!important;
+  box-shadow:0 14px 30px rgba(47,111,240,.25),0 7px 15px rgba(15,23,42,.11),inset 0 1px 0 rgba(255,255,255,.34)!important;
+  z-index:10040!important;
+  transform:none!important;
 }
-
-#quickAddBtn.quickAddBtn.quickAddVisible{
-  display:inline-flex!important;
-}
-
-#quickAddBtn.quickAddBtn span{
-  width:24px!important;
-  height:24px!important;
-  min-width:24px!important;
-  border-radius:50%!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  background:rgba(255,255,255,.18)!important;
-  color:#fff!important;
-  font-size:22px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  margin:0!important;
-}
-
-#quickAddBtn.quickAddBtn b{
-  display:block!important;
-  font-size:14px!important;
-  font-weight:900!important;
-  letter-spacing:-.12px!important;
-  color:#fff!important;
-  white-space:nowrap!important;
-  margin:0!important;
-}
-
-.container{
-  padding-bottom:calc(170px + env(safe-area-inset-bottom,0px))!important;
-}
-
-body::after{
-  height:calc(124px + env(safe-area-inset-bottom,0px))!important;
-  background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 40%,#f6f7fb 100%)!important;
-}
-
-body.darkMode .tabbar,
-html.darkRoot .tabbar{
-  background:linear-gradient(180deg,rgba(22,28,39,.90),rgba(13,18,27,.84))!important;
-  border-color:rgba(255,255,255,.08)!important;
-  box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05)!important;
-}
-
-body.darkMode .tabbar .tabItem,
-html.darkRoot .tabbar .tabItem{
-  color:#94a1b2!important;
-}
-
-body.darkMode .tabbar .tabItem.activeTab,
-html.darkRoot .tabbar .tabItem.activeTab{
-  color:#7db2ff!important;
-  background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
-  border-color:rgba(96,165,250,.28)!important;
-}
-
-body.darkMode #quickAddBtn.quickAddBtn,
-html.darkRoot #quickAddBtn.quickAddBtn{
-  background:linear-gradient(180deg,#4b82f3 0%,#2563eb 100%)!important;
-  border-color:rgba(255,255,255,.12)!important;
-  box-shadow:0 16px 34px rgba(37,99,235,.28),0 8px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
-}
-
-body.darkMode::after,
-html.darkRoot body::after{
-  background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 40%,#0b0f17 100%)!important;
-}
-
+body.apartmanMode:not(.formOpen) #quickAddBtn,
+body.apartmanMode:not(.formOpen) .quickAddBtn,
+body.apartmanMode:not(.formOpen) .addApartmentFab{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;}
+body.profileMode #quickAddBtn,body.profileMode .quickAddBtn,body.bakimMode #quickAddBtn,body.bakimMode .quickAddBtn,body.formOpen #quickAddBtn,body.formOpen .quickAddBtn{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
 @media(max-width:430px){
-  .filterBtn{
-    flex:0 0 110px!important;
-    width:110px!important;
-  }
-  .tabbar{
-    width:min(348px,calc(100vw - 34px))!important;
-    height:72px!important;
-    bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
-    padding:7px 9px!important;
-  }
-  .tabbar .tabItem{
-    height:56px!important;
-  }
-  .tabbar .tabText{
-    font-size:10.6px!important;
-  }
-  #quickAddBtn.quickAddBtn{
-    right:16px!important;
-    bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
-    height:46px!important;
-    min-width:104px!important;
-    max-width:126px!important;
-    padding:0 16px!important;
-  }
+  .tabbar{width:min(348px,calc(100vw - 44px))!important;height:72px!important;bottom:calc(9px + env(safe-area-inset-bottom))!important;}
+  .tabbar .tabItem{height:52px!important;}
+  .tabbar .tabText{font-size:10.6px!important;}
+  .quickAddBtn,.addApartmentFab,#quickAddBtn{right:18px!important;bottom:calc(94px + env(safe-area-inset-bottom))!important;height:44px!important;font-size:15px!important;}
+  .filterBtn{flex-basis:108px!important;width:108px!important;min-width:108px!important;}
 }
-
 </style>
 
 <script>
@@ -6947,7 +7409,6 @@ window.__ELEVATORX_BOOT_OK__ = false;
 })();
 </script>
 
-<!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 </head>
 
 <body>
@@ -6983,10 +7444,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=145" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.5</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.9</div>
 </div>
 </div>
 
@@ -6995,7 +7456,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=145" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7334,18 +7795,13 @@ Destek: supportelevatorx@gmail.com
 
 </div>
 
-<button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
-  <span>+</span>
-  <b>Yeni</b>
-</button>
-
 <div class="tabbar">
 
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="4.5" y="3.5" width="15" height="17" rx="4.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M8 12.4L10.6 15L16.4 9.2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="4.7" y="3.8" width="14.6" height="16.4" rx="4" stroke="currentColor" stroke-width="1.9"/>
+<path d="M8.1 12.2L10.6 14.8L16.1 9.1" stroke="currentColor" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </span>
 <span class="tabText">Bakım</span>
@@ -7354,8 +7810,8 @@ Destek: supportelevatorx@gmail.com
 <button type="button" class="tabItem activeTab" data-tab="apartman" onclick="anaSayfa()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="5" y="4" width="14" height="16" rx="3.6" stroke="currentColor" stroke-width="1.9"/>
-<path d="M9 8.5H9.01M15 8.5H15.01M9 12.5H9.01M15 12.5H15.01M9 16.5H9.01M15 16.5H15.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="5.2" y="4.2" width="13.6" height="15.6" rx="3.4" stroke="currentColor" stroke-width="1.9"/>
+<path d="M9 8.6H9.01M15 8.6H15.01M9 12.4H9.01M15 12.4H15.01M9 16.2H9.01M15 16.2H15.01" stroke="currentColor" stroke-width="2.15" stroke-linecap="round"/>
 </svg>
 </span>
 <span class="tabText">Apartmanlar</span>
@@ -7364,14 +7820,19 @@ Destek: supportelevatorx@gmail.com
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="8.2" r="3.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M5.5 18.6C6.7 15.9 9 14.5 12 14.5C15 14.5 17.3 15.9 18.5 18.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+<circle cx="12" cy="8.2" r="3.15" stroke="currentColor" stroke-width="1.9"/>
+<path d="M5.7 18.4C6.9 15.9 9.1 14.5 12 14.5C14.9 14.5 17.1 15.9 18.3 18.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
 </svg>
 </span>
 <span class="tabText">Profil</span>
 </button>
 
 </div>
+
+<button type="button" id="addApartmentFab" class="addApartmentFab" onclick="formAc()" aria-label="Yeni apartman ekle">
+<span class="addFabIcon" aria-hidden="true">+</span>
+<span>Yeni</span>
+</button>
 
 
 <div id="legalModal" class="legalModal">
@@ -7427,9 +7888,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.5";
-window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=145", location.href).href;
+const APP_VERSION = "v1.4.9";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=149", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7507,9 +7967,8 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.5").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
-url.searchParams.set("v", temizSurum);
+url.searchParams.set("v","125");
 url.searchParams.set("hard",Date.now());
 url.searchParams.set("nocache",Math.random().toString(36).slice(2));
 location.replace(url.href);
@@ -7833,6 +8292,11 @@ dark ? "☀️" : "🌙";
 
 }
 
+let themeMeta = document.querySelector('meta[name="theme-color"]');
+if(themeMeta){
+themeMeta.setAttribute("content", dark ? "#0b0f17" : "#f6f7fb");
+}
+
 }
 
 function temaDegistir(){
@@ -7867,6 +8331,11 @@ items.forEach(item=>{
 item.classList.remove("activeTab");
 });
 
+document.documentElement.classList.toggle("apartmanTabActive", tab === "apartman");
+if(document.body){
+document.body.classList.toggle("apartmanTabActive", tab === "apartman");
+}
+
 if(!tab) return;
 
 let aktif =
@@ -7877,6 +8346,14 @@ aktif.classList.add("activeTab");
 }
 
 }
+
+
+
+document.addEventListener("DOMContentLoaded",function(){
+let aktif = document.querySelector(".tabItem.activeTab");
+let tab = aktif ? aktif.getAttribute("data-tab") : "apartman";
+setAktifTab(tab);
+});
 
 function localVeriKaydet(){
 localStorage.setItem(
@@ -8104,69 +8581,17 @@ return "Genel cari tahsilat";
 }
 
 
-
-function eskiBakiyeListesi(a){
-
-if(!a) return [];
-
-if(!Array.isArray(a.eskiBakiyeler)){
-a.eskiBakiyeler = [];
-}
-
-if(a.eskiBakiye && Number(a.eskiBakiye) > 0 && a.eskiBakiyeler.length === 0){
-a.eskiBakiyeler.push({
-tutar:Number(a.eskiBakiye || 0),
-tarih:a.eskiBakiyeTarihi || bugun(),
-aciklama:a.eskiBakiyeAciklama || "Eski bakiye",
-createdAt:a.eskiBakiyeCreatedAt || new Date().toISOString()
-});
-a.eskiBakiye = 0;
-}
-
-return a.eskiBakiyeler;
-
-}
-
-function eskiBakiyeToplam(a){
-
-return eskiBakiyeListesi(a).reduce(function(t,b){
-return t + Number(b && b.tutar ? b.tutar : 0);
-},0);
-
-}
-
-function cariOdemeDurumunuGuncelle(a){
-
-if(!a) return;
-
-let odemeler = odemeListesi(a);
-let c = cariOzet(a);
-
-a.sonOdemeTarihi = odemeler.length ? (odemeler[0].tarih || "") : "";
-
-if(c.kalanPozitif <= 0 && c.toplam > 0){
-a.odemeTarihi = a.sonOdemeTarihi || bugun();
-}else{
-a.odemeTarihi = "";
-}
-
-}
-
-
 function cariOzet(a){
 
-let anlasmaUcreti = Number(a && a.ucret ? a.ucret : 0);
-let bakimBorcuAktif = !!(a && a.bakimTarihi);
-let bakimUcreti = bakimBorcuAktif ? anlasmaUcreti : 0;
+let bakimUcreti = Number(a && a.ucret ? a.ucret : 0);
 let parcaToplam = parcaToplamTutar(a);
-let eskiBakiyeToplami = eskiBakiyeToplam(a);
-let beklenen = bakimUcreti + parcaToplam + eskiBakiyeToplami;
+let beklenen = bakimUcreti + parcaToplam;
 let kalemler = [];
 
 if(bakimUcreti > 0){
 kalemler.push({
 tip:"Bakım",
-tarih:(a && a.bakimTarihi) || "-",
+tarih:(a && (a.bakimTarihi || a.bakimGunu)) || "-",
 aciklama:"Aylık bakım ücreti",
 tutar:bakimUcreti
 });
@@ -8184,20 +8609,6 @@ kalemler.push({
 tip:"Parça",
 tarih:(p && p.tarih) || "-",
 aciklama:"Parça değişimi: " + ((p && p.ad) || "Parça") + adet + not,
-tutar:tutar
-});
-});
-}
-
-if(a && Array.isArray(a.eskiBakiyeler)){
-a.eskiBakiyeler.forEach(function(b){
-let tutar = Number(b && b.tutar ? b.tutar : 0);
-if(tutar <= 0) return;
-
-kalemler.push({
-tip:"Eski Bakiye",
-tarih:(b && b.tarih) || "-",
-aciklama:(b && b.aciklama) ? b.aciklama : "Eski bakiye",
 tutar:tutar
 });
 });
@@ -8233,11 +8644,8 @@ durumClass = "over";
 let sonOdeme = odemeler.length ? (odemeler[0].tarih || "") : "";
 
 return {
-anlasmaUcreti:anlasmaUcreti,
-bakimBorcuAktif:bakimBorcuAktif,
 bakimUcreti:bakimUcreti,
 parcaToplam:parcaToplam,
-eskiBakiyeToplami:eskiBakiyeToplami,
 beklenen:beklenen,
 kalemler:kalemler,
 toplam:toplam,
@@ -8252,7 +8660,7 @@ odemeler:odemeler
 
 }
 
-function cariOzetHtml(a,i){
+function cariOzetHtml(a){
 
 let c = cariOzet(a);
 let kalanText = c.alacak > 0 ? "Alacak: " + tutarFormat(c.alacak) : "Kalan: " + tutarFormat(c.kalanPozitif);
@@ -8274,10 +8682,6 @@ return `
       <div class="cariMiniValue debt">${tutarFormat(c.parcaToplam)}</div>
     </div>
     <div class="cariMini">
-      <div class="cariMiniLabel">Eski Bakiye</div>
-      <div class="cariMiniValue debt">${tutarFormat(c.eskiBakiyeToplami || 0)}</div>
-    </div>
-    <div class="cariMini">
       <div class="cariMiniLabel">Tahsil</div>
       <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
     </div>
@@ -8286,452 +8690,10 @@ return `
       <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
     </div>
   </div>
-  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Bakım ücreti, yalnızca Bakım Yapıldı denince cariye eklenir.</div>
+  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Parça değişim tutarları da cari hesaba otomatik işlenir.</div>
   <div class="cariHint">${kalanText}. Yönetici borç sorduğunda bu ekran veya Cari Hesap Özeti PDF'i kullanılabilir.</div>
-  ${Number.isInteger(i) ? `
-  <div class="cariEditActions">
-    <button type="button" class="cariEditBtn oldBalance" onclick="eskiBakiyeEkle(${i})">+ Eski Bakiye</button>
-    <button type="button" class="cariEditBtn" onclick="cariIslemleriDuzenle(${i})">Cariyi Düzenle</button>
-  </div>
-  ` : ``}
 </div>
 `;
-
-}
-
-
-
-function paraPromptDegeri(v){
-
-let n = Number(v || 0);
-return n ? String(n) : "";
-
-}
-
-function cariKayitListesiMetni(liste, bosMetin){
-
-if(!liste || !liste.length){
-return bosMetin || "Kayıt yok";
-}
-
-return liste.map(function(k,idx){
-let tutar = tutarFormat(k.tutar || 0);
-let tarih = k.tarih || "-";
-let aciklama = k.aciklama || k.kalem || "-";
-let tip = k.tip ? " • " + odemeTipEtiket(k.tip) : "";
-return (idx + 1) + ") " + tutar + " • " + tarih + tip + " • " + aciklama;
-}).join("\n");
-
-}
-
-function eskiBakiyeEkle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let tutarGiris = prompt("Eski bakiye tutarı ₺", "");
-if(tutarGiris === null){
-toast("Eski bakiye iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Eski bakiye tarihi", bugun()) || bugun();
-let aciklama = prompt("Açıklama", "Eski bakiye") || "Eski bakiye";
-
-let liste = eskiBakiyeListesi(a);
-
-liste.unshift({
-tutar:tutar,
-tarih:tarih.trim(),
-aciklama:aciklama.trim(),
-createdAt:new Date().toISOString()
-});
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye cariye eklendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}else{
-anaSayfa();
-}
-
-}
-
-function eskiBakiyeDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let liste = eskiBakiyeListesi(a);
-
-if(!liste.length){
-toast("Düzenlenecek eski bakiye yok");
-return;
-}
-
-let secim = prompt(
-"Düzenlenecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
-"1"
-);
-
-if(secim === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= liste.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let kayit = liste[idx];
-
-let tutarGiris = prompt("Tutar ₺", paraPromptDegeri(kayit.tutar));
-if(tutarGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Tarih", kayit.tarih || bugun()) || kayit.tarih || bugun();
-let aciklama = prompt("Açıklama", kayit.aciklama || "Eski bakiye") || kayit.aciklama || "Eski bakiye";
-
-kayit.tutar = tutar;
-kayit.tarih = tarih.trim();
-kayit.aciklama = aciklama.trim();
-kayit.updatedAt = new Date().toISOString();
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + kayit.tarih + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye güncellendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
-}
-
-function eskiBakiyeSil(i){
-
-haptic("warning");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let liste = eskiBakiyeListesi(a);
-
-if(!liste.length){
-toast("Silinecek eski bakiye yok");
-return;
-}
-
-let secim = prompt(
-"Silinecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
-"1"
-);
-
-if(secim === null){
-toast("Silme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= liste.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let kayit = liste[idx];
-
-let onay = confirm(
-"Bu eski bakiye kaydı silinsin mi?\n\n" +
-tutarFormat(kayit.tutar || 0) + " • " + (kayit.tarih || "-") + "\n" +
-(kayit.aciklama || "Eski bakiye")
-);
-
-if(!onay){
-toast("Silme iptal edildi");
-return;
-}
-
-liste.splice(idx,1);
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye silindi: " + tutarFormat(kayit.tutar || 0) + " (" + bugun() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye silindi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
-}
-
-function odemeDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-
-if(!Array.isArray(a.odemeler) || !a.odemeler.length){
-toast("Düzenlenecek tahsilat yok");
-return;
-}
-
-let secim = prompt(
-"Düzenlenecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
-"1"
-);
-
-if(secim === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= a.odemeler.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let odeme = a.odemeler[idx];
-
-let tutarGiris = prompt("Tahsil edilen tutar ₺", paraPromptDegeri(odeme.tutar));
-if(tutarGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Ödeme tarihi", odeme.tarih || bugun()) || odeme.tarih || bugun();
-let tipGiris = prompt("Ödeme türü: bakım / parça / cari", odeme.tip || "cari");
-if(tipGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tip = odemeTipNormalize(tipGiris);
-let aciklama = prompt("Makbuz açıklaması", odeme.aciklama || odeme.kalem || odemeKalemMetni(odeme,a)) || odeme.aciklama || odeme.kalem || "";
-
-odeme.tutar = tutar;
-odeme.tarih = tarih.trim();
-odeme.tip = tip;
-odeme.aciklama = aciklama.trim();
-odeme.kalem = aciklama.trim();
-odeme.updatedAt = new Date().toISOString();
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Tahsilat düzenlendi: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + odeme.tarih + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Tahsilat güncellendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
-}
-
-function odemeSil(i){
-
-haptic("warning");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-
-if(!Array.isArray(a.odemeler) || !a.odemeler.length){
-toast("Silinecek tahsilat yok");
-return;
-}
-
-let secim = prompt(
-"Silinecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
-"1"
-);
-
-if(secim === null){
-toast("Silme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= a.odemeler.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let odeme = a.odemeler[idx];
-
-let onay = confirm(
-"Bu tahsilat kaydı silinsin mi?\n\n" +
-tutarFormat(odeme.tutar || 0) + " • " + (odeme.tarih || "-") + "\n" +
-(odeme.aciklama || odeme.kalem || "Tahsilat")
-);
-
-if(!onay){
-toast("Silme iptal edildi");
-return;
-}
-
-a.odemeler.splice(idx,1);
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Tahsilat silindi: " + tutarFormat(odeme.tutar || 0) + " (" + bugun() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Tahsilat silindi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
-}
-
-function cariIslemleriDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-eskiBakiyeListesi(a);
-
-let secim = prompt(
-"Cari düzenleme\n\n" +
-"1 - Eski bakiye düzenle\n" +
-"2 - Eski bakiye sil\n" +
-"3 - Tahsilat düzenle\n" +
-"4 - Tahsilat sil\n\n" +
-"Yeni eski bakiye eklemek için cari kartındaki + Eski Bakiye butonunu kullan.",
-"1"
-);
-
-if(secim === null){
-toast("Cari düzenleme iptal edildi");
-return;
-}
-
-if(secim === "1"){
-eskiBakiyeDuzenle(i);
-return;
-}
-
-if(secim === "2"){
-eskiBakiyeSil(i);
-return;
-}
-
-if(secim === "3"){
-odemeDuzenle(i);
-return;
-}
-
-if(secim === "4"){
-odemeSil(i);
-return;
-}
-
-toast("Geçerli bir seçim yapılmadı");
 
 }
 
@@ -8745,10 +8707,6 @@ return toplam + cariOzet(a).toplam;
 function odemeBadge(a){
 
 let c = cariOzet(a);
-
-if(c.beklenen <= 0 && c.toplam <= 0){
-return `<span class="payBadge payPaid">Borç Yok</span>`;
-}
 
 if(c.alacak > 0){
 return `<span class="payBadge payOver">Fazla Ödeme</span>`;
@@ -9164,7 +9122,8 @@ if(formBox.style.display=="none"){
 guncelleApartmanFormDurumu();
 
 formBox.style.display="block";
-quickAddGuncelle();
+
+document.body.classList.add("formOpen");
 
 animateIn(formBox,"screenFadeUp");
 
@@ -9176,7 +9135,7 @@ behavior:"smooth"
 }else{
 
 formBox.style.display="none";
-quickAddGuncelle();
+document.body.classList.remove("formOpen");
 
 }
 
@@ -9372,6 +9331,7 @@ not.value="";
 editIndex=null;
 guncelleApartmanFormDurumu();
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 
 kaydet();
 
@@ -9560,7 +9520,6 @@ if(window.toplamKazanc) toplamKazanc.innerText = tutarFormat(toplam);
 if(typeof profilKontrolMerkeziGuncelle === "function"){
 profilKontrolMerkeziGuncelle();
 }
-quickAddGuncelle();
 
 }
 
@@ -9622,10 +9581,10 @@ setAktifTab("bakim");
 searchArea.style.display="none";
 filterPanel.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 detayPanel.style.display="none";
 profilPanel.style.display="none";
 liste.style.display="block";
-quickAddGuncelle();
 
 let satirlar =
 data
@@ -10404,6 +10363,63 @@ ${sonParcalar}
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
 
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
+
 </body>
 </html>
 
@@ -11018,6 +11034,63 @@ ${satirlar}
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
 
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
+
 </body>
 </html>
 
@@ -11415,9 +11488,9 @@ searchArea.style.display="none";
 filterPanel.style.display="none";
 liste.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 profilPanel.style.display="none";
 detayPanel.style.display="block";
-quickAddGuncelle();
 
 let odemeText =
 cari.kalanPozitif > 0 ? "Ödeme Al" : "Makbuz Oluştur";
@@ -11514,7 +11587,7 @@ detayPanel.innerHTML = `
 ${ayHtml(a.not || "Teknik not yok")}
 </div>
 
-${cariOzetHtml(a,i)}
+${cariOzetHtml(a)}
 
 <div class="detailActionSection">
   <div class="detailSectionHead">
@@ -11714,7 +11787,7 @@ let tarih = prompt("Ödeme tarihi", bugun()) || bugun();
 let varsayilanTip =
 cari.parcaToplam > 0 && cari.bakimUcreti > 0
 ? "parça"
-: (cari.parcaToplam > 0 ? "parça" : (cari.bakimUcreti > 0 ? "bakım" : "cari"));
+: (cari.parcaToplam > 0 ? "parça" : "bakım");
 
 let tipGiris = prompt(
 "Ödeme türü yazın: bakım / parça / cari",
@@ -11732,7 +11805,7 @@ let sonParca = sonParcaAdi(a);
 let varsayilanAciklama =
 tip === "parca"
 ? (sonParca ? "Parça ödemesi: " + sonParca : "Parça / işlem ödemesi")
-: (tip === "bakim" ? "Bakım ücreti tahsilatı" : ((cari.eskiBakiyeToplami || 0) > 0 ? "Eski bakiye tahsilatı" : "Cari tahsilat"));
+: (tip === "bakim" ? "Bakım ücreti tahsilatı" : "Cari tahsilat");
 
 let aciklama = prompt("Makbuz açıklaması", varsayilanAciklama) || varsayilanAciklama;
 
@@ -11997,6 +12070,63 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
+
 </body>
 </html>
 `);
@@ -12201,6 +12331,63 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 </div>
 
 <div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
+
 </body>
 </html>
 `);
@@ -12448,6 +12635,63 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 </div>
 
 <div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
+
 </body>
 </html>
 `);
@@ -12581,76 +12825,31 @@ body{zoom:.68!important}
 }
 
 
-/* === v1.4.1 - Cari düzenleme / eski bakiye edit === */
-.cariEditActions{
-display:flex!important;
-gap:10px!important;
-margin-top:12px!important;
-flex-wrap:wrap!important;
+/* === v1.3.2 - Splash top safe-area fix + tab bar redesign === */
+html:not(.appBooted),
+body:not(.appBooted){
+background:#020817!important;
 }
 
-.cariEditBtn{
-width:auto!important;
-min-width:0!important;
-height:38px!important;
-border:1px solid rgba(37,99,235,.16)!important;
-border-radius:999px!important;
-padding:0 15px!important;
-display:inline-flex!important;
-align-items:center!important;
-justify-content:center!important;
-background:linear-gradient(180deg,#ffffff,#f7faff)!important;
-color:#2563eb!important;
-font-size:13px!important;
-font-weight:850!important;
-box-shadow:0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.9)!important;
+html:not(.appBooted)::before,
+body:not(.appBooted)::before{
+content:"";
+position:fixed;
+left:0;
+right:0;
+top:0;
+height:calc(env(safe-area-inset-top,0px) + 18px);
+background:#020817;
+z-index:1000001;
+pointer-events:none;
 }
 
-.cariEditBtn.oldBalance{
-background:linear-gradient(180deg,#eff6ff,#e8f1ff)!important;
-border-color:rgba(37,99,235,.22)!important;
+#splash{
+padding-top:max(env(safe-area-inset-top),16px)!important;
 }
 
-body.darkMode .cariEditBtn,
-html.darkRoot .cariEditBtn{
-background:linear-gradient(180deg,rgba(30,41,59,.92),rgba(15,23,42,.86))!important;
-border-color:rgba(96,165,250,.2)!important;
-color:#93c5fd!important;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
-}
-
-
-
-/* === v1.4.1 - Stabil kilit: Luna kapalı / 3 sekmeli tab bar / + Yeni butonu === */
-.aiBtn,
-#aiOverlay{
-display:none!important;
-visibility:hidden!important;
-pointer-events:none!important;
-}
-
-.searchRow{
-display:flex!important;
-align-items:center!important;
-gap:12px!important;
-}
-
-#arama{
-flex:1 1 auto!important;
-width:auto!important;
-min-width:0!important;
-}
-
-.filterBtn{
-flex:0 0 118px!important;
-width:118px!important;
-}
-
-.tabGap,
-.middleButton{
-display:none!important;
-visibility:hidden!important;
-pointer-events:none!important;
+#splash .motionSplashWrap{
+margin-top:calc(env(safe-area-inset-top,0px) * .16)!important;
 }
 
 .tabbar,
@@ -12665,60 +12864,378 @@ left:50%!important;
 right:auto!important;
 bottom:calc(10px + env(safe-area-inset-bottom))!important;
 transform:translateX(-50%)!important;
-width:min(360px,calc(100vw - 36px))!important;
-height:74px!important;
-padding:0 10px!important;
-display:flex!important;
-align-items:center!important;
-justify-content:space-between!important;
-border-radius:28px!important;
-border:1px solid rgba(255,255,255,.75)!important;
-background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(246,248,252,.82))!important;
+width:min(390px,calc(100vw - 24px))!important;
+height:84px!important;
+padding:0!important;
+display:block!important;
+border-radius:30px!important;
+border:1px solid rgba(255,255,255,.72)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(246,248,252,.82))!important;
 box-shadow:0 18px 42px rgba(15,23,42,.12),0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.95)!important;
 backdrop-filter:blur(24px) saturate(170%)!important;
 -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
 overflow:visible!important;
 z-index:10020!important;
-box-sizing:border-box!important;
+}
+
+.tabbar::before{
+content:""!important;
+position:absolute!important;
+inset:1px!important;
+border-radius:29px!important;
+pointer-events:none!important;
+background:linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,0) 44%)!important;
 }
 
 .tabbar .tabItem{
-width:31.5%!important;
-height:56px!important;
+position:absolute!important;
+bottom:9px!important;
+height:58px!important;
 margin:0!important;
 padding:0!important;
 background:transparent!important;
 border:none!important;
-border-radius:20px!important;
 display:flex!important;
 flex-direction:column!important;
 align-items:center!important;
 justify-content:center!important;
 gap:4px!important;
+text-align:center!important;
 color:#7d8796!important;
 font:inherit!important;
 line-height:1!important;
-text-align:center!important;
-box-shadow:none!important;
+cursor:pointer!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"]{
+left:12px!important;
+width:98px!important;
+}
+
+.tabbar .tabItem[data-tab="apartman"]{
+left:50%!important;
+transform:translateX(-50%)!important;
+width:118px!important;
+bottom:7px!important;
+padding-top:22px!important;
+}
+
+.tabbar .tabItem[data-tab="profil"]{
+right:12px!important;
+width:98px!important;
+}
+
+.tabbar .tabItem:active{
+transform:scale(.975)!important;
+opacity:.84!important;
+}
+
+.tabbar .tabItem[data-tab="apartman"]:active{
+transform:translateX(-50%) scale(.975)!important;
 }
 
 .tabbar .tabItem.activeTab{
 color:#2f6ff0!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+content:""!important;
+position:absolute!important;
+left:6px!important;
+right:6px!important;
+top:5px!important;
+bottom:2px!important;
+border-radius:18px!important;
 background:linear-gradient(180deg,rgba(47,111,240,.11),rgba(47,111,240,.05))!important;
 border:1px solid rgba(125,178,255,.34)!important;
 box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
+z-index:0!important;
+}
+
+.tabbar .tabItem[data-tab="apartman"].activeTab::before{
+top:18px!important;
+bottom:0!important;
+}
+
+.tabbar .tabIcon,
+.tabbar .tabText{
+position:relative!important;
+z-index:1!important;
 }
 
 .tabbar .tabIcon{
 width:22px!important;
 height:22px!important;
+margin:0!important;
 display:flex!important;
 align-items:center!important;
 justify-content:center!important;
+}
+
+.tabbar .tabItem[data-tab="apartman"] .tabIcon{
+width:19px!important;
+height:19px!important;
+}
+
+.tabbar .tabSvg{
+width:100%!important;
+height:100%!important;
+display:block!important;
+stroke:currentColor!important;
+fill:none!important;
+stroke-linecap:round!important;
+stroke-linejoin:round!important;
+}
+
+.tabbar .tabText{
+font-size:11px!important;
+font-weight:870!important;
+letter-spacing:-.12px!important;
+white-space:nowrap!important;
+}
+
+.tabbar .middleButton{
+position:absolute!important;
+left:50%!important;
+top:-16px!important;
+transform:translateX(-50%)!important;
+width:64px!important;
+height:64px!important;
+padding:0!important;
 margin:0!important;
-color:currentColor!important;
-background:none!important;
-box-shadow:none!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+border-radius:50%!important;
+border:3px solid rgba(247,249,253,.96)!important;
+background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
+color:#fff!important;
+box-shadow:0 16px 32px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.44)!important;
+z-index:3!important;
+cursor:pointer!important;
+}
+
+.tabbar .middleButton svg{
+width:27px!important;
+height:27px!important;
+display:block!important;
+stroke:currentColor!important;
+}
+
+.tabbar .middleButton::after{
+content:""!important;
+position:absolute!important;
+inset:-5px!important;
+border-radius:50%!important;
+pointer-events:none!important;
+border:1px solid rgba(191,219,254,.48)!important;
+}
+
+.tabbar .middleButton:active{
+transform:translateX(-50%) scale(.95)!important;
+}
+
+body::after{
+height:calc(116px + env(safe-area-inset-bottom))!important;
+background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 36%,#f6f7fb 100%)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 36%,#0b0f17 100%)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+background:linear-gradient(180deg,rgba(22,28,39,.88),rgba(13,18,27,.82))!important;
+border-color:rgba(255,255,255,.08)!important;
+box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar::before,
+html.darkRoot .tabbar::before{
+background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 44%)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+color:#94a1b2!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+color:#7db2ff!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab::before,
+html.darkRoot .tabbar .tabItem.activeTab::before{
+background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
+border-color:rgba(96,165,250,.28)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+body.darkMode .tabbar .middleButton,
+html.darkRoot .tabbar .middleButton{
+border-color:rgba(13,18,27,.96)!important;
+}
+
+@media(max-width:430px){
+.tabbar{
+width:min(372px,calc(100vw - 20px))!important;
+height:82px!important;
+bottom:calc(8px + env(safe-area-inset-bottom))!important;
+}
+.tabbar .tabItem[data-tab="bakim"],
+.tabbar .tabItem[data-tab="profil"]{
+width:92px!important;
+}
+.tabbar .tabItem[data-tab="apartman"]{
+width:110px!important;
+padding-top:21px!important;
+}
+.tabbar .tabIcon{
+width:21px!important;
+height:21px!important;
+}
+.tabbar .tabItem[data-tab="apartman"] .tabIcon{
+width:18px!important;
+height:18px!important;
+}
+.tabbar .tabText{
+font-size:10.6px!important;
+}
+.tabbar .middleButton{
+width:60px!important;
+height:60px!important;
+top:-14px!important;
+}
+.tabbar .middleButton svg{
+width:25px!important;
+height:25px!important;
+}
+}
+
+
+
+/* === v1.3.3 - 3 Sekmeli Tab Bar + Ayrı Yeni Butonu === */
+.tabbar{
+position:fixed!important;
+left:50%!important;
+right:auto!important;
+bottom:calc(10px + env(safe-area-inset-bottom))!important;
+transform:translateX(-50%)!important;
+width:min(382px,calc(100vw - 24px))!important;
+height:76px!important;
+padding:8px 10px 10px!important;
+box-sizing:border-box!important;
+display:grid!important;
+grid-template-columns:1fr 1fr 1fr!important;
+align-items:center!important;
+justify-items:center!important;
+gap:6px!important;
+border-radius:28px!important;
+border:1px solid rgba(255,255,255,.72)!important;
+background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(247,249,253,.80))!important;
+box-shadow:
+0 16px 38px rgba(15,23,42,.12),
+0 6px 16px rgba(15,23,42,.055),
+inset 0 1px 0 rgba(255,255,255,.95)!important;
+backdrop-filter:blur(24px) saturate(170%)!important;
+-webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+overflow:visible!important;
+z-index:10020!important;
+}
+
+.tabbar::before{
+content:""!important;
+position:absolute!important;
+inset:1px!important;
+border-radius:27px!important;
+pointer-events:none!important;
+background:linear-gradient(180deg,rgba(255,255,255,.52),rgba(255,255,255,0) 45%)!important;
+opacity:.8!important;
+}
+
+.tabbar .middleButton,
+.tabbar .tabGap{
+display:none!important;
+}
+
+.tabbar .tabItem{
+position:relative!important;
+left:auto!important;
+right:auto!important;
+top:auto!important;
+bottom:auto!important;
+transform:none!important;
+width:100%!important;
+height:58px!important;
+margin:0!important;
+padding:0!important;
+display:flex!important;
+flex-direction:column!important;
+align-items:center!important;
+justify-content:center!important;
+gap:5px!important;
+background:transparent!important;
+border:0!important;
+border-radius:20px!important;
+color:#7d8796!important;
+font:inherit!important;
+line-height:1!important;
+box-sizing:border-box!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"],
+.tabbar .tabItem[data-tab="apartman"],
+.tabbar .tabItem[data-tab="profil"]{
+position:relative!important;
+left:auto!important;
+right:auto!important;
+bottom:auto!important;
+width:100%!important;
+grid-column:auto!important;
+padding:0!important;
+}
+
+.tabbar .tabItem:active{
+transform:scale(.975)!important;
+opacity:.82!important;
+}
+
+.tabbar .tabItem.activeTab{
+color:#0b7cff!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+content:""!important;
+position:absolute!important;
+left:5px!important;
+right:5px!important;
+top:4px!important;
+bottom:4px!important;
+border-radius:18px!important;
+background:linear-gradient(180deg,rgba(0,122,255,.11),rgba(0,122,255,.045))!important;
+border:1px solid rgba(125,178,255,.34)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+z-index:0!important;
+}
+
+.tabbar .tabIcon,
+.tabbar .tabText{
+position:relative!important;
+z-index:1!important;
+}
+
+.tabbar .tabIcon{
+width:23px!important;
+height:23px!important;
+margin:0!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
 }
 
 .tabbar .tabSvg{
@@ -12730,57 +13247,81 @@ fill:none!important;
 }
 
 .tabbar .tabText{
+display:block!important;
 font-size:11px!important;
-font-weight:860!important;
-letter-spacing:-.12px!important;
+font-weight:880!important;
+letter-spacing:-.14px!important;
+line-height:1!important;
 white-space:nowrap!important;
+text-align:center!important;
 }
 
-.quickAddBtn{
+.addApartmentFab{
 position:fixed!important;
-right:18px!important;
-bottom:calc(94px + env(safe-area-inset-bottom))!important;
-width:auto!important;
-min-width:0!important;
-height:48px!important;
-padding:0 18px!important;
-border:none!important;
+right:max(18px,calc(env(safe-area-inset-right,0px) + 18px))!important;
+bottom:calc(96px + env(safe-area-inset-bottom))!important;
+height:46px!important;
+padding:0 16px 0 13px!important;
+border:1px solid rgba(255,255,255,.72)!important;
 border-radius:999px!important;
-display:none;
-align-items:center!important;
-justify-content:center!important;
-gap:9px!important;
-background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
+background:linear-gradient(180deg,#4b8cff,#2f6ff0)!important;
 color:#fff!important;
-font:inherit!important;
-font-weight:900!important;
-box-shadow:0 16px 32px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.44)!important;
-z-index:10030!important;
-}
-
-.quickAddBtn span{
-width:24px!important;
-height:24px!important;
-border-radius:50%!important;
 display:flex!important;
 align-items:center!important;
 justify-content:center!important;
-background:rgba(255,255,255,.18)!important;
-font-size:22px!important;
-line-height:1!important;
-font-weight:800!important;
-}
-
-.quickAddBtn b{
+gap:8px!important;
 font-size:14px!important;
 font-weight:900!important;
+letter-spacing:-.2px!important;
+box-shadow:
+0 14px 28px rgba(47,111,240,.26),
+0 6px 15px rgba(15,23,42,.12),
+inset 0 1px 0 rgba(255,255,255,.42)!important;
+z-index:10018!important;
+-webkit-appearance:none!important;
+appearance:none!important;
+opacity:0!important;
+pointer-events:none!important;
+transform:translateY(10px) scale(.96)!important;
+transition:opacity .18s ease, transform .18s ease!important;
+}
+
+.addApartmentFab .addFabIcon{
+width:22px!important;
+height:22px!important;
+border-radius:50%!important;
+background:rgba(255,255,255,.18)!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+font-size:20px!important;
+font-weight:500!important;
+line-height:1!important;
+}
+
+body.apartmanTabActive:not(.formOpen) .addApartmentFab{
+opacity:1!important;
+pointer-events:auto!important;
+transform:translateY(0) scale(1)!important;
+}
+
+.addApartmentFab:active{
+transform:translateY(1px) scale(.96)!important;
 }
 
 body.darkMode .tabbar,
 html.darkRoot .tabbar{
 background:linear-gradient(180deg,rgba(22,28,39,.88),rgba(13,18,27,.82))!important;
 border-color:rgba(255,255,255,.08)!important;
-box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.05)!important;
+box-shadow:
+0 16px 38px rgba(0,0,0,.34),
+0 7px 18px rgba(0,0,0,.2),
+inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar::before,
+html.darkRoot .tabbar::before{
+background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%)!important;
 }
 
 body.darkMode .tabbar .tabItem,
@@ -12791,132 +13332,152 @@ color:#94a1b2!important;
 body.darkMode .tabbar .tabItem.activeTab,
 html.darkRoot .tabbar .tabItem.activeTab{
 color:#7db2ff!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab::before,
+html.darkRoot .tabbar .tabItem.activeTab::before{
 background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
 border-color:rgba(96,165,250,.28)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+body.darkMode .addApartmentFab,
+html.darkRoot .addApartmentFab{
+border-color:rgba(255,255,255,.10)!important;
+box-shadow:
+0 14px 30px rgba(47,111,240,.22),
+0 6px 16px rgba(0,0,0,.22),
+inset 0 1px 0 rgba(255,255,255,.30)!important;
+}
+
+body::after{
+height:calc(110px + env(safe-area-inset-bottom))!important;
+background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 38%,#f6f7fb 100%)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 38%,#0b0f17 100%)!important;
 }
 
 @media(max-width:430px){
-.filterBtn{
-flex:0 0 110px!important;
-width:110px!important;
-}
 .tabbar{
-width:min(348px,calc(100vw - 34px))!important;
-height:72px!important;
-bottom:calc(8px + env(safe-area-inset-bottom))!important;
+width:min(368px,calc(100vw - 20px))!important;
+height:74px!important;
+padding:8px 9px 9px!important;
+border-radius:27px!important;
+}
+.tabbar::before{
+border-radius:26px!important;
+}
+.tabbar .tabItem{
+height:56px!important;
+}
+.tabbar .tabIcon{
+width:22px!important;
+height:22px!important;
 }
 .tabbar .tabText{
-font-size:10.6px!important;
+font-size:10.7px!important;
 }
-.quickAddBtn{
-right:16px!important;
-bottom:calc(88px + env(safe-area-inset-bottom))!important;
-height:46px!important;
-padding:0 16px!important;
-}
-}
-
-
-
-/* === v1.4.2 - Bakım borcu fix + Yeni buton konum fix === */
-.quickAddBtn{
-right:20px!important;
-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
-}
-
-@media(max-width:430px){
-.quickAddBtn{
+.addApartmentFab{
 right:18px!important;
-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+bottom:calc(92px + env(safe-area-inset-bottom))!important;
+height:44px!important;
+padding:0 15px 0 12px!important;
+font-size:13.5px!important;
 }
 }
 
 
 
-/* === v1.4.3 - + Yeni butonu konum kilidi === */
-#quickAddBtn.quickAddBtn{
-position:fixed!important;
-left:auto!important;
-right:18px!important;
-top:auto!important;
-bottom:calc(122px + env(safe-area-inset-bottom,0px))!important;
-transform:none!important;
-width:auto!important;
-min-width:108px!important;
-max-width:132px!important;
-height:48px!important;
-padding:0 18px!important;
-margin:0!important;
-box-sizing:border-box!important;
-display:none!important;
-flex-direction:row!important;
-align-items:center!important;
-justify-content:center!important;
-gap:9px!important;
-border:1px solid rgba(255,255,255,.38)!important;
-border-radius:999px!important;
-background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
-color:#fff!important;
-font:inherit!important;
-font-weight:900!important;
-line-height:1!important;
-text-decoration:none!important;
-box-shadow:0 16px 34px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.13),inset 0 1px 0 rgba(255,255,255,.44)!important;
-z-index:10080!important;
-opacity:1!important;
-visibility:visible!important;
-pointer-events:auto!important;
--webkit-appearance:none!important;
-appearance:none!important;
-overflow:hidden!important;
+/* === v1.4.9 — Screen State Hard Lock + Bottom Safe-Area Light Patch === */
+html:not(.darkRoot),
+body:not(.darkMode){
+  background:#f6f7fb!important;
+  background-color:#f6f7fb!important;
 }
-
-#quickAddBtn.quickAddBtn.quickAddVisible{
-display:inline-flex!important;
+body:not(.darkMode){
+  min-height:100dvh!important;
+  overflow-x:hidden!important;
 }
-
-#quickAddBtn.quickAddBtn span{
-width:24px!important;
-height:24px!important;
-min-width:24px!important;
-border-radius:50%!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-background:rgba(255,255,255,.18)!important;
-color:#fff!important;
-font-size:22px!important;
-line-height:1!important;
-font-weight:850!important;
-margin:0!important;
+/* Arama / filtre yalnızca apartman modunda görünür */
+body:not(.apartmanMode) #searchArea,
+body:not(.apartmanMode) #filterPanel,
+body.profileMode #searchArea,
+body.profileMode #filterPanel,
+body.bakimMode #searchArea,
+body.bakimMode #filterPanel{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
 }
-
-#quickAddBtn.quickAddBtn b{
-display:block!important;
-font-size:14px!important;
-font-weight:900!important;
-letter-spacing:-.12px!important;
-color:#fff!important;
-white-space:nowrap!important;
-margin:0!important;
+body.apartmanMode #searchArea{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  height:auto!important;
+  min-height:0!important;
+  pointer-events:auto!important;
 }
-
-body.darkMode #quickAddBtn.quickAddBtn,
-html.darkRoot #quickAddBtn.quickAddBtn{
-background:linear-gradient(180deg,#4b82f3 0%,#2563eb 100%)!important;
-border-color:rgba(255,255,255,.12)!important;
-box-shadow:0 16px 34px rgba(37,99,235,.28),0 8px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
+body.apartmanMode #filterPanel.open,
+body.apartmanMode #filterPanel.show{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  height:auto!important;
+  pointer-events:auto!important;
 }
-
-@media(max-width:430px){
-#quickAddBtn.quickAddBtn{
-right:16px!important;
-bottom:calc(118px + env(safe-area-inset-bottom,0px))!important;
-height:46px!important;
-min-width:104px!important;
-max-width:126px!important;
-padding:0 16px!important;
+/* Light modda alttaki siyah bandı kapatan son katman */
+body:not(.darkMode)::after{
+  content:""!important;
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:calc(230px + env(safe-area-inset-bottom,0px))!important;
+  background:linear-gradient(180deg,rgba(246,247,251,0) 0%,#f6f7fb 32%,#f6f7fb 100%)!important;
+  z-index:9000!important;
+  pointer-events:none!important;
 }
+body.darkMode::after,
+html.darkRoot body::after{
+  content:""!important;
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:calc(230px + env(safe-area-inset-bottom,0px))!important;
+  background:linear-gradient(180deg,rgba(11,15,23,0) 0%,#0b0f17 32%,#0b0f17 100%)!important;
+  z-index:9000!important;
+  pointer-events:none!important;
+}
+.tabbar{z-index:10020!important;}
+#quickAddBtn,
+.quickAddBtn,
+#addApartmentFab,
+.addApartmentFab{z-index:10035!important;}
+.container{position:relative!important;z-index:2!important;padding-bottom:calc(190px + env(safe-area-inset-bottom,0px))!important;}
+body.profileMode .quickAddBtn,
+body.profileMode #quickAddBtn,
+body.bakimMode .quickAddBtn,
+body.bakimMode #quickAddBtn{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+/* Luna/AI kalıntıları yine kapalı */
+.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
 }
 
 </style>
@@ -12982,6 +13543,63 @@ ${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.
 </div>
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
+</script>
 
 </body>
 </html>
@@ -13124,44 +13742,29 @@ reader.readAsText(file);
 
 }
 
-
-function quickAddGuncelle(){
-
-let btn = document.getElementById("quickAddBtn");
-
-if(!btn) return;
-
-let formAcik = formBox && formBox.style.display === "block";
-let detayAcik = detayPanel && detayPanel.style.display === "block";
-let profilAcik = profilPanel && profilPanel.style.display === "block";
-let bakimEkrani = aktifEkran === "bakim";
-
-let goster = aktifEkran === "apartman" && !formAcik && !detayAcik && !profilAcik && !bakimEkrani;
-
-btn.classList.toggle("quickAddVisible", !!goster);
-btn.setAttribute("aria-hidden", goster ? "false" : "true");
-btn.style.display = "";
-
-}
-
-
-
 function anaSayfa(){
 
 haptic("light");
+
+document.body.classList.remove("profileMode","bakimMode");
+document.body.classList.add("apartmanMode");
 
 aktifEkran = "apartman";
 oncekiEkran = "apartman";
 setAktifTab("apartman");
 
 aktifDetay = null;
-searchArea.style.display="flex";
+if(searchArea){
+searchArea.style.removeProperty("display");
+searchArea.style.setProperty("display","flex","important");
+}
+if(filterPanel){ filterPanel.style.setProperty("display","none","important"); }
 profilPanel.style.display="none";
 detayPanel.style.display="none";
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 liste.style.display="block";
 goster();
-quickAddGuncelle();
 
 animateIn(liste,"screenInLeft");
 animateIn(searchArea,"screenSoft");
@@ -13216,22 +13819,24 @@ function profilAc(){
 
 haptic("light");
 
+document.body.classList.remove("apartmanMode","bakimMode");
+document.body.classList.add("profileMode");
+
 aktifEkran = "profil";
 oncekiEkran = "profil";
 setAktifTab("profil");
 
 aktifDetay = null;
-searchArea.style.display="none";
-filterPanel.style.display="none";
+if(searchArea){ searchArea.style.setProperty("display","none","important"); }
+if(filterPanel){ filterPanel.style.setProperty("display","none","important"); }
 formBox.style.display="none";
+document.body.classList.remove("formOpen");
 detayPanel.style.display="none";
 liste.style.display="none";
 profilPanel.style.display="block";
 
 temaUygula();
 profilKontrolMerkeziGuncelle();
-
-quickAddGuncelle();
 
 animateIn(profilPanel,"screenFadeUp");
 
@@ -13741,384 +14346,6 @@ profilKurulumKontrol();
 
 
 
-function ayNormalize(text){
-
-return (text || "")
-.toString()
-.toLocaleLowerCase("tr-TR")
-.replace(/ı/g,"i")
-.replace(/ğ/g,"g")
-.replace(/ü/g,"u")
-.replace(/ş/g,"s")
-.replace(/ö/g,"o")
-.replace(/ç/g,"c");
-
-}
-
-function ayAsistanAc(){
-
-haptic("light");
-
-let overlay =
-document.getElementById("aiOverlay");
-
-overlay.classList.add("show");
-
-setTimeout(()=>{
-let input = document.getElementById("aiInput");
-if(input) input.focus();
-},220);
-
-}
-
-function ayAsistanKapat(){
-
-haptic("light");
-
-document
-.getElementById("aiOverlay")
-.classList.remove("show");
-
-}
-
-function ayAsistanKapatDis(e){
-
-if(e.target.id === "aiOverlay"){
-ayAsistanKapat();
-}
-
-}
-
-function ayAsistanEnter(e){
-
-if(e.key === "Enter"){
-ayAsistanSor();
-}
-
-}
-
-function ayHizliSor(text){
-
-let input =
-document.getElementById("aiInput");
-
-input.value = text;
-
-ayAsistanSor();
-
-}
-
-function ayApartmanBul(query){
-
-let q =
-ayNormalize(query);
-
-let enIyi = null;
-let enIyiPuan = 0;
-
-data.forEach((a,i)=>{
-
-let ad =
-ayNormalize(a.ad || "");
-
-if(!ad) return;
-
-if(q.includes(ad)){
-enIyi = {a,i};
-enIyiPuan = 999;
-return;
-}
-
-let kelimeler =
-ad.split(" ").filter(Boolean);
-
-let eslesen =
-kelimeler.filter(k=>q.includes(k)).length;
-
-if(eslesen > enIyiPuan){
-enIyi = {a,i};
-enIyiPuan = eslesen;
-}
-
-});
-
-return enIyiPuan > 0 ? enIyi : null;
-
-}
-
-function aySonKayit(a){
-
-if(!a || !a.kayitlar || !a.kayitlar.length){
-return "Kayıt bulunamadı.";
-}
-
-return a.kayitlar[a.kayitlar.length - 1];
-
-}
-
-function ayAsistanSor(){
-
-haptic("light");
-
-let input =
-document.getElementById("aiInput");
-
-let result =
-document.getElementById("aiResult");
-
-let text =
-input.value.trim();
-
-if(!text){
-toast("Bir şey yaz");
-return;
-}
-
-let q =
-ayNormalize(text);
-
-let bulunan =
-ayApartmanBul(text);
-
-let html = "";
-
-if(
-bulunan &&
-(
-q.includes("bilgi") ||
-q.includes("goster") ||
-q.includes("detay") ||
-q.includes("kim") ||
-q.includes("telefon")
-)
-){
-
-let a = bulunan.a;
-let i = bulunan.i;
-let d = durumBilgisi(a);
-
-html = `
-<div class="aiResultTitle">${a.ad || "-"}</div>
-Yönetici: <b>${a.yonetici || "-"}</b><br>
-Telefon: <b>${a.tel || "-"}</b><br>
-Ücret: <b>${a.ucret || 0} ₺</b><br>
-Bakım Günü: <b>${a.bakimGunu || "-"}</b><br>
-Ödeme: <b>${a.odemeTarihi || "Bekliyor"}</b><br>
-Son Bakım: <b>${a.bakimTarihi || "-"}</b><br>
-Durum: <b>${d.durum}</b>
-
-<div class="aiActionRow">
-<button class="aiMiniBtn aiBlueMini" onclick="ayAsistanKapat(); detayAc(${i})">Detaya Git</button>
-<button class="aiMiniBtn aiGrayMini" onclick="window.location.href='tel:${(a.tel || "").replace(/\s/g,"")}'">Ara</button>
-</div>
-`;
-
-}
-
-else if(q.includes("odeme") && (q.includes("bekleyen") || q.includes("bekliyor"))){
-
-let liste =
-data
-.map((a,i)=>({a,i}))
-.filter(x=>!x.a.odemeTarihi);
-
-if(!liste.length){
-
-html = `
-<div class="aiResultTitle">Ödeme bekleyen yok</div>
-Şu an tüm ödemeler alınmış görünüyor.
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">Ödeme Bekleyenler</div>
-${liste.map(x=>`
-• <b>${x.a.ad || "-"}</b> — ${x.a.ucret || 0} ₺
-`).join("<br>")}
-
-<div class="aiResultSmall">
-Toplam bekleyen: ${liste.reduce((t,x)=>t + Number(x.a.ucret || 0),0)} ₺
-</div>
-`;
-
-}
-
-}
-
-else if(
-q.includes("geciken") ||
-(q.includes("gecik") && q.includes("bakim"))
-){
-
-let liste =
-data.filter(a=>
-a.bakimGunu &&
-a.bakimGunu < bugunISO() &&
-!a.bakimTarihi
-);
-
-if(!liste.length){
-
-html = `
-<div class="aiResultTitle">Geciken bakım yok</div>
-Şu an gecikmiş bakım görünmüyor.
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">Geciken Bakımlar</div>
-${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.bakimGunu || "-"}
-`).join("<br>")}
-`;
-
-}
-
-}
-
-else if(
-q.includes("bugun") &&
-q.includes("bakim")
-){
-
-let liste =
-data.filter(a=>a.bakimGunu === bugunISO());
-
-if(!liste.length){
-
-html = `
-<div class="aiResultTitle">Bugün bakım yok</div>
-Bugün için planlanan bakım görünmüyor.
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">Bugünkü Bakımlar</div>
-${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.yonetici || "-"}
-`).join("<br>")}
-`;
-
-}
-
-}
-
-else if(q.includes("20") && q.includes("bakim")){
-
-let liste =
-data.filter(a=>{
-if(!a.bakimGunu) return false;
-let gun = Number(a.bakimGunu.split("-")[2]);
-return gun === 20;
-});
-
-if(!liste.length){
-
-html = `
-<div class="aiResultTitle">Ayın 20’sinde bakım yok</div>
-20. gün için kayıtlı bakım bulunamadı.
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">Ayın 20’sindeki Bakımlar</div>
-${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.bakimGunu || "-"}
-`).join("<br>")}
-`;
-
-}
-
-}
-
-else if(q.includes("pdf")){
-
-if(bulunan){
-
-let a = bulunan.a;
-let i = bulunan.i;
-
-html = `
-<div class="aiResultTitle">${a.ad || "-"} PDF</div>
-Bu apartman için PDF oluşturabilirsin.<br>
-Son kayıt: <b>${aySonKayit(a)}</b>
-
-<div class="aiActionRow">
-<button class="aiMiniBtn aiBlueMini" onclick="pdf(${i})">Bakım PDF</button>
-<button class="aiMiniBtn aiGrayMini" onclick="odemeMakbuzuPdf(${i})">Ödeme PDF</button>
-</div>
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">PDF için apartman seç</div>
-Örnek: <b>Şen Apt son PDF’i aç</b>
-`;
-
-}
-
-}
-
-else if(q.includes("tahsilat") || q.includes("kazanc")){
-
-html = `
-<div class="aiResultTitle">Tahsilat Özeti</div>
-Toplam tahsilat: <b>${toplamTahsilat()} ₺</b><br>
-Apartman sayısı: <b>${data.length}</b><br>
-Ödeme bekleyen: <b>${data.filter(a=>!a.odemeTarihi).length}</b>
-`;
-
-}
-
-else if(q.includes("son") && q.includes("islem")){
-
-let son =
-sonIslemBul();
-
-if(!son){
-
-html = `
-<div class="aiResultTitle">Son işlem yok</div>
-Henüz işlem kaydı bulunmuyor.
-`;
-
-}else{
-
-html = `
-<div class="aiResultTitle">Son İşlem</div>
-<b>${son.ad}</b><br>
-${son.islem.replace(/\s*\(.*?\)/,"")}<br>
-<span class="aiResultSmall">${son.tarih || "Tarih yok"}</span>
-`;
-
-}
-
-}
-
-else{
-
-html = `
-<div class="aiResultTitle">Bunu tam anlayamadım</div>
-Şöyle deneyebilirsin:<br><br>
-• Şen Apt bilgilerini göster<br>
-• Ödeme bekleyenleri göster<br>
-• Bugünkü bakımları listele<br>
-• Ayın 20’sindeki bakımları listele<br>
-• Şen Apt PDF aç<br>
-• Toplam tahsilat
-`;
-
-}
-
-result.innerHTML = html;
-result.classList.add("show");
-
-}
 
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -14129,16 +14356,115 @@ setTimeout(guncellemeKontrolEt,2400);
 
 });
 
+</script>
 
-document.addEventListener("DOMContentLoaded",function(){
-setTimeout(function(){
-try{ quickAddGuncelle(); }catch(e){}
-},250);
-setInterval(function(){
-try{ quickAddGuncelle(); }catch(e){}
-},900);
-});
 
+<script>
+/* === v1.4.9 screen mode lock === */
+(function(){
+  function el(id){return document.getElementById(id);}
+  function shown(x){return !!(x && x.style.display !== 'none');}
+  function setMode(mode){
+    var b=document.body; if(!b) return;
+    b.classList.remove('apartmanMode','profileMode','bakimMode');
+    b.classList.add(mode+'Mode');
+    var form=el('formBox');
+    if(shown(form)){ b.classList.add('formOpen'); } else { b.classList.remove('formOpen'); }
+  }
+  function sync(){
+    try{
+      var p=el('profilPanel'), d=el('detayPanel'), f=el('formBox');
+      var mode='apartman';
+      if(p && p.style.display && p.style.display !== 'none') mode='profile';
+      if(window.aktifEkran === 'profil') mode='profile';
+      if(window.aktifEkran === 'bakim') mode='bakim';
+      if(window.aktifEkran === 'apartman') mode='apartman';
+      setMode(mode);
+      var search=el('searchArea'), filter=el('filterPanel'), quick=el('quickAddBtn');
+      if(mode==='profile' || mode==='bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(quick && !(f && f.style.display !== 'none')) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay').forEach(function(n){n.style.setProperty('display','none','important');});
+    }catch(e){}
+  }
+  window.elevatorXModeLock = sync;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster'].forEach(function(name){
+    var old=window[name];
+    if(typeof old==='function' && !old.__modeLockWrapped){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(sync,0); setTimeout(sync,80); setTimeout(sync,260);
+        return r;
+      };
+      wrapped.__modeLockWrapped=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(sync,0);setTimeout(sync,400);});
+  window.addEventListener('load',function(){setTimeout(sync,0);setTimeout(sync,800);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(sync,0); },true);
+})();
+</script>
+
+<script>
+/* === v1.4.9 runtime screen lock === */
+(function(){
+  function byId(id){return document.getElementById(id);}
+  function isVisible(el){return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none');}
+  function currentMode(){
+    var p=byId('profilPanel');
+    var detail=byId('detayPanel');
+    if(p && isVisible(p)) return 'profile';
+    if(window.aktifEkran === 'profil') return 'profile';
+    if(window.aktifEkran === 'bakim') return 'bakim';
+    return 'apartman';
+  }
+  function apply(){
+    try{
+      var mode=currentMode();
+      document.body.classList.remove('apartmanMode','profileMode','bakimMode');
+      document.body.classList.add(mode+'Mode');
+      var search=byId('searchArea');
+      var filter=byId('filterPanel');
+      var quick=byId('quickAddBtn');
+      var form=byId('formBox');
+      if(mode === 'profile' || mode === 'bakim'){
+        if(search) search.style.setProperty('display','none','important');
+        if(filter) filter.style.setProperty('display','none','important');
+        if(quick) quick.style.setProperty('display','none','important');
+      }else{
+        if(search) search.style.setProperty('display','flex','important');
+        if(filter && !filter.classList.contains('open') && !filter.classList.contains('show')) filter.style.setProperty('display','none','important');
+        if(quick && !(form && isVisible(form))) quick.style.setProperty('display','flex','important');
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(function(n){
+        n.style.setProperty('display','none','important');
+      });
+    }catch(e){}
+  }
+  window.elevatorXScreenLock = apply;
+  ['anaSayfa','profilAc','bakimListesiAc','formAc','formKapat','goster','setAktifTab'].forEach(function(name){
+    var old=window[name];
+    if(typeof old === 'function' && !old.__ex149Lock){
+      var wrapped=function(){
+        var r=old.apply(this,arguments);
+        setTimeout(apply,0); setTimeout(apply,80); setTimeout(apply,250); setTimeout(apply,700);
+        return r;
+      };
+      wrapped.__ex149Lock=true;
+      window[name]=wrapped;
+    }
+  });
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);setTimeout(apply,250);setTimeout(apply,900);});
+  window.addEventListener('load',function(){setTimeout(apply,0);setTimeout(apply,500);});
+  document.addEventListener('input',function(e){ if(e && e.target && e.target.id==='arama') setTimeout(apply,0); },true);
+  document.addEventListener('click',function(){ setTimeout(apply,20); },true);
+})();
 </script>
 
 </body>
