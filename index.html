@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- ElevatorX REAL INDEX v1.5.1 - index sync fixed - 2026-05-23 -->
+<!-- ElevatorX REAL INDEX v1.5.2 - index sync fixed - 2026-05-23 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
@@ -42,12 +42,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=151">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=151">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=151">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=151">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=151">
-<link rel="manifest" href="/manifest.webmanifest?v=151">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=152">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=152">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=152">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=152">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=152">
+<link rel="manifest" href="/manifest.webmanifest?v=152">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7445,7 +7445,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=151" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=152" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
 <div class="motionSplashVersion" data-splash-version>v1.5.1</div>
@@ -7457,7 +7457,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=151" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=152" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7889,8 +7889,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.1";
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=151", location.href).href;
+const APP_VERSION = "v1.5.2";
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=152", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -10422,7 +10422,7 @@ ${sonParcalar}
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -10489,7 +10489,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -11219,7 +11219,7 @@ ${satirlar}
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -11286,7 +11286,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -11730,6 +11730,8 @@ oncekiEkran = aktifEkran || "apartman";
 }
 
 aktifEkran = "detay";
+document.body.classList.add("exHardDetail");
+document.body.classList.remove("exHardApartman","exHardProfile","exHardBakim");
 
 aktifDetay = i;
 
@@ -11935,6 +11937,7 @@ Kaydı Sil
 `;
 
 animateIn(detayPanel,"screenInRight");
+if(window.elevatorXHardModeLock){ window.elevatorXHardModeLock("detail"); }
 
 window.scrollTo({
 top:0,
@@ -12381,7 +12384,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -12448,7 +12451,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -12768,7 +12771,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -12835,7 +12838,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -13198,7 +13201,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -13265,7 +13268,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -14233,7 +14236,7 @@ ${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -14300,7 +14303,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -15225,7 +15228,7 @@ setTimeout(guncellemeKontrolEt,2400);
 </script>
 
 
-<style id="elevatorx-v151-final-screen-lock">
+<style id="elevatorx-v152-final-screen-lock">
 /* === v1.5.1 FINAL INDEX SYNC + DETAIL SCREEN LOCK === */
 html,body{
   min-height:100%!important;
@@ -15292,7 +15295,7 @@ body.ex-screen-bakim .addApartmentFab,
 body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 </style>
-<script id="elevatorx-v151-final-screen-lock-js">
+<script id="elevatorx-v152-final-screen-lock-js">
 (function(){
   function byId(id){return document.getElementById(id);}
   function isVisible(el){
@@ -15350,5 +15353,245 @@ body.ex-screen-detay .addApartmentFab{display:none!important;visibility:hidden!i
 })();
 </script>
 
+
+
+<!-- ElevatorX v1.5.2 HARD DETAIL MODE LOCK: ekranda üst üste binme fix -->
+<style id="elevatorx-v152-hard-detail-lock">
+/* v1.5.2: Detay ekranında header / arama / filtre sızıntısını kesin kilitler */
+body.exHardDetail{
+  background:#f6f7fb!important;
+  overflow-x:hidden!important;
+}
+body.exHardDetail .header,
+body.exHardDetail #searchArea,
+body.exHardDetail #filterPanel,
+body.exHardDetail #liste,
+body.exHardDetail #profilPanel,
+body.exHardDetail #formBox,
+body.exHardDetail #quickAddBtn,
+body.exHardDetail .quickAddBtn,
+body.exHardDetail .addApartmentFab,
+body.exHardDetail .aiBtn,
+body.exHardDetail #aiOverlay,
+body.exHardDetail .aiOverlay,
+body.exHardDetail .aiPanel,
+body.exHardDetail .aiAssistant,
+body.exHardDetail .lunaBtn,
+body.exHardDetail .lunaPanel{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+}
+body.exHardDetail #detayPanel{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:relative!important;
+  z-index:20!important;
+  padding-top:calc(env(safe-area-inset-top,0px) + 14px)!important;
+  padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))!important;
+}
+body.exHardDetail .detailHero,
+body.exHardDetail .detailPremiumHero{
+  margin-top:0!important;
+  position:relative!important;
+  z-index:22!important;
+}
+body.exHardDetail .detailTopBtn,
+body.exHardDetail .detailBackBtn,
+body.exHardDetail #detayPanel button[onclick*="geriDon"]{
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  inset:auto!important;
+  transform:none!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:max-content!important;
+  height:44px!important;
+  min-height:44px!important;
+  max-height:44px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding:0 16px!important;
+  margin:0 0 16px 0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.92)!important;
+  color:#0f172a!important;
+  font-size:15px!important;
+  font-weight:950!important;
+  line-height:1!important;
+  box-shadow:0 10px 28px rgba(15,23,42,.10)!important;
+  z-index:30!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+body.darkMode.exHardDetail,
+html.darkRoot body.exHardDetail{background:#0b0f17!important;}
+body.darkMode.exHardDetail .detailTopBtn,
+body.darkMode.exHardDetail .detailBackBtn,
+html.darkRoot body.exHardDetail .detailTopBtn,
+html.darkRoot body.exHardDetail .detailBackBtn{
+  background:rgba(255,255,255,.10)!important;
+  color:#f8fafc!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22)!important;
+}
+body.exHardProfile #searchArea,
+body.exHardProfile #filterPanel,
+body.exHardBakim #searchArea,
+body.exHardBakim #filterPanel{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;
+}
+body.exHardProfile .header,
+body.exHardBakim .header,
+body.exHardApartman .header{display:flex!important;visibility:visible!important;opacity:1!important;height:auto!important;}
+body.exHardApartman #searchArea{display:flex!important;visibility:visible!important;opacity:1!important;height:auto!important;}
+</style>
+<script id="elevatorx-v152-hard-detail-lock-js">
+(function(){
+  var forcedMode = null;
+  function id(x){ return document.getElementById(x); }
+  function visible(el){
+    try{return !!(el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden');}
+    catch(e){return !!el;}
+  }
+  function clearHardClasses(){
+    if(!document.body) return;
+    document.body.classList.remove('exHardDetail','exHardProfile','exHardBakim','exHardApartman');
+  }
+  function hide(el){
+    if(!el) return;
+    el.style.setProperty('display','none','important');
+    el.style.setProperty('visibility','hidden','important');
+    el.style.setProperty('pointer-events','none','important');
+  }
+  function showFlex(el){
+    if(!el) return;
+    el.style.setProperty('display','flex','important');
+    el.style.setProperty('visibility','visible','important');
+    el.style.removeProperty('pointer-events');
+  }
+  function showBlock(el){
+    if(!el) return;
+    el.style.setProperty('display','block','important');
+    el.style.setProperty('visibility','visible','important');
+    el.style.removeProperty('pointer-events');
+  }
+  function detect(){
+    if(forcedMode) return forcedMode;
+    var d=id('detayPanel'), p=id('profilPanel');
+    if(d && visible(d) && d.innerHTML && d.innerHTML.trim().length>20) return 'detail';
+    if(p && visible(p)) return 'profile';
+    if(document.body && document.body.classList.contains('bakimMode')) return 'bakim';
+    return 'apartman';
+  }
+  function apply(mode){
+    try{
+      mode = mode || detect();
+      clearHardClasses();
+      var b=document.body; if(!b) return;
+      var header=document.querySelector('.header');
+      var search=id('searchArea'), filter=id('filterPanel'), list=id('liste'), detail=id('detayPanel'), profile=id('profilPanel'), form=id('formBox');
+      var quick=id('quickAddBtn') || document.querySelector('.quickAddBtn') || document.querySelector('.addApartmentFab');
+      if(mode==='detail'){
+        b.classList.add('exHardDetail');
+        hide(header); hide(search); hide(filter); hide(list); hide(profile); hide(form); hide(quick);
+        showBlock(detail);
+        b.classList.remove('apartmanMode','profileMode','bakimMode','formOpen');
+      }else if(mode==='profile'){
+        b.classList.add('exHardProfile','profileMode');
+        hide(search); hide(filter); hide(detail); hide(list); hide(form); hide(quick);
+        if(header) showFlex(header);
+        showBlock(profile);
+      }else if(mode==='bakim'){
+        b.classList.add('exHardBakim','bakimMode');
+        hide(search); hide(filter); hide(detail); hide(profile); hide(form); hide(quick);
+        if(header) showFlex(header);
+        showBlock(list);
+      }else{
+        b.classList.add('exHardApartman','apartmanMode');
+        if(header) showFlex(header);
+        showFlex(search);
+        hide(filter); hide(detail); hide(profile);
+        if(form && visible(form)){ showBlock(form); b.classList.add('formOpen'); } else { hide(form); b.classList.remove('formOpen'); }
+        showBlock(list);
+        if(quick && !(form && visible(form))) showFlex(quick);
+      }
+      document.querySelectorAll('.aiBtn,#aiOverlay,.aiOverlay,.aiPanel,.aiAssistant,.lunaBtn,.lunaPanel').forEach(hide);
+    }catch(e){}
+  }
+  function force(mode){
+    forcedMode = mode;
+    apply(mode);
+    setTimeout(function(){apply(mode)},0);
+    setTimeout(function(){apply(mode)},60);
+    setTimeout(function(){apply(mode)},180);
+    setTimeout(function(){apply(mode)},420);
+    setTimeout(function(){apply(mode)},900);
+  }
+  window.elevatorXHardModeLock = force;
+  function wrap(name, mode){
+    var old=window[name];
+    if(typeof old==='function' && !old.__ex152Hard){
+      var w=function(){
+        var r=old.apply(this, arguments);
+        force(mode);
+        return r;
+      };
+      w.__ex152Hard=true;
+      window[name]=w;
+    }
+  }
+  wrap('detayAc','detail');
+  wrap('profilAc','profile');
+  wrap('bakimListesiAc','bakim');
+  wrap('anaSayfa','apartman');
+  wrap('goster','apartman');
+  wrap('formAc','apartman');
+  wrap('formKapat','apartman');
+  var oldBack=window.geriDon;
+  if(typeof oldBack==='function' && !oldBack.__ex152Hard){
+    var wb=function(){
+      forcedMode = null;
+      var r=oldBack.apply(this, arguments);
+      setTimeout(function(){ forcedMode=null; apply(); },0);
+      setTimeout(function(){ forcedMode=null; apply(); },120);
+      return r;
+    };
+    wb.__ex152Hard=true;
+    window.geriDon=wb;
+  }
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){apply()},0);setTimeout(function(){apply()},400);});
+  window.addEventListener('load',function(){setTimeout(function(){apply()},0);setTimeout(function(){apply()},800);});
+  document.addEventListener('click',function(e){
+    if(e && e.target && (e.target.closest('[onclick*="detayAc"]') || e.target.closest('.aptCard') || e.target.closest('.apartmentCard'))){
+      setTimeout(function(){force('detail')},30);
+    }else{
+      setTimeout(function(){apply()},80);
+    }
+  },true);
+  document.addEventListener('input',function(e){if(e && e.target && e.target.id==='arama'){setTimeout(function(){apply()},0);}},true);
+  try{
+    new MutationObserver(function(){
+      var d=id('detayPanel');
+      if(forcedMode==='detail' || (d && visible(d) && d.innerHTML && d.innerHTML.trim().length>20)) apply('detail');
+    }).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']});
+  }catch(e){}
+  setInterval(function(){ if(forcedMode) apply(forcedMode); },250);
+})();
+</script>
 </body>
 </html>
