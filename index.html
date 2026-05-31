@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1413_SEARCH_ONLY_APARTMAN_FIX_KESIN | APP_VERSION v1.4.13 -->
+<!-- ELEVATORX_V1412_KART_PREMIUM_BLOB_FIX_KESIN | APP_VERSION v1.4.12 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1413">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1413">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1413">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1413">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1413">
-<link rel="manifest" href="/manifest.webmanifest?v=1413">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1412">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1412">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1412">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1412">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1412">
+<link rel="manifest" href="/manifest.webmanifest?v=1412">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7077,7 +7077,7 @@ body.darkMode .appearanceToggle{
 }
 
 
-/* v1.4.13 — Apartman Kartları Premium + Blob/PDF Geri Kaydırma Fix */
+/* v1.4.12 — Apartman Kartları Premium + Blob/PDF Geri Kaydırma Fix */
 .aptCard{
   grid-template-columns:42px minmax(0,1fr) 98px 8px!important;
   gap:8px!important;
@@ -7317,13 +7317,6 @@ html.darkRoot .aptBalanceLine.moneyOk{
     font-size:9.3px!important;
   }
 }
-
-
-/* === v1.4.13 — Arama/Filtre sadece Apartmanlar sekmesi === */
-body.topSearchHidden #searchArea,
-body.topSearchHidden #filterPanel{
-display:none!important;
-}
 </style>
 
 <script>
@@ -7473,10 +7466,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1413" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1412" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.13</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.12</div>
 </div>
 </div>
 
@@ -7921,9 +7914,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.13";
+const APP_VERSION = "v1.4.12";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1413", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1412", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8034,7 +8027,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.13").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.12").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -15027,94 +15020,6 @@ try{ quickAddGuncelle(); }catch(e){}
 
   window.addEventListener("load", elevatorXProfilModeSync);
   window.elevatorXProfilModeSync = elevatorXProfilModeSync;
-})();
-</script>
-
-
-
-<script>
-/* v1.4.13 — üst arama/filtre görünürlük kilidi
-   Arama ve filtre sadece Apartmanlar sekmesinde açık kalır. */
-(function(){
-  function ayVisible(el){
-    try{
-      if(!el) return false;
-      var cs = window.getComputedStyle(el);
-      return cs.display !== "none" && cs.visibility !== "hidden" && cs.opacity !== "0";
-    }catch(e){
-      return !!el;
-    }
-  }
-
-  function ayTopSearchSet(visible){
-    try{
-      var body = document.body;
-      var search = document.getElementById("searchArea");
-      var filter = document.getElementById("filterPanel");
-      if(body){ body.classList.toggle("topSearchHidden", !visible); }
-      if(search){ search.style.display = visible ? "flex" : "none"; }
-      if(filter && !visible){ filter.style.display = "none"; }
-    }catch(e){}
-  }
-
-  function ayTopSearchSync(){
-    try{
-      var profil = document.getElementById("profilPanel");
-      var detay = document.getElementById("detayPanel");
-      var profilAcik = ayVisible(profil);
-      var detayAcik = ayVisible(detay);
-      var ekran = "";
-      try{ if(typeof aktifEkran !== "undefined") ekran = String(aktifEkran || ""); }catch(e){}
-
-      var gizle = profilAcik || detayAcik || ekran === "profil" || ekran === "bakim" || ekran === "detay";
-      ayTopSearchSet(!gizle);
-    }catch(e){}
-  }
-
-  function ayWrap(name, visibleAfter){
-    try{
-      var original = window[name];
-      if(typeof original !== "function" || original.__ayTopSearchWrapped) return;
-      var wrapped = function(){
-        var result = original.apply(this, arguments);
-        setTimeout(function(){
-          if(typeof visibleAfter === "boolean") ayTopSearchSet(visibleAfter);
-          ayTopSearchSync();
-        }, 0);
-        return result;
-      };
-      wrapped.__ayTopSearchWrapped = true;
-      window[name] = wrapped;
-    }catch(e){}
-  }
-
-  document.addEventListener("DOMContentLoaded", function(){
-    ayWrap("anaSayfa", true);
-    ayWrap("profilAc", false);
-    ayWrap("bakimListesiAc", false);
-    ayWrap("detayAc", false);
-    ayWrap("goster", true);
-    ayWrap("formAc", true);
-
-    ayTopSearchSync();
-
-    ["profilPanel","detayPanel","liste","formBox"].forEach(function(id){
-      try{
-        var el = document.getElementById(id);
-        if(el){
-          new MutationObserver(ayTopSearchSync).observe(el, {
-            attributes:true,
-            attributeFilter:["style","class"]
-          });
-        }
-      }catch(e){}
-    });
-
-    setInterval(ayTopSearchSync, 700);
-  });
-
-  window.addEventListener("load", ayTopSearchSync);
-  window.elevatorXTopSearchSync = ayTopSearchSync;
 })();
 </script>
 
