@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1411_HEADER_SADELESTIRME_KESIN | APP_VERSION v1.4.11 -->
+<!-- ELEVATORX_V1412_KART_PREMIUM_BLOB_FIX_KESIN | APP_VERSION v1.4.12 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1411">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1411">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1411">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1411">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1411">
-<link rel="manifest" href="/manifest.webmanifest?v=1411">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1412">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1412">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1412">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1412">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1412">
+<link rel="manifest" href="/manifest.webmanifest?v=1412">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7075,6 +7075,248 @@ body.darkMode .appearanceToggle{
     font-size:12.5px;
   }
 }
+
+
+/* v1.4.12 — Apartman Kartları Premium + Blob/PDF Geri Kaydırma Fix */
+.aptCard{
+  grid-template-columns:42px minmax(0,1fr) 98px 8px!important;
+  gap:8px!important;
+  min-height:76px!important;
+  padding:10px 9px 10px 13px!important;
+  border-radius:24px!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,255,255,.64))!important;
+  border:1px solid rgba(226,232,240,.88)!important;
+  box-shadow:
+    0 16px 38px rgba(15,23,42,.065),
+    0 2px 8px rgba(15,23,42,.025),
+    inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+
+.aptCard:before{
+  top:12px!important;
+  bottom:12px!important;
+  width:4px!important;
+  opacity:.9!important;
+}
+
+.aptIcon{
+  width:42px!important;
+  height:42px!important;
+  border-radius:15px!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 10px 20px rgba(15,23,42,.05)!important;
+}
+
+.aptIcon:before{
+  width:19px!important;
+  height:23px!important;
+  bottom:10px!important;
+}
+
+.aptIcon:after{
+  top:13px!important;
+  left:15px!important;
+}
+
+.aptMain{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.aptName{
+  font-size:15.4px!important;
+  line-height:1.08!important;
+  margin-bottom:4px!important;
+  letter-spacing:.035em!important;
+  text-transform:uppercase!important;
+}
+
+.aptCode{
+  margin-top:0!important;
+  margin-bottom:4px!important;
+  padding:5px 8px!important;
+  font-size:10px!important;
+  letter-spacing:.12em!important;
+  background:linear-gradient(180deg,rgba(15,23,42,.075),rgba(15,23,42,.045))!important;
+  border-color:rgba(15,23,42,.08)!important;
+  color:#475569!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65)!important;
+}
+
+.aptMeta{
+  font-size:11.35px!important;
+  line-height:1.32!important;
+  color:#6b7280!important;
+}
+
+.metaLine{
+  max-width:100%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.aptRightPremium{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:4px!important;
+  line-height:1!important;
+  text-align:right!important;
+}
+
+.aptStatusStack{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:4px;
+}
+
+.aptRightPremium .badge,
+.aptRightPremium .payBadge{
+  margin:0!important;
+  font-size:10px!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  font-weight:950!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55)!important;
+}
+
+.aptPlanDate{
+  font-size:10.2px;
+  font-weight:850;
+  color:#8a94a6;
+  white-space:nowrap;
+}
+
+.aptPlanDate b{
+  font-weight:950;
+  color:#64748b;
+}
+
+.aptMoneyLine,
+.aptBalanceLine{
+  white-space:nowrap;
+  font-size:10.4px;
+  font-weight:850;
+  color:#64748b;
+}
+
+.aptBalanceLine{
+  color:#8a94a6;
+}
+
+.aptBalanceLine.moneyDebt{
+  color:#ea580c;
+}
+
+.aptBalanceLine.moneyOk{
+  color:#16a34a;
+}
+
+.aptArrowPremium{
+  font-size:20px!important;
+  color:#a7b0bf!important;
+  transform:translateX(-1px);
+}
+
+body.darkMode .aptCard,
+html.darkRoot .aptCard{
+  background:linear-gradient(145deg,rgba(30,41,59,.76),rgba(15,23,42,.62))!important;
+  border-color:rgba(148,163,184,.16)!important;
+  box-shadow:
+    0 16px 38px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+
+body.darkMode .aptCode,
+html.darkRoot .aptCode{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(255,255,255,.10)!important;
+  color:#cbd5e1!important;
+}
+
+body.darkMode .aptMeta,
+body.darkMode .aptPlanDate,
+body.darkMode .aptBalanceLine,
+html.darkRoot .aptMeta,
+html.darkRoot .aptPlanDate,
+html.darkRoot .aptBalanceLine{
+  color:#9ca3af!important;
+}
+
+body.darkMode .aptPlanDate b,
+body.darkMode .aptMoneyLine,
+html.darkRoot .aptPlanDate b,
+html.darkRoot .aptMoneyLine{
+  color:#cbd5e1!important;
+}
+
+body.darkMode .aptBalanceLine.moneyDebt,
+html.darkRoot .aptBalanceLine.moneyDebt{
+  color:#fbbf24!important;
+}
+
+body.darkMode .aptBalanceLine.moneyOk,
+html.darkRoot .aptBalanceLine.moneyOk{
+  color:#4ade80!important;
+}
+
+@media(max-width:430px){
+  .aptCard{
+    grid-template-columns:40px minmax(0,1fr) 92px 8px!important;
+    min-height:74px!important;
+    padding:9px 8px 9px 12px!important;
+    gap:7px!important;
+  }
+  .aptIcon{
+    width:40px!important;
+    height:40px!important;
+    border-radius:14px!important;
+  }
+  .aptName{
+    font-size:14.8px!important;
+  }
+  .aptCode{
+    font-size:9.6px!important;
+    padding:4.5px 7px!important;
+  }
+  .aptMeta{
+    font-size:11px!important;
+  }
+  .aptRightPremium .badge,
+  .aptRightPremium .payBadge{
+    font-size:9.7px!important;
+    padding:4.7px 7px!important;
+  }
+  .aptPlanDate,
+  .aptMoneyLine,
+  .aptBalanceLine{
+    font-size:9.8px!important;
+  }
+}
+
+@media(max-width:380px){
+  .aptCard{
+    grid-template-columns:38px minmax(0,1fr) 86px 7px!important;
+  }
+  .aptRightPremium .badge,
+  .aptRightPremium .payBadge{
+    font-size:9.2px!important;
+    padding:4.4px 6.4px!important;
+  }
+  .aptMoneyLine,
+  .aptBalanceLine,
+  .aptPlanDate{
+    font-size:9.3px!important;
+  }
+}
 </style>
 
 <script>
@@ -7224,10 +7466,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1411" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1412" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.11</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.12</div>
 </div>
 </div>
 
@@ -7672,9 +7914,42 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.11";
+const APP_VERSION = "v1.4.12";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1411", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1412", location.href).href;
+
+
+function elevatorXOpenReportWindow(){
+try{
+let w = window.open("about:blank","_blank");
+if(w){
+try{ w.opener = null; }catch(err){}
+}
+return w;
+}catch(err){
+return null;
+}
+}
+
+function elevatorXPdfSafetyScript(){
+return `<script>
+(function(){
+try{
+if(window.history && window.history.replaceState){
+window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
+}
+window.addEventListener("pageshow", function(){
+try{
+if(String(window.location.href).indexOf("blob:") === 0){
+window.location.replace("https://elevatorx.github.io/?return=elevatorx");
+}
+}catch(e){}
+});
+}catch(e){}
+})();
+<\/script>`;
+}
+
 
 
 function profilSurumGuncelle(){
@@ -7752,7 +8027,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.11").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.12").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -9351,7 +9626,7 @@ try{
 URL.revokeObjectURL(url);
 link.remove();
 }catch(err){}
-},1600);
+},60000);
 
 return {
 ok:true,
@@ -9879,7 +10154,7 @@ h += `
 
 <div class="aptIcon ${colorClass}"></div>
 
-<div>
+<div class="aptMain">
 <div class="aptName">${a.ad || "-"}</div>
 <div class="aptCode">${apartmanKodu(i)}</div>
 <div class="aptMeta">
@@ -9888,17 +10163,17 @@ h += `
 </div>
 </div>
 
-<div class="aptRight">
-<span class="badge ${d.badgeClass}">
-${d.durum}
-</span><br>
-${odemeBadge(a)}<br>
-<span class="kartDate">${bakimPlanTarih(a)}</span><br>
-${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}<br>
-<span class="kartDate">Kalan: ${tutarFormat(cari.kalanPozitif)}</span>
+<div class="aptRight aptRightPremium">
+<div class="aptStatusStack">
+<span class="badge ${d.badgeClass}">${d.durum}</span>
+${odemeBadge(a)}
+</div>
+<div class="aptPlanDate">Plan <b>${bakimPlanTarih(a)}</b></div>
+<div class="aptMoneyLine">${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}</div>
+<div class="aptBalanceLine ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">Kalan ${tutarFormat(cari.kalanPozitif)}</div>
 </div>
 
-<div class="arrow">›</div>
+<div class="arrow aptArrowPremium">›</div>
 
 </div>
 
@@ -10339,7 +10614,7 @@ return `
 `;
 
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -10701,7 +10976,7 @@ td{font-size:8.5px!important;padding:6px!important}
 }
 </style>
 
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 
 <button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
@@ -10866,7 +11141,7 @@ ${not}
 `;
 }).join("");
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -11339,7 +11614,7 @@ line-height:1.2!important;
 }
 </style>
 
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 
 <button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
@@ -12297,7 +12572,7 @@ let yoneticiMesaj = cari.kalanPozitif > 0
 ? `${a.ad || "-"} için güncel kalan bakiye ${tutarFormat(cari.kalanPozitif)} olarak görünmektedir.`
 : `${a.ad || "-"} için güncel cari bakiye kapalı görünmektedir.`;
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -12330,7 +12605,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 @page{size:A4;margin:0}
 @media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:16px}.stats{margin:0 22px 14px;gap:8px}.section{margin:0 22px 14px}.noteBox{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.footer{margin:0 22px 18px}.docTitle{font-size:25px}.statValue{font-size:16px}th,td{padding:7px 8px;font-size:10px;line-height:1.25}th{font-size:9px}td.c-amount{font-size:10px}}
 </style>
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 <button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 <div class="page">
@@ -12460,7 +12735,7 @@ odemeTip === "parca"
 ? `${aptAd} için ${tahsilEdilen} tutarında bakım ücreti tahsilatı kaydedilmiştir.`
 : `${aptAd} için ${tahsilEdilen} tutarında cari tahsilat kaydedilmiştir.`);
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -12532,7 +12807,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 .footer{font-size:6pt!important;margin-top:5mm!important;padding-top:2mm!important}
 }
 </style>
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
@@ -12677,7 +12952,7 @@ let teknikNot = a.not && String(a.not).trim()
 
 let durumText = `${aptAd} için bakım işlemi ${ayHtml(bakimTarihi)} tarihinde ${ayHtml(pdfFirma)} tarafından kayıt altına alınmıştır.`;
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -12751,7 +13026,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 .footer{font-size:5.8pt!important;margin-top:3mm!important;padding-top:1.8mm!important}
 }
 </style>
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
@@ -12904,7 +13179,7 @@ let pdfLogo = pdfMarka.logo;
 let pdfSorumlu = pdfMarka.ad;
 let pdfTel = pdfMarka.telefon;
 
-let w = window.open("");
+let w = elevatorXOpenReportWindow();
 
 if(!w){
 toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
@@ -13487,7 +13762,7 @@ opacity:.9;
 
 </style>
 
-</head>
+${elevatorXPdfSafetyScript()}</head>
 <body>
 
 <button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
@@ -13988,30 +14263,41 @@ function blobuGoster(key,blob){
 
 if(!blob) return;
 
-const url =
-URL.createObjectURL(blob);
+function uygulaGorsel(src){
+
+if(!src) return;
 
 if(key === "profilePhotoBlob"){
-profilePhoto.src = url;
+profilePhoto.src = src;
+try{ localStorage.setItem("profilePhoto", src); }catch(err){}
+}
+
+if(key === "coverPhotoBlob"){
+let kapak = document.getElementById("coverPhoto");
+if(kapak){
+kapak.style.backgroundImage = `url('${src}')`;
+}
+try{ localStorage.setItem("coverPhoto", src); }catch(err){}
+}
+
+}
+
 try{
 const reader = new FileReader();
 reader.onload = function(e){
 if(e.target && e.target.result){
-localStorage.setItem("profilePhoto", e.target.result);
+uygulaGorsel(e.target.result);
 }
 };
 reader.readAsDataURL(blob);
+return;
 }catch(err){}
-}
 
-if(key === "coverPhotoBlob"){
-
-document.getElementById(
-"coverPhoto"
-).style.backgroundImage =
-`url('${url}')`;
-
-}
+let url = URL.createObjectURL(blob);
+uygulaGorsel(url);
+setTimeout(function(){
+try{ URL.revokeObjectURL(url); }catch(err){}
+},60000);
 
 }
 
