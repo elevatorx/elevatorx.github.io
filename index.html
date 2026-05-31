@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=146">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=146">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=146">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=146">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=146">
-<link rel="manifest" href="/manifest.webmanifest?v=146">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=148">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=148">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=148">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=148">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=148">
+<link rel="manifest" href="/manifest.webmanifest?v=148">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6836,7 +6836,7 @@ html.darkRoot body::after{
 
 
 
-/* v1.4.6 — Profil alt boşluk compact fix
+/* v1.4.8 — Profil alt boşluk compact fix
    v1.4.5 stabil taban korunur; sadece profil ekranı alt boşluğu sıkıştırılır. */
 #profilPanel{
   padding-bottom:calc(96px + env(safe-area-inset-bottom))!important;
@@ -6866,6 +6866,66 @@ html.darkRoot body::after{
   content:"";
   display:block;
   height:calc(84px + env(safe-area-inset-bottom));
+}
+
+
+
+/* v1.4.8 — Sadece Profil Alt Boşluk Fix
+   v1.4.6 stabil taban korunur; profil ekranındaki gereksiz scroll boşluğu toparlanır. */
+body.profileMode{
+  min-height:100dvh!important;
+  background:#f6f7fb!important;
+}
+
+body.darkMode.profileMode,
+html.darkRoot body.profileMode{
+  background:#0b0f17!important;
+}
+
+body.profileMode .container{
+  padding-bottom:calc(86px + env(safe-area-inset-bottom))!important;
+}
+
+body.profileMode #profilPanel{
+  padding-bottom:0!important;
+  margin-bottom:0!important;
+  min-height:auto!important;
+}
+
+body.profileMode #profilPanel::after{
+  content:none!important;
+  display:none!important;
+  height:0!important;
+}
+
+body.profileMode #profilPanel .profileSystemCard{
+  margin-bottom:14px!important;
+}
+
+body.profileMode #profilPanel .profileFooter{
+  margin-top:16px!important;
+  margin-bottom:0!important;
+  padding:16px 18px 0!important;
+}
+
+body.profileMode #profilPanel .footerReferenceBrands{
+  margin-top:16px!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+
+body.profileMode #profilPanel .referenceLogoGrid{
+  margin-bottom:0!important;
+}
+
+body.profileMode #profilPanel .referenceLogoCard{
+  margin-bottom:0!important;
+}
+
+@supports (height:100dvh){
+  body.profileMode #profilPanel{
+    min-height:auto!important;
+  }
 }
 
 </style>
@@ -7017,10 +7077,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=146" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=148" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.6</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.8</div>
 </div>
 </div>
 
@@ -7029,7 +7089,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=146" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=148" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7461,9 +7521,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.6";
+const APP_VERSION = "v1.4.8";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=146", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=148", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7541,7 +7601,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.6").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.8").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -12953,6 +13013,177 @@ padding:0 16px!important;
 }
 }
 
+
+
+/* === v1.4.8 — Premium Mikro Cila (sadece görsel dokunuş) ===
+   Mantık / cari / ödeme / PDF / yedek / tab bar layout kodlarına dokunulmadı. */
+body:not(.darkMode){
+background:
+radial-gradient(circle at 50% -12%, rgba(47,111,240,.085), transparent 34%),
+radial-gradient(circle at 100% 12%, rgba(96,165,250,.06), transparent 30%),
+linear-gradient(180deg,#f7f8fc 0%,#f3f5fa 100%)!important;
+}
+
+body.darkMode{
+background:
+radial-gradient(circle at 50% -10%, rgba(59,130,246,.13), transparent 36%),
+linear-gradient(180deg,#0b0f17 0%,#080c13 100%)!important;
+}
+
+.elevatorXWordmark{
+position:relative;
+text-shadow:0 10px 28px rgba(15,23,42,.075);
+}
+
+.elevatorXWordmark span{
+text-shadow:0 8px 22px rgba(0,122,255,.24);
+}
+
+.headerThemeBtn,
+.filterBtn,
+#arama,
+.statCard,
+.lastActionCard,
+.aptCard,
+.profileBox,
+.profileStatCard,
+.profileBio,
+.referenceLogoCard,
+.maintHeader,
+.maintStat,
+.maintRow{
+border-color:rgba(226,232,240,.86)!important;
+}
+
+.statCard,
+.lastActionCard,
+.aptCard,
+.profileBox,
+.profileStatCard,
+.profileBio,
+.referenceLogoCard{
+box-shadow:
+0 14px 34px rgba(15,23,42,.055),
+0 2px 8px rgba(15,23,42,.025),
+inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+
+.statIcon{
+box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 18px rgba(15,23,42,.045);
+}
+
+.aptCard,
+.lastActionCard,
+.statCard,
+.referenceLogoCard{
+position:relative;
+}
+
+.aptCard::after,
+.lastActionCard::after,
+.statCard::after,
+.referenceLogoCard::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:inherit;
+pointer-events:none;
+background:linear-gradient(135deg,rgba(255,255,255,.38),transparent 34%,rgba(47,111,240,.035) 100%);
+opacity:.72;
+}
+
+.aptCard > *,
+.lastActionCard > *,
+.statCard > *,
+.referenceLogoCard > *{
+position:relative;
+z-index:1;
+}
+
+.aptCard:active,
+.statCard:active,
+.lastActionCard:active,
+.referenceLogoCard:active{
+transform:scale(.982);
+}
+
+.lastActionLabel,
+.sectionHead h2,
+.referenceTitle{
+letter-spacing:.34px;
+}
+
+.filterChip.active{
+box-shadow:0 10px 22px rgba(0,122,255,.18),inset 0 1px 0 rgba(255,255,255,.3)!important;
+}
+
+#quickAddBtn.quickAddBtn{
+box-shadow:
+0 18px 36px rgba(47,111,240,.30),
+0 8px 18px rgba(15,23,42,.13),
+inset 0 1px 0 rgba(255,255,255,.46)!important;
+}
+
+#quickAddBtn.quickAddBtn::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:inherit;
+pointer-events:none;
+background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.28) 42%,transparent 62%);
+transform:translateX(-120%);
+animation:elevatorXQuickSheen 4.8s ease-in-out infinite;
+}
+
+@keyframes elevatorXQuickSheen{
+0%,68%{transform:translateX(-120%);opacity:0;}
+76%{opacity:1;}
+92%,100%{transform:translateX(120%);opacity:0;}
+}
+
+body.darkMode .headerThemeBtn,
+body.darkMode .filterBtn,
+body.darkMode #arama,
+body.darkMode .statCard,
+body.darkMode .lastActionCard,
+body.darkMode .aptCard,
+body.darkMode .profileBox,
+body.darkMode .profileStatCard,
+body.darkMode .profileBio,
+body.darkMode .referenceLogoCard,
+html.darkRoot .headerThemeBtn,
+html.darkRoot .filterBtn,
+html.darkRoot #arama,
+html.darkRoot .statCard,
+html.darkRoot .lastActionCard,
+html.darkRoot .aptCard,
+html.darkRoot .profileBox,
+html.darkRoot .profileStatCard,
+html.darkRoot .profileBio,
+html.darkRoot .referenceLogoCard{
+border-color:rgba(255,255,255,.075)!important;
+box-shadow:
+0 14px 34px rgba(0,0,0,.24),
+0 2px 8px rgba(0,0,0,.16),
+inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+body.darkMode .aptCard::after,
+body.darkMode .lastActionCard::after,
+body.darkMode .statCard::after,
+body.darkMode .referenceLogoCard::after,
+html.darkRoot .aptCard::after,
+html.darkRoot .lastActionCard::after,
+html.darkRoot .statCard::after,
+html.darkRoot .referenceLogoCard::after{
+background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 34%,rgba(59,130,246,.06) 100%);
+opacity:.9;
+}
+
+@media (prefers-reduced-motion: reduce){
+#quickAddBtn.quickAddBtn::after{animation:none!important;}
+}
+
 </style>
 
 </head>
@@ -14173,6 +14404,40 @@ try{ quickAddGuncelle(); }catch(e){}
 },900);
 });
 
+</script>
+
+
+<script>
+/* v1.4.8 profile mode body lock — sadece profil alt boşluğu için */
+(function(){
+  function elevatorXProfilModeSync(){
+    try{
+      var panel = document.getElementById("profilPanel");
+      if(!panel || !document.body) return;
+      var visible = panel.style.display !== "none" && getComputedStyle(panel).display !== "none";
+      document.body.classList.toggle("profileMode", !!visible);
+    }catch(e){}
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    elevatorXProfilModeSync();
+
+    try{
+      var panel = document.getElementById("profilPanel");
+      if(panel){
+        new MutationObserver(elevatorXProfilModeSync).observe(panel, {
+          attributes:true,
+          attributeFilter:["style","class"]
+        });
+      }
+    }catch(e){}
+
+    setInterval(elevatorXProfilModeSync, 650);
+  });
+
+  window.addEventListener("load", elevatorXProfilModeSync);
+  window.elevatorXProfilModeSync = elevatorXProfilModeSync;
+})();
 </script>
 
 </body>
