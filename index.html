@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=149">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=149">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=149">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=149">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=149">
-<link rel="manifest" href="/manifest.webmanifest?v=149">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1410">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1410">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1410">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1410">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1410">
+<link rel="manifest" href="/manifest.webmanifest?v=1410">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7077,10 +7077,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1410" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.9</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.10</div>
 </div>
 </div>
 
@@ -7089,7 +7089,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=1410" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7521,9 +7521,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.9";
+const APP_VERSION = "v1.4.10";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=149", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1410", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7601,7 +7601,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.9").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.10").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -9028,6 +9028,46 @@ return parca.ay === ay && parca.yil === yil;
 
 }
 
+/* v1.4.10 - Aylık bakım günü artık her ay tekrar eden gün olarak hesaplanır.
+   Örnek: kayıt 20.05.2026 ise Haziran ekranında plan 20.06.2026 kabul edilir.
+   Böylece ayın 1'inde bütün apartmanlar gecikmiş görünmez. */
+function ayinGunSayisi(yil,ay){
+return new Date(yil,ay,0).getDate();
+}
+
+function bakimPlanBuAyISO(a){
+let parca = tarihParcala(a && a.bakimGunu);
+
+if(!parca || !parca.gun){
+return "";
+}
+
+let simdi = new Date();
+let yil = simdi.getFullYear();
+let ay = simdi.getMonth() + 1;
+let gun = Math.min(parca.gun, ayinGunSayisi(yil,ay));
+
+return (
+yil + "-" +
+String(ay).padStart(2,"0") + "-" +
+String(gun).padStart(2,"0")
+);
+}
+
+function bakimPlanBugunMu(a){
+return bakimPlanBuAyISO(a) === bugunISO();
+}
+
+function bakimPlanGectiMi(a){
+let plan = bakimPlanBuAyISO(a);
+return !!(plan && plan < bugunISO());
+}
+
+function bakimPlanGoster(a){
+let plan = bakimPlanBuAyISO(a);
+return plan ? kartTarih(plan) : "-";
+}
+
 
 
 function ayAdi(){
@@ -9317,12 +9357,12 @@ return cariOzet(a).kalanPozitif > 0;
 }
 
 if(aktifFiltre === "today"){
-return a.bakimGunu === bugunISO();
+return bakimPlanBugunMu(a);
 }
 
 if(aktifFiltre === "overdue"){
 return a.bakimGunu &&
-a.bakimGunu < bugunISO() &&
+bakimPlanGectiMi(a) &&
 !buAyBakim;
 }
 
@@ -9578,11 +9618,11 @@ if(buAyBakim){
 return "statusDone";
 }
 
-if(a.bakimGunu && a.bakimGunu == bugunISO()){
+if(a.bakimGunu && bakimPlanBugunMu(a)){
 return "statusToday";
 }
 
-if(a.bakimGunu && a.bakimGunu < bugunISO() && !buAyBakim){
+if(a.bakimGunu && bakimPlanGectiMi(a) && !buAyBakim){
 return "statusOverdue";
 }
 
@@ -9601,10 +9641,10 @@ let buAyBakim = bakimBuAyYapildi(a);
 if(buAyBakim){
 durum = "Bakım Yapıldı";
 badgeClass = "badgeGreen";
-}else if(a.bakimGunu && a.bakimGunu < bugunISO()){
+}else if(a.bakimGunu && bakimPlanGectiMi(a)){
 durum = "Gecikmiş";
 badgeClass = "badgeOrange";
-}else if(a.bakimGunu && a.bakimGunu == bugunISO()){
+}else if(a.bakimGunu && bakimPlanBugunMu(a)){
 durum = "Bakım Günü";
 badgeClass = "badgeBlue";
 }
@@ -9631,11 +9671,11 @@ let aramaMetni = arama.value.toLowerCase();
 let toplam =
 toplamTahsilat();
 
-let bugunCount = data.filter(x => x.bakimGunu === bugunISO()).length;
+let bugunCount = data.filter(x => bakimPlanBugunMu(x)).length;
 
 let gecikenCount = data.filter(x =>
 x.bakimGunu &&
-x.bakimGunu < bugunISO() &&
+bakimPlanGectiMi(x) &&
 !bakimBuAyYapildi(x)
 ).length;
 
@@ -9732,7 +9772,7 @@ h += `
 ${d.durum}
 </span><br>
 ${odemeBadge(a)}<br>
-<span class="kartDate">${kartTarih(a.bakimGunu)}</span><br>
+<span class="kartDate">${bakimPlanGoster(a)}</span><br>
 ${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}<br>
 <span class="kartDate">Kalan: ${tutarFormat(cari.kalanPozitif)}</span>
 </div>
@@ -9775,7 +9815,7 @@ rank:3
 };
 }
 
-if(a.bakimGunu && a.bakimGunu < bugunISO()){
+if(a.bakimGunu && bakimPlanGectiMi(a)){
 return {
 text:"Gecikti",
 cls:"maintOverdue",
@@ -9785,7 +9825,7 @@ rank:0
 };
 }
 
-if(a.bakimGunu && a.bakimGunu === bugunISO()){
+if(a.bakimGunu && bakimPlanBugunMu(a)){
 return {
 text:"Bugün",
 cls:"maintToday",
@@ -9870,7 +9910,7 @@ let a = item.a;
 let i = item.i;
 let b = item.b;
 let sonBakim = a.bakimTarihi || "Yok";
-let plan = kartTarih(a.bakimGunu);
+let plan = bakimPlanGoster(a);
 
 h += `
 <div class="maintRow ${b.cls}">
@@ -11672,7 +11712,7 @@ detayPanel.innerHTML = `
   </div>
   <div>
     <span>Bakım Günü</span>
-    <b>${a.bakimGunu || "-"}</b>
+    <b>${bakimPlanGoster(a)}</b>
   </div>
   <div>
     <span>Son Parça</span>
@@ -12687,7 +12727,7 @@ bekleyen.reduce((t,a)=>t + cariOzet(a).kalanPozitif,0);
 let geciken =
 data.filter(a=>
 a.bakimGunu &&
-a.bakimGunu < bugunISO() &&
+bakimPlanGectiMi(a) &&
 !bakimBuAyYapildi(a)
 );
 
@@ -13339,7 +13379,7 @@ ${bekleyen.length ? bekleyen.map(a=>`<div class="listItem">${a.ad || "-"} — Ka
 </div></div>
 
 <div class="section"><div class="sectionTitle">Geciken Bakımlar</div><div class="list">
-${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.bakimGunu || "-"}</div>`).join("") : `<div class="empty">Geciken bakım yok.</div>`}
+${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${bakimPlanGoster(a)}</div>`).join("") : `<div class="empty">Geciken bakım yok.</div>`}
 </div></div>
 
 
@@ -14271,7 +14311,7 @@ html = `
 Yönetici: <b>${a.yonetici || "-"}</b><br>
 Telefon: <b>${a.tel || "-"}</b><br>
 Ücret: <b>${a.ucret || 0} ₺</b><br>
-Bakım Günü: <b>${a.bakimGunu || "-"}</b><br>
+Bakım Günü: <b>${bakimPlanGoster(a)}</b><br>
 Ödeme: <b>${a.odemeTarihi || "Bekliyor"}</b><br>
 Son Bakım: <b>${a.bakimTarihi || "-"}</b><br>
 Durum: <b>${d.durum}</b>
@@ -14323,7 +14363,7 @@ q.includes("geciken") ||
 let liste =
 data.filter(a=>
 a.bakimGunu &&
-a.bakimGunu < bugunISO() &&
+bakimPlanGectiMi(a) &&
 !bakimBuAyYapildi(a)
 );
 
@@ -14339,7 +14379,7 @@ html = `
 html = `
 <div class="aiResultTitle">Geciken Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.bakimGunu || "-"}
+• <b>${a.ad || "-"}</b> — ${bakimPlanGoster(a)}
 `).join("<br>")}
 `;
 
@@ -14353,7 +14393,7 @@ q.includes("bakim")
 ){
 
 let liste =
-data.filter(a=>a.bakimGunu === bugunISO());
+data.filter(a=>bakimPlanBugunMu(a));
 
 if(!liste.length){
 
@@ -14396,7 +14436,7 @@ html = `
 html = `
 <div class="aiResultTitle">Ayın 20’sindeki Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.bakimGunu || "-"}
+• <b>${a.ad || "-"}</b> — ${bakimPlanGoster(a)}
 `).join("<br>")}
 `;
 
