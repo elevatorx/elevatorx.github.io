@@ -41,12 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1410">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1410">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1410">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1410">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1410">
-<link rel="manifest" href="/manifest.webmanifest?v=1410">
+<!-- ELEVATORX_V1411_HEADER_SADELESTIRME_KESIN | APP_VERSION v1.4.11 -->
+
+
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1411">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1411">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1411">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1411">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1411">
+<link rel="manifest" href="/manifest.webmanifest?v=1411">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6928,6 +6931,150 @@ body.profileMode #profilPanel .referenceLogoCard{
   }
 }
 
+
+
+/* v1.4.11 — Header Sadeleştirme + Profil Görünüm */
+body > .header.headerClean{
+  display:flex!important;
+  grid-template-columns:none!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  padding:26px 22px 12px!important;
+  gap:0!important;
+}
+
+body > .header.headerClean .headerBrand{
+  width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+}
+
+body > .header.headerClean .headerNewLogo,
+body > .header.headerClean .headerThemeBtn{
+  display:none!important;
+}
+
+body > .header.headerClean .elevatorXWordmark{
+  font-size:34px!important;
+  letter-spacing:-1.35px!important;
+}
+
+.appearanceCard{
+  margin-top:10px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(229,231,235,.92);
+  border-radius:24px;
+  padding:14px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:
+    0 10px 26px rgba(15,23,42,.045),
+    inset 0 1px 0 rgba(255,255,255,.74);
+}
+
+.appearanceInfo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.appearanceIcon{
+  width:42px;
+  height:42px;
+  border-radius:16px;
+  background:#eef4ff;
+  color:#007aff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+}
+
+.appearanceText{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.appearanceText b{
+  font-size:15px;
+  font-weight:950;
+  color:#111827;
+  letter-spacing:-.18px;
+}
+
+.appearanceText em{
+  margin-top:3px;
+  font-size:12px;
+  line-height:1.35;
+  color:#6b7280;
+  font-style:normal;
+  font-weight:700;
+}
+
+.appearanceToggle{
+  width:auto;
+  margin:0;
+  padding:10px 12px;
+  border-radius:15px;
+  background:#007aff;
+  color:white;
+  font-size:13px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+body.darkMode .appearanceCard{
+  background:#151b26;
+  border-color:#263241;
+  box-shadow:0 8px 28px rgba(0,0,0,.22);
+}
+
+body.darkMode .appearanceIcon{
+  background:#12223a;
+  color:#60a5fa;
+}
+
+body.darkMode .appearanceText b{
+  color:#f8fafc;
+}
+
+body.darkMode .appearanceText em{
+  color:#a7b0bf;
+}
+
+body.darkMode .appearanceToggle{
+  background:#263241;
+  color:#f8fafc;
+}
+
+@media(max-width:430px){
+  body > .header.headerClean{
+    padding:22px 20px 10px!important;
+  }
+  body > .header.headerClean .elevatorXWordmark{
+    font-size:32px!important;
+  }
+  .appearanceCard{
+    border-radius:22px;
+    padding:12px;
+  }
+  .appearanceIcon{
+    width:38px;
+    height:38px;
+    border-radius:14px;
+  }
+  .appearanceToggle{
+    padding:9px 11px;
+    font-size:12.5px;
+  }
+}
 </style>
 
 <script>
@@ -7077,30 +7224,18 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1410" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1411" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.10</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.11</div>
 </div>
 </div>
 
-<div class="header">
-
-<div></div>
+<div class="header headerClean">
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=1410" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
-
-<button
-id="headerThemeBtn"
-class="headerThemeBtn"
-onclick="temaDegistir()">
-
-<span id="headerThemeIcon">🌙</span>
-
-</button>
 
 </div>
 
@@ -7359,6 +7494,22 @@ placeholder="Bilgi yaz..."></textarea>
 
 </div>
 
+
+<div class="profileSectionTitle">Görünüm</div>
+
+<div class="appearanceCard">
+  <div class="appearanceInfo">
+    <span class="appearanceIcon" id="profileThemeIcon">🌙</span>
+    <span class="appearanceText">
+      <b>Gece Modu</b>
+      <em>Uygulama temasını buradan değiştir.</em>
+    </span>
+  </div>
+  <button class="appearanceToggle" onclick="temaDegistir()">
+    <span id="profileThemeText">Koyu Mod</span>
+  </button>
+</div>
+
 <div class="profileSystemCard">
   <div class="profileSystemTop">
     <div>
@@ -7521,9 +7672,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.10";
+const APP_VERSION = "v1.4.11";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1410", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1411", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7601,7 +7752,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.10").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.11").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -7925,6 +8076,22 @@ if(headerIcon){
 headerIcon.innerText =
 dark ? "☀️" : "🌙";
 
+}
+
+let profileIcon =
+document.getElementById("profileThemeIcon");
+
+if(profileIcon){
+profileIcon.innerText =
+dark ? "☀️" : "🌙";
+}
+
+let profileText =
+document.getElementById("profileThemeText");
+
+if(profileText){
+profileText.innerText =
+dark ? "Açık Mod" : "Koyu Mod";
 }
 
 }
@@ -9028,46 +9195,6 @@ return parca.ay === ay && parca.yil === yil;
 
 }
 
-/* v1.4.10 - Aylık bakım günü artık her ay tekrar eden gün olarak hesaplanır.
-   Örnek: kayıt 20.05.2026 ise Haziran ekranında plan 20.06.2026 kabul edilir.
-   Böylece ayın 1'inde bütün apartmanlar gecikmiş görünmez. */
-function ayinGunSayisi(yil,ay){
-return new Date(yil,ay,0).getDate();
-}
-
-function bakimPlanBuAyISO(a){
-let parca = tarihParcala(a && a.bakimGunu);
-
-if(!parca || !parca.gun){
-return "";
-}
-
-let simdi = new Date();
-let yil = simdi.getFullYear();
-let ay = simdi.getMonth() + 1;
-let gun = Math.min(parca.gun, ayinGunSayisi(yil,ay));
-
-return (
-yil + "-" +
-String(ay).padStart(2,"0") + "-" +
-String(gun).padStart(2,"0")
-);
-}
-
-function bakimPlanBugunMu(a){
-return bakimPlanBuAyISO(a) === bugunISO();
-}
-
-function bakimPlanGectiMi(a){
-let plan = bakimPlanBuAyISO(a);
-return !!(plan && plan < bugunISO());
-}
-
-function bakimPlanGoster(a){
-let plan = bakimPlanBuAyISO(a);
-return plan ? kartTarih(plan) : "-";
-}
-
 
 
 function ayAdi(){
@@ -9357,13 +9484,11 @@ return cariOzet(a).kalanPozitif > 0;
 }
 
 if(aktifFiltre === "today"){
-return bakimPlanBugunMu(a);
+return bakimBugunMu(a);
 }
 
 if(aktifFiltre === "overdue"){
-return a.bakimGunu &&
-bakimPlanGectiMi(a) &&
-!buAyBakim;
+return bakimGeciktiMi(a);
 }
 
 if(aktifFiltre === "done"){
@@ -9618,11 +9743,11 @@ if(buAyBakim){
 return "statusDone";
 }
 
-if(a.bakimGunu && bakimPlanBugunMu(a)){
+if(bakimBugunMu(a)){
 return "statusToday";
 }
 
-if(a.bakimGunu && bakimPlanGectiMi(a) && !buAyBakim){
+if(bakimGeciktiMi(a)){
 return "statusOverdue";
 }
 
@@ -9641,10 +9766,10 @@ let buAyBakim = bakimBuAyYapildi(a);
 if(buAyBakim){
 durum = "Bakım Yapıldı";
 badgeClass = "badgeGreen";
-}else if(a.bakimGunu && bakimPlanGectiMi(a)){
+}else if(bakimGeciktiMi(a)){
 durum = "Gecikmiş";
 badgeClass = "badgeOrange";
-}else if(a.bakimGunu && bakimPlanBugunMu(a)){
+}else if(bakimBugunMu(a)){
 durum = "Bakım Günü";
 badgeClass = "badgeBlue";
 }
@@ -9671,13 +9796,9 @@ let aramaMetni = arama.value.toLowerCase();
 let toplam =
 toplamTahsilat();
 
-let bugunCount = data.filter(x => bakimPlanBugunMu(x)).length;
+let bugunCount = data.filter(x => bakimBugunMu(x)).length;
 
-let gecikenCount = data.filter(x =>
-x.bakimGunu &&
-bakimPlanGectiMi(x) &&
-!bakimBuAyYapildi(x)
-).length;
+let gecikenCount = data.filter(x => bakimGeciktiMi(x)).length;
 
 let filtreli =
 data
@@ -9772,7 +9893,7 @@ h += `
 ${d.durum}
 </span><br>
 ${odemeBadge(a)}<br>
-<span class="kartDate">${bakimPlanGoster(a)}</span><br>
+<span class="kartDate">${bakimPlanTarih(a)}</span><br>
 ${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}<br>
 <span class="kartDate">Kalan: ${tutarFormat(cari.kalanPozitif)}</span>
 </div>
@@ -9800,7 +9921,47 @@ quickAddGuncelle();
 
 
 function bakimBuAyYapildi(a){
-return tarihBuAyMi(a.bakimTarihi);
+return tarihBuAyMi(a && a.bakimTarihi);
+}
+
+function bakimPlanISO(a){
+
+let kaynak =
+typeof a === "string" ? a : (a && a.bakimGunu);
+
+let parca = tarihParcala(kaynak);
+
+if(!parca){
+return "";
+}
+
+let simdi = new Date();
+let yil = simdi.getFullYear();
+let ay = simdi.getMonth() + 1;
+let aySonGun = new Date(yil, ay, 0).getDate();
+let gun = Math.min(Math.max(Number(parca.gun) || 1, 1), aySonGun);
+
+return (
+yil + "-" +
+String(ay).padStart(2,"0") + "-" +
+String(gun).padStart(2,"0")
+);
+
+}
+
+function bakimBugunMu(a){
+let plan = bakimPlanISO(a);
+return !!plan && plan === bugunISO();
+}
+
+function bakimGeciktiMi(a){
+let plan = bakimPlanISO(a);
+return !!plan && plan < bugunISO() && !bakimBuAyYapildi(a);
+}
+
+function bakimPlanTarih(a){
+let plan = bakimPlanISO(a);
+return kartTarih(plan || (a && a.bakimGunu));
 }
 
 function bakimKontrolBilgisi(a){
@@ -9815,7 +9976,7 @@ rank:3
 };
 }
 
-if(a.bakimGunu && bakimPlanGectiMi(a)){
+if(bakimGeciktiMi(a)){
 return {
 text:"Gecikti",
 cls:"maintOverdue",
@@ -9825,7 +9986,7 @@ rank:0
 };
 }
 
-if(a.bakimGunu && bakimPlanBugunMu(a)){
+if(bakimBugunMu(a)){
 return {
 text:"Bugün",
 cls:"maintToday",
@@ -9870,7 +10031,7 @@ data
 if(x.b.rank !== y.b.rank){
 return x.b.rank - y.b.rank;
 }
-return String(x.a.bakimGunu || "").localeCompare(String(y.a.bakimGunu || ""));
+return String(bakimPlanISO(x.a) || "").localeCompare(String(bakimPlanISO(y.a) || ""));
 });
 
 let yapildi = satirlar.filter(x=>x.b.text === "Yapıldı").length;
@@ -9910,7 +10071,7 @@ let a = item.a;
 let i = item.i;
 let b = item.b;
 let sonBakim = a.bakimTarihi || "Yok";
-let plan = bakimPlanGoster(a);
+let plan = bakimPlanTarih(a);
 
 h += `
 <div class="maintRow ${b.cls}">
@@ -11712,7 +11873,7 @@ detayPanel.innerHTML = `
   </div>
   <div>
     <span>Bakım Günü</span>
-    <b>${bakimPlanGoster(a)}</b>
+    <b>${a.bakimGunu || "-"}</b>
   </div>
   <div>
     <span>Son Parça</span>
@@ -12725,11 +12886,7 @@ let bekleyenTutar =
 bekleyen.reduce((t,a)=>t + cariOzet(a).kalanPozitif,0);
 
 let geciken =
-data.filter(a=>
-a.bakimGunu &&
-bakimPlanGectiMi(a) &&
-!bakimBuAyYapildi(a)
-);
+data.filter(a=>bakimGeciktiMi(a));
 
 let notlu =
 data.filter(a=>a.not && a.not.trim() !== "");
@@ -13379,7 +13536,7 @@ ${bekleyen.length ? bekleyen.map(a=>`<div class="listItem">${a.ad || "-"} — Ka
 </div></div>
 
 <div class="section"><div class="sectionTitle">Geciken Bakımlar</div><div class="list">
-${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${bakimPlanGoster(a)}</div>`).join("") : `<div class="empty">Geciken bakım yok.</div>`}
+${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${bakimPlanTarih(a)}</div>`).join("") : `<div class="empty">Geciken bakım yok.</div>`}
 </div></div>
 
 
@@ -14311,7 +14468,7 @@ html = `
 Yönetici: <b>${a.yonetici || "-"}</b><br>
 Telefon: <b>${a.tel || "-"}</b><br>
 Ücret: <b>${a.ucret || 0} ₺</b><br>
-Bakım Günü: <b>${bakimPlanGoster(a)}</b><br>
+Bakım Günü: <b>${a.bakimGunu || "-"}</b><br>
 Ödeme: <b>${a.odemeTarihi || "Bekliyor"}</b><br>
 Son Bakım: <b>${a.bakimTarihi || "-"}</b><br>
 Durum: <b>${d.durum}</b>
@@ -14361,11 +14518,7 @@ q.includes("geciken") ||
 ){
 
 let liste =
-data.filter(a=>
-a.bakimGunu &&
-bakimPlanGectiMi(a) &&
-!bakimBuAyYapildi(a)
-);
+data.filter(a=>bakimGeciktiMi(a));
 
 if(!liste.length){
 
@@ -14379,7 +14532,7 @@ html = `
 html = `
 <div class="aiResultTitle">Geciken Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${bakimPlanGoster(a)}
+• <b>${a.ad || "-"}</b> — ${bakimPlanTarih(a)}
 `).join("<br>")}
 `;
 
@@ -14393,7 +14546,7 @@ q.includes("bakim")
 ){
 
 let liste =
-data.filter(a=>bakimPlanBugunMu(a));
+data.filter(a=>bakimBugunMu(a));
 
 if(!liste.length){
 
@@ -14436,7 +14589,7 @@ html = `
 html = `
 <div class="aiResultTitle">Ayın 20’sindeki Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${bakimPlanGoster(a)}
+• <b>${a.ad || "-"}</b> — ${bakimPlanTarih(a)}
 `).join("<br>")}
 `;
 
