@@ -41,12 +41,12 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=148">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=148">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=148">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=148">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=148">
-<link rel="manifest" href="/manifest.webmanifest?v=148">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=149">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=149">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=149">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=149">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=149">
+<link rel="manifest" href="/manifest.webmanifest?v=149">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7077,10 +7077,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=148" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span>X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.8</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.9</div>
 </div>
 </div>
 
@@ -7089,7 +7089,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <div></div>
 
 <div class="headerBrand">
-<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=148" alt="ElevatorX logo">
+<img class="headerNewLogo" src="/elevatorx-icon-v69.png?v=149" alt="ElevatorX logo">
 <span class="elevatorXWordmark">Elevator<span>X</span></span>
 </div>
 
@@ -7521,9 +7521,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.8";
+const APP_VERSION = "v1.4.9";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=148", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=149", location.href).href;
 
 
 function profilSurumGuncelle(){
@@ -7601,7 +7601,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.8").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.9").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -7984,8 +7984,18 @@ return new Date().toLocaleDateString("tr-TR");
 }
 
 function bugunISO(){
-return new Date().toISOString().split("T")[0];
+
+let d = new Date();
+
+return (
+d.getFullYear() + "-" +
+String(d.getMonth() + 1).padStart(2,"0") + "-" +
+String(d.getDate()).padStart(2,"0")
+);
+
 }
+
+
 
 function kartTarih(tarih){
 if(!tarih) return "-";
@@ -8250,7 +8260,7 @@ a.odemeTarihi = "";
 function cariOzet(a){
 
 let anlasmaUcreti = Number(a && a.ucret ? a.ucret : 0);
-let bakimBorcuAktif = !!(a && a.bakimTarihi);
+let bakimBorcuAktif = !!(a && bakimBuAyYapildi(a));
 let bakimUcreti = bakimBorcuAktif ? anlasmaUcreti : 0;
 let parcaToplam = parcaToplamTutar(a);
 let eskiBakiyeToplami = eskiBakiyeToplam(a);
@@ -8261,7 +8271,7 @@ if(bakimUcreti > 0){
 kalemler.push({
 tip:"Bakım",
 tarih:(a && a.bakimTarihi) || "-",
-aciklama:"Aylık bakım ücreti",
+aciklama:"Bu ayın aylık bakım ücreti",
 tutar:bakimUcreti
 });
 }
@@ -8298,7 +8308,26 @@ tutar:tutar
 }
 
 let odemeler = odemeListesi(a);
-let toplam = odemeler.reduce(function(t,o){
+
+/*
+Ay devir kuralı:
+- Bakım ödemesi sadece bulunduğumuz ayın tahsilatı olarak aktif sayılır.
+- Parça / cari / eski bakiye ödemeleri geçmiş tarihli olsa bile cari hesabı kapatmaya devam eder.
+Bu sayede Mayıs bakım ödemesi Haziran ekranında "ödeme alındı" gibi davranmaz.
+*/
+let aktifOdemeler = odemeler.filter(function(o){
+let tip = odemeTipTahminEt(o);
+if(tip === "bakim"){
+return tarihBuAyMi(o.tarih);
+}
+return true;
+});
+
+let toplam = aktifOdemeler.reduce(function(t,o){
+return t + Number(o.tutar || 0);
+},0);
+
+let toplamGenel = odemeler.reduce(function(t,o){
 return t + Number(o.tutar || 0);
 },0);
 
@@ -8319,12 +8348,17 @@ durum = "Tamamlandı";
 durumClass = "paid";
 }
 
+if(beklenen <= 0 && toplam <= 0){
+durum = "Borç Yok";
+durumClass = "paid";
+}
+
 if(alacak > 0){
 durum = "Fazla Ödeme";
 durumClass = "over";
 }
 
-let sonOdeme = odemeler.length ? (odemeler[0].tarih || "") : "";
+let sonOdeme = aktifOdemeler.length ? (aktifOdemeler[0].tarih || "") : "";
 
 return {
 anlasmaUcreti:anlasmaUcreti,
@@ -8335,16 +8369,20 @@ eskiBakiyeToplami:eskiBakiyeToplami,
 beklenen:beklenen,
 kalemler:kalemler,
 toplam:toplam,
+toplamGenel:toplamGenel,
 kalan:kalan,
 kalanPozitif:kalanPozitif,
 alacak:alacak,
 durum:durum,
 durumClass:durumClass,
 sonOdeme:sonOdeme,
-odemeler:odemeler
+odemeler:aktifOdemeler,
+tumOdemeler:odemeler
 };
 
 }
+
+
 
 function cariOzetHtml(a,i){
 
@@ -8831,10 +8869,20 @@ toast("Geçerli bir seçim yapılmadı");
 
 
 function toplamTahsilat(){
-return data.reduce((toplam,a)=>{
-return toplam + cariOzet(a).toplam;
+
+return data.reduce(function(toplam,a){
+return toplam + odemeListesi(a)
+.filter(function(o){
+return tarihBuAyMi(o.tarih);
+})
+.reduce(function(ara,o){
+return ara + Number(o.tutar || 0);
 },0);
+},0);
+
 }
+
+
 
 function odemeBadge(a){
 
@@ -8918,24 +8966,69 @@ return `
 
 }
 
+function tarihParcala(tarih){
+
+let s = String(tarih || "").trim();
+
+if(!s){
+return null;
+}
+
+let iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+
+if(iso){
+return {
+gun:Number(iso[3]),
+ay:Number(iso[2]),
+yil:Number(iso[1])
+};
+}
+
+let tr = s.match(/^(\d{1,2})[./](\d{1,2})[./](\d{2,4})/);
+
+if(tr){
+let yil = Number(tr[3]);
+if(yil < 100){
+yil += 2000;
+}
+return {
+gun:Number(tr[1]),
+ay:Number(tr[2]),
+yil:yil
+};
+}
+
+let d = new Date(s);
+
+if(!Number.isNaN(d.getTime())){
+return {
+gun:d.getDate(),
+ay:d.getMonth() + 1,
+yil:d.getFullYear()
+};
+}
+
+return null;
+
+}
+
 function tarihBuAyMi(tarih){
 
-if(!tarih) return false;
+let parca = tarihParcala(tarih);
+
+if(!parca){
+return false;
+}
 
 let simdi = new Date();
 let ay = simdi.getMonth() + 1;
 let yil = simdi.getFullYear();
 
-let parca = tarih.split(".");
-
-if(parca.length < 3) return false;
-
-let tAy = Number(parca[1]);
-let tYil = Number(parca[2]);
-
-return tAy === ay && tYil === yil;
+return parca.ay === ay && parca.yil === yil;
 
 }
+
+
 
 function ayAdi(){
 
@@ -9213,6 +9306,8 @@ goster();
 
 function filtreKontrol(a){
 
+let buAyBakim = bakimBuAyYapildi(a);
+
 if(aktifFiltre === "all"){
 return true;
 }
@@ -9228,16 +9323,18 @@ return a.bakimGunu === bugunISO();
 if(aktifFiltre === "overdue"){
 return a.bakimGunu &&
 a.bakimGunu < bugunISO() &&
-!a.bakimTarihi;
+!buAyBakim;
 }
 
 if(aktifFiltre === "done"){
-return !!a.bakimTarihi;
+return buAyBakim;
 }
 
 return true;
 
 }
+
+
 
 function formAc(){
 
@@ -9475,7 +9572,9 @@ animateIn(liste,"screenFadeUp");
 
 function durumClass(a){
 
-if(a.bakimTarihi){
+let buAyBakim = bakimBuAyYapildi(a);
+
+if(buAyBakim){
 return "statusDone";
 }
 
@@ -9483,7 +9582,7 @@ if(a.bakimGunu && a.bakimGunu == bugunISO()){
 return "statusToday";
 }
 
-if(a.bakimGunu && a.bakimGunu < bugunISO() && !a.bakimTarihi){
+if(a.bakimGunu && a.bakimGunu < bugunISO() && !buAyBakim){
 return "statusOverdue";
 }
 
@@ -9491,22 +9590,21 @@ return "statusWaiting";
 
 }
 
+
+
 function durumBilgisi(a){
 
 let durum = "Beklemede";
 let badgeClass = "badgeGray";
+let buAyBakim = bakimBuAyYapildi(a);
 
-if(a.bakimTarihi){
+if(buAyBakim){
 durum = "Bakım Yapıldı";
 badgeClass = "badgeGreen";
-}
-
-if(a.bakimGunu && a.bakimGunu < bugunISO() && !a.bakimTarihi){
+}else if(a.bakimGunu && a.bakimGunu < bugunISO()){
 durum = "Gecikmiş";
 badgeClass = "badgeOrange";
-}
-
-if(a.bakimGunu && a.bakimGunu == bugunISO()){
+}else if(a.bakimGunu && a.bakimGunu == bugunISO()){
 durum = "Bakım Günü";
 badgeClass = "badgeBlue";
 }
@@ -9517,6 +9615,8 @@ badgeClass
 };
 
 }
+
+
 
 function goster(){
 
@@ -9536,7 +9636,7 @@ let bugunCount = data.filter(x => x.bakimGunu === bugunISO()).length;
 let gecikenCount = data.filter(x =>
 x.bakimGunu &&
 x.bakimGunu < bugunISO() &&
-!x.bakimTarihi
+!bakimBuAyYapildi(x)
 ).length;
 
 let filtreli =
@@ -9704,6 +9804,8 @@ rank:2
 };
 
 }
+
+
 
 function bakimListesiAc(){
 
@@ -11517,7 +11619,7 @@ let odemeText =
 cari.kalanPozitif > 0 ? "Ödeme Al" : "Makbuz Oluştur";
 
 let bakimText =
-a.bakimTarihi ? "Bakım Yapıldı" : "Bakım Yapıldı";
+bakimBuAyYapildi(a) ? "Bakım Yapıldı" : "Bakım Yapıldı";
 
 let telTemiz =
 (a.tel || "").replace(/\s/g,"");
@@ -11565,8 +11667,8 @@ detayPanel.innerHTML = `
 
 <div class="detailMiniStats">
   <div>
-    <span>Bakım</span>
-    <b>${a.bakimTarihi || "-"}</b>
+    <span>Bu Ay Bakım</span>
+    <b>${bakimBuAyYapildi(a) ? (a.bakimTarihi || "-") : "Yapılmadı"}</b>
   </div>
   <div>
     <span>Bakım Günü</span>
@@ -11880,7 +11982,7 @@ function bakim(i){
 
 haptic("success");
 
-if(data[i].bakimTarihi){
+if(bakimBuAyYapildi(data[i])){
 toast("Bakım raporu oluşturuldu");
 pdf(i);
 return;
@@ -11889,6 +11991,8 @@ return;
 bakimChecklistAc(i);
 
 }
+
+
 
 
 function pdfProfilLogo(){
@@ -12584,7 +12688,7 @@ let geciken =
 data.filter(a=>
 a.bakimGunu &&
 a.bakimGunu < bugunISO() &&
-!a.bakimTarihi
+!bakimBuAyYapildi(a)
 );
 
 let notlu =
@@ -14220,7 +14324,7 @@ let liste =
 data.filter(a=>
 a.bakimGunu &&
 a.bakimGunu < bugunISO() &&
-!a.bakimTarihi
+!bakimBuAyYapildi(a)
 );
 
 if(!liste.length){
