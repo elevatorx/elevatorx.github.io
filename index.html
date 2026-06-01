@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1419_SPLASH_SADE_SIK_KESIN | APP_VERSION v1.4.19 -->
+<!-- ELEVATORX_V1420_AKILLI_SPLASH_SURESI_KESIN | APP_VERSION v1.4.20 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1419">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1419">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1419">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1419">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1419">
-<link rel="manifest" href="/manifest.webmanifest?v=1419">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1420">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1420">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1420">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1420">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1420">
+<link rel="manifest" href="/manifest.webmanifest?v=1420">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7753,6 +7753,19 @@ to{opacity:0; transform:translateY(-8px) scale(.99);}
 #splash.hide .motionSplashWrap{animation:none!important;}
 }
 
+
+
+/* === v1.4.20 — Akıllı Splash Süresi === */
+#splash.smartSplash{
+transition:
+opacity .32s ease,
+visibility .32s ease!important;
+}
+
+#splash.smartSplash .motionSplashWrap{
+animation-duration:.52s!important;
+}
+
 </style>
 
 <script>
@@ -7849,15 +7862,15 @@ window.__ELEVATORX_BOOT_OK__ = false;
   window.__forceOpenElevatorX = forceOpenElevatorX;
 
   window.addEventListener("error", function(){
-    setTimeout(forceOpenElevatorX, 900);
+    setTimeout(function(){ if(window.elevatorXHideSplashSmart){ window.elevatorXHideSplashSmart(); } else { forceOpenElevatorX(); } }, 3200);
   });
 
   window.addEventListener("unhandledrejection", function(){
-    setTimeout(forceOpenElevatorX, 900);
+    setTimeout(function(){ if(window.elevatorXHideSplashSmart){ window.elevatorXHideSplashSmart(); } else { forceOpenElevatorX(); } }, 3200);
   });
 
   document.addEventListener("DOMContentLoaded", function(){
-    setTimeout(forceOpenElevatorX, 2600);
+    setTimeout(function(){ if(window.elevatorXHideSplashSmart){ window.elevatorXHideSplashSmart(); } else { forceOpenElevatorX(); } }, 3200);
   });
 
   window.addEventListener("load", function(){
@@ -7902,12 +7915,63 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1419" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1420" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.19</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.20</div>
 </div>
 </div>
+
+<script>
+/* ElevatorX v1.4.20 — Akıllı Splash Süresi
+   Güncellemeden sonra ilk açılış: 3 sn
+   Normal açılışlar: 1.5 sn
+   Takılırsa zorla açma: 3.2 sn */
+(function(){
+  const SPLASH_VERSION = "v1.4.20";
+  const KEY = "elevatorxSmartSplashSeenVersion";
+  const FIRST_MS = 3000;
+  const NORMAL_MS = 1500;
+  const FAILSAFE_MS = 3200;
+
+  function hideSplashSmart(){
+    try{
+      const splash = document.getElementById("splash");
+      if(!splash || splash.dataset.hidden === "1") return;
+      splash.dataset.hidden = "1";
+      splash.classList.add("hide");
+      splash.style.opacity = "0";
+      splash.style.pointerEvents = "none";
+      setTimeout(function(){
+        if(splash && splash.parentNode){ splash.parentNode.removeChild(splash); }
+      }, 420);
+      document.documentElement.classList.add("appBooted");
+      if(document.body){ document.body.classList.add("appBooted"); }
+    }catch(e){}
+  }
+
+  window.elevatorXHideSplashSmart = hideSplashSmart;
+
+  document.addEventListener("DOMContentLoaded", function(){
+    try{
+      const splash = document.getElementById("splash");
+      if(splash){ splash.classList.add("smartSplash"); }
+
+      const seen = localStorage.getItem(KEY) === SPLASH_VERSION;
+      const delay = seen ? NORMAL_MS : FIRST_MS;
+
+      setTimeout(function(){
+        localStorage.setItem(KEY, SPLASH_VERSION);
+        hideSplashSmart();
+      }, delay);
+
+      setTimeout(hideSplashSmart, FAILSAFE_MS);
+    }catch(e){
+      setTimeout(hideSplashSmart, NORMAL_MS);
+    }
+  });
+})();
+</script>
 
 <div class="header headerClean">
 
@@ -8350,9 +8414,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.19";
+const APP_VERSION = "v1.4.20";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1419", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1420", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8463,7 +8527,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.19").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.20").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
