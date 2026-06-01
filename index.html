@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1418_CLEAN_LOGO_REVERT_KESIN | APP_VERSION v1.4.18 -->
+<!-- ELEVATORX_V1419_SPLASH_SADE_SIK_KESIN | APP_VERSION v1.4.19 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1418">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1418">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1418">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1418">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1418">
-<link rel="manifest" href="/manifest.webmanifest?v=1418">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1419">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1419">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1419">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1419">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1419">
+<link rel="manifest" href="/manifest.webmanifest?v=1419">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7647,6 +7647,112 @@ text-shadow:none!important;
 filter:none!important;
 }
 
+
+
+/* === v1.4.19 — Splash sade şık yenileme === */
+#splash{
+background:
+radial-gradient(circle at 50% 18%, rgba(59,130,246,.12), transparent 26%),
+linear-gradient(180deg,#08111f 0%,#0a1322 52%,#09111d 100%)!important;
+}
+
+#splash::before{
+content:"";
+position:absolute;
+inset:auto 0 58% 0;
+height:220px;
+background:radial-gradient(circle at 50% 50%, rgba(96,165,250,.18), transparent 62%);
+opacity:.8;
+transform:none!important;
+animation:none!important;
+}
+
+#splash::after{
+background:radial-gradient(circle at center, transparent 0%, transparent 58%, rgba(0,0,0,.24) 100%)!important;
+}
+
+#splash .splashMotion,
+#splash .motionLine,
+#splash .motionArrow,
+#splash .motionDot{
+display:none!important;
+}
+
+.motionSplashWrap,
+.splashWrap.motionSplashWrap{
+position:relative;
+z-index:3;
+transform:none!important;
+animation:splashMinimalIn .55s cubic-bezier(.22,.9,.24,1) both!important;
+}
+
+.motionSplashLogo{
+width:124px!important;
+height:124px!important;
+border-radius:30px!important;
+background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))!important;
+border:1px solid rgba(255,255,255,.11)!important;
+box-shadow:
+0 18px 42px rgba(0,0,0,.30),
+0 0 0 1px rgba(255,255,255,.03),
+inset 0 1px 0 rgba(255,255,255,.18)!important;
+backdrop-filter: blur(10px);
+}
+
+.motionSplashTitle{
+margin-top:20px!important;
+font-size:40px!important;
+font-weight:800!important;
+letter-spacing:-.02em!important;
+color:#f8fafc!important;
+text-shadow:none!important;
+}
+
+.motionSplashSub{
+margin-top:8px!important;
+font-size:15px!important;
+font-weight:600!important;
+letter-spacing:.08em!important;
+text-transform:uppercase;
+color:rgba(226,232,240,.68)!important;
+}
+
+.motionSplashVersion{
+position:static!important;
+transform:none!important;
+margin-top:18px!important;
+font-size:12px!important;
+font-weight:700!important;
+letter-spacing:.12em!important;
+color:rgba(226,232,240,.56)!important;
+text-shadow:none!important;
+}
+
+@keyframes splashMinimalIn{
+from{opacity:0; transform:translateY(10px) scale(.985);}
+to{opacity:1; transform:translateY(0) scale(1);}
+}
+
+#splash.hide .motionSplashWrap{
+animation:splashMinimalOut .28s ease both!important;
+}
+
+@keyframes splashMinimalOut{
+to{opacity:0; transform:translateY(-8px) scale(.99);}
+}
+
+@media(max-width:430px){
+.motionSplashLogo{width:112px!important;height:112px!important;border-radius:28px!important;}
+.motionSplashTitle{font-size:36px!important;}
+.motionSplashSub{font-size:14px!important;}
+.motionSplashVersion{margin-top:16px!important;}
+}
+
+@media(prefers-reduced-motion:reduce){
+.motionSplashWrap,
+#splash.hide .motionSplashWrap{animation:none!important;}
+}
+
 </style>
 
 <script>
@@ -7796,10 +7902,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1418" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1419" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.13</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.19</div>
 </div>
 </div>
 
@@ -8244,9 +8350,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.18";
+const APP_VERSION = "v1.4.19";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1418", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1419", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8357,7 +8463,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.18").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.19").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
