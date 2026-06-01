@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1417_X_SWORD_GLINT_CLEAN_FIX_KESIN | APP_VERSION v1.4.17 -->
+<!-- ELEVATORX_V1418_CLEAN_LOGO_REVERT_KESIN | APP_VERSION v1.4.18 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1417">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1417">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1417">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1417">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1417">
-<link rel="manifest" href="/manifest.webmanifest?v=1417">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1418">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1418">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1418">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1418">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1418">
+<link rel="manifest" href="/manifest.webmanifest?v=1418">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7606,6 +7606,47 @@ text-shadow:0 1px 0 rgba(255,255,255,.10)!important;
 .elevatorXWordmark .animatedX::after{animation:none!important;}
 }
 
+
+
+/* === v1.4.18 — Clean Logo Revert: X efekti tamamen kaldırıldı === */
+.elevatorXWordmark .animatedX,
+.animatedX{
+position:static!important;
+display:inline!important;
+overflow:visible!important;
+isolation:auto!important;
+color:#007aff!important;
+text-shadow:none!important;
+filter:none!important;
+animation:none!important;
+background:none!important;
+-webkit-text-fill-color:#007aff!important;
+}
+
+.elevatorXWordmark .animatedX::before,
+.elevatorXWordmark .animatedX::after,
+.animatedX::before,
+.animatedX::after{
+content:none!important;
+display:none!important;
+opacity:0!important;
+animation:none!important;
+background:none!important;
+filter:none!important;
+box-shadow:none!important;
+text-shadow:none!important;
+}
+
+body.darkMode .elevatorXWordmark .animatedX,
+html.darkRoot .elevatorXWordmark .animatedX,
+body.darkMode .animatedX,
+html.darkRoot .animatedX{
+color:#0a84ff!important;
+-webkit-text-fill-color:#0a84ff!important;
+text-shadow:none!important;
+filter:none!important;
+}
+
 </style>
 
 <script>
@@ -7755,7 +7796,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1417" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1418" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
 <div class="motionSplashVersion" data-splash-version>v1.4.13</div>
@@ -8203,9 +8244,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.17";
+const APP_VERSION = "v1.4.18";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1417", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1418", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8316,7 +8357,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.17").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.18").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
