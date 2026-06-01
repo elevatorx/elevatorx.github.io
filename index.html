@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1416_X_SHINE_BOOST_KESIN | APP_VERSION v1.4.16 -->
+<!-- ELEVATORX_V1417_X_SWORD_GLINT_CLEAN_FIX_KESIN | APP_VERSION v1.4.17 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1416">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1416">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1416">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1416">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1416">
-<link rel="manifest" href="/manifest.webmanifest?v=1416">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1417">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1417">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1417">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1417">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1417">
+<link rel="manifest" href="/manifest.webmanifest?v=1417">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7546,6 +7546,66 @@ animation:none!important;
 }
 }
 
+
+
+/* === v1.4.17 — X Sword Glint Clean Fix === */
+.elevatorXWordmark .animatedX{
+position:relative!important;
+display:inline-block!important;
+overflow:hidden!important;
+color:#2f7df6!important;
+text-shadow:0 1px 0 rgba(255,255,255,.20)!important;
+isolation:isolate!important;
+}
+
+.elevatorXWordmark .animatedX::before{
+content:none!important;
+display:none!important;
+}
+
+.elevatorXWordmark .animatedX::after{
+content:attr(data-letter)!important;
+position:absolute!important;
+inset:0!important;
+-webkit-background-clip:text!important;
+background-clip:text!important;
+-webkit-text-fill-color:transparent!important;
+color:transparent!important;
+background-image:linear-gradient(118deg,
+rgba(255,255,255,0) 0%,
+rgba(255,255,255,0) 44%,
+rgba(255,255,255,.18) 47%,
+rgba(255,255,255,1) 49.5%,
+rgba(210,240,255,.95) 50.5%,
+rgba(255,255,255,.18) 53%,
+rgba(255,255,255,0) 56%,
+rgba(255,255,255,0) 100%)!important;
+background-size:240% 100%!important;
+background-position:-165% 0!important;
+text-shadow:none!important;
+filter:none!important;
+mix-blend-mode:normal!important;
+pointer-events:none!important;
+animation:xSwordGlint 3.2s cubic-bezier(.4,0,.2,1) infinite!important;
+}
+
+@keyframes xSwordGlint{
+0%,70%,100%{background-position:-165% 0;opacity:0;}
+74%{opacity:1;}
+87%{background-position:165% 0;opacity:1;}
+92%{opacity:0;}
+}
+
+body.darkMode .elevatorXWordmark .animatedX,
+html.darkRoot .elevatorXWordmark .animatedX{
+color:#4ca2ff!important;
+text-shadow:0 1px 0 rgba(255,255,255,.10)!important;
+}
+
+@media (prefers-reduced-motion: reduce){
+.elevatorXWordmark .animatedX::after{animation:none!important;}
+}
+
 </style>
 
 <script>
@@ -7695,7 +7755,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1416" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1417" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
 <div class="motionSplashVersion" data-splash-version>v1.4.13</div>
@@ -8143,9 +8203,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.16";
+const APP_VERSION = "v1.4.17";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1416", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1417", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8256,7 +8316,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.16").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.17").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
