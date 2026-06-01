@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1415_ICONS_MICRO_ANIM_KESIN | APP_VERSION v1.4.15 -->
+<!-- ELEVATORX_V1416_X_SHINE_BOOST_KESIN | APP_VERSION v1.4.16 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1415">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1415">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1415">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1415">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1415">
-<link rel="manifest" href="/manifest.webmanifest?v=1415">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1416">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1416">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1416">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1416">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1416">
+<link rel="manifest" href="/manifest.webmanifest?v=1416">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7464,6 +7464,88 @@ animation:none!important;
 }
 }
 
+
+
+/* === v1.4.16 — X Shine Boost: belirgin ama sadece X === */
+.elevatorXWordmark .animatedX{
+position:relative!important;
+display:inline-block!important;
+isolation:isolate!important;
+color:#007aff!important;
+text-shadow:
+0 0 9px rgba(0,122,255,.34),
+0 0 18px rgba(0,122,255,.20),
+0 8px 22px rgba(0,122,255,.20)!important;
+overflow:visible!important;
+}
+
+.elevatorXWordmark .animatedX::before{
+content:"";
+position:absolute;
+left:-18%;
+top:8%;
+width:136%;
+height:86%;
+border-radius:10px;
+background:radial-gradient(circle at 50% 50%,rgba(0,122,255,.34),rgba(0,122,255,.10) 38%,transparent 72%);
+opacity:.18;
+filter:blur(8px);
+z-index:-1;
+animation:xBoostGlow 3.1s ease-in-out infinite;
+}
+
+.elevatorXWordmark .animatedX::after{
+content:"";
+position:absolute;
+top:-22%;
+bottom:-22%;
+left:-85%;
+width:54%;
+border-radius:12px;
+background:linear-gradient(105deg,
+transparent 0%,
+rgba(255,255,255,0) 14%,
+rgba(255,255,255,.92) 45%,
+rgba(122,204,255,.88) 52%,
+rgba(255,255,255,.82) 59%,
+rgba(255,255,255,0) 86%,
+transparent 100%);
+transform:translateX(-150%) skewX(-18deg);
+filter:blur(.25px) drop-shadow(0 0 6px rgba(122,204,255,.70));
+mix-blend-mode:screen;
+pointer-events:none;
+animation:xBoostShine 3.1s cubic-bezier(.22,.9,.24,1) infinite;
+}
+
+@keyframes xBoostShine{
+0%,58%,100%{transform:translateX(-150%) skewX(-18deg);opacity:0;}
+64%{opacity:1;}
+77%{transform:translateX(260%) skewX(-18deg);opacity:1;}
+84%{opacity:0;}
+}
+
+@keyframes xBoostGlow{
+0%,58%,100%{opacity:.16;transform:scale(.96);}
+66%{opacity:.48;transform:scale(1.06);}
+80%{opacity:.30;transform:scale(1);}
+}
+
+body.darkMode .elevatorXWordmark .animatedX,
+html.darkRoot .elevatorXWordmark .animatedX{
+color:#3b9cff!important;
+text-shadow:
+0 0 10px rgba(59,156,255,.46),
+0 0 24px rgba(59,156,255,.26),
+0 8px 22px rgba(59,156,255,.22)!important;
+}
+
+@media (prefers-reduced-motion: reduce){
+.elevatorXWordmark .animatedX::before,
+.elevatorXWordmark .animatedX::after{
+animation:none!important;
+}
+}
+
 </style>
 
 <script>
@@ -7613,7 +7695,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1415" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1416" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
 <div class="motionSplashVersion" data-splash-version>v1.4.13</div>
@@ -8061,9 +8143,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.15";
+const APP_VERSION = "v1.4.16";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1415", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1416", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8174,7 +8256,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.15").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.16").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
