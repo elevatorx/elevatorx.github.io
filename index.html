@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1421_UPDATE_JSON_PREVIEW_FIX_KESIN | APP_VERSION v1.4.21 -->
+<!-- ELEVATORX_V1422_EMPTY_STATE_BOTTOM_FIX_KESIN | APP_VERSION v1.4.22 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1421">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1421">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1421">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1421">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1421">
-<link rel="manifest" href="/manifest.webmanifest?v=1421">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1422">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1422">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1422">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1422">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1422">
+<link rel="manifest" href="/manifest.webmanifest?v=1422">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7770,6 +7770,89 @@ animation-duration:.52s!important;
 /* === v1.4.21 — Güncelleme JSON önizleme fix ===
    Güncelle butonu artık JSON dosyası indirme/önizleme açmaz.
    Güncelleme öncesi yedek cihaz içinde localStorage'a kaydedilir. */
+
+
+/* === v1.4.22 — Empty State Alt Siyahlık Fix === */
+html,
+body{
+min-height:100%!important;
+background:#f6f7fb!important;
+}
+
+html.appBooted:not(.darkRoot),
+body.appBooted:not(.darkMode){
+background:
+radial-gradient(circle at 50% -12%, rgba(47,111,240,.085), transparent 34%),
+radial-gradient(circle at 100% 12%, rgba(96,165,250,.06), transparent 30%),
+linear-gradient(180deg,#f7f8fc 0%,#f3f5fa 100%)!important;
+}
+
+body.darkMode,
+html.darkRoot,
+html.appBooted.darkRoot,
+body.appBooted.darkMode{
+background:
+radial-gradient(circle at 50% -10%, rgba(59,130,246,.13), transparent 36%),
+linear-gradient(180deg,#0b0f17 0%,#080c13 100%)!important;
+}
+
+.container{
+min-height:calc(100svh - 96px)!important;
+box-sizing:border-box!important;
+padding-bottom:calc(156px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#liste,
+#apartmanListesi,
+.apartmanList,
+.emptyBox{
+position:relative;
+z-index:1;
+}
+
+.emptyBox{
+margin-bottom:calc(128px + env(safe-area-inset-bottom,0px))!important;
+}
+
+body::after{
+content:"";
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:calc(170px + env(safe-area-inset-bottom,0px));
+background:
+linear-gradient(180deg,rgba(243,245,250,0) 0%,rgba(243,245,250,.92) 42%,#f3f5fa 100%);
+z-index:1;
+pointer-events:none;
+}
+
+body.darkMode::after{
+background:
+linear-gradient(180deg,rgba(8,12,19,0) 0%,rgba(8,12,19,.92) 42%,#080c13 100%);
+}
+
+.tabbar,
+#quickAddBtn,
+.quickAddBtn{
+z-index:9999!important;
+}
+
+@supports (height:100dvh){
+.container{
+min-height:calc(100dvh - 96px)!important;
+}
+}
+
+@media(max-width:430px){
+.container{
+padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))!important;
+}
+.emptyBox{
+margin-bottom:calc(120px + env(safe-area-inset-bottom,0px))!important;
+}
+}
+
 </style>
 
 <script>
@@ -7919,10 +8002,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1421" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1422" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.21</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.22</div>
 </div>
 </div>
 
@@ -8418,9 +8501,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.21";
+const APP_VERSION = "v1.4.22";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1421", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1422", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8531,7 +8614,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.21").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.22").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
