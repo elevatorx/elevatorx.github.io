@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1428_ARKEL_ARL300_BASLANGIC_KESIN | APP_VERSION v1.4.28 -->
+<!-- ELEVATORX_V1429_ARKEL_ARL300_HATA_KODLARI_H1_H34_KESIN | APP_VERSION v1.4.29 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1428">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1428">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1428">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1428">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1428">
-<link rel="manifest" href="/manifest.webmanifest?v=1428">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1429">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1429">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1429">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1429">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1429">
+<link rel="manifest" href="/manifest.webmanifest?v=1429">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8820,10 +8820,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1428" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1429" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.28</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.29</div>
 </div>
 </div>
 
@@ -9363,9 +9363,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.28";
+const APP_VERSION = "v1.4.29";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1428", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1429", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9476,7 +9476,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.28").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.29").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -16359,90 +16359,510 @@ const ARKEL_ARL300_RESMI_LINK = "https://www.arkel.com.tr/urunler/asansor-kumand
 
 function teknikArkelArl300Kayitlari(){
 return [
-{
-baslik:"ARL-300 — Emniyet Devresi Kontrolü",
-tip:"Arkel ARL-300",
-kategori:"ariza",
-aciklama:"Emniyet zinciri kesildiğinde ilk kontrol sırası.",
-kod:"Emniyet / Stop",
-etiket:"Arkel",
-kontroller:[
-"Stop, kapı kilidi ve emniyet kontaklarını sırayla ölç.",
-"120/125/130 benzeri emniyet hatlarında gevşek kontak ihtimalini kontrol et.",
-"Hata silmeden önce hangi hatta kesinti olduğunu not al."
-],
-arama:"arkel arl 300 emniyet stop kapı kilidi 120 125 130"
-},
-{
-baslik:"ARL-300 — Kapı Açma/Kapama Sorunu",
-tip:"Arkel ARL-300",
-kategori:"ariza",
-aciklama:"Kapı operatörü veya kapı emniyeti kaynaklı sorunlarda hızlı kontrol.",
-kod:"Kapı",
-etiket:"Kapı",
-kontroller:[
-"Fotosel, kapı kilidi ve kapı limitlerini kontrol et.",
-"Kapı motoru/operatör beslemesini ve aç-kapa komutlarını izle.",
-"Mekanikte kızak, paten, kayış ve sıkışma kontrolü yap."
-],
-arama:"arkel arl 300 kapı kapı motoru fotosel kilit operatör"
-},
-{
-baslik:"ARL-300 — Kuyu Kopyalama / Manyetik Şalter",
-tip:"Arkel ARL-300",
-kategori:"ariza",
-aciklama:"Pozisyon bilgisi ve kat algısı karıştığında kontrol edilecekler.",
-kod:"Kuyu Kopyalama",
-etiket:"Konum",
-kontroller:[
-"Manyetik şalter ve mıknatıs yerleşimlerini kontrol et.",
-"Kuyu kopyalama işlemi öncesi mevcut ayarları not al.",
-"Kat kaçırma varsa şalter yönü, mesafe ve kablo bağlantısını kontrol et."
-],
-arama:"arkel arl 300 kuyu kopyalama manyetik şalter mıknatıs pozisyon"
-},
-{
-baslik:"ARL-300 — LCD / Menü / Şifre",
-tip:"Arkel ARL-300",
-kategori:"not",
-aciklama:"Kart üstü ekran ve menü kullanımında saha notu.",
-kod:"LCD Menü",
-etiket:"Not",
-kontroller:[
-"LCD kontrast/parlaklık ayarıyla ekran okunabilirliğini kontrol et.",
-"Parametre değiştirmeden önce eski değeri yaz.",
-"Şifre/PUK işlemlerinde yetkili bilgi olmadan rastgele deneme yapma."
-],
-arama:"arkel arl 300 lcd menü şifre puk kontrast"
-},
-{
-baslik:"ARL-300 — VVVF / Çift Hız / Hidrolik Kontrol",
-tip:"Arkel ARL-300",
-kategori:"not",
-aciklama:"Tahrik tipine göre ilk bakış kontrolü.",
-kod:"Tahrik",
-etiket:"Sürücü",
-kontroller:[
-"Kurulumun çift hızlı, hidrolik veya VVVF olduğuna göre bağlantıları kontrol et.",
-"Sürücü hata ekranı varsa önce sürücü hatasını oku.",
-"Fren, yön kontaktörü ve motor çıkışlarını ayrı ayrı gözle."
-],
-arama:"arkel arl 300 vvvf çift hızlı hidrolik sürücü motor fren"
-},
-{
-baslik:"ARL-300 — Grup / Çağrı / Kayıt Sorunu",
-tip:"Arkel ARL-300",
-kategori:"ariza",
-aciklama:"Çağrı almama veya yanlış kayıt davranışlarında hızlı saha kontrolü.",
-kod:"Çağrı",
-etiket:"Kayıt",
-kontroller:[
-"Kat ve kabin buton girişlerini kontrol et.",
-"Toplama tipi ve durak ayarlarını kontrol et.",
-"Grup kumanda varsa diğer asansörle haberleşme ve kat ayarlarını doğrula."
-],
-arama:"arkel arl 300 çağrı kayıt buton grup kumanda durak"
-}
+  {
+    "baslik": "ARL-300 H1 — Kapı kilit hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "140 sinyali yok.",
+    "kod": "H1",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı kilit hattını ve 140 sinyalini ölç.",
+      "Kapı kontağı, kilit fişi ve seri emniyet bağlantılarını kontrol et.",
+      "Kapı kapalıyken 140 gelmiyorsa kilit/kablo tarafını sırayla takip et."
+    ],
+    "arama": "arkel arl 300 H1 Kapı kilit hatası 140 sinyali yok. Kapı kilit hattını ve 140 sinyalini ölç. Kapı kontağı, kilit fişi ve seri emniyet bağlantılarını kontrol et. Kapı kapalıyken 140 gelmiyorsa kilit/kablo tarafını sırayla takip et."
+  },
+  {
+    "baslik": "ARL-300 H2 — Kattan kata maksimum seyir süresi aşıldı",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kabinin kattan kata hareket süresi parametre sınırını geçti.",
+    "kod": "H2",
+    "etiket": "Süre",
+    "kontroller": [
+      "KATLAR ARASI MAX süresini kontrol et.",
+      "Sürücü/motor hareketini ve fren açmayı gözle.",
+      "Mekanik sıkışma, düşük hızda kalma veya hedefe varamama durumunu kontrol et."
+    ],
+    "arama": "arkel arl 300 H2 Kattan kata maksimum seyir süresi aşıldı Kabinin kattan kata hareket süresi parametre sınırını geçti. KATLAR ARASI MAX süresini kontrol et. Sürücü/motor hareketini ve fren açmayı gözle. Mekanik sıkışma, düşük hızda kalma veya hedefe varamama durumunu kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H3 — Kapı uzun süredir açık kaldı",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kapı açık hata süresi aşıldı.",
+    "kod": "H3",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı açık/kapanma limitlerini kontrol et.",
+      "Fotosel veya sıkışma kontağı sürekli aktif mi bak.",
+      "Kapı açık hatası süresi ve kapı operatörü davranışını kontrol et."
+    ],
+    "arama": "arkel arl 300 H3 Kapı uzun süredir açık kaldı Kapı açık hata süresi aşıldı. Kapı açık/kapanma limitlerini kontrol et. Fotosel veya sıkışma kontağı sürekli aktif mi bak. Kapı açık hatası süresi ve kapı operatörü davranışını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H4 — Maksimum yavaş seyir süresi aşıldı",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Yavaş hızda seyir süresi limitini geçti.",
+    "kod": "H4",
+    "etiket": "Süre",
+    "kontroller": [
+      "YAVAS MAX SEYIR süresini kontrol et.",
+      "Kat durdurucu/manyetik şalterleri kontrol et.",
+      "Yavaş hız komutu, sürücü ayarı ve kabin seviye algısını kontrol et."
+    ],
+    "arama": "arkel arl 300 H4 Maksimum yavaş seyir süresi aşıldı Yavaş hızda seyir süresi limitini geçti. YAVAS MAX SEYIR süresini kontrol et. Kat durdurucu/manyetik şalterleri kontrol et. Yavaş hız komutu, sürücü ayarı ve kabin seviye algısını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H5 — Alt ve üst limit birlikte kesiyor",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Yukarı ve aşağı limit kesicilerin ikisi de kesiyor.",
+    "kod": "H5",
+    "etiket": "Limit",
+    "kontroller": [
+      "817 ve 818 limit kesicileri ayrı ayrı kontrol et.",
+      "Limit kablolarında kısa devre/yanlış bağlantı var mı bak.",
+      "Kabin konumu ile limitlerin fiziksel durumunu karşılaştır."
+    ],
+    "arama": "arkel arl 300 H5 Alt ve üst limit birlikte kesiyor Yukarı ve aşağı limit kesicilerin ikisi de kesiyor. 817 ve 818 limit kesicileri ayrı ayrı kontrol et. Limit kablolarında kısa devre/yanlış bağlantı var mı bak. Kabin konumu ile limitlerin fiziksel durumunu karşılaştır."
+  },
+  {
+    "baslik": "ARL-300 H6 — Aşağı harekette yukarı limit kesti",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Aşağı hareket sırasında yukarı limit kesici devreye girdi.",
+    "kod": "H6",
+    "etiket": "Limit",
+    "kontroller": [
+      "818/yukarı limit bağlantısını kontrol et.",
+      "Limit isimleri veya kablo uçları karışmış mı kontrol et.",
+      "Hareket yönü ve limit girişlerini ekrandan takip et."
+    ],
+    "arama": "arkel arl 300 H6 Aşağı harekette yukarı limit kesti Aşağı hareket sırasında yukarı limit kesici devreye girdi. 818/yukarı limit bağlantısını kontrol et. Limit isimleri veya kablo uçları karışmış mı kontrol et. Hareket yönü ve limit girişlerini ekrandan takip et."
+  },
+  {
+    "baslik": "ARL-300 H7 — Yukarı harekette aşağı limit kesti",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Yukarı hareket sırasında aşağı limit kesici devreye girdi.",
+    "kod": "H7",
+    "etiket": "Limit",
+    "kontroller": [
+      "817/aşağı limit bağlantısını kontrol et.",
+      "Limit uçlarının ters bağlanıp bağlanmadığını kontrol et.",
+      "Kabin hareket yönü ile limit sinyalini karşılaştır."
+    ],
+    "arama": "arkel arl 300 H7 Yukarı harekette aşağı limit kesti Yukarı hareket sırasında aşağı limit kesici devreye girdi. 817/aşağı limit bağlantısını kontrol et. Limit uçlarının ters bağlanıp bağlanmadığını kontrol et. Kabin hareket yönü ile limit sinyalini karşılaştır."
+  },
+  {
+    "baslik": "ARL-300 H8 — Motor PTC devresi kesti",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Motor aşırı ısı algılandı.",
+    "kod": "H8",
+    "etiket": "Motor",
+    "kontroller": [
+      "Motor sıcaklığını kontrol et.",
+      "PTC/termistör hattını ölç.",
+      "Motor yüklenmesi, havalandırma ve sık kalkış durumunu kontrol et."
+    ],
+    "arama": "arkel arl 300 H8 Motor PTC devresi kesti Motor aşırı ısı algılandı. Motor sıcaklığını kontrol et. PTC/termistör hattını ölç. Motor yüklenmesi, havalandırma ve sık kalkış durumunu kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H9 — Sistem hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kart sistem hatası algıladı.",
+    "kod": "H9",
+    "etiket": "Sistem",
+    "kontroller": [
+      "Kart beslemelerini kontrol et.",
+      "Hata tekrar ediyorsa enerji kes-aç sonrası davranışı izle.",
+      "Tekrarlayan sistem hatasında üretici teknik destek/kılavuz kontrolü yap."
+    ],
+    "arama": "arkel arl 300 H9 Sistem hatası Kart sistem hatası algıladı. Kart beslemelerini kontrol et. Hata tekrar ediyorsa enerji kes-aç sonrası davranışı izle. Tekrarlayan sistem hatasında üretici teknik destek/kılavuz kontrolü yap."
+  },
+  {
+    "baslik": "ARL-300 H10 — Kontaktör geri besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kontaktör geri beslemesi beklenen durumda değil.",
+    "kod": "H10",
+    "etiket": "Kontaktör",
+    "kontroller": [
+      "Kontaktör yardımcı kontaklarını kontrol et.",
+      "Geri besleme kablosunu ve kart girişini ölç.",
+      "Kontaktör yapışması veya bobin gecikmesi var mı kontrol et."
+    ],
+    "arama": "arkel arl 300 H10 Kontaktör geri besleme hatası Kontaktör geri beslemesi beklenen durumda değil. Kontaktör yardımcı kontaklarını kontrol et. Geri besleme kablosunu ve kart girişini ölç. Kontaktör yapışması veya bobin gecikmesi var mı kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H11 — ML1 ve ML2 kısa devre",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "ML1 ve ML2 sinyalleri birbirine kısa devre.",
+    "kod": "H11",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 şalterlerini ayrı ayrı ölç.",
+      "Mıknatıs/şalter kablolarında kısa devre kontrolü yap.",
+      "Kuyu tesisatı ve klemens bağlantılarını kontrol et."
+    ],
+    "arama": "arkel arl 300 H11 ML1 ve ML2 kısa devre ML1 ve ML2 sinyalleri birbirine kısa devre. ML1-ML2 şalterlerini ayrı ayrı ölç. Mıknatıs/şalter kablolarında kısa devre kontrolü yap. Kuyu tesisatı ve klemens bağlantılarını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H12 — Kapı köprüleme röleleri çekmedi",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "SR2 ve SR3 kapı köprüleme röleleri çekmedi.",
+    "kod": "H12",
+    "etiket": "Köprüleme",
+    "kontroller": [
+      "SR2-SR3 rölelerini ve çıkışlarını kontrol et.",
+      "Kapı köprüleme parametre/şartlarının oluşup oluşmadığını kontrol et.",
+      "Röle beslemesi ve emniyet devresi bağlantılarını ölç."
+    ],
+    "arama": "arkel arl 300 H12 Kapı köprüleme röleleri çekmedi SR2 ve SR3 kapı köprüleme röleleri çekmedi. SR2-SR3 rölelerini ve çıkışlarını kontrol et. Kapı köprüleme parametre/şartlarının oluşup oluşmadığını kontrol et. Röle beslemesi ve emniyet devresi bağlantılarını ölç."
+  },
+  {
+    "baslik": "ARL-300 H13 — Kapı köprüleme röleleri bırakmadı",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "SR2 veya SR3 kapı köprüleme rölesi bırakmadı.",
+    "kod": "H13",
+    "etiket": "Köprüleme",
+    "kontroller": [
+      "SR2-SR3 rölelerinin yapışma ihtimalini kontrol et.",
+      "Röle çıkışlarının enerjisiz durumda normale döndüğünü ölç.",
+      "Kapı köprüleme devresinde kısa devre veya yapışık kontak ara."
+    ],
+    "arama": "arkel arl 300 H13 Kapı köprüleme röleleri bırakmadı SR2 veya SR3 kapı köprüleme rölesi bırakmadı. SR2-SR3 rölelerinin yapışma ihtimalini kontrol et. Röle çıkışlarının enerjisiz durumda normale döndüğünü ölç. Kapı köprüleme devresinde kısa devre veya yapışık kontak ara."
+  },
+  {
+    "baslik": "ARL-300 H14 — Kapı köprüleme sonrası 140 var",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kapı köprüleme sonlandırılmasına rağmen 140 devresi var.",
+    "kod": "H14",
+    "etiket": "Köprüleme",
+    "kontroller": [
+      "140 devresinde köprü/kaçak bağlantı var mı kontrol et.",
+      "Kapı kilit hattını ve köprüleme röle kontaklarını ölç.",
+      "Kapı köprüleme sonlandıktan sonra emniyet zincirini takip et."
+    ],
+    "arama": "arkel arl 300 H14 Kapı köprüleme sonrası 140 var Kapı köprüleme sonlandırılmasına rağmen 140 devresi var. 140 devresinde köprü/kaçak bağlantı var mı kontrol et. Kapı kilit hattını ve köprüleme röle kontaklarını ölç. Kapı köprüleme sonlandıktan sonra emniyet zincirini takip et."
+  },
+  {
+    "baslik": "ARL-300 H15 — RST şebeke besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "RST şebeke beslemesinde hata algılandı.",
+    "kod": "H15",
+    "etiket": "Faz",
+    "kontroller": [
+      "Faz sırası ve eksik faz kontrolü yap.",
+      "L1-L2-L3 gerilimlerini ölç.",
+      "RST faz kontrol parametresini ve bağlantısını kontrol et."
+    ],
+    "arama": "arkel arl 300 H15 RST şebeke besleme hatası RST şebeke beslemesinde hata algılandı. Faz sırası ve eksik faz kontrolü yap. L1-L2-L3 gerilimlerini ölç. RST faz kontrol parametresini ve bağlantısını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H16 — 24V besleme düşük",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "24V/100 besleme gerilimi limitin altında.",
+    "kod": "H16",
+    "etiket": "Besleme",
+    "kontroller": [
+      "100/24V besleme gerilimini ölç.",
+      "24V hattında kısa devre veya fazla yük var mı kontrol et.",
+      "Güç kaynağı ve kart besleme klemenslerini kontrol et."
+    ],
+    "arama": "arkel arl 300 H16 24V besleme düşük 24V/100 besleme gerilimi limitin altında. 100/24V besleme gerilimini ölç. 24V hattında kısa devre veya fazla yük var mı kontrol et. Güç kaynağı ve kart besleme klemenslerini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H17 — PTC devresi yok",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "PTC devresi yok, motor aşırı ısındı olarak algılandı.",
+    "kod": "H17",
+    "etiket": "Motor",
+    "kontroller": [
+      "PTC hattının kopuk olup olmadığını kontrol et.",
+      "Motor termistör bağlantılarını ölç.",
+      "PTC kullanılmıyorsa bağlantı/parametre uygunluğunu kontrol et."
+    ],
+    "arama": "arkel arl 300 H17 PTC devresi yok PTC devresi yok, motor aşırı ısındı olarak algılandı. PTC hattının kopuk olup olmadığını kontrol et. Motor termistör bağlantılarını ölç. PTC kullanılmıyorsa bağlantı/parametre uygunluğunu kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H18 — VVVF sürücü hata sinyali",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "VVVF motor sürücüsünden hata sinyali geliyor.",
+    "kod": "H18",
+    "etiket": "Sürücü",
+    "kontroller": [
+      "Sürücü ekranındaki hata kodunu oku.",
+      "Sürücü hata çıkışı ve kart giriş bağlantısını kontrol et.",
+      "Motor, fren direnci, enkoder ve besleme tarafını kontrol et."
+    ],
+    "arama": "arkel arl 300 H18 VVVF sürücü hata sinyali VVVF motor sürücüsünden hata sinyali geliyor. Sürücü ekranındaki hata kodunu oku. Sürücü hata çıkışı ve kart giriş bağlantısını kontrol et. Motor, fren direnci, enkoder ve besleme tarafını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H19 — Grup kimlik çakışması",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Aynı grup kimliği kullanılıyor.",
+    "kod": "H19",
+    "etiket": "Grup",
+    "kontroller": [
+      "Grup kimliği parametrelerini kontrol et.",
+      "Aynı gruptaki panolarda kimlikleri farklı ayarla.",
+      "RS-485 grup haberleşme bağlantısını kontrol et."
+    ],
+    "arama": "arkel arl 300 H19 Grup kimlik çakışması Aynı grup kimliği kullanılıyor. Grup kimliği parametrelerini kontrol et. Aynı gruptaki panolarda kimlikleri farklı ayarla. RS-485 grup haberleşme bağlantısını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H20 — 120 stop devresi yok",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "120/stop devresi yok, asansör blokeye alındı.",
+    "kod": "H20",
+    "etiket": "Stop",
+    "kontroller": [
+      "120 stop hattını sırayla takip et.",
+      "Stop butonu, revizyon, regülatör ve emniyet kontaklarını kontrol et.",
+      "120 fonksiyonu parametresinin davranışını kontrol et."
+    ],
+    "arama": "arkel arl 300 H20 120 stop devresi yok 120/stop devresi yok, asansör blokeye alındı. 120 stop hattını sırayla takip et. Stop butonu, revizyon, regülatör ve emniyet kontaklarını kontrol et. 120 fonksiyonu parametresinin davranışını kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H21 — Harici güvenlik rölesi geri besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Harici güvenlik rölesi geri beslemesi hatalı.",
+    "kod": "H21",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "Harici emniyet rölesi/kontaktör geri beslemesini kontrol et.",
+      "PI/geri besleme hattını ölç.",
+      "Hidrolik sistemlerde harici emniyet rölesi parametresini kontrol et."
+    ],
+    "arama": "arkel arl 300 H21 Harici güvenlik rölesi geri besleme hatası Harici güvenlik rölesi geri beslemesi hatalı. Harici emniyet rölesi/kontaktör geri beslemesini kontrol et. PI/geri besleme hattını ölç. Hidrolik sistemlerde harici emniyet rölesi parametresini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H22 — Bakım süresi geçti",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Tanımlı bakım süresi doldu.",
+    "kod": "H22",
+    "etiket": "Bakım",
+    "kontroller": [
+      "Bakım süresi parametresini kontrol et.",
+      "Bakım işlemi yapıldıysa bakım sayacını/uyarısını sıfırla.",
+      "Asansörün bakım periyodunu saha kayıtlarınla karşılaştır."
+    ],
+    "arama": "arkel arl 300 H22 Bakım süresi geçti Tanımlı bakım süresi doldu. Bakım süresi parametresini kontrol et. Bakım işlemi yapıldıysa bakım sayacını/uyarısını sıfırla. Asansörün bakım periyodunu saha kayıtlarınla karşılaştır."
+  },
+  {
+    "baslik": "ARL-300 H23 — A3 HDU valfi test hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "A3 HDU valfi testinde hata algılandı.",
+    "kod": "H23",
+    "etiket": "Hidrolik",
+    "kontroller": [
+      "A3 valf bağlantılarını kontrol et.",
+      "Hidrolik ünite ve valf bobinlerini ölç.",
+      "A3 valf kontrol/test parametrelerini kontrol et."
+    ],
+    "arama": "arkel arl 300 H23 A3 HDU valfi test hatası A3 HDU valfi testinde hata algılandı. A3 valf bağlantılarını kontrol et. Hidrolik ünite ve valf bobinlerini ölç. A3 valf kontrol/test parametrelerini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H24 — UCM algılama hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "İstenmeyen kabin hareketi algılama hatası.",
+    "kod": "H24",
+    "etiket": "UCM",
+    "kontroller": [
+      "UCM güvenlik devresini kontrol et.",
+      "Kapı açık bölge ve seviyeleme algılarını kontrol et.",
+      "Fren/valf/kontaktör davranışını dikkatle test et."
+    ],
+    "arama": "arkel arl 300 H24 UCM algılama hatası İstenmeyen kabin hareketi algılama hatası. UCM güvenlik devresini kontrol et. Kapı açık bölge ve seviyeleme algılarını kontrol et. Fren/valf/kontaktör davranışını dikkatle test et."
+  },
+  {
+    "baslik": "ARL-300 H25 — Kontaktör geri besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kontaktör geri beslemesi hatalı algılandı.",
+    "kod": "H25",
+    "etiket": "Kontaktör",
+    "kontroller": [
+      "Kontaktör yardımcı kontaklarını kontrol et.",
+      "Geri besleme hattında yapışık/kopuk kontak ara.",
+      "Kontaktör gecikme ve bobin beslemesini kontrol et."
+    ],
+    "arama": "arkel arl 300 H25 Kontaktör geri besleme hatası Kontaktör geri beslemesi hatalı algılandı. Kontaktör yardımcı kontaklarını kontrol et. Geri besleme hattında yapışık/kopuk kontak ara. Kontaktör gecikme ve bobin beslemesini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H26 — Fren geri besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Fren geri besleme bilgisi hatalı.",
+    "kod": "H26",
+    "etiket": "Fren",
+    "kontroller": [
+      "Fren switch/kontak bilgisini kontrol et.",
+      "Frenin açıp kapadığını mekanik olarak gözlemle.",
+      "Fren beslemesi ve geri besleme girişini ölç."
+    ],
+    "arama": "arkel arl 300 H26 Fren geri besleme hatası Fren geri besleme bilgisi hatalı. Fren switch/kontak bilgisini kontrol et. Frenin açıp kapadığını mekanik olarak gözlemle. Fren beslemesi ve geri besleme girişini ölç."
+  },
+  {
+    "baslik": "ARL-300 H27 — Fren geri besleme hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Fren geri besleme bilgisi hatalı.",
+    "kod": "H27",
+    "etiket": "Fren",
+    "kontroller": [
+      "Fren switch/kontak bilgisini kontrol et.",
+      "Fren rölesi/çıkışı ve kablo hattını ölç.",
+      "Mekanik frenin sıkışma/gecikme durumunu kontrol et."
+    ],
+    "arama": "arkel arl 300 H27 Fren geri besleme hatası Fren geri besleme bilgisi hatalı. Fren switch/kontak bilgisini kontrol et. Fren rölesi/çıkışı ve kablo hattını ölç. Mekanik frenin sıkışma/gecikme durumunu kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H28 — Kapı güvenlik devresi köprülü",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kapı güvenlik devresinde köprüleme algılandı.",
+    "kod": "H28",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı emniyet devresinde kalıcı köprü var mı kontrol et.",
+      "Kapı kilitleri ve güvenlik kontaklarını tek tek ölç.",
+      "Kapı köprüleme rölelerinin normal konuma döndüğünü kontrol et."
+    ],
+    "arama": "arkel arl 300 H28 Kapı güvenlik devresi köprülü Kapı güvenlik devresinde köprüleme algılandı. Kapı emniyet devresinde kalıcı köprü var mı kontrol et. Kapı kilitleri ve güvenlik kontaklarını tek tek ölç. Kapı köprüleme rölelerinin normal konuma döndüğünü kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H29 — I-Valve hatası",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "I-Valve / valf kontrol hatası.",
+    "kod": "H29",
+    "etiket": "Hidrolik",
+    "kontroller": [
+      "I-Valve bağlantısını kontrol et.",
+      "Valf bobini ve sürücü/çıkış tarafını ölç.",
+      "Hidrolik ünite bağlantı ve kontrol parametrelerini kontrol et."
+    ],
+    "arama": "arkel arl 300 H29 I-Valve hatası I-Valve / valf kontrol hatası. I-Valve bağlantısını kontrol et. Valf bobini ve sürücü/çıkış tarafını ölç. Hidrolik ünite bağlantı ve kontrol parametrelerini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H30 — ML1/ML2 sinyal sıralaması ters",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "ML1 ve ML2 sinyal sırası ters algılandı.",
+    "kod": "H30",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 şalter sırasını kontrol et.",
+      "Mıknatıs dizilimi ve şalter konumlarını kontrol et.",
+      "Kuyu öğrenme/pozisyon algılamayı doğrula."
+    ],
+    "arama": "arkel arl 300 H30 ML1/ML2 sinyal sıralaması ters ML1 ve ML2 sinyal sırası ters algılandı. ML1-ML2 şalter sırasını kontrol et. Mıknatıs dizilimi ve şalter konumlarını kontrol et. Kuyu öğrenme/pozisyon algılamayı doğrula."
+  },
+  {
+    "baslik": "ARL-300 H31 — Öğrenilen bayrak sayısı yanlış",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Kuyu öğrenmede bayrak sayısı beklenen gibi değil.",
+    "kod": "H31",
+    "etiket": "Kuyu",
+    "kontroller": [
+      "Durak sayısı parametresini kontrol et.",
+      "Mıknatıs/bayrak sayısı ve yerleşimini kontrol et.",
+      "Kuyu öğrenmeyi doğru şartlarda tekrar yap."
+    ],
+    "arama": "arkel arl 300 H31 Öğrenilen bayrak sayısı yanlış Kuyu öğrenmede bayrak sayısı beklenen gibi değil. Durak sayısı parametresini kontrol et. Mıknatıs/bayrak sayısı ve yerleşimini kontrol et. Kuyu öğrenmeyi doğru şartlarda tekrar yap."
+  },
+  {
+    "baslik": "ARL-300 H32 — 817/818 yavaşlatıcısı yanlış yönde kesti",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Yanlış yönde 817/818 yavaşlatıcısı kesti.",
+    "kod": "H32",
+    "etiket": "Limit",
+    "kontroller": [
+      "817/818 yavaşlatıcı bağlantılarını kontrol et.",
+      "Yön bilgisi ve yavaşlatıcı yerleşimini karşılaştır.",
+      "Kabin yönüyle kesici sinyalinin uyumunu kontrol et."
+    ],
+    "arama": "arkel arl 300 H32 817/818 yavaşlatıcısı yanlış yönde kesti Yanlış yönde 817/818 yavaşlatıcısı kesti. 817/818 yavaşlatıcı bağlantılarını kontrol et. Yön bilgisi ve yavaşlatıcı yerleşimini karşılaştır. Kabin yönüyle kesici sinyalinin uyumunu kontrol et."
+  },
+  {
+    "baslik": "ARL-300 H33 — Enkoder yönü ters",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Enkoder yönü ters algılandı.",
+    "kod": "H33",
+    "etiket": "Enkoder",
+    "kontroller": [
+      "Enkoder yönünü ve A/B sinyallerini kontrol et.",
+      "Motor yönü ile enkoder sayım yönünü karşılaştır.",
+      "Gerekirse enkoder yön/bağlantı ayarını düzelt."
+    ],
+    "arama": "arkel arl 300 H33 Enkoder yönü ters Enkoder yönü ters algılandı. Enkoder yönünü ve A/B sinyallerini kontrol et. Motor yönü ile enkoder sayım yönünü karşılaştır. Gerekirse enkoder yön/bağlantı ayarını düzelt."
+  },
+  {
+    "baslik": "ARL-300 H34 — Enkoder sinyali yok",
+    "tip": "Arkel ARL-300",
+    "kategori": "ariza",
+    "aciklama": "Enkoder sinyali alınamıyor.",
+    "kod": "H34",
+    "etiket": "Enkoder",
+    "kontroller": [
+      "Enkoder beslemesini kontrol et.",
+      "A/B sinyal uçlarını ve ekranlı kabloyu ölç.",
+      "Sürücü/anakart enkoder bağlantılarını ve kopukluk ihtimalini kontrol et."
+    ],
+    "arama": "arkel arl 300 H34 Enkoder sinyali yok Enkoder sinyali alınamıyor. Enkoder beslemesini kontrol et. A/B sinyal uçlarını ve ekranlı kabloyu ölç. Sürücü/anakart enkoder bağlantılarını ve kopukluk ihtimalini kontrol et."
+  },
+  {
+    "baslik": "ARL-300 — LCD / Menü / Şifre",
+    "tip": "Arkel ARL-300",
+    "kategori": "not",
+    "aciklama": "Kart üstü ekran ve menü kullanımında saha notu.",
+    "kod": "LCD Menü",
+    "etiket": "Not",
+    "kontroller": [
+      "LCD kontrast/parlaklık ayarıyla ekran okunabilirliğini kontrol et.",
+      "Parametre değiştirmeden önce eski değeri yaz.",
+      "Şifre/PUK işlemlerinde yetkili bilgi olmadan rastgele deneme yapma."
+    ],
+    "arama": "arkel arl 300 lcd menü şifre puk kontrast"
+  },
+  {
+    "baslik": "ARL-300 — VVVF / Çift Hız / Hidrolik Kontrol",
+    "tip": "Arkel ARL-300",
+    "kategori": "not",
+    "aciklama": "Tahrik tipine göre ilk bakış kontrolü.",
+    "kod": "Tahrik",
+    "etiket": "Sürücü",
+    "kontroller": [
+      "Kurulumun çift hızlı, hidrolik veya VVVF olduğuna göre bağlantıları kontrol et.",
+      "Sürücü hata ekranı varsa önce sürücü hatasını oku.",
+      "Fren, yön kontaktörü ve motor çıkışlarını ayrı ayrı gözle."
+    ],
+    "arama": "arkel arl 300 vvvf çift hızlı hidrolik sürücü motor fren"
+  }
 ];
 }
 
@@ -16462,7 +16882,7 @@ return `
       <span class="teknikTag">Arkel</span>
     </div>
     <ul class="teknikChecks">
-      <li>ARL-300 resmi ürün bilgisi ve teknik özellikler için kullan.</li>
+      <li>ARL-300 kullanıcı kılavuzunda hata kodları bölümü 29. sayfadan başlar; H1-H34 kodları uygulamaya saha notu olarak eklendi.</li><li>ARL-300 resmi ürün bilgisi ve teknik özellikler için kullan.</li>
       <li>Hata/parametre detayında resmi doküman ve saha ölçümü esas alınmalıdır.</li>
       <li>Bu uygulamadaki notlar hızlı saha yardımcısıdır.</li>
     </ul>
@@ -16615,9 +17035,9 @@ const teknikAnaKartlar = [
   {
     id:"arkel",
     baslik:"Arkel",
-    aciklama:"ARL-300 ile başladı. Diğer Arkel kartları sırayla eklenecek.",
+    aciklama:"ARL-300 H1-H34 hata kodları eklendi. Diğer Arkel kartları sırayla gelecek.",
     icon:"A",
-    meta:["ARL-300","Kumanda","Resmi Link"],
+    meta:["ARL-300","H1-H34","Kumanda"],
     enabled:true,
     next:function(){ teknikGit("arkel"); }
   },
@@ -16959,9 +17379,9 @@ let devices = [
   {
     id:"arkel-arl300",
     baslik:"ARL-300",
-    aciklama:"Kumanda kartı saha notları ve resmi ürün sayfası.",
+    aciklama:"H1-H34 hata kodları, saha notları ve resmi ürün sayfası.",
     icon:"300",
-    meta:["24 durak","1.6 m/s","VVVF/Hidrolik"],
+    meta:["H1-H34","24 durak","VVVF/Hidrolik"],
     enabled:true
   },
   {
@@ -17000,15 +17420,15 @@ if(teknikView === "arkel-arl300"){
 teknikSetHeader("Arkel ARL-300","Saha notları, kılavuz bağlantısı ve başlangıç arıza kontrol başlıkları.","ARL-300","← Arkel");
 teknikSetPlaceholder("ARL-300 içinde ara...");
 teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300"]);
-if(notice) notice.textContent = "ARL-300 için önce saha notu ve resmi ürün sayfası bağlandı. Tam hata listesi izin/link geldikçe genişletilecek.";
+if(notice) notice.textContent = "ARL-300 H1-H34 hata kodları eklendi. Resmi doküman ve saha ölçümüyle doğrulayarak kullan.";
 
 let actions = [
   {
-    title:"Arıza / Kontrol Başlıkları",
-    desc:"Emniyet, kapı, kuyu kopyalama, çağrı ve tahrik kontrol notları.",
+    title:"Arıza Kodları",
+    desc:"ARL-300 H1-H34 hata kodları ve saha kontrol adımları.",
     icon:"!",
     onclick:"teknikGit('arkel-arl300-ariza')",
-    search:"arıza kontrol emniyet kapı kuyu çağrı tahrik"
+    search:"arıza kodları h1 h34 emniyet kapı kuyu enkoder limit"
   },
   {
     title:"Saha Notları",
@@ -17033,10 +17453,10 @@ return;
 }
 
 if(teknikView === "arkel-arl300-ariza"){
-teknikSetHeader("ARL-300 Kontrol Başlıkları","Arkel ARL-300 başlangıç saha kontrol notları.","Kontrol","← ARL-300");
-teknikSetPlaceholder("Ara: kapı, emniyet, kuyu, VVVF...");
+teknikSetHeader("ARL-300 Arıza Kodları","Arkel ARL-300 H1-H34 hata kodları.","Kontrol","← ARL-300");
+teknikSetPlaceholder("Kod ara: H1, H10, kapı, enkoder, limit...");
 teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300","Kontrol"]);
-if(notice) notice.textContent = "Bu bölüm resmi hata listesi değil; ARL-300 için hızlı saha kontrol başlıklarıdır.";
+if(notice) notice.textContent = "Bu bölüm ARL-300 kılavuzundaki H1-H34 hata kodlarını saha notu formatında gösterir.";
 
 let kayitlar = teknikArkelArl300Kayitlari().filter(function(k){
 return k.kategori !== "not" && (!q || teknikFilterText(k).includes(q));
