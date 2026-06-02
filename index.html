@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1423_TEKNIK_KUTUPHANE_BASLANGIC_KESIN | APP_VERSION v1.4.23 -->
+<!-- ELEVATORX_V1424_KONEL_REVO_LC_TAM_LISTE_LAYOUT_FIX_KESIN | APP_VERSION v1.4.24 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1423">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1423">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1423">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1423">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1423">
-<link rel="manifest" href="/manifest.webmanifest?v=1423">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1424">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1424">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1424">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1424">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1424">
+<link rel="manifest" href="/manifest.webmanifest?v=1424">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8170,6 +8170,168 @@ border-color:rgba(251,191,36,.22);
 color:#fbbf24;
 }
 
+
+
+/* === v1.4.24 — Teknik Kütüphane Layout Fix + Konel Tam Liste === */
+.teknikPanel{
+position:fixed!important;
+inset:0!important;
+z-index:900!important;
+display:none;
+overflow-y:auto!important;
+-webkit-overflow-scrolling:touch;
+padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(118px + env(safe-area-inset-bottom,0px))!important;
+box-sizing:border-box!important;
+min-height:100dvh!important;
+background:
+radial-gradient(circle at 50% -12%, rgba(47,111,240,.085), transparent 34%),
+radial-gradient(circle at 100% 12%, rgba(96,165,250,.06), transparent 30%),
+linear-gradient(180deg,#f7f8fc 0%,#f3f5fa 100%)!important;
+}
+
+.teknikHero{
+margin:0 0 10px!important;
+border-radius:24px!important;
+padding:13px!important;
+}
+
+.teknikBackBtn{
+height:34px!important;
+padding:0 12px!important;
+font-size:12px!important;
+margin:0 0 10px!important;
+}
+
+.teknikHero h2{
+font-size:24px!important;
+letter-spacing:-.55px!important;
+}
+
+.teknikHero p{
+font-size:12.4px!important;
+line-height:1.34!important;
+margin-top:5px!important;
+}
+
+.teknikHeroIcon{
+width:52px!important;
+height:52px!important;
+border-radius:18px!important;
+}
+
+.teknikHeroIcon svg{
+width:29px!important;
+height:29px!important;
+}
+
+.teknikSearchCard{
+border-radius:22px!important;
+padding:10px!important;
+margin-bottom:9px!important;
+}
+
+#teknikArama{
+height:46px!important;
+border-radius:16px!important;
+font-size:14px!important;
+margin-bottom:9px!important;
+}
+
+.teknikChips{
+gap:7px!important;
+}
+
+.teknikChip{
+padding:8px 11px!important;
+font-size:11.5px!important;
+}
+
+.teknikNotice{
+border-radius:18px!important;
+padding:10px 12px!important;
+font-size:11.4px!important;
+line-height:1.4!important;
+margin-bottom:9px!important;
+}
+
+.teknikListe{
+gap:8px!important;
+}
+
+.teknikCard{
+border-radius:20px!important;
+padding:12px!important;
+}
+
+.teknikCardHead{
+margin-bottom:7px!important;
+}
+
+.teknikTitle{
+font-size:15.8px!important;
+line-height:1.15!important;
+}
+
+.teknikDesc{
+font-size:11.7px!important;
+line-height:1.38!important;
+margin-top:4px!important;
+}
+
+.teknikType{
+font-size:9.8px!important;
+padding:5px 7px!important;
+}
+
+.teknikCodeBox{
+margin-top:8px!important;
+border-radius:15px!important;
+padding:9px 10px!important;
+}
+
+.teknikCodeTop{
+margin-bottom:6px!important;
+}
+
+.teknikCode{
+font-size:12.2px!important;
+}
+
+.teknikTag{
+font-size:9.5px!important;
+padding:4px 7px!important;
+}
+
+.teknikChecks{
+font-size:11.35px!important;
+line-height:1.46!important;
+padding-left:16px!important;
+}
+
+.teknikChecks li{
+margin-bottom:2px;
+}
+
+body.darkMode .teknikPanel,
+html.darkRoot .teknikPanel{
+background:
+radial-gradient(circle at 50% -10%, rgba(59,130,246,.13), transparent 36%),
+linear-gradient(180deg,#0b0f17 0%,#080c13 100%)!important;
+}
+
+@media(max-width:430px){
+.teknikPanel{
+padding-left:10px!important;
+padding-right:10px!important;
+}
+.teknikHero h2{font-size:22px!important;}
+.teknikHero p{font-size:12px!important;}
+.teknikTitle{font-size:15px!important;}
+.teknikDesc{font-size:11.2px!important;}
+.teknikChecks{font-size:10.9px!important;}
+.teknikType{font-size:9.4px!important;}
+}
+
 </style>
 
 <script>
@@ -8319,10 +8481,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1423" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1424" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.23</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.24</div>
 </div>
 </div>
 
@@ -8766,7 +8928,7 @@ Destek: supportelevatorx@gmail.com
   </div>
 
   <div class="teknikNotice">
-    Bu alan üretici kılavuzunun yerine geçmez. İlk sürümde örnek saha notları var; gerçek kılavuz/arıza kodları izinli veya kendi notlarımızla aşamalı eklenecek.
+    Konel Revo LC hata kodları Hata 01-50 saha notu formatında eklendi. Üretici kılavuzu yerine geçmez; uygulamadan önce resmi doküman ve saha ölçümüyle doğrula.
   </div>
 
   <div id="teknikListe" class="teknikListe"></div>
@@ -8867,9 +9029,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.23";
+const APP_VERSION = "v1.4.24";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1423", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1424", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8980,7 +9142,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.23").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.24").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -15081,81 +15243,761 @@ behavior:"smooth"
 
 
 const teknikKutuphaneKayitlari = [
-{
-  baslik:"Konel Revo LC",
-  tip:"Kumanda Kartı",
-  kategori:"kart",
-  favori:true,
-  aciklama:"Revo LC için hızlı saha kontrol notu. Detaylı parametre için resmi üretici kılavuzu kontrol edilmeli.",
-  kod:"Genel kontrol",
-  etiket:"Kart",
-  kontroller:[
-    "Besleme, emniyet devresi ve kapı kilit zinciri kontrol edilir.",
-    "Kontaktör geri besleme ve röle çıkışları ayrı ayrı izlenir.",
-    "Parametre değişikliği öncesi mevcut ayarlar not alınır."
-  ],
-  arama:"konel revo lc kart kumanda hata arıza"
-},
-{
-  baslik:"Aybey ACT",
-  tip:"Kumanda Kartı",
-  kategori:"kart",
-  favori:true,
-  aciklama:"Sahada hızlı bakış için ACT kart notları. Hata açıklamaları kendi teknik notlarımızla genişletilecek.",
-  kod:"Hata 24",
-  etiket:"Arıza",
-  kontroller:[
-    "Kontaktör yapışması / geri besleme hattı kontrol edilir.",
-    "Kontaktör yardımcı kontağı ve kablo bağlantısı kontrol edilir.",
-    "Enerji kesilip mekanik yapışma ihtimali gözlemlenir."
-  ],
-  arama:"aybey act hata 24 kontaktör yapıştı geri besleme"
-},
-{
-  baslik:"Arkel Sistem Notları",
-  tip:"Kumanda / Pano",
-  kategori:"kart",
-  favori:false,
-  aciklama:"Arkel pano ve kartlarda sahada bakılacak genel kontrol başlıkları.",
-  kod:"Genel pano kontrolü",
-  etiket:"Not",
-  kontroller:[
-    "Emniyet devresi, kapı kilitleri ve revizyon hattı sırayla takip edilir.",
-    "Sürücü haberleşme / yön kontaktörü çıkışları gözlenir.",
-    "Hata silmeden önce son arıza durumu not edilir."
-  ],
-  arama:"arkel pano kart emniyet revizyon sürücü haberleşme"
-},
-{
-  baslik:"Sürücü Ön Kontrol",
-  tip:"Sürücü",
-  kategori:"surucu",
-  favori:false,
-  aciklama:"Markadan bağımsız sürücü arızalarında ilk kontrol sırası.",
-  kod:"OC / OV / UV",
-  etiket:"Sürücü",
-  kontroller:[
-    "Şebeke voltajı, faz durumu ve topraklama kontrol edilir.",
-    "Motor kablosu, fren direnci ve enkoder bağlantısı gözlenir.",
-    "Arıza tekrar ediyorsa yük durumu ve mekanik sıkışma kontrol edilir."
-  ],
-  arama:"sürücü inverter oc ov uv over current over voltage under voltage fren direnci enkoder"
-},
-{
-  baslik:"Kapı Operatörü Notu",
-  tip:"Arıza Kodu",
-  kategori:"ariza",
-  favori:false,
-  aciklama:"Kapı motoru / operatör arızalarında hızlı saha kontrolü.",
-  kod:"Kapı açmıyor / kapanmıyor",
-  etiket:"Kapı",
-  kontroller:[
-    "Fotosel, kapı kontağı ve sıkışma algısı kontrol edilir.",
-    "Kayış, kızak, paten ve mekanik sürtme gözlenir.",
-    "Kapı kartı beslemesi ve motor çıkışı ölçülür."
-  ],
-  arama:"kapı operatörü kapı motoru fotosel kayış kızak paten kapı kartı"
-}
+  {
+    "baslik": "Konel Revo LC — Hızlı Kart Notu",
+    "tip": "Kumanda Kartı",
+    "kategori": "kart",
+    "favori": true,
+    "aciklama": "Revo LC için hızlı saha sayfası. Arıza kodları Hata 01-50 olarak aşağıda listelenir.",
+    "kod": "Revo LC",
+    "etiket": "Özet",
+    "kontroller": [
+      "Hata kodunu ekrandan net oku ve aynı kodla arama yap.",
+      "CAN, kapı emniyet, limit, ML ve faz hatalarında önce saha bağlantılarını ölç.",
+      "Parametre değişikliğinden önce mevcut değerleri not al."
+    ],
+    "arama": "konel revo lc kumanda kartı kullanım kılavuzu hata kodları"
+  },
+  {
+    "baslik": "Hata 01 — Kabin haberleşme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Ana kart ile kabin kartı CAN-Bus haberleşmesi yok.",
+    "kod": "Hata 01",
+    "etiket": "CAN1",
+    "kontroller": [
+      "CAN1 hattını kontrol et.",
+      "Fleks kabloda CANH/CANL yanında GND düzenini kontrol et.",
+      "Kabin kartı beslemesini ve konnektörleri kontrol et."
+    ],
+    "arama": "konel revo lc Hata 01 01 Kabin haberleşme hatası Ana kart ile kabin kartı CAN-Bus haberleşmesi yok. CAN1 hattını kontrol et. Fleks kabloda CANH/CANL yanında GND düzenini kontrol et. Kabin kartı beslemesini ve konnektörleri kontrol et."
+  },
+  {
+    "baslik": "Hata 02 — Kat haberleşme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Ana kart ile kat seri kartları arasında CAN-Bus haberleşmesi yok.",
+    "kod": "Hata 02",
+    "etiket": "CAN2",
+    "kontroller": [
+      "CAN2 hattını kontrol et.",
+      "CAN2 sonlandırma direncinin takılı olduğunu doğrula.",
+      "Kat seri kartı besleme ve bağlantılarını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 02 02 Kat haberleşme hatası Ana kart ile kat seri kartları arasında CAN-Bus haberleşmesi yok. CAN2 hattını kontrol et. CAN2 sonlandırma direncinin takılı olduğunu doğrula. Kat seri kartı besleme ve bağlantılarını kontrol et."
+  },
+  {
+    "baslik": "Hata 03 — Kapı kapatma hatası",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Kilit bekleme süresi sonunda kapı kapanma limitine ulaşılamadı.",
+    "kod": "Hata 03",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı limiti ve kapı kilidini kontrol et.",
+      "B05 kilit bekleme süresini kontrol et.",
+      "Kabin kartı A3-B3 kapı kapatma rölelerini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 03 03 Kapı kapatma hatası Kilit bekleme süresi sonunda kapı kapanma limitine ulaşılamadı. Kapı limiti ve kapı kilidini kontrol et. B05 kilit bekleme süresini kontrol et. Kabin kartı A3-B3 kapı kapatma rölelerini kontrol et."
+  },
+  {
+    "baslik": "Hata 04 — Kapı açma hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapı açma sinyali geldiği halde kapı emniyet hattı beklenen şekilde kesilmedi.",
+    "kod": "Hata 04",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı açma/kapatma bağlantılarını kontrol et.",
+      "Kabin kartı A5-B5 kapı açma rölelerini kontrol et.",
+      "Kapı operatörü çıkışlarını ve emniyet devresini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 04 04 Kapı açma hatası Kapı açma sinyali geldiği halde kapı emniyet hattı beklenen şekilde kesilmedi. Kapı açma/kapatma bağlantılarını kontrol et. Kabin kartı A5-B5 kapı açma rölelerini kontrol et. Kapı operatörü çıkışlarını ve emniyet devresini kontrol et."
+  },
+  {
+    "baslik": "Hata 05 — Çalışma bölge dışı",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Asansör çalışma bölgesinin dışına çıktı.",
+    "kod": "Hata 05",
+    "etiket": "Konum",
+    "kontroller": [
+      "Enkoder sinyalini kontrol et.",
+      "Kat mıknatıslarının yerleşimini kontrol et.",
+      "Kuyu tanıma ve konum bilgisini doğrula."
+    ],
+    "arama": "konel revo lc Hata 05 05 Çalışma bölge dışı Asansör çalışma bölgesinin dışına çıktı. Enkoder sinyalini kontrol et. Kat mıknatıslarının yerleşimini kontrol et. Kuyu tanıma ve konum bilgisini doğrula."
+  },
+  {
+    "baslik": "Hata 06 — Yüksek hız süre hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Harekette belirlenen sürede bir sonraki kata ulaşılamadı.",
+    "kod": "Hata 06",
+    "etiket": "Süre",
+    "kontroller": [
+      "B06 yüksek hız süresini kontrol et.",
+      "Kat mıknatıslarının doğru yerleştiğini kontrol et.",
+      "Sürücü hız/ivme ve mekanik sürtme durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 06 06 Yüksek hız süre hatası Harekette belirlenen sürede bir sonraki kata ulaşılamadı. B06 yüksek hız süresini kontrol et. Kat mıknatıslarının doğru yerleştiğini kontrol et. Sürücü hız/ivme ve mekanik sürtme durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 07 — Yanaşmada ML1-ML2 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Sürüklenme bölgesinde kat mıknatısı algılanmadı.",
+    "kod": "Hata 07",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 mıknatıs yerleşimini kontrol et.",
+      "I02/I03/I04 rampa değerlerini kontrol et.",
+      "Gerekirse kuyu tanımayı yeniden yap."
+    ],
+    "arama": "konel revo lc Hata 07 07 Yanaşmada ML1-ML2 hatası Sürüklenme bölgesinde kat mıknatısı algılanmadı. ML1-ML2 mıknatıs yerleşimini kontrol et. I02/I03/I04 rampa değerlerini kontrol et. Gerekirse kuyu tanımayı yeniden yap."
+  },
+  {
+    "baslik": "Hata 08 — Enkoder sayma hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Enkoder sayımı hatalı algılandı.",
+    "kod": "Hata 08",
+    "etiket": "Enkoder",
+    "kontroller": [
+      "Enkoder bağlantılarını kontrol et.",
+      "Enkoder yönü ve darbe bilgisini kontrol et.",
+      "Kablo/konektör gevşekliğini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 08 08 Enkoder sayma hatası Enkoder sayımı hatalı algılandı. Enkoder bağlantılarını kontrol et. Enkoder yönü ve darbe bilgisini kontrol et. Kablo/konektör gevşekliğini kontrol et."
+  },
+  {
+    "baslik": "Hata 09 — Bölge dışı kapı açma hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapı açma bölgesinde ML1-ML2 girişi yok.",
+    "kod": "Hata 09",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 şalterini kontrol et.",
+      "Kat mıknatıs yerleşimini kontrol et.",
+      "Kapı açma bölgesinin konumunu doğrula."
+    ],
+    "arama": "konel revo lc Hata 09 09 Bölge dışı kapı açma hatası Kapı açma bölgesinde ML1-ML2 girişi yok. ML1-ML2 şalterini kontrol et. Kat mıknatıs yerleşimini kontrol et. Kapı açma bölgesinin konumunu doğrula."
+  },
+  {
+    "baslik": "Hata 10 — Bölge dışı kapı kapama hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapı kapama bölgesinde ML1-ML2 girişi yok.",
+    "kod": "Hata 10",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 şalterini kontrol et.",
+      "Kat mıknatıs yerleşimini kontrol et.",
+      "Kapı bölgesi konum bilgisini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 10 10 Bölge dışı kapı kapama hatası Kapı kapama bölgesinde ML1-ML2 girişi yok. ML1-ML2 şalterini kontrol et. Kat mıknatıs yerleşimini kontrol et. Kapı bölgesi konum bilgisini kontrol et."
+  },
+  {
+    "baslik": "Hata 11 — Harekette 120 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında kapı/emniyet hattı kesildi.",
+    "kod": "Hata 11",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "İlgili kapı/emniyet bağlantılarını kontrol et.",
+      "Hareket sırasında gevşek kontak ihtimalini kontrol et.",
+      "Kapı kilidi ve emniyet zincirini ölç."
+    ],
+    "arama": "konel revo lc Hata 11 11 Harekette 120 hatası Hareket sırasında kapı/emniyet hattı kesildi. İlgili kapı/emniyet bağlantılarını kontrol et. Hareket sırasında gevşek kontak ihtimalini kontrol et. Kapı kilidi ve emniyet zincirini ölç."
+  },
+  {
+    "baslik": "Hata 12 — Harekette 125 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında emniyet hattı kesildi.",
+    "kod": "Hata 12",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "Kapı bağlantılarını kontrol et.",
+      "125 hattında temassızlık olup olmadığını kontrol et.",
+      "Kilit zincirini hareket sırasında izle."
+    ],
+    "arama": "konel revo lc Hata 12 12 Harekette 125 hatası Hareket sırasında emniyet hattı kesildi. Kapı bağlantılarını kontrol et. 125 hattında temassızlık olup olmadığını kontrol et. Kilit zincirini hareket sırasında izle."
+  },
+  {
+    "baslik": "Hata 13 — Harekette 130 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında emniyet hattı kesildi.",
+    "kod": "Hata 13",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "Kapı bağlantılarını kontrol et.",
+      "130 hattını ve kilit kontaklarını kontrol et.",
+      "Kablo gevşekliği ve seri kontakları kontrol et."
+    ],
+    "arama": "konel revo lc Hata 13 13 Harekette 130 hatası Hareket sırasında emniyet hattı kesildi. Kapı bağlantılarını kontrol et. 130 hattını ve kilit kontaklarını kontrol et. Kablo gevşekliği ve seri kontakları kontrol et."
+  },
+  {
+    "baslik": "Hata 14 — Dururken 120 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Bekleme sırasında emniyet devresi kesildi.",
+    "kod": "Hata 14",
+    "etiket": "Stop",
+    "kontroller": [
+      "Stop bağlantılarını kontrol et.",
+      "120 hattında kopuk/temassızlık kontrolü yap.",
+      "Emniyet zincirini sırayla takip et."
+    ],
+    "arama": "konel revo lc Hata 14 14 Dururken 120 hatası Bekleme sırasında emniyet devresi kesildi. Stop bağlantılarını kontrol et. 120 hattında kopuk/temassızlık kontrolü yap. Emniyet zincirini sırayla takip et."
+  },
+  {
+    "baslik": "Hata 15 — KRC hatası 1",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Hareket halindeyken kontaktör geri beslemesi algılandı.",
+    "kod": "Hata 15",
+    "etiket": "Kontaktör",
+    "kontroller": [
+      "Kontaktör kapalı kontaklarını kontrol et.",
+      "Yardımcı kontak/geri besleme kablosunu kontrol et.",
+      "Kontaktör yapışması ihtimalini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 15 15 KRC hatası 1 Hareket halindeyken kontaktör geri beslemesi algılandı. Kontaktör kapalı kontaklarını kontrol et. Yardımcı kontak/geri besleme kablosunu kontrol et. Kontaktör yapışması ihtimalini kontrol et."
+  },
+  {
+    "baslik": "Hata 16 — KRC hatası 2",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Durma sırasında kontaktör geri beslemesi kesildi.",
+    "kod": "Hata 16",
+    "etiket": "Kontaktör",
+    "kontroller": [
+      "Kontaktör kapalı kontaklarını kontrol et.",
+      "Geri besleme hattını ve yardımcı kontakları ölç.",
+      "Kontaktör bobin/yardımcı kontak durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 16 16 KRC hatası 2 Durma sırasında kontaktör geri beslemesi kesildi. Kontaktör kapalı kontaklarını kontrol et. Geri besleme hattını ve yardımcı kontakları ölç. Kontaktör bobin/yardımcı kontak durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 17 — UCM hatası",
+    "tip": "Konel Revo LC",
+    "kategori": true,
+    "favori": false,
+    "aciklama": "Kapı açma bölgesinde kabin hareketi algılandı.",
+    "kod": "Hata 17",
+    "etiket": "UCM",
+    "kontroller": [
+      "Mıknatıs girişlerini kontrol et.",
+      "Kapı bölgesi algılamasını kontrol et.",
+      "UCM güvenlik donanımlarını ve fren davranışını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 17 17 UCM hatası Kapı açma bölgesinde kabin hareketi algılandı. Mıknatıs girişlerini kontrol et. Kapı bölgesi algılamasını kontrol et. UCM güvenlik donanımlarını ve fren davranışını kontrol et."
+  },
+  {
+    "baslik": "Hata 18 — UCM kontak hatası dişlisiz",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket/durma durumunda fren switch bilgisi hatalı algılandı.",
+    "kod": "Hata 18",
+    "etiket": "UCM",
+    "kontroller": [
+      "Fren switch bağlantılarını kontrol et.",
+      "Frenin açma/kapama bilgisini izle.",
+      "Switch kablosu ve giriş terminalini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 18 18 UCM kontak hatası dişlisiz Hareket/durma durumunda fren switch bilgisi hatalı algılandı. Fren switch bağlantılarını kontrol et. Frenin açma/kapama bilgisini izle. Switch kablosu ve giriş terminalini kontrol et."
+  },
+  {
+    "baslik": "Hata 19 — UCM kontak hatası dişlili",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Regülatör bobin switch bilgisi hatalı algılandı.",
+    "kod": "Hata 19",
+    "etiket": "UCM",
+    "kontroller": [
+      "Regülatör bobini switch bağlantısını kontrol et.",
+      "Regülatör bobini enerjisini ve kontağını kontrol et.",
+      "İlgili giriş terminalini ölç."
+    ],
+    "arama": "konel revo lc Hata 19 19 UCM kontak hatası dişlili Regülatör bobin switch bilgisi hatalı algılandı. Regülatör bobini switch bağlantısını kontrol et. Regülatör bobini enerjisini ve kontağını kontrol et. İlgili giriş terminalini ölç."
+  },
+  {
+    "baslik": "Hata 20 — Kapı emniyet devresi yok",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "İç ve dış kapı emniyet devresi algılanmadı.",
+    "kod": "Hata 20",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı emniyet kontaklarını kontrol et.",
+      "Kapı limiti yoksa C06 kapı kapama süresini kontrol et.",
+      "Kapı güvenlik zincirini sırayla ölç."
+    ],
+    "arama": "konel revo lc Hata 20 20 Kapı emniyet devresi yok İç ve dış kapı emniyet devresi algılanmadı. Kapı emniyet kontaklarını kontrol et. Kapı limiti yoksa C06 kapı kapama süresini kontrol et. Kapı güvenlik zincirini sırayla ölç."
+  },
+  {
+    "baslik": "Hata 21 — Kapı köprüleme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapı açma süresi sonunda kapı açılmadı veya algılamada sorun oluştu.",
+    "kod": "Hata 21",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı bağlantılarını kontrol et.",
+      "Kapı emniyet kontaklarını kontrol et.",
+      "Kapı açma çıkışını ve operatör davranışını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 21 21 Kapı köprüleme hatası Kapı açma süresi sonunda kapı açılmadı veya algılamada sorun oluştu. Kapı bağlantılarını kontrol et. Kapı emniyet kontaklarını kontrol et. Kapı açma çıkışını ve operatör davranışını kontrol et."
+  },
+  {
+    "baslik": "Hata 22 — Kapı köprüleme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapılarda açılmama veya kapı emniyet devrelerinde köprüleme algılandı.",
+    "kod": "Hata 22",
+    "etiket": "Kapı",
+    "kontroller": [
+      "Kapı açma/kapatma çıkışlarını kontrol et.",
+      "Kapı emniyet devresinde köprüleme olup olmadığını kontrol et.",
+      "Kapı kontaklarını tek tek takip et."
+    ],
+    "arama": "konel revo lc Hata 22 22 Kapı köprüleme hatası Kapılarda açılmama veya kapı emniyet devrelerinde köprüleme algılandı. Kapı açma/kapatma çıkışlarını kontrol et. Kapı emniyet devresinde köprüleme olup olmadığını kontrol et. Kapı kontaklarını tek tek takip et."
+  },
+  {
+    "baslik": "Hata 23 — Üst limit hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında üst limit 818 devreden çıktı.",
+    "kod": "Hata 23",
+    "etiket": "Limit",
+    "kontroller": [
+      "Üst limit makaralı şalteri kontrol et.",
+      "818 hattını ve bağlantısını kontrol et.",
+      "Kabin konumunu ve limit ayarını doğrula."
+    ],
+    "arama": "konel revo lc Hata 23 23 Üst limit hatası Hareket sırasında üst limit 818 devreden çıktı. Üst limit makaralı şalteri kontrol et. 818 hattını ve bağlantısını kontrol et. Kabin konumunu ve limit ayarını doğrula."
+  },
+  {
+    "baslik": "Hata 24 — Alt limit hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında alt limit 817 devreden çıktı.",
+    "kod": "Hata 24",
+    "etiket": "Limit",
+    "kontroller": [
+      "Alt limit makaralı şalteri kontrol et.",
+      "817 hattını ve bağlantısını kontrol et.",
+      "Kabin konumunu ve limit ayarını doğrula."
+    ],
+    "arama": "konel revo lc Hata 24 24 Alt limit hatası Hareket sırasında alt limit 817 devreden çıktı. Alt limit makaralı şalteri kontrol et. 817 hattını ve bağlantısını kontrol et. Kabin konumunu ve limit ayarını doğrula."
+  },
+  {
+    "baslik": "Hata 25 — İnverter hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "DFI girişi pasif oldu, inverter hatası algılandı.",
+    "kod": "Hata 25",
+    "etiket": "İnverter",
+    "kontroller": [
+      "İnverter hata ekranını kontrol et.",
+      "İnverter ayarlarını ve DFI bağlantısını kontrol et.",
+      "Motor/sürücü besleme ve fren direnci durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 25 25 İnverter hatası DFI girişi pasif oldu, inverter hatası algılandı. İnverter hata ekranını kontrol et. İnverter ayarlarını ve DFI bağlantısını kontrol et. Motor/sürücü besleme ve fren direnci durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 26 — PTC sıcaklık hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Motor termistör/sıcaklık hatası algılandı.",
+    "kod": "Hata 26",
+    "etiket": "Motor",
+    "kontroller": [
+      "Motor ısısını kontrol et.",
+      "PTC/termistör bağlantısını kontrol et.",
+      "Motor havalandırma ve yük durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 26 26 PTC sıcaklık hatası Motor termistör/sıcaklık hatası algılandı. Motor ısısını kontrol et. PTC/termistör bağlantısını kontrol et. Motor havalandırma ve yük durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 27 — Süre aşımı",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Program işlem süresi aşıldı.",
+    "kod": "Hata 27",
+    "etiket": "Süre",
+    "kontroller": [
+      "Süre parametrelerini kontrol et.",
+      "İşlemi geciktiren kapı, sürücü veya haberleşme durumunu kontrol et.",
+      "Tekrarlıyorsa ilgili hareket akışını izle."
+    ],
+    "arama": "konel revo lc Hata 27 27 Süre aşımı Program işlem süresi aşıldı. Süre parametrelerini kontrol et. İşlemi geciktiren kapı, sürücü veya haberleşme durumunu kontrol et. Tekrarlıyorsa ilgili hareket akışını izle."
+  },
+  {
+    "baslik": "Hata 28 — UPS kurtarma hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "UPS kurtarma maksimum süresinde kurtarma tamamlanamadı.",
+    "kod": "Hata 28",
+    "etiket": "UPS",
+    "kontroller": [
+      "UPS gücünü kontrol et.",
+      "H03 kurtarma maksimum süresini kontrol et.",
+      "UPS bağlantısı ve akü durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 28 28 UPS kurtarma hatası UPS kurtarma maksimum süresinde kurtarma tamamlanamadı. UPS gücünü kontrol et. H03 kurtarma maksimum süresini kontrol et. UPS bağlantısı ve akü durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 29 — Alt-üst limit aktif",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "817 ve 818 limitleri aynı anda kesildi algılandı.",
+    "kod": "Hata 29",
+    "etiket": "Limit",
+    "kontroller": [
+      "817-818 makaralı limit kesicileri kontrol et.",
+      "Limit kablo bağlantılarını kontrol et.",
+      "Kuyu limit yerleşimini doğrula."
+    ],
+    "arama": "konel revo lc Hata 29 29 Alt-üst limit aktif 817 ve 818 limitleri aynı anda kesildi algılandı. 817-818 makaralı limit kesicileri kontrol et. Limit kablo bağlantılarını kontrol et. Kuyu limit yerleşimini doğrula."
+  },
+  {
+    "baslik": "Hata 30 — Seviyeleme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "B32 süresi içinde seviyeleme yapılamadı.",
+    "kod": "Hata 30",
+    "etiket": "Seviye",
+    "kontroller": [
+      "B32 seviyeleme süresini kontrol et.",
+      "Seviyeleme mıknatısları ve ML girişlerini kontrol et.",
+      "Sürücü düşük hız ve fren davranışını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 30 30 Seviyeleme hatası B32 süresi içinde seviyeleme yapılamadı. B32 seviyeleme süresini kontrol et. Seviyeleme mıknatısları ve ML girişlerini kontrol et. Sürücü düşük hız ve fren davranışını kontrol et."
+  },
+  {
+    "baslik": "Hata 31 — ML1-ML2 yok hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kapı açma bölgesinde ML1-ML2 algılanmadı.",
+    "kod": "Hata 31",
+    "etiket": "ML",
+    "kontroller": [
+      "ML1-ML2 şalterini kontrol et.",
+      "I02/I03/I04 yavaşlama rampalarını kontrol et.",
+      "Katta durdurucu mıknatıs yerleşimini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 31 31 ML1-ML2 yok hatası Kapı açma bölgesinde ML1-ML2 algılanmadı. ML1-ML2 şalterini kontrol et. I02/I03/I04 yavaşlama rampalarını kontrol et. Katta durdurucu mıknatıs yerleşimini kontrol et."
+  },
+  {
+    "baslik": "Hata 32 — Aşırı yük hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Kabin aşırı yük durumunda hata oluştu.",
+    "kod": "Hata 32",
+    "etiket": "Yük",
+    "kontroller": [
+      "Kabin içi yükü kontrol et.",
+      "804 aşırı yük sensör girişini kontrol et.",
+      "Aşırı yük sensörü ayarını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 32 32 Aşırı yük hatası Kabin aşırı yük durumunda hata oluştu. Kabin içi yükü kontrol et. 804 aşırı yük sensör girişini kontrol et. Aşırı yük sensörü ayarını kontrol et."
+  },
+  {
+    "baslik": "Hata 33 — Azami yük hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Azami yük durumunda hata oluştu.",
+    "kod": "Hata 33",
+    "etiket": "Yük",
+    "kontroller": [
+      "Kabin yükünü kontrol et.",
+      "Yük sensörü ve girişini kontrol et.",
+      "Yük ayar/kalibrasyon değerlerini kontrol et."
+    ],
+    "arama": "konel revo lc Hata 33 33 Azami yük hatası Azami yük durumunda hata oluştu. Kabin yükünü kontrol et. Yük sensörü ve girişini kontrol et. Yük ayar/kalibrasyon değerlerini kontrol et."
+  },
+  {
+    "baslik": "Hata 34 — Hedef kayboldu",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Asansörün gideceği hedef bilgisi kayboldu.",
+    "kod": "Hata 34",
+    "etiket": "Lojik",
+    "kontroller": [
+      "Çağrı/hedef bilgisini kontrol et.",
+      "Lojik akışı ve kart durumunu gözlemle.",
+      "Tekrarlıyorsa tedarikçi firma ile görüş."
+    ],
+    "arama": "konel revo lc Hata 34 34 Hedef kayboldu Asansörün gideceği hedef bilgisi kayboldu. Çağrı/hedef bilgisini kontrol et. Lojik akışı ve kart durumunu gözlemle. Tekrarlıyorsa tedarikçi firma ile görüş."
+  },
+  {
+    "baslik": "Hata 35 — Kalkışta ML1-ML2 yok",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Harekete başlangıçta ML1-ML2 görülemedi.",
+    "kod": "Hata 35",
+    "etiket": "ML",
+    "kontroller": [
+      "Katta durdurucu ML1-ML2 şalterini kontrol et.",
+      "Mıknatıs yerleşimini kontrol et.",
+      "Kabin başlangıç konumunu doğrula."
+    ],
+    "arama": "konel revo lc Hata 35 35 Kalkışta ML1-ML2 yok Harekete başlangıçta ML1-ML2 görülemedi. Katta durdurucu ML1-ML2 şalterini kontrol et. Mıknatıs yerleşimini kontrol et. Kabin başlangıç konumunu doğrula."
+  },
+  {
+    "baslik": "Hata 36 — M0 sayıcı hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "M0 sayıcı bilgisi hatalı algılandı.",
+    "kod": "Hata 36",
+    "etiket": "M0",
+    "kontroller": [
+      "M0 girişlerini kontrol et.",
+      "Mıknatıs yerleşimini kontrol et.",
+      "Sayıcı bağlantısı ve kablo durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 36 36 M0 sayıcı hatası M0 sayıcı bilgisi hatalı algılandı. M0 girişlerini kontrol et. Mıknatıs yerleşimini kontrol et. Sayıcı bağlantısı ve kablo durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 37 — Dubleks haberleşme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Dubleks sistem haberleşme hatası algılandı.",
+    "kod": "Hata 37",
+    "etiket": "CAN3",
+    "kontroller": [
+      "CAN3 haberleşme hattını kontrol et.",
+      "Dubleks kartlar arası bağlantıyı kontrol et.",
+      "Sonlandırma ve adresleme durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 37 37 Dubleks haberleşme hatası Dubleks sistem haberleşme hatası algılandı. CAN3 haberleşme hattını kontrol et. Dubleks kartlar arası bağlantıyı kontrol et. Sonlandırma ve adresleme durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 38 — Hareket yok hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket komutu verildiği halde hareket gerçekleşmedi.",
+    "kod": "Hata 38",
+    "etiket": "Hareket",
+    "kontroller": [
+      "İnverter ayarlarını kontrol et.",
+      "Fren açma ve motor çıkışını kontrol et.",
+      "Mekanik sıkışma/yük durumunu kontrol et."
+    ],
+    "arama": "konel revo lc Hata 38 38 Hareket yok hatası Hareket komutu verildiği halde hareket gerçekleşmedi. İnverter ayarlarını kontrol et. Fren açma ve motor çıkışını kontrol et. Mekanik sıkışma/yük durumunu kontrol et."
+  },
+  {
+    "baslik": "Hata 39 — 24V besleme hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "24V besleme voltajı düşük algılandı.",
+    "kod": "Hata 39",
+    "etiket": "Besleme",
+    "kontroller": [
+      "24V besleme voltajını ölç.",
+      "24V çıkışlarında kısa devre/yük kontrolü yap.",
+      "Güç kaynağı ve bağlantıları kontrol et."
+    ],
+    "arama": "konel revo lc Hata 39 39 24V besleme hatası 24V besleme voltajı düşük algılandı. 24V besleme voltajını ölç. 24V çıkışlarında kısa devre/yük kontrolü yap. Güç kaynağı ve bağlantıları kontrol et."
+  },
+  {
+    "baslik": "Hata 40 — Düşük hız süre hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Yanaşmada belirlenen sürede kata ulaşılamadı.",
+    "kod": "Hata 40",
+    "etiket": "Süre",
+    "kontroller": [
+      "B07 düşük hız süresini kontrol et.",
+      "Kat mıknatıslarının doğru yerleşimini kontrol et.",
+      "Düşük hız ve seviyeleme davranışını kontrol et."
+    ],
+    "arama": "konel revo lc Hata 40 40 Düşük hız süre hatası Yanaşmada belirlenen sürede kata ulaşılamadı. B07 düşük hız süresini kontrol et. Kat mıknatıslarının doğru yerleşimini kontrol et. Düşük hız ve seviyeleme davranışını kontrol et."
+  },
+  {
+    "baslik": "Hata 41 — Faz sıra hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "RST yüksek voltaj girişlerinin sırası hatalı.",
+    "kod": "Hata 41",
+    "etiket": "Faz",
+    "kontroller": [
+      "RST faz sırasını kontrol et.",
+      "Faz sırası rölesi/bağlantısını kontrol et.",
+      "Besleme girişlerini doğrula."
+    ],
+    "arama": "konel revo lc Hata 41 41 Faz sıra hatası RST yüksek voltaj girişlerinin sırası hatalı. RST faz sırasını kontrol et. Faz sırası rölesi/bağlantısını kontrol et. Besleme girişlerini doğrula."
+  },
+  {
+    "baslik": "Hata 42 — Eksik faz hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "RST yüksek voltaj girişlerinde eksik faz var.",
+    "kod": "Hata 42",
+    "etiket": "Faz",
+    "kontroller": [
+      "RST girişlerini ölç.",
+      "Sigorta/klemens ve faz bağlantılarını kontrol et.",
+      "Besleme kaynağını doğrula."
+    ],
+    "arama": "konel revo lc Hata 42 42 Eksik faz hatası RST yüksek voltaj girişlerinde eksik faz var. RST girişlerini ölç. Sigorta/klemens ve faz bağlantılarını kontrol et. Besleme kaynağını doğrula."
+  },
+  {
+    "baslik": "Hata 43 — Harekette 135 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında iç kapı açıldı algılandı.",
+    "kod": "Hata 43",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "135 yüksek voltaj girişini kontrol et.",
+      "İç kapı kilit/kontak devresini kontrol et.",
+      "Hareket sırasında temassızlık olup olmadığını izle."
+    ],
+    "arama": "konel revo lc Hata 43 43 Harekette 135 hatası Hareket sırasında iç kapı açıldı algılandı. 135 yüksek voltaj girişini kontrol et. İç kapı kilit/kontak devresini kontrol et. Hareket sırasında temassızlık olup olmadığını izle."
+  },
+  {
+    "baslik": "Hata 44 — Harekette 140 hatası",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Hareket sırasında iç kapı açıldı algılandı.",
+    "kod": "Hata 44",
+    "etiket": "Emniyet",
+    "kontroller": [
+      "140 yüksek voltaj girişini kontrol et.",
+      "İç kapı kilit/kontak devresini kontrol et.",
+      "Kapı emniyet zincirini hareket sırasında izle."
+    ],
+    "arama": "konel revo lc Hata 44 44 Harekette 140 hatası Hareket sırasında iç kapı açıldı algılandı. 140 yüksek voltaj girişini kontrol et. İç kapı kilit/kontak devresini kontrol et. Kapı emniyet zincirini hareket sırasında izle."
+  },
+  {
+    "baslik": "Hata 45 — Reserved",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Ayrılmış hata kodu.",
+    "kod": "Hata 45",
+    "etiket": "Reserved",
+    "kontroller": [
+      "Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+    ],
+    "arama": "konel revo lc Hata 45 45 Reserved Ayrılmış hata kodu. Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+  },
+  {
+    "baslik": "Hata 46 — Reserved",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Ayrılmış hata kodu.",
+    "kod": "Hata 46",
+    "etiket": "Reserved",
+    "kontroller": [
+      "Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+    ],
+    "arama": "konel revo lc Hata 46 46 Reserved Ayrılmış hata kodu. Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+  },
+  {
+    "baslik": "Hata 47 — Reserved",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Ayrılmış hata kodu.",
+    "kod": "Hata 47",
+    "etiket": "Reserved",
+    "kontroller": [
+      "Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+    ],
+    "arama": "konel revo lc Hata 47 47 Reserved Ayrılmış hata kodu. Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+  },
+  {
+    "baslik": "Hata 48 — Reserved",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Ayrılmış hata kodu.",
+    "kod": "Hata 48",
+    "etiket": "Reserved",
+    "kontroller": [
+      "Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+    ],
+    "arama": "konel revo lc Hata 48 48 Reserved Ayrılmış hata kodu. Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+  },
+  {
+    "baslik": "Hata 49 — Yukarı kat hata",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Katı bulmak için yukarı hareket sırasında kat bulunamadı.",
+    "kod": "Hata 49",
+    "etiket": "Konum",
+    "kontroller": [
+      "Kuyu mıknatıs yerleşimini kontrol et.",
+      "817-818 sinyal girişlerini kontrol et.",
+      "Kuyu tanıma/kat konum bilgisini doğrula."
+    ],
+    "arama": "konel revo lc Hata 49 49 Yukarı kat hata Katı bulmak için yukarı hareket sırasında kat bulunamadı. Kuyu mıknatıs yerleşimini kontrol et. 817-818 sinyal girişlerini kontrol et. Kuyu tanıma/kat konum bilgisini doğrula."
+  },
+  {
+    "baslik": "Hata 50 — Reserved",
+    "tip": "Konel Revo LC",
+    "kategori": "ariza",
+    "favori": false,
+    "aciklama": "Ayrılmış hata kodu.",
+    "kod": "Hata 50",
+    "etiket": "Reserved",
+    "kontroller": [
+      "Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+    ],
+    "arama": "konel revo lc Hata 50 50 Reserved Ayrılmış hata kodu. Aktif arıza ise üretici dokümanını veya teknik desteği kontrol et."
+  }
 ];
 
 let teknikAktifKategori = "all";
@@ -15253,7 +16095,11 @@ profilPanel.style.display = "none";
 let panel = document.getElementById("teknikPanel");
 if(panel){
 panel.style.display = "block";
+panel.scrollTop = 0;
 }
+
+document.documentElement.scrollTop = 0;
+document.body.scrollTop = 0;
 
 quickAddGuncelle();
 teknikKutuphaneRender();
