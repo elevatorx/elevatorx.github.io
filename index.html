@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1424_KONEL_REVO_LC_TAM_LISTE_LAYOUT_FIX_KESIN | APP_VERSION v1.4.24 -->
+<!-- ELEVATORX_V1425_TEKNIK_KUTUPHANE_HIYERARSI_KESIN | APP_VERSION v1.4.25 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1424">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1424">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1424">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1424">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1424">
-<link rel="manifest" href="/manifest.webmanifest?v=1424">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1425">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1425">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1425">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1425">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1425">
+<link rel="manifest" href="/manifest.webmanifest?v=1425">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8332,6 +8332,262 @@ padding-right:10px!important;
 .teknikType{font-size:9.4px!important;}
 }
 
+
+
+/* === v1.4.25 — Teknik Kütüphane Hiyerarşi Düzeni === */
+.techHierarchyPanel .teknikHero{
+margin-top:0!important;
+}
+
+.techHierarchySearch{
+padding:10px!important;
+}
+
+.techHierarchySearch #teknikArama{
+margin:0!important;
+}
+
+.teknikBreadcrumb{
+display:flex;
+align-items:center;
+gap:6px;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+margin:0 0 9px;
+padding:2px 0;
+}
+
+.teknikCrumb{
+display:inline-flex;
+align-items:center;
+height:28px;
+padding:0 10px;
+border-radius:999px;
+background:#eef4ff;
+color:#007aff;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
+}
+
+.teknikHubGrid{
+display:grid;
+gap:10px;
+}
+
+.teknikHubCard{
+background:rgba(255,255,255,.92);
+border:1px solid rgba(226,232,240,.92);
+border-radius:24px;
+padding:15px;
+box-shadow:0 12px 30px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.78);
+display:grid;
+grid-template-columns:52px minmax(0,1fr) 18px;
+gap:12px;
+align-items:center;
+text-align:left;
+position:relative;
+overflow:hidden;
+animation:elevatorXMicroAppear .26s cubic-bezier(.22,.9,.24,1) both;
+}
+
+.teknikHubCard::after{
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+background:linear-gradient(135deg,rgba(255,255,255,.36),transparent 40%,rgba(0,122,255,.035) 100%);
+}
+
+.teknikHubCard > *{
+position:relative;
+z-index:1;
+}
+
+.teknikHubIcon{
+width:52px;
+height:52px;
+border-radius:19px;
+background:#eaf2ff;
+color:#007aff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+font-weight:950;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 22px rgba(0,122,255,.10);
+}
+
+.teknikHubTitle{
+font-size:17px;
+font-weight:950;
+letter-spacing:-.3px;
+line-height:1.1;
+color:#0f172a;
+}
+
+.teknikHubDesc{
+font-size:12.2px;
+font-weight:760;
+line-height:1.38;
+color:#64748b;
+margin-top:5px;
+}
+
+.teknikHubMeta{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin-top:8px;
+}
+
+.teknikMiniPill{
+display:inline-flex;
+align-items:center;
+height:22px;
+padding:0 8px;
+border-radius:999px;
+background:#f1f5f9;
+color:#64748b;
+font-size:10px;
+font-weight:950;
+}
+
+.teknikHubArrow{
+font-size:24px;
+font-weight:800;
+color:#94a3b8;
+}
+
+.teknikHubCard:active{
+transform:scale(.982);
+}
+
+.teknikHubCard.disabled{
+opacity:.72;
+}
+
+.teknikHubCard.disabled .teknikHubIcon{
+background:#f1f5f9;
+color:#94a3b8;
+}
+
+.teknikSectionTitle{
+font-size:13px;
+font-weight:950;
+letter-spacing:.25px;
+text-transform:uppercase;
+color:#64748b;
+margin:4px 2px 8px;
+}
+
+.teknikCardGroup{
+display:grid;
+gap:8px;
+}
+
+.teknikActionCard{
+display:grid;
+grid-template-columns:48px minmax(0,1fr) 18px;
+gap:11px;
+align-items:center;
+background:rgba(255,255,255,.92);
+border:1px solid rgba(226,232,240,.92);
+border-radius:22px;
+padding:13px;
+box-shadow:0 12px 30px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.78);
+text-align:left;
+}
+
+.teknikActionIcon{
+width:48px;
+height:48px;
+border-radius:18px;
+background:#eaf2ff;
+color:#007aff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:21px;
+font-weight:950;
+}
+
+.teknikActionTitle{
+font-size:15.6px;
+font-weight:950;
+letter-spacing:-.25px;
+color:#0f172a;
+}
+
+.teknikActionDesc{
+font-size:11.8px;
+font-weight:760;
+color:#64748b;
+line-height:1.35;
+margin-top:4px;
+}
+
+.teknikActionArrow{
+font-size:22px;
+color:#94a3b8;
+font-weight:800;
+}
+
+.teknikCodeSearchHint{
+font-size:11px;
+font-weight:800;
+color:#64748b;
+margin:-2px 2px 8px;
+}
+
+body.darkMode .teknikHubCard,
+body.darkMode .teknikActionCard,
+html.darkRoot .teknikHubCard,
+html.darkRoot .teknikActionCard{
+background:#151b26;
+border-color:#263241;
+box-shadow:0 14px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+body.darkMode .teknikHubTitle,
+body.darkMode .teknikActionTitle,
+html.darkRoot .teknikHubTitle,
+html.darkRoot .teknikActionTitle{
+color:#f8fafc;
+}
+
+body.darkMode .teknikHubDesc,
+body.darkMode .teknikActionDesc,
+body.darkMode .teknikCodeSearchHint,
+html.darkRoot .teknikHubDesc,
+html.darkRoot .teknikActionDesc,
+html.darkRoot .teknikCodeSearchHint{
+color:#a7b0bf;
+}
+
+body.darkMode .teknikMiniPill,
+html.darkRoot .teknikMiniPill{
+background:#263241;
+color:#cbd5e1;
+}
+
+body.darkMode .teknikCrumb,
+html.darkRoot .teknikCrumb{
+background:#12223a;
+color:#60a5fa;
+}
+
+@media(max-width:430px){
+.teknikHubCard{grid-template-columns:48px minmax(0,1fr) 16px;padding:13px;gap:10px;border-radius:22px;}
+.teknikHubIcon{width:48px;height:48px;border-radius:18px;font-size:21px;}
+.teknikHubTitle{font-size:16px;}
+.teknikHubDesc{font-size:11.6px;}
+.teknikActionCard{grid-template-columns:44px minmax(0,1fr) 16px;padding:12px;gap:10px;}
+.teknikActionIcon{width:44px;height:44px;border-radius:17px;font-size:19px;}
+.teknikActionTitle{font-size:14.8px;}
+.teknikActionDesc{font-size:11.2px;}
+}
+
 </style>
 
 <script>
@@ -8481,10 +8737,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1424" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1425" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.24</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.25</div>
 </div>
 </div>
 
@@ -8896,15 +9152,16 @@ Destek: supportelevatorx@gmail.com
 </div>
 
 
-<div id="teknikPanel" class="teknikPanel" style="display:none">
 
-  <div class="teknikHero">
-    <button class="teknikBackBtn" onclick="profilAc()">← Profil</button>
+<div id="teknikPanel" class="teknikPanel techHierarchyPanel" style="display:none">
+
+  <div class="teknikHero techHierarchyHero">
+    <button id="teknikBackBtn" class="teknikBackBtn" onclick="teknikGeri()">← Profil</button>
     <div class="teknikHeroTop">
       <div>
-        <div class="teknikKicker">Saha Modu</div>
-        <h2>Teknik Kütüphane</h2>
-        <p>Kumanda kartları, sürücüler ve arıza kodları için hızlı saha notları.</p>
+        <div id="teknikKicker" class="teknikKicker">Saha Modu</div>
+        <h2 id="teknikBaslik">Teknik Kütüphane</h2>
+        <p id="teknikAciklama">Önce marka veya sistem seç; sonra kart, sürücü ve arıza kodlarına gir.</p>
       </div>
       <div class="teknikHeroIcon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
@@ -8916,25 +9173,19 @@ Destek: supportelevatorx@gmail.com
     </div>
   </div>
 
-  <div class="teknikSearchCard">
-    <input id="teknikArama" type="search" placeholder="Kart, sürücü veya hata kodu ara..." oninput="teknikKutuphaneRender()">
-    <div class="teknikChips">
-      <button class="teknikChip active" data-tech-cat="all" onclick="teknikKategoriSec('all')">Tümü</button>
-      <button class="teknikChip" data-tech-cat="kart" onclick="teknikKategoriSec('kart')">Kumanda Kartı</button>
-      <button class="teknikChip" data-tech-cat="surucu" onclick="teknikKategoriSec('surucu')">Sürücü</button>
-      <button class="teknikChip" data-tech-cat="ariza" onclick="teknikKategoriSec('ariza')">Arıza Kodu</button>
-      <button class="teknikChip" data-tech-cat="favori" onclick="teknikKategoriSec('favori')">Favoriler</button>
-    </div>
+  <div class="teknikSearchCard techHierarchySearch">
+    <input id="teknikArama" type="search" placeholder="Marka, kart veya hata kodu ara..." oninput="teknikKutuphaneRender()">
   </div>
 
-  <div class="teknikNotice">
-    Konel Revo LC hata kodları Hata 01-50 saha notu formatında eklendi. Üretici kılavuzu yerine geçmez; uygulamadan önce resmi doküman ve saha ölçümüyle doğrula.
+  <div id="teknikNotice" class="teknikNotice">
+    Teknik Kütüphane artık marka → cihaz → içerik şeklinde çalışır. Konel Revo LC hata kodları Hata 01-50 eklendi.
   </div>
+
+  <div id="teknikBreadcrumb" class="teknikBreadcrumb"></div>
 
   <div id="teknikListe" class="teknikListe"></div>
 
 </div>
-
 
 <button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
   <span>+</span>
@@ -9029,9 +9280,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.24";
+const APP_VERSION = "v1.4.25";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1424", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1425", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9142,7 +9393,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.24").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.25").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -16112,6 +16363,392 @@ window.scrollTo({
 top:0,
 behavior:"smooth"
 });
+}
+
+
+
+/* v1.4.25 — Teknik Kütüphane Hiyerarşi */
+let teknikView = "home";
+let teknikSeciliMarka = "";
+let teknikSeciliCihaz = "";
+let teknikHistory = [];
+
+const teknikAnaKartlar = [
+  {
+    id:"konel",
+    baslik:"Konel",
+    aciklama:"Kumanda kartları ve Revo LC hata kodları.",
+    icon:"K",
+    meta:["Revo LC","Hata 01-50","Kumanda"],
+    enabled:true,
+    next:function(){ teknikGit("konel"); }
+  },
+  {
+    id:"arkel",
+    baslik:"Arkel",
+    aciklama:"ARL / ARCODE ve pano saha notları sonraki paketlerde eklenecek.",
+    icon:"A",
+    meta:["Yakında","Kumanda"],
+    enabled:false,
+    next:function(){ toast("Arkel sonraki güncellemede eklenecek"); }
+  },
+  {
+    id:"aybey",
+    baslik:"Aybey",
+    aciklama:"ACT ve diğer kart notları sırayla eklenecek.",
+    icon:"AY",
+    meta:["Yakında","Kumanda"],
+    enabled:false,
+    next:function(){ toast("Aybey sonraki güncellemede eklenecek"); }
+  },
+  {
+    id:"suruculer",
+    baslik:"Sürücüler",
+    aciklama:"Fuji, Yaskawa, Ziehl-Abegg, Delta sürücü hata notları.",
+    icon:"S",
+    meta:["Yakında","İnverter"],
+    enabled:false,
+    next:function(){ toast("Sürücüler bölümü sonraki paketlerde açılacak"); }
+  },
+  {
+    id:"kapi",
+    baslik:"Kapı Sistemleri",
+    aciklama:"Kapı operatörü, fotosel, kapı kartı ve mekanik kontrol notları.",
+    icon:"D",
+    meta:["Yakında","Kapı"],
+    enabled:false,
+    next:function(){ toast("Kapı sistemleri bölümü sonraki paketlerde açılacak"); }
+  }
+];
+
+function teknikSetHeader(baslik, aciklama, kicker, backText){
+let b = document.getElementById("teknikBaslik");
+let a = document.getElementById("teknikAciklama");
+let k = document.getElementById("teknikKicker");
+let back = document.getElementById("teknikBackBtn");
+
+if(b) b.textContent = baslik || "Teknik Kütüphane";
+if(a) a.textContent = aciklama || "";
+if(k) k.textContent = kicker || "Saha Modu";
+if(back) back.textContent = backText || "← Profil";
+}
+
+function teknikSetPlaceholder(text){
+let input = document.getElementById("teknikArama");
+if(input) input.placeholder = text || "Marka, kart veya hata kodu ara...";
+}
+
+function teknikBreadcrumbRender(items){
+let el = document.getElementById("teknikBreadcrumb");
+if(!el) return;
+if(!items || !items.length){
+el.innerHTML = "";
+return;
+}
+el.innerHTML = items.map(function(i){
+return `<span class="teknikCrumb">${ayHtml(i)}</span>`;
+}).join("");
+}
+
+function teknikQuery(){
+let input = document.getElementById("teknikArama");
+return String(input ? input.value : "").toLocaleLowerCase("tr-TR").trim();
+}
+
+function teknikFilterText(obj){
+return [
+obj.baslik,obj.aciklama,obj.tip,obj.kod,obj.etiket,(obj.meta || []).join(" "),(obj.kontroller || []).join(" "),obj.arama
+].join(" ").toLocaleLowerCase("tr-TR");
+}
+
+function teknikHubCard(k){
+let disabled = k.enabled ? "" : " disabled";
+return `
+<button type="button" class="teknikHubCard${disabled}" onclick="${k.enabled ? `teknikGit('${ayAttr(k.id)}')` : `toast('${ayAttr(k.baslik)} sonraki güncellemede eklenecek')`}">
+  <div class="teknikHubIcon">${ayHtml(k.icon)}</div>
+  <div>
+    <div class="teknikHubTitle">${ayHtml(k.baslik)}</div>
+    <div class="teknikHubDesc">${ayHtml(k.aciklama)}</div>
+    <div class="teknikHubMeta">${(k.meta || []).map(function(m){return `<span class="teknikMiniPill">${ayHtml(m)}</span>`;}).join("")}</div>
+  </div>
+  <div class="teknikHubArrow">›</div>
+</button>`;
+}
+
+function teknikActionCard(title, desc, icon, onclick){
+return `
+<button type="button" class="teknikActionCard" onclick="${onclick}">
+  <div class="teknikActionIcon">${ayHtml(icon)}</div>
+  <div>
+    <div class="teknikActionTitle">${ayHtml(title)}</div>
+    <div class="teknikActionDesc">${ayHtml(desc)}</div>
+  </div>
+  <div class="teknikActionArrow">›</div>
+</button>`;
+}
+
+function teknikGit(view){
+haptic("light");
+teknikHistory.push(teknikView);
+teknikView = view;
+
+let input = document.getElementById("teknikArama");
+if(input) input.value = "";
+
+teknikKutuphaneRender();
+let panel = document.getElementById("teknikPanel");
+if(panel) panel.scrollTop = 0;
+}
+
+function teknikGeri(){
+haptic("light");
+
+if(teknikView === "home"){
+profilAc();
+return;
+}
+
+if(teknikView === "konel"){
+teknikView = "home";
+}else if(teknikView === "konel-revo"){
+teknikView = "konel";
+}else if(teknikView === "konel-revo-ariza" || teknikView === "konel-revo-notlar" || teknikView === "konel-revo-kilavuz"){
+teknikView = "konel-revo";
+}else{
+teknikView = "home";
+}
+
+let input = document.getElementById("teknikArama");
+if(input) input.value = "";
+
+teknikKutuphaneRender();
+let panel = document.getElementById("teknikPanel");
+if(panel) panel.scrollTop = 0;
+}
+
+function teknikKonelKodlari(){
+return teknikKutuphaneKayitlari.filter(function(k){
+return String(k.baslik || "").toLocaleLowerCase("tr-TR").includes("hata ");
+});
+}
+
+function teknikKodKart(k){
+return `
+<div class="teknikCard">
+  <div class="teknikCardHead">
+    <div>
+      <div class="teknikTitle">${ayHtml(k.baslik)}</div>
+      <div class="teknikDesc">${ayHtml(k.aciklama)}</div>
+    </div>
+    <span class="teknikType">${ayHtml(k.tip)}</span>
+  </div>
+
+  <div class="teknikCodeBox">
+    <div class="teknikCodeTop">
+      <div class="teknikCode">${ayHtml(k.kod)}</div>
+      <span class="teknikTag">${ayHtml(k.etiket)}</span>
+    </div>
+    <ul class="teknikChecks">
+      ${(k.kontroller || []).map(function(m){ return `<li>${ayHtml(m)}</li>`; }).join("")}
+    </ul>
+  </div>
+</div>`;
+}
+
+function teknikKutuphaneRender(){
+let listeEl = document.getElementById("teknikListe");
+let notice = document.getElementById("teknikNotice");
+if(!listeEl) return;
+
+let q = teknikQuery();
+
+if(teknikView === "home"){
+teknikSetHeader("Teknik Kütüphane","Önce marka veya sistem seç; sonra kart, sürücü ve arıza kodlarına gir.","Saha Modu","← Profil");
+teknikSetPlaceholder("Marka, kart veya sistem ara...");
+teknikBreadcrumbRender([]);
+
+if(notice) notice.textContent = "Ana ekranda sadece marka ve sistem rafları görünür. Hata kodları ilgili cihazın içine alınmıştır.";
+
+let cards = teknikAnaKartlar.filter(function(k){
+return !q || teknikFilterText(k).includes(q);
+});
+
+listeEl.innerHTML = cards.length
+? `<div class="teknikHubGrid">${cards.map(teknikHubCard).join("")}</div>`
+: `<div class="teknikEmpty">Sonuç bulunamadı.<br><span style="font-size:12px;font-weight:750;color:#94a3b8;">Farklı marka veya sistem adıyla ara.</span></div>`;
+return;
+}
+
+if(teknikView === "konel"){
+teknikSetHeader("Konel","Konel kartları ve cihaz notları.","Kumanda Kartları","← Teknik");
+teknikSetPlaceholder("Konel cihazı ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Konel"]);
+if(notice) notice.textContent = "Konel altında şu an Revo LC aktif. Diğer Konel kartları sırayla eklenebilir.";
+
+let devices = [
+  {
+    id:"konel-revo",
+    baslik:"Revo LC",
+    aciklama:"Hata 01-50 arıza kodları ve hızlı saha notları.",
+    icon:"LC",
+    meta:["50 hata kodu","CAN","Kapı","ML"],
+    enabled:true
+  },
+  {
+    id:"konel-diger",
+    baslik:"Diğer Konel Kartları",
+    aciklama:"Diğer Konel kartları için alan hazır. İçerik sonraki paketlerde eklenebilir.",
+    icon:"+",
+    meta:["Yakında"],
+    enabled:false
+  }
+].filter(function(k){ return !q || teknikFilterText(k).includes(q); });
+
+listeEl.innerHTML = `<div class="teknikHubGrid">${devices.map(teknikHubCard).join("")}</div>`;
+return;
+}
+
+if(teknikView === "konel-revo"){
+teknikSetHeader("Konel Revo LC","Arıza kodları, saha notları ve kılavuz bağlantısı.","Revo LC","← Konel");
+teknikSetPlaceholder("Revo LC içinde ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Konel","Revo LC"]);
+if(notice) notice.textContent = "Revo LC içerikleri gruplandı. Uzun hata kodu listesi sadece Arıza Kodları bölümünde açılır.";
+
+let actions = [
+  {
+    title:"Arıza Kodları",
+    desc:"Hata 01-50 listesini aç, kod veya kelimeyle ara.",
+    icon:"!",
+    onclick:"teknikGit('konel-revo-ariza')",
+    search:"arıza kodları hata 01 50"
+  },
+  {
+    title:"Saha Notları",
+    desc:"Revo LC için hızlı kontrol sırası ve genel uyarılar.",
+    icon:"✓",
+    onclick:"teknikGit('konel-revo-notlar')",
+    search:"saha notları kontrol can kapı ml limit"
+  },
+  {
+    title:"Kılavuz Bağlantısı",
+    desc:"Resmi üretici dokümanına gitmeden önce notları kontrol et.",
+    icon:"↗",
+    onclick:"teknikGit('konel-revo-kilavuz')",
+    search:"kılavuz bağlantısı resmi doküman"
+  }
+].filter(function(a){ return !q || teknikFilterText(a).includes(q); });
+
+listeEl.innerHTML = actions.length
+? `<div class="teknikCardGroup">${actions.map(function(a){return teknikActionCard(a.title,a.desc,a.icon,a.onclick);}).join("")}</div>`
+: `<div class="teknikEmpty">Bu bölümde sonuç yok.</div>`;
+return;
+}
+
+if(teknikView === "konel-revo-ariza"){
+teknikSetHeader("Revo LC Arıza Kodları","Konel Revo LC Hata 01-50 saha notları.","Arıza Kodları","← Revo LC");
+teknikSetPlaceholder("Kod ara: 24, CAN, kapı, ML, 817...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Konel","Revo LC","Arıza Kodları"]);
+if(notice) notice.textContent = "Bu liste saha notu formatındadır. Uygulamadan önce resmi doküman ve ölçümle doğrula.";
+
+let kayitlar = teknikKonelKodlari().filter(function(k){
+return !q || teknikFilterText(k).includes(q);
+});
+
+listeEl.innerHTML = kayitlar.length
+? `<div class="teknikCodeSearchHint">${kayitlar.length} kayıt gösteriliyor.</div>${kayitlar.map(teknikKodKart).join("")}`
+: `<div class="teknikEmpty">Kod bulunamadı.<br><span style="font-size:12px;font-weight:750;color:#94a3b8;">Örn: 24, CAN, kapı, ML1, 817, inverter</span></div>`;
+return;
+}
+
+if(teknikView === "konel-revo-notlar"){
+teknikSetHeader("Revo LC Saha Notları","Hızlı genel kontrol sırası.","Saha Notları","← Revo LC");
+teknikSetPlaceholder("Saha notu ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Konel","Revo LC","Saha Notları"]);
+if(notice) notice.textContent = "Genel kontrol notları; arıza kodundan bağımsız hızlı bakış içindir.";
+
+let notlar = teknikKutuphaneKayitlari.filter(function(k){
+return String(k.kod || "") === "Revo LC";
+});
+if(q){
+notlar = notlar.filter(function(k){ return teknikFilterText(k).includes(q); });
+}
+
+listeEl.innerHTML = notlar.length
+? notlar.map(teknikKodKart).join("")
+: `<div class="teknikEmpty">Saha notu bulunamadı.</div>`;
+return;
+}
+
+if(teknikView === "konel-revo-kilavuz"){
+teknikSetHeader("Revo LC Kılavuz","Resmi doküman için bağlantı alanı.","Kılavuz","← Revo LC");
+teknikSetPlaceholder("Kılavuz içinde ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Konel","Revo LC","Kılavuz"]);
+if(notice) notice.textContent = "Public uygulamaya PDF kopyalamak yerine resmi bağlantı ve kendi saha notlarımızla ilerliyoruz.";
+
+listeEl.innerHTML = `
+<div class="teknikCard">
+  <div class="teknikCardHead">
+    <div>
+      <div class="teknikTitle">Resmi Konel Revo LC dokümanı</div>
+      <div class="teknikDesc">Kullanım kılavuzu ve üretici dokümanları için resmi Konel sayfası kontrol edilmeli.</div>
+    </div>
+    <span class="teknikType">Bağlantı</span>
+  </div>
+  <div class="teknikCodeBox">
+    <div class="teknikCodeTop">
+      <div class="teknikCode">konelsan.com.tr</div>
+      <span class="teknikTag">Resmi</span>
+    </div>
+    <ul class="teknikChecks">
+      <li>Uygulamadaki notlar hızlı saha yardımcısıdır.</li>
+      <li>Parametre ve bağlantı detayında resmi kılavuz esas alınmalıdır.</li>
+      <li>İzinli PDF ekleme kararı verilirse bu alana bağlanabilir.</li>
+    </ul>
+  </div>
+</div>`;
+return;
+}
+
+teknikView = "home";
+teknikKutuphaneRender();
+}
+
+function teknikKutuphaneAc(){
+haptic("light");
+
+aktifEkran = "teknik";
+oncekiEkran = "profil";
+setAktifTab("profil");
+
+aktifDetay = null;
+teknikView = "home";
+teknikHistory = [];
+
+searchArea.style.display = "none";
+filterPanel.style.display = "none";
+formBox.style.display = "none";
+detayPanel.style.display = "none";
+liste.style.display = "none";
+profilPanel.style.display = "none";
+
+let panel = document.getElementById("teknikPanel");
+if(panel){
+panel.style.display = "block";
+panel.scrollTop = 0;
+}
+
+let input = document.getElementById("teknikArama");
+if(input) input.value = "";
+
+document.documentElement.scrollTop = 0;
+document.body.scrollTop = 0;
+
+quickAddGuncelle();
+teknikKutuphaneRender();
+
+if(panel){
+animateIn(panel,"screenFadeUp");
+}
 }
 
 
