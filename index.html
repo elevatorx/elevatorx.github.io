@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1427_KONEL_RESMI_LINK_ENTEGRASYON_KESIN | APP_VERSION v1.4.27 -->
+<!-- ELEVATORX_V1428_ARKEL_ARL300_BASLANGIC_KESIN | APP_VERSION v1.4.28 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1427">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1427">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1427">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1427">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1427">
-<link rel="manifest" href="/manifest.webmanifest?v=1427">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1428">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1428">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1428">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1428">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1428">
+<link rel="manifest" href="/manifest.webmanifest?v=1428">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8654,6 +8654,23 @@ html.darkRoot .teknikOfficialCard{
 border-color:rgba(96,165,250,.18)!important;
 }
 
+
+
+/* === v1.4.28 — Arkel ARL-300 başlangıç === */
+.teknikHubIcon{
+font-size:18px!important;
+letter-spacing:-.5px;
+}
+
+.teknikHubCard .teknikHubIcon{
+text-transform:uppercase;
+}
+
+.teknikOfficialCard .teknikPrimaryLink,
+.teknikOfficialCard .teknikSecondaryLink{
+min-height:46px;
+}
+
 </style>
 
 <script>
@@ -8803,10 +8820,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1427" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1428" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.27</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.28</div>
 </div>
 </div>
 
@@ -9346,9 +9363,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.27";
+const APP_VERSION = "v1.4.28";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1427", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1428", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9459,7 +9476,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.27").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.28").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -16337,6 +16354,127 @@ btn.classList.toggle("active", btn.getAttribute("data-tech-cat") === teknikAktif
 teknikKutuphaneRender();
 }
 
+
+const ARKEL_ARL300_RESMI_LINK = "https://www.arkel.com.tr/urunler/asansor-kumanda-kartlari/arl-300";
+
+function teknikArkelArl300Kayitlari(){
+return [
+{
+baslik:"ARL-300 — Emniyet Devresi Kontrolü",
+tip:"Arkel ARL-300",
+kategori:"ariza",
+aciklama:"Emniyet zinciri kesildiğinde ilk kontrol sırası.",
+kod:"Emniyet / Stop",
+etiket:"Arkel",
+kontroller:[
+"Stop, kapı kilidi ve emniyet kontaklarını sırayla ölç.",
+"120/125/130 benzeri emniyet hatlarında gevşek kontak ihtimalini kontrol et.",
+"Hata silmeden önce hangi hatta kesinti olduğunu not al."
+],
+arama:"arkel arl 300 emniyet stop kapı kilidi 120 125 130"
+},
+{
+baslik:"ARL-300 — Kapı Açma/Kapama Sorunu",
+tip:"Arkel ARL-300",
+kategori:"ariza",
+aciklama:"Kapı operatörü veya kapı emniyeti kaynaklı sorunlarda hızlı kontrol.",
+kod:"Kapı",
+etiket:"Kapı",
+kontroller:[
+"Fotosel, kapı kilidi ve kapı limitlerini kontrol et.",
+"Kapı motoru/operatör beslemesini ve aç-kapa komutlarını izle.",
+"Mekanikte kızak, paten, kayış ve sıkışma kontrolü yap."
+],
+arama:"arkel arl 300 kapı kapı motoru fotosel kilit operatör"
+},
+{
+baslik:"ARL-300 — Kuyu Kopyalama / Manyetik Şalter",
+tip:"Arkel ARL-300",
+kategori:"ariza",
+aciklama:"Pozisyon bilgisi ve kat algısı karıştığında kontrol edilecekler.",
+kod:"Kuyu Kopyalama",
+etiket:"Konum",
+kontroller:[
+"Manyetik şalter ve mıknatıs yerleşimlerini kontrol et.",
+"Kuyu kopyalama işlemi öncesi mevcut ayarları not al.",
+"Kat kaçırma varsa şalter yönü, mesafe ve kablo bağlantısını kontrol et."
+],
+arama:"arkel arl 300 kuyu kopyalama manyetik şalter mıknatıs pozisyon"
+},
+{
+baslik:"ARL-300 — LCD / Menü / Şifre",
+tip:"Arkel ARL-300",
+kategori:"not",
+aciklama:"Kart üstü ekran ve menü kullanımında saha notu.",
+kod:"LCD Menü",
+etiket:"Not",
+kontroller:[
+"LCD kontrast/parlaklık ayarıyla ekran okunabilirliğini kontrol et.",
+"Parametre değiştirmeden önce eski değeri yaz.",
+"Şifre/PUK işlemlerinde yetkili bilgi olmadan rastgele deneme yapma."
+],
+arama:"arkel arl 300 lcd menü şifre puk kontrast"
+},
+{
+baslik:"ARL-300 — VVVF / Çift Hız / Hidrolik Kontrol",
+tip:"Arkel ARL-300",
+kategori:"not",
+aciklama:"Tahrik tipine göre ilk bakış kontrolü.",
+kod:"Tahrik",
+etiket:"Sürücü",
+kontroller:[
+"Kurulumun çift hızlı, hidrolik veya VVVF olduğuna göre bağlantıları kontrol et.",
+"Sürücü hata ekranı varsa önce sürücü hatasını oku.",
+"Fren, yön kontaktörü ve motor çıkışlarını ayrı ayrı gözle."
+],
+arama:"arkel arl 300 vvvf çift hızlı hidrolik sürücü motor fren"
+},
+{
+baslik:"ARL-300 — Grup / Çağrı / Kayıt Sorunu",
+tip:"Arkel ARL-300",
+kategori:"ariza",
+aciklama:"Çağrı almama veya yanlış kayıt davranışlarında hızlı saha kontrolü.",
+kod:"Çağrı",
+etiket:"Kayıt",
+kontroller:[
+"Kat ve kabin buton girişlerini kontrol et.",
+"Toplama tipi ve durak ayarlarını kontrol et.",
+"Grup kumanda varsa diğer asansörle haberleşme ve kat ayarlarını doğrula."
+],
+arama:"arkel arl 300 çağrı kayıt buton grup kumanda durak"
+}
+];
+}
+
+function teknikArkelArl300ResmiKart(){
+return `
+<div class="teknikCard teknikOfficialCard">
+  <div class="teknikCardHead">
+    <div>
+      <div class="teknikTitle">Arkel ARL-300 Resmi Ürün Sayfası</div>
+      <div class="teknikDesc">ARL-300 için resmi Arkel ürün sayfası ve indirilebilir öğeler bağlantısı.</div>
+    </div>
+    <span class="teknikType">Resmi</span>
+  </div>
+  <div class="teknikCodeBox">
+    <div class="teknikCodeTop">
+      <div class="teknikCode">arkel.com.tr</div>
+      <span class="teknikTag">Arkel</span>
+    </div>
+    <ul class="teknikChecks">
+      <li>ARL-300 resmi ürün bilgisi ve teknik özellikler için kullan.</li>
+      <li>Hata/parametre detayında resmi doküman ve saha ölçümü esas alınmalıdır.</li>
+      <li>Bu uygulamadaki notlar hızlı saha yardımcısıdır.</li>
+    </ul>
+  </div>
+  <div class="teknikLinkActions">
+    <button type="button" class="teknikPrimaryLink" onclick="teknikLinkAc(ARKEL_ARL300_RESMI_LINK)">Resmi Sayfayı Aç</button>
+    <button type="button" class="teknikSecondaryLink" onclick="teknikLinkKopyala(ARKEL_ARL300_RESMI_LINK)">Bağlantıyı Kopyala</button>
+  </div>
+</div>`;
+}
+
+
 function teknikKutuphaneRender(){
 let listeEl = document.getElementById("teknikListe");
 if(!listeEl) return;
@@ -16477,11 +16615,11 @@ const teknikAnaKartlar = [
   {
     id:"arkel",
     baslik:"Arkel",
-    aciklama:"ARL / ARCODE ve pano saha notları sonraki paketlerde eklenecek.",
+    aciklama:"ARL-300 ile başladı. Diğer Arkel kartları sırayla eklenecek.",
     icon:"A",
-    meta:["Yakında","Kumanda"],
-    enabled:false,
-    next:function(){ toast("Arkel sonraki güncellemede eklenecek"); }
+    meta:["ARL-300","Kumanda","Resmi Link"],
+    enabled:true,
+    next:function(){ teknikGit("arkel"); }
   },
   {
     id:"aybey",
@@ -16599,12 +16737,16 @@ profilAc();
 return;
 }
 
-if(teknikView === "konel"){
+if(teknikView === "konel" || teknikView === "arkel"){
 teknikView = "home";
 }else if(teknikView === "konel-revo"){
 teknikView = "konel";
 }else if(teknikView === "konel-revo-ariza" || teknikView === "konel-revo-notlar" || teknikView === "konel-revo-kilavuz"){
 teknikView = "konel-revo";
+}else if(teknikView === "arkel-arl300"){
+teknikView = "arkel";
+}else if(teknikView === "arkel-arl300-ariza" || teknikView === "arkel-arl300-notlar" || teknikView === "arkel-arl300-kilavuz"){
+teknikView = "arkel-arl300";
 }else{
 teknikView = "home";
 }
@@ -16805,6 +16947,133 @@ listeEl.innerHTML = `
 </div>`;
 return;
 }
+
+
+if(teknikView === "arkel"){
+teknikSetHeader("Arkel","Arkel kartları ve saha notları.","Kumanda Kartları","← Teknik");
+teknikSetPlaceholder("Arkel cihazı ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Arkel"]);
+if(notice) notice.textContent = "Arkel rafı ARL-300 ile açıldı. ARL-500, ARCODE ve ADrive sonraki paketlerde eklenecek.";
+
+let devices = [
+  {
+    id:"arkel-arl300",
+    baslik:"ARL-300",
+    aciklama:"Kumanda kartı saha notları ve resmi ürün sayfası.",
+    icon:"300",
+    meta:["24 durak","1.6 m/s","VVVF/Hidrolik"],
+    enabled:true
+  },
+  {
+    id:"arkel-arl500",
+    baslik:"ARL-500",
+    aciklama:"ARL-500 için alan hazır. İçerik sonraki paketlerde eklenecek.",
+    icon:"500",
+    meta:["Yakında"],
+    enabled:false
+  },
+  {
+    id:"arkel-arcode",
+    baslik:"ARCODE",
+    aciklama:"ARCODE tümleşik kontrol ünitesi notları sonraki paketlerde eklenecek.",
+    icon:"AC",
+    meta:["Yakında"],
+    enabled:false
+  },
+  {
+    id:"arkel-adrive",
+    baslik:"ADrive / Sürücü Notları",
+    aciklama:"Sürücü hata ve kontrol notları sürücüler rafında büyütülecek.",
+    icon:"AD",
+    meta:["Yakında"],
+    enabled:false
+  }
+].filter(function(k){ return !q || teknikFilterText(k).includes(q); });
+
+listeEl.innerHTML = devices.length
+? `<div class="teknikHubGrid">${devices.map(teknikHubCard).join("")}</div>`
+: `<div class="teknikEmpty">Bu rafta sonuç yok.</div>`;
+return;
+}
+
+if(teknikView === "arkel-arl300"){
+teknikSetHeader("Arkel ARL-300","Saha notları, kılavuz bağlantısı ve başlangıç arıza kontrol başlıkları.","ARL-300","← Arkel");
+teknikSetPlaceholder("ARL-300 içinde ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300"]);
+if(notice) notice.textContent = "ARL-300 için önce saha notu ve resmi ürün sayfası bağlandı. Tam hata listesi izin/link geldikçe genişletilecek.";
+
+let actions = [
+  {
+    title:"Arıza / Kontrol Başlıkları",
+    desc:"Emniyet, kapı, kuyu kopyalama, çağrı ve tahrik kontrol notları.",
+    icon:"!",
+    onclick:"teknikGit('arkel-arl300-ariza')",
+    search:"arıza kontrol emniyet kapı kuyu çağrı tahrik"
+  },
+  {
+    title:"Saha Notları",
+    desc:"ARL-300 için hızlı genel kontrol sırası.",
+    icon:"✓",
+    onclick:"teknikGit('arkel-arl300-notlar')",
+    search:"saha notları lcd menü parametre manyetik şalter"
+  },
+  {
+    title:"Kılavuz Bağlantısı",
+    desc:"Arkel ARL-300 resmi ürün sayfası.",
+    icon:"↗",
+    onclick:"teknikGit('arkel-arl300-kilavuz')",
+    search:"kılavuz resmi arkel ürün sayfası"
+  }
+].filter(function(a){ return !q || teknikFilterText(a).includes(q); });
+
+listeEl.innerHTML = actions.length
+? `<div class="teknikCardGroup">${actions.map(function(a){return teknikActionCard(a.title,a.desc,a.icon,a.onclick);}).join("")}</div>`
+: `<div class="teknikEmpty">Bu bölümde sonuç yok.</div>`;
+return;
+}
+
+if(teknikView === "arkel-arl300-ariza"){
+teknikSetHeader("ARL-300 Kontrol Başlıkları","Arkel ARL-300 başlangıç saha kontrol notları.","Kontrol","← ARL-300");
+teknikSetPlaceholder("Ara: kapı, emniyet, kuyu, VVVF...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300","Kontrol"]);
+if(notice) notice.textContent = "Bu bölüm resmi hata listesi değil; ARL-300 için hızlı saha kontrol başlıklarıdır.";
+
+let kayitlar = teknikArkelArl300Kayitlari().filter(function(k){
+return k.kategori !== "not" && (!q || teknikFilterText(k).includes(q));
+});
+
+listeEl.innerHTML = kayitlar.length
+? `<div class="teknikCodeSearchHint">${kayitlar.length} kayıt gösteriliyor.</div>${kayitlar.map(teknikKodKart).join("")}`
+: `<div class="teknikEmpty">Sonuç bulunamadı.</div>`;
+return;
+}
+
+if(teknikView === "arkel-arl300-notlar"){
+teknikSetHeader("ARL-300 Saha Notları","Parametre değiştirmeden önce hızlı kontrol listesi.","Saha Notları","← ARL-300");
+teknikSetPlaceholder("Saha notu ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300","Saha Notları"]);
+if(notice) notice.textContent = "ARL-300 notları sahada hızlı karar için; resmi doküman yerine geçmez.";
+
+let kayitlar = teknikArkelArl300Kayitlari().filter(function(k){
+return k.kategori === "not" && (!q || teknikFilterText(k).includes(q));
+});
+
+listeEl.innerHTML = kayitlar.length
+? kayitlar.map(teknikKodKart).join("")
+: `<div class="teknikEmpty">Saha notu bulunamadı.</div>`;
+return;
+}
+
+if(teknikView === "arkel-arl300-kilavuz"){
+teknikSetHeader("ARL-300 Kılavuz","Arkel resmi ürün sayfası bağlantısı.","Kılavuz","← ARL-300");
+teknikSetPlaceholder("Kılavuz içinde ara...");
+teknikBreadcrumbRender(["Teknik Kütüphane","Arkel","ARL-300","Kılavuz"]);
+if(notice) notice.textContent = "ARL-300 resmi ürün sayfası bağlandı. Kılavuz/PDF için Arkel doküman alanı ayrıca kontrol edilebilir.";
+
+listeEl.innerHTML = teknikArkelArl300ResmiKart();
+return;
+}
+
 
 teknikView = "home";
 teknikKutuphaneRender();
