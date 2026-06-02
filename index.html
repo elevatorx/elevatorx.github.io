@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1425_TEKNIK_KUTUPHANE_HIYERARSI_KESIN | APP_VERSION v1.4.25 -->
+<!-- ELEVATORX_V1426_TEKNIK_RAF_KART_RENDER_FIX_KESIN | APP_VERSION v1.4.26 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1425">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1425">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1425">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1425">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1425">
-<link rel="manifest" href="/manifest.webmanifest?v=1425">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1426">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1426">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1426">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1426">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1426">
+<link rel="manifest" href="/manifest.webmanifest?v=1426">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8588,6 +8588,27 @@ color:#60a5fa;
 .teknikActionDesc{font-size:11.2px;}
 }
 
+
+
+/* === v1.4.26 — Teknik raf kart görünürlük fix === */
+.teknikHubGrid{
+display:grid!important;
+grid-template-columns:1fr!important;
+gap:10px!important;
+min-height:120px;
+}
+
+.teknikHubCard{
+width:100%!important;
+border:none;
+appearance:none;
+-webkit-appearance:none;
+}
+
+.teknikListe{
+min-height:180px;
+}
+
 </style>
 
 <script>
@@ -8737,10 +8758,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1425" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1426" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.25</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.26</div>
 </div>
 </div>
 
@@ -9280,9 +9301,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.25";
+const APP_VERSION = "v1.4.26";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1425", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1426", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9393,7 +9414,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.25").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.26").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -16464,7 +16485,7 @@ obj.baslik,obj.aciklama,obj.tip,obj.kod,obj.etiket,(obj.meta || []).join(" "),(o
 function teknikHubCard(k){
 let disabled = k.enabled ? "" : " disabled";
 return `
-<button type="button" class="teknikHubCard${disabled}" onclick="${k.enabled ? `teknikGit('${ayAttr(k.id)}')` : `toast('${ayAttr(k.baslik)} sonraki güncellemede eklenecek')`}">
+<button type="button" class="teknikHubCard${disabled}" onclick="${k.enabled ? `teknikGit('${String(k.id).replace(/'/g,'')}')` : `toast('${String(k.baslik).replace(/'/g,'')} sonraki güncellemede eklenecek')`}">
   <div class="teknikHubIcon">${ayHtml(k.icon)}</div>
   <div>
     <div class="teknikHubTitle">${ayHtml(k.baslik)}</div>
@@ -16751,6 +16772,74 @@ animateIn(panel,"screenFadeUp");
 }
 }
 
+
+
+
+/* v1.4.26 — Teknik raf kart render güvenliği */
+function teknikSafeText(v){
+return String(v || "").replace(/'/g,"").replace(/"/g,"");
+}
+
+(function(){
+  const onceKey = "__teknikRenderGuard1426";
+  if(window[onceKey]) return;
+  window[onceKey] = true;
+
+  const oldRender = window.teknikKutuphaneRender;
+  if(typeof oldRender === "function"){
+    window.teknikKutuphaneRender = function(){
+      try{
+        return oldRender.apply(this, arguments);
+      }catch(err){
+        console.warn("Teknik Kütüphane render düzeltme:", err);
+        try{
+          const listeEl = document.getElementById("teknikListe");
+          if(listeEl){
+            listeEl.innerHTML = `
+            <div class="teknikHubGrid">
+              <button type="button" class="teknikHubCard" onclick="teknikGit('konel')">
+                <div class="teknikHubIcon">K</div>
+                <div>
+                  <div class="teknikHubTitle">Konel</div>
+                  <div class="teknikHubDesc">Kumanda kartları ve Revo LC hata kodları.</div>
+                  <div class="teknikHubMeta"><span class="teknikMiniPill">Revo LC</span><span class="teknikMiniPill">Hata 01-50</span></div>
+                </div>
+                <div class="teknikHubArrow">›</div>
+              </button>
+              <button type="button" class="teknikHubCard disabled" onclick="toast('Arkel sonraki güncellemede eklenecek')">
+                <div class="teknikHubIcon">A</div>
+                <div>
+                  <div class="teknikHubTitle">Arkel</div>
+                  <div class="teknikHubDesc">ARL / ARCODE ve pano saha notları sonraki paketlerde eklenecek.</div>
+                  <div class="teknikHubMeta"><span class="teknikMiniPill">Yakında</span></div>
+                </div>
+                <div class="teknikHubArrow">›</div>
+              </button>
+              <button type="button" class="teknikHubCard disabled" onclick="toast('Aybey sonraki güncellemede eklenecek')">
+                <div class="teknikHubIcon">AY</div>
+                <div>
+                  <div class="teknikHubTitle">Aybey</div>
+                  <div class="teknikHubDesc">ACT ve diğer kart notları sırayla eklenecek.</div>
+                  <div class="teknikHubMeta"><span class="teknikMiniPill">Yakında</span></div>
+                </div>
+                <div class="teknikHubArrow">›</div>
+              </button>
+              <button type="button" class="teknikHubCard disabled" onclick="toast('Sürücüler bölümü sonraki paketlerde açılacak')">
+                <div class="teknikHubIcon">S</div>
+                <div>
+                  <div class="teknikHubTitle">Sürücüler</div>
+                  <div class="teknikHubDesc">Fuji, Yaskawa, Ziehl-Abegg, Delta sürücü hata notları.</div>
+                  <div class="teknikHubMeta"><span class="teknikMiniPill">Yakında</span></div>
+                </div>
+                <div class="teknikHubArrow">›</div>
+              </button>
+            </div>`;
+          }
+        }catch(e){}
+      }
+    };
+  }
+})();
 
 const AY_DB_NAME = "ay_asansor_db";
 const AY_DB_STORE = "ayarlar";
