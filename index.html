@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1426_TEKNIK_RAF_KART_RENDER_FIX_KESIN | APP_VERSION v1.4.26 -->
+<!-- ELEVATORX_V1427_KONEL_RESMI_LINK_ENTEGRASYON_KESIN | APP_VERSION v1.4.27 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1426">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1426">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1426">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1426">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1426">
-<link rel="manifest" href="/manifest.webmanifest?v=1426">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1427">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1427">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1427">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1427">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1427">
+<link rel="manifest" href="/manifest.webmanifest?v=1427">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8609,6 +8609,51 @@ appearance:none;
 min-height:180px;
 }
 
+
+
+/* === v1.4.27 — Konel resmi link kartı === */
+.teknikOfficialCard{
+border-color:rgba(0,122,255,.18)!important;
+}
+
+.teknikLinkActions{
+display:grid;
+grid-template-columns:1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.teknikPrimaryLink,
+.teknikSecondaryLink{
+height:48px;
+border-radius:17px;
+font-size:13px;
+font-weight:950;
+letter-spacing:.1px;
+}
+
+.teknikPrimaryLink{
+background:#007aff!important;
+color:#fff!important;
+box-shadow:0 12px 24px rgba(0,122,255,.22),inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.teknikSecondaryLink{
+background:#eef4ff!important;
+color:#007aff!important;
+}
+
+body.darkMode .teknikSecondaryLink,
+html.darkRoot .teknikSecondaryLink{
+background:#12223a!important;
+color:#60a5fa!important;
+}
+
+body.darkMode .teknikOfficialCard,
+html.darkRoot .teknikOfficialCard{
+border-color:rgba(96,165,250,.18)!important;
+}
+
 </style>
 
 <script>
@@ -8758,10 +8803,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1426" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1427" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.26</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.27</div>
 </div>
 </div>
 
@@ -9301,9 +9346,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.26";
+const APP_VERSION = "v1.4.27";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1426", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1427", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9414,7 +9459,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.26").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.27").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -16388,6 +16433,31 @@ behavior:"smooth"
 
 
 
+
+/* v1.4.27 — Konel resmi bağlantı entegrasyonu */
+const KONEL_REVO_LC_RESMI_LINK = "https://www.konelsan.com.tr/tr/revo-lc-hata-kodlari";
+
+function teknikLinkAc(url){
+try{ haptic("light"); }catch(e){}
+try{
+window.open(url,"_blank","noopener,noreferrer");
+}catch(e){
+location.href = url;
+}
+}
+
+async function teknikLinkKopyala(url){
+try{
+if(navigator.clipboard && navigator.clipboard.writeText){
+await navigator.clipboard.writeText(url);
+toast("Bağlantı kopyalandı");
+return;
+}
+}catch(e){}
+toast("Bağlantı: " + url);
+}
+
+
 /* v1.4.25 — Teknik Kütüphane Hiyerarşi */
 let teknikView = "home";
 let teknikSeciliMarka = "";
@@ -16707,24 +16777,30 @@ teknikBreadcrumbRender(["Teknik Kütüphane","Konel","Revo LC","Kılavuz"]);
 if(notice) notice.textContent = "Public uygulamaya PDF kopyalamak yerine resmi bağlantı ve kendi saha notlarımızla ilerliyoruz.";
 
 listeEl.innerHTML = `
-<div class="teknikCard">
+<div class="teknikCard teknikOfficialCard">
   <div class="teknikCardHead">
     <div>
-      <div class="teknikTitle">Resmi Konel Revo LC dokümanı</div>
-      <div class="teknikDesc">Kullanım kılavuzu ve üretici dokümanları için resmi Konel sayfası kontrol edilmeli.</div>
+      <div class="teknikTitle">Konel Revo LC Resmi Sayfa</div>
+      <div class="teknikDesc">Revo LC hata kodları için Konel'in resmi sayfası bağlandı. İzin alındığı için bu bölüm artık doğrudan resmi kaynağa yönlendirir.</div>
     </div>
-    <span class="teknikType">Bağlantı</span>
+    <span class="teknikType">Resmi</span>
   </div>
+
   <div class="teknikCodeBox">
     <div class="teknikCodeTop">
       <div class="teknikCode">konelsan.com.tr</div>
-      <span class="teknikTag">Resmi</span>
+      <span class="teknikTag">Konel</span>
     </div>
     <ul class="teknikChecks">
-      <li>Uygulamadaki notlar hızlı saha yardımcısıdır.</li>
-      <li>Parametre ve bağlantı detayında resmi kılavuz esas alınmalıdır.</li>
-      <li>İzinli PDF ekleme kararı verilirse bu alana bağlanabilir.</li>
+      <li>Resmi hata kodu sayfasını açmak için aşağıdaki butonu kullan.</li>
+      <li>Uygulamadaki saha notları hızlı kullanım içindir.</li>
+      <li>Detay ve doğrulama için resmi Konel sayfası esas alınmalıdır.</li>
     </ul>
+  </div>
+
+  <div class="teknikLinkActions">
+    <button type="button" class="teknikPrimaryLink" onclick="teknikLinkAc(KONEL_REVO_LC_RESMI_LINK)">Resmi Sayfayı Aç</button>
+    <button type="button" class="teknikSecondaryLink" onclick="teknikLinkKopyala(KONEL_REVO_LC_RESMI_LINK)">Bağlantıyı Kopyala</button>
   </div>
 </div>`;
 return;
