@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1422_EMPTY_STATE_BOTTOM_FIX_KESIN | APP_VERSION v1.4.22 -->
+<!-- ELEVATORX_V1423_TEKNIK_KUTUPHANE_BASLANGIC_KESIN | APP_VERSION v1.4.23 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1422">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1422">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1422">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1422">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1422">
-<link rel="manifest" href="/manifest.webmanifest?v=1422">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1423">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1423">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1423">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1423">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1423">
+<link rel="manifest" href="/manifest.webmanifest?v=1423">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7853,6 +7853,323 @@ margin-bottom:calc(120px + env(safe-area-inset-bottom,0px))!important;
 }
 }
 
+
+
+/* === v1.4.23 — Teknik Kütüphane Başlangıç === */
+.teknikPanel{
+padding:8px 12px calc(132px + env(safe-area-inset-bottom,0px));
+min-height:calc(100dvh - 96px);
+box-sizing:border-box;
+animation:screenFadeUp .28s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.teknikHero{
+border-radius:28px;
+padding:16px;
+margin:4px 0 12px;
+background:
+radial-gradient(circle at 92% 8%,rgba(0,122,255,.16),transparent 34%),
+linear-gradient(135deg,rgba(255,255,255,.96),rgba(247,250,255,.94));
+border:1px solid rgba(226,232,240,.9);
+box-shadow:0 14px 34px rgba(15,23,42,.055),inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+.teknikBackBtn{
+width:auto;
+height:38px;
+padding:0 13px;
+border-radius:999px;
+background:#eef4ff;
+color:#007aff;
+font-size:13px;
+font-weight:900;
+margin:0 0 14px;
+}
+
+.teknikHeroTop{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+}
+
+.teknikKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.35px;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:4px;
+}
+
+.teknikHero h2{
+font-size:28px;
+line-height:1.03;
+margin:0;
+letter-spacing:-.7px;
+}
+
+.teknikHero p{
+margin:7px 0 0;
+font-size:13px;
+font-weight:700;
+line-height:1.4;
+color:#64748b;
+}
+
+.teknikHeroIcon{
+width:62px;
+height:62px;
+border-radius:22px;
+background:#eaf2ff;
+color:#007aff;
+display:flex;
+align-items:center;
+justify-content:center;
+flex:0 0 auto;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 22px rgba(0,122,255,.10);
+}
+
+.teknikHeroIcon svg{
+width:34px;
+height:34px;
+}
+
+.teknikSearchCard{
+background:rgba(255,255,255,.88);
+border:1px solid rgba(226,232,240,.92);
+border-radius:24px;
+padding:12px;
+box-shadow:0 12px 30px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.85);
+margin-bottom:10px;
+}
+
+#teknikArama{
+height:50px;
+border:none;
+border-radius:18px;
+margin:0 0 10px;
+background:#f6f8fc;
+font-size:15px;
+font-weight:750;
+padding:0 14px;
+}
+
+.teknikChips{
+display:flex;
+gap:8px;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+padding:1px 0 2px;
+}
+
+.teknikChip{
+width:auto;
+flex:0 0 auto;
+margin:0;
+padding:9px 12px;
+border-radius:999px;
+background:#f1f5f9;
+color:#475569;
+font-size:12px;
+font-weight:900;
+}
+
+.teknikChip.active{
+background:#007aff;
+color:white;
+box-shadow:0 10px 22px rgba(0,122,255,.18),inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.teknikNotice{
+border-radius:20px;
+background:#fff7ed;
+color:#9a3412;
+border:1px solid rgba(251,146,60,.22);
+padding:12px 13px;
+font-size:12px;
+font-weight:800;
+line-height:1.45;
+margin-bottom:11px;
+}
+
+.teknikListe{
+display:grid;
+gap:10px;
+}
+
+.teknikCard{
+background:rgba(255,255,255,.92);
+border:1px solid rgba(226,232,240,.92);
+border-radius:24px;
+padding:14px;
+box-shadow:0 12px 30px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.78);
+position:relative;
+overflow:hidden;
+animation:elevatorXMicroAppear .26s cubic-bezier(.22,.9,.24,1) both;
+}
+
+.teknikCard::after{
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+background:linear-gradient(135deg,rgba(255,255,255,.38),transparent 40%,rgba(0,122,255,.035) 100%);
+}
+
+.teknikCard > *{
+position:relative;
+z-index:1;
+}
+
+.teknikCardHead{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:10px;
+margin-bottom:9px;
+}
+
+.teknikType{
+display:inline-flex;
+align-items:center;
+gap:6px;
+padding:6px 9px;
+border-radius:999px;
+font-size:10.5px;
+font-weight:950;
+background:#eef4ff;
+color:#007aff;
+white-space:nowrap;
+}
+
+.teknikTitle{
+font-size:18px;
+font-weight:950;
+letter-spacing:-.35px;
+line-height:1.1;
+}
+
+.teknikDesc{
+font-size:12.6px;
+font-weight:750;
+line-height:1.45;
+color:#64748b;
+margin-top:5px;
+}
+
+.teknikCodeBox{
+margin-top:10px;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.85);
+padding:11px;
+}
+
+.teknikCodeTop{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+margin-bottom:8px;
+}
+
+.teknikCode{
+font-size:13px;
+font-weight:950;
+color:#0f172a;
+}
+
+.teknikTag{
+padding:5px 8px;
+border-radius:999px;
+font-size:10px;
+font-weight:950;
+background:#eaf8f0;
+color:#22a859;
+white-space:nowrap;
+}
+
+.teknikChecks{
+margin:0;
+padding-left:17px;
+font-size:12px;
+font-weight:760;
+line-height:1.55;
+color:#475569;
+}
+
+.teknikEmpty{
+background:white;
+border-radius:24px;
+padding:22px;
+text-align:center;
+color:#64748b;
+font-size:14px;
+font-weight:800;
+box-shadow:0 12px 30px rgba(15,23,42,.045);
+}
+
+.techLibraryProfileCard .profileActionIcon{
+background:linear-gradient(145deg,#eff6ff,#dbeafe);
+color:#007aff;
+font-weight:950;
+}
+
+body.darkMode .teknikHero,
+body.darkMode .teknikSearchCard,
+body.darkMode .teknikCard,
+html.darkRoot .teknikHero,
+html.darkRoot .teknikSearchCard,
+html.darkRoot .teknikCard{
+background:#151b26;
+border-color:#263241;
+box-shadow:0 14px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+body.darkMode .teknikHero,
+html.darkRoot .teknikHero{
+background:
+radial-gradient(circle at 92% 8%,rgba(59,130,246,.16),transparent 34%),
+linear-gradient(135deg,rgba(21,27,38,.96),rgba(15,20,29,.94));
+}
+
+body.darkMode .teknikHero p,
+body.darkMode .teknikDesc,
+body.darkMode .teknikChecks,
+html.darkRoot .teknikHero p,
+html.darkRoot .teknikDesc,
+html.darkRoot .teknikChecks{
+color:#a7b0bf;
+}
+
+body.darkMode #teknikArama,
+body.darkMode .teknikCodeBox,
+html.darkRoot #teknikArama,
+html.darkRoot .teknikCodeBox{
+background:#0f141d;
+border-color:#263241;
+color:#f8fafc;
+}
+
+body.darkMode .teknikCode,
+html.darkRoot .teknikCode{
+color:#f8fafc;
+}
+
+body.darkMode .teknikChip,
+html.darkRoot .teknikChip{
+background:#263241;
+color:#cbd5e1;
+}
+
+body.darkMode .teknikNotice,
+html.darkRoot .teknikNotice{
+background:#2b1e0f;
+border-color:rgba(251,191,36,.22);
+color:#fbbf24;
+}
+
 </style>
 
 <script>
@@ -8002,10 +8319,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1422" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1423" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.22</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.23</div>
 </div>
 </div>
 
@@ -8289,6 +8606,14 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="profileActionGrid">
 
+<button class="profileActionCard techLibraryProfileCard" onclick="teknikKutuphaneAc()">
+  <span class="profileActionIcon">▣</span>
+  <span class="profileActionText">
+    <b>Teknik Kütüphane</b>
+    <em>Kumanda kartı, sürücü ve arıza kodu saha notları.</em>
+  </span>
+</button>
+
 <button class="profileActionCard" onclick="aySonuRaporu()">
   <span class="profileActionIcon">📄</span>
   <span class="profileActionText">
@@ -8408,6 +8733,47 @@ Destek: supportelevatorx@gmail.com
 
 </div>
 
+
+<div id="teknikPanel" class="teknikPanel" style="display:none">
+
+  <div class="teknikHero">
+    <button class="teknikBackBtn" onclick="profilAc()">← Profil</button>
+    <div class="teknikHeroTop">
+      <div>
+        <div class="teknikKicker">Saha Modu</div>
+        <h2>Teknik Kütüphane</h2>
+        <p>Kumanda kartları, sürücüler ve arıza kodları için hızlı saha notları.</p>
+      </div>
+      <div class="teknikHeroIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="4.5" y="5" width="15" height="14" rx="3.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M8 3.5v3M16 3.5v3M8 17.5v3M16 17.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="teknikSearchCard">
+    <input id="teknikArama" type="search" placeholder="Kart, sürücü veya hata kodu ara..." oninput="teknikKutuphaneRender()">
+    <div class="teknikChips">
+      <button class="teknikChip active" data-tech-cat="all" onclick="teknikKategoriSec('all')">Tümü</button>
+      <button class="teknikChip" data-tech-cat="kart" onclick="teknikKategoriSec('kart')">Kumanda Kartı</button>
+      <button class="teknikChip" data-tech-cat="surucu" onclick="teknikKategoriSec('surucu')">Sürücü</button>
+      <button class="teknikChip" data-tech-cat="ariza" onclick="teknikKategoriSec('ariza')">Arıza Kodu</button>
+      <button class="teknikChip" data-tech-cat="favori" onclick="teknikKategoriSec('favori')">Favoriler</button>
+    </div>
+  </div>
+
+  <div class="teknikNotice">
+    Bu alan üretici kılavuzunun yerine geçmez. İlk sürümde örnek saha notları var; gerçek kılavuz/arıza kodları izinli veya kendi notlarımızla aşamalı eklenecek.
+  </div>
+
+  <div id="teknikListe" class="teknikListe"></div>
+
+</div>
+
+
 <button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
   <span>+</span>
   <b>Yeni</b>
@@ -8501,9 +8867,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.22";
+const APP_VERSION = "v1.4.23";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1422", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1423", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -8614,7 +8980,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.22").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.23").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -10372,6 +10738,7 @@ setAktifTab("apartman");
 
 searchArea.style.display="flex";
 profilPanel.style.display="none";
+teknikPanelGizle();
 detayPanel.style.display="none";
 liste.style.display="block";
 
@@ -10883,6 +11250,7 @@ filterPanel.style.display="none";
 formBox.style.display="none";
 detayPanel.style.display="none";
 profilPanel.style.display="none";
+teknikPanelGizle();
 liste.style.display="block";
 quickAddGuncelle();
 
@@ -12675,6 +13043,7 @@ filterPanel.style.display="none";
 liste.style.display="none";
 formBox.style.display="none";
 profilPanel.style.display="none";
+teknikPanelGizle();
 detayPanel.style.display="block";
 quickAddGuncelle();
 
@@ -14623,6 +14992,7 @@ setAktifTab("apartman");
 aktifDetay = null;
 searchArea.style.display="flex";
 profilPanel.style.display="none";
+teknikPanelGizle();
 detayPanel.style.display="none";
 formBox.style.display="none";
 liste.style.display="block";
@@ -14692,6 +15062,7 @@ filterPanel.style.display="none";
 formBox.style.display="none";
 detayPanel.style.display="none";
 liste.style.display="none";
+teknikPanelGizle();
 profilPanel.style.display="block";
 
 temaUygula();
@@ -14707,6 +15078,196 @@ behavior:"smooth"
 });
 
 }
+
+
+const teknikKutuphaneKayitlari = [
+{
+  baslik:"Konel Revo LC",
+  tip:"Kumanda Kartı",
+  kategori:"kart",
+  favori:true,
+  aciklama:"Revo LC için hızlı saha kontrol notu. Detaylı parametre için resmi üretici kılavuzu kontrol edilmeli.",
+  kod:"Genel kontrol",
+  etiket:"Kart",
+  kontroller:[
+    "Besleme, emniyet devresi ve kapı kilit zinciri kontrol edilir.",
+    "Kontaktör geri besleme ve röle çıkışları ayrı ayrı izlenir.",
+    "Parametre değişikliği öncesi mevcut ayarlar not alınır."
+  ],
+  arama:"konel revo lc kart kumanda hata arıza"
+},
+{
+  baslik:"Aybey ACT",
+  tip:"Kumanda Kartı",
+  kategori:"kart",
+  favori:true,
+  aciklama:"Sahada hızlı bakış için ACT kart notları. Hata açıklamaları kendi teknik notlarımızla genişletilecek.",
+  kod:"Hata 24",
+  etiket:"Arıza",
+  kontroller:[
+    "Kontaktör yapışması / geri besleme hattı kontrol edilir.",
+    "Kontaktör yardımcı kontağı ve kablo bağlantısı kontrol edilir.",
+    "Enerji kesilip mekanik yapışma ihtimali gözlemlenir."
+  ],
+  arama:"aybey act hata 24 kontaktör yapıştı geri besleme"
+},
+{
+  baslik:"Arkel Sistem Notları",
+  tip:"Kumanda / Pano",
+  kategori:"kart",
+  favori:false,
+  aciklama:"Arkel pano ve kartlarda sahada bakılacak genel kontrol başlıkları.",
+  kod:"Genel pano kontrolü",
+  etiket:"Not",
+  kontroller:[
+    "Emniyet devresi, kapı kilitleri ve revizyon hattı sırayla takip edilir.",
+    "Sürücü haberleşme / yön kontaktörü çıkışları gözlenir.",
+    "Hata silmeden önce son arıza durumu not edilir."
+  ],
+  arama:"arkel pano kart emniyet revizyon sürücü haberleşme"
+},
+{
+  baslik:"Sürücü Ön Kontrol",
+  tip:"Sürücü",
+  kategori:"surucu",
+  favori:false,
+  aciklama:"Markadan bağımsız sürücü arızalarında ilk kontrol sırası.",
+  kod:"OC / OV / UV",
+  etiket:"Sürücü",
+  kontroller:[
+    "Şebeke voltajı, faz durumu ve topraklama kontrol edilir.",
+    "Motor kablosu, fren direnci ve enkoder bağlantısı gözlenir.",
+    "Arıza tekrar ediyorsa yük durumu ve mekanik sıkışma kontrol edilir."
+  ],
+  arama:"sürücü inverter oc ov uv over current over voltage under voltage fren direnci enkoder"
+},
+{
+  baslik:"Kapı Operatörü Notu",
+  tip:"Arıza Kodu",
+  kategori:"ariza",
+  favori:false,
+  aciklama:"Kapı motoru / operatör arızalarında hızlı saha kontrolü.",
+  kod:"Kapı açmıyor / kapanmıyor",
+  etiket:"Kapı",
+  kontroller:[
+    "Fotosel, kapı kontağı ve sıkışma algısı kontrol edilir.",
+    "Kayış, kızak, paten ve mekanik sürtme gözlenir.",
+    "Kapı kartı beslemesi ve motor çıkışı ölçülür."
+  ],
+  arama:"kapı operatörü kapı motoru fotosel kayış kızak paten kapı kartı"
+}
+];
+
+let teknikAktifKategori = "all";
+
+function teknikPanelGizle(){
+let panel = document.getElementById("teknikPanel");
+if(panel){
+panel.style.display = "none";
+}
+}
+
+function teknikKategoriSec(kategori){
+haptic("light");
+teknikAktifKategori = kategori || "all";
+
+document.querySelectorAll(".teknikChip").forEach(function(btn){
+btn.classList.toggle("active", btn.getAttribute("data-tech-cat") === teknikAktifKategori);
+});
+
+teknikKutuphaneRender();
+}
+
+function teknikKutuphaneRender(){
+let listeEl = document.getElementById("teknikListe");
+if(!listeEl) return;
+
+let input = document.getElementById("teknikArama");
+let q = String(input ? input.value : "").toLocaleLowerCase("tr-TR").trim();
+
+let sonuc = teknikKutuphaneKayitlari.filter(function(k){
+let kategoriUyum =
+teknikAktifKategori === "all" ||
+(teknikAktifKategori === "favori" && k.favori) ||
+k.kategori === teknikAktifKategori ||
+(teknikAktifKategori === "ariza" && (k.kategori === "ariza" || String(k.kod || "").toLocaleLowerCase("tr-TR").includes("hata")));
+
+let metin = [
+k.baslik,k.tip,k.aciklama,k.kod,k.etiket,k.arama,(k.kontroller || []).join(" ")
+].join(" ").toLocaleLowerCase("tr-TR");
+
+let aramaUyum = !q || metin.includes(q);
+
+return kategoriUyum && aramaUyum;
+});
+
+if(!sonuc.length){
+listeEl.innerHTML = `
+<div class="teknikEmpty">
+Sonuç bulunamadı.<br>
+<span style="font-size:12px;font-weight:750;color:#94a3b8;">Farklı kart, sürücü veya hata kodu ile ara.</span>
+</div>`;
+return;
+}
+
+listeEl.innerHTML = sonuc.map(function(k){
+return `
+<div class="teknikCard">
+  <div class="teknikCardHead">
+    <div>
+      <div class="teknikTitle">${ayHtml(k.baslik)}</div>
+      <div class="teknikDesc">${ayHtml(k.aciklama)}</div>
+    </div>
+    <span class="teknikType">${ayHtml(k.tip)}</span>
+  </div>
+
+  <div class="teknikCodeBox">
+    <div class="teknikCodeTop">
+      <div class="teknikCode">${ayHtml(k.kod)}</div>
+      <span class="teknikTag">${ayHtml(k.etiket)}</span>
+    </div>
+    <ul class="teknikChecks">
+      ${(k.kontroller || []).map(function(m){ return `<li>${ayHtml(m)}</li>`; }).join("")}
+    </ul>
+  </div>
+</div>`;
+}).join("");
+}
+
+function teknikKutuphaneAc(){
+haptic("light");
+
+aktifEkran = "teknik";
+oncekiEkran = "profil";
+setAktifTab("profil");
+
+aktifDetay = null;
+
+searchArea.style.display = "none";
+filterPanel.style.display = "none";
+formBox.style.display = "none";
+detayPanel.style.display = "none";
+liste.style.display = "none";
+profilPanel.style.display = "none";
+
+let panel = document.getElementById("teknikPanel");
+if(panel){
+panel.style.display = "block";
+}
+
+quickAddGuncelle();
+teknikKutuphaneRender();
+
+if(panel){
+animateIn(panel,"screenFadeUp");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+}
+
 
 const AY_DB_NAME = "ay_asansor_db";
 const AY_DB_STORE = "ayarlar";
@@ -15684,7 +16245,7 @@ try{ quickAddGuncelle(); }catch(e){}
       var ekran = "";
       try{ if(typeof aktifEkran !== "undefined") ekran = String(aktifEkran || ""); }catch(e){}
 
-      var gizle = profilAcik || detayAcik || ekran === "profil" || ekran === "bakim" || ekran === "detay";
+      var gizle = profilAcik || detayAcik || ekran === "profil" || ekran === "bakim" || ekran === "detay" || ekran === "teknik";
       ayTopSearchSet(!gizle);
     }catch(e){}
   }
