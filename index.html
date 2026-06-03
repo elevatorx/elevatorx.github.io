@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1433_KONTROL_RAPORU_SK_AYIKLAMA_FIX | APP_VERSION v1.4.33 -->
+<!-- ELEVATORX_V1434_PDF_GERI_TUSU_RELOAD_FIX | APP_VERSION v1.4.34 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1430">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1430">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1430">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1430">
-<link rel="manifest" href="/manifest.webmanifest?v=1430">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1434">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1434">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1434">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1434">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1434">
+<link rel="manifest" href="/manifest.webmanifest?v=1434">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9334,10 +9334,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1434" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.33</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.34</div>
 </div>
 </div>
 
@@ -9877,9 +9877,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.33";
+const APP_VERSION = "v1.4.34";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1434", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9901,6 +9901,22 @@ try{
 if(window.history && window.history.replaceState){
 window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
 }
+window.elevatorXReportBack = function(){
+try{ window.close(); }catch(e){}
+setTimeout(function(){
+try{
+if(!window.closed){
+var btn = document.querySelector(".backBtn,.screenBtn");
+if(btn){
+btn.textContent = "Kapatmak için sağ üstteki X'i kullan";
+btn.disabled = true;
+btn.style.opacity = "0.75";
+}
+}
+}catch(e){}
+},120);
+return false;
+};
 window.addEventListener("pageshow", function(){
 try{
 if(String(window.location.href).indexOf("blob:") === 0){
@@ -12944,7 +12960,7 @@ td{font-size:8.5px!important;padding:6px!important}
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -13582,7 +13598,7 @@ line-height:1.2!important;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -14693,7 +14709,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -15400,7 +15416,7 @@ h2{font-size:21px;letter-spacing:.2px;margin:12px 0 8px;color:#14233b;font-weigh
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
 
 <section class="page">
@@ -15551,7 +15567,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -15754,7 +15770,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -15973,7 +15989,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -16747,7 +16763,7 @@ opacity:.9;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
