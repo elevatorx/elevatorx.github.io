@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1432_KONTROL_RAPORU_TEMIZ_SK_OZETI | APP_VERSION v1.4.32 -->
+<!-- ELEVATORX_V1433_KONTROL_RAPORU_SK_AYIKLAMA_FIX | APP_VERSION v1.4.33 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
@@ -6376,7 +6376,7 @@ color:#f8fafc;
 }
 
 
-/* === v1.4.32 — Kontrol Raporu Sarı/Kırmızı Ayıklayıcı === */
+/* === v1.4.33 — Kontrol Raporu S/K Ayıklama Fix === */
 .controlReportHero{
 background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
 border:1px solid rgba(229,231,235,.92);
@@ -9178,7 +9178,7 @@ min-height:46px;
 
 
 
-/* === v1.4.32 — Temiz S/K Madde Özeti PDF düzeni === */
+/* === v1.4.33 — Temiz S/K Madde Özeti PDF düzeni === */
 .controlList li{line-height:1.55;margin-bottom:7px;}
 .controlIssueCode{display:inline-block;font-weight:950;color:#0f172a;margin-right:5px;}
 body.darkMode .controlIssueCode{color:#f8fafc;}
@@ -9337,7 +9337,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.32</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.33</div>
 </div>
 </div>
 
@@ -9877,7 +9877,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.32";
+const APP_VERSION = "v1.4.33";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
@@ -14556,7 +14556,7 @@ detayPanel.innerHTML = `
       <div class="revisionOfferTitle">Revizyon Teklifi</div>
       <div class="revisionOfferSub">${ayHtml(a.ad || "-")} için yöneticiye gönderilecek kurumsal teklif PDF'i.</div>
     </div>
-    <div class="revisionOfferBadge">v1.4.32</div>
+    <div class="revisionOfferBadge">v1.4.33</div>
   </div>
 
   <div class="revisionTemplatePreview">
@@ -14758,7 +14758,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.32</div>
+  <div>ElevatorX v1.4.33</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -14809,8 +14809,9 @@ t = kontrolBoslukluHarfleriDuzelt(t);
 
 /* PDF.js bazı raporlarda satırları yan yana verdiği için kodları yeni satıra al */
 t = t
-.replace(/(\d+\.\d+\.\d+)\s*\(([SK])\)/gi,"\n$1 ($2) ")
-.replace(/(\d+\.\d+\.\d+)\s+(S|K)\b/gi,"\n$1 ($2) ")
+.replace(/\s+[-–—]\s*(\d+\.\d+\.\d+)\s*\(([SKM])\)/gi,"\n$1 ($2) ")
+.replace(/(\d+\.\d+\.\d+)\s*\(([SKM])\)/gi,"\n$1 ($2) ")
+.replace(/(\d+\.\d+\.\d+)\s+(S|K|M)\b/gi,"\n$1 ($2) ")
 .replace(/\b(SARI|SARI\s*\(S\)|SARI\s+MADDELER|SARI\s+UYGUNSUZLUK[^\n]*)/gi,"\n$1\n")
 .replace(/\b(KIRMIZI|KIRMIZI\s*\(K\)|KIRMIZI\s+MADDELER|KIRMIZI\s+UYGUNSUZLUK[^\n]*)/gi,"\n$1\n")
 .replace(/\b(Not:)\s*/gi,"\n$1 ");
@@ -14835,15 +14836,18 @@ return false;
 
 function kontrolKategoriBul(s){
 let t = String(s || "").toLocaleLowerCase("tr-TR");
+/* Mavi / M / hafif kusurlu maddeler müşteri özetine dahil edilmez. */
+if(/mavi|blue|\(\s*m\s*\)|m\s*\)|hafif\s*kusur|hafif\s*kusurlu/.test(t)) return "";
 if(/kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz|guvensiz|emniyetsiz/.test(t)) return "kirmizi";
-if(/sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu/.test(t)) return "sari";
+if(/sarı|sari|yellow|orta\s*kusur|kusurlu/.test(t)) return "sari";
 return "";
 }
 
 function kontrolBaslikKategori(s){
 let t = kontrolTemizSatir(s).toLocaleLowerCase("tr-TR");
+if(/mavi|blue|\(\s*m\s*\)|m\s*\)|hafif\s*kusur|hafif\s*kusurlu/.test(t)) return "";
 if(/^(kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz)/.test(t) && t.length < 110) return "kirmizi";
-if(/^(sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu)/.test(t) && t.length < 110) return "sari";
+if(/^(sarı|sari|yellow|orta\s*kusur|kusurlu)/.test(t) && t.length < 110) return "sari";
 return "";
 }
 
@@ -14869,10 +14873,19 @@ let t = kontrolBoslukluHarfleriDuzelt(String(s || ""))
 .replace(/\s+/g," ")
 .trim();
 
-/* Raporun alt metinleri maddeye yapışırsa burada kes */
+/* Raporun alt metinleri, muayene yapan kişi bilgisi veya M maddeleri maddeye yapışırsa burada kes */
+t = t.split(/\bRAPOR\s+ONAY\b/i)[0];
+t = t.split(/\bMUAYENE\s+M[ÜU]HEND[İI]S[İI]\b/i)[0];
+t = t.split(/\bTEKN[İI]K\s*Y[ÖO]NET[İI]C[İI]\b/i)[0];
+t = t.split(/\bBu\s+belge\s+5070\b/i)[0];
+t = t.split(/\bE\s*K\s*\d+\b/i)[0];
+t = t.split(/\bASANS[ÖO]R\s+PER[İI]YOD[İI]K\s*\/\s*TAK[İI]P\s*KONTROL\b/i)[0];
+t = t.split(/\n?\s*\d+\.\d+\.\d+\s*\(\s*M\s*\)/i)[0];
+t = t.split(/\n?\s*[-–—]\s*\d+\.\d+\.\d+\s*\(\s*M\s*\)/i)[0];
 t = t.split(/\bNot:\s+/i)[0];
 t = t.split(/\bAY\s+ASANSÖR\b/i)[0];
 t = t.split(/\bBu\s+özet,\s+resmi/i)[0];
+t = t.replace(/([.!?])\s+\d{1,3}\s*$/g,"$1");
 return kontrolTemizSatir(t);
 }
 
@@ -14924,7 +14937,7 @@ liste.push({text:t,__key:anahtar});
 function kontrolRaporuKodluMaddeleriAyikla(raw,sonuc){
 let bulunan = 0;
 let t = kontrolRaporMetniNormalize(raw);
-let re = /(\d+\.\d+\.\d+)\s*\(([SK])\)\s*([\s\S]*?)(?=\n\s*\d+\.\d+\.\d+\s*\([SK]\)|\n\s*(?:SARI|KIRMIZI)\s*\([SK]\)|\n\s*(?:SARI|KIRMIZI)\s+UYGUNSUZLUK|\n\s*Not:|$)/gi;
+let re = /(?:^|\n)\s*(\d+\.\d+\.\d+)\s*\(([SK])\)\s*([\s\S]*?)(?=\n\s*(?:[-–—]\s*)?\d+\.\d+\.\d+\s*\([SKM]\)|\n\s*(?:SARI|KIRMIZI|MAVİ|MAVI|HAFİF|HAFIF)\s*\([SKM]\)|\n\s*(?:SARI|KIRMIZI)\s+UYGUNSUZLUK|\n\s*RAPOR\s+ONAY|\n\s*MUAYENE\s+M[ÜU]HEND[İI]S[İI]|\n\s*TEKN[İI]K\s*Y[ÖO]NET[İI]C[İI]|\n\s*Bu\s+belge\s+5070|\n\s*E\s*K\s*\d+|\n\s*Not:|$)/gi;
 let m;
 while((m = re.exec(t)) !== null){
 let kod = m[1];
@@ -15052,7 +15065,7 @@ quickAddGuncelle();
 let son = Array.isArray(a.kontrolRaporlari) && a.kontrolRaporlari.length ? a.kontrolRaporlari[0] : null;
 let sonNot = son
 ? `Son ayıklama: ${ayHtml(son.tarih || "-")} • Kırmızı ${Number(son.kirmiziSayisi || 0)} / Sarı ${Number(son.sariSayisi || 0)}`
-: "PDF metin olarak okunabiliyorsa kodlu S/K maddeleri temiz tabloya ayıklar. Taranmış foto PDF ise metni aşağıya elle yapıştırabilirsin.";
+: "PDF metin olarak okunabiliyorsa yalnızca S/K maddelerini temiz tabloya ayıklar. Mavi (M) maddeler özete alınmaz.";
 
 detayPanel.innerHTML = `
 <div class="controlReportHero screenFadeUp">
@@ -15065,12 +15078,12 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için sarı ve kırmızı uygunsuzluk maddelerini listele.</div>
     </div>
-    <div class="controlReportBadge">v1.4.32</div>
+    <div class="controlReportBadge">v1.4.33</div>
   </div>
 
   <div class="controlReportPreview">
     <b>SARI / KIRMIZI AYIKLAYICI</b>
-    <p>Kontrol raporu metninden kırmızı ve sarı maddeleri çıkarır, yöneticiye gönderilecek özet PDF hazırlar.</p>
+    <p>Kontrol raporu metninden yalnızca sarı ve kırmızı maddeleri çıkarır; mavi (M) maddeleri ve imza/onay bilgilerini dışarıda bırakır.</p>
   </div>
 
   <div class="controlUploadBox">
