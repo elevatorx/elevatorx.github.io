@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1430_HAZIR_REVIZYON_TEKLIFI | APP_VERSION v1.4.30 -->
+<!-- ELEVATORX_V1431_KONTROL_RAPORU_AYIKLAYICI | APP_VERSION v1.4.31 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
@@ -6375,6 +6375,319 @@ background:#263241;
 color:#f8fafc;
 }
 
+
+/* === v1.4.31 — Kontrol Raporu Sarı/Kırmızı Ayıklayıcı === */
+.controlReportHero{
+background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+border:1px solid rgba(229,231,235,.92);
+border-radius:30px;
+padding:18px;
+box-shadow:0 18px 44px rgba(15,23,42,.07);
+}
+
+.controlReportTop{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:14px;
+}
+
+.controlReportKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:5px;
+}
+
+.controlReportTitle{
+font-size:27px;
+font-weight:950;
+letter-spacing:-.65px;
+line-height:1.05;
+color:#0f172a;
+}
+
+.controlReportSub{
+font-size:13px;
+font-weight:750;
+color:#64748b;
+line-height:1.4;
+margin-top:7px;
+}
+
+.controlReportBadge{
+flex:0 0 auto;
+padding:8px 10px;
+border-radius:999px;
+background:#eff6ff;
+color:#007aff;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
+}
+
+.controlReportPreview{
+background:linear-gradient(145deg,#0f172a,#1e293b);
+color:white;
+border-radius:24px;
+padding:16px;
+margin:10px 0 14px;
+box-shadow:0 14px 34px rgba(15,23,42,.16);
+}
+
+.controlReportPreview b{
+display:block;
+font-size:18px;
+font-weight:950;
+letter-spacing:-.25px;
+margin-bottom:7px;
+}
+
+.controlReportPreview p{
+margin:0;
+font-size:13px;
+line-height:1.48;
+color:#cbd5e1;
+}
+
+.controlUploadBox{
+border:1.5px dashed rgba(0,122,255,.28);
+background:#f8fbff;
+border-radius:22px;
+padding:14px;
+margin:0 0 12px;
+}
+
+.controlUploadBox input[type="file"]{
+background:white;
+margin-bottom:8px;
+font-weight:850;
+}
+
+.controlUploadBox small{
+display:block;
+font-size:12px;
+font-weight:750;
+color:#64748b;
+line-height:1.45;
+}
+
+.controlReportHero textarea{
+min-height:180px;
+line-height:1.45;
+margin-bottom:0;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.96);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+font-weight:750;
+}
+
+.controlReportActions{
+display:grid;
+grid-template-columns:1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.controlBlueBtn,
+.controlPdfBtn{
+background:#007aff;
+color:white;
+border-radius:19px;
+font-size:15px;
+font-weight:950;
+padding:14px;
+box-shadow:0 14px 28px rgba(0,122,255,.18);
+}
+
+.controlGrayBtn{
+background:#e5e5ea;
+color:#111827;
+border-radius:19px;
+font-size:14px;
+font-weight:950;
+padding:13px;
+}
+
+.controlResultBox{
+margin-top:14px;
+}
+
+.controlResultGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+}
+
+.controlResultCard{
+border-radius:22px;
+padding:14px;
+border:1px solid rgba(226,232,240,.92);
+background:#f8fafc;
+}
+
+.controlResultCard.redList{
+background:linear-gradient(135deg,rgba(255,245,245,.98),rgba(255,255,255,.96));
+border-color:rgba(255,59,48,.22);
+}
+
+.controlResultCard.yellowList{
+background:linear-gradient(135deg,rgba(255,251,235,.98),rgba(255,255,255,.96));
+border-color:rgba(245,158,11,.22);
+}
+
+.controlResultHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px;
+}
+
+.controlResultHead b{
+font-size:16px;
+font-weight:950;
+letter-spacing:-.25px;
+}
+
+.controlCount{
+padding:6px 9px;
+border-radius:999px;
+font-size:11px;
+font-weight:950;
+background:white;
+color:#0f172a;
+box-shadow:0 6px 14px rgba(15,23,42,.045);
+}
+
+.controlList{
+margin:0;
+padding-left:20px;
+font-size:13px;
+font-weight:750;
+line-height:1.55;
+color:#334155;
+}
+
+.controlList li{
+margin-bottom:7px;
+}
+
+.controlEmpty{
+font-size:12.5px;
+font-weight:750;
+line-height:1.5;
+color:#64748b;
+background:rgba(255,255,255,.68);
+border-radius:16px;
+padding:12px;
+}
+
+.controlResultActions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.controlMiniBtn{
+margin:0;
+padding:12px 10px;
+border-radius:16px;
+font-size:12.5px;
+font-weight:950;
+}
+
+.controlMiniBtn.blue{
+background:#007aff;
+color:white;
+}
+
+.controlMiniBtn.gray{
+background:#e5e5ea;
+color:#111827;
+}
+
+body.darkMode .controlReportHero,
+html.darkRoot .controlReportHero{
+background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94));
+border-color:rgba(255,255,255,.08);
+box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+
+body.darkMode .controlReportTitle,
+html.darkRoot .controlReportTitle{
+color:#f8fafc;
+}
+
+body.darkMode .controlReportSub,
+html.darkRoot .controlReportSub,
+body.darkMode .controlUploadBox small,
+html.darkRoot .controlUploadBox small{
+color:#94a3b8;
+}
+
+body.darkMode .controlReportPreview,
+html.darkRoot .controlReportPreview{
+background:linear-gradient(145deg,#020817,#0f172a);
+box-shadow:0 16px 36px rgba(0,0,0,.34);
+}
+
+body.darkMode .controlUploadBox,
+html.darkRoot .controlUploadBox,
+body.darkMode .controlResultCard,
+html.darkRoot .controlResultCard{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+}
+
+body.darkMode .controlReportHero textarea,
+html.darkRoot .controlReportHero textarea,
+body.darkMode .controlUploadBox input[type="file"],
+html.darkRoot .controlUploadBox input[type="file"]{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+color:#f8fafc;
+}
+
+body.darkMode .controlResultCard.redList,
+html.darkRoot .controlResultCard.redList{
+background:linear-gradient(135deg,rgba(49,18,18,.96),rgba(21,27,38,.94));
+border-color:rgba(248,113,113,.24);
+}
+
+body.darkMode .controlResultCard.yellowList,
+html.darkRoot .controlResultCard.yellowList{
+background:linear-gradient(135deg,rgba(43,30,15,.96),rgba(21,27,38,.94));
+border-color:rgba(251,191,36,.24);
+}
+
+body.darkMode .controlList,
+html.darkRoot .controlList{
+color:#cbd5e1;
+}
+
+body.darkMode .controlEmpty,
+html.darkRoot .controlEmpty,
+body.darkMode .controlCount,
+html.darkRoot .controlCount{
+background:rgba(255,255,255,.06);
+color:#cbd5e1;
+}
+
+body.darkMode .controlGrayBtn,
+html.darkRoot .controlGrayBtn,
+body.darkMode .controlMiniBtn.gray,
+html.darkRoot .controlMiniBtn.gray{
+background:#263241;
+color:#f8fafc;
+}
+
 .detailDangerZone{
 margin-top:14px;
 padding:12px;
@@ -9015,7 +9328,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.30</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.31</div>
 </div>
 </div>
 
@@ -9555,7 +9868,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.30";
+const APP_VERSION = "v1.4.31";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
@@ -13917,6 +14230,13 @@ ${parcaGecmisiHtml(i)}
       <em>Hazır teklif şablonu</em>
     </button>
 
+
+    <button class="detailReportCard" onclick="kontrolRaporuForm(${i})">
+      <span>🧾</span>
+      <b>Kontrol Raporu</b>
+      <em>Sarı / kırmızı ayıkla</em>
+    </button>
+
   </div>
 </div>
 
@@ -14196,14 +14516,25 @@ detayPanel.style.display="block";
 quickAddGuncelle();
 
 let sonTeklif = Array.isArray(a.revizyonTeklifleri) && a.revizyonTeklifleri.length ? a.revizyonTeklifleri[0] : null;
-let varsayilanKonu = sonTeklif && sonTeklif.konu ? sonTeklif.konu : "Asansör revizyon çalışması";
-let varsayilanAciklama = sonTeklif && sonTeklif.aciklama
+let raporAktarim = window.__kontrolRaporuAktarim && window.__kontrolRaporuAktarim.i === i ? window.__kontrolRaporuAktarim : null;
+let varsayilanKonu = raporAktarim && raporAktarim.konu
+? raporAktarim.konu
+: (sonTeklif && sonTeklif.konu ? sonTeklif.konu : "Asansör revizyon çalışması");
+let varsayilanAciklama = raporAktarim && raporAktarim.aciklama
+? raporAktarim.aciklama
+: (sonTeklif && sonTeklif.aciklama
 ? sonTeklif.aciklama
-: "Yapılan kontrol sonucunda asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için gerekli revizyon işlemlerinin yapılması önerilmektedir.";
+: "Yapılan kontrol sonucunda asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için gerekli revizyon işlemlerinin yapılması önerilmektedir.");
 
-let sonTeklifNotu = sonTeklif
+let sonTeklifNotu = raporAktarim
+? "Kontrol raporundaki sarı/kırmızı maddeler açıklama alanına aktarıldı."
+: (sonTeklif
 ? `Son teklif: ${ayHtml(sonTeklif.tarih || "-")} • ${tutarFormat(sonTeklif.tutar || 0)}`
-: "Bu şablon teklif kalıbı olarak çalışır; ürün kalemi girmeden hızlı PDF oluşturur.";
+: "Bu şablon teklif kalıbı olarak çalışır; ürün kalemi girmeden hızlı PDF oluşturur.");
+
+if(raporAktarim){
+window.__kontrolRaporuAktarim = null;
+}
 
 detayPanel.innerHTML = `
 <div class="revisionOfferHero screenFadeUp">
@@ -14216,7 +14547,7 @@ detayPanel.innerHTML = `
       <div class="revisionOfferTitle">Revizyon Teklifi</div>
       <div class="revisionOfferSub">${ayHtml(a.ad || "-")} için yöneticiye gönderilecek kurumsal teklif PDF'i.</div>
     </div>
-    <div class="revisionOfferBadge">v1.4.30</div>
+    <div class="revisionOfferBadge">v1.4.31</div>
   </div>
 
   <div class="revisionTemplatePreview">
@@ -14417,7 +14748,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.30</div>
+  <div>ElevatorX v1.4.31</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -14427,6 +14758,542 @@ ${elevatorXPdfSafetyScript()}</head>
 w.document.close();
 
 toast("Revizyon teklif PDF'i hazırlandı");
+}
+
+
+function kontrolRaporuNo(i){
+let yil = new Date().getFullYear();
+let sira = 1;
+try{
+let a = data[i] || {};
+if(Array.isArray(a.kontrolRaporlari)){
+sira = a.kontrolRaporlari.length + 1;
+}
+}catch(err){}
+return "KR-" + yil + "-" + String(i + 1).padStart(3,"0") + "-" + String(sira).padStart(2,"0");
+}
+
+function kontrolTemizSatir(s){
+return String(s || "")
+.replace(/\s+/g," ")
+.replace(/[•●▪◦]/g,"-")
+.replace(/[\u200B-\u200D\uFEFF]/g,"")
+.trim();
+}
+
+function kontrolGurultuSatiri(s){
+let t = kontrolTemizSatir(s).toLocaleLowerCase("tr-TR");
+if(!t) return true;
+if(t.length < 3) return true;
+if(/^(sayfa|page)\s*\d+/i.test(t)) return true;
+if(/^(no|sıra|sira|madde|renk|durum|sonuç|sonuc|açıklama|aciklama|uygunsuzluk|kusur seviyesi|kontrol kriteri)$/i.test(t)) return true;
+if(/^(tarih|rapor no|kontrol tarihi|bina adı|bina adi|adres|asansör kimlik|asansor kimlik)/i.test(t)) return true;
+return false;
+}
+
+function kontrolKategoriBul(s){
+let t = String(s || "").toLocaleLowerCase("tr-TR");
+if(/kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz|guvensiz|emniyetsiz/.test(t)) return "kirmizi";
+if(/sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu/.test(t)) return "sari";
+return "";
+}
+
+function kontrolBaslikKategori(s){
+let t = kontrolTemizSatir(s).toLocaleLowerCase("tr-TR");
+if(/^(kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz)/.test(t) && t.length < 80) return "kirmizi";
+if(/^(sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu)/.test(t) && t.length < 80) return "sari";
+return "";
+}
+
+function kontrolKategoriTemizle(s){
+return kontrolTemizSatir(s)
+.replace(/\b(kırmızı|kirmizi|red|sarı|sari|yellow)\b/ig,"")
+.replace(/\b(ağır\s*kusur|agir\s*kusur|hafif\s*kusur|orta\s*kusur|güvensiz|guvensiz|emniyetsiz|kusurlu)\b/ig,"")
+.replace(/\b(uygunsuzluk\s*seviyesi|kusur\s*seviyesi|etiket\s*rengi|renk|sonuç|sonuc)\b/ig,"")
+.replace(/^[-–—:;|\s]+|[-–—:;|\s]+$/g,"")
+.replace(/\s{2,}/g," ")
+.trim();
+}
+
+function kontrolMaddeMetniOlustur(lines,idx,kat){
+let line = kontrolTemizSatir(lines[idx]);
+let temiz = kontrolKategoriTemizle(line);
+let parcalar = [];
+let onceki = kontrolTemizSatir(lines[idx - 1] || "");
+let sonraki = kontrolTemizSatir(lines[idx + 1] || "");
+let sonraki2 = kontrolTemizSatir(lines[idx + 2] || "");
+
+if(temiz && temiz.length >= 18 && !kontrolGurultuSatiri(temiz)){
+parcalar.push(temiz);
+}else{
+if(onceki && !kontrolKategoriBul(onceki) && !kontrolGurultuSatiri(onceki)) parcalar.push(onceki);
+if(temiz && temiz.length >= 6 && !kontrolGurultuSatiri(temiz)) parcalar.push(temiz);
+if(sonraki && !kontrolKategoriBul(sonraki) && !kontrolGurultuSatiri(sonraki)) parcalar.push(sonraki);
+if(parcalar.join(" ").length < 45 && sonraki2 && !kontrolKategoriBul(sonraki2) && !kontrolGurultuSatiri(sonraki2)) parcalar.push(sonraki2);
+}
+
+let metin = parcalar.join(" ")
+.replace(/\s{2,}/g," ")
+.replace(/^\d+[.)-]?\s*/,"")
+.trim();
+
+if(!metin || metin.length < 8) return "";
+return metin;
+}
+
+function kontrolMaddeEkle(liste,metin){
+let t = kontrolTemizSatir(metin)
+.replace(/^[-–—:;|\s]+|[-–—:;|\s]+$/g,"")
+.trim();
+if(!t || t.length < 8) return;
+let anahtar = t.toLocaleLowerCase("tr-TR").replace(/[^a-z0-9ığüşöçİĞÜŞÖÇ]+/g,"").slice(0,110);
+let varMi = liste.some(function(x){
+return x.__key === anahtar || anahtar.includes(x.__key) || x.__key.includes(anahtar);
+});
+if(!varMi){
+liste.push({text:t,__key:anahtar});
+}
+}
+
+function kontrolRaporuAyiklaMetinden(metin){
+let raw = String(metin || "")
+.replace(/\r/g,"\n")
+.replace(/([.;:])\s+(?=(Kırmızı|Kirmizi|Sarı|Sari|Ağır|Agir|Hafif)\b)/gi,"$1\n")
+.replace(/\t/g," ");
+
+let lines = raw.split(/\n+/).map(kontrolTemizSatir).filter(Boolean);
+let sonuc = {kirmizi:[],sari:[]};
+let aktifBolum = "";
+
+for(let idx=0; idx<lines.length; idx++){
+let line = lines[idx];
+let baslikKat = kontrolBaslikKategori(line);
+if(baslikKat){
+aktifBolum = baslikKat;
+let baslikIci = kontrolKategoriTemizle(line);
+if(baslikIci.length >= 18 && !kontrolGurultuSatiri(baslikIci)){
+kontrolMaddeEkle(sonuc[baslikKat],baslikIci);
+}
+continue;
+}
+
+let kat = kontrolKategoriBul(line);
+if(kat){
+let madde = kontrolMaddeMetniOlustur(lines,idx,kat);
+kontrolMaddeEkle(sonuc[kat],madde);
+aktifBolum = kat;
+continue;
+}
+
+if(aktifBolum && /^\s*(\d+[.)-]|[-–—])\s+/.test(line) && !kontrolGurultuSatiri(line)){
+kontrolMaddeEkle(sonuc[aktifBolum],line);
+continue;
+}
+
+if(aktifBolum && line.length > 32 && line.length < 220 && !kontrolGurultuSatiri(line) && !/(uygun\s+görülmüştür|sonuç|sonuc|rapor|kontrol eden|onay)/i.test(line)){
+let oncekiKat = kontrolKategoriBul(lines[idx - 1] || "");
+let sonrakiKat = kontrolKategoriBul(lines[idx + 1] || "");
+if(oncekiKat || sonrakiKat){
+kontrolMaddeEkle(sonuc[aktifBolum],line);
+}
+}
+}
+
+sonuc.kirmizi = sonuc.kirmizi.map(x=>x.text).slice(0,60);
+sonuc.sari = sonuc.sari.map(x=>x.text).slice(0,60);
+return sonuc;
+}
+
+function kontrolListeHtml(arr,emptyText){
+if(!arr || !arr.length){
+return `<div class="controlEmpty">${ayHtml(emptyText)}</div>`;
+}
+return `<ol class="controlList">${arr.map(function(m){return `<li>${ayHtml(m)}</li>`;}).join("")}</ol>`;
+}
+
+function kontrolRaporuForm(i){
+haptic("light");
+let a = data[i];
+if(!a) return;
+
+aktifEkran = "kontrolRaporu";
+aktifDetay = i;
+
+searchArea.style.display="none";
+filterPanel.style.display="none";
+liste.style.display="none";
+formBox.style.display="none";
+profilPanel.style.display="none";
+teknikPanelGizle();
+detayPanel.style.display="block";
+quickAddGuncelle();
+
+let son = Array.isArray(a.kontrolRaporlari) && a.kontrolRaporlari.length ? a.kontrolRaporlari[0] : null;
+let sonNot = son
+? `Son ayıklama: ${ayHtml(son.tarih || "-")} • Kırmızı ${Number(son.kirmiziSayisi || 0)} / Sarı ${Number(son.sariSayisi || 0)}`
+: "PDF metin olarak okunabiliyorsa otomatik ayıklar. Taranmış foto PDF ise metni aşağıya elle yapıştırabilirsin.";
+
+detayPanel.innerHTML = `
+<div class="controlReportHero screenFadeUp">
+
+  <button class="detailTopBtn detailBackBtn" onclick="detayAc(${i})">← Apartman Detayına Dön</button>
+
+  <div class="controlReportTop">
+    <div>
+      <div class="controlReportKicker">Rapor Ayıklayıcı</div>
+      <div class="controlReportTitle">Kontrol Raporu</div>
+      <div class="controlReportSub">${ayHtml(a.ad || "-")} için sarı ve kırmızı uygunsuzluk maddelerini listele.</div>
+    </div>
+    <div class="controlReportBadge">v1.4.31</div>
+  </div>
+
+  <div class="controlReportPreview">
+    <b>SARI / KIRMIZI AYIKLAYICI</b>
+    <p>Kontrol raporu metninden kırmızı ve sarı maddeleri çıkarır, yöneticiye gönderilecek özet PDF hazırlar.</p>
+  </div>
+
+  <div class="controlUploadBox">
+    <input id="kontrolRaporDosya" type="file" accept="application/pdf,text/plain,.pdf,.txt" onchange="kontrolRaporuDosyaOku(this,${i})">
+    <small>${sonNot}</small>
+  </div>
+
+  <label>
+    <span class="revisionFieldLabel">Rapor Metni</span>
+    <textarea id="kontrolRaporMetni" placeholder="PDF okunmazsa rapordaki metni buraya yapıştır. Örn: Kırmızı / Ağır kusur ... Sarı / Hafif kusur ..."></textarea>
+  </label>
+
+  <div class="controlReportActions">
+    <button class="controlBlueBtn" onclick="kontrolRaporuAyikla(${i})">Sarı / Kırmızı Maddeleri Ayıkla</button>
+    <button class="controlGrayBtn" onclick="detayAc(${i})">Vazgeç</button>
+  </div>
+
+  <div id="kontrolRaporSonuc" class="controlResultBox"></div>
+
+</div>
+`;
+
+animateIn(detayPanel,"screenInRight");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function kontrolPdfJsYukle(){
+return new Promise(function(resolve,reject){
+if(window.pdfjsLib){
+resolve(window.pdfjsLib);
+return;
+}
+let mevcut = document.querySelector('script[data-elevatorx-pdfjs="1"]');
+if(mevcut){
+mevcut.addEventListener("load",function(){resolve(window.pdfjsLib);});
+mevcut.addEventListener("error",reject);
+return;
+}
+let sc = document.createElement("script");
+sc.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+sc.async = true;
+sc.dataset.elevatorxPdfjs = "1";
+sc.onload = function(){
+if(window.pdfjsLib){
+window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+resolve(window.pdfjsLib);
+}else{
+reject(new Error("PDF okuyucu yüklenemedi"));
+}
+};
+sc.onerror = reject;
+document.head.appendChild(sc);
+});
+}
+
+async function kontrolRaporuDosyaOku(input,i){
+let file = input && input.files ? input.files[0] : null;
+if(!file) return;
+let metinEl = document.getElementById("kontrolRaporMetni");
+if(!metinEl) return;
+
+try{
+if(file.type === "application/pdf" || /\.pdf$/i.test(file.name || "")){
+toast("PDF okunuyor...");
+let pdfjs = await kontrolPdfJsYukle();
+let buffer = await file.arrayBuffer();
+let pdf = await pdfjs.getDocument({data:buffer}).promise;
+let parcalar = [];
+for(let p=1; p<=pdf.numPages; p++){
+let page = await pdf.getPage(p);
+let content = await page.getTextContent();
+let pageText = content.items.map(function(item){return item.str || "";}).join(" ");
+parcalar.push("Sayfa " + p + "\n" + pageText);
+}
+metinEl.value = parcalar.join("\n\n");
+toast("PDF metni alındı");
+kontrolRaporuAyikla(i);
+return;
+}
+
+let text = await file.text();
+metinEl.value = text;
+toast("Metin dosyası yüklendi");
+kontrolRaporuAyikla(i);
+}catch(err){
+console.warn(err);
+toast("PDF metni okunamadı. Metni elle yapıştırabilirsin.");
+}
+}
+
+function kontrolRaporuAyikla(i){
+haptic("medium");
+let metinEl = document.getElementById("kontrolRaporMetni");
+let metin = metinEl ? metinEl.value : "";
+if(!metin || !metin.trim()){
+toast("Önce rapor metni eklemelisin");
+if(metinEl) metinEl.focus();
+return;
+}
+let sonuc = kontrolRaporuAyiklaMetinden(metin);
+window.__kontrolRaporSonuc = {
+i:i,
+metin:metin,
+kirmizi:sonuc.kirmizi,
+sari:sonuc.sari,
+tarih:bugun(),
+createdAt:new Date().toISOString()
+};
+
+let sonucEl = document.getElementById("kontrolRaporSonuc");
+if(!sonucEl) return;
+
+sonucEl.innerHTML = `
+  <div class="controlResultGrid">
+    <div class="controlResultCard redList">
+      <div class="controlResultHead">
+        <b>Kırmızı Maddeler</b>
+        <span class="controlCount">${sonuc.kirmizi.length} madde</span>
+      </div>
+      ${kontrolListeHtml(sonuc.kirmizi,"Kırmızı madde bulunamadı. Raporda 'Kırmızı', 'Ağır Kusur' veya 'Güvensiz' gibi ifadeler varsa metni kontrol et.")}
+    </div>
+
+    <div class="controlResultCard yellowList">
+      <div class="controlResultHead">
+        <b>Sarı Maddeler</b>
+        <span class="controlCount">${sonuc.sari.length} madde</span>
+      </div>
+      ${kontrolListeHtml(sonuc.sari,"Sarı madde bulunamadı. Raporda 'Sarı', 'Hafif Kusur' veya 'Kusurlu' gibi ifadeler varsa metni kontrol et.")}
+    </div>
+  </div>
+
+  <div class="controlResultActions">
+    <button class="controlMiniBtn blue" onclick="kontrolRaporuPdf(${i})">Özet PDF Oluştur</button>
+    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Teklife Aktar</button>
+  </div>
+`;
+
+toast("Maddeler ayıklandı");
+}
+
+function kontrolRaporuSonucAl(i){
+let sonuc = window.__kontrolRaporSonuc;
+if(!sonuc || sonuc.i !== i){
+let metinEl = document.getElementById("kontrolRaporMetni");
+let metin = metinEl ? metinEl.value : "";
+if(!metin || !metin.trim()) return null;
+let ayiklanan = kontrolRaporuAyiklaMetinden(metin);
+sonuc = {
+i:i,
+metin:metin,
+kirmizi:ayiklanan.kirmizi,
+sari:ayiklanan.sari,
+tarih:bugun(),
+createdAt:new Date().toISOString()
+};
+window.__kontrolRaporSonuc = sonuc;
+}
+return sonuc;
+}
+
+function kontrolRaporuOzetMetni(sonuc){
+let kirmizi = sonuc && sonuc.kirmizi ? sonuc.kirmizi : [];
+let sari = sonuc && sonuc.sari ? sonuc.sari : [];
+let satirlar = [];
+satirlar.push("Periyodik kontrol raporunda tespit edilen sarı ve kırmızı uygunsuzluk maddelerinin giderilmesi önerilmektedir.");
+if(kirmizi.length){
+satirlar.push("\nKırmızı Maddeler:");
+kirmizi.forEach(function(m,idx){satirlar.push((idx + 1) + ". " + m);});
+}
+if(sari.length){
+satirlar.push("\nSarı Maddeler:");
+sari.forEach(function(m,idx){satirlar.push((idx + 1) + ". " + m);});
+}
+return satirlar.join("\n");
+}
+
+function kontrolRaporuRevizyonaAktar(i){
+haptic("light");
+let sonuc = kontrolRaporuSonucAl(i);
+if(!sonuc){
+toast("Önce raporu ayıkla");
+return;
+}
+if(!sonuc.kirmizi.length && !sonuc.sari.length){
+toast("Aktarılacak sarı/kırmızı madde bulunamadı");
+return;
+}
+window.__kontrolRaporuAktarim = {
+i:i,
+konu:"Kontrol raporu uygunsuzluk giderimi",
+aciklama:kontrolRaporuOzetMetni(sonuc)
+};
+toast("Maddeler revizyon teklifine aktarıldı");
+revizyonTeklifiForm(i);
+}
+
+function kontrolRaporuPdf(i){
+haptic("medium");
+let a = data[i];
+if(!a) return;
+let sonuc = kontrolRaporuSonucAl(i);
+if(!sonuc){
+toast("Önce raporu ayıkla");
+return;
+}
+if(!sonuc.kirmizi.length && !sonuc.sari.length){
+toast("Sarı/kırmızı madde bulunamadı");
+return;
+}
+
+let raporNo = kontrolRaporuNo(i);
+
+if(!Array.isArray(a.kontrolRaporlari)){
+a.kontrolRaporlari = [];
+}
+
+a.kontrolRaporlari.unshift({
+raporNo:raporNo,
+tarih:bugun(),
+kirmizi:sonuc.kirmizi,
+sari:sonuc.sari,
+kirmiziSayisi:sonuc.kirmizi.length,
+sariSayisi:sonuc.sari.length,
+createdAt:new Date().toISOString()
+});
+a.kontrolRaporlari = a.kontrolRaporlari.slice(0,20);
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+a.kayitlar.push("Kontrol raporu ayıklandı (" + bugun() + ") - Kırmızı: " + sonuc.kirmizi.length + " / Sarı: " + sonuc.sari.length);
+
+localVeriKaydet();
+autoYedekAl(true);
+
+let pdfMarka = pdfFirmaBilgi();
+let pdfFirma = pdfMarka.firma;
+let pdfLogo = pdfMarka.logo;
+let pdfSorumlu = pdfMarka.ad;
+let pdfTel = pdfMarka.telefon;
+
+let kirmiziSatir = sonuc.kirmizi.length
+? sonuc.kirmizi.map(function(m,idx){return `<li>${ayHtml(m)}</li>`;}).join("")
+: `<li>Raporda kırmızı madde bulunamadı.</li>`;
+let sariSatir = sonuc.sari.length
+? sonuc.sari.map(function(m,idx){return `<li>${ayHtml(m)}</li>`;}).join("")
+: `<li>Raporda sarı madde bulunamadı.</li>`;
+
+let w = elevatorXOpenReportWindow();
+if(!w){
+toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
+return;
+}
+
+w.document.open();
+w.document.write(`
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontrol Raporu Özeti - ElevatorX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:24px}
+.page{max-width:840px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
+.topBand{height:10px;background:linear-gradient(90deg,#dc2626,#f59e0b,#2563eb)}
+.header{padding:26px 30px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
+.brand{display:flex;align-items:center;gap:14px}.brand img{width:54px;height:54px;border-radius:16px;object-fit:cover;background:#f8fafc}.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:750;margin-top:2px}
+.reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
+.hero{margin:24px 30px 18px;background:linear-gradient(145deg,#0f172a,#1f2937);border-radius:26px;padding:24px;color:#fff}
+.kicker{font-size:12px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.68;margin-bottom:8px}.docTitle{font-size:34px;font-weight:950;letter-spacing:-.8px;margin:0}.docDesc{font-size:14px;color:#cbd5e1;margin:9px 0 0;line-height:1.5}
+.infoGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 30px 18px}.infoCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:15px}.label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.28px;color:#8a94a6;margin-bottom:7px}.value{font-size:17px;font-weight:900;color:#111827;line-height:1.32;word-break:break-word}.value.big{font-size:24px;color:#2563eb;letter-spacing:-.5px}
+.summary{margin:0 30px 18px;background:#f8fafc;border:1px solid #edf0f5;border-radius:22px;padding:18px;font-size:14px;line-height:1.65;color:#374151;font-weight:700}
+.issueGrid{display:grid;grid-template-columns:1fr;gap:16px;margin:0 30px 22px}.issueBox{border-radius:24px;border:1px solid #edf0f5;overflow:hidden}.issueHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;font-size:18px;font-weight:950}.issueHead span{font-size:12px;border-radius:999px;padding:7px 10px;background:#fff;font-weight:950}.red .issueHead{background:#fef2f2;color:#dc2626}.yellow .issueHead{background:#fffbeb;color:#b45309}.issueBody{padding:17px 20px}.issueBody ol{margin:0;padding-left:22px;font-size:14px;line-height:1.65;color:#374151;font-weight:700}.issueBody li{margin-bottom:8px}
+.note{margin:0 30px 22px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:20px;padding:16px 18px;font-size:13.5px;line-height:1.55;color:#1d4ed8;font-weight:750}
+.footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
+@page{size:A4;margin:0}
+@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.summary{margin:0 22px 12px;padding:14px}.issueGrid{margin:0 22px 14px;gap:10px}.issueHead{padding:12px 14px}.issueBody{padding:13px 16px}.issueBody ol{font-size:12.5px;line-height:1.55}.note{margin:0 22px 16px}.footer{margin:0 22px 18px}}
+</style>
+${elevatorXPdfSafetyScript()}</head>
+<body>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<div class="page">
+<div class="topBand"></div>
+<div class="header">
+  <div class="brand">
+    <img src="${pdfLogo}">
+    <div>
+      <div class="brandTitle">${ayHtml(pdfFirma)}</div>
+      <div class="brandSub">${ayHtml(APP_NAME)} • Kontrol raporu özeti</div>
+    </div>
+  </div>
+  <div class="reportMeta">
+    <b>Rapor No:</b> ${ayHtml(raporNo)}<br>
+    <b>Tarih:</b> ${ayHtml(bugun())}<br>
+    <b>Hazırlayan:</b> ${ayHtml(pdfSorumlu || "-")}
+  </div>
+</div>
+
+<div class="hero">
+  <div class="kicker">Sarı / Kırmızı Uygunsuzluk Özeti</div>
+  <h1 class="docTitle">Kontrol Raporu Özeti</h1>
+  <p class="docDesc">Bu belge, periyodik kontrol raporunda tespit edilen sarı ve kırmızı uygunsuzluk maddelerinin yöneticiye anlaşılır şekilde iletilmesi için hazırlanmıştır.</p>
+</div>
+
+<div class="infoGrid">
+  <div class="infoCard"><div class="label">Apartman</div><div class="value">${ayHtml(a.ad || "-")}</div></div>
+  <div class="infoCard"><div class="label">Yönetici</div><div class="value">${ayHtml(a.yonetici || "-")}</div></div>
+  <div class="infoCard"><div class="label">Telefon</div><div class="value">${ayHtml(a.tel || "-")}</div></div>
+  <div class="infoCard"><div class="label">Tespit</div><div class="value big">${sonuc.kirmizi.length} Kırmızı / ${sonuc.sari.length} Sarı</div></div>
+</div>
+
+<div class="summary">
+Yapılan kontrol raporunda tespit edilen uygunsuzluklar aşağıda listelenmiştir. Kırmızı maddeler öncelikli olmak üzere gerekli revizyon ve düzeltme işlemlerinin planlanması önerilir.
+</div>
+
+<div class="issueGrid">
+  <div class="issueBox red">
+    <div class="issueHead">Kırmızı Maddeler <span>${sonuc.kirmizi.length} madde</span></div>
+    <div class="issueBody"><ol>${kirmiziSatir}</ol></div>
+  </div>
+  <div class="issueBox yellow">
+    <div class="issueHead">Sarı Maddeler <span>${sonuc.sari.length} madde</span></div>
+    <div class="issueBody"><ol>${sariSatir}</ol></div>
+  </div>
+</div>
+
+<div class="note">
+Not: Bu özet, yüklenen/yapıştırılan rapor metninden otomatik olarak ayıklanmıştır. Resmî periyodik kontrol raporunun yerine geçmez; yöneticinin eksikleri hızlı görmesi için hazırlanmıştır.
+</div>
+
+<div class="footer">
+  <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
+  <div>ElevatorX v1.4.31</div>
+</div>
+</div>
+<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+</body>
+</html>
+`);
+w.document.close();
+
+toast("Kontrol raporu özet PDF'i hazırlandı");
 }
 
 function cariHesapPdf(i){
