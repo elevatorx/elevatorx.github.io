@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1431_KONTROL_RAPORU_AYIKLAYICI | APP_VERSION v1.4.31 -->
+<!-- ELEVATORX_V1432_KONTROL_RAPORU_TEMIZ_SK_OZETI | APP_VERSION v1.4.32 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
@@ -6376,7 +6376,7 @@ color:#f8fafc;
 }
 
 
-/* === v1.4.31 — Kontrol Raporu Sarı/Kırmızı Ayıklayıcı === */
+/* === v1.4.32 — Kontrol Raporu Sarı/Kırmızı Ayıklayıcı === */
 .controlReportHero{
 background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
 border:1px solid rgba(229,231,235,.92);
@@ -9176,6 +9176,15 @@ text-transform:uppercase;
 min-height:46px;
 }
 
+
+
+/* === v1.4.32 — Temiz S/K Madde Özeti PDF düzeni === */
+.controlList li{line-height:1.55;margin-bottom:7px;}
+.controlIssueCode{display:inline-block;font-weight:950;color:#0f172a;margin-right:5px;}
+body.darkMode .controlIssueCode{color:#f8fafc;}
+.controlResultCard.yellowList .controlIssueCode{color:#a16207;}
+.controlResultCard.redList .controlIssueCode{color:#dc2626;}
+
 </style>
 
 <script>
@@ -9328,7 +9337,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.31</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.32</div>
 </div>
 </div>
 
@@ -9868,7 +9877,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.31";
+const APP_VERSION = "v1.4.32";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
@@ -14547,7 +14556,7 @@ detayPanel.innerHTML = `
       <div class="revisionOfferTitle">Revizyon Teklifi</div>
       <div class="revisionOfferSub">${ayHtml(a.ad || "-")} için yöneticiye gönderilecek kurumsal teklif PDF'i.</div>
     </div>
-    <div class="revisionOfferBadge">v1.4.31</div>
+    <div class="revisionOfferBadge">v1.4.32</div>
   </div>
 
   <div class="revisionTemplatePreview">
@@ -14680,6 +14689,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 .footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
 @page{size:A4;margin:0}
 @media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.letter{margin:0 22px 12px}.letterBody{padding:16px 18px;font-size:13px;line-height:1.62}.priceBox{margin:0 22px 14px;padding:15px}.priceBox b{font-size:24px}.note{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.footer{margin:0 22px 18px}}
+
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
@@ -14748,7 +14758,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.31</div>
+  <div>ElevatorX v1.4.32</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -14775,9 +14785,41 @@ return "KR-" + yil + "-" + String(i + 1).padStart(3,"0") + "-" + String(sira).pa
 
 function kontrolTemizSatir(s){
 return String(s || "")
-.replace(/\s+/g," ")
-.replace(/[•●▪◦]/g,"-")
+.replace(/\u00a0/g," ")
 .replace(/[\u200B-\u200D\uFEFF]/g,"")
+.replace(/[ \t]+/g," ")
+.replace(/\s+([.,;:])/g,"$1")
+.replace(/([([{])\s+/g,"$1")
+.replace(/\s+([)\]}])/g,"$1")
+.trim();
+}
+
+function kontrolBoslukluHarfleriDuzelt(s){
+return String(s || "").replace(/(?:\b[A-ZÇĞİÖŞÜ]\b\s*){4,}/g,function(m){
+return m.replace(/\s+/g,"");
+});
+}
+
+function kontrolRaporMetniNormalize(metin){
+let t = String(metin || "")
+.replace(/\r/g,"\n")
+.replace(/\u00a0/g," ");
+
+t = kontrolBoslukluHarfleriDuzelt(t);
+
+/* PDF.js bazı raporlarda satırları yan yana verdiği için kodları yeni satıra al */
+t = t
+.replace(/(\d+\.\d+\.\d+)\s*\(([SK])\)/gi,"\n$1 ($2) ")
+.replace(/(\d+\.\d+\.\d+)\s+(S|K)\b/gi,"\n$1 ($2) ")
+.replace(/\b(SARI|SARI\s*\(S\)|SARI\s+MADDELER|SARI\s+UYGUNSUZLUK[^\n]*)/gi,"\n$1\n")
+.replace(/\b(KIRMIZI|KIRMIZI\s*\(K\)|KIRMIZI\s+MADDELER|KIRMIZI\s+UYGUNSUZLUK[^\n]*)/gi,"\n$1\n")
+.replace(/\b(Not:)\s*/gi,"\n$1 ");
+
+return t
+.replace(/[ \t]+/g," ")
+.replace(/\n[ \t]+/g,"\n")
+.replace(/[ \t]+\n/g,"\n")
+.replace(/\n{3,}/g,"\n\n")
 .trim();
 }
 
@@ -14800,8 +14842,8 @@ return "";
 
 function kontrolBaslikKategori(s){
 let t = kontrolTemizSatir(s).toLocaleLowerCase("tr-TR");
-if(/^(kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz)/.test(t) && t.length < 80) return "kirmizi";
-if(/^(sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu)/.test(t) && t.length < 80) return "sari";
+if(/^(kırmızı|kirmizi|red|ağır\s*kusur|agir\s*kusur|güvensiz)/.test(t) && t.length < 110) return "kirmizi";
+if(/^(sarı|sari|yellow|hafif\s*kusur|orta\s*kusur|kusurlu)/.test(t) && t.length < 110) return "sari";
 return "";
 }
 
@@ -14813,6 +14855,88 @@ return kontrolTemizSatir(s)
 .replace(/^[-–—:;|\s]+|[-–—:;|\s]+$/g,"")
 .replace(/\s{2,}/g," ")
 .trim();
+}
+
+function kontrolMaddeAciklamaTemizle(s){
+let t = kontrolBoslukluHarfleriDuzelt(String(s || ""))
+.replace(/\bKod\s+Tespit\s*\/\s*Yapılması\s+Gereken\s+İşlem\b/gi,"")
+.replace(/\bKod\s+Tespit\s*\/\s*Yapilmasi\s+Gereken\s+Islem\b/gi,"")
+.replace(/\bSarı\s*\(S\)\s*Uygunsuzluk\s*Maddeleri\b/gi,"")
+.replace(/\bKırmızı\s*\(K\)\s*Uygunsuzluk\s*Maddeleri\b/gi,"")
+.replace(/\bSARI\s*\(S\)\s*UYGUNSUZLUK\s*MADDELERİ\b/gi,"")
+.replace(/\bKIRMIZI\s*\(K\)\s*UYGUNSUZLUK\s*MADDELERİ\b/gi,"")
+.replace(/\bSayfa\s+\d+\b/gi,"")
+.replace(/\s+/g," ")
+.trim();
+
+/* Raporun alt metinleri maddeye yapışırsa burada kes */
+t = t.split(/\bNot:\s+/i)[0];
+t = t.split(/\bAY\s+ASANSÖR\b/i)[0];
+t = t.split(/\bBu\s+özet,\s+resmi/i)[0];
+return kontrolTemizSatir(t);
+}
+
+function kontrolMaddeFormatla(kod,kat,aciklama){
+let k = String(kod || "").trim();
+let c = String(kat || "").toUpperCase()==="K" ? "K" : "S";
+let a = kontrolMaddeAciklamaTemizle(aciklama);
+if(!k || !a || a.length < 8) return "";
+return k + " (" + c + ") " + a;
+}
+
+function kontrolMaddeParcala(m){
+let t = kontrolTemizSatir(m);
+let r = t.match(/^(\d+\.\d+\.\d+)\s*\(([SK])\)\s*(.*)$/i);
+if(r){
+return {kod:r[1] + " (" + r[2].toUpperCase() + ")", kategori:r[2].toUpperCase(), aciklama:kontrolMaddeAciklamaTemizle(r[3])};
+}
+return {kod:"",kategori:"",aciklama:t};
+}
+
+function kontrolRaporuMetaAyikla(metin,a){
+let t = kontrolRaporMetniNormalize(metin);
+function yakala(re){let m = t.match(re); return m ? kontrolTemizSatir(m[1]) : "";}
+return {
+raporNo: yakala(/Rapor\s*No\s*[:\-]?\s*([A-ZÇĞİÖŞÜ0-9.\/\-]+)(?=\s|$)/i),
+kontrolTarihi: yakala(/Kontrol\s*Tarihi\s*[:\-]?\s*(\d{1,2}[.\/]\d{1,2}[.\/]\d{2,4})/i),
+raporOnay: yakala(/Rapor\s*Onay\s*[:\-]?\s*(\d{1,2}[.\/]\d{1,2}[.\/]\d{2,4})/i),
+takipKontrol: yakala(/Takip\s*Kontrol\s*[:\-]?\s*(\d{1,2}[.\/]\d{1,2}[.\/]\d{2,4})/i),
+kontrolSonucu: yakala(/Kontrol\s*Sonucu\s*[:\-]?\s*([^\n]+?)(?=\s+Takip\s*Kontrol|\n|$)/i),
+asansor: yakala(/(?:^|\n)\s*Asansör\s*[:\-]?\s+(?!Periyodik\b)([^\n]+?)(?=\s+Rapor\s*Onay|\n|$)/im) || (a && a.ad ? a.ad : "")
+};
+}
+
+function kontrolMaddeEkle(liste,metin){
+let t = kontrolTemizSatir(metin)
+.replace(/^[-–—:;|\s]+|[-–—:;|\s]+$/g,"")
+.trim();
+if(!t || t.length < 8) return;
+let parca = kontrolMaddeParcala(t);
+let anahtar = (parca.kod || parca.aciklama || t).toLocaleLowerCase("tr-TR").replace(/[^a-z0-9ığüşöçİĞÜŞÖÇ.]+/g,"").slice(0,140);
+let varMi = liste.some(function(x){
+return x.__key === anahtar || (anahtar.length > 20 && (anahtar.includes(x.__key) || x.__key.includes(anahtar)));
+});
+if(!varMi){
+liste.push({text:t,__key:anahtar});
+}
+}
+
+function kontrolRaporuKodluMaddeleriAyikla(raw,sonuc){
+let bulunan = 0;
+let t = kontrolRaporMetniNormalize(raw);
+let re = /(\d+\.\d+\.\d+)\s*\(([SK])\)\s*([\s\S]*?)(?=\n\s*\d+\.\d+\.\d+\s*\([SK]\)|\n\s*(?:SARI|KIRMIZI)\s*\([SK]\)|\n\s*(?:SARI|KIRMIZI)\s+UYGUNSUZLUK|\n\s*Not:|$)/gi;
+let m;
+while((m = re.exec(t)) !== null){
+let kod = m[1];
+let kat = String(m[2] || "").toUpperCase();
+let aciklama = kontrolMaddeAciklamaTemizle(m[3] || "");
+let madde = kontrolMaddeFormatla(kod,kat,aciklama);
+if(madde){
+kontrolMaddeEkle(kat === "K" ? sonuc.kirmizi : sonuc.sari,madde);
+bulunan++;
+}
+}
+return bulunan;
 }
 
 function kontrolMaddeMetniOlustur(lines,idx,kat){
@@ -14841,30 +14965,21 @@ if(!metin || metin.length < 8) return "";
 return metin;
 }
 
-function kontrolMaddeEkle(liste,metin){
-let t = kontrolTemizSatir(metin)
-.replace(/^[-–—:;|\s]+|[-–—:;|\s]+$/g,"")
-.trim();
-if(!t || t.length < 8) return;
-let anahtar = t.toLocaleLowerCase("tr-TR").replace(/[^a-z0-9ığüşöçİĞÜŞÖÇ]+/g,"").slice(0,110);
-let varMi = liste.some(function(x){
-return x.__key === anahtar || anahtar.includes(x.__key) || x.__key.includes(anahtar);
-});
-if(!varMi){
-liste.push({text:t,__key:anahtar});
-}
-}
-
 function kontrolRaporuAyiklaMetinden(metin){
-let raw = String(metin || "")
-.replace(/\r/g,"\n")
-.replace(/([.;:])\s+(?=(Kırmızı|Kirmizi|Sarı|Sari|Ağır|Agir|Hafif)\b)/gi,"$1\n")
-.replace(/\t/g," ");
-
+let raw = kontrolRaporMetniNormalize(metin);
 let lines = raw.split(/\n+/).map(kontrolTemizSatir).filter(Boolean);
-let sonuc = {kirmizi:[],sari:[]};
+let sonuc = {kirmizi:[],sari:[],meta:kontrolRaporuMetaAyikla(raw)};
 let aktifBolum = "";
 
+/* Öncelik: raporlardaki 1.03.01 (S/K) kodlarını temiz yakala */
+kontrolRaporuKodluMaddeleriAyikla(raw,sonuc);
+if(sonuc.kirmizi.length || sonuc.sari.length){
+sonuc.kirmizi = sonuc.kirmizi.map(x=>x.text).slice(0,80);
+sonuc.sari = sonuc.sari.map(x=>x.text).slice(0,80);
+return sonuc;
+}
+
+/* Yedek yöntem: kodsuz/dağınık metinde bölüm başlığına göre ayıkla */
 for(let idx=0; idx<lines.length; idx++){
 let line = lines[idx];
 let baslikKat = kontrolBaslikKategori(line);
@@ -14890,7 +15005,7 @@ kontrolMaddeEkle(sonuc[aktifBolum],line);
 continue;
 }
 
-if(aktifBolum && line.length > 32 && line.length < 220 && !kontrolGurultuSatiri(line) && !/(uygun\s+görülmüştür|sonuç|sonuc|rapor|kontrol eden|onay)/i.test(line)){
+if(aktifBolum && line.length > 32 && line.length < 260 && !kontrolGurultuSatiri(line) && !/(uygun\s+görülmüştür|sonuç|sonuc|rapor|kontrol eden|onay)/i.test(line)){
 let oncekiKat = kontrolKategoriBul(lines[idx - 1] || "");
 let sonrakiKat = kontrolKategoriBul(lines[idx + 1] || "");
 if(oncekiKat || sonrakiKat){
@@ -14908,7 +15023,13 @@ function kontrolListeHtml(arr,emptyText){
 if(!arr || !arr.length){
 return `<div class="controlEmpty">${ayHtml(emptyText)}</div>`;
 }
-return `<ol class="controlList">${arr.map(function(m){return `<li>${ayHtml(m)}</li>`;}).join("")}</ol>`;
+return `<ol class="controlList">${arr.map(function(m){
+let p = kontrolMaddeParcala(m);
+if(p.kod){
+return `<li><span class="controlIssueCode">${ayHtml(p.kod)}</span> ${ayHtml(p.aciklama)}</li>`;
+}
+return `<li>${ayHtml(m)}</li>`;
+}).join("")}</ol>`;
 }
 
 function kontrolRaporuForm(i){
@@ -14931,7 +15052,7 @@ quickAddGuncelle();
 let son = Array.isArray(a.kontrolRaporlari) && a.kontrolRaporlari.length ? a.kontrolRaporlari[0] : null;
 let sonNot = son
 ? `Son ayıklama: ${ayHtml(son.tarih || "-")} • Kırmızı ${Number(son.kirmiziSayisi || 0)} / Sarı ${Number(son.sariSayisi || 0)}`
-: "PDF metin olarak okunabiliyorsa otomatik ayıklar. Taranmış foto PDF ise metni aşağıya elle yapıştırabilirsin.";
+: "PDF metin olarak okunabiliyorsa kodlu S/K maddeleri temiz tabloya ayıklar. Taranmış foto PDF ise metni aşağıya elle yapıştırabilirsin.";
 
 detayPanel.innerHTML = `
 <div class="controlReportHero screenFadeUp">
@@ -14944,7 +15065,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için sarı ve kırmızı uygunsuzluk maddelerini listele.</div>
     </div>
-    <div class="controlReportBadge">v1.4.31</div>
+    <div class="controlReportBadge">v1.4.32</div>
   </div>
 
   <div class="controlReportPreview">
@@ -14974,6 +15095,30 @@ detayPanel.innerHTML = `
 
 animateIn(detayPanel,"screenInRight");
 window.scrollTo({top:0,behavior:"smooth"});
+}
+
+
+function kontrolPdfSayfaMetni(content){
+let items = (content && content.items ? content.items : [])
+.map(function(item){
+let str = kontrolTemizSatir(item.str || "");
+let tr = item.transform || [1,0,0,1,0,0];
+return {str:str,x:tr[4] || 0,y:tr[5] || 0};
+})
+.filter(function(item){return item.str;});
+
+let rows = [];
+items.forEach(function(item){
+let row = rows.find(function(r){return Math.abs(r.y - item.y) < 2.8;});
+if(!row){row = {y:item.y,items:[]}; rows.push(row);}
+row.items.push(item);
+});
+
+rows.sort(function(a,b){return b.y - a.y;});
+return rows.map(function(row){
+row.items.sort(function(a,b){return a.x - b.x;});
+return row.items.map(function(item){return item.str;}).join(" ").replace(/\s{2,}/g," ").trim();
+}).filter(Boolean).join("\n");
 }
 
 function kontrolPdfJsYukle(){
@@ -15021,7 +15166,7 @@ let parcalar = [];
 for(let p=1; p<=pdf.numPages; p++){
 let page = await pdf.getPage(p);
 let content = await page.getTextContent();
-let pageText = content.items.map(function(item){return item.str || "";}).join(" ");
+let pageText = kontrolPdfSayfaMetni(content);
 parcalar.push("Sayfa " + p + "\n" + pageText);
 }
 metinEl.value = parcalar.join("\n\n");
@@ -15055,6 +15200,7 @@ i:i,
 metin:metin,
 kirmizi:sonuc.kirmizi,
 sari:sonuc.sari,
+meta:sonuc.meta || {},
 tarih:bugun(),
 createdAt:new Date().toISOString()
 };
@@ -15082,8 +15228,8 @@ sonucEl.innerHTML = `
   </div>
 
   <div class="controlResultActions">
-    <button class="controlMiniBtn blue" onclick="kontrolRaporuPdf(${i})">Özet PDF Oluştur</button>
-    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Teklife Aktar</button>
+    <button class="controlMiniBtn blue" onclick="kontrolRaporuPdf(${i})">S/K Özet PDF Oluştur</button>
+    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Özeti Teklife Aktar</button>
   </div>
 `;
 
@@ -15102,6 +15248,7 @@ i:i,
 metin:metin,
 kirmizi:ayiklanan.kirmizi,
 sari:ayiklanan.sari,
+meta:ayiklanan.meta || {},
 tarih:bugun(),
 createdAt:new Date().toISOString()
 };
@@ -15114,15 +15261,13 @@ function kontrolRaporuOzetMetni(sonuc){
 let kirmizi = sonuc && sonuc.kirmizi ? sonuc.kirmizi : [];
 let sari = sonuc && sonuc.sari ? sonuc.sari : [];
 let satirlar = [];
-satirlar.push("Periyodik kontrol raporunda tespit edilen sarı ve kırmızı uygunsuzluk maddelerinin giderilmesi önerilmektedir.");
-if(kirmizi.length){
-satirlar.push("\nKırmızı Maddeler:");
-kirmizi.forEach(function(m,idx){satirlar.push((idx + 1) + ". " + m);});
-}
-if(sari.length){
-satirlar.push("\nSarı Maddeler:");
-sari.forEach(function(m,idx){satirlar.push((idx + 1) + ". " + m);});
-}
+satirlar.push("Periyodik kontrol raporunda tespit edilen kırmızı ve sarı uygunsuzluk maddelerinin giderilmesi kapsamında revizyon çalışması yapılması önerilmektedir.");
+satirlar.push("");
+satirlar.push("Tespit Özeti:");
+satirlar.push("- Kırmızı (K) madde: " + kirmizi.length + " adet");
+satirlar.push("- Sarı (S) madde: " + sari.length + " adet");
+satirlar.push("");
+satirlar.push("Detaylı madde listesi için ElevatorX Kontrol Raporu Sarı/Kırmızı Madde Özeti PDF'i hazırlanmalıdır.");
 return satirlar.join("\n");
 }
 
@@ -15146,6 +15291,18 @@ toast("Maddeler revizyon teklifine aktarıldı");
 revizyonTeklifiForm(i);
 }
 
+function kontrolRaporuSatirlariHtml(arr,tip){
+if(!arr || !arr.length){
+return `<tr><td class="codeCell">-</td><td>Madde bulunamadı.</td></tr>`;
+}
+return arr.map(function(m,idx){
+let p = kontrolMaddeParcala(m);
+let kod = p.kod || (idx + 1);
+let aciklama = p.aciklama || m;
+return `<tr><td class="codeCell">${ayHtml(kod)}</td><td>${ayHtml(aciklama)}</td></tr>`;
+}).join("");
+}
+
 function kontrolRaporuPdf(i){
 haptic("medium");
 let a = data[i];
@@ -15161,6 +15318,7 @@ return;
 }
 
 let raporNo = kontrolRaporuNo(i);
+let meta = sonuc.meta || {};
 
 if(!Array.isArray(a.kontrolRaporlari)){
 a.kontrolRaporlari = [];
@@ -15171,6 +15329,7 @@ raporNo:raporNo,
 tarih:bugun(),
 kirmizi:sonuc.kirmizi,
 sari:sonuc.sari,
+meta:meta,
 kirmiziSayisi:sonuc.kirmizi.length,
 sariSayisi:sonuc.sari.length,
 createdAt:new Date().toISOString()
@@ -15187,16 +15346,13 @@ autoYedekAl(true);
 
 let pdfMarka = pdfFirmaBilgi();
 let pdfFirma = pdfMarka.firma;
-let pdfLogo = pdfMarka.logo;
-let pdfSorumlu = pdfMarka.ad;
 let pdfTel = pdfMarka.telefon;
-
-let kirmiziSatir = sonuc.kirmizi.length
-? sonuc.kirmizi.map(function(m,idx){return `<li>${ayHtml(m)}</li>`;}).join("")
-: `<li>Raporda kırmızı madde bulunamadı.</li>`;
-let sariSatir = sonuc.sari.length
-? sonuc.sari.map(function(m,idx){return `<li>${ayHtml(m)}</li>`;}).join("")
-: `<li>Raporda sarı madde bulunamadı.</li>`;
+let apartmanAdi = (a.ad || "Apartman").toLocaleUpperCase("tr-TR");
+let asansorSatiri = meta.asansor || a.ad || "-";
+let kontrolSonucu = meta.kontrolSonucu || "Güvensiz / Düzeltme süresi: 60 gün";
+let dokumanBaslik = (a.ad || "Apartman") + " - S/K Madde Özeti";
+let sariSatir = kontrolRaporuSatirlariHtml(sonuc.sari,"S");
+let kirmiziSatir = kontrolRaporuSatirlariHtml(sonuc.kirmizi,"K");
 
 let w = elevatorXOpenReportWindow();
 if(!w){
@@ -15211,89 +15367,73 @@ w.document.write(`
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kontrol Raporu Özeti - ElevatorX</title>
+<title>${ayHtml(dokumanBaslik)}</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:24px}
-.page{max-width:840px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
-.topBand{height:10px;background:linear-gradient(90deg,#dc2626,#f59e0b,#2563eb)}
-.header{padding:26px 30px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
-.brand{display:flex;align-items:center;gap:14px}.brand img{width:54px;height:54px;border-radius:16px;object-fit:cover;background:#f8fafc}.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:750;margin-top:2px}
-.reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
-.hero{margin:24px 30px 18px;background:linear-gradient(145deg,#0f172a,#1f2937);border-radius:26px;padding:24px;color:#fff}
-.kicker{font-size:12px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.68;margin-bottom:8px}.docTitle{font-size:34px;font-weight:950;letter-spacing:-.8px;margin:0}.docDesc{font-size:14px;color:#cbd5e1;margin:9px 0 0;line-height:1.5}
-.infoGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 30px 18px}.infoCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:15px}.label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.28px;color:#8a94a6;margin-bottom:7px}.value{font-size:17px;font-weight:900;color:#111827;line-height:1.32;word-break:break-word}.value.big{font-size:24px;color:#2563eb;letter-spacing:-.5px}
-.summary{margin:0 30px 18px;background:#f8fafc;border:1px solid #edf0f5;border-radius:22px;padding:18px;font-size:14px;line-height:1.65;color:#374151;font-weight:700}
-.issueGrid{display:grid;grid-template-columns:1fr;gap:16px;margin:0 30px 22px}.issueBox{border-radius:24px;border:1px solid #edf0f5;overflow:hidden}.issueHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;font-size:18px;font-weight:950}.issueHead span{font-size:12px;border-radius:999px;padding:7px 10px;background:#fff;font-weight:950}.red .issueHead{background:#fef2f2;color:#dc2626}.yellow .issueHead{background:#fffbeb;color:#b45309}.issueBody{padding:17px 20px}.issueBody ol{margin:0;padding-left:22px;font-size:14px;line-height:1.65;color:#374151;font-weight:700}.issueBody li{margin-bottom:8px}
-.note{margin:0 30px 22px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:20px;padding:16px 18px;font-size:13.5px;line-height:1.55;color:#1d4ed8;font-weight:750}
-.footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
+body{margin:0;background:#fff;color:#17233a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:13px;line-height:1.35}
+.page{width:210mm;min-height:297mm;margin:0 auto;padding:18mm 17mm 14mm;background:#fff;position:relative;page-break-after:always}
+.page:last-child{page-break-after:auto}
+.topline{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #cfd6df;padding-bottom:8px;margin-bottom:30px;color:#6b7280;font-size:12px;font-weight:700}
+.topline b{color:#14233b;font-size:13px}
+h1{font-size:30px;line-height:1.05;text-align:center;letter-spacing:-.5px;margin:0 0 12px;color:#14233b;font-weight:950}
+.subtitle{text-align:center;font-size:16px;color:#343b49;margin-bottom:22px}
+.metaTable{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12.6px}.metaTable td{border:1px solid #cfd6df;padding:9px 10px;background:#f7f9fc}.metaTable td.label{width:15%;font-weight:850;color:#374151}.metaTable td.value{width:35%;color:#293142}
+.countTable{width:100%;border-collapse:collapse;margin-bottom:4px}.countTable th{color:#fff;text-align:left;padding:10px 12px;font-size:13.5px}.countTable td{border:1px solid #d8dfe8;padding:11px 12px;font-size:13px}.countTable .sHead{background:#e0aa00}.countTable .kHead{background:#ce252b}.countTable .sVal{background:#fff3c4}.countTable .kVal{background:#fde1e1}
+.infoNote{border:1px solid #cfd6df;background:#f5f6f8;color:#3b4250;padding:10px 12px;margin-bottom:8px;font-size:12.5px;line-height:1.42}
+h2{font-size:21px;letter-spacing:.2px;margin:12px 0 8px;color:#14233b;font-weight:950}.sectionRed h2{margin-top:0}.issueTable{width:100%;border-collapse:collapse;font-size:12.35px}.issueTable th{color:#fff;text-align:left;padding:8px 9px;font-size:13px}.issueTable th:first-child{width:150px}.issueTable td{border:1px solid #d7dce4;padding:7px 9px;vertical-align:top;color:#303642}.issueTable .codeCell{width:150px;font-weight:950;color:#14233b;white-space:nowrap}.yellowTable th{background:#e0aa00}.yellowTable td{background:#fff4c7}.yellowTable tr:nth-child(even) td{background:#fffdf5}.redTable th{background:#ce252b}.redTable td{background:#fde1e1}.redTable tr:nth-child(even) td{background:#fff8f8}
+.note{margin-top:16px;color:#5c6472;font-size:12px;line-height:1.45}.footerLine{margin-top:16px;border-top:1px solid #cfd6df;padding-top:10px;color:#697386;font-size:12px}.pageNo{position:absolute;right:18mm;bottom:11mm;color:#697386;font-size:11px}.printBtn,.backBtn{position:fixed;z-index:10;top:14px;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:11px 15px}.printBtn{right:18px}.backBtn{left:18px;background:#e5e7eb;color:#111827}.sectionRed{page-break-before:always}
 @page{size:A4;margin:0}
-@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.summary{margin:0 22px 12px;padding:14px}.issueGrid{margin:0 22px 14px;gap:10px}.issueHead{padding:12px 14px}.issueBody{padding:13px 16px}.issueBody ol{font-size:12.5px;line-height:1.55}.note{margin:0 22px 16px}.footer{margin:0 22px 18px}}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none}.printBtn,.backBtn{display:none}.sectionRed{page-break-before:always}}
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
-<div class="page">
-<div class="topBand"></div>
-<div class="header">
-  <div class="brand">
-    <img src="${pdfLogo}">
-    <div>
-      <div class="brandTitle">${ayHtml(pdfFirma)}</div>
-      <div class="brandSub">${ayHtml(APP_NAME)} • Kontrol raporu özeti</div>
-    </div>
-  </div>
-  <div class="reportMeta">
-    <b>Rapor No:</b> ${ayHtml(raporNo)}<br>
-    <b>Tarih:</b> ${ayHtml(bugun())}<br>
-    <b>Hazırlayan:</b> ${ayHtml(pdfSorumlu || "-")}
-  </div>
-</div>
-
-<div class="hero">
-  <div class="kicker">Sarı / Kırmızı Uygunsuzluk Özeti</div>
-  <h1 class="docTitle">Kontrol Raporu Özeti</h1>
-  <p class="docDesc">Bu belge, periyodik kontrol raporunda tespit edilen sarı ve kırmızı uygunsuzluk maddelerinin yöneticiye anlaşılır şekilde iletilmesi için hazırlanmıştır.</p>
-</div>
-
-<div class="infoGrid">
-  <div class="infoCard"><div class="label">Apartman</div><div class="value">${ayHtml(a.ad || "-")}</div></div>
-  <div class="infoCard"><div class="label">Yönetici</div><div class="value">${ayHtml(a.yonetici || "-")}</div></div>
-  <div class="infoCard"><div class="label">Telefon</div><div class="value">${ayHtml(a.tel || "-")}</div></div>
-  <div class="infoCard"><div class="label">Tespit</div><div class="value big">${sonuc.kirmizi.length} Kırmızı / ${sonuc.sari.length} Sarı</div></div>
-</div>
-
-<div class="summary">
-Yapılan kontrol raporunda tespit edilen uygunsuzluklar aşağıda listelenmiştir. Kırmızı maddeler öncelikli olmak üzere gerekli revizyon ve düzeltme işlemlerinin planlanması önerilir.
-</div>
-
-<div class="issueGrid">
-  <div class="issueBox red">
-    <div class="issueHead">Kırmızı Maddeler <span>${sonuc.kirmizi.length} madde</span></div>
-    <div class="issueBody"><ol>${kirmiziSatir}</ol></div>
-  </div>
-  <div class="issueBox yellow">
-    <div class="issueHead">Sarı Maddeler <span>${sonuc.sari.length} madde</span></div>
-    <div class="issueBody"><ol>${sariSatir}</ol></div>
-  </div>
-</div>
-
-<div class="note">
-Not: Bu özet, yüklenen/yapıştırılan rapor metninden otomatik olarak ayıklanmıştır. Resmî periyodik kontrol raporunun yerine geçmez; yöneticinin eksikleri hızlı görmesi için hazırlanmıştır.
-</div>
-
-<div class="footer">
-  <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.31</div>
-</div>
-</div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+<section class="page">
+  <div class="topline"><b>${ayHtml(pdfFirma)}</b><span>${ayHtml(dokumanBaslik)}</span></div>
+  <h1>${ayHtml(apartmanAdi)}</h1>
+  <div class="subtitle">Asansör Periyodik Kontrol Raporu - Sarı ve Kırmızı Madde Özeti</div>
+
+  <table class="metaTable">
+    <tr><td class="label">Rapor No</td><td class="value">${ayHtml(meta.raporNo || raporNo)}</td><td class="label">Kontrol Tarihi</td><td class="value">${ayHtml(meta.kontrolTarihi || bugun())}</td></tr>
+    <tr><td class="label">Asansör</td><td class="value">${ayHtml(asansorSatiri)}</td><td class="label">Rapor Onay</td><td class="value">${ayHtml(meta.raporOnay || "-")}</td></tr>
+    <tr><td class="label">Kontrol Sonucu</td><td class="value">${ayHtml(kontrolSonucu)}</td><td class="label">Takip Kontrol</td><td class="value">${ayHtml(meta.takipKontrol || "-")}</td></tr>
+  </table>
+
+  <table class="countTable">
+    <tr><th class="sHead">Sarı (S) Maddeler</th><th class="kHead">Kırmızı (K) Maddeler</th></tr>
+    <tr><td class="sVal">${sonuc.sari.length} adet kusurlu madde</td><td class="kVal">${sonuc.kirmizi.length} adet güvensiz madde</td></tr>
+  </table>
+
+  <div class="infoNote">Bu doküman, müşteriye bilgilendirme amacıyla hazırlanmıştır. Resmi periyodik kontrol raporunda yer alan yalnızca sarı (S) ve kırmızı (K) uygunsuzluk maddeleri özetlenmiştir; hafif kusurlu (M) maddeler bu özetin dışında bırakılmıştır.</div>
+
+  <h2>SARI (S) UYGUNSUZLUK MADDELERİ</h2>
+  <table class="issueTable yellowTable">
+    <thead><tr><th>Kod</th><th>Tespit / Yapılması Gereken İşlem</th></tr></thead>
+    <tbody>${sariSatir}</tbody>
+  </table>
+  <div class="pageNo">Sayfa 1</div>
+</section>
+
+<section class="page sectionRed">
+  <div class="topline"><b>${ayHtml(pdfFirma)}</b><span>${ayHtml(dokumanBaslik)}</span></div>
+  <h2>KIRMIZI (K) UYGUNSUZLUK MADDELERİ</h2>
+  <table class="issueTable redTable">
+    <thead><tr><th>Kod</th><th>Tespit / Yapılması Gereken İşlem</th></tr></thead>
+    <tbody>${kirmiziSatir}</tbody>
+  </table>
+  <div class="note">Not: Yukarıdaki maddelerin giderilmesinden sonra takip kontrol süreci için ilgili kontrol kuruluşu ile gerekli planlama yapılmalıdır. Bu özet, resmi periyodik kontrol raporunun yerine geçmez; bilgilendirme ve iş planı amacıyla hazırlanmıştır.</div>
+  <div class="footerLine">${ayHtml(pdfFirma)} | Teknik Bilgilendirme${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
+  <div class="pageNo">Sayfa 2</div>
+</section>
+
 </body>
 </html>
 `);
 w.document.close();
 
-toast("Kontrol raporu özet PDF'i hazırlandı");
+toast("S/K madde özeti PDF'i hazırlandı");
 }
 
 function cariHesapPdf(i){
