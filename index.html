@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1434_PDF_GERI_TUSU_RELOAD_FIX | APP_VERSION v1.4.34 -->
+<!-- ELEVATORX_V1435_KONTROL_RAPORU_TEKLIF_AKISI | APP_VERSION v1.4.35 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1434">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1434">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1434">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1434">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1434">
-<link rel="manifest" href="/manifest.webmanifest?v=1434">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1435">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1435">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1435">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1435">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1435">
+<link rel="manifest" href="/manifest.webmanifest?v=1435">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6184,6 +6184,38 @@ margin-bottom:9px;
 }
 
 
+.detailReportCardWide{
+grid-column:1 / -1;
+min-height:92px;
+display:grid;
+grid-template-columns:42px 1fr;
+gap:12px;
+align-items:center;
+}
+
+.detailReportCardWide span{
+margin-bottom:0;
+width:42px;
+height:42px;
+border-radius:16px;
+}
+
+.detailReportCardFlow{
+background:linear-gradient(135deg,#eef6ff,#ffffff);
+border-color:rgba(0,122,255,.18);
+}
+
+.detailReportCardFlow b{
+font-size:15.5px;
+}
+
+body.darkMode .detailReportCardFlow,
+html.darkRoot .detailReportCardFlow{
+background:linear-gradient(135deg,#12223a,#151b26);
+border-color:rgba(96,165,250,.18);
+}
+
+
 /* === v1.4.30 — Hazır Revizyon Teklifi Şablonu === */
 .revisionOfferHero{
 background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
@@ -9334,10 +9366,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1434" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1435" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.34</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.35</div>
 </div>
 </div>
 
@@ -9877,9 +9909,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.34";
+const APP_VERSION = "v1.4.35";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1434", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1435", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14249,17 +14281,12 @@ ${parcaGecmisiHtml(i)}
       <em>Değişen parçalar</em>
     </button>
 
-    <button class="detailReportCard" onclick="revizyonTeklifiForm(${i})">
-      <span>📝</span>
-      <b>Revizyon Teklifi</b>
-      <em>Hazır teklif şablonu</em>
-    </button>
-
-
-    <button class="detailReportCard" onclick="kontrolRaporuForm(${i})">
+    <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
       <span>🧾</span>
-      <b>Kontrol Raporu</b>
-      <em>Sarı / kırmızı ayıkla</em>
+      <div>
+        <b>Kontrol Raporu & Revizyon Teklifi</b>
+        <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
+      </div>
     </button>
 
   </div>
@@ -15090,16 +15117,16 @@ detayPanel.innerHTML = `
 
   <div class="controlReportTop">
     <div>
-      <div class="controlReportKicker">Rapor Ayıklayıcı</div>
-      <div class="controlReportTitle">Kontrol Raporu</div>
-      <div class="controlReportSub">${ayHtml(a.ad || "-")} için sarı ve kırmızı uygunsuzluk maddelerini listele.</div>
+      <div class="controlReportKicker">Teklif Akışı</div>
+      <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
+      <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.33</div>
+    <div class="controlReportBadge">v1.4.35</div>
   </div>
 
   <div class="controlReportPreview">
-    <b>SARI / KIRMIZI AYIKLAYICI</b>
-    <p>Kontrol raporu metninden yalnızca sarı ve kırmızı maddeleri çıkarır; mavi (M) maddeleri ve imza/onay bilgilerini dışarıda bırakır.</p>
+    <b>1. RAPORU YÜKLE → 2. S/K AYIKLA → 3. TEKLİF HAZIRLA</b>
+    <p>Kontrol raporundan yalnızca sarı ve kırmızı maddeleri çıkarır. Mavi (M) maddeler, imza/onay ve muayene personeli bilgileri özete alınmaz.</p>
   </div>
 
   <div class="controlUploadBox">
@@ -15258,7 +15285,7 @@ sonucEl.innerHTML = `
 
   <div class="controlResultActions">
     <button class="controlMiniBtn blue" onclick="kontrolRaporuPdf(${i})">S/K Özet PDF Oluştur</button>
-    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Özeti Teklife Aktar</button>
+    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Revizyon Teklifi Hazırla</button>
   </div>
 `;
 
@@ -15316,7 +15343,7 @@ i:i,
 konu:"Kontrol raporu uygunsuzluk giderimi",
 aciklama:kontrolRaporuOzetMetni(sonuc)
 };
-toast("Maddeler revizyon teklifine aktarıldı");
+toast("Özet teklif ekranına aktarıldı");
 revizyonTeklifiForm(i);
 }
 
