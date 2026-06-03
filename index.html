@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1435_KONTROL_RAPORU_TEKLIF_AKISI | APP_VERSION v1.4.35 -->
+<!-- ELEVATORX_V1436_EKSIKLERLE_FIYAT_TEKLIFI | APP_VERSION v1.4.36 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1435">
@@ -9369,7 +9369,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1435" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.35</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.36</div>
 </div>
 </div>
 
@@ -9909,7 +9909,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.35";
+const APP_VERSION = "v1.4.36";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1435", location.href).href;
 
@@ -14579,13 +14579,16 @@ let varsayilanAciklama = raporAktarim && raporAktarim.aciklama
 : "Yapılan kontrol sonucunda asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için gerekli revizyon işlemlerinin yapılması önerilmektedir.");
 
 let sonTeklifNotu = raporAktarim
-? "Kontrol raporundaki sarı/kırmızı maddeler açıklama alanına aktarıldı."
+? "Kontrol raporundaki sarı/kırmızı maddeler teklife bağlandı. Fiyatı girince eksik listesiyle birlikte teklif PDF’i oluşur."
 : (sonTeklif
 ? `Son teklif: ${ayHtml(sonTeklif.tarih || "-")} • ${tutarFormat(sonTeklif.tutar || 0)}`
 : "Bu şablon teklif kalıbı olarak çalışır; ürün kalemi girmeden hızlı PDF oluşturur.");
 
 if(raporAktarim){
+window.__aktifRevizyonKontrolMaddeleri = raporAktarim;
 window.__kontrolRaporuAktarim = null;
+}else{
+window.__aktifRevizyonKontrolMaddeleri = null;
 }
 
 detayPanel.innerHTML = `
@@ -14643,6 +14646,38 @@ animateIn(detayPanel,"screenInRight");
 window.scrollTo({top:0,behavior:"smooth"});
 }
 
+function revizyonTeklifMaddeSatirlariHtml(arr,tip){
+if(!arr || !arr.length){
+return `<tr><td colspan="2" class="emptyIssue">${tip} madde bulunamadı.</td></tr>`;
+}
+return arr.map(function(m){
+let p = kontrolMaddeParcala(m);
+let kod = p.kod || "-";
+let aciklama = p.aciklama || m;
+return `<tr><td class="issueCode">${ayHtml(kod)} (${tip})</td><td>${ayHtml(aciklama)}</td></tr>`;
+}).join("");
+}
+
+function revizyonTeklifEksikListesiHtml(aktarim){
+if(!aktarim || ((!aktarim.kirmizi || !aktarim.kirmizi.length) && (!aktarim.sari || !aktarim.sari.length))){
+return "";
+}
+let sari = aktarim.sari || [];
+let kirmizi = aktarim.kirmizi || [];
+return `
+<div class="issuesBlock">
+  <div class="issuesTitle">Kontrol Raporunda Tespit Edilen Eksikler</div>
+  <div class="issuesSummary">
+    <div class="sumYellow"><b>${sari.length}</b><span>Sarı (S) madde</span></div>
+    <div class="sumRed"><b>${kirmizi.length}</b><span>Kırmızı (K) madde</span></div>
+  </div>
+  <div class="issueSectionTitle yellowText">Sarı (S) Uygunsuzluk Maddeleri</div>
+  <table class="issueTable yellowTable"><thead><tr><th>Kod</th><th>Tespit / Yapılması Gereken İşlem</th></tr></thead><tbody>${revizyonTeklifMaddeSatirlariHtml(sari,"S")}</tbody></table>
+  <div class="issueSectionTitle redText">Kırmızı (K) Uygunsuzluk Maddeleri</div>
+  <table class="issueTable redTable"><thead><tr><th>Kod</th><th>Tespit / Yapılması Gereken İşlem</th></tr></thead><tbody>${revizyonTeklifMaddeSatirlariHtml(kirmizi,"K")}</tbody></table>
+</div>`;
+}
+
 function revizyonTeklifiPdf(i){
 haptic("medium");
 
@@ -14677,6 +14712,9 @@ konu:konu,
 aciklama:aciklama,
 tutar:tutar,
 gecerlilik:gecerlilik,
+kontrolRaporuKaynakli: !!(window.__aktifRevizyonKontrolMaddeleri && window.__aktifRevizyonKontrolMaddeleri.i === i),
+sariMaddeler: window.__aktifRevizyonKontrolMaddeleri && window.__aktifRevizyonKontrolMaddeleri.i === i ? (window.__aktifRevizyonKontrolMaddeleri.sari || []) : [],
+kirmiziMaddeler: window.__aktifRevizyonKontrolMaddeleri && window.__aktifRevizyonKontrolMaddeleri.i === i ? (window.__aktifRevizyonKontrolMaddeleri.kirmizi || []) : [],
 createdAt:new Date().toISOString()
 });
 
@@ -14698,6 +14736,9 @@ let pdfSorumlu = pdfMarka.ad;
 let pdfTel = pdfMarka.telefon;
 let temizTel = (a.tel || "").replace(/\s/g,"");
 let tutarYazi = tutarFormat(tutar);
+let kontrolAktarim = window.__aktifRevizyonKontrolMaddeleri && window.__aktifRevizyonKontrolMaddeleri.i === i ? window.__aktifRevizyonKontrolMaddeleri : null;
+let eksikListesiHtml = revizyonTeklifEksikListesiHtml(kontrolAktarim);
+let teklifAltBaslik = kontrolAktarim ? "Kontrol raporu kaynaklı revizyon teklifi" : "Hazır revizyon teklifi";
 
 let w = elevatorXOpenReportWindow();
 
@@ -14730,8 +14771,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 .note{margin:0 30px 22px;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:16px 18px;font-size:13.5px;line-height:1.55;color:#9a3412;font-weight:750}
 .signatureArea{padding:4px 30px 24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.signatureBox{height:74px;border-top:1.5px solid #d1d5db;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#6b7280;font-size:13px;font-weight:800;padding-bottom:6px}
 .footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
+.issuesBlock{margin:0 30px 18px;border:1px solid #edf0f5;border-radius:22px;overflow:hidden;background:#fff}.issuesTitle{padding:15px 18px;background:#f8fafc;border-bottom:1px solid #edf0f5;font-size:18px;font-weight:950;color:#111827}.issuesSummary{display:grid;grid-template-columns:1fr 1fr}.issuesSummary div{padding:14px 16px}.issuesSummary b{display:block;font-size:24px;font-weight:950}.issuesSummary span{display:block;font-size:12px;font-weight:900;margin-top:2px}.sumYellow{background:#fff3c4;color:#9a6a00}.sumRed{background:#fee2e2;color:#b91c1c}.issueSectionTitle{padding:14px 18px 8px;font-size:17px;font-weight:950}.yellowText{color:#9a6a00}.redText{color:#b91c1c}.issueTable{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.45}.issueTable th{padding:9px 10px;text-align:left;color:#111827}.issueTable td{padding:9px 10px;border-top:1px solid rgba(15,23,42,.08);vertical-align:top}.issueTable th:first-child,.issueTable td:first-child{width:118px;font-weight:950}.yellowTable th{background:#eab308;color:#fff}.yellowTable tr:nth-child(even) td{background:#fff8d8}.yellowTable tr:nth-child(odd) td{background:#fffdf2}.redTable th{background:#dc2626;color:#fff}.redTable tr:nth-child(even) td{background:#fee2e2}.redTable tr:nth-child(odd) td{background:#fff5f5}.issueCode{white-space:nowrap}.emptyIssue{text-align:center;color:#6b7280;font-weight:800}
 @page{size:A4;margin:0}
-@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.letter{margin:0 22px 12px}.letterBody{padding:16px 18px;font-size:13px;line-height:1.62}.priceBox{margin:0 22px 14px;padding:15px}.priceBox b{font-size:24px}.note{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.footer{margin:0 22px 18px}}
+@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.letter{margin:0 22px 12px}.letterBody{padding:16px 18px;font-size:13px;line-height:1.62}.priceBox{margin:0 22px 14px;padding:15px}.priceBox b{font-size:24px}.note{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.issuesBlock{margin:0 22px 12px}.issueTable{font-size:10.6px;line-height:1.35}.issueTable td{padding:6px 7px}.issueTable th{padding:7px}.issueTable th:first-child,.issueTable td:first-child{width:92px}.footer{margin:0 22px 18px}}
 
 </style>
 ${elevatorXPdfSafetyScript()}</head>
@@ -14744,7 +14786,7 @@ ${elevatorXPdfSafetyScript()}</head>
     <img src="${pdfLogo}">
     <div>
       <div class="brandTitle">${ayHtml(pdfFirma)}</div>
-      <div class="brandSub">${ayHtml(APP_NAME)} • Hazır revizyon teklifi</div>
+      <div class="brandSub">${ayHtml(APP_NAME)} • ${ayHtml(teklifAltBaslik)}</div>
     </div>
   </div>
   <div class="reportMeta">
@@ -14757,7 +14799,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="hero">
   <div class="kicker">Revizyon Teklifi</div>
   <h1 class="docTitle">Hazır Teklif Formu</h1>
-  <p class="docDesc">Bu belge, ilgili asansörde önerilen revizyon çalışmasının yöneticiye kurumsal şekilde sunulması için hazırlanmıştır.</p>
+  <p class="docDesc">Bu belge, kontrol raporunda tespit edilen eksiklerin giderilmesi için önerilen revizyon çalışmasının yöneticiye kurumsal şekilde sunulması amacıyla hazırlanmıştır.</p>
 </div>
 
 <div class="infoGrid">
@@ -14782,6 +14824,8 @@ ${elevatorXPdfSafetyScript()}</head>
   </div>
 </div>
 
+${eksikListesiHtml}
+
 <div class="priceBox">
   <div>
     <span>Teklif Tutarı</span>
@@ -14791,7 +14835,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 
 <div class="note">
-  Not: Bu teklif, belirtilen revizyon konusu için hazırlanmıştır. Ek arıza, farklı parça ihtiyacı veya ilave işçilik oluşması halinde ayrıca bilgilendirme yapılır.
+  Not: Bu teklif, kontrol raporunda ayıklanan sarı/kırmızı maddelerin giderilmesine yönelik bilgilendirme amaçlı hazırlanmıştır. Ek arıza, farklı parça ihtiyacı veya ilave işçilik oluşması halinde ayrıca bilgilendirme yapılır.
 </div>
 
 <div class="signatureArea">
@@ -14801,7 +14845,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.33</div>
+  <div>ElevatorX v1.4.36</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15121,7 +15165,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.35</div>
+    <div class="controlReportBadge">v1.4.36</div>
   </div>
 
   <div class="controlReportPreview">
@@ -15285,7 +15329,7 @@ sonucEl.innerHTML = `
 
   <div class="controlResultActions">
     <button class="controlMiniBtn blue" onclick="kontrolRaporuPdf(${i})">S/K Özet PDF Oluştur</button>
-    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Revizyon Teklifi Hazırla</button>
+    <button class="controlMiniBtn gray" onclick="kontrolRaporuRevizyonaAktar(${i})">Eksiklerle Teklif Hazırla</button>
   </div>
 `;
 
@@ -15341,9 +15385,12 @@ return;
 window.__kontrolRaporuAktarim = {
 i:i,
 konu:"Kontrol raporu uygunsuzluk giderimi",
-aciklama:kontrolRaporuOzetMetni(sonuc)
+aciklama:kontrolRaporuOzetMetni(sonuc),
+sari:sonuc.sari || [],
+kirmizi:sonuc.kirmizi || [],
+meta:sonuc.meta || {}
 };
-toast("Özet teklif ekranına aktarıldı");
+toast("Eksikler teklif ekranına aktarıldı. Şimdi fiyatı gir.");
 revizyonTeklifiForm(i);
 }
 
