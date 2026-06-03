@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1436_EKSIKLERLE_FIYAT_TEKLIFI | APP_VERSION v1.4.36 -->
+<!-- ELEVATORX_V1437_EMOJI_FREE_ICON_SYSTEM | APP_VERSION v1.4.37 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1435">
@@ -9217,6 +9217,152 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 .controlResultCard.yellowList .controlIssueCode{color:#a16207;}
 .controlResultCard.redList .controlIssueCode{color:#dc2626;}
 
+
+
+/* === v1.4.37 — Emoji-free premium line icon system === */
+.exIcon{
+position:relative!important;
+font-size:0!important;
+line-height:0!important;
+color:#007aff;
+overflow:hidden;
+}
+.exIcon:before,
+.exIcon:after{
+content:"";
+position:absolute;
+box-sizing:border-box;
+}
+.detailReportCard .exIcon,
+.profileActionIcon.exIcon,
+.detailActionIcon.exIcon,
+.appearanceIcon.exIcon,
+.coverEdit .exIcon{
+font-size:0!important;
+}
+.detailReportCard .exIcon:before,
+.detailReportCard .exIcon:after,
+.profileActionIcon.exIcon:before,
+.profileActionIcon.exIcon:after,
+.detailActionIcon.exIcon:before,
+.detailActionIcon.exIcon:after,
+.appearanceIcon.exIcon:before,
+.appearanceIcon.exIcon:after,
+.coverEdit .exIcon:before,
+.coverEdit .exIcon:after{
+content:"";
+position:absolute;
+box-sizing:border-box;
+}
+.exDoc:before{
+width:15px;height:20px;border:2px solid currentColor;border-radius:4px;left:50%;top:50%;transform:translate(-50%,-50%);
+background:linear-gradient(135deg,transparent 0 73%,rgba(0,122,255,.13) 73% 100%);
+}
+.exDoc:after{
+width:8px;height:2px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-1px);box-shadow:0 5px 0 currentColor;
+}
+.exMoney:before{
+width:22px;height:14px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exMoney:after{
+content:"₺"!important;position:absolute;font-size:14px;line-height:1;font-weight:950;color:currentColor;left:50%;top:50%;transform:translate(-50%,-54%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
+}
+.exChart:before{
+width:22px;height:20px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;left:8px;top:7px;border-radius:0 0 0 3px;
+}
+.exChart:after{
+width:4px;height:8px;background:currentColor;border-radius:2px;left:14px;bottom:9px;box-shadow:7px -5px 0 currentColor,14px -10px 0 currentColor;
+}
+.exCard:before{
+width:23px;height:16px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exCard:after{
+width:5px;height:5px;border-radius:50%;background:currentColor;left:10px;top:12px;box-shadow:9px -1px 0 -1px currentColor,9px 4px 0 -1px currentColor;
+}
+.exPart:before{
+width:19px;height:5px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-38deg);
+}
+.exPart:after{
+width:9px;height:9px;border:2px solid currentColor;border-radius:50%;right:7px;top:7px;background:transparent;
+}
+.exReport:before{
+width:19px;height:22px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-48%);
+}
+.exReport:after{
+width:9px;height:2px;background:currentColor;border-radius:999px;left:50%;top:46%;transform:translateX(-50%);box-shadow:0 5px 0 currentColor,0 10px 0 currentColor;
+}
+.exLibrary:before{
+width:20px;height:20px;border:2px solid currentColor;border-radius:6px;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exLibrary:after{
+width:2px;height:14px;background:currentColor;border-radius:999px;left:14px;top:10px;box-shadow:6px 0 0 currentColor,12px 0 0 currentColor;
+}
+.exCloud:before{
+width:23px;height:13px;background:currentColor;border-radius:999px;left:50%;top:56%;transform:translate(-50%,-50%);
+}
+.exCloud:after{
+width:12px;height:12px;background:currentColor;border-radius:50%;left:10px;top:9px;box-shadow:9px -3px 0 2px currentColor;
+}
+.exRestore:before{
+width:20px;height:20px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-28deg);
+}
+.exRestore:after{
+width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;left:8px;top:12px;transform:rotate(35deg);
+}
+.exRefresh:before{
+width:21px;height:21px;border:2px solid currentColor;border-left-color:transparent;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) rotate(24deg);
+}
+.exRefresh:after{
+width:8px;height:8px;border-top:2px solid currentColor;border-right:2px solid currentColor;right:8px;top:9px;transform:rotate(35deg);
+}
+.exCamera:before{
+width:24px;height:17px;border:2px solid currentColor;border-radius:6px;left:50%;top:54%;transform:translate(-50%,-50%);
+}
+.exCamera:after{
+width:8px;height:8px;border:2px solid currentColor;border-radius:50%;left:50%;top:54%;transform:translate(-50%,-50%);box-shadow:-8px -8px 0 -3px currentColor;
+}
+.exMoon:before{
+width:20px;height:20px;border-radius:50%;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exMoon:after{
+width:18px;height:18px;border-radius:50%;background:#eef4ff;left:50%;top:43%;transform:translate(-20%,-50%);
+}
+.exSun:before{
+width:16px;height:16px;border:2px solid currentColor;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exSun:after{
+width:3px;height:3px;background:currentColor;border-radius:50%;left:50%;top:4px;transform:translateX(-50%);box-shadow:0 31px 0 currentColor,15px 15px 0 currentColor,-15px 15px 0 currentColor,10px 5px 0 currentColor,-10px 5px 0 currentColor,10px 26px 0 currentColor,-10px 26px 0 currentColor;
+}
+.exCheck:before{
+width:18px;height:18px;border:2px solid currentColor;border-radius:6px;left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.exCheck:after{
+width:11px;height:6px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;left:50%;top:50%;transform:translate(-42%,-58%) rotate(-45deg);
+}
+.exEdit:before{
+width:18px;height:5px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-38deg);
+}
+.exEdit:after{
+width:7px;height:7px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;right:7px;bottom:8px;transform:rotate(-38deg);
+}
+.detailReportCard:nth-child(1) .exIcon{color:#007aff;}
+.detailReportCard:nth-child(2) .exIcon{color:#8b5cf6;}
+.detailReportCard:nth-child(3) .exIcon{color:#22c55e;}
+.detailReportCard:nth-child(4) .exIcon{color:#f59e0b;}
+.detailReportCard:nth-child(5) .exIcon{color:#64748b;}
+.detailReportCardFlow .exIcon{color:#007aff;}
+.profileActionIcon.exCloud{color:#0ea5e9;}
+.profileActionIcon.exRestore{color:#64748b;}
+.profileActionIcon.exRefresh{color:#22c55e;}
+.coverEdit .exIcon{width:28px;height:28px;background:transparent!important;box-shadow:none!important;margin:0!important;}
+body.darkMode .exMoon:after,
+html.darkRoot .exMoon:after{background:#151b26;}
+body.darkMode .appearanceIcon.exMoon:after,
+html.darkRoot .appearanceIcon.exMoon:after{background:#12223a;}
+body.darkMode .detailReportCard .exIcon,
+html.darkRoot .detailReportCard .exIcon,
+body.darkMode .profileActionIcon.exIcon,
+html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 </style>
 
 <script>
@@ -9369,7 +9515,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1435" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.36</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.37</div>
 </div>
 </div>
 
@@ -9569,7 +9715,7 @@ height:1px;
 
 <div id="coverPhoto" class="coverPhoto"></div>
 
-<label for="coverInput" class="coverEdit">📷</label>
+<label for="coverInput" class="coverEdit"><span class="exIcon exCamera" aria-hidden="true"></span></label>
 
 </div>
 
@@ -9654,7 +9800,7 @@ placeholder="Bilgi yaz..."></textarea>
 <div class="profileActionGrid">
 
 <button class="profileActionCard techLibraryProfileCard" onclick="teknikKutuphaneAc()">
-  <span class="profileActionIcon">▣</span>
+  <span class="profileActionIcon exIcon exLibrary" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Teknik Kütüphane</b>
     <em>Kumanda kartı, sürücü ve arıza kodu saha notları.</em>
@@ -9662,7 +9808,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="aySonuRaporu()">
-  <span class="profileActionIcon">📄</span>
+  <span class="profileActionIcon exIcon exDoc" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Ay Sonu Raporu</b>
     <em>Bakım, tahsilat ve geciken işlemleri özetle.</em>
@@ -9670,7 +9816,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="yedekle()">
-  <span class="profileActionIcon">☁️</span>
+  <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Verileri Yedekle</b>
     <em>Apartman kayıtlarının dosya yedeğini al.</em>
@@ -9678,7 +9824,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="document.getElementById('yedekInput').click()">
-  <span class="profileActionIcon">↩️</span>
+  <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Yedekten Geri Yükle</b>
     <em>Daha önce alınan JSON yedeğini içeri aktar.</em>
@@ -9686,7 +9832,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
-  <span class="profileActionIcon">↻</span>
+  <span class="profileActionIcon exIcon exRefresh" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Güvenli Yenile</b>
     <em>Cihaz içi yedek alır, dosya açmadan güncel sürümü yükler.</em>
@@ -9700,7 +9846,7 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="appearanceCard">
   <div class="appearanceInfo">
-    <span class="appearanceIcon" id="profileThemeIcon">🌙</span>
+    <span class="appearanceIcon exIcon exMoon" id="profileThemeIcon" aria-hidden="true"></span>
     <span class="appearanceText">
       <b>Gece Modu</b>
       <em>Uygulama temasını buradan değiştir.</em>
@@ -9909,7 +10055,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.36";
+const APP_VERSION = "v1.4.37";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1435", location.href).href;
 
@@ -10358,18 +10504,20 @@ let headerIcon =
 document.getElementById("headerThemeIcon");
 
 if(headerIcon){
-
-headerIcon.innerText =
-dark ? "☀️" : "🌙";
-
+headerIcon.innerText = "";
+headerIcon.classList.add("exIcon");
+headerIcon.classList.toggle("exSun", dark);
+headerIcon.classList.toggle("exMoon", !dark);
 }
 
 let profileIcon =
 document.getElementById("profileThemeIcon");
 
 if(profileIcon){
-profileIcon.innerText =
-dark ? "☀️" : "🌙";
+profileIcon.innerText = "";
+profileIcon.classList.add("exIcon");
+profileIcon.classList.toggle("exSun", dark);
+profileIcon.classList.toggle("exMoon", !dark);
 }
 
 let profileText =
@@ -14213,7 +14361,7 @@ ${cariOzetHtml(a,i)}
   <div class="detailPrimaryActions">
 
     <button class="detailActionCard payAction ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
-      <span class="detailActionIcon">₺</span>
+      <span class="detailActionIcon exIcon exMoney" aria-hidden="true"></span>
       <span>
         <b>${odemeText}</b>
         <em>Tahsilat / makbuz</em>
@@ -14221,7 +14369,7 @@ ${cariOzetHtml(a,i)}
     </button>
 
     <button class="detailActionCard maintAction ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
-      <span class="detailActionIcon">✓</span>
+      <span class="detailActionIcon exIcon exCheck" aria-hidden="true"></span>
       <span>
         <b>${bakimText}</b>
         <em>Bakım raporu</em>
@@ -14229,7 +14377,7 @@ ${cariOzetHtml(a,i)}
     </button>
 
     <button class="detailActionCard editAction" onclick="duzenle(${i})">
-      <span class="detailActionIcon">✎</span>
+      <span class="detailActionIcon exIcon exEdit" aria-hidden="true"></span>
       <span>
         <b>Düzenle</b>
         <em>Apartman bilgileri</em>
@@ -14252,37 +14400,37 @@ ${parcaGecmisiHtml(i)}
   <div class="detailReportGrid">
 
     <button class="detailReportCard" onclick="pdf(${i})">
-      <span>📄</span>
+      <span class="exIcon exDoc" aria-hidden="true"></span>
       <b>Bakım Raporu</b>
       <em>Servis / bakım PDF</em>
     </button>
 
     <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
-      <span>₺</span>
+      <span class="exIcon exMoney" aria-hidden="true"></span>
       <b>Ödeme Makbuzu</b>
       <em>Son tahsilat belgesi</em>
     </button>
 
     <button class="detailReportCard" onclick="cariHesapPdf(${i})">
-      <span>📊</span>
+      <span class="exIcon exChart" aria-hidden="true"></span>
       <b>Cari Özeti</b>
       <em>Borç ve tahsilat</em>
     </button>
 
     <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
-      <span>🪪</span>
+      <span class="exIcon exCard" aria-hidden="true"></span>
       <b>Sicil Kartı</b>
       <em>Asansör kayıt kartı</em>
     </button>
 
     <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
-      <span>🔩</span>
+      <span class="exIcon exPart" aria-hidden="true"></span>
       <b>Parça Geçmişi</b>
       <em>Değişen parçalar</em>
     </button>
 
     <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
-      <span>🧾</span>
+      <span class="exIcon exReport" aria-hidden="true"></span>
       <div>
         <b>Kontrol Raporu & Revizyon Teklifi</b>
         <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
@@ -14845,7 +14993,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.36</div>
+  <div>ElevatorX v1.4.37</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15165,7 +15313,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.36</div>
+    <div class="controlReportBadge">v1.4.37</div>
   </div>
 
   <div class="controlReportPreview">
