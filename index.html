@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1429_ARKEL_ARL300_HATA_KODLARI_H1_H34_KESIN | APP_VERSION v1.4.29 -->
+<!-- ELEVATORX_V1430_HAZIR_REVIZYON_TEKLIFI | APP_VERSION v1.4.30 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1429">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1429">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1429">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1429">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1429">
-<link rel="manifest" href="/manifest.webmanifest?v=1429">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1430">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1430">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1430">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1430">
+<link rel="manifest" href="/manifest.webmanifest?v=1430">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6183,6 +6183,198 @@ box-shadow:0 8px 18px rgba(15,23,42,.05);
 margin-bottom:9px;
 }
 
+
+/* === v1.4.30 — Hazır Revizyon Teklifi Şablonu === */
+.revisionOfferHero{
+background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+border:1px solid rgba(229,231,235,.92);
+border-radius:30px;
+padding:18px;
+box-shadow:0 18px 44px rgba(15,23,42,.07);
+}
+
+.revisionOfferTop{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:14px;
+}
+
+.revisionOfferKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:5px;
+}
+
+.revisionOfferTitle{
+font-size:27px;
+font-weight:950;
+letter-spacing:-.65px;
+line-height:1.05;
+color:#0f172a;
+}
+
+.revisionOfferSub{
+font-size:13px;
+font-weight:750;
+color:#64748b;
+line-height:1.4;
+margin-top:7px;
+}
+
+.revisionOfferBadge{
+flex:0 0 auto;
+padding:8px 10px;
+border-radius:999px;
+background:#eff6ff;
+color:#007aff;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
+}
+
+.revisionTemplatePreview{
+background:linear-gradient(145deg,#0f172a,#1e293b);
+color:white;
+border-radius:24px;
+padding:16px;
+margin:10px 0 14px;
+box-shadow:0 14px 34px rgba(15,23,42,.16);
+}
+
+.revisionTemplatePreview b{
+display:block;
+font-size:18px;
+font-weight:950;
+letter-spacing:-.25px;
+margin-bottom:7px;
+}
+
+.revisionTemplatePreview p{
+margin:0;
+font-size:13px;
+line-height:1.48;
+color:#cbd5e1;
+}
+
+.revisionFormGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.revisionFieldLabel{
+display:block;
+font-size:11px;
+font-weight:950;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#64748b;
+margin:2px 2px 6px;
+}
+
+.revisionOfferHero input,
+.revisionOfferHero textarea{
+margin-bottom:0;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.96);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+font-weight:750;
+}
+
+.revisionOfferHero textarea{
+min-height:118px;
+line-height:1.45;
+}
+
+.revisionHint{
+margin-top:12px;
+border-radius:20px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.9);
+padding:13px 14px;
+font-size:12.5px;
+font-weight:750;
+line-height:1.45;
+color:#64748b;
+}
+
+.revisionButtons{
+display:grid;
+grid-template-columns:1fr;
+gap:9px;
+margin-top:14px;
+}
+
+.revisionPdfBtn{
+background:#007aff;
+color:white;
+border-radius:19px;
+font-size:15px;
+font-weight:950;
+padding:14px;
+box-shadow:0 14px 28px rgba(0,122,255,.18);
+}
+
+.revisionBackBtn{
+background:#e5e5ea;
+color:#111827;
+border-radius:19px;
+font-size:14px;
+font-weight:950;
+padding:13px;
+}
+
+body.darkMode .revisionOfferHero,
+html.darkRoot .revisionOfferHero{
+background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94));
+border-color:rgba(255,255,255,.08);
+box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+
+body.darkMode .revisionOfferTitle,
+html.darkRoot .revisionOfferTitle{
+color:#f8fafc;
+}
+
+body.darkMode .revisionOfferSub,
+html.darkRoot .revisionOfferSub,
+body.darkMode .revisionFieldLabel,
+html.darkRoot .revisionFieldLabel,
+body.darkMode .revisionHint,
+html.darkRoot .revisionHint{
+color:#94a3b8;
+}
+
+body.darkMode .revisionTemplatePreview,
+html.darkRoot .revisionTemplatePreview{
+background:linear-gradient(145deg,#020817,#0f172a);
+box-shadow:0 16px 36px rgba(0,0,0,.34);
+}
+
+body.darkMode .revisionOfferHero input,
+html.darkRoot .revisionOfferHero input,
+body.darkMode .revisionOfferHero textarea,
+html.darkRoot .revisionOfferHero textarea,
+body.darkMode .revisionHint,
+html.darkRoot .revisionHint{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+color:#f8fafc;
+}
+
+body.darkMode .revisionBackBtn,
+html.darkRoot .revisionBackBtn{
+background:#263241;
+color:#f8fafc;
+}
+
 .detailDangerZone{
 margin-top:14px;
 padding:12px;
@@ -8820,10 +9012,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1429" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.29</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.30</div>
 </div>
 </div>
 
@@ -9363,9 +9555,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.29";
+const APP_VERSION = "v1.4.30";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1429", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -9476,7 +9668,7 @@ try{
 localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
-let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.29").replace(/[^\d]/g,"") || String(Date.now());
+let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.30").replace(/[^\d]/g,"") || String(Date.now());
 let url = new URL("index.html", location.href);
 url.searchParams.set("v", temizSurum);
 url.searchParams.set("hard",Date.now());
@@ -13719,6 +13911,12 @@ ${parcaGecmisiHtml(i)}
       <em>Değişen parçalar</em>
     </button>
 
+    <button class="detailReportCard" onclick="revizyonTeklifiForm(${i})">
+      <span>📝</span>
+      <b>Revizyon Teklifi</b>
+      <em>Hazır teklif şablonu</em>
+    </button>
+
   </div>
 </div>
 
@@ -13956,6 +14154,280 @@ logo:pdfProfilLogo()
 };
 }
 
+
+
+function revizyonTeklifiNo(i){
+let yil = new Date().getFullYear();
+let sira = 1;
+try{
+let a = data[i] || {};
+if(Array.isArray(a.revizyonTeklifleri)){
+sira = a.revizyonTeklifleri.length + 1;
+}
+}catch(err){}
+return "RX-" + yil + "-" + String(i + 1).padStart(3,"0") + "-" + String(sira).padStart(2,"0");
+}
+
+function revizyonTutarSayiyaCevir(v){
+let temiz = String(v || "")
+.replace(/[^0-9,.-]/g,"")
+.replace(/\./g,"")
+.replace(",",".");
+let n = Number(temiz);
+return Number.isFinite(n) ? n : 0;
+}
+
+function revizyonTeklifiForm(i){
+haptic("light");
+
+let a = data[i];
+if(!a) return;
+
+aktifEkran = "revizyonTeklifi";
+aktifDetay = i;
+
+searchArea.style.display="none";
+filterPanel.style.display="none";
+liste.style.display="none";
+formBox.style.display="none";
+profilPanel.style.display="none";
+teknikPanelGizle();
+detayPanel.style.display="block";
+quickAddGuncelle();
+
+let sonTeklif = Array.isArray(a.revizyonTeklifleri) && a.revizyonTeklifleri.length ? a.revizyonTeklifleri[0] : null;
+let varsayilanKonu = sonTeklif && sonTeklif.konu ? sonTeklif.konu : "Asansör revizyon çalışması";
+let varsayilanAciklama = sonTeklif && sonTeklif.aciklama
+? sonTeklif.aciklama
+: "Yapılan kontrol sonucunda asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için gerekli revizyon işlemlerinin yapılması önerilmektedir.";
+
+let sonTeklifNotu = sonTeklif
+? `Son teklif: ${ayHtml(sonTeklif.tarih || "-")} • ${tutarFormat(sonTeklif.tutar || 0)}`
+: "Bu şablon teklif kalıbı olarak çalışır; ürün kalemi girmeden hızlı PDF oluşturur.";
+
+detayPanel.innerHTML = `
+<div class="revisionOfferHero screenFadeUp">
+
+  <button class="detailTopBtn detailBackBtn" onclick="detayAc(${i})">← Apartman Detayına Dön</button>
+
+  <div class="revisionOfferTop">
+    <div>
+      <div class="revisionOfferKicker">Hazır Şablon</div>
+      <div class="revisionOfferTitle">Revizyon Teklifi</div>
+      <div class="revisionOfferSub">${ayHtml(a.ad || "-")} için yöneticiye gönderilecek kurumsal teklif PDF'i.</div>
+    </div>
+    <div class="revisionOfferBadge">v1.4.30</div>
+  </div>
+
+  <div class="revisionTemplatePreview">
+    <b>REVİZYON TEKLİFİ</b>
+    <p>Sayın Yönetici, yapılan kontrol sonucunda asansörünüzün güvenli ve düzenli çalışması için aşağıdaki revizyonun yapılması önerilmektedir.</p>
+  </div>
+
+  <div class="revisionFormGrid">
+    <label>
+      <span class="revisionFieldLabel">Teklif Konusu</span>
+      <input id="revizyonKonu" value="${ayHtml(varsayilanKonu)}" placeholder="Örn: Kapı sistemi revizyonu">
+    </label>
+
+    <label>
+      <span class="revisionFieldLabel">Açıklama</span>
+      <textarea id="revizyonAciklama" placeholder="Kısa revizyon açıklaması">${ayHtml(varsayilanAciklama)}</textarea>
+    </label>
+
+    <label>
+      <span class="revisionFieldLabel">Teklif Tutarı</span>
+      <input id="revizyonTutar" inputmode="decimal" placeholder="Örn: 24.000 TL">
+    </label>
+
+    <label>
+      <span class="revisionFieldLabel">Geçerlilik Süresi</span>
+      <input id="revizyonGecerlilik" inputmode="numeric" value="7" placeholder="Örn: 7">
+    </label>
+  </div>
+
+  <div class="revisionHint">${sonTeklifNotu}</div>
+
+  <div class="revisionButtons">
+    <button class="revisionPdfBtn" onclick="revizyonTeklifiPdf(${i})">PDF Oluştur</button>
+    <button class="revisionBackBtn" onclick="detayAc(${i})">Vazgeç</button>
+  </div>
+
+</div>
+`;
+
+animateIn(detayPanel,"screenInRight");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function revizyonTeklifiPdf(i){
+haptic("medium");
+
+let a = data[i];
+if(!a) return;
+
+let konuEl = document.getElementById("revizyonKonu");
+let aciklamaEl = document.getElementById("revizyonAciklama");
+let tutarEl = document.getElementById("revizyonTutar");
+let gecerlilikEl = document.getElementById("revizyonGecerlilik");
+
+let konu = (konuEl ? konuEl.value : "").trim() || "Asansör revizyon çalışması";
+let aciklama = (aciklamaEl ? aciklamaEl.value : "").trim() || "Yapılan kontrol sonucunda asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için gerekli revizyon işlemlerinin yapılması önerilmektedir.";
+let tutar = revizyonTutarSayiyaCevir(tutarEl ? tutarEl.value : "");
+let gecerlilik = Math.max(1, Number(String(gecerlilikEl ? gecerlilikEl.value : "7").replace(/\D/g,"")) || 7);
+let teklifNo = revizyonTeklifiNo(i);
+
+if(!tutar){
+toast("Teklif tutarını yazmalısın");
+if(tutarEl) tutarEl.focus();
+return;
+}
+
+if(!Array.isArray(a.revizyonTeklifleri)){
+a.revizyonTeklifleri = [];
+}
+
+a.revizyonTeklifleri.unshift({
+teklifNo:teklifNo,
+tarih:bugun(),
+konu:konu,
+aciklama:aciklama,
+tutar:tutar,
+gecerlilik:gecerlilik,
+createdAt:new Date().toISOString()
+});
+
+a.revizyonTeklifleri = a.revizyonTeklifleri.slice(0,20);
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push("Revizyon teklifi hazırlandı (" + bugun() + ") - " + konu + " - " + tutarFormat(tutar));
+
+localVeriKaydet();
+autoYedekAl(true);
+
+let pdfMarka = pdfFirmaBilgi();
+let pdfFirma = pdfMarka.firma;
+let pdfLogo = pdfMarka.logo;
+let pdfSorumlu = pdfMarka.ad;
+let pdfTel = pdfMarka.telefon;
+let temizTel = (a.tel || "").replace(/\s/g,"");
+let tutarYazi = tutarFormat(tutar);
+
+let w = elevatorXOpenReportWindow();
+
+if(!w){
+toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
+return;
+}
+
+w.document.open();
+w.document.write(`
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revizyon Teklifi - ElevatorX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:24px}
+.page{max-width:840px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
+.topBand{height:10px;background:linear-gradient(90deg,#111827,#2563eb,#0ea5e9)}
+.header{padding:26px 30px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
+.brand{display:flex;align-items:center;gap:14px}.brand img{width:54px;height:54px;border-radius:16px;object-fit:cover;background:#f8fafc}.brandTitle{font-size:24px;font-weight:950;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:750;margin-top:2px}
+.reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
+.hero{margin:24px 30px 18px;background:linear-gradient(145deg,#0f172a,#1f2937);border-radius:26px;padding:24px;color:#fff}
+.kicker{font-size:12px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;opacity:.68;margin-bottom:8px}.docTitle{font-size:34px;font-weight:950;letter-spacing:-.8px;margin:0}.docDesc{font-size:14px;color:#cbd5e1;margin:9px 0 0;line-height:1.5}
+.infoGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 30px 18px}.infoCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:15px}.label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.28px;color:#8a94a6;margin-bottom:7px}.value{font-size:17px;font-weight:900;color:#111827;line-height:1.32;word-break:break-word}.value.money{font-size:25px;color:#2563eb;letter-spacing:-.5px}
+.letter{margin:0 30px 18px;border:1px solid #edf0f5;border-radius:22px;overflow:hidden}.letterTitle{padding:16px 18px;background:#f8fafc;border-bottom:1px solid #edf0f5;font-size:18px;font-weight:950}.letterBody{padding:20px 22px;font-size:15px;line-height:1.75;color:#374151}.letterBody p{margin:0 0 14px}.letterBody p:last-child{margin-bottom:0}.subjectBox{margin:0 0 16px;padding:14px 16px;background:#f8fafc;border-radius:16px;border:1px solid #edf0f5}.subjectBox b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:#8a94a6;margin-bottom:6px}.subjectBox span{display:block;font-size:18px;font-weight:950;color:#111827;letter-spacing:-.25px}
+.priceBox{margin:0 30px 22px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:24px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:16px}.priceBox span{font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.16em;color:#2563eb}.priceBox b{display:block;font-size:30px;font-weight:950;color:#1d4ed8;letter-spacing:-.7px;margin-top:4px}.priceBox em{font-style:normal;font-size:13px;color:#64748b;font-weight:800;text-align:right;line-height:1.45}
+.note{margin:0 30px 22px;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:16px 18px;font-size:13.5px;line-height:1.55;color:#9a3412;font-weight:750}
+.signatureArea{padding:4px 30px 24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.signatureBox{height:74px;border-top:1.5px solid #d1d5db;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#6b7280;font-size:13px;font-weight:800;padding-bottom:6px}
+.footer{display:flex;justify-content:space-between;gap:12px;margin:0 30px 24px;padding-top:14px;border-top:1px solid #edf0f5;color:#9ca3af;font-size:11px;line-height:1.45}.printBtn,.backBtn{display:block;margin:16px auto 0;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:950;padding:13px 18px}
+@page{size:A4;margin:0}
+@media print{body{background:#fff;padding:0}.page{width:190mm;min-height:260mm;margin:8mm auto;border-radius:0;box-shadow:none}.printBtn,.backBtn{display:none}.header{padding:18px 22px 14px}.hero{margin:16px 22px 12px;padding:17px}.infoGrid{margin:0 22px 12px;gap:8px}.infoCard{padding:11px}.docTitle{font-size:28px}.letter{margin:0 22px 12px}.letterBody{padding:16px 18px;font-size:13px;line-height:1.62}.priceBox{margin:0 22px 14px;padding:15px}.priceBox b{font-size:24px}.note{margin:0 22px 16px}.signatureArea{padding:0 22px 18px}.footer{margin:0 22px 18px}}
+</style>
+${elevatorXPdfSafetyScript()}</head>
+<body>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<div class="page">
+<div class="topBand"></div>
+<div class="header">
+  <div class="brand">
+    <img src="${pdfLogo}">
+    <div>
+      <div class="brandTitle">${ayHtml(pdfFirma)}</div>
+      <div class="brandSub">${ayHtml(APP_NAME)} • Hazır revizyon teklifi</div>
+    </div>
+  </div>
+  <div class="reportMeta">
+    <b>Teklif No:</b> ${ayHtml(teklifNo)}<br>
+    <b>Tarih:</b> ${ayHtml(bugun())}<br>
+    <b>Geçerlilik:</b> ${gecerlilik} gün
+  </div>
+</div>
+
+<div class="hero">
+  <div class="kicker">Revizyon Teklifi</div>
+  <h1 class="docTitle">Hazır Teklif Formu</h1>
+  <p class="docDesc">Bu belge, ilgili asansörde önerilen revizyon çalışmasının yöneticiye kurumsal şekilde sunulması için hazırlanmıştır.</p>
+</div>
+
+<div class="infoGrid">
+  <div class="infoCard"><div class="label">Apartman</div><div class="value">${ayHtml(a.ad || "-")}</div></div>
+  <div class="infoCard"><div class="label">Yönetici</div><div class="value">${ayHtml(a.yonetici || "-")}</div></div>
+  <div class="infoCard"><div class="label">Telefon</div><div class="value">${ayHtml(a.tel || "-")}</div></div>
+  <div class="infoCard"><div class="label">Hazırlayan</div><div class="value">${ayHtml(pdfSorumlu || "-")}</div></div>
+</div>
+
+<div class="letter">
+  <div class="letterTitle">Teklif Metni</div>
+  <div class="letterBody">
+    <div class="subjectBox">
+      <b>Teklif Konusu</b>
+      <span>${ayHtml(konu)}</span>
+    </div>
+    <p><b>Sayın Yönetici,</b></p>
+    <p>Yapılan kontrol sonucunda apartmanınızda bulunan asansörün daha güvenli, düzenli ve sorunsuz çalışabilmesi için aşağıda belirtilen revizyon işleminin yapılması önerilmektedir.</p>
+    <p>${ayHtml(aciklama)}</p>
+    <p>Belirtilen revizyon işleminin onaylanması halinde gerekli malzeme temini sağlanarak iş programına alınacaktır.</p>
+    <p>Bilginize sunar, iyi günler dileriz.</p>
+  </div>
+</div>
+
+<div class="priceBox">
+  <div>
+    <span>Teklif Tutarı</span>
+    <b>${ayHtml(tutarYazi)}</b>
+  </div>
+  <em>Fiyat geçerlilik süresi belge tarihinden itibaren ${gecerlilik} gündür.</em>
+</div>
+
+<div class="note">
+  Not: Bu teklif, belirtilen revizyon konusu için hazırlanmıştır. Ek arıza, farklı parça ihtiyacı veya ilave işçilik oluşması halinde ayrıca bilgilendirme yapılır.
+</div>
+
+<div class="signatureArea">
+  <div class="signatureBox">Teklifi Hazırlayan<br>${ayHtml(pdfFirma)}${pdfTel ? " • " + ayHtml(pdfTel) : ""}</div>
+  <div class="signatureBox">Yönetici Onayı</div>
+</div>
+
+<div class="footer">
+  <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
+  <div>ElevatorX v1.4.30</div>
+</div>
+</div>
+<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+</body>
+</html>
+`);
+w.document.close();
+
+toast("Revizyon teklif PDF'i hazırlandı");
+}
 
 function cariHesapPdf(i){
 
