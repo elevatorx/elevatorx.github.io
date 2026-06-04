@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1437_EMOJI_FREE_ICON_SYSTEM | APP_VERSION v1.4.37 -->
+<!-- ELEVATORX_V1438_APARTMAN_ICON_REVISION | APP_VERSION v1.4.38 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1435">
@@ -9219,7 +9219,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.37 — Emoji-free premium line icon system === */
+/* === v1.4.38 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9515,7 +9515,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1435" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.37</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.38</div>
 </div>
 </div>
 
@@ -10055,7 +10055,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.37";
+const APP_VERSION = "v1.4.38";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1435", location.href).href;
 
@@ -11543,7 +11543,7 @@ if(!son){
 
 return `
 <div class="lastActionCard">
-<div class="lastActionIcon">✓</div>
+<div class="lastActionIcon exAptCheck" aria-hidden="true"></div>
 <div class="lastActionText">
 <div class="lastActionLabel">Son İşlem</div>
 <div class="lastActionValue">Henüz işlem kaydı yok</div>
@@ -11556,7 +11556,7 @@ return `
 
 return `
 <div class="lastActionCard">
-<div class="lastActionIcon">✓</div>
+<div class="lastActionIcon exAptCheck" aria-hidden="true"></div>
 <div class="lastActionText">
 <div class="lastActionLabel">Son İşlem</div>
 <div class="lastActionValue">${son.ad} • ${son.islem.replace(/\s*\(.*?\)/,"")}</div>
@@ -14993,7 +14993,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.37</div>
+  <div>ElevatorX v1.4.38</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15313,7 +15313,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.37</div>
+    <div class="controlReportBadge">v1.4.38</div>
   </div>
 
   <div class="controlReportPreview">
@@ -16978,6 +16978,304 @@ opacity:.9;
 
 @media (prefers-reduced-motion: reduce){
 #quickAddBtn.quickAddBtn::after{animation:none!important;}
+}
+
+
+
+/* === v1.4.38 — Apartman sekmesi premium ikon revizyonu === */
+.statIcon,
+.aptIcon,
+.lastActionIcon,
+.miniMetaIcon,
+#quickAddBtn.quickAddBtn span{
+  position:relative!important;
+  font-size:0!important;
+  line-height:0!important;
+  overflow:hidden!important;
+}
+
+.statIcon:before,
+.statIcon:after,
+.aptIcon:before,
+.aptIcon:after,
+.lastActionIcon:before,
+.lastActionIcon:after,
+.miniMetaIcon:before,
+.miniMetaIcon:after,
+#quickAddBtn.quickAddBtn span:before,
+#quickAddBtn.quickAddBtn span:after{
+  content:""!important;
+  position:absolute!important;
+  box-sizing:border-box!important;
+}
+
+/* Üst sayaç kartları: emoji hissi yerine tek tip çizgisel simgeler */
+.statIcon{
+  width:38px!important;
+  height:38px!important;
+  border-radius:15px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background-image:radial-gradient(circle at 30% 22%,rgba(255,255,255,.55),transparent 42%)!important;
+}
+
+.iconBuilding:before{
+  width:18px!important;
+  height:21px!important;
+  border:2px solid currentColor!important;
+  border-radius:5px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-48%)!important;
+  background:transparent!important;
+  bottom:auto!important;
+}
+.iconBuilding:after{
+  width:3px!important;
+  height:3px!important;
+  border-radius:1.5px!important;
+  background:currentColor!important;
+  left:12px!important;
+  top:11px!important;
+  box-shadow:
+    7px 0 0 currentColor,
+    0 7px 0 currentColor,
+    7px 7px 0 currentColor,
+    3.5px 14px 0 currentColor!important;
+}
+
+.iconTool:before{
+  width:21px!important;
+  height:21px!important;
+  border:2px solid currentColor!important;
+  border-radius:50%!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  background:transparent!important;
+}
+.iconTool:after{
+  width:11px!important;
+  height:6px!important;
+  border-left:2.5px solid currentColor!important;
+  border-bottom:2.5px solid currentColor!important;
+  border-radius:1px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-42%,-56%) rotate(-45deg)!important;
+  background:transparent!important;
+  right:auto!important;
+}
+
+.iconCalendar:before{
+  width:22px!important;
+  height:18px!important;
+  border:2px solid currentColor!important;
+  border-radius:5px!important;
+  left:50%!important;
+  top:52%!important;
+  transform:translate(-50%,-50%)!important;
+  background:transparent!important;
+  bottom:auto!important;
+}
+.iconCalendar:after{
+  width:14px!important;
+  height:2px!important;
+  background:currentColor!important;
+  border-radius:999px!important;
+  left:50%!important;
+  top:47%!important;
+  transform:translateX(-50%)!important;
+  box-shadow:0 6px 0 currentColor!important;
+}
+
+.iconMoney:before{
+  width:23px!important;
+  height:15px!important;
+  border:2px solid currentColor!important;
+  border-radius:6px!important;
+  left:50%!important;
+  top:52%!important;
+  transform:translate(-50%,-50%)!important;
+  background:transparent!important;
+}
+.iconMoney:after{
+  content:"₺"!important;
+  position:absolute!important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  color:currentColor!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-55%)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Apartman kartı sol ikonları: daha sade bina/elevator çizimi */
+.aptIcon{
+  background-image:radial-gradient(circle at 30% 22%,rgba(255,255,255,.50),transparent 40%)!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 10px 20px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.62)!important;
+}
+.aptIcon:before{
+  width:20px!important;
+  height:24px!important;
+  border:2px solid currentColor!important;
+  border-radius:6px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  background:transparent!important;
+  bottom:auto!important;
+}
+.aptIcon:after{
+  width:3px!important;
+  height:3px!important;
+  border-radius:1.5px!important;
+  background:currentColor!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-5.5px,-8px)!important;
+  box-shadow:
+    8px 0 0 currentColor,
+    0 7px 0 currentColor,
+    8px 7px 0 currentColor,
+    4px 15px 0 currentColor!important;
+}
+
+/* Yönetici / telefon mini ikonları: emoji değil, küçük sistem ikonu */
+.miniMetaIcon{
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  border:none!important;
+  border-radius:7px!important;
+  background:#f1f5f9!important;
+  color:#94a3b8!important;
+  opacity:1!important;
+  display:inline-block!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+.miniMetaIcon.person:before{
+  width:5px!important;
+  height:5px!important;
+  border:1.8px solid currentColor!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  left:50%!important;
+  top:4px!important;
+  transform:translateX(-50%)!important;
+}
+.miniMetaIcon.person:after{
+  width:11px!important;
+  height:6px!important;
+  border:1.8px solid currentColor!important;
+  border-top:none!important;
+  border-radius:0 0 7px 7px!important;
+  background:transparent!important;
+  left:50%!important;
+  bottom:3px!important;
+  transform:translateX(-50%)!important;
+}
+.metaPhone .miniMetaIcon{
+  background:#eaf2ff!important;
+  color:#007aff!important;
+}
+.miniMetaIcon.phone:before{
+  width:7px!important;
+  height:12px!important;
+  border:1.8px solid currentColor!important;
+  border-radius:3.5px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%) rotate(-10deg)!important;
+  background:transparent!important;
+}
+.miniMetaIcon.phone:after{
+  width:2.5px!important;
+  height:2.5px!important;
+  border-radius:50%!important;
+  background:currentColor!important;
+  left:50%!important;
+  bottom:4px!important;
+  transform:translateX(-50%)!important;
+}
+
+/* Son işlem tik ikonunu metin/emoji olmaktan çıkar */
+.lastActionIcon{
+  font-size:0!important;
+  color:#007aff!important;
+  background:#eef4ff!important;
+}
+.lastActionIcon.exAptCheck:before{
+  width:18px!important;
+  height:18px!important;
+  border:2px solid currentColor!important;
+  border-radius:7px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  background:transparent!important;
+}
+.lastActionIcon.exAptCheck:after{
+  width:11px!important;
+  height:6px!important;
+  border-left:2.5px solid currentColor!important;
+  border-bottom:2.5px solid currentColor!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-42%,-58%) rotate(-45deg)!important;
+  background:transparent!important;
+}
+
+/* + Yeni butonu: artı sembolünü çizgisel sisteme bağla */
+#quickAddBtn.quickAddBtn span{
+  width:34px!important;
+  height:34px!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.16)!important;
+  display:inline-block!important;
+  flex:0 0 34px!important;
+  margin-right:8px!important;
+}
+#quickAddBtn.quickAddBtn span:before,
+#quickAddBtn.quickAddBtn span:after{
+  width:15px!important;
+  height:2.5px!important;
+  background:white!important;
+  border-radius:999px!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+}
+#quickAddBtn.quickAddBtn span:after{
+  transform:translate(-50%,-50%) rotate(90deg)!important;
+}
+
+body.darkMode .miniMetaIcon,
+html.darkRoot .miniMetaIcon{
+  background:#263241!important;
+  color:#9ca3af!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+body.darkMode .metaPhone .miniMetaIcon,
+html.darkRoot .metaPhone .miniMetaIcon{
+  background:#12223a!important;
+  color:#60a5fa!important;
+}
+body.darkMode .lastActionIcon,
+html.darkRoot .lastActionIcon{
+  background:#12223a!important;
+  color:#60a5fa!important;
+}
+body.darkMode .aptIcon,
+html.darkRoot .aptIcon{
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05)!important;
 }
 
 </style>
