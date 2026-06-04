@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1440_GLOBAL_APARTMAN_ICON_FIX | APP_VERSION v1.4.40 -->
+<!-- ELEVATORX_V1441_IOS_SADE_ICON_SETI | APP_VERSION v1.4.41 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1440">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1440">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1440">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1440">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1440">
-<link rel="manifest" href="/manifest.webmanifest?v=1440">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1441">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1441">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1441">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1441">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1441">
+<link rel="manifest" href="/manifest.webmanifest?v=1441">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9365,7 +9365,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.40 — Apartmanlar ana ekran ikon fix: GLOBAL STYLE ===
+/* === v1.4.41 — Apartmanlar ana ekran ikon fix: GLOBAL STYLE ===
    Not: v1.4.39 ikon CSS'i rapor/PDF style bloğuna düşmüştü; bu blok gerçek uygulama stiline en sona basıldı. */
 body #app .statIcon,
 body .container .statIcon,
@@ -9555,6 +9555,134 @@ html.darkRoot .aptIcon{
   border:none!important;
   box-shadow:none!important;
 }
+
+
+/* === v1.4.41 — iOS tarzı sade ikon seti ===
+   Sadece Apartmanlar sekmesindeki üst sayaç ikonları ve apartman kartı sol ikonları resetlendi. */
+body .statIcon,
+body .statCard .statIcon,
+body .aptIcon,
+body .aptCard .aptIcon{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  font-size:0!important;
+  line-height:0!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:
+    0 8px 18px rgba(15,23,42,.045),
+    inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+
+body .statIcon,
+body .statCard .statIcon{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  border-radius:15px!important;
+  margin:0 auto 8px!important;
+}
+
+body .aptIcon,
+body .aptCard .aptIcon{
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  border-radius:16px!important;
+  margin-left:2px!important;
+}
+
+body .statIcon:before,
+body .aptIcon:before,
+body .statCard .statIcon:before,
+body .aptCard .aptIcon:before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:25px!important;
+  height:25px!important;
+  transform:translate(-50%,-50%)!important;
+  background:currentColor!important;
+  border:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  -webkit-mask:var(--ex-ios-icon) center / contain no-repeat!important;
+  mask:var(--ex-ios-icon) center / contain no-repeat!important;
+}
+
+body .aptIcon:before,
+body .aptCard .aptIcon:before{
+  width:26px!important;
+  height:26px!important;
+}
+
+body .statIcon:after,
+body .aptIcon:after,
+body .statCard .statIcon:after,
+body .aptCard .aptIcon:after{
+  content:""!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  border:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body .statIcon.iconBuilding{ --ex-ios-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272.15%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%275.5%27%20y%3D%273.5%27%20width%3D%2713%27%20height%3D%2717%27%20rx%3D%273%27%2F%3E%3Cpath%20d%3D%27M9%208h.01M15%208h.01M9%2012h.01M15%2012h.01M9%2016h.01M15%2016h.01%27%2F%3E%3C%2Fsvg%3E"); }
+body .statIcon.iconTool{ --ex-ios-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272.25%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%278.5%27%2F%3E%3Cpath%20d%3D%27M8.4%2012.2l2.4%202.5%204.9-5.3%27%2F%3E%3C%2Fsvg%3E"); }
+body .statIcon.iconCalendar{ --ex-ios-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272.2%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%278.5%27%2F%3E%3Cpath%20d%3D%27M12%207.5V12l3.2%202%27%2F%3E%3C%2Fsvg%3E"); }
+body .statIcon.iconMoney{ --ex-ios-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272.15%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%273.5%27%20y%3D%276%27%20width%3D%2717%27%20height%3D%2712%27%20rx%3D%273%27%2F%3E%3Cpath%20d%3D%27M3.5%2010h17M7.5%2014.5h4%27%2F%3E%3C%2Fsvg%3E"); }
+body .aptIcon{ --ex-ios-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272.1%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%276%27%20y%3D%273.5%27%20width%3D%2712%27%20height%3D%2717%27%20rx%3D%273%27%2F%3E%3Cpath%20d%3D%27M9.3%208h.01M14.7%208h.01M9.3%2012h.01M14.7%2012h.01M9.3%2016h.01M14.7%2016h.01%27%2F%3E%3C%2Fsvg%3E"); }
+
+body .statIcon.statBlue{color:#0a84ff!important;background:rgba(10,132,255,.105)!important;}
+body .statIcon.statGreen{color:#22c55e!important;background:rgba(34,197,94,.105)!important;}
+body .statIcon.statOrange{color:#ff9500!important;background:rgba(255,149,0,.115)!important;}
+body .statIcon.statPurple{color:#8b5cf6!important;background:rgba(139,92,246,.115)!important;}
+
+body .aptIcon.c0{color:#0a84ff!important;background:rgba(10,132,255,.095)!important;}
+body .aptIcon.c1{color:#22c55e!important;background:rgba(34,197,94,.095)!important;}
+body .aptIcon.c2{color:#8b5cf6!important;background:rgba(139,92,246,.105)!important;}
+body .aptIcon.c3{color:#ff9500!important;background:rgba(255,149,0,.105)!important;}
+body .aptIcon.c4{color:#ff2d75!important;background:rgba(255,45,117,.095)!important;}
+
+body.darkMode .statIcon,
+body.darkMode .statCard .statIcon,
+body.darkMode .aptIcon,
+body.darkMode .aptCard .aptIcon,
+html.darkRoot .statIcon,
+html.darkRoot .statCard .statIcon,
+html.darkRoot .aptIcon,
+html.darkRoot .aptCard .aptIcon{
+  border-color:rgba(255,255,255,.075)!important;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+body.darkMode .statIcon.statBlue,
+html.darkRoot .statIcon.statBlue,
+body.darkMode .aptIcon.c0,
+html.darkRoot .aptIcon.c0{background:rgba(10,132,255,.14)!important;}
+body.darkMode .statIcon.statGreen,
+html.darkRoot .statIcon.statGreen,
+body.darkMode .aptIcon.c1,
+html.darkRoot .aptIcon.c1{background:rgba(34,197,94,.14)!important;}
+body.darkMode .statIcon.statOrange,
+html.darkRoot .statIcon.statOrange,
+body.darkMode .aptIcon.c3,
+html.darkRoot .aptIcon.c3{background:rgba(255,149,0,.15)!important;}
+body.darkMode .statIcon.statPurple,
+html.darkRoot .statIcon.statPurple,
+body.darkMode .aptIcon.c2,
+html.darkRoot .aptIcon.c2{background:rgba(139,92,246,.15)!important;}
+body.darkMode .aptIcon.c4,
+html.darkRoot .aptIcon.c4{background:rgba(255,45,117,.14)!important;}
 </style>
 
 <script>
@@ -9704,10 +9832,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1440" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1441" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.40</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.41</div>
 </div>
 </div>
 
@@ -10247,9 +10375,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.40";
+const APP_VERSION = "v1.4.41";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1440", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1441", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -15185,7 +15313,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.40</div>
+  <div>ElevatorX v1.4.41</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15505,7 +15633,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.40</div>
+    <div class="controlReportBadge">v1.4.41</div>
   </div>
 
   <div class="controlReportPreview">
