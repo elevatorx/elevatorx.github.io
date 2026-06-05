@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1448_PROFIL_SON_CILA_ALT_BAR_FIX | APP_VERSION v1.4.48 -->
+<!-- ELEVATORX_V1449_QUICK_ADD_TABBAR_INTEGRATION_FIX | APP_VERSION v1.4.49 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -9250,6 +9250,125 @@ html.darkRoot body::after{
   }
 }
 
+
+
+/* === v1.4.49 — + Yeni tabbar entegrasyon fix ===
+   v1.4.48'de + Yeni butonu DOM olarak tabbar dışında kaldığı için bazı ekranlarda sol alta kaçıyordu.
+   Bu blok butonu tabbar içinde normal sekme gibi hizalar; eski floating davranışını iptal eder. */
+.tabbar{
+  width:min(372px,calc(100vw - 34px))!important;
+  height:70px!important;
+  padding:7px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  overflow:hidden!important;
+}
+
+.tabbar .tabItem,
+.tabbar #quickAddBtn.quickAddBtn{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:56px!important;
+  margin:0!important;
+  padding:0 5px!important;
+  border-radius:999px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn{
+  display:none!important;
+  border:1px solid rgba(47,111,240,.14)!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.10),rgba(47,111,240,.045))!important;
+  color:#2f6ff0!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn.quickAddVisible{
+  display:flex!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn span{
+  width:22px!important;
+  height:22px!important;
+  min-width:22px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:linear-gradient(180deg,#62a0ff 0%,#2f6ff0 100%)!important;
+  color:#fff!important;
+  font-size:21px!important;
+  line-height:18px!important;
+  font-weight:850!important;
+  box-shadow:0 6px 13px rgba(47,111,240,.23), inset 0 1px 0 rgba(255,255,255,.36)!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn b{
+  display:block!important;
+  margin:0!important;
+  font-size:10.4px!important;
+  font-weight:850!important;
+  letter-spacing:-.16px!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+}
+
+.tabbar .tabItem.activeTab{
+  flex:1.25 1 0!important;
+}
+
+body.darkMode .tabbar #quickAddBtn.quickAddBtn,
+html.darkRoot .tabbar #quickAddBtn.quickAddBtn{
+  color:#84b6ff!important;
+  background:linear-gradient(180deg,rgba(59,130,246,.15),rgba(59,130,246,.06))!important;
+  border-color:rgba(96,165,250,.16)!important;
+}
+
+@media(max-width:430px){
+  .tabbar{
+    width:min(360px,calc(100vw - 32px))!important;
+    height:68px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+    padding:6px!important;
+    gap:5px!important;
+  }
+  .tabbar .tabItem,
+  .tabbar #quickAddBtn.quickAddBtn{
+    height:56px!important;
+    padding:0 4px!important;
+  }
+  .tabbar #quickAddBtn.quickAddBtn span{
+    width:21px!important;
+    height:21px!important;
+    min-width:21px!important;
+    font-size:20px!important;
+  }
+  .tabbar #quickAddBtn.quickAddBtn b{
+    font-size:10px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -9402,7 +9521,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1448" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.48</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.49</div>
 </div>
 </div>
 
@@ -9844,11 +9963,6 @@ Destek: supportelevatorx@gmail.com
 
 </div>
 
-<button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
-  <span>+</span>
-  <b>Yeni</b>
-</button>
-
 <div class="tabbar">
 
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
@@ -9869,6 +9983,11 @@ Destek: supportelevatorx@gmail.com
 </svg>
 </span>
 <span class="tabText">Apartmanlar</span>
+</button>
+
+<button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
+  <span>+</span>
+  <b>Yeni</b>
 </button>
 
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
@@ -9937,7 +10056,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.48";
+const APP_VERSION = "v1.4.49";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
