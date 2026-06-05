@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1443_PROFIL_EKRANI_SADELESTIRME | APP_VERSION v1.4.43 -->
+<!-- ELEVATORX_V1444_PDF_GERI_BUTONU_SAFE_CLOSE_FIX | APP_VERSION v1.4.44 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
@@ -9799,7 +9799,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.43";
+const APP_VERSION = "v1.4.44";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
@@ -9819,6 +9819,27 @@ return null;
 function elevatorXPdfSafetyScript(){
 return `<script>
 (function(){
+function showCloseHint(){
+try{
+var old=document.getElementById("elevatorxCloseHint");
+if(old){old.remove();}
+var box=document.createElement("div");
+box.id="elevatorxCloseHint";
+box.textContent="Önizleme kapanmazsa sağ üstteki X ile kapat.";
+box.style.cssText="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:999999;background:rgba(17,24,39,.92);color:#fff;padding:11px 15px;border-radius:999px;font:800 12px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.22);max-width:calc(100% - 36px);text-align:center;";
+document.body.appendChild(box);
+setTimeout(function(){try{box.remove();}catch(e){}},2600);
+}catch(e){}
+}
+window.elevatorXReportBack=function(){
+try{ window.close(); }catch(e){}
+setTimeout(function(){
+try{
+if(!window.closed){ showCloseHint(); }
+}catch(e){ showCloseHint(); }
+},180);
+return false;
+};
 try{
 if(window.history && window.history.replaceState){
 window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
@@ -9826,7 +9847,7 @@ window.history.replaceState({elevatorxReport:true}, document.title, window.locat
 window.addEventListener("pageshow", function(){
 try{
 if(String(window.location.href).indexOf("blob:") === 0){
-window.location.replace("https://elevatorx.github.io/?return=elevatorx");
+/* iOS blob geri tuşu uygulamayı yeniden başlatmasın diye otomatik yönlendirme yok. */
 }
 }catch(e){}
 });
@@ -12866,7 +12887,7 @@ td{font-size:8.5px!important;padding:6px!important}
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -12966,7 +12987,7 @@ ${sonParcalar}
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -13685,7 +13706,7 @@ line-height:1.2!important;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -13761,7 +13782,7 @@ ${satirlar}
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -14958,7 +14979,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -15030,7 +15051,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -15318,7 +15339,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -15385,7 +15406,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -15702,7 +15723,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -15770,7 +15791,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -16102,7 +16123,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -16198,7 +16219,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -17057,7 +17078,7 @@ opacity:.9;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -17119,7 +17140,7 @@ ${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${ba
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
@@ -20620,7 +20641,7 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 <style id="elevatorx-v143-profile-simplify">
-/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+/* === v1.4.44 — PDF Geri Butonu Safe Close Fix ===
    Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
    Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
 
