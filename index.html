@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1445_PDF_ACIKLAYICI_GERI_GETIRILDI | APP_VERSION v1.4.45 -->
+<!-- ELEVATORX_V1446_PROFIL_KONTROL_MERKEZI_ASAGI_ALINDI | APP_VERSION v1.4.46 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1430">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1430">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1430">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1430">
-<link rel="manifest" href="/manifest.webmanifest?v=1430">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1446">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1446">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1446">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1446">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1446">
+<link rel="manifest" href="/manifest.webmanifest?v=1446">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9750,6 +9750,74 @@ body.darkMode .aptFormCard .fieldInput::placeholder,
 body.darkMode .aptFormCard textarea.fieldInput::placeholder{
 color:#6f7a89;
 }
+
+
+/* v1.4.46 — Profil Kontrol Merkezi aşağı alındı */
+#profilPanel .profileStatsFour{
+  margin-top:18px!important;
+  margin-bottom:14px!important;
+}
+
+#profilPanel .profileControlHero.profileControlLower{
+  margin:14px 0 18px!important;
+  padding:14px 14px!important;
+  border-radius:22px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:12px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,249,255,.82))!important;
+  border:1px solid rgba(219,234,254,.92)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero.profileControlLower .profileControlKicker{
+  font-size:9.8px!important;
+  letter-spacing:.13em!important;
+  margin-bottom:4px!important;
+}
+
+#profilPanel .profileControlHero.profileControlLower .profileControlTitle{
+  font-size:16px!important;
+  line-height:1.14!important;
+  letter-spacing:-.25px!important;
+}
+
+#profilPanel .profileControlHero.profileControlLower .profileControlText{
+  font-size:11.8px!important;
+  line-height:1.35!important;
+  margin-top:4px!important;
+  color:#6b7280!important;
+}
+
+#profilPanel .profileControlHero.profileControlLower .profileEditBtn{
+  width:auto!important;
+  min-width:104px!important;
+  margin:0!important;
+  padding:11px 14px!important;
+  border-radius:16px!important;
+  font-size:12.5px!important;
+  box-shadow:0 10px 22px rgba(15,23,42,.15)!important;
+}
+
+body.darkMode #profilPanel .profileControlHero.profileControlLower,
+html.darkRoot #profilPanel .profileControlHero.profileControlLower{
+  background:linear-gradient(135deg,rgba(21,27,38,.84),rgba(15,20,29,.84))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .profileControlHero.profileControlLower{
+    margin:12px 0 16px!important;
+    padding:13px!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  #profilPanel .profileControlHero.profileControlLower .profileEditBtn{
+    width:100%!important;
+  }
+}
 </style>
 
 <script>
@@ -10144,7 +10212,7 @@ html.darkRoot body::after{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1430" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1446" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
 <div class="motionSplashVersion" data-splash-version>v1.4.42</div>
@@ -10390,19 +10458,6 @@ onclick="rehberdenTelefonSec(event,'profilTelefon','profilAd')">
 id="profilBio"
 class="profileBio"
 placeholder="Bilgi yaz..."></textarea>
-
-
-<div class="profileControlHero">
-  <div>
-    <div class="profileControlKicker">Kontrol Merkezi</div>
-    <div class="profileControlTitle">Profil, rapor ve yedekleme işlemleri</div>
-    <div class="profileControlText">
-      Bu bilgiler raporlara, makbuzlara, sicil kartlarına ve yedek dosyalarına otomatik işlenir.
-    </div>
-  </div>
-  <button class="profileEditBtn" onclick="profilKurulumuAc()">Düzenle</button>
-</div>
-
 <div class="profileStats profileStatsFour">
 
 <div class="profileStatCard">
@@ -10426,6 +10481,20 @@ placeholder="Bilgi yaz..."></textarea>
 </div>
 
 </div>
+
+
+
+<div class="profileControlHero profileControlLower">
+  <div>
+    <div class="profileControlKicker">Kontrol Merkezi</div>
+    <div class="profileControlTitle">Profil, rapor ve yedekleme işlemleri</div>
+    <div class="profileControlText">
+      Bu bilgiler raporlara, makbuzlara, sicil kartlarına ve yedek dosyalarına otomatik işlenir.
+    </div>
+  </div>
+  <button class="profileEditBtn" onclick="profilKurulumuAc()">Düzenle</button>
+</div>
+
 
 <div class="profileSectionTitle">Hızlı İşlemler</div>
 
@@ -10686,9 +10755,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.45";
+const APP_VERSION = "v1.4.46";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1446", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
