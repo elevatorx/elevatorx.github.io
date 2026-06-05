@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1442_ALT_BAR_PREMIUM_REDESIGN | APP_VERSION v1.4.42 -->
+<!-- ELEVATORX_V1443_PROFIL_EKRANI_SADELESTIRME | APP_VERSION v1.4.43 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1430">
@@ -9799,7 +9799,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.42";
+const APP_VERSION = "v1.4.43";
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1430", location.href).href;
 
@@ -12963,6 +12963,187 @@ ${sonParcalar}
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
 
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
+
 </body>
 </html>
 
@@ -13576,6 +13757,187 @@ ${satirlar}
 </div>
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
 
 </body>
 </html>
@@ -14665,6 +15027,187 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
+
 </body>
 </html>
 `);
@@ -14839,6 +15382,187 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
+
 </body>
 </html>
 `);
@@ -15043,6 +15767,187 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 
 <div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
+
 </body>
 </html>
 `);
@@ -15290,6 +16195,187 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 
 <div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
+
 </body>
 </html>
 `);
@@ -16029,6 +17115,187 @@ ${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${ba
 </div>
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
 
 </body>
 </html>
@@ -19349,6 +20616,187 @@ try{ quickAddGuncelle(); }catch(e){}
   window.elevatorXTopSearchSync = ayTopSearchSync;
 })();
 </script>
+
+
+
+<style id="elevatorx-v143-profile-simplify">
+/* === v1.4.43 — Profil Ekranı Sadeleştirme ===
+   Güvenli paket: sadece Profil ekranı üst alanı ve Kontrol Merkezi görünümü sıkılaştırıldı.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu/alt bar mantığına dokunulmadı. */
+
+#profilPanel{
+  padding-bottom:calc(106px + env(safe-area-inset-bottom,0px))!important;
+}
+
+#profilPanel .coverArea{
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+
+#profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(15,23,42,.10))!important;
+}
+
+#profilPanel .coverEdit{
+  width:38px!important;
+  height:38px!important;
+  right:12px!important;
+  bottom:12px!important;
+  font-size:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+
+#profilPanel .coverEdit:before{
+  content:"";
+  width:17px;
+  height:13px;
+  border:2px solid #64748b;
+  border-radius:5px;
+  display:block;
+  box-sizing:border-box;
+  position:relative;
+}
+
+#profilPanel .coverEdit:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:5px;
+  border:2px solid #64748b;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-35%);
+  box-sizing:border-box;
+}
+
+#profilPanel .profileWrap{
+  margin-top:-38px!important;
+}
+
+#profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border-width:4px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+
+#profilPanel .profileContent{
+  padding:8px 18px 14px!important;
+}
+
+#profilPanel .profileNameInput{
+  font-size:27px!important;
+  line-height:1.08!important;
+  letter-spacing:-.65px!important;
+}
+
+#profilPanel .profileJobInput{
+  font-size:13.5px!important;
+  line-height:1.2!important;
+  margin-top:1px!important;
+  color:#64748b!important;
+  font-weight:850!important;
+}
+
+#profilPanel #profilTelefon{
+  margin-top:5px!important;
+  font-size:14px!important;
+}
+
+#profilPanel .profileBio{
+  width:100%!important;
+  min-height:54px!important;
+  height:54px!important;
+  margin:12px 0 0!important;
+  padding:10px 14px!important;
+  border-radius:20px!important;
+  line-height:1.32!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+#profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:14px!important;
+  border-radius:24px!important;
+  gap:11px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(239,246,255,.66))!important;
+  box-shadow:0 14px 32px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileControlKicker{
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  margin-bottom:5px!important;
+}
+
+#profilPanel .profileControlTitle{
+  font-size:18px!important;
+  line-height:1.12!important;
+  letter-spacing:-.42px!important;
+}
+
+#profilPanel .profileControlText{
+  margin-top:6px!important;
+  font-size:12px!important;
+  line-height:1.38!important;
+}
+
+#profilPanel .profileEditBtn{
+  height:48px!important;
+  padding:0 14px!important;
+  border-radius:17px!important;
+  font-size:13.5px!important;
+  margin-top:0!important;
+}
+
+#profilPanel .profileStatsFour{
+  margin-top:12px!important;
+}
+
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:12px 8px!important;
+  border-radius:19px!important;
+}
+
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput{
+  color:#94a3b8!important;
+}
+
+body.darkMode #profilPanel .coverEdit:before,
+body.darkMode #profilPanel .coverEdit:after,
+html.darkRoot #profilPanel .coverEdit:before,
+html.darkRoot #profilPanel .coverEdit:after{
+  border-color:#e5e7eb!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:128px!important;border-radius:26px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-35px!important;}
+  #profilPanel .profilePhoto{width:72px!important;height:72px!important;}
+  #profilPanel .profileNameInput{font-size:25px!important;}
+  #profilPanel .profileBio{height:52px!important;min-height:52px!important;font-size:15px!important;}
+  #profilPanel .profileControlHero{padding:13px!important;border-radius:23px!important;}
+  #profilPanel .profileControlTitle{font-size:17.2px!important;}
+}
+</style>
 
 </body>
 </html>
