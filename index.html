@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1439_APARTMANLAR_ANA_ICON_DILI | APP_VERSION v1.4.39 -->
+<!-- ELEVATORX_V1450_STABILIZASYON_KAYIP_MODULLER_FIX | APP_VERSION v1.4.50 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1435">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1435">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1435">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1435">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1435">
-<link rel="manifest" href="/manifest.webmanifest?v=1435">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1448">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1448">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1448">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1448">
+<link rel="manifest" href="/manifest.webmanifest?v=1448">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6184,38 +6184,6 @@ margin-bottom:9px;
 }
 
 
-.detailReportCardWide{
-grid-column:1 / -1;
-min-height:92px;
-display:grid;
-grid-template-columns:42px 1fr;
-gap:12px;
-align-items:center;
-}
-
-.detailReportCardWide span{
-margin-bottom:0;
-width:42px;
-height:42px;
-border-radius:16px;
-}
-
-.detailReportCardFlow{
-background:linear-gradient(135deg,#eef6ff,#ffffff);
-border-color:rgba(0,122,255,.18);
-}
-
-.detailReportCardFlow b{
-font-size:15.5px;
-}
-
-body.darkMode .detailReportCardFlow,
-html.darkRoot .detailReportCardFlow{
-background:linear-gradient(135deg,#12223a,#151b26);
-border-color:rgba(96,165,250,.18);
-}
-
-
 /* === v1.4.30 — Hazır Revizyon Teklifi Şablonu === */
 .revisionOfferHero{
 background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
@@ -6403,319 +6371,6 @@ color:#f8fafc;
 
 body.darkMode .revisionBackBtn,
 html.darkRoot .revisionBackBtn{
-background:#263241;
-color:#f8fafc;
-}
-
-
-/* === v1.4.33 — Kontrol Raporu S/K Ayıklama Fix === */
-.controlReportHero{
-background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
-border:1px solid rgba(229,231,235,.92);
-border-radius:30px;
-padding:18px;
-box-shadow:0 18px 44px rgba(15,23,42,.07);
-}
-
-.controlReportTop{
-display:flex;
-align-items:flex-start;
-justify-content:space-between;
-gap:14px;
-margin-bottom:14px;
-}
-
-.controlReportKicker{
-font-size:11px;
-font-weight:950;
-letter-spacing:.16em;
-text-transform:uppercase;
-color:#007aff;
-margin-bottom:5px;
-}
-
-.controlReportTitle{
-font-size:27px;
-font-weight:950;
-letter-spacing:-.65px;
-line-height:1.05;
-color:#0f172a;
-}
-
-.controlReportSub{
-font-size:13px;
-font-weight:750;
-color:#64748b;
-line-height:1.4;
-margin-top:7px;
-}
-
-.controlReportBadge{
-flex:0 0 auto;
-padding:8px 10px;
-border-radius:999px;
-background:#eff6ff;
-color:#007aff;
-font-size:11px;
-font-weight:950;
-white-space:nowrap;
-}
-
-.controlReportPreview{
-background:linear-gradient(145deg,#0f172a,#1e293b);
-color:white;
-border-radius:24px;
-padding:16px;
-margin:10px 0 14px;
-box-shadow:0 14px 34px rgba(15,23,42,.16);
-}
-
-.controlReportPreview b{
-display:block;
-font-size:18px;
-font-weight:950;
-letter-spacing:-.25px;
-margin-bottom:7px;
-}
-
-.controlReportPreview p{
-margin:0;
-font-size:13px;
-line-height:1.48;
-color:#cbd5e1;
-}
-
-.controlUploadBox{
-border:1.5px dashed rgba(0,122,255,.28);
-background:#f8fbff;
-border-radius:22px;
-padding:14px;
-margin:0 0 12px;
-}
-
-.controlUploadBox input[type="file"]{
-background:white;
-margin-bottom:8px;
-font-weight:850;
-}
-
-.controlUploadBox small{
-display:block;
-font-size:12px;
-font-weight:750;
-color:#64748b;
-line-height:1.45;
-}
-
-.controlReportHero textarea{
-min-height:180px;
-line-height:1.45;
-margin-bottom:0;
-border-radius:18px;
-background:#f8fafc;
-border:1px solid rgba(226,232,240,.96);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
-font-weight:750;
-}
-
-.controlReportActions{
-display:grid;
-grid-template-columns:1fr;
-gap:9px;
-margin-top:12px;
-}
-
-.controlBlueBtn,
-.controlPdfBtn{
-background:#007aff;
-color:white;
-border-radius:19px;
-font-size:15px;
-font-weight:950;
-padding:14px;
-box-shadow:0 14px 28px rgba(0,122,255,.18);
-}
-
-.controlGrayBtn{
-background:#e5e5ea;
-color:#111827;
-border-radius:19px;
-font-size:14px;
-font-weight:950;
-padding:13px;
-}
-
-.controlResultBox{
-margin-top:14px;
-}
-
-.controlResultGrid{
-display:grid;
-grid-template-columns:1fr;
-gap:12px;
-}
-
-.controlResultCard{
-border-radius:22px;
-padding:14px;
-border:1px solid rgba(226,232,240,.92);
-background:#f8fafc;
-}
-
-.controlResultCard.redList{
-background:linear-gradient(135deg,rgba(255,245,245,.98),rgba(255,255,255,.96));
-border-color:rgba(255,59,48,.22);
-}
-
-.controlResultCard.yellowList{
-background:linear-gradient(135deg,rgba(255,251,235,.98),rgba(255,255,255,.96));
-border-color:rgba(245,158,11,.22);
-}
-
-.controlResultHead{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-margin-bottom:10px;
-}
-
-.controlResultHead b{
-font-size:16px;
-font-weight:950;
-letter-spacing:-.25px;
-}
-
-.controlCount{
-padding:6px 9px;
-border-radius:999px;
-font-size:11px;
-font-weight:950;
-background:white;
-color:#0f172a;
-box-shadow:0 6px 14px rgba(15,23,42,.045);
-}
-
-.controlList{
-margin:0;
-padding-left:20px;
-font-size:13px;
-font-weight:750;
-line-height:1.55;
-color:#334155;
-}
-
-.controlList li{
-margin-bottom:7px;
-}
-
-.controlEmpty{
-font-size:12.5px;
-font-weight:750;
-line-height:1.5;
-color:#64748b;
-background:rgba(255,255,255,.68);
-border-radius:16px;
-padding:12px;
-}
-
-.controlResultActions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px;
-margin-top:12px;
-}
-
-.controlMiniBtn{
-margin:0;
-padding:12px 10px;
-border-radius:16px;
-font-size:12.5px;
-font-weight:950;
-}
-
-.controlMiniBtn.blue{
-background:#007aff;
-color:white;
-}
-
-.controlMiniBtn.gray{
-background:#e5e5ea;
-color:#111827;
-}
-
-body.darkMode .controlReportHero,
-html.darkRoot .controlReportHero{
-background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94));
-border-color:rgba(255,255,255,.08);
-box-shadow:0 18px 44px rgba(0,0,0,.22);
-}
-
-body.darkMode .controlReportTitle,
-html.darkRoot .controlReportTitle{
-color:#f8fafc;
-}
-
-body.darkMode .controlReportSub,
-html.darkRoot .controlReportSub,
-body.darkMode .controlUploadBox small,
-html.darkRoot .controlUploadBox small{
-color:#94a3b8;
-}
-
-body.darkMode .controlReportPreview,
-html.darkRoot .controlReportPreview{
-background:linear-gradient(145deg,#020817,#0f172a);
-box-shadow:0 16px 36px rgba(0,0,0,.34);
-}
-
-body.darkMode .controlUploadBox,
-html.darkRoot .controlUploadBox,
-body.darkMode .controlResultCard,
-html.darkRoot .controlResultCard{
-background:rgba(15,23,42,.86);
-border-color:rgba(255,255,255,.08);
-}
-
-body.darkMode .controlReportHero textarea,
-html.darkRoot .controlReportHero textarea,
-body.darkMode .controlUploadBox input[type="file"],
-html.darkRoot .controlUploadBox input[type="file"]{
-background:rgba(15,23,42,.86);
-border-color:rgba(255,255,255,.08);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
-color:#f8fafc;
-}
-
-body.darkMode .controlResultCard.redList,
-html.darkRoot .controlResultCard.redList{
-background:linear-gradient(135deg,rgba(49,18,18,.96),rgba(21,27,38,.94));
-border-color:rgba(248,113,113,.24);
-}
-
-body.darkMode .controlResultCard.yellowList,
-html.darkRoot .controlResultCard.yellowList{
-background:linear-gradient(135deg,rgba(43,30,15,.96),rgba(21,27,38,.94));
-border-color:rgba(251,191,36,.24);
-}
-
-body.darkMode .controlList,
-html.darkRoot .controlList{
-color:#cbd5e1;
-}
-
-body.darkMode .controlEmpty,
-html.darkRoot .controlEmpty,
-body.darkMode .controlCount,
-html.darkRoot .controlCount{
-background:rgba(255,255,255,.06);
-color:#cbd5e1;
-}
-
-body.darkMode .controlGrayBtn,
-html.darkRoot .controlGrayBtn,
-body.darkMode .controlMiniBtn.gray,
-html.darkRoot .controlMiniBtn.gray{
 background:#263241;
 color:#f8fafc;
 }
@@ -9210,159 +8865,1049 @@ min-height:46px;
 
 
 
-/* === v1.4.33 — Temiz S/K Madde Özeti PDF düzeni === */
-.controlList li{line-height:1.55;margin-bottom:7px;}
-.controlIssueCode{display:inline-block;font-weight:950;color:#0f172a;margin-right:5px;}
-body.darkMode .controlIssueCode{color:#f8fafc;}
-.controlResultCard.yellowList .controlIssueCode{color:#a16207;}
-.controlResultCard.redList .controlIssueCode{color:#dc2626;}
+/* === v1.4.47 — Kontrol Merkezi kaldırıldı ===
+   Büyük Kontrol Merkezi kartı kaldırıldı; düzenleme işlemi Hızlı İşlemler'e alındı. */
+.profileEditActionCard{
+background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(239,246,255,.92))!important;
+border-color:rgba(191,219,254,.95)!important;
+}
+.profileEditActionCard .profileActionIcon{
+background:linear-gradient(145deg,#eaf2ff,#dbeafe)!important;
+color:#007aff!important;
+font-weight:950!important;
+}
+body.darkMode .profileEditActionCard,
+html.darkRoot .profileEditActionCard{
+background:linear-gradient(135deg,rgba(21,27,38,.92),rgba(15,23,42,.92))!important;
+border-color:rgba(96,165,250,.22)!important;
+}
 
 
 
-/* === v1.4.39 — Emoji-free premium line icon system === */
-.exIcon{
-position:relative!important;
-font-size:0!important;
-line-height:0!important;
+/* === v1.4.48 — Profil Son Cila + Alt Bar Geri Dönüş Fix ===
+   v1.4.47'de Kontrol Merkezi kaldırıldıktan sonra profil hızlı işlemleri sıkılaştırıldı.
+   v1.4.42'de beğenilen koyu aktif kapsül alt bar tekrar global stile sabitlendi.
+   Veri, PDF, bakım/ödeme/cari/yedekleme/kontrol raporu mantığına dokunulmadı. */
+
+/* Profil hızlı işlemler: daha kompakt, daha az ayarlar-menüsü hissi */
+#profilPanel .profileSectionTitle{
+  margin:18px 0 9px!important;
+  font-size:17px!important;
+  font-weight:950!important;
+  letter-spacing:-.35px!important;
+}
+
+#profilPanel .profileActionGrid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+
+#profilPanel .profileActionCard{
+  min-height:92px!important;
+  border-radius:22px!important;
+  padding:13px!important;
+  gap:10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,250,252,.88))!important;
+  border:1px solid rgba(226,232,240,.92)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+#profilPanel .profileEditActionCard{
+  grid-column:1/-1!important;
+  min-height:76px!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,246,255,.92))!important;
+  border-color:rgba(191,219,254,.92)!important;
+}
+
+#profilPanel .profileActionIcon{
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,#eff6ff,#dbeafe)!important;
+  color:#007aff!important;
+  font-size:0!important;
+  box-shadow:0 10px 22px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.76)!important;
+}
+
+#profilPanel .profileActionSvg{
+  width:21px!important;
+  height:21px!important;
+  display:block!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+#profilPanel .profileActionText b{
+  font-size:14px!important;
+  font-weight:950!important;
+  letter-spacing:-.25px!important;
+  line-height:1.12!important;
+}
+
+#profilPanel .profileActionText em{
+  margin-top:4px!important;
+  font-size:11.2px!important;
+  line-height:1.28!important;
+  font-weight:740!important;
+  color:#737f90!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+}
+
+#profilPanel .profileActionCard:not(.profileEditActionCard) .profileActionText em{
+  -webkit-line-clamp:1!important;
+}
+
+#profilPanel .appearanceCard{
+  margin-top:8px!important;
+  border-radius:22px!important;
+}
+
+body.darkMode #profilPanel .profileActionCard,
+html.darkRoot #profilPanel .profileActionCard{
+  background:linear-gradient(180deg,rgba(21,27,38,.92),rgba(15,23,42,.88))!important;
+  border-color:rgba(255,255,255,.075)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileActionIcon,
+html.darkRoot #profilPanel .profileActionIcon{
+  background:linear-gradient(145deg,#12223a,#0f172a)!important;
+  color:#60a5fa!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode #profilPanel .profileActionText em,
+html.darkRoot #profilPanel .profileActionText em{
+  color:#9aa5b5!important;
+}
+
+/* v1.4.42 beğenilen premium alt bar tekrar global olarak sabitlenir */
+.tabGap,
+.middleButton{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.tabbar,
+.tabbar *{
+  box-sizing:border-box!important;
+}
+
+.tabbar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  width:min(372px,calc(100vw - 34px))!important;
+  height:70px!important;
+  padding:7px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(239,242,247,.90))!important;
+  box-shadow:0 20px 44px rgba(15,23,42,.14),0 8px 18px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.98),inset 0 -1px 0 rgba(15,23,42,.04)!important;
+  backdrop-filter:blur(24px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+  overflow:hidden!important;
+  z-index:10020!important;
+}
+
+.tabbar button,
+.tabbar .tabItem,
+#quickAddBtn.quickAddBtn{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  border:0!important;
+  outline:none!important;
+  font:inherit!important;
+}
+
+.tabbar .tabItem,
+#quickAddBtn.quickAddBtn{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:56px!important;
+  padding:0 6px!important;
+  margin:0!important;
+  border-radius:999px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  background:transparent!important;
+  color:#5f6775!important;
+  text-align:center!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+.tabbar .tabItem.activeTab{
+  flex:1.28 1 0!important;
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#20242d 0%,#11141b 100%)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 10px 22px rgba(15,23,42,.22),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.22)!important;
+}
+
+.tabbar .tabItem.activeTab::before,
+.tabbar .tabItem.activeTab::after{
+  display:none!important;
+  content:none!important;
+}
+
+.tabbar .tabIcon,
+#quickAddBtn.quickAddBtn span{
+  width:23px!important;
+  height:23px!important;
+  min-width:23px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:currentColor!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
+}
+
+.tabbar .tabSvg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  stroke:currentColor!important;
+  fill:none!important;
+}
+
+.tabbar .tabText,
+#quickAddBtn.quickAddBtn b{
+  display:block!important;
+  margin:0!important;
+  font-size:10.9px!important;
+  font-weight:780!important;
+  letter-spacing:-.18px!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+  line-height:1!important;
+  transform:none!important;
+}
+
+#quickAddBtn.quickAddBtn{
+  display:none!important;
+  flex:.92 1 0!important;
+  color:#2f6ff0!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.10),rgba(47,111,240,.045))!important;
+  border:1px solid rgba(47,111,240,.14)!important;
+}
+
+#quickAddBtn.quickAddBtn.quickAddVisible{
+  display:flex!important;
+}
+
+#quickAddBtn.quickAddBtn span{
+  border-radius:50%!important;
+  background:linear-gradient(180deg,#62a0ff 0%,#2f6ff0 100%)!important;
+  color:#fff!important;
+  font-size:22px!important;
+  font-weight:850!important;
+  line-height:20px!important;
+  box-shadow:0 7px 14px rgba(47,111,240,.24), inset 0 1px 0 rgba(255,255,255,.36)!important;
+}
+
+#quickAddBtn.quickAddBtn b{
+  font-size:11px!important;
+  font-weight:850!important;
+}
+
+.tabbar .tabItem:active,
+#quickAddBtn.quickAddBtn:active{
+  transform:scale(.96)!important;
+  opacity:.92!important;
+}
+
+.container{
+  padding-bottom:calc(128px + env(safe-area-inset-bottom,0px))!important;
+}
+
+body::after{
+  height:calc(106px + env(safe-area-inset-bottom,0px))!important;
+  background:linear-gradient(180deg,rgba(246,247,251,0),#f6f7fb 48%,#f6f7fb 100%)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  background:linear-gradient(180deg,rgba(27,33,44,.92),rgba(14,19,29,.88))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 20px 44px rgba(0,0,0,.38),0 8px 18px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06),inset 0 -1px 0 rgba(0,0,0,.36)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+  color:#9aa5b5!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#2a3140 0%,#141a25 100%)!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+
+body.darkMode #quickAddBtn.quickAddBtn,
+html.darkRoot #quickAddBtn.quickAddBtn{
+  color:#84b6ff!important;
+  background:linear-gradient(180deg,rgba(59,130,246,.15),rgba(59,130,246,.06))!important;
+  border-color:rgba(96,165,250,.16)!important;
+}
+
+body.darkMode::after,
+html.darkRoot body::after{
+  background:linear-gradient(180deg,rgba(11,15,23,0),#0b0f17 48%,#0b0f17 100%)!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .profileActionGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+  }
+  #profilPanel .profileActionCard{
+    min-height:88px!important;
+    border-radius:20px!important;
+    padding:12px!important;
+  }
+  #profilPanel .profileEditActionCard{
+    min-height:74px!important;
+  }
+  #profilPanel .profileActionIcon{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+    border-radius:15px!important;
+  }
+  #profilPanel .profileActionText b{
+    font-size:13.2px!important;
+  }
+  #profilPanel .profileActionText em{
+    font-size:10.8px!important;
+  }
+  .tabbar{
+    width:min(360px,calc(100vw - 32px))!important;
+    height:68px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+    padding:6px!important;
+    gap:5px!important;
+  }
+  .tabbar .tabItem,
+  #quickAddBtn.quickAddBtn{
+    height:56px!important;
+    padding:0 4px!important;
+  }
+  .tabbar .tabIcon,
+  #quickAddBtn.quickAddBtn span{
+    width:22px!important;
+    height:22px!important;
+    min-width:22px!important;
+  }
+  .tabbar .tabText,
+  #quickAddBtn.quickAddBtn b{
+    font-size:10.3px!important;
+  }
+}
+
+
+
+/* === v1.4.49 — + Yeni tabbar entegrasyon fix ===
+   v1.4.48'de + Yeni butonu DOM olarak tabbar dışında kaldığı için bazı ekranlarda sol alta kaçıyordu.
+   Bu blok butonu tabbar içinde normal sekme gibi hizalar; eski floating davranışını iptal eder. */
+.tabbar{
+  width:min(372px,calc(100vw - 34px))!important;
+  height:70px!important;
+  padding:7px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  overflow:hidden!important;
+}
+
+.tabbar .tabItem,
+.tabbar #quickAddBtn.quickAddBtn{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:56px!important;
+  margin:0!important;
+  padding:0 5px!important;
+  border-radius:999px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn{
+  display:none!important;
+  border:1px solid rgba(47,111,240,.14)!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.10),rgba(47,111,240,.045))!important;
+  color:#2f6ff0!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn.quickAddVisible{
+  display:flex!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn span{
+  width:22px!important;
+  height:22px!important;
+  min-width:22px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:linear-gradient(180deg,#62a0ff 0%,#2f6ff0 100%)!important;
+  color:#fff!important;
+  font-size:21px!important;
+  line-height:18px!important;
+  font-weight:850!important;
+  box-shadow:0 6px 13px rgba(47,111,240,.23), inset 0 1px 0 rgba(255,255,255,.36)!important;
+}
+
+.tabbar #quickAddBtn.quickAddBtn b{
+  display:block!important;
+  margin:0!important;
+  font-size:10.4px!important;
+  font-weight:850!important;
+  letter-spacing:-.16px!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+}
+
+.tabbar .tabItem.activeTab{
+  flex:1.25 1 0!important;
+}
+
+body.darkMode .tabbar #quickAddBtn.quickAddBtn,
+html.darkRoot .tabbar #quickAddBtn.quickAddBtn{
+  color:#84b6ff!important;
+  background:linear-gradient(180deg,rgba(59,130,246,.15),rgba(59,130,246,.06))!important;
+  border-color:rgba(96,165,250,.16)!important;
+}
+
+@media(max-width:430px){
+  .tabbar{
+    width:min(360px,calc(100vw - 32px))!important;
+    height:68px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+    padding:6px!important;
+    gap:5px!important;
+  }
+  .tabbar .tabItem,
+  .tabbar #quickAddBtn.quickAddBtn{
+    height:56px!important;
+    padding:0 4px!important;
+  }
+  .tabbar #quickAddBtn.quickAddBtn span{
+    width:21px!important;
+    height:21px!important;
+    min-width:21px!important;
+    font-size:20px!important;
+  }
+  .tabbar #quickAddBtn.quickAddBtn b{
+    font-size:10px!important;
+  }
+}
+
+/* === v1.4.45 — Kontrol Raporu & Teklif Akışı Geri Getirme === */
+.detailReportCardWide{
+grid-column:1 / -1;
+min-height:92px;
+display:grid;
+grid-template-columns:42px 1fr;
+gap:12px;
+align-items:center;
+}
+
+.detailReportCardWide span{
+margin-bottom:0;
+width:42px;
+height:42px;
+border-radius:16px;
+}
+
+.detailReportCardFlow{
+background:linear-gradient(135deg,#eef6ff,#ffffff);
+border-color:rgba(0,122,255,.18);
+}
+
+.detailReportCardFlow b{
+font-size:15.5px;
+}
+
+body.darkMode .detailReportCardFlow,
+html.darkRoot .detailReportCardFlow{
+background:linear-gradient(135deg,#12223a,#151b26);
+border-color:rgba(96,165,250,.18);
+}
+
+
+/* === v1.4.30 — Hazır Revizyon Teklifi Şablonu === */
+.revisionOfferHero{
+background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+border:1px solid rgba(229,231,235,.92);
+border-radius:30px;
+padding:18px;
+box-shadow:0 18px 44px rgba(15,23,42,.07);
+}
+
+.revisionOfferTop{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:14px;
+}
+
+.revisionOfferKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.16em;
+text-transform:uppercase;
 color:#007aff;
-overflow:hidden;
+margin-bottom:5px;
 }
-.exIcon:before,
-.exIcon:after{
-content:"";
-position:absolute;
-box-sizing:border-box;
+
+.revisionOfferTitle{
+font-size:27px;
+font-weight:950;
+letter-spacing:-.65px;
+line-height:1.05;
+color:#0f172a;
 }
-.detailReportCard .exIcon,
-.profileActionIcon.exIcon,
-.detailActionIcon.exIcon,
-.appearanceIcon.exIcon,
-.coverEdit .exIcon{
-font-size:0!important;
+
+.revisionOfferSub{
+font-size:13px;
+font-weight:750;
+color:#64748b;
+line-height:1.4;
+margin-top:7px;
 }
-.detailReportCard .exIcon:before,
-.detailReportCard .exIcon:after,
-.profileActionIcon.exIcon:before,
-.profileActionIcon.exIcon:after,
-.detailActionIcon.exIcon:before,
-.detailActionIcon.exIcon:after,
-.appearanceIcon.exIcon:before,
-.appearanceIcon.exIcon:after,
-.coverEdit .exIcon:before,
-.coverEdit .exIcon:after{
-content:"";
-position:absolute;
-box-sizing:border-box;
+
+.revisionOfferBadge{
+flex:0 0 auto;
+padding:8px 10px;
+border-radius:999px;
+background:#eff6ff;
+color:#007aff;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
 }
-.exDoc:before{
-width:15px;height:20px;border:2px solid currentColor;border-radius:4px;left:50%;top:50%;transform:translate(-50%,-50%);
-background:linear-gradient(135deg,transparent 0 73%,rgba(0,122,255,.13) 73% 100%);
+
+.revisionTemplatePreview{
+background:linear-gradient(145deg,#0f172a,#1e293b);
+color:white;
+border-radius:24px;
+padding:16px;
+margin:10px 0 14px;
+box-shadow:0 14px 34px rgba(15,23,42,.16);
 }
-.exDoc:after{
-width:8px;height:2px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-1px);box-shadow:0 5px 0 currentColor;
+
+.revisionTemplatePreview b{
+display:block;
+font-size:18px;
+font-weight:950;
+letter-spacing:-.25px;
+margin-bottom:7px;
 }
-.exMoney:before{
-width:22px;height:14px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-50%);
+
+.revisionTemplatePreview p{
+margin:0;
+font-size:13px;
+line-height:1.48;
+color:#cbd5e1;
 }
-.exMoney:after{
-content:"₺"!important;position:absolute;font-size:14px;line-height:1;font-weight:950;color:currentColor;left:50%;top:50%;transform:translate(-50%,-54%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
+
+.revisionFormGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
 }
-.exChart:before{
-width:22px;height:20px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;left:8px;top:7px;border-radius:0 0 0 3px;
+
+.revisionFieldLabel{
+display:block;
+font-size:11px;
+font-weight:950;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:#64748b;
+margin:2px 2px 6px;
 }
-.exChart:after{
-width:4px;height:8px;background:currentColor;border-radius:2px;left:14px;bottom:9px;box-shadow:7px -5px 0 currentColor,14px -10px 0 currentColor;
+
+.revisionOfferHero input,
+.revisionOfferHero textarea{
+margin-bottom:0;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.96);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+font-weight:750;
 }
-.exCard:before{
-width:23px;height:16px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-50%);
+
+.revisionOfferHero textarea{
+min-height:118px;
+line-height:1.45;
 }
-.exCard:after{
-width:5px;height:5px;border-radius:50%;background:currentColor;left:10px;top:12px;box-shadow:9px -1px 0 -1px currentColor,9px 4px 0 -1px currentColor;
+
+.revisionHint{
+margin-top:12px;
+border-radius:20px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.9);
+padding:13px 14px;
+font-size:12.5px;
+font-weight:750;
+line-height:1.45;
+color:#64748b;
 }
-.exPart:before{
-width:19px;height:5px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-38deg);
+
+.revisionButtons{
+display:grid;
+grid-template-columns:1fr;
+gap:9px;
+margin-top:14px;
 }
-.exPart:after{
-width:9px;height:9px;border:2px solid currentColor;border-radius:50%;right:7px;top:7px;background:transparent;
+
+.revisionPdfBtn{
+background:#007aff;
+color:white;
+border-radius:19px;
+font-size:15px;
+font-weight:950;
+padding:14px;
+box-shadow:0 14px 28px rgba(0,122,255,.18);
 }
-.exReport:before{
-width:19px;height:22px;border:2px solid currentColor;border-radius:5px;left:50%;top:50%;transform:translate(-50%,-48%);
+
+.revisionBackBtn{
+background:#e5e5ea;
+color:#111827;
+border-radius:19px;
+font-size:14px;
+font-weight:950;
+padding:13px;
 }
-.exReport:after{
-width:9px;height:2px;background:currentColor;border-radius:999px;left:50%;top:46%;transform:translateX(-50%);box-shadow:0 5px 0 currentColor,0 10px 0 currentColor;
+
+body.darkMode .revisionOfferHero,
+html.darkRoot .revisionOfferHero{
+background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94));
+border-color:rgba(255,255,255,.08);
+box-shadow:0 18px 44px rgba(0,0,0,.22);
 }
-.exLibrary:before{
-width:20px;height:20px;border:2px solid currentColor;border-radius:6px;left:50%;top:50%;transform:translate(-50%,-50%);
+
+body.darkMode .revisionOfferTitle,
+html.darkRoot .revisionOfferTitle{
+color:#f8fafc;
 }
-.exLibrary:after{
-width:2px;height:14px;background:currentColor;border-radius:999px;left:14px;top:10px;box-shadow:6px 0 0 currentColor,12px 0 0 currentColor;
+
+body.darkMode .revisionOfferSub,
+html.darkRoot .revisionOfferSub,
+body.darkMode .revisionFieldLabel,
+html.darkRoot .revisionFieldLabel,
+body.darkMode .revisionHint,
+html.darkRoot .revisionHint{
+color:#94a3b8;
 }
-.exCloud:before{
-width:23px;height:13px;background:currentColor;border-radius:999px;left:50%;top:56%;transform:translate(-50%,-50%);
+
+body.darkMode .revisionTemplatePreview,
+html.darkRoot .revisionTemplatePreview{
+background:linear-gradient(145deg,#020817,#0f172a);
+box-shadow:0 16px 36px rgba(0,0,0,.34);
 }
-.exCloud:after{
-width:12px;height:12px;background:currentColor;border-radius:50%;left:10px;top:9px;box-shadow:9px -3px 0 2px currentColor;
+
+body.darkMode .revisionOfferHero input,
+html.darkRoot .revisionOfferHero input,
+body.darkMode .revisionOfferHero textarea,
+html.darkRoot .revisionOfferHero textarea,
+body.darkMode .revisionHint,
+html.darkRoot .revisionHint{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+color:#f8fafc;
 }
-.exRestore:before{
-width:20px;height:20px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-28deg);
+
+body.darkMode .revisionBackBtn,
+html.darkRoot .revisionBackBtn{
+background:#263241;
+color:#f8fafc;
 }
-.exRestore:after{
-width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;left:8px;top:12px;transform:rotate(35deg);
+
+
+/* === v1.4.33 — Kontrol Raporu S/K Ayıklama Fix === */
+.controlReportHero{
+background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+border:1px solid rgba(229,231,235,.92);
+border-radius:30px;
+padding:18px;
+box-shadow:0 18px 44px rgba(15,23,42,.07);
 }
-.exRefresh:before{
-width:21px;height:21px;border:2px solid currentColor;border-left-color:transparent;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) rotate(24deg);
+
+.controlReportTop{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:14px;
+margin-bottom:14px;
 }
-.exRefresh:after{
-width:8px;height:8px;border-top:2px solid currentColor;border-right:2px solid currentColor;right:8px;top:9px;transform:rotate(35deg);
+
+.controlReportKicker{
+font-size:11px;
+font-weight:950;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:5px;
 }
-.exCamera:before{
-width:24px;height:17px;border:2px solid currentColor;border-radius:6px;left:50%;top:54%;transform:translate(-50%,-50%);
+
+.controlReportTitle{
+font-size:27px;
+font-weight:950;
+letter-spacing:-.65px;
+line-height:1.05;
+color:#0f172a;
 }
-.exCamera:after{
-width:8px;height:8px;border:2px solid currentColor;border-radius:50%;left:50%;top:54%;transform:translate(-50%,-50%);box-shadow:-8px -8px 0 -3px currentColor;
+
+.controlReportSub{
+font-size:13px;
+font-weight:750;
+color:#64748b;
+line-height:1.4;
+margin-top:7px;
 }
-.exMoon:before{
-width:20px;height:20px;border-radius:50%;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%);
+
+.controlReportBadge{
+flex:0 0 auto;
+padding:8px 10px;
+border-radius:999px;
+background:#eff6ff;
+color:#007aff;
+font-size:11px;
+font-weight:950;
+white-space:nowrap;
 }
-.exMoon:after{
-width:18px;height:18px;border-radius:50%;background:#eef4ff;left:50%;top:43%;transform:translate(-20%,-50%);
+
+.controlReportPreview{
+background:linear-gradient(145deg,#0f172a,#1e293b);
+color:white;
+border-radius:24px;
+padding:16px;
+margin:10px 0 14px;
+box-shadow:0 14px 34px rgba(15,23,42,.16);
 }
-.exSun:before{
-width:16px;height:16px;border:2px solid currentColor;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);
+
+.controlReportPreview b{
+display:block;
+font-size:18px;
+font-weight:950;
+letter-spacing:-.25px;
+margin-bottom:7px;
 }
-.exSun:after{
-width:3px;height:3px;background:currentColor;border-radius:50%;left:50%;top:4px;transform:translateX(-50%);box-shadow:0 31px 0 currentColor,15px 15px 0 currentColor,-15px 15px 0 currentColor,10px 5px 0 currentColor,-10px 5px 0 currentColor,10px 26px 0 currentColor,-10px 26px 0 currentColor;
+
+.controlReportPreview p{
+margin:0;
+font-size:13px;
+line-height:1.48;
+color:#cbd5e1;
 }
-.exCheck:before{
-width:18px;height:18px;border:2px solid currentColor;border-radius:6px;left:50%;top:50%;transform:translate(-50%,-50%);
+
+.controlUploadBox{
+border:1.5px dashed rgba(0,122,255,.28);
+background:#f8fbff;
+border-radius:22px;
+padding:14px;
+margin:0 0 12px;
 }
-.exCheck:after{
-width:11px;height:6px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;left:50%;top:50%;transform:translate(-42%,-58%) rotate(-45deg);
+
+.controlUploadBox input[type="file"]{
+background:white;
+margin-bottom:8px;
+font-weight:850;
 }
-.exEdit:before{
-width:18px;height:5px;background:currentColor;border-radius:999px;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-38deg);
+
+.controlUploadBox small{
+display:block;
+font-size:12px;
+font-weight:750;
+color:#64748b;
+line-height:1.45;
 }
-.exEdit:after{
-width:7px;height:7px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;right:7px;bottom:8px;transform:rotate(-38deg);
+
+.controlReportHero textarea{
+min-height:180px;
+line-height:1.45;
+margin-bottom:0;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid rgba(226,232,240,.96);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+font-weight:750;
 }
-.detailReportCard:nth-child(1) .exIcon{color:#007aff;}
-.detailReportCard:nth-child(2) .exIcon{color:#8b5cf6;}
-.detailReportCard:nth-child(3) .exIcon{color:#22c55e;}
-.detailReportCard:nth-child(4) .exIcon{color:#f59e0b;}
-.detailReportCard:nth-child(5) .exIcon{color:#64748b;}
-.detailReportCardFlow .exIcon{color:#007aff;}
-.profileActionIcon.exCloud{color:#0ea5e9;}
-.profileActionIcon.exRestore{color:#64748b;}
-.profileActionIcon.exRefresh{color:#22c55e;}
-.coverEdit .exIcon{width:28px;height:28px;background:transparent!important;box-shadow:none!important;margin:0!important;}
-body.darkMode .exMoon:after,
-html.darkRoot .exMoon:after{background:#151b26;}
-body.darkMode .appearanceIcon.exMoon:after,
-html.darkRoot .appearanceIcon.exMoon:after{background:#12223a;}
-body.darkMode .detailReportCard .exIcon,
-html.darkRoot .detailReportCard .exIcon,
-body.darkMode .profileActionIcon.exIcon,
-html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
+
+.controlReportActions{
+display:grid;
+grid-template-columns:1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.controlBlueBtn,
+.controlPdfBtn{
+background:#007aff;
+color:white;
+border-radius:19px;
+font-size:15px;
+font-weight:950;
+padding:14px;
+box-shadow:0 14px 28px rgba(0,122,255,.18);
+}
+
+.controlGrayBtn{
+background:#e5e5ea;
+color:#111827;
+border-radius:19px;
+font-size:14px;
+font-weight:950;
+padding:13px;
+}
+
+.controlResultBox{
+margin-top:14px;
+}
+
+.controlResultGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+}
+
+.controlResultCard{
+border-radius:22px;
+padding:14px;
+border:1px solid rgba(226,232,240,.92);
+background:#f8fafc;
+}
+
+.controlResultCard.redList{
+background:linear-gradient(135deg,rgba(255,245,245,.98),rgba(255,255,255,.96));
+border-color:rgba(255,59,48,.22);
+}
+
+.controlResultCard.yellowList{
+background:linear-gradient(135deg,rgba(255,251,235,.98),rgba(255,255,255,.96));
+border-color:rgba(245,158,11,.22);
+}
+
+.controlResultHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px;
+}
+
+.controlResultHead b{
+font-size:16px;
+font-weight:950;
+letter-spacing:-.25px;
+}
+
+.controlCount{
+padding:6px 9px;
+border-radius:999px;
+font-size:11px;
+font-weight:950;
+background:white;
+color:#0f172a;
+box-shadow:0 6px 14px rgba(15,23,42,.045);
+}
+
+.controlList{
+margin:0;
+padding-left:20px;
+font-size:13px;
+font-weight:750;
+line-height:1.55;
+color:#334155;
+}
+
+.controlList li{
+margin-bottom:7px;
+}
+
+.controlEmpty{
+font-size:12.5px;
+font-weight:750;
+line-height:1.5;
+color:#64748b;
+background:rgba(255,255,255,.68);
+border-radius:16px;
+padding:12px;
+}
+
+.controlResultActions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.controlMiniBtn{
+margin:0;
+padding:12px 10px;
+border-radius:16px;
+font-size:12.5px;
+font-weight:950;
+}
+
+.controlMiniBtn.blue{
+background:#007aff;
+color:white;
+}
+
+.controlMiniBtn.gray{
+background:#e5e5ea;
+color:#111827;
+}
+
+body.darkMode .controlReportHero,
+html.darkRoot .controlReportHero{
+background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(11,15,23,.94));
+border-color:rgba(255,255,255,.08);
+box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+
+body.darkMode .controlReportTitle,
+html.darkRoot .controlReportTitle{
+color:#f8fafc;
+}
+
+body.darkMode .controlReportSub,
+html.darkRoot .controlReportSub,
+body.darkMode .controlUploadBox small,
+html.darkRoot .controlUploadBox small{
+color:#94a3b8;
+}
+
+body.darkMode .controlReportPreview,
+html.darkRoot .controlReportPreview{
+background:linear-gradient(145deg,#020817,#0f172a);
+box-shadow:0 16px 36px rgba(0,0,0,.34);
+}
+
+body.darkMode .controlUploadBox,
+html.darkRoot .controlUploadBox,
+body.darkMode .controlResultCard,
+html.darkRoot .controlResultCard{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+}
+
+body.darkMode .controlReportHero textarea,
+html.darkRoot .controlReportHero textarea,
+body.darkMode .controlUploadBox input[type="file"],
+html.darkRoot .controlUploadBox input[type="file"]{
+background:rgba(15,23,42,.86);
+border-color:rgba(255,255,255,.08);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+color:#f8fafc;
+}
+
+body.darkMode .controlResultCard.redList,
+html.darkRoot .controlResultCard.redList{
+background:linear-gradient(135deg,rgba(49,18,18,.96),rgba(21,27,38,.94));
+border-color:rgba(248,113,113,.24);
+}
+
+body.darkMode .controlResultCard.yellowList,
+html.darkRoot .controlResultCard.yellowList{
+background:linear-gradient(135deg,rgba(43,30,15,.96),rgba(21,27,38,.94));
+border-color:rgba(251,191,36,.24);
+}
+
+body.darkMode .controlList,
+html.darkRoot .controlList{
+color:#cbd5e1;
+}
+
+body.darkMode .controlEmpty,
+html.darkRoot .controlEmpty,
+body.darkMode .controlCount,
+html.darkRoot .controlCount{
+background:rgba(255,255,255,.06);
+color:#cbd5e1;
+}
+
+body.darkMode .controlGrayBtn,
+html.darkRoot .controlGrayBtn,
+body.darkMode .controlMiniBtn.gray,
+html.darkRoot .controlMiniBtn.gray{
+background:#263241;
+color:#f8fafc;
+}
+
+/* === v1.4.50 — Stabilizasyon: kontrol raporu akışı kilidi === */
+
 </style>
 
 <script>
@@ -9512,10 +10057,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1435" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1448" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.39</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.50</div>
 </div>
 </div>
 
@@ -9715,7 +10260,7 @@ height:1px;
 
 <div id="coverPhoto" class="coverPhoto"></div>
 
-<label for="coverInput" class="coverEdit"><span class="exIcon exCamera" aria-hidden="true"></span></label>
+<label for="coverInput" class="coverEdit">📷</label>
 
 </div>
 
@@ -9758,19 +10303,6 @@ onclick="rehberdenTelefonSec(event,'profilTelefon','profilAd')">
 id="profilBio"
 class="profileBio"
 placeholder="Bilgi yaz..."></textarea>
-
-
-<div class="profileControlHero">
-  <div>
-    <div class="profileControlKicker">Kontrol Merkezi</div>
-    <div class="profileControlTitle">Profil, rapor ve yedekleme işlemleri</div>
-    <div class="profileControlText">
-      Bu bilgiler raporlara, makbuzlara, sicil kartlarına ve yedek dosyalarına otomatik işlenir.
-    </div>
-  </div>
-  <button class="profileEditBtn" onclick="profilKurulumuAc()">Düzenle</button>
-</div>
-
 <div class="profileStats profileStatsFour">
 
 <div class="profileStatCard">
@@ -9799,8 +10331,16 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="profileActionGrid">
 
+<button class="profileActionCard profileEditActionCard" onclick="profilKurulumuAc()">
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><path d="M5 17.5V19h1.5L17.2 8.3l-1.5-1.5L5 17.5Z"/><path d="M14.6 5.4l1.1-1.1a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2l-1.1 1.1"/><path d="M4.8 20.2h14.4"/></svg></span>
+  <span class="profileActionText">
+    <b>Profil Bilgilerini Düzenle</b>
+    <em>Rapor, makbuz ve sicil kartında kullanılan bilgileri yönet.</em>
+  </span>
+</button>
+
 <button class="profileActionCard techLibraryProfileCard" onclick="teknikKutuphaneAc()">
-  <span class="profileActionIcon exIcon exLibrary" aria-hidden="true"></span>
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
   <span class="profileActionText">
     <b>Teknik Kütüphane</b>
     <em>Kumanda kartı, sürücü ve arıza kodu saha notları.</em>
@@ -9808,7 +10348,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="aySonuRaporu()">
-  <span class="profileActionIcon exIcon exDoc" aria-hidden="true"></span>
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="3"/><path d="M9 14.5v2.5M12 11.5v5.5M15 8.5v8.5"/></svg></span>
   <span class="profileActionText">
     <b>Ay Sonu Raporu</b>
     <em>Bakım, tahsilat ve geciken işlemleri özetle.</em>
@@ -9816,7 +10356,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="yedekle()">
-  <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><path d="M7.2 18.5H17a4 4 0 0 0 .7-7.9A6 6 0 0 0 6.4 8.8A4.8 4.8 0 0 0 7.2 18.5Z"/><path d="M12 16V10M9.8 12.2 12 10l2.2 2.2"/></svg></span>
   <span class="profileActionText">
     <b>Verileri Yedekle</b>
     <em>Apartman kayıtlarının dosya yedeğini al.</em>
@@ -9824,7 +10364,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="document.getElementById('yedekInput').click()">
-  <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><path d="M6 8.5a7 7 0 1 1 .5 8.6"/><path d="M6 5v3.5h3.5"/><path d="M12 8.5v4l2.8 1.7"/></svg></span>
   <span class="profileActionText">
     <b>Yedekten Geri Yükle</b>
     <em>Daha önce alınan JSON yedeğini içeri aktar.</em>
@@ -9832,7 +10372,7 @@ placeholder="Bilgi yaz..."></textarea>
 </button>
 
 <button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
-  <span class="profileActionIcon exIcon exRefresh" aria-hidden="true"></span>
+  <span class="profileActionIcon"><svg viewBox="0 0 24 24" class="profileActionSvg" aria-hidden="true"><path d="M18.5 9A6.5 6.5 0 0 0 7 6.7L5.5 8.2"/><path d="M5.5 4.8v3.4h3.4"/><path d="M5.5 15A6.5 6.5 0 0 0 17 17.3l1.5-1.5"/><path d="M18.5 19.2v-3.4h-3.4"/></svg></span>
   <span class="profileActionText">
     <b>Güvenli Yenile</b>
     <em>Cihaz içi yedek alır, dosya açmadan güncel sürümü yükler.</em>
@@ -9846,7 +10386,7 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="appearanceCard">
   <div class="appearanceInfo">
-    <span class="appearanceIcon exIcon exMoon" id="profileThemeIcon" aria-hidden="true"></span>
+    <span class="appearanceIcon" id="profileThemeIcon">🌙</span>
     <span class="appearanceText">
       <b>Gece Modu</b>
       <em>Uygulama temasını buradan değiştir.</em>
@@ -9962,11 +10502,6 @@ Destek: supportelevatorx@gmail.com
 
 </div>
 
-<button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
-  <span>+</span>
-  <b>Yeni</b>
-</button>
-
 <div class="tabbar">
 
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
@@ -9987,6 +10522,11 @@ Destek: supportelevatorx@gmail.com
 </svg>
 </span>
 <span class="tabText">Apartmanlar</span>
+</button>
+
+<button id="quickAddBtn" type="button" class="quickAddBtn" onclick="formAc()" aria-label="Yeni apartman ekle">
+  <span>+</span>
+  <b>Yeni</b>
 </button>
 
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
@@ -10055,9 +10595,10 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.57";
+const APP_VERSION = "v1.4.58";
+// v1.4.50: Stabilizasyon — PDF açıklayıcı/ayıklayıcı + alt bar + profil düzeni birlikte kilitlendi.
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1435", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -10079,22 +10620,6 @@ try{
 if(window.history && window.history.replaceState){
 window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
 }
-window.elevatorXReportBack = function(){
-try{ window.close(); }catch(e){}
-setTimeout(function(){
-try{
-if(!window.closed){
-var btn = document.querySelector(".backBtn,.screenBtn");
-if(btn){
-btn.textContent = "Kapatmak için sağ üstteki X'i kullan";
-btn.disabled = true;
-btn.style.opacity = "0.75";
-}
-}
-}catch(e){}
-},120);
-return false;
-};
 window.addEventListener("pageshow", function(){
 try{
 if(String(window.location.href).indexOf("blob:") === 0){
@@ -10504,20 +11029,18 @@ let headerIcon =
 document.getElementById("headerThemeIcon");
 
 if(headerIcon){
-headerIcon.innerText = "";
-headerIcon.classList.add("exIcon");
-headerIcon.classList.toggle("exSun", dark);
-headerIcon.classList.toggle("exMoon", !dark);
+
+headerIcon.innerText =
+dark ? "☀️" : "🌙";
+
 }
 
 let profileIcon =
 document.getElementById("profileThemeIcon");
 
 if(profileIcon){
-profileIcon.innerText = "";
-profileIcon.classList.add("exIcon");
-profileIcon.classList.toggle("exSun", dark);
-profileIcon.classList.toggle("exMoon", !dark);
+profileIcon.innerText =
+dark ? "☀️" : "🌙";
 }
 
 let profileText =
@@ -11543,7 +12066,7 @@ if(!son){
 
 return `
 <div class="lastActionCard">
-<div class="lastActionIcon exAptCheck" aria-hidden="true"></div>
+<div class="lastActionIcon">✓</div>
 <div class="lastActionText">
 <div class="lastActionLabel">Son İşlem</div>
 <div class="lastActionValue">Henüz işlem kaydı yok</div>
@@ -11556,7 +12079,7 @@ return `
 
 return `
 <div class="lastActionCard">
-<div class="lastActionIcon exAptCheck" aria-hidden="true"></div>
+<div class="lastActionIcon">✓</div>
 <div class="lastActionText">
 <div class="lastActionLabel">Son İşlem</div>
 <div class="lastActionValue">${son.ad} • ${son.islem.replace(/\s*\(.*?\)/,"")}</div>
@@ -13140,7 +13663,7 @@ td{font-size:8.5px!important;padding:6px!important}
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -13236,230 +13759,6 @@ ${sonParcalar}
 </div>
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
-
-
-<style id="elevatorx-v1457-profile-identity-card">
-/* === v1.4.57 — Profil Üst Kart Dönüşümü ===
-   Güvenli paket: sadece Profil ekranı üst alanı sadeleştirildi.
-   Kapak + avatar + kontrol merkezi birleşimi kaldırılıp tek firma kimliği kartına geçildi. */
-#profilPanel{
-  padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))!important;
-}
-#profilPanel .coverArea,
-#profilPanel .profileWrap,
-#profilPanel .profileNameInput,
-#profilPanel .profileJobInput,
-#profilPanel .profileBio,
-#profilPanel .profileControlHero{
-  display:none!important;
-}
-#profilPanel .profileContent{
-  padding:12px 18px 18px!important;
-  text-align:left!important;
-}
-#profilPanel .profileStats{
-  margin-top:16px!important;
-}
-#profilPanel .profileSectionTitle{
-  margin-top:18px!important;
-}
-#profileIdentityCard{
-  position:relative;
-  overflow:hidden;
-  margin:4px 0 0!important;
-  padding:18px!important;
-  border-radius:30px!important;
-  border:1px solid rgba(226,232,240,.92)!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.92))!important;
-  box-shadow:0 18px 38px rgba(15,23,42,.06), inset 0 1px 0 rgba(255,255,255,.9)!important;
-}
-#profileIdentityCard::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:radial-gradient(circle at 100% 0%, rgba(47,111,240,.11), transparent 34%), linear-gradient(135deg, rgba(255,255,255,.4), transparent 36%);
-}
-.profileIdentityTop,
-.profileIdentityMeta{position:relative;z-index:1;}
-.profileIdentityTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:16px;
-}
-.profileIdentityBrandWrap{display:flex; align-items:center; gap:14px; min-width:0;}
-.profileIdentityLogoBtn{
-  width:68px; height:68px; min-width:68px;
-  padding:0; border:none; cursor:pointer;
-  border-radius:22px; overflow:hidden;
-  background:linear-gradient(180deg,#ffffff,#edf3ff);
-  box-shadow:0 12px 28px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.92);
-}
-.profileIdentityLogoBtn img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-.profileIdentityWordmark{min-width:0;}
-.profileIdentityFirma{
-  font-size:13px; font-weight:900; letter-spacing:1.8px; text-transform:uppercase; color:#3b82f6; margin:0 0 3px;
-}
-.profileIdentityName{
-  font-size:30px; line-height:1.04; font-weight:900; letter-spacing:-.8px; color:#0f172a; margin:0;
-}
-.profileIdentityEditBtn{
-  border:none; cursor:pointer; white-space:nowrap;
-  padding:12px 18px; border-radius:18px;
-  background:linear-gradient(180deg,#0f172a,#0b1220); color:#fff; font-weight:800; font-size:15px;
-  box-shadow:0 12px 26px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.08);
-}
-.profileIdentityPhone{
-  display:inline-flex; align-items:center; gap:8px;
-  margin:0 0 14px; padding:9px 12px;
-  border-radius:14px; background:rgba(59,130,246,.09); color:#355ea8; font-weight:800; font-size:16px;
-}
-.profileIdentityInfo{
-  border-radius:22px; padding:16px 16px 15px;
-  background:rgba(255,255,255,.8); border:1px solid rgba(226,232,240,.9);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.86);
-}
-.profileIdentityServices{
-  font-size:16px; line-height:1.45; font-weight:800; color:#111827; margin:0;
-}
-.profileIdentityLocation{
-  margin-top:5px; font-size:15px; line-height:1.45; font-weight:700; color:#667085;
-}
-#profilPanel .profileFooterSmall,
-#profilPanel .legalLinks,
-#profilPanel .referenceTitle,
-#profilPanel .referenceGrid{display:none!important;}
-#profilPanel .profileFooter{padding-top:12px!important; padding-bottom:118px!important;}
-body.darkMode #profileIdentityCard,
-html.darkRoot #profileIdentityCard{
-  background:linear-gradient(180deg,rgba(15,23,42,.92),rgba(17,24,39,.9))!important;
-  border-color:rgba(148,163,184,.18)!important;
-  box-shadow:0 18px 42px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.04)!important;
-}
-body.darkMode #profileIdentityCard::after,
-html.darkRoot #profileIdentityCard::after{
-  background:radial-gradient(circle at 100% 0%, rgba(59,130,246,.18), transparent 36%), linear-gradient(135deg, rgba(255,255,255,.04), transparent 40%);
-}
-body.darkMode .profileIdentityFirma,
-html.darkRoot .profileIdentityFirma{color:#60a5fa;}
-body.darkMode .profileIdentityName,
-html.darkRoot .profileIdentityName{color:#f8fafc;}
-body.darkMode .profileIdentityPhone,
-html.darkRoot .profileIdentityPhone{background:rgba(59,130,246,.14); color:#bfdbfe;}
-body.darkMode .profileIdentityInfo,
-html.darkRoot .profileIdentityInfo{background:rgba(15,23,42,.55); border-color:rgba(148,163,184,.16); box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
-body.darkMode .profileIdentityServices,
-html.darkRoot .profileIdentityServices{color:#f8fafc;}
-body.darkMode .profileIdentityLocation,
-html.darkRoot .profileIdentityLocation{color:#94a3b8;}
-body.darkMode .profileIdentityLogoBtn,
-html.darkRoot .profileIdentityLogoBtn{background:linear-gradient(180deg,#111827,#0f172a); box-shadow:0 12px 28px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.05);}
-@media(max-width:430px){
-  #profileIdentityCard{padding:16px!important; border-radius:26px!important;}
-  .profileIdentityTop{align-items:flex-start; gap:10px;}
-  .profileIdentityBrandWrap{gap:12px;}
-  .profileIdentityLogoBtn{width:60px;height:60px;min-width:60px;border-radius:18px;}
-  .profileIdentityName{font-size:25px;}
-  .profileIdentityEditBtn{padding:11px 15px; font-size:14px; border-radius:16px;}
-  .profileIdentityPhone{font-size:15px;}
-  .profileIdentityServices{font-size:15px;}
-  .profileIdentityLocation{font-size:14px;}
-}
-</style>
-<script id="elevatorx-v1457-profile-identity-script">
-(function(){
-  function ensureCard(){
-    var content = document.querySelector('#profilPanel .profileContent');
-    if(!content) return null;
-    var card = document.getElementById('profileIdentityCard');
-    if(card) return card;
-    card = document.createElement('div');
-    card.id = 'profileIdentityCard';
-    card.innerHTML = ''+
-      '<div class="profileIdentityTop">'+
-        '<div class="profileIdentityBrandWrap">'+
-          '<button class="profileIdentityLogoBtn" type="button" onclick="document.getElementById(\'profileInput\').click()">'+
-            '<img id="profileIdentityLogo" alt="Profil logosu">'+
-          '</button>'+
-          '<div class="profileIdentityWordmark">'+
-            '<div class="profileIdentityFirma" id="profileIdentityFirmaDisplay">AY ASANSÖR</div>'+
-            '<div class="profileIdentityName" id="profileIdentityNameDisplay">Uğur AY</div>'+
-          '</div>'+
-        '</div>'+
-        '<button class="profileIdentityEditBtn" type="button" onclick="profilKurulumuAc()">Düzenle</button>'+
-      '</div>'+
-      '<div class="profileIdentityMeta">'+
-        '<div class="profileIdentityPhone" id="profileIdentityPhoneDisplay">+90 541 265 43 08</div>'+
-        '<div class="profileIdentityInfo">'+
-          '<div class="profileIdentityServices" id="profileIdentityServicesDisplay">Asansör bakım • montaj • servis</div>'+
-          '<div class="profileIdentityLocation" id="profileIdentityLocationDisplay">Kütahya / Tavşanlı</div>'+
-        '</div>'+
-      '</div>';
-    content.insertBefore(card, content.firstChild);
-    return card;
-  }
-  function safeVal(id, fallback){
-    var el = document.getElementById(id);
-    if(el && typeof el.value === 'string' && el.value.trim()) return el.value.trim();
-    var val = localStorage.getItem(id);
-    return (val && val.trim()) ? val.trim() : fallback;
-  }
-  function splitBio(bio){
-    var clean = (bio || '').replace(/\r/g,'').trim();
-    if(!clean) return ['Asansör bakım • montaj • servis','Kütahya / Tavşanlı'];
-    var lines = clean.split('\n').map(function(x){return x.trim();}).filter(Boolean);
-    if(lines.length >= 2) return [lines[0], lines.slice(1).join(' • ')];
-    if(clean.indexOf(' / ') > -1){
-      var idx = clean.lastIndexOf(' / ');
-      var left = clean.slice(0, idx).trim();
-      var right = clean.slice(idx-8 > 0 ? clean.lastIndexOf(' ', idx-1)+1 : 0).trim();
-    }
-    return [clean, ''];
-  }
-  function updateCard(){
-    ensureCard();
-    var firma = safeVal('profilFirma','AY ASANSÖR');
-    var ad = safeVal('profilAd','Uğur AY');
-    var tel = safeVal('profilTelefon','+90 541 265 43 08');
-    var bio = safeVal('profilBio','Asansör bakım • montaj • servis\nKütahya / Tavşanlı');
-    var parts = splitBio(bio);
-    var firmaEl = document.getElementById('profileIdentityFirmaDisplay');
-    var adEl = document.getElementById('profileIdentityNameDisplay');
-    var telEl = document.getElementById('profileIdentityPhoneDisplay');
-    var servicesEl = document.getElementById('profileIdentityServicesDisplay');
-    var locationEl = document.getElementById('profileIdentityLocationDisplay');
-    var logoEl = document.getElementById('profileIdentityLogo');
-    var profileImg = document.getElementById('profilePhoto');
-    if(firmaEl) firmaEl.textContent = firma || 'AY ASANSÖR';
-    if(adEl) adEl.textContent = ad || 'Uğur AY';
-    if(telEl) telEl.textContent = tel || '+90 541 265 43 08';
-    if(servicesEl) servicesEl.textContent = parts[0] || 'Asansör bakım • montaj • servis';
-    if(locationEl){
-      var loc = parts[1] || 'Kütahya / Tavşanlı';
-      locationEl.textContent = loc;
-      locationEl.style.display = loc ? 'block' : 'none';
-    }
-    if(logoEl && profileImg && profileImg.src) logoEl.src = profileImg.src;
-  }
-  window.updateProfileIdentityCard = updateCard;
-  document.addEventListener('DOMContentLoaded', function(){ ensureCard(); setTimeout(updateCard, 250); setTimeout(updateCard, 1200); });
-  window.addEventListener('load', function(){ ensureCard(); setTimeout(updateCard, 300); setTimeout(updateCard, 1400); });
-  document.addEventListener('input', function(e){ if(e && e.target && ['profilAd','profilFirma','profilTelefon','profilBio','setupName','setupCompany','setupPhone','setupBio'].indexOf(e.target.id) > -1){ setTimeout(updateCard, 30); } });
-  document.addEventListener('click', function(e){ var t=e.target; if(t && (t.closest('#profilPanel') || t.closest('#setupPanel') || t.closest('.profileIdentityEditBtn'))){ setTimeout(updateCard, 60); } });
-  var _kaydetProfil = window.kaydetProfil;
-  if(typeof _kaydetProfil === 'function'){
-    window.kaydetProfil = function(){ var r = _kaydetProfil.apply(this, arguments); setTimeout(updateCard, 60); return r; };
-  }
-  var _profilKurulumuAc = window.profilKurulumuAc;
-  if(typeof _profilKurulumuAc === 'function'){
-    window.profilKurulumuAc = function(){ var r = _profilKurulumuAc.apply(this, arguments); setTimeout(updateCard, 60); return r; };
-  }
-})();
-</script>
 
 </body>
 </html>
@@ -14002,7 +14301,7 @@ line-height:1.2!important;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -14585,7 +14884,7 @@ ${cariOzetHtml(a,i)}
   <div class="detailPrimaryActions">
 
     <button class="detailActionCard payAction ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
-      <span class="detailActionIcon exIcon exMoney" aria-hidden="true"></span>
+      <span class="detailActionIcon">₺</span>
       <span>
         <b>${odemeText}</b>
         <em>Tahsilat / makbuz</em>
@@ -14593,7 +14892,7 @@ ${cariOzetHtml(a,i)}
     </button>
 
     <button class="detailActionCard maintAction ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
-      <span class="detailActionIcon exIcon exCheck" aria-hidden="true"></span>
+      <span class="detailActionIcon">✓</span>
       <span>
         <b>${bakimText}</b>
         <em>Bakım raporu</em>
@@ -14601,7 +14900,7 @@ ${cariOzetHtml(a,i)}
     </button>
 
     <button class="detailActionCard editAction" onclick="duzenle(${i})">
-      <span class="detailActionIcon exIcon exEdit" aria-hidden="true"></span>
+      <span class="detailActionIcon">✎</span>
       <span>
         <b>Düzenle</b>
         <em>Apartman bilgileri</em>
@@ -14624,37 +14923,37 @@ ${parcaGecmisiHtml(i)}
   <div class="detailReportGrid">
 
     <button class="detailReportCard" onclick="pdf(${i})">
-      <span class="exIcon exDoc" aria-hidden="true"></span>
+      <span>📄</span>
       <b>Bakım Raporu</b>
       <em>Servis / bakım PDF</em>
     </button>
 
     <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
-      <span class="exIcon exMoney" aria-hidden="true"></span>
+      <span>₺</span>
       <b>Ödeme Makbuzu</b>
       <em>Son tahsilat belgesi</em>
     </button>
 
     <button class="detailReportCard" onclick="cariHesapPdf(${i})">
-      <span class="exIcon exChart" aria-hidden="true"></span>
+      <span>📊</span>
       <b>Cari Özeti</b>
       <em>Borç ve tahsilat</em>
     </button>
 
     <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
-      <span class="exIcon exCard" aria-hidden="true"></span>
+      <span>🪪</span>
       <b>Sicil Kartı</b>
       <em>Asansör kayıt kartı</em>
     </button>
 
     <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
-      <span class="exIcon exPart" aria-hidden="true"></span>
+      <span>🔩</span>
       <b>Parça Geçmişi</b>
       <em>Değişen parçalar</em>
     </button>
 
     <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
-      <span class="exIcon exReport" aria-hidden="true"></span>
+      <span>🧾</span>
       <div>
         <b>Kontrol Raporu & Revizyon Teklifi</b>
         <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
@@ -14974,7 +15273,7 @@ detayPanel.innerHTML = `
       <div class="revisionOfferTitle">Revizyon Teklifi</div>
       <div class="revisionOfferSub">${ayHtml(a.ad || "-")} için yöneticiye gönderilecek kurumsal teklif PDF'i.</div>
     </div>
-    <div class="revisionOfferBadge">v1.4.33</div>
+    <div class="revisionOfferBadge">v1.4.45</div>
   </div>
 
   <div class="revisionTemplatePreview">
@@ -15217,7 +15516,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.39</div>
+  <div>ElevatorX v1.4.36</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15537,7 +15836,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.39</div>
+    <div class="controlReportBadge">v1.4.36</div>
   </div>
 
   <div class="controlReportPreview">
@@ -16013,7 +16312,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -16216,7 +16515,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 <h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -16435,7 +16734,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -17204,495 +17503,12 @@ opacity:.9;
 #quickAddBtn.quickAddBtn::after{animation:none!important;}
 }
 
-
-
-/* === v1.4.39 — Apartman sekmesi premium ikon revizyonu === */
-.statIcon,
-.aptIcon,
-.lastActionIcon,
-.miniMetaIcon,
-#quickAddBtn.quickAddBtn span{
-  position:relative!important;
-  font-size:0!important;
-  line-height:0!important;
-  overflow:hidden!important;
-}
-
-.statIcon:before,
-.statIcon:after,
-.aptIcon:before,
-.aptIcon:after,
-.lastActionIcon:before,
-.lastActionIcon:after,
-.miniMetaIcon:before,
-.miniMetaIcon:after,
-#quickAddBtn.quickAddBtn span:before,
-#quickAddBtn.quickAddBtn span:after{
-  content:""!important;
-  position:absolute!important;
-  box-sizing:border-box!important;
-}
-
-/* Üst sayaç kartları: emoji hissi yerine tek tip çizgisel simgeler */
-.statIcon{
-  width:38px!important;
-  height:38px!important;
-  border-radius:15px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  background-image:radial-gradient(circle at 30% 22%,rgba(255,255,255,.55),transparent 42%)!important;
-}
-
-.iconBuilding:before{
-  width:18px!important;
-  height:21px!important;
-  border:2px solid currentColor!important;
-  border-radius:5px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-48%)!important;
-  background:transparent!important;
-  bottom:auto!important;
-}
-.iconBuilding:after{
-  width:3px!important;
-  height:3px!important;
-  border-radius:1.5px!important;
-  background:currentColor!important;
-  left:12px!important;
-  top:11px!important;
-  box-shadow:
-    7px 0 0 currentColor,
-    0 7px 0 currentColor,
-    7px 7px 0 currentColor,
-    3.5px 14px 0 currentColor!important;
-}
-
-.iconTool:before{
-  width:21px!important;
-  height:21px!important;
-  border:2px solid currentColor!important;
-  border-radius:50%!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:transparent!important;
-}
-.iconTool:after{
-  width:11px!important;
-  height:6px!important;
-  border-left:2.5px solid currentColor!important;
-  border-bottom:2.5px solid currentColor!important;
-  border-radius:1px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-42%,-56%) rotate(-45deg)!important;
-  background:transparent!important;
-  right:auto!important;
-}
-
-.iconCalendar:before{
-  width:22px!important;
-  height:18px!important;
-  border:2px solid currentColor!important;
-  border-radius:5px!important;
-  left:50%!important;
-  top:52%!important;
-  transform:translate(-50%,-50%)!important;
-  background:transparent!important;
-  bottom:auto!important;
-}
-.iconCalendar:after{
-  width:14px!important;
-  height:2px!important;
-  background:currentColor!important;
-  border-radius:999px!important;
-  left:50%!important;
-  top:47%!important;
-  transform:translateX(-50%)!important;
-  box-shadow:0 6px 0 currentColor!important;
-}
-
-.iconMoney:before{
-  width:23px!important;
-  height:15px!important;
-  border:2px solid currentColor!important;
-  border-radius:6px!important;
-  left:50%!important;
-  top:52%!important;
-  transform:translate(-50%,-50%)!important;
-  background:transparent!important;
-}
-.iconMoney:after{
-  content:"₺"!important;
-  position:absolute!important;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  font-size:14px!important;
-  line-height:1!important;
-  font-weight:950!important;
-  color:currentColor!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-55%)!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-/* Apartman kartı sol ikonları: daha sade bina/elevator çizimi */
-.aptIcon{
-  background-image:radial-gradient(circle at 30% 22%,rgba(255,255,255,.50),transparent 40%)!important;
-  border:1px solid rgba(255,255,255,.72)!important;
-  box-shadow:0 10px 20px rgba(15,23,42,.055), inset 0 1px 0 rgba(255,255,255,.62)!important;
-}
-.aptIcon:before{
-  width:20px!important;
-  height:24px!important;
-  border:2px solid currentColor!important;
-  border-radius:6px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:transparent!important;
-  bottom:auto!important;
-}
-.aptIcon:after{
-  width:3px!important;
-  height:3px!important;
-  border-radius:1.5px!important;
-  background:currentColor!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-5.5px,-8px)!important;
-  box-shadow:
-    8px 0 0 currentColor,
-    0 7px 0 currentColor,
-    8px 7px 0 currentColor,
-    4px 15px 0 currentColor!important;
-}
-
-/* Yönetici / telefon mini ikonları: emoji değil, küçük sistem ikonu */
-.miniMetaIcon{
-  width:18px!important;
-  height:18px!important;
-  min-width:18px!important;
-  border:none!important;
-  border-radius:7px!important;
-  background:#f1f5f9!important;
-  color:#94a3b8!important;
-  opacity:1!important;
-  display:inline-block!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
-}
-.miniMetaIcon.person:before{
-  width:5px!important;
-  height:5px!important;
-  border:1.8px solid currentColor!important;
-  border-radius:50%!important;
-  background:transparent!important;
-  left:50%!important;
-  top:4px!important;
-  transform:translateX(-50%)!important;
-}
-.miniMetaIcon.person:after{
-  width:11px!important;
-  height:6px!important;
-  border:1.8px solid currentColor!important;
-  border-top:none!important;
-  border-radius:0 0 7px 7px!important;
-  background:transparent!important;
-  left:50%!important;
-  bottom:3px!important;
-  transform:translateX(-50%)!important;
-}
-.metaPhone .miniMetaIcon{
-  background:#eaf2ff!important;
-  color:#007aff!important;
-}
-.miniMetaIcon.phone:before{
-  width:7px!important;
-  height:12px!important;
-  border:1.8px solid currentColor!important;
-  border-radius:3.5px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%) rotate(-10deg)!important;
-  background:transparent!important;
-}
-.miniMetaIcon.phone:after{
-  width:2.5px!important;
-  height:2.5px!important;
-  border-radius:50%!important;
-  background:currentColor!important;
-  left:50%!important;
-  bottom:4px!important;
-  transform:translateX(-50%)!important;
-}
-
-/* Son işlem tik ikonunu metin/emoji olmaktan çıkar */
-.lastActionIcon{
-  font-size:0!important;
-  color:#007aff!important;
-  background:#eef4ff!important;
-}
-.lastActionIcon.exAptCheck:before{
-  width:18px!important;
-  height:18px!important;
-  border:2px solid currentColor!important;
-  border-radius:7px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:transparent!important;
-}
-.lastActionIcon.exAptCheck:after{
-  width:11px!important;
-  height:6px!important;
-  border-left:2.5px solid currentColor!important;
-  border-bottom:2.5px solid currentColor!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-42%,-58%) rotate(-45deg)!important;
-  background:transparent!important;
-}
-
-/* + Yeni butonu: artı sembolünü çizgisel sisteme bağla */
-#quickAddBtn.quickAddBtn span{
-  width:34px!important;
-  height:34px!important;
-  border-radius:14px!important;
-  background:rgba(255,255,255,.16)!important;
-  display:inline-block!important;
-  flex:0 0 34px!important;
-  margin-right:8px!important;
-}
-#quickAddBtn.quickAddBtn span:before,
-#quickAddBtn.quickAddBtn span:after{
-  width:15px!important;
-  height:2.5px!important;
-  background:white!important;
-  border-radius:999px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-}
-#quickAddBtn.quickAddBtn span:after{
-  transform:translate(-50%,-50%) rotate(90deg)!important;
-}
-
-body.darkMode .miniMetaIcon,
-html.darkRoot .miniMetaIcon{
-  background:#263241!important;
-  color:#9ca3af!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
-}
-body.darkMode .metaPhone .miniMetaIcon,
-html.darkRoot .metaPhone .miniMetaIcon{
-  background:#12223a!important;
-  color:#60a5fa!important;
-}
-body.darkMode .lastActionIcon,
-html.darkRoot .lastActionIcon{
-  background:#12223a!important;
-  color:#60a5fa!important;
-}
-body.darkMode .aptIcon,
-html.darkRoot .aptIcon{
-  border-color:rgba(255,255,255,.08)!important;
-  box-shadow:0 10px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05)!important;
-}
-
-
-
-/* === v1.4.39 — Apartmanlar sekmesi ana ikon dili revizyonu === */
-/* Sadece apartmanlar ekranındaki işaretlenen ikonlar: üst sayaçlar + apartman kartı sol ikonları */
-.statIcon,
-.aptIcon{
-  background:transparent!important;
-  background-image:none!important;
-  border:none!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-  filter:none!important;
-}
-
-.statIcon{
-  width:36px!important;
-  height:36px!important;
-  border-radius:0!important;
-  margin-bottom:7px!important;
-}
-
-.statIcon.statBlue{color:#007aff!important;background:transparent!important;}
-.statIcon.statGreen{color:#22c55e!important;background:transparent!important;}
-.statIcon.statOrange{color:#ff9500!important;background:transparent!important;}
-.statIcon.statPurple{color:#8b5cf6!important;background:transparent!important;}
-
-.statIcon:before,
-.statIcon:after,
-.aptIcon:before,
-.aptIcon:after{
-  content:""!important;
-  position:absolute!important;
-  box-sizing:border-box!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-/* Üst Apartman: bina değil, asansör kapısı çizgisi */
-.iconBuilding:before{
-  width:23px!important;
-  height:28px!important;
-  border:2.35px solid currentColor!important;
-  border-radius:8px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:
-    linear-gradient(currentColor,currentColor) center/2.35px 100% no-repeat,
-    linear-gradient(currentColor,currentColor) center 7px/11px 2.35px no-repeat!important;
-}
-.iconBuilding:after{
-  width:5px!important;
-  height:5px!important;
-  border-radius:50%!important;
-  background:currentColor!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  opacity:.9!important;
-}
-
-/* Bakım Bugün: yaprak/tool hissi yerine sade onay halkası */
-.iconTool:before{
-  width:27px!important;
-  height:27px!important;
-  border:2.35px solid currentColor!important;
-  border-radius:50%!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-}
-.iconTool:after{
-  width:13px!important;
-  height:7px!important;
-  border-left:2.65px solid currentColor!important;
-  border-bottom:2.65px solid currentColor!important;
-  border-radius:1px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-42%,-60%) rotate(-45deg)!important;
-}
-
-/* Geciken: takvim/kart değil, net saat ikonu */
-.iconCalendar:before{
-  width:27px!important;
-  height:27px!important;
-  border:2.35px solid currentColor!important;
-  border-radius:50%!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-}
-.iconCalendar:after{
-  width:16px!important;
-  height:16px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:
-    linear-gradient(currentColor,currentColor) 7px 2px/2.35px 8px no-repeat,
-    linear-gradient(currentColor,currentColor) 7px 8px/8px 2.35px no-repeat!important;
-  border-radius:0!important;
-}
-
-/* Tahsilat: yazı gibi duran ₺ yerine sade ödeme kartı */
-.iconMoney:before{
-  width:28px!important;
-  height:19px!important;
-  border:2.35px solid currentColor!important;
-  border-radius:7px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-}
-.iconMoney:after{
-  content:""!important;
-  width:18px!important;
-  height:10px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-43%)!important;
-  background:
-    linear-gradient(currentColor,currentColor) 0 0/18px 2.35px no-repeat,
-    linear-gradient(currentColor,currentColor) 1px 7px/7px 2.35px no-repeat!important;
-  border-radius:0!important;
-  color:currentColor!important;
-  font-size:0!important;
-}
-
-/* Apartman kartlarının solundaki ikon: renkli sticker değil, profesyonel asansör kapısı */
-.aptIcon{
-  width:44px!important;
-  height:44px!important;
-  border-radius:0!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  margin-left:2px!important;
-}
-
-.aptIcon.c0{color:#007aff!important;background:transparent!important;}
-.aptIcon.c1{color:#22c55e!important;background:transparent!important;}
-.aptIcon.c2{color:#8b5cf6!important;background:transparent!important;}
-.aptIcon.c3{color:#ff9500!important;background:transparent!important;}
-.aptIcon.c4{color:#ff2d75!important;background:transparent!important;}
-
-.aptIcon:before{
-  width:27px!important;
-  height:34px!important;
-  border:2.35px solid currentColor!important;
-  border-radius:9px!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  background:
-    linear-gradient(currentColor,currentColor) center/2.35px 100% no-repeat,
-    linear-gradient(currentColor,currentColor) center 8px/12px 2.35px no-repeat!important;
-  opacity:1!important;
-}
-.aptIcon:after{
-  width:6px!important;
-  height:6px!important;
-  border-radius:50%!important;
-  background:currentColor!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  opacity:.92!important;
-}
-
-/* Eski küçük dolgu kartı hissini geri getirmesin */
-.statCard .statIcon,
-.aptCard .aptIcon{
-  box-shadow:none!important;
-}
-
-body.darkMode .statIcon,
-body.darkMode .aptIcon,
-html.darkRoot .statIcon,
-html.darkRoot .aptIcon{
-  background:transparent!important;
-  border:none!important;
-  box-shadow:none!important;
-}
-
 </style>
 
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
+<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -21068,6 +20884,91 @@ try{ quickAddGuncelle(); }catch(e){}
 
   window.addEventListener("load", ayTopSearchSync);
   window.elevatorXTopSearchSync = ayTopSearchSync;
+})();
+</script>
+
+
+<style id="elevatorx-v1458-profile-identity-card-safe">
+/* === v1.4.58 — Profil Üst Kart Safe Fix ===
+   v1.4.50 stabil tabanından üretildi.
+   Sadece profil üst tasarımı sadeleştirildi; PDF/alt bar/rapor akışına dokunulmadı. */
+#profilPanel{
+  padding-bottom:calc(118px + env(safe-area-inset-bottom,0px))!important;
+}
+#profilPanel .coverArea,
+#profilPanel .profileWrap,
+#profilPanel .profileNameInput,
+#profilPanel .profileJobInput,
+#profilPanel .profileBio{
+  display:none!important;
+}
+#profilPanel .profileContent{
+  padding:10px 18px 18px!important;
+  text-align:left!important;
+}
+#profilPanel .profileStats{margin-top:16px!important;}
+#profilPanel .profileSectionTitle{margin-top:18px!important;}
+#profileIdentityCard{
+  position:relative;
+  overflow:hidden;
+  margin:4px 0 0!important;
+  padding:18px!important;
+  border-radius:30px!important;
+  border:1px solid rgba(226,232,240,.92)!important;
+  background:radial-gradient(circle at 100% 0%, rgba(47,111,240,.11), transparent 34%), linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.93))!important;
+  box-shadow:0 18px 38px rgba(15,23,42,.06), inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+.profileIdentityTop{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;}
+.profileIdentityBrandWrap{display:flex;align-items:center;gap:14px;min-width:0;}
+.profileIdentityLogoBtn{width:68px;height:68px;min-width:68px;padding:0;border:none;cursor:pointer;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#ffffff,#edf3ff);box-shadow:0 12px 28px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.92);}
+.profileIdentityLogoBtn img{width:100%;height:100%;object-fit:cover;display:block;}
+.profileIdentityWordmark{min-width:0;}
+.profileIdentityFirma{font-size:13px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;color:#3b82f6;margin:0 0 3px;}
+.profileIdentityName{font-size:30px;line-height:1.04;font-weight:900;letter-spacing:-.8px;color:#0f172a;margin:0;}
+.profileIdentityEditBtn{border:none;cursor:pointer;white-space:nowrap;padding:12px 18px;border-radius:18px;background:linear-gradient(180deg,#0f172a,#0b1220);color:#fff;font-weight:800;font-size:15px;box-shadow:0 12px 26px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.08);}
+.profileIdentityPhone{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:9px 12px;border-radius:14px;background:rgba(59,130,246,.09);color:#355ea8;font-weight:800;font-size:16px;}
+.profileIdentityInfo{border-radius:22px;padding:16px;background:rgba(255,255,255,.82);border:1px solid rgba(226,232,240,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,.86);}
+.profileIdentityServices{font-size:16px;line-height:1.45;font-weight:800;color:#111827;margin:0;}
+.profileIdentityLocation{margin-top:5px;font-size:15px;line-height:1.45;font-weight:700;color:#667085;}
+#profilPanel .profileFooterSmall,#profilPanel .legalLinks,#profilPanel .referenceTitle,#profilPanel .referenceGrid{display:none!important;}
+#profilPanel .profileFooter{padding-top:12px!important;padding-bottom:118px!important;}
+#profilPanel .profileActionGrid{gap:12px!important;}
+body.darkMode #profileIdentityCard,html.darkRoot #profileIdentityCard{background:radial-gradient(circle at 100% 0%, rgba(59,130,246,.18), transparent 36%), linear-gradient(180deg,rgba(15,23,42,.92),rgba(17,24,39,.9))!important;border-color:rgba(148,163,184,.18)!important;box-shadow:0 18px 42px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.04)!important;}
+body.darkMode .profileIdentityFirma,html.darkRoot .profileIdentityFirma{color:#60a5fa;}
+body.darkMode .profileIdentityName,html.darkRoot .profileIdentityName{color:#f8fafc;}
+body.darkMode .profileIdentityPhone,html.darkRoot .profileIdentityPhone{background:rgba(59,130,246,.14);color:#bfdbfe;}
+body.darkMode .profileIdentityInfo,html.darkRoot .profileIdentityInfo{background:rgba(15,23,42,.55);border-color:rgba(148,163,184,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
+body.darkMode .profileIdentityServices,html.darkRoot .profileIdentityServices{color:#f8fafc;}
+body.darkMode .profileIdentityLocation,html.darkRoot .profileIdentityLocation{color:#94a3b8;}
+body.darkMode .profileIdentityLogoBtn,html.darkRoot .profileIdentityLogoBtn{background:linear-gradient(180deg,#111827,#0f172a);box-shadow:0 12px 28px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.05);}
+@media(max-width:430px){#profileIdentityCard{padding:16px!important;border-radius:26px!important;}.profileIdentityTop{align-items:flex-start;gap:10px;}.profileIdentityBrandWrap{gap:12px;}.profileIdentityLogoBtn{width:60px;height:60px;min-width:60px;border-radius:18px;}.profileIdentityName{font-size:25px;}.profileIdentityEditBtn{padding:11px 15px;font-size:14px;border-radius:16px;}.profileIdentityPhone{font-size:15px;}.profileIdentityServices{font-size:15px;}.profileIdentityLocation{font-size:14px;}}
+</style>
+<script id="elevatorx-v1458-profile-identity-script">
+(function(){
+  function ensureCard(){
+    var content=document.querySelector('#profilPanel .profileContent');
+    if(!content) return null;
+    var card=document.getElementById('profileIdentityCard');
+    if(card) return card;
+    card=document.createElement('div');
+    card.id='profileIdentityCard';
+    card.innerHTML='<div class="profileIdentityTop"><div class="profileIdentityBrandWrap"><button class="profileIdentityLogoBtn" type="button" aria-label="Profil logosunu değiştir"><img id="profileIdentityLogo" alt="Profil logosu"></button><div class="profileIdentityWordmark"><div class="profileIdentityFirma" id="profileIdentityFirmaDisplay">AY ASANSÖR</div><div class="profileIdentityName" id="profileIdentityNameDisplay">Uğur AY</div></div></div><button class="profileIdentityEditBtn" type="button">Düzenle</button></div><div class="profileIdentityMeta"><div class="profileIdentityPhone" id="profileIdentityPhoneDisplay">+90 541 265 43 08</div><div class="profileIdentityInfo"><div class="profileIdentityServices" id="profileIdentityServicesDisplay">Asansör bakım • montaj • servis</div><div class="profileIdentityLocation" id="profileIdentityLocationDisplay">Kütahya / Tavşanlı</div></div></div>';
+    content.insertBefore(card, content.firstChild);
+    var logoBtn=card.querySelector('.profileIdentityLogoBtn');
+    var editBtn=card.querySelector('.profileIdentityEditBtn');
+    if(logoBtn){logoBtn.addEventListener('click',function(){var input=document.getElementById('profileInput');if(input) input.click();});}
+    if(editBtn){editBtn.addEventListener('click',function(){if(typeof window.profilKurulumuAc==='function') window.profilKurulumuAc();});}
+    return card;
+  }
+  function safeVal(id,fallback){var el=document.getElementById(id);if(el&&typeof el.value==='string'&&el.value.trim()) return el.value.trim();var val=localStorage.getItem(id);return(val&&val.trim())?val.trim():fallback;}
+  function splitBio(bio){var clean=(bio||'').replace(/\r/g,'').trim();if(!clean) return ['Asansör bakım • montaj • servis','Kütahya / Tavşanlı'];var lines=clean.split('\n').map(function(x){return x.trim();}).filter(Boolean);if(lines.length>=2) return [lines[0], lines.slice(1).join(' • ')];return [clean,'Kütahya / Tavşanlı'];}
+  function updateCard(){var card=ensureCard();if(!card) return;var firma=safeVal('profilFirma','AY ASANSÖR');var ad=safeVal('profilAd','Uğur AY');var tel=safeVal('profilTelefon','+90 541 265 43 08');var bio=safeVal('profilBio','Asansör bakım • montaj • servis\nKütahya / Tavşanlı');var parts=splitBio(bio);var firmaEl=document.getElementById('profileIdentityFirmaDisplay');var adEl=document.getElementById('profileIdentityNameDisplay');var telEl=document.getElementById('profileIdentityPhoneDisplay');var servicesEl=document.getElementById('profileIdentityServicesDisplay');var locationEl=document.getElementById('profileIdentityLocationDisplay');var logoEl=document.getElementById('profileIdentityLogo');var profileImg=document.getElementById('profilePhoto');if(firmaEl) firmaEl.textContent=firma||'AY ASANSÖR';if(adEl) adEl.textContent=ad||'Uğur AY';if(telEl) telEl.textContent=tel||'+90 541 265 43 08';if(servicesEl) servicesEl.textContent=parts[0]||'Asansör bakım • montaj • servis';if(locationEl){var loc=parts[1]||'Kütahya / Tavşanlı';locationEl.textContent=loc;locationEl.style.display=loc?'block':'none';}if(logoEl&&profileImg&&profileImg.src) logoEl.src=profileImg.src;}
+  window.updateProfileIdentityCard=updateCard;
+  document.addEventListener('DOMContentLoaded',function(){ensureCard();setTimeout(updateCard,80);setTimeout(updateCard,600);setTimeout(updateCard,1400);});
+  window.addEventListener('load',function(){ensureCard();setTimeout(updateCard,120);setTimeout(updateCard,900);});
+  document.addEventListener('input',function(e){if(e&&e.target&&['profilAd','profilFirma','profilTelefon','profilBio','setupName','setupCompany','setupPhone','setupBio'].indexOf(e.target.id)>-1){setTimeout(updateCard,40);}});
+  document.addEventListener('change',function(e){if(e&&e.target&&['profileInput','coverInput'].indexOf(e.target.id)>-1){setTimeout(updateCard,400);setTimeout(updateCard,1200);}});
+  var _kaydetProfil=window.kaydetProfil;if(typeof _kaydetProfil==='function'){window.kaydetProfil=function(){var result=_kaydetProfil.apply(this,arguments);setTimeout(updateCard,80);return result;};}
 })();
 </script>
 
