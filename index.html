@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1462_KARARLI_SURUME_GERI_DONUS | BASE v1.4.62 | APP_VERSION v1.4.62 -->
+<!-- ELEVATORX_V1450_STABILIZASYON_KAYIP_MODULLER_FIX | APP_VERSION v1.4.50 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -9906,7 +9906,7 @@ background:#263241;
 color:#f8fafc;
 }
 
-/* === v1.4.62 — Stabilizasyon: kontrol raporu akışı kilidi === */
+/* === v1.4.50 — Stabilizasyon: kontrol raporu akışı kilidi === */
 
 </style>
 
@@ -10060,7 +10060,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1448" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.62</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.63</div>
 </div>
 </div>
 
@@ -10070,7 +10070,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.21";
+  const SPLASH_VERSION = "v1.4.63";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10595,8 +10595,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.62";
-// v1.4.62: Kararlı sürüme geri dönüş — v1.4.50 stabil tabanı yeni sürüm numarasıyla geri yüklendi.
+const APP_VERSION = "v1.4.63";
+// v1.4.50: Stabilizasyon — PDF açıklayıcı/ayıklayıcı + alt bar + profil düzeni birlikte kilitlendi.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
@@ -10618,7 +10618,45 @@ return `<script>
 (function(){
 try{
 if(window.history && window.history.replaceState){
-window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
+window.history.replaceState({elevatorxReport:true, safeClose:true}, document.title, window.location.href);
+}
+window.elevatorXReportBack = function(){
+try{
+if(window.opener && !window.opener.closed){
+try{ window.opener.focus(); }catch(e){}
+}
+}catch(e){}
+try{ window.close(); }catch(e){}
+setTimeout(function(){
+try{
+var btn = document.querySelector(".backBtn,.screenBtn,.pdfBackBtn");
+if(btn){
+btn.textContent = "Kapatmak için sağ üstteki X'i kullan";
+btn.disabled = true;
+btn.style.opacity = "0.75";
+btn.style.pointerEvents = "none";
+}
+}catch(e){}
+},120);
+return false;
+};
+window.addEventListener("popstate", function(ev){
+try{
+if(ev && ev.state && ev.state.elevatorxReport){
+if(window.elevatorXReportBack){ window.elevatorXReportBack(); }
+}
+}catch(e){}
+});
+window.addEventListener("pageshow", function(){
+try{
+if(String(window.location.href).indexOf("blob:") === 0){
+window.location.replace("https://elevatorx.github.io/?return=elevatorx");
+}
+}catch(e){}
+});
+}catch(e){}
+})();
+<\/script>`;
 }
 window.addEventListener("pageshow", function(){
 try{
@@ -13663,7 +13701,7 @@ td{font-size:8.5px!important;padding:6px!important}
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -14301,7 +14339,7 @@ line-height:1.2!important;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -16312,7 +16350,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -16515,7 +16553,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -16734,7 +16772,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -17508,7 +17546,7 @@ opacity:.9;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
