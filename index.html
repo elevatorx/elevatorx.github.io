@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1452_APARTMAN_UST_PANEL_PREMIUM_REDESIGN | APP_VERSION v1.4.52 -->
+<!-- ELEVATORX_V1453_GLOBAL_PREMIUM_IKON_REVIZYONU | APP_VERSION v1.4.53 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1452">
@@ -9971,7 +9971,7 @@ body.darkMode .profileFooterLiteMail{color:#7c8797;}
 body.darkMode .legalLinks.legalLinksLite span{color:#485263;}
 
 
-/* === v1.4.52 — Apartman Üst Panel Premium Redesign ===
+/* === v1.4.53 — Global Premium İkon Revizyonu ===
    Sadece Apartmanlar ana ekranındaki üst özet alanı sıkılaştırılır.
    Alt bar, PDF Merkezi, Kontrol Raporu & Revizyon Teklifi ve veri sistemleri korunur. */
 .searchRow{
@@ -10792,7 +10792,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.52";
+const APP_VERSION = "v1.4.53";
 // v1.4.52: Apartman üst panel premium redesign — v1.4.50 stabil tabanı korunarak ana ekran üst alanı sıkılaştırıldı.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1451", location.href).href;
@@ -17698,6 +17698,138 @@ opacity:.9;
 
 @media (prefers-reduced-motion: reduce){
 #quickAddBtn.quickAddBtn::after{animation:none!important;}
+}
+
+
+
+/* === v1.4.53 — Global Premium İkon Revizyonu ===
+   Tüm ana ekran ikonları tek tip SVG mask sistemine çekildi.
+   Emoji/sticker/paint hissi veren eski çizimler global olarak bastırılır. */
+.statIcon,
+.aptIcon,
+.miniMetaIcon,
+.profileActionIcon,
+.lastActionIcon{
+  font-size:0!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+}
+
+.statIcon{
+  width:34px!important;
+  height:34px!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.66))!important;
+  border:1px solid rgba(255,255,255,.74)!important;
+  box-shadow:0 8px 18px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+
+.aptIcon{
+  width:40px!important;
+  height:40px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.52))!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 8px 18px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.78)!important;
+  --ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M6.75%203.5A2.25%202.25%200%200%200%204.5%205.75v12.5A2.25%202.25%200%200%200%206.75%2020.5h10.5a2.25%202.25%200%200%200%202.25-2.25V5.75A2.25%202.25%200%200%200%2017.25%203.5H6.75Zm0%201.8h10.5c.25%200%20.45.2.45.45v12.5c0%20.25-.2.45-.45.45H14.6v-3.1a1.1%201.1%200%200%200-1.1-1.1h-3a1.1%201.1%200%200%200-1.1%201.1v3.1H6.75a.45.45%200%200%201-.45-.45V5.75c0-.25.2-.45.45-.45Zm2.1%202.45a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm-5.2%203.7a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.statIcon:before,
+.aptIcon:before,
+.lastActionIcon:before{
+  content:""!important;
+  display:block!important;
+  position:static!important;
+  width:19px!important;
+  height:19px!important;
+  border:none!important;
+  border-radius:0!important;
+  background:currentColor!important;
+  -webkit-mask:var(--ex-premium-icon) center / contain no-repeat!important;
+  mask:var(--ex-premium-icon) center / contain no-repeat!important;
+  transform:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+
+.statIcon:after,
+.aptIcon:after,
+.lastActionIcon:after{
+  display:none!important;
+  content:none!important;
+}
+
+.iconBuilding{--ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M6.75%203.5A2.25%202.25%200%200%200%204.5%205.75v12.5A2.25%202.25%200%200%200%206.75%2020.5h10.5a2.25%202.25%200%200%200%202.25-2.25V5.75A2.25%202.25%200%200%200%2017.25%203.5H6.75Zm0%201.8h10.5c.25%200%20.45.2.45.45v12.5c0%20.25-.2.45-.45.45H14.6v-3.1a1.1%201.1%200%200%200-1.1-1.1h-3a1.1%201.1%200%200%200-1.1%201.1v3.1H6.75a.45.45%200%200%201-.45-.45V5.75c0-.25.2-.45.45-.45Zm2.1%202.45a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm-5.2%203.7a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+.iconTool{--ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M12%203.25a8.75%208.75%200%201%200%200%2017.5%208.75%208.75%200%200%200%200-17.5Zm0%202a6.75%206.75%200%201%201%200%2013.5%206.75%206.75%200%200%201%200-13.5Zm3.96%204.45a1%201%200%200%200-1.41.03l-3.48%203.65-1.55-1.58a1%201%200%200%200-1.43%201.4l2.28%202.32a1%201%200%200%200%201.44-.02l4.18-4.39a1%201%200%200%200-.03-1.41Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+.iconCalendar{--ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M12%203.25a8.75%208.75%200%201%200%200%2017.5%208.75%208.75%200%200%200%200-17.5Zm0%202a6.75%206.75%200%201%201%200%2013.5%206.75%206.75%200%200%201%200-13.5Zm0%202.5a1%201%200%200%200-1%201v3.45c0%20.34.17.65.45.84l2.75%201.85a1%201%200%201%200%201.11-1.66L13%2011.68V8.75a1%201%200%200%200-1-1Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+.iconMoney{--ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M4.75%206A2.75%202.75%200%200%200%202%208.75v6.5A2.75%202.75%200%200%200%204.75%2018h14.5A2.75%202.75%200%200%200%2022%2015.25v-6.5A2.75%202.75%200%200%200%2019.25%206H4.75Zm0%202h14.5c.41%200%20.75.34.75.75v.7H4v-.7c0-.41.34-.75.75-.75ZM4%2011.35h16v3.9c0%20.41-.34.75-.75.75H4.75a.75.75%200%200%201-.75-.75v-3.9Zm2.25%202.25a.9.9%200%200%200%200%201.8h3.2a.9.9%200%200%200%200-1.8h-3.2Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+
+.aptIcon.c0,.aptIcon.c1,.aptIcon.c2,.aptIcon.c3,.aptIcon.c4{
+  --ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M6.75%203.5A2.25%202.25%200%200%200%204.5%205.75v12.5A2.25%202.25%200%200%200%206.75%2020.5h10.5a2.25%202.25%200%200%200%202.25-2.25V5.75A2.25%202.25%200%200%200%2017.25%203.5H6.75Zm0%201.8h10.5c.25%200%20.45.2.45.45v12.5c0%20.25-.2.45-.45.45H14.6v-3.1a1.1%201.1%200%200%200-1.1-1.1h-3a1.1%201.1%200%200%200-1.1%201.1v3.1H6.75a.45.45%200%200%201-.45-.45V5.75c0-.25.2-.45.45-.45Zm2.1%202.45a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm-5.2%203.7a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Zm5.2%200a.9.9%200%201%200%200%201.8h1.1a.9.9%200%201%200%200-1.8h-1.1Z%22%2F%3E%3C%2Fsvg%3E")!important;
+}
+.aptIcon.c0,.statBlue{color:#007aff!important;background-color:#eef6ff!important;}
+.aptIcon.c1,.statGreen{color:#22c55e!important;background-color:#ecfdf3!important;}
+.aptIcon.c2,.statPurple{color:#8b5cf6!important;background-color:#f5efff!important;}
+.aptIcon.c3,.statOrange{color:#ff9500!important;background-color:#fff5e6!important;}
+.aptIcon.c4{color:#ff2d75!important;background-color:#fff0f6!important;}
+
+.miniMetaIcon{
+  width:16px!important;
+  height:16px!important;
+  border:none!important;
+  background:transparent!important;
+  color:#8b95a5!important;
+  opacity:1!important;
+  box-shadow:none!important;
+  flex:0 0 16px!important;
+}
+.miniMetaIcon:before{
+  content:""!important;
+  position:static!important;
+  display:block!important;
+  width:16px!important;
+  height:16px!important;
+  background:currentColor!important;
+  -webkit-mask:var(--ex-mini-icon) center / contain no-repeat!important;
+  mask:var(--ex-mini-icon) center / contain no-repeat!important;
+  border:none!important;
+  border-radius:0!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.miniMetaIcon:after{display:none!important;content:none!important;}
+.miniMetaIcon.person{--ex-mini-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M12%2012.2a4.25%204.25%200%201%200%200-8.5%204.25%204.25%200%200%200%200%208.5Zm0-1.9a2.35%202.35%200%201%201%200-4.7%202.35%202.35%200%200%201%200%204.7Zm0%202.3c-4.2%200-7.1%202.35-7.1%205.2%200%201.36%201.07%202.5%202.45%202.5h9.3c1.38%200%202.45-1.14%202.45-2.5%200-2.85-2.9-5.2-7.1-5.2Zm0%201.9c3.1%200%205.2%201.55%205.2%203.3%200%20.35-.25.6-.55.6h-9.3a.58.58%200%200%201-.55-.6c0-1.75%202.1-3.3%205.2-3.3Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+.miniMetaIcon.phone{--ex-mini-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M7.8%203.75h8.4A2.3%202.3%200%200%201%2018.5%206.05v11.9a2.3%202.3%200%200%201-2.3%202.3H7.8a2.3%202.3%200%200%201-2.3-2.3V6.05a2.3%202.3%200%200%201%202.3-2.3Zm0%201.9a.4.4%200%200%200-.4.4v11.9c0%20.22.18.4.4.4h8.4a.4.4%200%200%200%20.4-.4V6.05a.4.4%200%200%200-.4-.4H7.8Zm3.2%2010.65h2a.9.9%200%201%201%200%201.8h-2a.9.9%200%201%201%200-1.8Z%22%2F%3E%3C%2Fsvg%3E")!important;}
+.metaPhone .miniMetaIcon{color:#0a84ff!important;}
+
+.lastActionIcon{
+  --ex-premium-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M12%203.25a8.75%208.75%200%201%200%200%2017.5%208.75%208.75%200%200%200%200-17.5Zm0%202a6.75%206.75%200%201%201%200%2013.5%206.75%206.75%200%200%201%200-13.5Zm3.96%204.45a1%201%200%200%200-1.41.03l-3.48%203.65-1.55-1.58a1%201%200%200%200-1.43%201.4l2.28%202.32a1%201%200%200%200%201.44-.02l4.18-4.39a1%201%200%200%200-.03-1.41Z%22%2F%3E%3C%2Fsvg%3E")!important;
+  color:#007aff!important;
+}
+.profileActionIcon{
+  border-radius:16px!important;
+  background:rgba(0,122,255,.10)!important;
+  color:#007aff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65)!important;
+}
+
+body.darkMode .statIcon,
+body.darkMode .aptIcon,
+html.darkRoot .statIcon,
+html.darkRoot .aptIcon{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.045))!important;
+  border-color:rgba(255,255,255,.10)!important;
+  box-shadow:0 10px 20px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+
+@media(max-width:430px){
+  .statIcon{width:31px!important;height:31px!important;border-radius:13px!important;}
+  .statIcon:before{width:17px!important;height:17px!important;}
+  .aptIcon{width:38px!important;height:38px!important;border-radius:15px!important;}
+  .aptIcon:before{width:18px!important;height:18px!important;}
 }
 
 </style>
