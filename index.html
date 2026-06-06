@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1460_PROFIL_ESKI_UST_ISTATISTIK_DUZENI | APP_VERSION v1.4.60 -->
+<!-- ELEVATORX_V1460_PROFIL_ESKI_UST_ISTATISTIK_DUZENI | APP_VERSION v1.4.61 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -10060,7 +10060,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1448" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.50</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.61</div>
 </div>
 </div>
 
@@ -10595,9 +10595,12 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.60";
-// v1.4.50: Stabilizasyon — PDF açıklayıcı/ayıklayıcı + alt bar + profil düzeni birlikte kilitlendi.
+const APP_VERSION = "v1.4.61";
+// v1.4.61: Sürüm/splash önbellek etiketi fix — v1.4.60 profil düzeni korunur.
 window.APP_VERSION = APP_VERSION;
+try{
+  document.querySelectorAll("[data-splash-version]").forEach(function(el){ el.textContent = APP_VERSION; });
+}catch(e){}
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
 
