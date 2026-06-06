@@ -41,15 +41,15 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1451_PROFIL_ALT_BILGI_SADELESTIRME | APP_VERSION v1.4.51 -->
+<!-- ELEVATORX_V1452_APARTMAN_UST_PANEL_PREMIUM_REDESIGN | APP_VERSION v1.4.52 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1451">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1451">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1451">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1451">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1451">
-<link rel="manifest" href="/manifest.webmanifest?v=1451">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1452">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1452">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1452">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1452">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1452">
+<link rel="manifest" href="/manifest.webmanifest?v=1452">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9969,6 +9969,167 @@ body.darkMode .profileFooterLiteTitle{color:#f8fafc;}
 body.darkMode .profileFooterLiteSub,
 body.darkMode .profileFooterLiteMail{color:#7c8797;}
 body.darkMode .legalLinks.legalLinksLite span{color:#485263;}
+
+
+/* === v1.4.52 — Apartman Üst Panel Premium Redesign ===
+   Sadece Apartmanlar ana ekranındaki üst özet alanı sıkılaştırılır.
+   Alt bar, PDF Merkezi, Kontrol Raporu & Revizyon Teklifi ve veri sistemleri korunur. */
+.searchRow{
+  margin:4px 0 10px!important;
+  gap:10px!important;
+}
+#arama{
+  height:52px!important;
+  border-radius:22px!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045)!important;
+}
+.filterBtn{
+  height:52px!important;
+  border-radius:22px!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045)!important;
+}
+.statGrid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin:8px 0 9px!important;
+}
+.statCard{
+  min-height:78px!important;
+  border-radius:23px!important;
+  padding:11px 6px 10px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.90),rgba(255,255,255,.72))!important;
+  border:1px solid rgba(255,255,255,.86)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+.statIcon{
+  width:34px!important;
+  height:34px!important;
+  border-radius:14px!important;
+  margin-bottom:7px!important;
+  box-shadow:0 8px 18px rgba(15,23,42,.045)!important;
+}
+.statNumber{
+  font-size:21px!important;
+  font-weight:950!important;
+  letter-spacing:-.45px!important;
+  line-height:1!important;
+}
+.statLabel{
+  font-size:10.8px!important;
+  font-weight:760!important;
+  margin-top:4px!important;
+  color:#6b7280!important;
+  line-height:1.15!important;
+}
+.lastActionCard{
+  margin:8px 0 20px!important;
+  padding:10px 13px!important;
+  min-height:54px!important;
+  border-radius:23px!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr)!important;
+  gap:11px!important;
+  align-items:center!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.74),rgba(239,246,255,.66))!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.042), inset 0 1px 0 rgba(255,255,255,.70)!important;
+  overflow:hidden!important;
+}
+.lastActionCard::after{display:none!important;}
+.lastActionIcon{
+  width:34px!important;
+  height:34px!important;
+  border-radius:14px!important;
+  background:rgba(0,122,255,.10)!important;
+  color:#007aff!important;
+  font-size:0!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
+}
+.lastActionIcon::before{
+  content:"";
+  width:13px;
+  height:7px;
+  border-left:2.4px solid currentColor;
+  border-bottom:2.4px solid currentColor;
+  transform:rotate(-45deg) translate(1px,-1px);
+  border-radius:1px;
+}
+.lastActionText{min-width:0!important;}
+.lastActionLabel{
+  font-size:10px!important;
+  font-weight:950!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  color:#8b95a5!important;
+  margin:0 0 3px!important;
+}
+.lastActionValue{
+  font-size:14.4px!important;
+  font-weight:900!important;
+  line-height:1.22!important;
+  color:#111827!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.lastActionDate{
+  font-size:11.4px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  margin-top:2px!important;
+  color:#8a94a6!important;
+}
+.sectionHead{
+  margin:18px 4px 10px!important;
+}
+.sectionHead h2{
+  font-size:22px!important;
+  line-height:1.05!important;
+  letter-spacing:-.45px!important;
+}
+body.darkMode .statCard,
+html.darkRoot body .statCard{
+  background:linear-gradient(180deg,rgba(21,27,38,.88),rgba(15,20,29,.78))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+body.darkMode .lastActionCard,
+html.darkRoot body .lastActionCard{
+  background:linear-gradient(135deg,rgba(21,27,38,.86),rgba(15,23,42,.74))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+body.darkMode .lastActionValue,
+html.darkRoot body .lastActionValue{color:#f8fafc!important;}
+body.darkMode .statLabel,
+html.darkRoot body .statLabel,
+body.darkMode .lastActionLabel,
+html.darkRoot body .lastActionLabel,
+body.darkMode .lastActionDate,
+html.darkRoot body .lastActionDate{color:#8f9aaa!important;}
+
+@media(max-width:430px){
+  .searchRow{margin:3px 0 9px!important;gap:8px!important;}
+  #arama,.filterBtn{height:50px!important;border-radius:21px!important;}
+  .filterBtn{width:96px!important;font-size:14.5px!important;}
+  .statGrid{gap:7px!important;margin:7px 0 8px!important;}
+  .statCard{min-height:74px!important;border-radius:21px!important;padding:10px 4px 9px!important;}
+  .statIcon{width:31px!important;height:31px!important;border-radius:13px!important;margin-bottom:6px!important;}
+  .statNumber{font-size:20px!important;}
+  .statLabel{font-size:10.2px!important;}
+  .lastActionCard{margin:7px 0 19px!important;padding:9px 12px!important;grid-template-columns:32px minmax(0,1fr)!important;gap:10px!important;border-radius:22px!important;min-height:52px!important;}
+  .lastActionIcon{width:32px!important;height:32px!important;border-radius:13px!important;}
+  .lastActionValue{font-size:13.8px!important;}
+  .lastActionDate{font-size:11px!important;}
+  .sectionHead{margin:17px 4px 9px!important;}
+  .sectionHead h2{font-size:21px!important;}
+}
+
 </style>
 
 <script>
@@ -10118,10 +10279,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1451" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1452" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.51</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.52</div>
 </div>
 </div>
 
@@ -10631,8 +10792,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.51";
-// v1.4.51: Profil alt bilgi sadeleştirme — v1.4.50 stabil tabanı korunarak footer tekrarları azaltıldı.
+const APP_VERSION = "v1.4.52";
+// v1.4.52: Apartman üst panel premium redesign — v1.4.50 stabil tabanı korunarak ana ekran üst alanı sıkılaştırıldı.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1451", location.href).href;
 
