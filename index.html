@@ -10595,8 +10595,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.64";
-// v1.4.64: Acil stabil geri dönüş — v1.4.50 sağlam tabanı yeniden paketlendi.
+const APP_VERSION = "v1.4.65";
+// v1.4.65: Kararlı taban + PDF geri butonu güvenli kapatma fix.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
@@ -10605,7 +10605,6 @@ function elevatorXOpenReportWindow(){
 try{
 let w = window.open("about:blank","_blank");
 if(w){
-try{ w.opener = null; }catch(err){}
 }
 return w;
 }catch(err){
@@ -10617,9 +10616,20 @@ function elevatorXPdfSafetyScript(){
 return `<script>
 (function(){
 try{
-if(window.history && window.history.replaceState){
-window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
+window.elevatorXReportBack = function(){
+try{
+if(window.opener && !window.opener.closed){ window.opener.focus(); }
+}catch(e){}
+try{ window.close(); }catch(e){}
+setTimeout(function(){
+try{
+if(!window.closed){
+document.body.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif;color:#111827;background:#f6f7fb;text-align:center;padding:24px"><div><b>Rapor kapatıldı</b><br><span style="color:#6b7280">Uygulamaya geri dönebilirsin.</span></div></div>';
 }
+}catch(e){}
+}, 180);
+return false;
+};
 window.addEventListener("pageshow", function(){
 try{
 if(String(window.location.href).indexOf("blob:") === 0){
@@ -13663,7 +13673,7 @@ td{font-size:8.5px!important;padding:6px!important}
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -14301,7 +14311,7 @@ line-height:1.2!important;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
@@ -16312,7 +16322,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <div class="page">
 <div class="topBand"></div>
 <div class="header">
@@ -16515,7 +16525,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -16734,7 +16744,7 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
-<button class="screenBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
 <button class="screenBtn" onclick="window.print()">Yazdır</button>
 </div>
@@ -17508,7 +17518,7 @@ opacity:.9;
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 
-<button class="backBtn" onclick="if(window.history.length>1){window.history.back()}else{window.close()}">← Geri</button>
+<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
 
 <div class="page">
 <div class="topBand"></div>
