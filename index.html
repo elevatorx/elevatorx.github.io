@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1450_STABILIZASYON_KAYIP_MODULLER_FIX | APP_VERSION v1.4.50 -->
+<!-- ELEVATORX_V1460_PROFIL_ESKI_UST_ISTATISTIK_DUZENI | APP_VERSION v1.4.60 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -10595,7 +10595,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.59";
+const APP_VERSION = "v1.4.60";
 // v1.4.50: Stabilizasyon — PDF açıklayıcı/ayıklayıcı + alt bar + profil düzeni birlikte kilitlendi.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
@@ -13908,6 +13908,199 @@ ${sonParcalar}
   }
 }
 </style>
+
+
+<style id="elevatorx-v1460-profile-revert-stats-fix">
+/* === v1.4.60 — Profil Üst Eski Hal + İstatistik Düzeni ===
+   Güvenli paket: Profil üst alanı eski kapak/avatar düzenine döndü.
+   Sadece alt istatistik bölümü kompakt özet bandı olarak yenilendi. */
+
+/* v1.4.58/59 firma kartı denemesi tamamen kapalı */
+#profileIdentityCard{
+  display:none!important;
+}
+
+/* Profil üst alanı eski haline döndü */
+#profilPanel .coverArea{
+  display:block!important;
+  height:136px!important;
+  border-radius:28px!important;
+  margin:4px 8px 0!important;
+  overflow:hidden!important;
+  box-shadow:0 14px 34px rgba(15,23,42,.065)!important;
+}
+#profilPanel .profileWrap{
+  display:flex!important;
+  justify-content:center!important;
+  margin-top:-38px!important;
+  position:relative!important;
+  z-index:5!important;
+}
+#profilPanel .profilePhoto{
+  display:block!important;
+  width:78px!important;
+  height:78px!important;
+  border-radius:50%!important;
+  border:5px solid rgba(255,255,255,.95)!important;
+  object-fit:cover!important;
+  background:#fff!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+}
+#profilPanel .profileContent{
+  padding:10px 18px 18px!important;
+  text-align:center!important;
+}
+#profilPanel .profileNameInput{
+  display:block!important;
+  width:100%!important;
+  font-size:27px!important;
+  font-weight:900!important;
+  border:none!important;
+  background:transparent!important;
+  text-align:center!important;
+  padding:0!important;
+  margin:0!important;
+  letter-spacing:-.6px!important;
+  color:#0f172a!important;
+}
+#profilPanel .profileJobInput{
+  display:block!important;
+  width:100%!important;
+  font-size:15px!important;
+  font-weight:800!important;
+  color:#6b7280!important;
+  border:none!important;
+  background:transparent!important;
+  text-align:center!important;
+  padding:0!important;
+  margin:3px 0 0!important;
+  letter-spacing:.2px!important;
+}
+#profilPanel #profilTelefon.profileJobInput{
+  margin-top:9px!important;
+  font-size:16px!important;
+  color:#6b7280!important;
+}
+#profilPanel .profileBio{
+  display:block!important;
+  width:100%!important;
+  margin:18px 0 0!important;
+  min-height:64px!important;
+  height:64px!important;
+  resize:none!important;
+  background:rgba(255,255,255,.88)!important;
+  border:1px solid rgba(226,232,240,.92)!important;
+  border-radius:22px!important;
+  padding:14px 16px!important;
+  line-height:1.45!important;
+  color:#111827!important;
+  font-weight:700!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.045), inset 0 1px 0 rgba(255,255,255,.8)!important;
+}
+
+/* Alt istatistik alanı değiştirildi: büyük kutular yerine kompakt özet bandı */
+#profilPanel .profileStats.profileStatsFour{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin:18px 0 0!important;
+  padding:10px!important;
+  border-radius:26px!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(226,232,240,.85)!important;
+  box-shadow:0 12px 30px rgba(15,23,42,.05), inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+#profilPanel .profileStatsFour .profileStatCard{
+  min-height:62px!important;
+  padding:10px 6px 9px!important;
+  border-radius:18px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.9))!important;
+  border:1px solid rgba(229,231,235,.8)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#profilPanel .profileStatsFour b{
+  font-size:18px!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:-.45px!important;
+  color:#0f172a!important;
+  white-space:nowrap!important;
+}
+#profilPanel .profileStatsFour span{
+  margin-top:5px!important;
+  font-size:10.5px!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  color:#6b7280!important;
+  white-space:nowrap!important;
+}
+#profilPanel .profileSectionTitle{
+  margin-top:22px!important;
+}
+
+body.darkMode #profilPanel .profileNameInput,
+html.darkRoot #profilPanel .profileNameInput,
+body.darkMode #profilPanel .profileStatsFour b,
+html.darkRoot #profilPanel .profileStatsFour b{
+  color:#f8fafc!important;
+}
+body.darkMode #profilPanel .profileJobInput,
+html.darkRoot #profilPanel .profileJobInput,
+body.darkMode #profilPanel .profileStatsFour span,
+html.darkRoot #profilPanel .profileStatsFour span{
+  color:#94a3b8!important;
+}
+body.darkMode #profilPanel .profileBio,
+html.darkRoot #profilPanel .profileBio{
+  background:rgba(17,24,39,.76)!important;
+  border-color:rgba(148,163,184,.18)!important;
+  color:#f8fafc!important;
+}
+body.darkMode #profilPanel .profileStats.profileStatsFour,
+html.darkRoot #profilPanel .profileStats.profileStatsFour{
+  background:rgba(15,23,42,.60)!important;
+  border-color:rgba(148,163,184,.15)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+body.darkMode #profilPanel .profileStatsFour .profileStatCard,
+html.darkRoot #profilPanel .profileStatsFour .profileStatCard{
+  background:rgba(17,24,39,.72)!important;
+  border-color:rgba(148,163,184,.14)!important;
+}
+
+@media(max-width:430px){
+  #profilPanel .coverArea{height:132px!important;border-radius:27px!important;margin-left:6px!important;margin-right:6px!important;}
+  #profilPanel .profileWrap{margin-top:-36px!important;}
+  #profilPanel .profilePhoto{width:74px!important;height:74px!important;}
+  #profilPanel .profileNameInput{font-size:26px!important;}
+  #profilPanel .profileBio{height:62px!important;min-height:62px!important;font-size:15px!important;}
+  #profilPanel .profileStats.profileStatsFour{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:11px!important;border-radius:25px!important;}
+  #profilPanel .profileStatsFour .profileStatCard{min-height:64px!important;padding:11px 8px!important;border-radius:18px!important;}
+  #profilPanel .profileStatsFour b{font-size:20px!important;}
+  #profilPanel .profileStatsFour span{font-size:12px!important;}
+}
+</style>
+<script id="elevatorx-v1460-profile-card-cleanup">
+(function(){
+  function cleanupProfileIdentity(){
+    try{
+      var card = document.getElementById('profileIdentityCard');
+      if(card) card.style.display = 'none';
+      ['coverArea','profileWrap','profileNameInput','profileJobInput','profileBio'].forEach(function(cls){
+        var list = document.querySelectorAll('#profilPanel .' + cls);
+        list.forEach(function(el){ el.style.removeProperty('display'); });
+      });
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){ cleanupProfileIdentity(); setTimeout(cleanupProfileIdentity, 500); setTimeout(cleanupProfileIdentity, 1500); });
+  window.addEventListener('load', function(){ cleanupProfileIdentity(); setTimeout(cleanupProfileIdentity, 800); });
+  setInterval(cleanupProfileIdentity, 1200);
+})();
+</script>
 
 </body>
 </html>
