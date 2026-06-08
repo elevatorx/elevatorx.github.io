@@ -1,3 +1,4 @@
+<!-- ELEVATORX_V1474_ACIL_GERI_DONUS | BASE v1.4.70 STABLE | LICENSE_ATTEMPT_REMOVED -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -41,7 +42,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1473_OFFLINE_LISANS_CIHAZ_AKTIVASYON | BASE v1.4.70 STABLE | APP_VERSION v1.4.73 -->
+<!-- ELEVATORX_V1474_ACIL_GERI_DONUS | BASE v1.4.70 STABLE | LICENSE_ATTEMPT_REMOVED | APP_VERSION v1.4.74 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -10060,7 +10061,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
 <img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1448" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.64</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.74</div>
 </div>
 </div>
 
@@ -10070,7 +10071,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.64";
+  const SPLASH_VERSION = "v1.4.74";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10595,8 +10596,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.73";
-// v1.4.73: Offline lisans + cihaza özel aktivasyon sistemi eklendi. Base v1.4.70 net çalışan sürüm.
+const APP_VERSION = "v1.4.74";
+// v1.4.74: Offline lisans denemesi iptal edildi; v1.4.70 net çalışan sürüme acil geri dönüş.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
 
@@ -13769,223 +13770,6 @@ ${sonParcalar}
 </div>
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
-
-
-
-<!-- === v1.4.73 Offline Lisans + Cihaz Aktivasyon Sistemi === -->
-<style id="ex-offline-license-style-v1473">
-#exLicenseGateV1473{
-  position:fixed!important;
-  inset:0!important;
-  z-index:2147483647!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  padding:22px!important;
-  background:
-    radial-gradient(circle at 50% -10%, rgba(0,122,255,.20), transparent 35%),
-    linear-gradient(180deg,#f7f8fc 0%,#eef2f8 100%)!important;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
-  color:#101828!important;
-}
-#exLicenseGateV1473 *{box-sizing:border-box!important;}
-.exLicenseCardV1473{
-  width:min(430px,100%)!important;
-  border-radius:34px!important;
-  padding:24px!important;
-  background:rgba(255,255,255,.92)!important;
-  border:1px solid rgba(226,232,240,.90)!important;
-  box-shadow:0 24px 70px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.88)!important;
-  backdrop-filter:blur(18px)!important;
-  -webkit-backdrop-filter:blur(18px)!important;
-}
-.exLicenseMarkV1473{
-  width:64px!important;height:64px!important;border-radius:22px!important;
-  margin:0 auto 14px!important;display:flex!important;align-items:center!important;justify-content:center!important;
-  background:linear-gradient(180deg,#0a84ff,#0057d9)!important;color:white!important;
-  font-size:32px!important;font-weight:900!important;letter-spacing:-1px!important;
-  box-shadow:0 14px 34px rgba(0,122,255,.26)!important;
-}
-.exLicenseTitleV1473{text-align:center!important;font-size:25px!important;font-weight:900!important;letter-spacing:-.6px!important;margin:0!important;}
-.exLicenseTextV1473{text-align:center!important;margin:8px auto 18px!important;color:#667085!important;font-size:14px!important;line-height:1.45!important;max-width:330px!important;font-weight:650!important;}
-.exLicenseDeviceBoxV1473{
-  background:linear-gradient(180deg,#f8fafc,#f2f6fb)!important;
-  border:1px solid rgba(226,232,240,.95)!important;
-  border-radius:22px!important;
-  padding:14px!important;
-  margin:14px 0!important;
-}
-.exLicenseDeviceLabelV1473{font-size:12px!important;color:#667085!important;font-weight:800!important;text-transform:uppercase!important;letter-spacing:.8px!important;margin-bottom:7px!important;}
-.exLicenseDeviceRowV1473{display:flex!important;gap:9px!important;align-items:center!important;}
-.exLicenseDeviceCodeV1473{
-  flex:1!important;min-width:0!important;
-  padding:11px 12px!important;border-radius:16px!important;background:white!important;border:1px solid rgba(226,232,240,.9)!important;
-  font-size:16px!important;font-weight:900!important;letter-spacing:1px!important;color:#101828!important;text-align:center!important;
-  user-select:all!important;
-}
-.exLicenseCopyBtnV1473,.exLicenseButtonV1473,.exLicenseGhostBtnV1473{
-  border:none!important;border-radius:16px!important;font-weight:900!important;cursor:pointer!important;
-  -webkit-tap-highlight-color:transparent!important;
-}
-.exLicenseCopyBtnV1473{padding:11px 12px!important;background:#eef4ff!important;color:#0a62d0!important;font-size:13px!important;}
-.exLicenseFormV1473 label{display:block!important;font-size:12px!important;font-weight:900!important;color:#667085!important;text-transform:uppercase!important;letter-spacing:.7px!important;margin:13px 0 7px!important;}
-.exLicenseFormV1473 input{
-  width:100%!important;height:52px!important;border:none!important;outline:none!important;border-radius:18px!important;
-  background:#f2f4f7!important;color:#101828!important;font-size:16px!important;font-weight:800!important;
-  padding:0 15px!important;text-align:center!important;text-transform:uppercase!important;
-  box-shadow:inset 0 0 0 1px rgba(226,232,240,.95)!important;
-}
-.exLicenseButtonV1473{
-  width:100%!important;height:54px!important;margin-top:16px!important;
-  background:linear-gradient(180deg,#101828,#0b1220)!important;color:white!important;font-size:16px!important;
-  box-shadow:0 15px 30px rgba(15,23,42,.18)!important;
-}
-.exLicenseGhostBtnV1473{
-  width:100%!important;height:46px!important;margin-top:10px!important;background:transparent!important;color:#667085!important;font-size:13px!important;
-}
-.exLicenseMsgV1473{min-height:22px!important;margin-top:12px!important;text-align:center!important;font-size:13px!important;font-weight:800!important;color:#667085!important;line-height:1.35!important;}
-.exLicenseMsgV1473.bad{color:#d92d20!important;}
-.exLicenseMsgV1473.good{color:#027a48!important;}
-.exLicenseHintV1473{margin-top:14px!important;font-size:12px!important;line-height:1.45!important;color:#98a2b3!important;text-align:center!important;font-weight:650!important;}
-body.exLicenseLockedV1473{overflow:hidden!important;}
-body.darkMode #exLicenseGateV1473,
-html.darkRoot #exLicenseGateV1473{
-  background:radial-gradient(circle at 50% -10%, rgba(59,130,246,.20), transparent 36%),linear-gradient(180deg,#0b0f17,#080c13)!important;
-  color:#f8fafc!important;
-}
-body.darkMode .exLicenseCardV1473,
-html.darkRoot .exLicenseCardV1473{background:rgba(17,24,39,.92)!important;border-color:rgba(148,163,184,.16)!important;box-shadow:0 24px 70px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05)!important;}
-body.darkMode .exLicenseTitleV1473,
-html.darkRoot .exLicenseTitleV1473{color:#f8fafc!important;}
-body.darkMode .exLicenseDeviceBoxV1473,
-html.darkRoot .exLicenseDeviceBoxV1473{background:rgba(15,23,42,.78)!important;border-color:rgba(148,163,184,.16)!important;}
-body.darkMode .exLicenseDeviceCodeV1473,
-html.darkRoot .exLicenseDeviceCodeV1473{background:#111827!important;border-color:rgba(148,163,184,.16)!important;color:#f8fafc!important;}
-body.darkMode .exLicenseFormV1473 input,
-html.darkRoot .exLicenseFormV1473 input{background:#111827!important;color:#f8fafc!important;box-shadow:inset 0 0 0 1px rgba(148,163,184,.16)!important;}
-</style>
-<script id="ex-offline-license-script-v1473">
-(function(){
-  var STORE_KEY='ex_offline_license_v1473';
-  var DEVICE_KEY='ex_offline_device_seed_v1473';
-  var SECRET_PARTS=[69,88,124,65,89,124,76,73,70,84,124,50,48,50,54,124,83,69,82,86,73,83];
-  var DURATION_MS={D30:30*24*60*60*1000,M06:183*24*60*60*1000,Y01:365*24*60*60*1000,LFT:null};
-  function secret(){return SECRET_PARTS.map(function(c){return String.fromCharCode(c);}).join('');}
-  function norm(v){return String(v||'').toUpperCase().replace(/[^A-Z0-9]/g,'');}
-  function pretty(v){v=norm(v);return v.replace(/(.{4})/g,'$1-').replace(/-$/,'');}
-  function hash32(str){
-    var h=2166136261>>>0;
-    for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
-    h^=h>>>13;h=Math.imul(h,0x5bd1e995)>>>0;h^=h>>>15;
-    return h>>>0;
-  }
-  function code36(num,len){var s=(num>>>0).toString(36).toUpperCase();while(s.length<len)s='0'+s;return s.slice(-len);}
-  function makeSeed(){
-    var arr=[];try{var a=new Uint32Array(4);crypto.getRandomValues(a);arr=Array.prototype.slice.call(a);}catch(e){arr=[Date.now(),Math.random()*1e9,screen.width,screen.height];}
-    return arr.join('-')+'-'+Date.now()+'-'+Math.random();
-  }
-  function getSeed(){var s=localStorage.getItem(DEVICE_KEY);if(!s){s=makeSeed();localStorage.setItem(DEVICE_KEY,s);}return s;}
-  function deviceCode(){
-    var raw=getSeed()+'|'+(navigator.userAgent||'')+'|'+screen.width+'x'+screen.height+'|'+(navigator.language||'');
-    var a=code36(hash32(raw+'|A'),4), b=code36(hash32(raw+'|B'),4), c=code36(hash32(raw+'|C'),4);
-    return a+'-'+b+'-'+c;
-  }
-  function makeActivation(license,device,duration){
-    var L=norm(license), D=norm(device), T=norm(duration).slice(0,3);
-    if(!DURATION_MS.hasOwnProperty(T)) return '';
-    var base=secret()+'|'+L+'|'+D+'|'+T;
-    var p1=code36(hash32(base+'|1'),4), p2=code36(hash32(base+'|2'),4), p3=code36(hash32(base+'|3'),4);
-    return T+'-'+p1+'-'+p2+'-'+p3;
-  }
-  function parseDuration(key){var k=norm(key);return k.slice(0,3);}
-  function validStored(){
-    try{
-      var rec=JSON.parse(localStorage.getItem(STORE_KEY)||'null');
-      if(!rec||!rec.license||!rec.key||!rec.duration) return false;
-      var dc=deviceCode();
-      if(norm(rec.device)!==norm(dc)) return false;
-      if(makeActivation(rec.license,dc,rec.duration)!==String(rec.key||'').toUpperCase()) return false;
-      if(rec.expiresAt && Date.now()>Number(rec.expiresAt)) return false;
-      return true;
-    }catch(e){return false;}
-  }
-  function expiryLabel(ts){
-    if(!ts) return 'Süresiz';
-    try{return new Date(Number(ts)).toLocaleDateString('tr-TR');}catch(e){return '-';}
-  }
-  function removeGate(){
-    var g=document.getElementById('exLicenseGateV1473');if(g)g.remove();
-    document.body.classList.remove('exLicenseLockedV1473');
-  }
-  function showMsg(text,type){
-    var m=document.getElementById('exLicenseMsgV1473');if(!m)return;
-    m.textContent=text||'';m.className='exLicenseMsgV1473 '+(type||'');
-  }
-  function copyDevice(){
-    var dc=deviceCode();
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(dc).then(function(){showMsg('Cihaz kodu kopyalandı.','good');}).catch(function(){showMsg('Cihaz kodu: '+dc,'good');});}
-    else{showMsg('Cihaz kodu: '+dc,'good');}
-  }
-  function activate(){
-    var licEl=document.getElementById('exLicenseNoV1473');
-    var keyEl=document.getElementById('exActivationKeyV1473');
-    var license=licEl?licEl.value:'';
-    var key=(keyEl?keyEl.value:'').toUpperCase().trim();
-    var dur=parseDuration(key);
-    if(!norm(license)){showMsg('Lisans no girmen gerekiyor.','bad');return;}
-    if(!DURATION_MS.hasOwnProperty(dur)){showMsg('Aktivasyon kodu geçersiz görünüyor.','bad');return;}
-    var dc=deviceCode();
-    var expected=makeActivation(license,dc,dur);
-    if(norm(key)!==norm(expected)){showMsg('Aktivasyon kodu bu cihaz için geçerli değil.','bad');return;}
-    var ms=DURATION_MS[dur];
-    var exp=ms===null?null:(Date.now()+ms);
-    var rec={license:pretty(license),device:dc,duration:dur,key:expected,activatedAt:Date.now(),expiresAt:exp};
-    localStorage.setItem(STORE_KEY,JSON.stringify(rec));
-    showMsg('Aktivasyon tamamlandı. Geçerlilik: '+expiryLabel(exp),'good');
-    setTimeout(removeGate,650);
-  }
-  function ensureGate(){
-    if(validStored()){removeGate();return;}
-    if(document.getElementById('exLicenseGateV1473')) return;
-    document.body.classList.add('exLicenseLockedV1473');
-    var expired='';
-    try{var rec=JSON.parse(localStorage.getItem(STORE_KEY)||'null');if(rec&&rec.expiresAt&&Date.now()>Number(rec.expiresAt)) expired='Aktivasyon süresi dolmuş. Yeni kod gerekiyor.';}catch(e){}
-    var gate=document.createElement('div');gate.id='exLicenseGateV1473';
-    gate.innerHTML=''+
-      '<div class="exLicenseCardV1473">'+
-        '<div class="exLicenseMarkV1473">X</div>'+ 
-        '<h1 class="exLicenseTitleV1473">ElevatorX Aktivasyon</h1>'+ 
-        '<p class="exLicenseTextV1473">Bu cihaz için lisans no ve aktivasyon kodu gerekiyor. Lisans no ile cihaz kodunu yetkili kişiye gönder.</p>'+ 
-        '<div class="exLicenseDeviceBoxV1473">'+
-          '<div class="exLicenseDeviceLabelV1473">Bu cihazın kodu</div>'+ 
-          '<div class="exLicenseDeviceRowV1473"><div class="exLicenseDeviceCodeV1473" id="exDeviceCodeV1473">'+deviceCode()+'</div><button class="exLicenseCopyBtnV1473" type="button" id="exCopyDeviceV1473">Kopyala</button></div>'+ 
-        '</div>'+ 
-        '<div class="exLicenseFormV1473">'+
-          '<label for="exLicenseNoV1473">Lisans No</label>'+ 
-          '<input id="exLicenseNoV1473" inputmode="text" autocomplete="off" placeholder="EX-001">'+ 
-          '<label for="exActivationKeyV1473">Aktivasyon Kodu</label>'+ 
-          '<input id="exActivationKeyV1473" inputmode="text" autocomplete="off" placeholder="D30-XXXX-XXXX-XXXX">'+ 
-          '<button class="exLicenseButtonV1473" type="button" id="exActivateBtnV1473">Aktifleştir</button>'+ 
-          '<button class="exLicenseGhostBtnV1473" type="button" id="exResetDeviceV1473">Cihaz kodunu yenile</button>'+ 
-        '</div>'+ 
-        '<div id="exLicenseMsgV1473" class="exLicenseMsgV1473">'+(expired||'')+'</div>'+ 
-        '<div class="exLicenseHintV1473">Aktivasyon kodu sadece bu cihaz kodu için çalışır. Başka telefonda aynı kod açılmaz.</div>'+ 
-      '</div>';
-    document.body.appendChild(gate);
-    document.getElementById('exCopyDeviceV1473').onclick=copyDevice;
-    document.getElementById('exActivateBtnV1473').onclick=activate;
-    document.getElementById('exResetDeviceV1473').onclick=function(){
-      if(confirm('Cihaz kodu yenilensin mi? Eski aktivasyon geçersiz olur.')){
-        localStorage.removeItem(STORE_KEY);localStorage.removeItem(DEVICE_KEY);document.getElementById('exDeviceCodeV1473').textContent=deviceCode();showMsg('Yeni cihaz kodu oluşturuldu.','good');
-      }
-    };
-    ['exLicenseNoV1473','exActivationKeyV1473'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('keydown',function(e){if(e.key==='Enter')activate();});});
-  }
-  window.elevatorXOfflineLicense={deviceCode:deviceCode,makeActivation:makeActivation,reset:function(){localStorage.removeItem(STORE_KEY);}};
-  document.addEventListener('DOMContentLoaded',function(){try{ensureGate();}catch(e){console.warn('ElevatorX offline license skipped',e);}});
-  window.addEventListener('load',function(){try{ensureGate();}catch(e){}});
-})();
-</script>
 
 </body>
 </html>
