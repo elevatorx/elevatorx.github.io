@@ -41,7 +41,7 @@ document.documentElement.classList.add("darkRoot");
 
 <title>ElevatorX</title>
 
-<!-- ELEVATORX_V1470_ACIL_NET_SURUME_DONUS | BASE v1.4.65 STABLE | APP_VERSION v1.4.70 -->
+<!-- ELEVATORX_V1471_DAVET_KODU_LITE_IZOLE | BASE v1.4.70 STABLE | APP_VERSION v1.4.71 -->
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1448">
@@ -10595,7 +10595,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.70";
+const APP_VERSION = "v1.4.71";
 // v1.4.70: Davet kodu denemesi iptal edildi, v1.4.65 net çalışan sürüme acil dönüş.
 window.APP_VERSION = APP_VERSION;
 const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1448", location.href).href;
@@ -20899,3 +20899,134 @@ try{ quickAddGuncelle(); }catch(e){}
 
 </body>
 </html>
+
+<!-- === v1.4.71 Davet Kodu Lite / İzole Aktivasyon Kilidi === -->
+<style id="ex-license-lite-style-v1471">
+  #exLicenseGateV1471 {
+    position:fixed; inset:0; z-index:2147483600;
+    display:flex; align-items:center; justify-content:center;
+    padding:26px; box-sizing:border-box;
+    background:radial-gradient(circle at 50% 18%, rgba(10,132,255,.22), transparent 34%), linear-gradient(180deg,#071426,#0b1220 70%, #050914);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",Arial,sans-serif;
+  }
+  #exLicenseGateV1471 *{box-sizing:border-box;}
+  #exLicenseGateV1471 .exl-card{
+    width:min(430px,100%); border-radius:34px; padding:28px 24px 24px;
+    color:#f8fafc; background:rgba(15,23,42,.82); border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 30px 80px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  }
+  #exLicenseGateV1471 .exl-logo{
+    width:76px; height:76px; border-radius:24px; margin:0 auto 18px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg,#ffffff,#eaf2ff); color:#0f172a;
+    box-shadow:0 18px 42px rgba(0,0,0,.24);
+    font-weight:900; font-size:38px; letter-spacing:-4px;
+  }
+  #exLicenseGateV1471 h1{font-size:30px; line-height:1.05; margin:0; text-align:center; letter-spacing:-.8px; font-weight:900;}
+  #exLicenseGateV1471 h1 span{color:#0a84ff;}
+  #exLicenseGateV1471 .exl-sub{margin:10px auto 22px; max-width:330px; text-align:center; color:#a8b3c7; line-height:1.45; font-size:15px; font-weight:650;}
+  #exLicenseGateV1471 label{display:block; color:#cbd5e1; font-size:13px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; margin:0 0 10px 4px;}
+  #exLicenseGateV1471 input{
+    width:100%; height:60px; border-radius:20px; border:1px solid rgba(255,255,255,.13); outline:none;
+    background:rgba(255,255,255,.08); color:#fff; padding:0 18px; font-size:20px; font-weight:900; letter-spacing:.06em;
+    text-transform:uppercase; box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  #exLicenseGateV1471 input::placeholder{color:rgba(203,213,225,.48);}
+  #exLicenseGateV1471 .exl-btn{
+    width:100%; height:58px; border:0; border-radius:20px; margin-top:14px; cursor:pointer;
+    background:linear-gradient(180deg,#128dff,#0571df); color:#fff; font-weight:900; font-size:18px;
+    box-shadow:0 18px 36px rgba(10,132,255,.25), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  #exLicenseGateV1471 .exl-note{margin-top:14px; color:#7f8da5; text-align:center; font-size:12px; line-height:1.45; font-weight:700;}
+  #exLicenseGateV1471 .exl-error{display:none; margin-top:12px; color:#fecaca; background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.22); padding:11px 13px; border-radius:16px; font-size:14px; font-weight:800;}
+  #exLicenseGateV1471.exl-shake .exl-card{animation:exlShakeV1471 .28s ease;}
+  @keyframes exlShakeV1471{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  body.ex-license-locked-v1471{overflow:hidden!important;}
+</style>
+<script id="ex-license-lite-script-v1471">
+(function(){
+  'use strict';
+  var LICENSE_KEY='ex_license_lite_v1';
+  var DEVICE_KEY='ex_license_device_v1';
+  var VALID_SHA=['96d20208d01617d512bc823f43b4a6269e46919a9e333458636b15c1fb4d7403'];
+  var VALID_LITE=['8572320333728655'];
+  var PEPPER=['Elevator','X','|','AY','|','License','Lite','|','2026'].join('');
+  function normalize(v){return String(v||'').toUpperCase().replace(/[^A-Z0-9]/g,'');}
+  function cyrb53(str, seed){
+    var h1=0xdeadbeef ^ (seed||0), h2=0x41c6ce57 ^ (seed||0);
+    for(var i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}
+    h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+    h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+    return String(4294967296*(2097151&h2)+(h1>>>0));
+  }
+  function getDeviceId(){
+    var id=localStorage.getItem(DEVICE_KEY);
+    if(!id){id='dx-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);localStorage.setItem(DEVICE_KEY,id);}
+    return id;
+  }
+  function sign(device, ts){return cyrb53(String(device)+'|'+String(ts)+'|'+PEPPER+'|v1471',17);}
+  function isActivated(){
+    try{
+      var raw=localStorage.getItem(LICENSE_KEY); if(!raw) return false;
+      var data=JSON.parse(raw); if(!data||data.ok!==true||!data.device||!data.ts||!data.sig) return false;
+      return data.sig===sign(data.device,data.ts);
+    }catch(e){return false;}
+  }
+  function saveActivation(){
+    var device=getDeviceId(); var ts=Date.now();
+    localStorage.setItem(LICENSE_KEY, JSON.stringify({ok:true,device:device,ts:ts,sig:sign(device,ts)}));
+  }
+  function hashSha(text){
+    if(!window.crypto||!crypto.subtle||!window.TextEncoder) return Promise.resolve(null);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(x){return ('00'+x.toString(16)).slice(-2);}).join('');
+    }).catch(function(){return null;});
+  }
+  function ensureGate(){
+    if(isActivated()) return;
+    if(document.getElementById('exLicenseGateV1471')) return;
+    document.body.classList.add('ex-license-locked-v1471');
+    var gate=document.createElement('div');
+    gate.id='exLicenseGateV1471';
+    gate.innerHTML='<div class="exl-card" role="dialog" aria-modal="true" aria-label="ElevatorX aktivasyon">'+
+      '<div class="exl-logo"><span>E<span style="color:#0a84ff">X</span></span></div>'+
+      '<h1>Elevator<span>X</span></h1>'+
+      '<div class="exl-sub">Bu cihazda kullanıma başlamak için davet kodunu gir.</div>'+
+      '<label for="exLicenseCodeV1471">Davet kodu</label>'+
+      '<input id="exLicenseCodeV1471" inputmode="text" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" placeholder="EX-XXXX-XXXX">'+
+      '<button class="exl-btn" id="exLicenseBtnV1471" type="button">Aktifleştir</button>'+
+      '<div class="exl-error" id="exLicenseErrV1471">Kod hatalı. Büyük/küçük harf fark etmez, tekrar dene.</div>'+
+      '<div class="exl-note">Aktivasyon bu cihazda saklanır. Uygulama verilerine dokunulmaz.</div>'+
+    '</div>';
+    document.body.appendChild(gate);
+    var input=document.getElementById('exLicenseCodeV1471');
+    var btn=document.getElementById('exLicenseBtnV1471');
+    var err=document.getElementById('exLicenseErrV1471');
+    function fail(){
+      if(err) err.style.display='block';
+      gate.classList.remove('exl-shake'); void gate.offsetWidth; gate.classList.add('exl-shake');
+    }
+    function ok(){
+      saveActivation();
+      document.body.classList.remove('ex-license-locked-v1471');
+      gate.style.opacity='0'; gate.style.transition='opacity .22s ease';
+      setTimeout(function(){try{gate.remove();}catch(e){gate.parentNode&&gate.parentNode.removeChild(gate);}},240);
+    }
+    function check(){
+      var normalized=normalize(input && input.value);
+      var lite=cyrb53(normalized+'|'+PEPPER,0);
+      hashSha(normalized+'|'+PEPPER).then(function(sha){
+        if((sha && VALID_SHA.indexOf(sha)>-1) || VALID_LITE.indexOf(lite)>-1) ok(); else fail();
+      });
+    }
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', function(e){ if(e.key==='Enter') check(); });
+    setTimeout(function(){try{input.focus();}catch(e){}},280);
+  }
+  document.addEventListener('DOMContentLoaded', function(){try{ensureGate();}catch(e){console.warn('ElevatorX license gate skipped',e);}});
+  window.addEventListener('load', function(){try{ensureGate();}catch(e){}});
+  window.elevatorXLicenseReset=function(){localStorage.removeItem(LICENSE_KEY); location.reload();};
+})();
+</script>
+
