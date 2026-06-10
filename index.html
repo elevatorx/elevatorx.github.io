@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.81 — aktivasyon/splash preboot */
+/* v1.4.82 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1481_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1482_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.81 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.82 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1481_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1482_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1481_BUILD_VERIFIED | APP_VERSION v1.4.81 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1482_BUILD_VERIFIED | APP_VERSION v1.4.82 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1481_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.81 -->
+<!-- ELEVATORX_V1482_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.82 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1481">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1481">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1481">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1481">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1481">
-<link rel="manifest" href="/manifest.webmanifest?v=1481">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1482">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1482">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1482">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1482">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1482">
+<link rel="manifest" href="/manifest.webmanifest?v=1482">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.81 — Emoji-free premium line icon system === */
+/* === v1.4.82 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9767,6 +9767,195 @@ body.darkMode .detailReportCard .exIcon,
 html.darkRoot .detailReportCard .exIcon,
 body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
+
+
+/* === v1.4.82 — Eski premium alt bar restore ===
+   Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
+#quickAddBtn.quickAddBtn,
+#quickAddBtn.quickAddBtn.quickAddVisible{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.tabGap{display:block!important;visibility:visible!important;pointer-events:none!important;}
+
+.tabbar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  width:min(356px,calc(100vw - 44px))!important;
+  height:76px!important;
+  padding:8px 12px!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr 78px 1fr!important;
+  align-items:center!important;
+  justify-items:center!important;
+  gap:0!important;
+  border-radius:34px!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.90),rgba(246,248,252,.82))!important;
+  box-shadow:
+    0 18px 42px rgba(15,23,42,.12),
+    0 8px 18px rgba(15,23,42,.06),
+    inset 0 1px 0 rgba(255,255,255,.96)!important;
+  backdrop-filter:blur(24px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+  overflow:visible!important;
+  z-index:10020!important;
+}
+
+.tabbar::before{display:none!important;}
+
+.tabbar .tabItem{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:58px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:22px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#7d8796!important;
+  line-height:1!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
+.tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
+.tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
+
+.tabbar .tabItem.activeTab{
+  color:#2f6ff0!important;
+  background:linear-gradient(180deg,rgba(47,111,240,.10),rgba(47,111,240,.04))!important;
+  border:1px solid rgba(125,178,255,.30)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.76)!important;
+}
+
+.tabbar .tabIcon{
+  width:23px!important;
+  height:23px!important;
+  margin:0 0 3px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:currentColor!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.tabbar .tabSvg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  stroke:currentColor!important;
+  fill:none!important;
+}
+
+.tabbar .tabText{
+  display:block!important;
+  font-size:10.8px!important;
+  font-weight:860!important;
+  letter-spacing:-.12px!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+}
+
+.tabbar .middleButton{
+  display:flex!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  position:absolute!important;
+  left:50%!important;
+  top:-22px!important;
+  transform:translateX(-50%)!important;
+  width:62px!important;
+  height:62px!important;
+  min-width:62px!important;
+  max-width:62px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:50%!important;
+  border:5px solid rgba(246,247,251,.96)!important;
+  background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
+  color:#fff!important;
+  font-size:38px!important;
+  font-weight:360!important;
+  line-height:1!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-shadow:
+    0 16px 34px rgba(47,111,240,.34),
+    0 8px 18px rgba(15,23,42,.12),
+    inset 0 1px 0 rgba(255,255,255,.45)!important;
+  z-index:10090!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+.tabbar .middleButton:active{
+  transform:translateX(-50%) scale(.94)!important;
+}
+
+.container{
+  padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))!important;
+}
+
+body::after{
+  height:calc(104px + env(safe-area-inset-bottom,0px))!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  background:linear-gradient(180deg,rgba(22,28,39,.90),rgba(13,18,27,.84))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{color:#94a1b2!important;}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#7db2ff!important;
+  background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
+  border-color:rgba(96,165,250,.28)!important;
+}
+
+body.darkMode .tabbar .middleButton,
+html.darkRoot .tabbar .middleButton{
+  border-color:rgba(17,23,34,.95)!important;
+  background:linear-gradient(180deg,#4b82f3 0%,#2563eb 100%)!important;
+}
+
+@media(max-width:430px){
+  .tabbar{
+    width:min(346px,calc(100vw - 38px))!important;
+    height:72px!important;
+    grid-template-columns:1fr 1fr 74px 1fr!important;
+    padding:7px 10px!important;
+    bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;
+  }
+  .tabbar .tabItem{height:55px!important;border-radius:20px!important;}
+  .tabbar .tabIcon{width:22px!important;height:22px!important;margin-bottom:2px!important;}
+  .tabbar .tabText{font-size:10.2px!important;}
+  .tabbar .middleButton{width:60px!important;height:60px!important;min-width:60px!important;max-width:60px!important;top:-21px!important;font-size:36px!important;}
+}
+
 </style>
 
 <script>
@@ -9916,10 +10105,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1481" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1482" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.81</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.82</div>
 </div>
 </div>
 
@@ -9929,7 +10118,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.81";
+  const SPLASH_VERSION = "v1.4.82";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10393,6 +10582,8 @@ Destek: supportelevatorx@gmail.com
 <span class="tabText">Apartmanlar</span>
 </button>
 
+<button type="button" class="middleButton" onclick="formAc()" aria-label="Yeni apartman ekle">+</button>
+
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10459,9 +10650,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.81";
+const APP_VERSION = "v1.4.82";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1481", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1482", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -15397,7 +15588,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.81</div>
+  <div>ElevatorX v1.4.82</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15717,7 +15908,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.81</div>
+    <div class="controlReportBadge">v1.4.82</div>
   </div>
 
   <div class="controlReportPreview">
