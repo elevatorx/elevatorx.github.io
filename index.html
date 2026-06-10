@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.90 — aktivasyon/splash preboot */
+/* v1.4.91 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1490_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1491_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.90 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.91 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1490_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1491_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1490_BUILD_VERIFIED | APP_VERSION v1.4.90 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1491_BUILD_VERIFIED | APP_VERSION v1.4.91 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1490_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.90 -->
+<!-- ELEVATORX_V1491_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.91 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1490">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1490">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1490">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1490">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1490">
-<link rel="manifest" href="/manifest.webmanifest?v=1490">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1491">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1491">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1491">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1491">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1491">
+<link rel="manifest" href="/manifest.webmanifest?v=1491">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.90 — Emoji-free premium line icon system === */
+/* === v1.4.91 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.90 — Eski premium alt bar restore ===
+/* === v1.4.91 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,11 +10071,11 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1490_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1491_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
 
-<style id="exBottomBarYeniLockV1490">
-/* === v1.4.90 — Alt bar Yeni görünüm kilidi ===
+<style id="exBottomBarYeniLockV1491">
+/* === v1.4.91 — Alt bar Yeni görünüm kilidi ===
    Yeni sadece Apartmanlar / Yeni form açıkken görünür.
    Bakım ve Profil ekranlarında alt bar 3 parçalı kalır. */
 
@@ -10145,8 +10145,8 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
 
 
 
-<style id="exLeftMenuOnlyStyleV1490">
-/* === v1.4.90 — Sadece soldan menü ===
+<style id="exLeftMenuOnlyStyleV1491">
+/* === v1.4.91 — Sadece soldan menü ===
    PDF/print şablonlarına dokunulmadı.
    Alt bar korunur, sadece sol üst menü eklenir. */
 .exLeftMenuBtn{
@@ -10559,6 +10559,56 @@ html.darkRoot .exLeftMenuFooter{
 }
 </style>
 
+
+
+<style id="exLeftMenuNoBottomBarFixV1491">
+/* === v1.4.91 — Soldan menü + alt bar tamamen kapalı ===
+   Ana head içinde. PDF/print şablonlarına dokunmaz. */
+.tabbar,
+.tabbar *,
+#quickAddBtn,
+#quickAddBtn.quickAddBtn,
+.quickAddBtn,
+.middleButton{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.container{
+  padding-bottom:34px!important;
+}
+
+#profilPanel,
+.profileFooter,
+.teknikPanel{
+  padding-bottom:42px!important;
+}
+
+.exLeftMenuBtn{
+  z-index:2147483000!important;
+}
+
+.exLeftMenuBackdrop{
+  z-index:2147482980!important;
+}
+
+.exLeftMenuDrawer{
+  z-index:2147482990!important;
+}
+
+body.exLeftMenuOpen .tabbar,
+body.exLeftMenuOpen #quickAddBtn,
+body.exLeftMenuOpen .quickAddBtn,
+body.exLeftMenuOpen .middleButton{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+</style>
+
 </head>
 
 <body>
@@ -10627,11 +10677,11 @@ html.darkRoot .exLeftMenuFooter{
 
   <div class="exLeftMenuFooter">
     <b>ElevatorX</b>
-    <span>v1.4.90 • Sadece soldan menü</span>
+    <span>v1.4.91 • Alt bar kapalı soldan menü</span>
   </div>
 </aside>
 
-<script id="exLeftMenuOnlyScriptV1490">
+<script id="exLeftMenuOnlyScriptV1491">
 (function(){
   function $(id){ return document.getElementById(id); }
 
@@ -10663,6 +10713,7 @@ html.darkRoot .exLeftMenuFooter{
   window.exLeftMenuGo = function(fnName, tab){
     try{ window.exLeftMenuMark(tab); }catch(e){}
     window.exLeftMenuClose();
+
     setTimeout(function(){
       try{
         if(typeof window[fnName] === 'function'){
@@ -10670,6 +10721,17 @@ html.darkRoot .exLeftMenuFooter{
         }else if(typeof toast === 'function'){
           toast('Bu bölüm henüz hazır değil');
         }
+
+        setTimeout(function(){
+          try{
+            document.querySelectorAll('.tabbar,#quickAddBtn,.quickAddBtn,.middleButton').forEach(function(el){
+              el.style.setProperty('display','none','important');
+              el.style.setProperty('opacity','0','important');
+              el.style.setProperty('visibility','hidden','important');
+              el.style.setProperty('pointer-events','none','important');
+            });
+          }catch(_){}
+        },80);
       }catch(e){
         try{ if(typeof toast === 'function') toast('Bölüm açılamadı'); }catch(_){}
       }
@@ -10746,10 +10808,10 @@ html.darkRoot .exLeftMenuFooter{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1490" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1491" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.90</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.91</div>
 </div>
 </div>
 
@@ -10759,7 +10821,7 @@ html.darkRoot .exLeftMenuFooter{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.90";
+  const SPLASH_VERSION = "v1.4.91";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -11299,9 +11361,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.90";
+const APP_VERSION = "v1.4.91";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1490", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1491", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14487,8 +14549,8 @@ ${sonParcalar}
 
 
 
-<script id="exBottomBarYeniLockScriptV1490">
-/* v1.4.90 — Yeni sekmesi görünürlük kilidi */
+<script id="exBottomBarYeniLockScriptV1491">
+/* v1.4.91 — Yeni sekmesi görünürlük kilidi */
 (function(){
   function currentTab(){
     try{
@@ -16338,7 +16400,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.90</div>
+  <div>ElevatorX v1.4.91</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -16658,7 +16720,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.90</div>
+    <div class="controlReportBadge">v1.4.91</div>
   </div>
 
   <div class="controlReportPreview">
@@ -18327,7 +18389,7 @@ opacity:.9;
 
 
 
-/* === v1.4.90 — 2. resimdeki alt bar restore ===
+/* === v1.4.91 — 2. resimdeki alt bar restore ===
    Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
    Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
 #quickAddBtn,
@@ -18537,7 +18599,7 @@ html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
 
 
 
-/* === v1.4.90 — + Yeni yalnız Apartman ekranında === */
+/* === v1.4.91 — + Yeni yalnız Apartman ekranında === */
 body:not(.exShowYeniTab) .tabbar{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   width:min(340px,calc(100vw - 48px))!important;
@@ -21967,8 +22029,8 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exTabbarYeniVisibilityV1490">
-/* v1.4.90 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
+<script id="exTabbarYeniVisibilityV1491">
+/* v1.4.91 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
 (function(){
   function exTabbarYeniDurum(){
     try{
@@ -22011,6 +22073,41 @@ try{ quickAddGuncelle(); }catch(e){}
       setTimeout(exTabbarYeniDurum, 80);
       setTimeout(exTabbarYeniDurum, 320);
     }
+  }, true);
+})();
+</script>
+
+
+
+<script id="exLeftMenuNoBottomBarFixScriptV1491">
+/* v1.4.91 — Ana uygulamada alt barı soldan menü için kapatır. */
+(function(){
+  function hideBottomBar(){
+    try{
+      document.querySelectorAll('.tabbar,#quickAddBtn,.quickAddBtn,.middleButton').forEach(function(el){
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('opacity','0','important');
+        el.style.setProperty('visibility','hidden','important');
+        el.style.setProperty('pointer-events','none','important');
+      });
+    }catch(e){}
+  }
+
+  window.exHideBottomBarForLeftMenu = hideBottomBar;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    hideBottomBar();
+    setTimeout(hideBottomBar,300);
+    setTimeout(hideBottomBar,900);
+  });
+
+  window.addEventListener('load', function(){
+    hideBottomBar();
+    setTimeout(hideBottomBar,600);
+  });
+
+  document.addEventListener('click', function(){
+    setTimeout(hideBottomBar,80);
   }, true);
 })();
 </script>
