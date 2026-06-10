@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.82 — aktivasyon/splash preboot */
+/* v1.4.83 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1482_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1483_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.82 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.83 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1482_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1483_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1482_BUILD_VERIFIED | APP_VERSION v1.4.82 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1483_BUILD_VERIFIED | APP_VERSION v1.4.83 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1482_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.82 -->
+<!-- ELEVATORX_V1483_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.83 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1482">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1482">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1482">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1482">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1482">
-<link rel="manifest" href="/manifest.webmanifest?v=1482">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1483">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1483">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1483">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1483">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1483">
+<link rel="manifest" href="/manifest.webmanifest?v=1483">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.82 — Emoji-free premium line icon system === */
+/* === v1.4.83 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.82 — Eski premium alt bar restore ===
+/* === v1.4.83 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10105,10 +10105,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1482" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1483" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.82</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.83</div>
 </div>
 </div>
 
@@ -10118,7 +10118,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.82";
+  const SPLASH_VERSION = "v1.4.83";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10582,7 +10582,15 @@ Destek: supportelevatorx@gmail.com
 <span class="tabText">Apartmanlar</span>
 </button>
 
-<button type="button" class="middleButton" onclick="formAc()" aria-label="Yeni apartman ekle">+</button>
+<button type="button" class="tabItem" data-tab="yeni" onclick="formAc()" aria-label="Yeni apartman ekle">
+<span class="tabIcon" aria-hidden="true">
+<svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.9"/>
+<path d="M12 8.2V15.8M8.2 12H15.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
+</span>
+<span class="tabText">Yeni</span>
+</button>
 
 <button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
 <span class="tabIcon" aria-hidden="true">
@@ -10650,9 +10658,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.82";
+const APP_VERSION = "v1.4.83";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1482", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1483", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -12535,7 +12543,7 @@ function formAc(){
 haptic("medium");
 
 aktifEkran = "apartman";
-setAktifTab("apartman");
+setAktifTab(formBox && formBox.style.display=="none" ? "yeni" : "apartman");
 
 searchArea.style.display="flex";
 profilPanel.style.display="none";
@@ -15588,7 +15596,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.82</div>
+  <div>ElevatorX v1.4.83</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15908,7 +15916,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.82</div>
+    <div class="controlReportBadge">v1.4.83</div>
   </div>
 
   <div class="controlReportPreview">
@@ -17573,6 +17581,216 @@ opacity:.9;
 
 @media (prefers-reduced-motion: reduce){
 #quickAddBtn.quickAddBtn::after{animation:none!important;}
+}
+
+
+
+/* === v1.4.83 — 2. resimdeki alt bar restore ===
+   Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
+   Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
+#quickAddBtn,
+#quickAddBtn.quickAddBtn,
+.quickAddBtn,
+.middleButton{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.tabbar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  width:min(390px,calc(100vw - 34px))!important;
+  height:82px!important;
+  padding:8px!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:center!important;
+  justify-items:center!important;
+  gap:6px!important;
+  border-radius:32px!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.91),rgba(246,249,255,.82))!important;
+  backdrop-filter:blur(24px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+  box-shadow:0 18px 45px rgba(15,23,42,.13),0 7px 18px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.86)!important;
+  z-index:10020!important;
+  overflow:visible!important;
+}
+
+.tabbar::before,
+.tabbar::after{
+  display:none!important;
+  content:none!important;
+}
+
+.tabbar .tabGap{
+  display:none!important;
+}
+
+.tabbar .tabItem{
+  position:relative!important;
+  grid-column:auto!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:64px!important;
+  margin:0!important;
+  padding:8px 4px!important;
+  border:1px solid transparent!important;
+  border-radius:25px!important;
+  background:transparent!important;
+  color:#6f7888!important;
+  box-shadow:none!important;
+  transform:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  font:inherit!important;
+  line-height:1!important;
+  text-align:center!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+.tabbar .tabItem::before,
+.tabbar .tabItem::after{
+  display:none!important;
+  content:none!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
+.tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
+.tabbar .tabItem[data-tab="yeni"]{grid-column:3!important;}
+.tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
+
+.tabbar .tabItem:active{
+  transform:scale(.97)!important;
+  opacity:.88!important;
+}
+
+.tabbar .tabIcon{
+  width:25px!important;
+  height:25px!important;
+  min-width:25px!important;
+  max-width:25px!important;
+  margin:0 0 2px!important;
+  color:currentColor!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+.tabbar .tabSvg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  stroke:currentColor!important;
+  fill:none!important;
+}
+
+.tabbar .tabText{
+  display:block!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  letter-spacing:-.15px!important;
+  line-height:1.05!important;
+  white-space:nowrap!important;
+  color:currentColor!important;
+}
+
+.tabbar .tabItem.activeTab{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;
+  border-color:rgba(255,255,255,.16)!important;
+  box-shadow:0 13px 28px rgba(15,23,42,.24),0 4px 10px rgba(15,23,42,.14),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+
+.tabbar .tabItem[data-tab="yeni"]{
+  color:#2f7df6!important;
+  background:linear-gradient(180deg,rgba(239,246,255,.98),rgba(219,234,254,.92))!important;
+  border-color:rgba(96,165,250,.32)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 8px 18px rgba(47,125,246,.08)!important;
+}
+
+.tabbar .tabItem[data-tab="yeni"] .tabIcon{
+  width:27px!important;
+  height:27px!important;
+}
+
+.tabbar .tabItem[data-tab="yeni"].activeTab{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#5b95ff 0%,#2876f3 100%)!important;
+  border-color:rgba(255,255,255,.35)!important;
+  box-shadow:0 14px 30px rgba(47,125,246,.28),inset 0 1px 0 rgba(255,255,255,.32)!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  background:linear-gradient(180deg,rgba(23,30,43,.92),rgba(12,17,27,.86))!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.38),0 7px 18px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+  color:#96a2b2!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;
+  border-color:rgba(255,255,255,.13)!important;
+}
+
+body.darkMode .tabbar .tabItem[data-tab="yeni"],
+html.darkRoot .tabbar .tabItem[data-tab="yeni"]{
+  color:#83b8ff!important;
+  background:linear-gradient(180deg,rgba(29,78,216,.22),rgba(37,99,235,.13))!important;
+  border-color:rgba(96,165,250,.24)!important;
+}
+
+body.darkMode .tabbar .tabItem[data-tab="yeni"].activeTab,
+html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#4d8cff 0%,#2563eb 100%)!important;
+}
+
+@media(max-width:430px){
+  .tabbar{
+    width:min(370px,calc(100vw - 30px))!important;
+    height:78px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+    padding:7px!important;
+    gap:5px!important;
+    border-radius:30px!important;
+  }
+  .tabbar .tabItem{
+    height:61px!important;
+    border-radius:23px!important;
+    padding:7px 3px!important;
+  }
+  .tabbar .tabIcon{
+    width:23px!important;
+    height:23px!important;
+    min-width:23px!important;
+    max-width:23px!important;
+  }
+  .tabbar .tabItem[data-tab="yeni"] .tabIcon{
+    width:25px!important;
+    height:25px!important;
+  }
+  .tabbar .tabText{
+    font-size:10.4px!important;
+  }
 }
 
 </style>
