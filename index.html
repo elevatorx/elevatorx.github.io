@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.92 — aktivasyon/splash preboot */
+/* v1.4.93 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1492_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1493_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.92 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.93 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1492_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1493_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1492_BUILD_VERIFIED | APP_VERSION v1.4.92 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1493_BUILD_VERIFIED | APP_VERSION v1.4.93 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1492_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.92 -->
+<!-- ELEVATORX_V1493_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.93 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1492">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1492">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1492">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1492">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1492">
-<link rel="manifest" href="/manifest.webmanifest?v=1492">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1493">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1493">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1493">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1493">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1493">
+<link rel="manifest" href="/manifest.webmanifest?v=1493">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.92 — Emoji-free premium line icon system === */
+/* === v1.4.93 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.92 — Eski premium alt bar restore ===
+/* === v1.4.93 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,11 +10071,11 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1492_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1493_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
 
-<style id="exBottomBarYeniLockV1492">
-/* === v1.4.92 — Alt bar Yeni görünüm kilidi ===
+<style id="exBottomBarYeniLockV1493">
+/* === v1.4.93 — Alt bar Yeni görünüm kilidi ===
    Yeni sadece Apartmanlar / Yeni form açıkken görünür.
    Bakım ve Profil ekranlarında alt bar 3 parçalı kalır. */
 
@@ -10145,8 +10145,8 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
 
 
 
-<style id="exLeftMenuJsSafeStyleV1492">
-/* === v1.4.92 — Soldan menü JS injection / PDF safe ===
+<style id="exLeftMenuJsSafeStyleV1493">
+/* === v1.4.93 — Soldan menü JS injection / PDF safe ===
    Menü HTML'e gömülmez. Sadece ana uygulama yüklendikten sonra JS ile oluşturulur.
    PDF/rapor/yazdır ekranlarına eklenmez. */
 
@@ -10348,6 +10348,8 @@ body.darkMode .exLeftMenuFooter,html.darkRoot .exLeftMenuFooter{
 }
 </style>
 
+
+<!-- ELEVATORX_V1493_PDF_BACK_HOME_FIX | LEFT_MENU_SAFE | PRINT_BUTTON_BOUNDARY_FIX -->
 </head>
 
 <body>
@@ -10383,10 +10385,10 @@ body.darkMode .exLeftMenuFooter,html.darkRoot .exLeftMenuFooter{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1492" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1493" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.92</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.93</div>
 </div>
 </div>
 
@@ -10396,7 +10398,7 @@ body.darkMode .exLeftMenuFooter,html.darkRoot .exLeftMenuFooter{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.92";
+  const SPLASH_VERSION = "v1.4.93";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10936,9 +10938,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.92";
+const APP_VERSION = "v1.4.93";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1492", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1493", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -10957,38 +10959,71 @@ function elevatorXPdfSafetyScript(){
 return `<script>
 (function(){
 try{
+var HOME_URL = "https://elevatorx.github.io/?v=1493&resetcache=1&fromPdf=1";
+
+function addPdfSafeStyle(){
+  try{
+    if(document.getElementById("exPdfSafeStyleV1493")) return;
+    var st = document.createElement("style");
+    st.id = "exPdfSafeStyleV1493";
+    st.textContent =
+      ".printBtn{position:fixed!important;right:18px!important;bottom:18px!important;left:auto!important;top:auto!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:16px!important;padding:14px 18px!important;background:#007aff!important;color:#fff!important;font-size:14px!important;font-weight:900!important;line-height:1!important;box-shadow:0 10px 28px rgba(15,23,42,.16)!important;transform:none!important;}" +
+      ".printBtn::before,.printBtn::after{display:none!important;content:none!important;}" +
+      ".backBtn{position:fixed!important;z-index:99999!important;top:14px!important;left:14px!important;right:auto!important;bottom:auto!important;width:auto!important;height:auto!important;min-width:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:16px!important;padding:11px 14px!important;line-height:1!important;}" +
+      ".screenBtn{width:auto!important;height:auto!important;min-width:0!important;}";
+    document.head.appendChild(st);
+  }catch(e){}
+}
+
+function goHome(){
+  try{
+    window.close();
+  }catch(e){}
+
+  setTimeout(function(){
+    try{
+      if(!window.closed){
+        location.replace(HOME_URL);
+      }
+    }catch(e){
+      try{ location.href = HOME_URL; }catch(_){}
+    }
+  },160);
+
+  return false;
+}
+
 if(window.history && window.history.replaceState){
-window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
+  window.history.replaceState({elevatorxReport:true}, document.title, window.location.href);
 }
-window.elevatorXReportBack = function(){
-try{ window.close(); }catch(e){}
-setTimeout(function(){
-try{
-if(!window.closed){
-var btn = document.querySelector(".backBtn,.screenBtn");
-if(btn){
-btn.textContent = "Kapatmak için sağ üstteki X'i kullan";
-btn.disabled = true;
-btn.style.opacity = "0.75";
-}
-}
-}catch(e){}
-},120);
-return false;
-};
+
+window.elevatorXReportBack = goHome;
+
 window.addEventListener("pageshow", function(){
-try{
-if(String(window.location.href).indexOf("blob:") === 0){
-window.location.replace("https://elevatorx.github.io/?return=elevatorx");
-}
-}catch(e){}
+  addPdfSafeStyle();
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+  addPdfSafeStyle();
+
+  try{
+    document.querySelectorAll(".backBtn,.screenBtn").forEach(function(btn){
+      var t = String(btn.textContent || "");
+      if(/Geri/i.test(t)){
+        btn.onclick = goHome;
+      }
+    });
+  }catch(e){}
+});
+
+setTimeout(addPdfSafeStyle,80);
+setTimeout(addPdfSafeStyle,400);
+setTimeout(addPdfSafeStyle,1200);
+
 }catch(e){}
 })();
 <\/script>`;
 }
-
-
 
 function profilSurumGuncelle(){
 
@@ -14124,8 +14159,8 @@ ${sonParcalar}
 
 
 
-<script id="exBottomBarYeniLockScriptV1492">
-/* v1.4.92 — Yeni sekmesi görünürlük kilidi */
+<script id="exBottomBarYeniLockScriptV1493">
+/* v1.4.93 — Yeni sekmesi görünürlük kilidi */
 (function(){
   function currentTab(){
     try{
@@ -15975,7 +16010,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.92</div>
+  <div>ElevatorX v1.4.93</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -16295,7 +16330,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.92</div>
+    <div class="controlReportBadge">v1.4.93</div>
   </div>
 
   <div class="controlReportPreview">
@@ -17964,7 +17999,7 @@ opacity:.9;
 
 
 
-/* === v1.4.92 — 2. resimdeki alt bar restore ===
+/* === v1.4.93 — 2. resimdeki alt bar restore ===
    Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
    Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
 #quickAddBtn,
@@ -18174,7 +18209,7 @@ html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
 
 
 
-/* === v1.4.92 — + Yeni yalnız Apartman ekranında === */
+/* === v1.4.93 — + Yeni yalnız Apartman ekranında === */
 body:not(.exShowYeniTab) .tabbar{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   width:min(340px,calc(100vw - 48px))!important;
@@ -21604,8 +21639,8 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exTabbarYeniVisibilityV1492">
-/* v1.4.92 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
+<script id="exTabbarYeniVisibilityV1493">
+/* v1.4.93 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
 (function(){
   function exTabbarYeniDurum(){
     try{
@@ -21654,7 +21689,7 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exLeftMenuJsSafeScriptV1492">
+<script id="exLeftMenuJsSafeScriptV1493">
 (function(){
   function isMainApp(){
     try{
@@ -21703,7 +21738,7 @@ try{ quickAddGuncelle(); }catch(e){}
             '<button type="button" class="exLeftMenuItem" onclick="exLeftMenuGo(\\'yedekle\\',\\'yedek\\')"><span class="exLeftMenuIcon">↥</span><span><b>Verileri Yedekle</b><small>JSON yedek oluştur</small></span></button>'+
             '<button type="button" class="exLeftMenuItem" onclick="exLeftMenuLicenseStatus()"><span class="exLeftMenuIcon">🔐</span><span><b>Lisans Durumu</b><small>Cihaz ve aktivasyon bilgisi</small></span></button>'+
           '</nav>'+
-          '<div class="exLeftMenuFooter"><b>ElevatorX</b><span>v1.4.92 • PDF safe soldan menü</span></div>'+
+          '<div class="exLeftMenuFooter"><b>ElevatorX</b><span>v1.4.93 • PDF safe soldan menü</span></div>'+
         '</aside>';
 
       document.body.insertBefore(wrap, document.body.firstChild);
