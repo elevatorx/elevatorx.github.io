@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.95 — aktivasyon/splash preboot */
+/* v1.4.96 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1495_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1496_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.95 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.96 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1495_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1496_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1495_BUILD_VERIFIED | APP_VERSION v1.4.95 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1496_BUILD_VERIFIED | APP_VERSION v1.4.96 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1495_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.95 -->
+<!-- ELEVATORX_V1496_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.96 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1495">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1495">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1495">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1495">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1495">
-<link rel="manifest" href="/manifest.webmanifest?v=1495">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1496">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1496">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1496">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1496">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1496">
+<link rel="manifest" href="/manifest.webmanifest?v=1496">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.95 — Emoji-free premium line icon system === */
+/* === v1.4.96 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.95 — Eski premium alt bar restore ===
+/* === v1.4.96 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,80 +10071,9 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1495_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1496_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
-
-<style id="exBottomBarYeniLockV1495">
-/* === v1.4.95 — Alt bar Yeni görünüm kilidi ===
-   Yeni sadece Apartmanlar / Yeni form açıkken görünür.
-   Bakım ve Profil ekranlarında alt bar 3 parçalı kalır. */
-
-body:not(.exBarShowYeni) .tabbar{
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  width:min(340px,calc(100vw - 48px))!important;
-}
-
-body:not(.exBarShowYeni) .tabbar .tabItem[data-tab="yeni"]{
-  display:none!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-  width:0!important;
-  min-width:0!important;
-  max-width:0!important;
-  padding:0!important;
-  margin:0!important;
-  overflow:hidden!important;
-}
-
-body:not(.exBarShowYeni) .tabbar .tabItem[data-tab="bakim"]{
-  grid-column:1!important;
-}
-
-body:not(.exBarShowYeni) .tabbar .tabItem[data-tab="apartman"]{
-  grid-column:2!important;
-}
-
-body:not(.exBarShowYeni) .tabbar .tabItem[data-tab="profil"]{
-  grid-column:3!important;
-}
-
-body.exBarShowYeni .tabbar{
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  width:min(390px,calc(100vw - 34px))!important;
-}
-
-body.exBarShowYeni .tabbar .tabItem[data-tab="yeni"]{
-  display:flex!important;
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-  width:100%!important;
-  min-width:0!important;
-  max-width:none!important;
-  padding:7px 3px!important;
-  margin:0!important;
-  overflow:visible!important;
-}
-
-body.exBarShowYeni .tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
-body.exBarShowYeni .tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
-body.exBarShowYeni .tabbar .tabItem[data-tab="yeni"]{grid-column:3!important;}
-body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
-
-@media(max-width:430px){
-  body:not(.exBarShowYeni) .tabbar{
-    width:min(322px,calc(100vw - 54px))!important;
-  }
-
-  body.exBarShowYeni .tabbar{
-    width:min(370px,calc(100vw - 30px))!important;
-  }
-}
-</style>
-
-
-<!-- ELEVATORX_V1495_STABIL_KURTARMA | LEFT_MENU_REMOVED | PDF_BASE_RESTORED_FROM_V1488 -->
+<!-- ELEVATORX_V1496_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
 </head>
 
 <body>
@@ -10180,10 +10109,10 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1495" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1496" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.95</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.96</div>
 </div>
 </div>
 
@@ -10193,7 +10122,7 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.95";
+  const SPLASH_VERSION = "v1.4.96";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10733,9 +10662,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.95";
+const APP_VERSION = "v1.4.96";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1495", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1496", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -13919,103 +13848,6 @@ ${sonParcalar}
 
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
 
-
-
-<script id="exBottomBarYeniLockScriptV1495">
-/* v1.4.95 — Yeni sekmesi görünürlük kilidi */
-(function(){
-  function currentTab(){
-    try{
-      var active = document.querySelector('.tabbar .tabItem.activeTab');
-      if(active && active.getAttribute('data-tab')){
-        return active.getAttribute('data-tab');
-      }
-    }catch(e){}
-    return 'apartman';
-  }
-
-  function formIsOpen(){
-    try{
-      var f = document.getElementById('formBox');
-      if(!f) return false;
-      return f.style.display !== 'none' && getComputedStyle(f).display !== 'none';
-    }catch(e){
-      return false;
-    }
-  }
-
-  function apply(tab){
-    try{
-      tab = tab || currentTab();
-
-      var show =
-        tab === 'apartman' ||
-        tab === 'yeni' ||
-        formIsOpen();
-
-      document.body.classList.toggle('exBarShowYeni', !!show);
-
-      var yeni = document.querySelector('.tabbar .tabItem[data-tab="yeni"]');
-      if(yeni){
-        if(show){
-          yeni.removeAttribute('hidden');
-        }else{
-          yeni.setAttribute('hidden','hidden');
-        }
-      }
-    }catch(e){}
-  }
-
-  window.exBottomBarYeniLock = apply;
-
-  function wrapSetAktifTab(){
-    try{
-      if(typeof window.setAktifTab !== 'function') return;
-      if(window.setAktifTab.__exYeniLockWrapped) return;
-
-      var original = window.setAktifTab;
-      window.setAktifTab = function(tab){
-        var result = original.apply(this, arguments);
-        setTimeout(function(){ apply(tab); }, 0);
-        setTimeout(function(){ apply(tab); }, 80);
-        return result;
-      };
-      window.setAktifTab.__exYeniLockWrapped = true;
-    }catch(e){}
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    wrapSetAktifTab();
-    apply(currentTab());
-    setTimeout(function(){ apply(currentTab()); }, 250);
-    setTimeout(function(){ apply(currentTab()); }, 900);
-  });
-
-  window.addEventListener('load', function(){
-    wrapSetAktifTab();
-    apply(currentTab());
-    setTimeout(function(){ apply(currentTab()); }, 400);
-  });
-
-  document.addEventListener('click', function(){
-    setTimeout(function(){ apply(currentTab()); }, 60);
-    setTimeout(function(){ apply(currentTab()); }, 220);
-  }, true);
-
-  try{
-    var obs = new MutationObserver(function(){
-      apply(currentTab());
-    });
-    document.addEventListener('DOMContentLoaded', function(){
-      var bar = document.querySelector('.tabbar');
-      if(bar){
-        obs.observe(bar, {attributes:true, subtree:true, attributeFilter:['class','style']});
-      }
-    });
-  }catch(e){}
-})();
-</script>
-
 </body>
 </html>
 
@@ -15772,7 +15604,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.95</div>
+  <div>ElevatorX v1.4.96</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -16092,7 +15924,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.95</div>
+    <div class="controlReportBadge">v1.4.96</div>
   </div>
 
   <div class="controlReportPreview">
@@ -17761,7 +17593,7 @@ opacity:.9;
 
 
 
-/* === v1.4.95 — 2. resimdeki alt bar restore ===
+/* === v1.4.96 — 2. resimdeki alt bar restore ===
    Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
    Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
 #quickAddBtn,
@@ -17971,7 +17803,7 @@ html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
 
 
 
-/* === v1.4.95 — + Yeni yalnız Apartman ekranında === */
+/* === v1.4.96 — + Yeni yalnız Apartman ekranında === */
 body:not(.exShowYeniTab) .tabbar{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   width:min(340px,calc(100vw - 48px))!important;
@@ -21401,8 +21233,8 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exTabbarYeniVisibilityV1495">
-/* v1.4.95 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
+<script id="exTabbarYeniVisibilityV1496">
+/* v1.4.96 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
 (function(){
   function exTabbarYeniDurum(){
     try{
