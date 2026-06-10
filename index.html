@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.83 — aktivasyon/splash preboot */
+/* v1.4.84 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1483_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1484_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.83 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.84 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1483_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1484_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1483_BUILD_VERIFIED | APP_VERSION v1.4.83 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1484_BUILD_VERIFIED | APP_VERSION v1.4.84 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1483_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.83 -->
+<!-- ELEVATORX_V1484_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.84 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1483">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1483">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1483">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1483">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1483">
-<link rel="manifest" href="/manifest.webmanifest?v=1483">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1484">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1484">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1484">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1484">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1484">
+<link rel="manifest" href="/manifest.webmanifest?v=1484">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.83 — Emoji-free premium line icon system === */
+/* === v1.4.84 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.83 — Eski premium alt bar restore ===
+/* === v1.4.84 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10105,10 +10105,10 @@ window.__ELEVATORX_BOOT_OK__ = false;
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1483" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1484" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.83</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.84</div>
 </div>
 </div>
 
@@ -10118,7 +10118,7 @@ window.__ELEVATORX_BOOT_OK__ = false;
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.83";
+  const SPLASH_VERSION = "v1.4.84";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -10658,9 +10658,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.83";
+const APP_VERSION = "v1.4.84";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1483", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1484", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -11173,6 +11173,8 @@ document.querySelector(`.tabItem[data-tab="${tab}"]`);
 if(aktif){
 aktif.classList.add("activeTab");
 }
+
+try{ if(window.exTabbarYeniDurum) setTimeout(window.exTabbarYeniDurum,30); }catch(e){}
 
 }
 
@@ -12573,6 +12575,8 @@ formBox.style.display="none";
 quickAddGuncelle();
 
 }
+
+try{ if(window.exTabbarYeniDurum) setTimeout(window.exTabbarYeniDurum,40); }catch(e){}
 
 }
 
@@ -15596,7 +15600,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.83</div>
+  <div>ElevatorX v1.4.84</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -15916,7 +15920,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.83</div>
+    <div class="controlReportBadge">v1.4.84</div>
   </div>
 
   <div class="controlReportPreview">
@@ -17585,7 +17589,7 @@ opacity:.9;
 
 
 
-/* === v1.4.83 — 2. resimdeki alt bar restore ===
+/* === v1.4.84 — 2. resimdeki alt bar restore ===
    Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
    Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
 #quickAddBtn,
@@ -17790,6 +17794,51 @@ html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
   }
   .tabbar .tabText{
     font-size:10.4px!important;
+  }
+}
+
+
+
+/* === v1.4.84 — + Yeni yalnız Apartman ekranında === */
+body:not(.exShowYeniTab) .tabbar{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  width:min(340px,calc(100vw - 48px))!important;
+}
+
+body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="yeni"]{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
+body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
+body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="profil"]{grid-column:3!important;}
+
+body.exShowYeniTab .tabbar{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  width:min(390px,calc(100vw - 34px))!important;
+}
+
+body.exShowYeniTab .tabbar .tabItem[data-tab="yeni"]{
+  display:flex!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+body.exShowYeniTab .tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
+body.exShowYeniTab .tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
+body.exShowYeniTab .tabbar .tabItem[data-tab="yeni"]{grid-column:3!important;}
+body.exShowYeniTab .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
+
+@media(max-width:430px){
+  body:not(.exShowYeniTab) .tabbar{
+    width:min(322px,calc(100vw - 54px))!important;
+  }
+  body.exShowYeniTab .tabbar{
+    width:min(370px,calc(100vw - 30px))!important;
   }
 }
 
@@ -18040,6 +18089,7 @@ quickAddGuncelle();
 
 animateIn(liste,"screenInLeft");
 animateIn(searchArea,"screenSoft");
+try{ if(window.exTabbarYeniDurum) setTimeout(window.exTabbarYeniDurum,40); }catch(e){}
 
 }
 
@@ -21174,6 +21224,56 @@ try{ quickAddGuncelle(); }catch(e){}
 
   window.addEventListener("load", ayTopSearchSync);
   window.elevatorXTopSearchSync = ayTopSearchSync;
+})();
+</script>
+
+
+
+<script id="exTabbarYeniVisibilityV1484">
+/* v1.4.84 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
+(function(){
+  function exTabbarYeniDurum(){
+    try{
+      var body = document.body;
+      var yeni = document.querySelector('.tabbar .tabItem[data-tab="yeni"]');
+      if(!body || !yeni) return;
+
+      var aktif = '';
+      var aktifEl = document.querySelector('.tabbar .tabItem.activeTab');
+      if(aktifEl) aktif = aktifEl.getAttribute('data-tab') || '';
+
+      var form = document.getElementById('formBox');
+      var formAcik = !!(form && form.style.display !== 'none' && getComputedStyle(form).display !== 'none');
+
+      var apartmanEkrani =
+        aktif === 'apartman' ||
+        aktif === 'yeni' ||
+        formAcik ||
+        (typeof window.aktifEkran !== 'undefined' && window.aktifEkran === 'apartman');
+
+      body.classList.toggle('exShowYeniTab', !!apartmanEkrani);
+    }catch(e){}
+  }
+
+  window.exTabbarYeniDurum = exTabbarYeniDurum;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    exTabbarYeniDurum();
+    setTimeout(exTabbarYeniDurum, 300);
+    setTimeout(exTabbarYeniDurum, 900);
+  });
+
+  window.addEventListener('load', function(){
+    exTabbarYeniDurum();
+    setTimeout(exTabbarYeniDurum, 600);
+  });
+
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.closest && e.target.closest('.tabbar')){
+      setTimeout(exTabbarYeniDurum, 80);
+      setTimeout(exTabbarYeniDurum, 320);
+    }
+  }, true);
 })();
 </script>
 
