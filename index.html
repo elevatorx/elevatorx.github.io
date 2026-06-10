@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.91 — aktivasyon/splash preboot */
+/* v1.4.92 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1491_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1492_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.91 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.92 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1491_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1492_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1491_BUILD_VERIFIED | APP_VERSION v1.4.91 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1492_BUILD_VERIFIED | APP_VERSION v1.4.92 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1491_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.91 -->
+<!-- ELEVATORX_V1492_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.92 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1491">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1491">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1491">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1491">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1491">
-<link rel="manifest" href="/manifest.webmanifest?v=1491">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1492">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1492">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1492">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1492">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1492">
+<link rel="manifest" href="/manifest.webmanifest?v=1492">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.91 — Emoji-free premium line icon system === */
+/* === v1.4.92 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.91 — Eski premium alt bar restore ===
+/* === v1.4.92 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,11 +10071,11 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1491_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1492_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
 
-<style id="exBottomBarYeniLockV1491">
-/* === v1.4.91 — Alt bar Yeni görünüm kilidi ===
+<style id="exBottomBarYeniLockV1492">
+/* === v1.4.92 — Alt bar Yeni görünüm kilidi ===
    Yeni sadece Apartmanlar / Yeni form açıkken görünür.
    Bakım ve Profil ekranlarında alt bar 3 parçalı kalır. */
 
@@ -10145,10 +10145,27 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
 
 
 
-<style id="exLeftMenuOnlyStyleV1491">
-/* === v1.4.91 — Sadece soldan menü ===
-   PDF/print şablonlarına dokunulmadı.
-   Alt bar korunur, sadece sol üst menü eklenir. */
+<style id="exLeftMenuJsSafeStyleV1492">
+/* === v1.4.92 — Soldan menü JS injection / PDF safe ===
+   Menü HTML'e gömülmez. Sadece ana uygulama yüklendikten sonra JS ile oluşturulur.
+   PDF/rapor/yazdır ekranlarına eklenmez. */
+
+/* Alt bar soldan menü aktifken tamamen kapalı */
+.tabbar,
+.tabbar *,
+#quickAddBtn,
+#quickAddBtn.quickAddBtn,
+.quickAddBtn,
+.middleButton{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+.container{padding-bottom:34px!important;}
+#profilPanel,.profileFooter,.teknikPanel{padding-bottom:42px!important;}
+
 .exLeftMenuBtn{
   position:fixed!important;
   left:18px!important;
@@ -10161,7 +10178,7 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
   box-shadow:0 14px 30px rgba(15,23,42,.13),inset 0 1px 0 rgba(255,255,255,.82)!important;
   backdrop-filter:blur(18px) saturate(170%)!important;
   -webkit-backdrop-filter:blur(18px) saturate(170%)!important;
-  z-index:10080!important;
+  z-index:2147483000!important;
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
@@ -10182,26 +10199,16 @@ body.exBarShowYeni .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
   transition:transform .22s ease, opacity .22s ease!important;
 }
 
-.exLeftMenuBtn:active{
-  transform:scale(.95)!important;
-}
+.exLeftMenuBtn:active{transform:scale(.95)!important;}
 
-body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(1){
-  transform:translateY(7px) rotate(45deg)!important;
-}
-
-body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(2){
-  opacity:0!important;
-}
-
-body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(3){
-  transform:translateY(-7px) rotate(-45deg)!important;
-}
+body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(1){transform:translateY(7px) rotate(45deg)!important;}
+body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(2){opacity:0!important;}
+body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)!important;}
 
 .exLeftMenuBackdrop{
   position:fixed!important;
   inset:0!important;
-  z-index:10060!important;
+  z-index:2147482980!important;
   background:rgba(6,12,22,.34)!important;
   backdrop-filter:blur(9px)!important;
   -webkit-backdrop-filter:blur(9px)!important;
@@ -10217,7 +10224,7 @@ body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(3){
   top:0!important;
   bottom:0!important;
   width:min(336px,88vw)!important;
-  z-index:10070!important;
+  z-index:2147482990!important;
   padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(18px + env(safe-area-inset-bottom,0px))!important;
   box-sizing:border-box!important;
   transform:translateX(-106%)!important;
@@ -10234,548 +10241,116 @@ body.exLeftMenuOpen .exLeftMenuBtn span:nth-child(3){
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
 }
 
-body.exLeftMenuOpen{
-  overflow:hidden!important;
-}
+body.exLeftMenuOpen{overflow:hidden!important;}
+body.exLeftMenuOpen .exLeftMenuBackdrop{opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+body.exLeftMenuOpen .exLeftMenuDrawer{transform:translateX(0)!important;}
 
-body.exLeftMenuOpen .exLeftMenuBackdrop{
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-}
-
-body.exLeftMenuOpen .exLeftMenuDrawer{
-  transform:translateX(0)!important;
-}
-
-.exLeftMenuHead{
-  display:flex!important;
-  align-items:center!important;
-  gap:12px!important;
-  margin-bottom:16px!important;
-}
-
+.exLeftMenuHead{display:flex!important;align-items:center!important;gap:12px!important;margin-bottom:16px!important;}
 .exLeftMenuLogo{
-  width:54px!important;
-  height:54px!important;
-  border-radius:20px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  flex-shrink:0!important;
-  background:linear-gradient(180deg,#ffffff,#eef5ff)!important;
-  color:#111827!important;
-  font-size:22px!important;
-  font-weight:950!important;
-  letter-spacing:-1px!important;
+  width:54px!important;height:54px!important;border-radius:20px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;flex-shrink:0!important;
+  background:linear-gradient(180deg,#ffffff,#eef5ff)!important;color:#111827!important;
+  font-size:22px!important;font-weight:950!important;letter-spacing:-1px!important;
   box-shadow:0 14px 30px rgba(15,23,42,.10),inset 0 1px 0 rgba(255,255,255,.9)!important;
 }
-
-.exLeftMenuLogo span,
-.exLeftMenuBrand span{
-  color:#007aff!important;
-}
-
-.exLeftMenuTitleBox{
-  min-width:0!important;
-  flex:1!important;
-}
-
-.exLeftMenuBrand{
-  font-size:28px!important;
-  font-weight:950!important;
-  letter-spacing:-1.15px!important;
-  line-height:1!important;
-  color:#111827!important;
-}
-
-.exLeftMenuSub{
-  margin-top:5px!important;
-  font-size:11px!important;
-  font-weight:850!important;
-  color:#7b8494!important;
-  letter-spacing:.6px!important;
-}
+.exLeftMenuLogo span,.exLeftMenuBrand span{color:#007aff!important;}
+.exLeftMenuTitleBox{min-width:0!important;flex:1!important;}
+.exLeftMenuBrand{font-size:28px!important;font-weight:950!important;letter-spacing:-1.15px!important;line-height:1!important;color:#111827!important;}
+.exLeftMenuSub{margin-top:5px!important;font-size:11px!important;font-weight:850!important;color:#7b8494!important;letter-spacing:.6px!important;}
 
 .exLeftMenuClose{
-  width:38px!important;
-  height:38px!important;
-  min-width:38px!important;
-  padding:0!important;
-  margin:0!important;
-  border-radius:15px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  border:none!important;
-  background:rgba(229,233,242,.86)!important;
-  color:#111827!important;
-  font-size:25px!important;
-  font-weight:800!important;
+  width:38px!important;height:38px!important;min-width:38px!important;padding:0!important;margin:0!important;
+  border-radius:15px!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  border:none!important;background:rgba(229,233,242,.86)!important;color:#111827!important;font-size:25px!important;font-weight:800!important;
 }
 
 .exLeftMenuProfile{
-  border-radius:24px!important;
-  padding:14px 15px!important;
-  margin-bottom:14px!important;
-  background:linear-gradient(135deg,rgba(17,24,39,.96),rgba(23,37,84,.92))!important;
-  color:#fff!important;
+  border-radius:24px!important;padding:14px 15px!important;margin-bottom:14px!important;
+  background:linear-gradient(135deg,rgba(17,24,39,.96),rgba(23,37,84,.92))!important;color:#fff!important;
   box-shadow:0 18px 34px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.10)!important;
 }
+.exLeftMenuProfileName{font-size:18px!important;font-weight:950!important;letter-spacing:-.35px!important;}
+.exLeftMenuProfileMeta{margin-top:4px!important;font-size:12px!important;font-weight:800!important;color:rgba(255,255,255,.72)!important;}
 
-.exLeftMenuProfileName{
-  font-size:18px!important;
-  font-weight:950!important;
-  letter-spacing:-.35px!important;
-}
-
-.exLeftMenuProfileMeta{
-  margin-top:4px!important;
-  font-size:12px!important;
-  font-weight:800!important;
-  color:rgba(255,255,255,.72)!important;
-}
-
-.exLeftMenuNav{
-  display:flex!important;
-  flex-direction:column!important;
-  gap:8px!important;
-}
-
+.exLeftMenuNav{display:flex!important;flex-direction:column!important;gap:8px!important;}
 .exLeftMenuItem{
-  width:100%!important;
-  min-height:62px!important;
-  padding:10px 11px!important;
-  margin:0!important;
-  border-radius:22px!important;
-  border:1px solid rgba(226,232,240,.78)!important;
-  background:rgba(255,255,255,.66)!important;
-  color:#111827!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-  gap:12px!important;
-  text-align:left!important;
+  width:100%!important;min-height:62px!important;padding:10px 11px!important;margin:0!important;
+  border-radius:22px!important;border:1px solid rgba(226,232,240,.78)!important;
+  background:rgba(255,255,255,.66)!important;color:#111827!important;
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;text-align:left!important;
   box-shadow:0 10px 24px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.72)!important;
-  -webkit-appearance:none!important;
-  appearance:none!important;
+  -webkit-appearance:none!important;appearance:none!important;
 }
-
-.exLeftMenuItem:active{
-  transform:scale(.985)!important;
-  opacity:.9!important;
-}
-
+.exLeftMenuItem:active{transform:scale(.985)!important;opacity:.9!important;}
 .exLeftMenuItem.active{
-  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;
-  color:#fff!important;
+  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;color:#fff!important;
   border-color:rgba(255,255,255,.15)!important;
   box-shadow:0 15px 30px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.14)!important;
 }
-
 .exLeftMenuItem.primary{
-  background:linear-gradient(180deg,rgba(239,246,255,.98),rgba(219,234,254,.90))!important;
-  color:#1d4ed8!important;
+  background:linear-gradient(180deg,rgba(239,246,255,.98),rgba(219,234,254,.90))!important;color:#1d4ed8!important;
   border-color:rgba(96,165,250,.32)!important;
 }
-
-.exLeftMenuItem.primary.active{
-  background:linear-gradient(180deg,#5b95ff 0%,#2876f3 100%)!important;
-  color:#fff!important;
-}
+.exLeftMenuItem.primary.active{background:linear-gradient(180deg,#5b95ff 0%,#2876f3 100%)!important;color:#fff!important;}
 
 .exLeftMenuIcon{
-  width:38px!important;
-  height:38px!important;
-  min-width:38px!important;
-  border-radius:15px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  background:#eef4ff!important;
-  color:#007aff!important;
-  font-size:19px!important;
-  font-weight:950!important;
+  width:38px!important;height:38px!important;min-width:38px!important;border-radius:15px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:#eef4ff!important;color:#007aff!important;font-size:19px!important;font-weight:950!important;
 }
+.exLeftMenuItem.active .exLeftMenuIcon,.exLeftMenuItem.primary.active .exLeftMenuIcon{background:rgba(255,255,255,.16)!important;color:#fff!important;}
 
-.exLeftMenuItem.active .exLeftMenuIcon,
-.exLeftMenuItem.primary.active .exLeftMenuIcon{
-  background:rgba(255,255,255,.16)!important;
-  color:#fff!important;
-}
+.exLeftMenuItem b{display:block!important;font-size:15px!important;font-weight:950!important;letter-spacing:-.2px!important;line-height:1.1!important;}
+.exLeftMenuItem small{display:block!important;margin-top:4px!important;font-size:11.5px!important;font-weight:760!important;color:#7a8494!important;line-height:1.15!important;}
+.exLeftMenuItem.active small,.exLeftMenuItem.primary.active small{color:rgba(255,255,255,.70)!important;}
 
-.exLeftMenuItem b{
-  display:block!important;
-  font-size:15px!important;
-  font-weight:950!important;
-  letter-spacing:-.2px!important;
-  line-height:1.1!important;
-}
-
-.exLeftMenuItem small{
-  display:block!important;
-  margin-top:4px!important;
-  font-size:11.5px!important;
-  font-weight:760!important;
-  color:#7a8494!important;
-  line-height:1.15!important;
-}
-
-.exLeftMenuItem.active small,
-.exLeftMenuItem.primary.active small{
-  color:rgba(255,255,255,.70)!important;
-}
-
-.exLeftMenuDivider{
-  height:1px!important;
-  margin:5px 6px!important;
-  background:linear-gradient(90deg,transparent,rgba(148,163,184,.45),transparent)!important;
-}
-
+.exLeftMenuDivider{height:1px!important;margin:5px 6px!important;background:linear-gradient(90deg,transparent,rgba(148,163,184,.45),transparent)!important;}
 .exLeftMenuFooter{
-  margin-top:14px!important;
-  padding:13px 14px!important;
-  border-radius:20px!important;
-  background:rgba(255,255,255,.52)!important;
-  border:1px solid rgba(226,232,240,.72)!important;
-  color:#6b7280!important;
+  margin-top:14px!important;padding:13px 14px!important;border-radius:20px!important;
+  background:rgba(255,255,255,.52)!important;border:1px solid rgba(226,232,240,.72)!important;color:#6b7280!important;
 }
+.exLeftMenuFooter b{display:block!important;color:#111827!important;font-size:14px!important;font-weight:950!important;}
+.exLeftMenuFooter span{display:block!important;margin-top:4px!important;font-size:11px!important;font-weight:780!important;}
 
-.exLeftMenuFooter b{
-  display:block!important;
-  color:#111827!important;
-  font-size:14px!important;
-  font-weight:950!important;
-}
-
-.exLeftMenuFooter span{
-  display:block!important;
-  margin-top:4px!important;
-  font-size:11px!important;
-  font-weight:780!important;
-}
-
-body.darkMode .exLeftMenuBtn,
-html.darkRoot .exLeftMenuBtn{
+body.darkMode .exLeftMenuBtn,html.darkRoot .exLeftMenuBtn{
   background:linear-gradient(180deg,rgba(23,30,43,.92),rgba(12,17,27,.86))!important;
-  border-color:rgba(255,255,255,.09)!important;
-  box-shadow:0 14px 30px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  border-color:rgba(255,255,255,.09)!important;box-shadow:0 14px 30px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06)!important;
 }
-
-body.darkMode .exLeftMenuBtn span,
-html.darkRoot .exLeftMenuBtn span{
-  background:#f8fafc!important;
+body.darkMode .exLeftMenuBtn span,html.darkRoot .exLeftMenuBtn span{background:#f8fafc!important;}
+body.darkMode .exLeftMenuDrawer,html.darkRoot .exLeftMenuDrawer{
+  background:radial-gradient(circle at 20% 0%,rgba(59,130,246,.16),transparent 34%),linear-gradient(180deg,rgba(20,27,40,.97),rgba(10,15,24,.94))!important;
+  border-right-color:rgba(255,255,255,.08)!important;box-shadow:24px 0 58px rgba(0,0,0,.45)!important;
 }
-
-body.darkMode .exLeftMenuDrawer,
-html.darkRoot .exLeftMenuDrawer{
-  background:
-    radial-gradient(circle at 20% 0%,rgba(59,130,246,.16),transparent 34%),
-    linear-gradient(180deg,rgba(20,27,40,.97),rgba(10,15,24,.94))!important;
-  border-right-color:rgba(255,255,255,.08)!important;
-  box-shadow:24px 0 58px rgba(0,0,0,.45)!important;
-}
-
-body.darkMode .exLeftMenuBrand,
-html.darkRoot .exLeftMenuBrand,
-body.darkMode .exLeftMenuFooter b,
-html.darkRoot .exLeftMenuFooter b{
-  color:#f8fafc!important;
-}
-
-body.darkMode .exLeftMenuSub,
-html.darkRoot .exLeftMenuSub{
-  color:#96a2b2!important;
-}
-
-body.darkMode .exLeftMenuLogo,
-html.darkRoot .exLeftMenuLogo{
-  background:linear-gradient(180deg,#172033,#101827)!important;
-  color:#f8fafc!important;
+body.darkMode .exLeftMenuBrand,html.darkRoot .exLeftMenuBrand,
+body.darkMode .exLeftMenuFooter b,html.darkRoot .exLeftMenuFooter b{color:#f8fafc!important;}
+body.darkMode .exLeftMenuSub,html.darkRoot .exLeftMenuSub{color:#96a2b2!important;}
+body.darkMode .exLeftMenuLogo,html.darkRoot .exLeftMenuLogo{
+  background:linear-gradient(180deg,#172033,#101827)!important;color:#f8fafc!important;
   box-shadow:0 14px 30px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.06)!important;
 }
-
-body.darkMode .exLeftMenuClose,
-html.darkRoot .exLeftMenuClose{
-  background:#263241!important;
-  color:#f8fafc!important;
-}
-
-body.darkMode .exLeftMenuItem,
-html.darkRoot .exLeftMenuItem{
-  background:rgba(21,27,38,.74)!important;
-  border-color:rgba(255,255,255,.08)!important;
-  color:#f8fafc!important;
+body.darkMode .exLeftMenuClose,html.darkRoot .exLeftMenuClose{background:#263241!important;color:#f8fafc!important;}
+body.darkMode .exLeftMenuItem,html.darkRoot .exLeftMenuItem{
+  background:rgba(21,27,38,.74)!important;border-color:rgba(255,255,255,.08)!important;color:#f8fafc!important;
   box-shadow:0 10px 24px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.04)!important;
 }
-
-body.darkMode .exLeftMenuItem small,
-html.darkRoot .exLeftMenuItem small{
-  color:#96a2b2!important;
-}
-
-body.darkMode .exLeftMenuItem.active,
-html.darkRoot .exLeftMenuItem.active{
-  background:linear-gradient(180deg,#f7faff 0%,#dbeafe 100%)!important;
-  color:#0f172a!important;
-}
-
-body.darkMode .exLeftMenuItem.active small,
-html.darkRoot .exLeftMenuItem.active small{
-  color:#64748b!important;
-}
-
-body.darkMode .exLeftMenuIcon,
-html.darkRoot .exLeftMenuIcon{
-  background:#12223a!important;
-  color:#83b8ff!important;
-}
-
-body.darkMode .exLeftMenuFooter,
-html.darkRoot .exLeftMenuFooter{
-  background:rgba(21,27,38,.55)!important;
-  border-color:rgba(255,255,255,.08)!important;
-  color:#96a2b2!important;
+body.darkMode .exLeftMenuItem small,html.darkRoot .exLeftMenuItem small{color:#96a2b2!important;}
+body.darkMode .exLeftMenuItem.active,html.darkRoot .exLeftMenuItem.active{background:linear-gradient(180deg,#f7faff 0%,#dbeafe 100%)!important;color:#0f172a!important;}
+body.darkMode .exLeftMenuItem.active small,html.darkRoot .exLeftMenuItem.active small{color:#64748b!important;}
+body.darkMode .exLeftMenuIcon,html.darkRoot .exLeftMenuIcon{background:#12223a!important;color:#83b8ff!important;}
+body.darkMode .exLeftMenuFooter,html.darkRoot .exLeftMenuFooter{
+  background:rgba(21,27,38,.55)!important;border-color:rgba(255,255,255,.08)!important;color:#96a2b2!important;
 }
 
 @media(max-width:430px){
-  .exLeftMenuBtn{
-    left:16px!important;
-    top:calc(16px + env(safe-area-inset-top,0px))!important;
-    width:44px!important;
-    height:44px!important;
-    border-radius:17px!important;
-  }
-
-  .exLeftMenuDrawer{
-    width:min(326px,89vw)!important;
-    padding-left:14px!important;
-    padding-right:14px!important;
-  }
-
-  .exLeftMenuItem{
-    min-height:60px!important;
-  }
-}
-</style>
-
-
-
-<style id="exLeftMenuNoBottomBarFixV1491">
-/* === v1.4.91 — Soldan menü + alt bar tamamen kapalı ===
-   Ana head içinde. PDF/print şablonlarına dokunmaz. */
-.tabbar,
-.tabbar *,
-#quickAddBtn,
-#quickAddBtn.quickAddBtn,
-.quickAddBtn,
-.middleButton{
-  display:none!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
-
-.container{
-  padding-bottom:34px!important;
-}
-
-#profilPanel,
-.profileFooter,
-.teknikPanel{
-  padding-bottom:42px!important;
-}
-
-.exLeftMenuBtn{
-  z-index:2147483000!important;
-}
-
-.exLeftMenuBackdrop{
-  z-index:2147482980!important;
-}
-
-.exLeftMenuDrawer{
-  z-index:2147482990!important;
-}
-
-body.exLeftMenuOpen .tabbar,
-body.exLeftMenuOpen #quickAddBtn,
-body.exLeftMenuOpen .quickAddBtn,
-body.exLeftMenuOpen .middleButton{
-  display:none!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
+  .exLeftMenuBtn{left:16px!important;top:calc(16px + env(safe-area-inset-top,0px))!important;width:44px!important;height:44px!important;border-radius:17px!important;}
+  .exLeftMenuDrawer{width:min(326px,89vw)!important;padding-left:14px!important;padding-right:14px!important;}
+  .exLeftMenuItem{min-height:60px!important;}
 }
 </style>
 
 </head>
 
 <body>
-
-<button id="exLeftMenuBtn" class="exLeftMenuBtn" type="button" onclick="exLeftMenuOpen()" aria-label="Menüyü aç">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-
-<div id="exLeftMenuBackdrop" class="exLeftMenuBackdrop" onclick="exLeftMenuClose()"></div>
-
-<aside id="exLeftMenuDrawer" class="exLeftMenuDrawer" aria-hidden="true">
-  <div class="exLeftMenuHead">
-    <div class="exLeftMenuLogo">E<span>X</span></div>
-    <div class="exLeftMenuTitleBox">
-      <div class="exLeftMenuBrand">Elevator<span>X</span></div>
-      <div class="exLeftMenuSub">AY ASANSÖR • Kontrol paneli</div>
-    </div>
-    <button type="button" class="exLeftMenuClose" onclick="exLeftMenuClose()" aria-label="Menüyü kapat">×</button>
-  </div>
-
-  <div class="exLeftMenuProfile">
-    <div class="exLeftMenuProfileName" id="exLeftMenuProfileName">Uğur AY</div>
-    <div class="exLeftMenuProfileMeta" id="exLeftMenuProfileMeta">Premium lisans aktif</div>
-  </div>
-
-  <nav class="exLeftMenuNav">
-    <button type="button" class="exLeftMenuItem active" data-left-menu="apartman" onclick="exLeftMenuGo('anaSayfa','apartman')">
-      <span class="exLeftMenuIcon">▦</span>
-      <span><b>Apartmanlar</b><small>Liste ve cari durum</small></span>
-    </button>
-
-    <button type="button" class="exLeftMenuItem" data-left-menu="bakim" onclick="exLeftMenuGo('bakimListesiAc','bakim')">
-      <span class="exLeftMenuIcon">✓</span>
-      <span><b>Bakım Listesi</b><small>Aylık bakım takibi</small></span>
-    </button>
-
-    <button type="button" class="exLeftMenuItem primary" data-left-menu="yeni" onclick="exLeftMenuGo('formAc','yeni')">
-      <span class="exLeftMenuIcon">＋</span>
-      <span><b>Yeni Apartman</b><small>Hızlı kayıt ekle</small></span>
-    </button>
-
-    <button type="button" class="exLeftMenuItem" data-left-menu="profil" onclick="exLeftMenuGo('profilAc','profil')">
-      <span class="exLeftMenuIcon">⌾</span>
-      <span><b>Profil</b><small>Firma ve yedekleme</small></span>
-    </button>
-
-    <div class="exLeftMenuDivider"></div>
-
-    <button type="button" class="exLeftMenuItem" data-left-menu="teknik" onclick="exLeftMenuGo('teknikKutuphaneAc','teknik')">
-      <span class="exLeftMenuIcon">▤</span>
-      <span><b>Teknik Kütüphane</b><small>Kart, sürücü ve notlar</small></span>
-    </button>
-
-    <button type="button" class="exLeftMenuItem" onclick="exLeftMenuGo('yedekle','yedek')">
-      <span class="exLeftMenuIcon">↥</span>
-      <span><b>Verileri Yedekle</b><small>JSON yedek oluştur</small></span>
-    </button>
-
-    <button type="button" class="exLeftMenuItem" onclick="exLeftMenuLicenseStatus()">
-      <span class="exLeftMenuIcon">🔐</span>
-      <span><b>Lisans Durumu</b><small>Cihaz ve aktivasyon bilgisi</small></span>
-    </button>
-  </nav>
-
-  <div class="exLeftMenuFooter">
-    <b>ElevatorX</b>
-    <span>v1.4.91 • Alt bar kapalı soldan menü</span>
-  </div>
-</aside>
-
-<script id="exLeftMenuOnlyScriptV1491">
-(function(){
-  function $(id){ return document.getElementById(id); }
-
-  window.exLeftMenuOpen = function(){
-    try{
-      document.body.classList.add('exLeftMenuOpen');
-      var d = $('exLeftMenuDrawer');
-      if(d) d.setAttribute('aria-hidden','false');
-      if(window.exLeftMenuUpdateProfile) window.exLeftMenuUpdateProfile();
-    }catch(e){}
-  };
-
-  window.exLeftMenuClose = function(){
-    try{
-      document.body.classList.remove('exLeftMenuOpen');
-      var d = $('exLeftMenuDrawer');
-      if(d) d.setAttribute('aria-hidden','true');
-    }catch(e){}
-  };
-
-  window.exLeftMenuMark = function(tab){
-    try{
-      document.querySelectorAll('.exLeftMenuItem[data-left-menu]').forEach(function(btn){
-        btn.classList.toggle('active', btn.getAttribute('data-left-menu') === tab);
-      });
-    }catch(e){}
-  };
-
-  window.exLeftMenuGo = function(fnName, tab){
-    try{ window.exLeftMenuMark(tab); }catch(e){}
-    window.exLeftMenuClose();
-
-    setTimeout(function(){
-      try{
-        if(typeof window[fnName] === 'function'){
-          window[fnName]();
-        }else if(typeof toast === 'function'){
-          toast('Bu bölüm henüz hazır değil');
-        }
-
-        setTimeout(function(){
-          try{
-            document.querySelectorAll('.tabbar,#quickAddBtn,.quickAddBtn,.middleButton').forEach(function(el){
-              el.style.setProperty('display','none','important');
-              el.style.setProperty('opacity','0','important');
-              el.style.setProperty('visibility','hidden','important');
-              el.style.setProperty('pointer-events','none','important');
-            });
-          }catch(_){}
-        },80);
-      }catch(e){
-        try{ if(typeof toast === 'function') toast('Bölüm açılamadı'); }catch(_){}
-      }
-    },170);
-  };
-
-  window.exLeftMenuUpdateProfile = function(){
-    try{
-      var nameEl = $('exLeftMenuProfileName');
-      var metaEl = $('exLeftMenuProfileMeta');
-
-      var ad = (localStorage.getItem('profilAd') || localStorage.getItem('firmaYetkili') || '').trim();
-      var firma = (localStorage.getItem('profilFirma') || localStorage.getItem('firmaAdi') || '').trim();
-
-      if(nameEl) nameEl.textContent = ad || 'Uğur AY';
-      if(metaEl) metaEl.textContent = (firma ? firma + ' • ' : '') + 'Premium lisans aktif';
-    }catch(e){}
-  };
-
-  window.exLeftMenuLicenseStatus = function(){
-    try{
-      window.exLeftMenuClose();
-      var dev = '';
-      try{ dev = localStorage.getItem('elevatorx_device_code_v1476') || ''; }catch(e){}
-      var mesaj = 'Premium lisans aktif';
-      if(dev) mesaj += '\\nCihaz kodu: ' + dev;
-      alert(mesaj);
-    }catch(e){
-      try{ if(typeof toast === 'function') toast('Lisans bilgisi okunamadı'); }catch(_){}
-    }
-  };
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') window.exLeftMenuClose();
-  });
-
-  document.addEventListener('DOMContentLoaded', function(){
-    window.exLeftMenuUpdateProfile();
-    window.exLeftMenuMark('apartman');
-  });
-})();
-</script>
-
-
 
 <div id="profileSetupOverlay" class="profileSetupOverlay" style="display:none">
   <div class="profileSetupCard">
@@ -10808,10 +10383,10 @@ body.exLeftMenuOpen .middleButton{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1491" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1492" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.91</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.92</div>
 </div>
 </div>
 
@@ -10821,7 +10396,7 @@ body.exLeftMenuOpen .middleButton{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.91";
+  const SPLASH_VERSION = "v1.4.92";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -11361,9 +10936,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.91";
+const APP_VERSION = "v1.4.92";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1491", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1492", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14549,8 +14124,8 @@ ${sonParcalar}
 
 
 
-<script id="exBottomBarYeniLockScriptV1491">
-/* v1.4.91 — Yeni sekmesi görünürlük kilidi */
+<script id="exBottomBarYeniLockScriptV1492">
+/* v1.4.92 — Yeni sekmesi görünürlük kilidi */
 (function(){
   function currentTab(){
     try{
@@ -16400,7 +15975,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>ElevatorX v1.4.91</div>
+  <div>ElevatorX v1.4.92</div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -16720,7 +16295,7 @@ detayPanel.innerHTML = `
       <div class="controlReportTitle">Kontrol Raporu & Teklif</div>
       <div class="controlReportSub">${ayHtml(a.ad || "-")} için önce sarı/kırmızı maddeleri ayıkla, sonra revizyon teklifini hazırla.</div>
     </div>
-    <div class="controlReportBadge">v1.4.91</div>
+    <div class="controlReportBadge">v1.4.92</div>
   </div>
 
   <div class="controlReportPreview">
@@ -18389,7 +17964,7 @@ opacity:.9;
 
 
 
-/* === v1.4.91 — 2. resimdeki alt bar restore ===
+/* === v1.4.92 — 2. resimdeki alt bar restore ===
    Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
    Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
 #quickAddBtn,
@@ -18599,7 +18174,7 @@ html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
 
 
 
-/* === v1.4.91 — + Yeni yalnız Apartman ekranında === */
+/* === v1.4.92 — + Yeni yalnız Apartman ekranında === */
 body:not(.exShowYeniTab) .tabbar{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   width:min(340px,calc(100vw - 48px))!important;
@@ -22029,8 +21604,8 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exTabbarYeniVisibilityV1491">
-/* v1.4.91 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
+<script id="exTabbarYeniVisibilityV1492">
+/* v1.4.92 — + Yeni sadece Apartmanlar / Yeni form ekranında görünür */
 (function(){
   function exTabbarYeniDurum(){
     try{
@@ -22079,9 +21654,17 @@ try{ quickAddGuncelle(); }catch(e){}
 
 
 
-<script id="exLeftMenuNoBottomBarFixScriptV1491">
-/* v1.4.91 — Ana uygulamada alt barı soldan menü için kapatır. */
+<script id="exLeftMenuJsSafeScriptV1492">
 (function(){
+  function isMainApp(){
+    try{
+      if(document.querySelector('.printBtn,.screenBtn,.backBtn')) return false;
+      if(!document.querySelector('.headerClean')) return false;
+      if(!document.getElementById('searchArea') && !document.getElementById('profilPanel')) return false;
+      return true;
+    }catch(e){ return false; }
+  }
+
   function hideBottomBar(){
     try{
       document.querySelectorAll('.tabbar,#quickAddBtn,.quickAddBtn,.middleButton').forEach(function(el){
@@ -22093,15 +21676,127 @@ try{ quickAddGuncelle(); }catch(e){}
     }catch(e){}
   }
 
-  window.exHideBottomBarForLeftMenu = hideBottomBar;
+  function injectMenu(){
+    try{
+      if(!isMainApp()) return;
+      if(document.getElementById('exLeftMenuBtn')) return;
+
+      var wrap = document.createElement('div');
+      wrap.id = 'exLeftMenuMount';
+      wrap.innerHTML =
+        '<button id="exLeftMenuBtn" class="exLeftMenuBtn" type="button" onclick="exLeftMenuOpen()" aria-label="Menüyü aç"><span></span><span></span><span></span></button>'+
+        '<div id="exLeftMenuBackdrop" class="exLeftMenuBackdrop" onclick="exLeftMenuClose()"></div>'+
+        '<aside id="exLeftMenuDrawer" class="exLeftMenuDrawer" aria-hidden="true">'+
+          '<div class="exLeftMenuHead">'+
+            '<div class="exLeftMenuLogo">E<span>X</span></div>'+
+            '<div class="exLeftMenuTitleBox"><div class="exLeftMenuBrand">Elevator<span>X</span></div><div class="exLeftMenuSub">AY ASANSÖR • Kontrol paneli</div></div>'+
+            '<button type="button" class="exLeftMenuClose" onclick="exLeftMenuClose()" aria-label="Menüyü kapat">×</button>'+
+          '</div>'+
+          '<div class="exLeftMenuProfile"><div class="exLeftMenuProfileName" id="exLeftMenuProfileName">Uğur AY</div><div class="exLeftMenuProfileMeta" id="exLeftMenuProfileMeta">Premium lisans aktif</div></div>'+
+          '<nav class="exLeftMenuNav">'+
+            '<button type="button" class="exLeftMenuItem active" data-left-menu="apartman" onclick="exLeftMenuGo(\\'anaSayfa\\',\\'apartman\\')"><span class="exLeftMenuIcon">▦</span><span><b>Apartmanlar</b><small>Liste ve cari durum</small></span></button>'+
+            '<button type="button" class="exLeftMenuItem" data-left-menu="bakim" onclick="exLeftMenuGo(\\'bakimListesiAc\\',\\'bakim\\')"><span class="exLeftMenuIcon">✓</span><span><b>Bakım Listesi</b><small>Aylık bakım takibi</small></span></button>'+
+            '<button type="button" class="exLeftMenuItem primary" data-left-menu="yeni" onclick="exLeftMenuGo(\\'formAc\\',\\'yeni\\')"><span class="exLeftMenuIcon">＋</span><span><b>Yeni Apartman</b><small>Hızlı kayıt ekle</small></span></button>'+
+            '<button type="button" class="exLeftMenuItem" data-left-menu="profil" onclick="exLeftMenuGo(\\'profilAc\\',\\'profil\\')"><span class="exLeftMenuIcon">⌾</span><span><b>Profil</b><small>Firma ve yedekleme</small></span></button>'+
+            '<div class="exLeftMenuDivider"></div>'+
+            '<button type="button" class="exLeftMenuItem" data-left-menu="teknik" onclick="exLeftMenuGo(\\'teknikKutuphaneAc\\',\\'teknik\\')"><span class="exLeftMenuIcon">▤</span><span><b>Teknik Kütüphane</b><small>Kart, sürücü ve notlar</small></span></button>'+
+            '<button type="button" class="exLeftMenuItem" onclick="exLeftMenuGo(\\'yedekle\\',\\'yedek\\')"><span class="exLeftMenuIcon">↥</span><span><b>Verileri Yedekle</b><small>JSON yedek oluştur</small></span></button>'+
+            '<button type="button" class="exLeftMenuItem" onclick="exLeftMenuLicenseStatus()"><span class="exLeftMenuIcon">🔐</span><span><b>Lisans Durumu</b><small>Cihaz ve aktivasyon bilgisi</small></span></button>'+
+          '</nav>'+
+          '<div class="exLeftMenuFooter"><b>ElevatorX</b><span>v1.4.92 • PDF safe soldan menü</span></div>'+
+        '</aside>';
+
+      document.body.insertBefore(wrap, document.body.firstChild);
+      updateProfile();
+      mark('apartman');
+      hideBottomBar();
+    }catch(e){}
+  }
+
+  function updateProfile(){
+    try{
+      var nameEl = document.getElementById('exLeftMenuProfileName');
+      var metaEl = document.getElementById('exLeftMenuProfileMeta');
+      var ad = (localStorage.getItem('profilAd') || localStorage.getItem('firmaYetkili') || '').trim();
+      var firma = (localStorage.getItem('profilFirma') || localStorage.getItem('firmaAdi') || '').trim();
+      if(nameEl) nameEl.textContent = ad || 'Uğur AY';
+      if(metaEl) metaEl.textContent = (firma ? firma + ' • ' : '') + 'Premium lisans aktif';
+    }catch(e){}
+  }
+
+  function mark(tab){
+    try{
+      document.querySelectorAll('.exLeftMenuItem[data-left-menu]').forEach(function(btn){
+        btn.classList.toggle('active', btn.getAttribute('data-left-menu') === tab);
+      });
+    }catch(e){}
+  }
+
+  window.exLeftMenuOpen = function(){
+    try{
+      injectMenu();
+      if(!isMainApp()) return;
+      document.body.classList.add('exLeftMenuOpen');
+      var d = document.getElementById('exLeftMenuDrawer');
+      if(d) d.setAttribute('aria-hidden','false');
+      updateProfile();
+      hideBottomBar();
+    }catch(e){}
+  };
+
+  window.exLeftMenuClose = function(){
+    try{
+      document.body.classList.remove('exLeftMenuOpen');
+      var d = document.getElementById('exLeftMenuDrawer');
+      if(d) d.setAttribute('aria-hidden','true');
+      hideBottomBar();
+    }catch(e){}
+  };
+
+  window.exLeftMenuGo = function(fnName, tab){
+    try{ mark(tab); }catch(e){}
+    window.exLeftMenuClose();
+    setTimeout(function(){
+      try{
+        if(typeof window[fnName] === 'function'){
+          window[fnName]();
+        }else if(typeof toast === 'function'){
+          toast('Bu bölüm henüz hazır değil');
+        }
+        setTimeout(hideBottomBar, 90);
+      }catch(e){
+        try{ if(typeof toast === 'function') toast('Bölüm açılamadı'); }catch(_){}
+      }
+    },170);
+  };
+
+  window.exLeftMenuLicenseStatus = function(){
+    try{
+      window.exLeftMenuClose();
+      var dev = '';
+      try{ dev = localStorage.getItem('elevatorx_device_code_v1476') || ''; }catch(e){}
+      var mesaj = 'Premium lisans aktif';
+      if(dev) mesaj += '\\nCihaz kodu: ' + dev;
+      alert(mesaj);
+    }catch(e){
+      try{ if(typeof toast === 'function') toast('Lisans bilgisi okunamadı'); }catch(_){}
+    }
+  };
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') window.exLeftMenuClose();
+  });
 
   document.addEventListener('DOMContentLoaded', function(){
+    injectMenu();
     hideBottomBar();
+    setTimeout(injectMenu,300);
     setTimeout(hideBottomBar,300);
     setTimeout(hideBottomBar,900);
   });
 
   window.addEventListener('load', function(){
+    injectMenu();
     hideBottomBar();
     setTimeout(hideBottomBar,600);
   });
@@ -22109,6 +21804,8 @@ try{ quickAddGuncelle(); }catch(e){}
   document.addEventListener('click', function(){
     setTimeout(hideBottomBar,80);
   }, true);
+
+  window.exHideBottomBarForLeftMenu = hideBottomBar;
 })();
 </script>
 
