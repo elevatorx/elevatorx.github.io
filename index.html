@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.5.03 — aktivasyon/splash preboot */
+/* v1.5.04 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1503_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1504_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.5.03 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.5.04 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -303,7 +303,7 @@ html.ex-preboot:not(.appBooted) body{
     var done=false;
     var sc;
     var url = API_URL + '?' + Object.keys(params).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(params[k]); }).join('&') + '&callback=' + cb;
-    var timer=setTimeout(function(){ if(done) return; done=true; cleanup(); if(fail) fail(new Error('Bağlantı zaman aşımına uğradı.')); }, 15030);
+    var timer=setTimeout(function(){ if(done) return; done=true; cleanup(); if(fail) fail(new Error('Bağlantı zaman aşımına uğradı.')); }, 15040);
     function cleanup(){
       try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
       try{ if(sc && sc.parentNode) sc.parentNode.removeChild(sc); }catch(e){}
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1503_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1504_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1503_BUILD_VERIFIED | APP_VERSION v1.5.03 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1504_BUILD_VERIFIED | APP_VERSION v1.5.04 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1503_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.03 -->
+<!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1503">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1503">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1503">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1503">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1503">
-<link rel="manifest" href="/manifest.webmanifest?v=1503">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1504">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1504">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1504">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1504">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1504">
+<link rel="manifest" href="/manifest.webmanifest?v=1504">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.5.03 — Emoji-free premium line icon system === */
+/* === v1.5.04 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.5.03 — Eski premium alt bar restore ===
+/* === v1.5.04 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,13 +10071,13 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1503_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1504_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
-<!-- ELEVATORX_V1503_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
+<!-- ELEVATORX_V1504_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
 
 
-<style id="exHybridNavigationStyleV1503">
-/* === ElevatorX v1.5.03 — 3'lü alt bar + soldan yardımcı menü ===
+<style id="exHybridNavigationStyleV1504">
+/* === ElevatorX v1.5.04 — 3'lü alt bar + soldan yardımcı menü ===
    Bu stil gerçek ana <head> içindedir. PDF/rapor şablonlarına eklenmez. */
 
 /* Alt bar her ekranda yalnızca Bakım / Apartmanlar / Profil */
@@ -10483,7 +10483,7 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exHybridNavigationRefineV1503">
+<style id="exHybridNavigationRefineV1504">
 .exHybridHead{margin-bottom:14px!important;}
 .exHybridTitle{display:flex!important;align-items:center!important;}
 .exHybridBrand{margin:0!important;}
@@ -10497,8 +10497,8 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exTwoTabBottomBarStyleV1503">
-/* === ElevatorX v1.5.03 — Alt bar: Bakım + Apartmanlar ===
+<style id="exTwoTabBottomBarStyleV1504">
+/* === ElevatorX v1.5.04 — Alt bar: Bakım + Apartmanlar ===
    Profil yalnız hamburger menüdedir. PDF/rapor alanına eklenmez. */
 
 .tabbar,
@@ -10555,8 +10555,8 @@ body:not(.exShowYeniTab) .tabbar{
 
 
 
-<style id="exHybridSwipeStyleV1503">
-/* v1.5.03 — Sol kenardan sağa kaydırarak menüyü açma */
+<style id="exHybridSwipeStyleV1504">
+/* v1.5.04 — Sol kenardan sağa kaydırarak menüyü açma */
 .exHybridDrawer.exSwipeDragging{
   transition:none!important;
   will-change:transform!important;
@@ -10570,8 +10570,8 @@ body:not(.exShowYeniTab) .tabbar{
 
 
 
-<style id="exPremiumSegmentedBarStyleV1503">
-/* === ElevatorX v1.5.03 — Premium segmented alt bar (flat version) ===
+<style id="exPremiumSegmentedBarStyleV1504">
+/* === ElevatorX v1.5.04 — Premium segmented alt bar (flat version) ===
    01 / 02 kaldırıldı. Glass hissi temizlendi. */
 
 .tabbar,
@@ -10765,8 +10765,8 @@ html.darkRoot .tabbar .tabItem.activeTab{
 
 
 
-<style id="exTopHeaderCompactPolishV1503">
-/* === ElevatorX v1.5.03 — Üst alan kompakt premium cilası ===
+<style id="exTopHeaderCompactPolishV1504">
+/* === ElevatorX v1.5.04 — Üst alan kompakt premium cilası ===
    Yalnız ana uygulamaya uygulanır.
    Menü, alt bar, lisans ve PDF/rapor fonksiyonlarına dokunmaz. */
 
@@ -11065,11 +11065,26 @@ html.darkRoot .lastActionDate{
 }
 </style>
 
+
+
+<style id="exHybridMenuGroupedOrderV1504">
+.exHybridMenuLabelSecondary{
+  margin:12px 8px 1px!important;
+  padding-top:3px!important;
+  border-top:1px solid rgba(148,163,184,.20)!important;
+}
+
+body.darkMode .exHybridMenuLabelSecondary,
+html.darkRoot .exHybridMenuLabelSecondary{
+  border-top-color:rgba(255,255,255,.08)!important;
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- ElevatorX v1.5.03 hibrit navigasyon: yalnız ana uygulama body içinde -->
+<!-- ElevatorX v1.5.04 hibrit navigasyon: yalnız ana uygulama body içinde -->
 <button id="exHybridMenuBtn" class="exHybridMenuBtn" type="button" onclick="exHybridMenuOpen()" aria-label="Yardımcı menüyü aç">
   <span></span><span></span><span></span>
 </button>
@@ -11114,15 +11129,8 @@ html.darkRoot .lastActionDate{
       <span class="exHybridItemText"><b>Teknik Kütüphane</b><small>Kart, sürücü ve teknik notlar</small></span>
     </button>
 
-    <button class="exHybridItem" type="button" onclick="exHybridCall('yedekle')">
-      <span class="exHybridItemIcon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 15V4M8.5 7.5 12 4l3.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5 13.5v4A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span class="exHybridItemText"><b>Verileri Yedekle</b><small>Güncel JSON yedeğini oluştur</small></span>
-    </button>
+    <div class="exHybridMenuLabel exHybridMenuLabelSecondary">Hesap ve güvenlik</div>
+
     <button class="exHybridItem" type="button" onclick="exHybridProfilAc()">
       <span class="exHybridItemIcon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
@@ -11133,6 +11141,15 @@ html.darkRoot .lastActionDate{
       <span class="exHybridItemText"><b>Profil</b><small>Firma bilgileri ve yedekleme ayarları</small></span>
     </button>
 
+    <button class="exHybridItem" type="button" onclick="exHybridCall('yedekle')">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 15V4M8.5 7.5 12 4l3.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 13.5v4A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Verileri Yedekle</b><small>Güncel JSON yedeğini oluştur</small></span>
+    </button>
 
     <button class="exHybridItem" type="button" onclick="exHybridLisansDurumu()">
       <span class="exHybridItemIcon" aria-hidden="true">
@@ -11147,7 +11164,7 @@ html.darkRoot .lastActionDate{
   </nav>
 </aside>
 
-<script id="exHybridNavigationScriptV1503">
+<script id="exHybridNavigationScriptV1504">
 (function(){
   function updateMenuProfile(){
     try{
@@ -11295,10 +11312,10 @@ html.darkRoot .lastActionDate{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1503" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1504" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.03</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.04</div>
 </div>
 </div>
 
@@ -11308,10 +11325,10 @@ html.darkRoot .lastActionDate{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.03";
+  const SPLASH_VERSION = "v1.5.04";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
-  const NORMAL_MS = 1503;
+  const NORMAL_MS = 1504;
   const FAILSAFE_MS = 3200;
 
   function hideSplashSmart(){
@@ -11441,7 +11458,7 @@ html.darkRoot .lastActionDate{
 <div class="fieldIcon" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15 8.2C14.5 7.42 13.41 6.9 12.2 6.9C10.61 6.9 9.32 7.8 9.32 8.92C9.32 10.03 10.61 10.94 12.2 10.94C13.79 10.94 15.08 11.84 15.08 12.96C15.08 14.08 13.79 14.98 12.2 14.98C10.99 14.98 9.9 14.46 9.4 13.68" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
-<input id="ucret" class="fieldInput" inputmode="decimal" placeholder="Örn. 1503">
+<input id="ucret" class="fieldInput" inputmode="decimal" placeholder="Örn. 1504">
 </div>
 </div>
 
@@ -11806,7 +11823,7 @@ Destek: supportelevatorx@gmail.com
 
 
 
-<script id="exHybridSwipeScriptV1503">
+<script id="exHybridSwipeScriptV1504">
 (function(){
   var startX = 0;
   var startY = 0;
@@ -11995,9 +12012,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.03";
+const APP_VERSION = "v1.5.04";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1503", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1504", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
