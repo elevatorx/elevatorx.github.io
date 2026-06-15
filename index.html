@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.5.02 — aktivasyon/splash preboot */
+/* v1.5.03 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1502_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1503_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.5.02 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.5.03 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -303,7 +303,7 @@ html.ex-preboot:not(.appBooted) body{
     var done=false;
     var sc;
     var url = API_URL + '?' + Object.keys(params).map(function(k){ return encodeURIComponent(k)+'='+encodeURIComponent(params[k]); }).join('&') + '&callback=' + cb;
-    var timer=setTimeout(function(){ if(done) return; done=true; cleanup(); if(fail) fail(new Error('Bağlantı zaman aşımına uğradı.')); }, 15020);
+    var timer=setTimeout(function(){ if(done) return; done=true; cleanup(); if(fail) fail(new Error('Bağlantı zaman aşımına uğradı.')); }, 15030);
     function cleanup(){
       try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
       try{ if(sc && sc.parentNode) sc.parentNode.removeChild(sc); }catch(e){}
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1502_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1503_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1502_BUILD_VERIFIED | APP_VERSION v1.5.02 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1503_BUILD_VERIFIED | APP_VERSION v1.5.03 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1502_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.02 -->
+<!-- ELEVATORX_V1503_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.03 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1502">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1502">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1502">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1502">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1502">
-<link rel="manifest" href="/manifest.webmanifest?v=1502">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1503">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1503">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1503">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1503">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1503">
+<link rel="manifest" href="/manifest.webmanifest?v=1503">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.5.02 — Emoji-free premium line icon system === */
+/* === v1.5.03 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.5.02 — Eski premium alt bar restore ===
+/* === v1.5.03 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,13 +10071,13 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1502_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1503_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
-<!-- ELEVATORX_V1502_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
+<!-- ELEVATORX_V1503_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
 
 
-<style id="exHybridNavigationStyleV1502">
-/* === ElevatorX v1.5.02 — 3'lü alt bar + soldan yardımcı menü ===
+<style id="exHybridNavigationStyleV1503">
+/* === ElevatorX v1.5.03 — 3'lü alt bar + soldan yardımcı menü ===
    Bu stil gerçek ana <head> içindedir. PDF/rapor şablonlarına eklenmez. */
 
 /* Alt bar her ekranda yalnızca Bakım / Apartmanlar / Profil */
@@ -10483,7 +10483,7 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exHybridNavigationRefineV1502">
+<style id="exHybridNavigationRefineV1503">
 .exHybridHead{margin-bottom:14px!important;}
 .exHybridTitle{display:flex!important;align-items:center!important;}
 .exHybridBrand{margin:0!important;}
@@ -10497,8 +10497,8 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exTwoTabBottomBarStyleV1502">
-/* === ElevatorX v1.5.02 — Alt bar: Bakım + Apartmanlar ===
+<style id="exTwoTabBottomBarStyleV1503">
+/* === ElevatorX v1.5.03 — Alt bar: Bakım + Apartmanlar ===
    Profil yalnız hamburger menüdedir. PDF/rapor alanına eklenmez. */
 
 .tabbar,
@@ -10555,8 +10555,8 @@ body:not(.exShowYeniTab) .tabbar{
 
 
 
-<style id="exHybridSwipeStyleV1502">
-/* v1.5.02 — Sol kenardan sağa kaydırarak menüyü açma */
+<style id="exHybridSwipeStyleV1503">
+/* v1.5.03 — Sol kenardan sağa kaydırarak menüyü açma */
 .exHybridDrawer.exSwipeDragging{
   transition:none!important;
   will-change:transform!important;
@@ -10570,8 +10570,8 @@ body:not(.exShowYeniTab) .tabbar{
 
 
 
-<style id="exPremiumSegmentedBarStyleV1502">
-/* === ElevatorX v1.5.02 — Premium segmented alt bar (flat version) ===
+<style id="exPremiumSegmentedBarStyleV1503">
+/* === ElevatorX v1.5.03 — Premium segmented alt bar (flat version) ===
    01 / 02 kaldırıldı. Glass hissi temizlendi. */
 
 .tabbar,
@@ -10763,11 +10763,313 @@ html.darkRoot .tabbar .tabItem.activeTab{
 </style>
 
 
+
+
+<style id="exTopHeaderCompactPolishV1503">
+/* === ElevatorX v1.5.03 — Üst alan kompakt premium cilası ===
+   Yalnız ana uygulamaya uygulanır.
+   Menü, alt bar, lisans ve PDF/rapor fonksiyonlarına dokunmaz. */
+
+/* Logo ve üst başlık */
+body > .header.headerClean{
+  min-height:62px!important;
+  padding:18px 16px 8px 74px!important;
+  box-sizing:border-box!important;
+  align-items:center!important;
+}
+
+body > .header.headerClean .headerBrand{
+  min-height:42px!important;
+  align-items:center!important;
+}
+
+body > .header.headerClean .elevatorXWordmark{
+  font-size:30px!important;
+  line-height:1!important;
+  letter-spacing:-1.15px!important;
+}
+
+/* Hamburger artık logoya taşmaz */
+.exHybridMenuBtn{
+  left:14px!important;
+  top:calc(13px + env(safe-area-inset-top,0px))!important;
+  width:42px!important;
+  height:42px!important;
+  border-radius:15px!important;
+  gap:4px!important;
+  box-shadow:
+    0 10px 24px rgba(15,23,42,.11),
+    inset 0 1px 0 rgba(255,255,255,.88)!important;
+}
+
+.exHybridMenuBtn span{
+  width:18px!important;
+  height:2.2px!important;
+}
+
+/* Ana içerik üst boşluğu */
+.container{
+  padding-top:8px!important;
+}
+
+/* Arama + filtre */
+.searchRow{
+  gap:9px!important;
+  margin:4px 0 14px!important;
+}
+
+#arama{
+  height:50px!important;
+  min-height:50px!important;
+  padding:0 16px!important;
+  border:1px solid rgba(226,232,240,.92)!important;
+  border-radius:18px!important;
+  background:#ffffff!important;
+  box-shadow:0 7px 20px rgba(15,23,42,.045)!important;
+  font-size:15.5px!important;
+  font-weight:650!important;
+  letter-spacing:-.15px!important;
+  outline:none!important;
+}
+
+#arama::placeholder{
+  color:#9aa5b5!important;
+  opacity:1!important;
+}
+
+#arama:focus{
+  border-color:rgba(59,130,246,.34)!important;
+  box-shadow:
+    0 0 0 4px rgba(59,130,246,.08),
+    0 8px 22px rgba(15,23,42,.05)!important;
+}
+
+.filterBtn{
+  width:94px!important;
+  height:50px!important;
+  min-height:50px!important;
+  padding:0 14px!important;
+  border:1px solid rgba(226,232,240,.92)!important;
+  border-radius:18px!important;
+  background:#ffffff!important;
+  color:#1769e0!important;
+  box-shadow:0 7px 20px rgba(15,23,42,.045)!important;
+  font-size:15px!important;
+  font-weight:850!important;
+  letter-spacing:-.15px!important;
+}
+
+/* Dört istatistik kartı */
+.statGrid{
+  gap:8px!important;
+  margin:8px 0 16px!important;
+}
+
+.statCard{
+  min-height:92px!important;
+  padding:11px 6px!important;
+  border-radius:22px!important;
+  background:#ffffff!important;
+  border:1px solid rgba(232,236,243,.98)!important;
+  box-shadow:0 8px 22px rgba(15,23,42,.045)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.statCard:active{
+  box-shadow:0 5px 16px rgba(15,23,42,.04)!important;
+}
+
+.statIcon{
+  width:34px!important;
+  height:34px!important;
+  border-radius:12px!important;
+  margin-bottom:6px!important;
+  box-shadow:none!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+}
+
+.statNumber{
+  font-size:22px!important;
+  line-height:1!important;
+  letter-spacing:-.45px!important;
+}
+
+.statLabel{
+  margin-top:4px!important;
+  font-size:11px!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+  color:#737b89!important;
+}
+
+/* Son işlem kartı */
+.lastActionCard{
+  padding:14px 15px!important;
+  margin:2px 0 16px!important;
+  gap:12px!important;
+  border-radius:22px!important;
+  background:#ffffff!important;
+  border:1px solid rgba(232,236,243,.98)!important;
+  box-shadow:0 8px 22px rgba(15,23,42,.045)!important;
+}
+
+.lastActionIcon{
+  width:38px!important;
+  height:38px!important;
+  border-radius:13px!important;
+  font-size:18px!important;
+  box-shadow:none!important;
+}
+
+.lastActionLabel{
+  margin-bottom:3px!important;
+  font-size:11px!important;
+  letter-spacing:.32px!important;
+}
+
+.lastActionValue{
+  font-size:14.5px!important;
+  line-height:1.25!important;
+}
+
+.lastActionDate{
+  margin-top:2px!important;
+  font-size:11.5px!important;
+}
+
+/* Bölüm başlığı da biraz daha sıkı */
+.sectionHead{
+  margin:6px 2px 12px!important;
+}
+
+.sectionHead h2{
+  font-size:21px!important;
+}
+
+/* Karanlık mod uyumu */
+body.darkMode #arama,
+html.darkRoot #arama,
+body.darkMode .filterBtn,
+html.darkRoot .filterBtn,
+body.darkMode .statCard,
+html.darkRoot .statCard,
+body.darkMode .lastActionCard,
+html.darkRoot .lastActionCard{
+  background:#171d28!important;
+  border-color:rgba(255,255,255,.075)!important;
+}
+
+body.darkMode #arama,
+html.darkRoot #arama{
+  color:#f8fafc!important;
+}
+
+body.darkMode #arama::placeholder,
+html.darkRoot #arama::placeholder{
+  color:#8f9aac!important;
+}
+
+body.darkMode .statLabel,
+html.darkRoot .statLabel,
+body.darkMode .lastActionDate,
+html.darkRoot .lastActionDate{
+  color:#98a2b2!important;
+}
+
+@media(max-width:430px){
+  body > .header.headerClean{
+    min-height:58px!important;
+    padding:16px 14px 7px 68px!important;
+  }
+
+  body > .header.headerClean .elevatorXWordmark{
+    font-size:28px!important;
+  }
+
+  .exHybridMenuBtn{
+    left:13px!important;
+    top:calc(12px + env(safe-area-inset-top,0px))!important;
+    width:40px!important;
+    height:40px!important;
+    border-radius:14px!important;
+  }
+
+  .searchRow{
+    gap:8px!important;
+  }
+
+  #arama{
+    height:48px!important;
+    min-height:48px!important;
+    border-radius:17px!important;
+    padding:0 14px!important;
+    font-size:15px!important;
+  }
+
+  .filterBtn{
+    width:88px!important;
+    height:48px!important;
+    min-height:48px!important;
+    border-radius:17px!important;
+    padding:0 11px!important;
+    font-size:14.5px!important;
+  }
+
+  .statGrid{
+    gap:7px!important;
+  }
+
+  .statCard{
+    min-height:88px!important;
+    padding:10px 5px!important;
+    border-radius:20px!important;
+  }
+
+  .statIcon{
+    width:32px!important;
+    height:32px!important;
+    margin-bottom:5px!important;
+  }
+
+  .statNumber{
+    font-size:20px!important;
+  }
+
+  .statLabel{
+    font-size:10.5px!important;
+  }
+}
+
+@media(max-width:360px){
+  body > .header.headerClean .elevatorXWordmark{
+    font-size:26px!important;
+  }
+
+  .filterBtn{
+    width:82px!important;
+    font-size:14px!important;
+  }
+
+  .statGrid{
+    gap:6px!important;
+  }
+
+  .statNumber{
+    font-size:19px!important;
+  }
+
+  .statLabel{
+    font-size:9.8px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- ElevatorX v1.5.02 hibrit navigasyon: yalnız ana uygulama body içinde -->
+<!-- ElevatorX v1.5.03 hibrit navigasyon: yalnız ana uygulama body içinde -->
 <button id="exHybridMenuBtn" class="exHybridMenuBtn" type="button" onclick="exHybridMenuOpen()" aria-label="Yardımcı menüyü aç">
   <span></span><span></span><span></span>
 </button>
@@ -10845,7 +11147,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
   </nav>
 </aside>
 
-<script id="exHybridNavigationScriptV1502">
+<script id="exHybridNavigationScriptV1503">
 (function(){
   function updateMenuProfile(){
     try{
@@ -10993,10 +11295,10 @@ html.darkRoot .tabbar .tabItem.activeTab{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1502" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1503" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.02</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.03</div>
 </div>
 </div>
 
@@ -11006,10 +11308,10 @@ html.darkRoot .tabbar .tabItem.activeTab{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.02";
+  const SPLASH_VERSION = "v1.5.03";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
-  const NORMAL_MS = 1502;
+  const NORMAL_MS = 1503;
   const FAILSAFE_MS = 3200;
 
   function hideSplashSmart(){
@@ -11139,7 +11441,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <div class="fieldIcon" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15 8.2C14.5 7.42 13.41 6.9 12.2 6.9C10.61 6.9 9.32 7.8 9.32 8.92C9.32 10.03 10.61 10.94 12.2 10.94C13.79 10.94 15.08 11.84 15.08 12.96C15.08 14.08 13.79 14.98 12.2 14.98C10.99 14.98 9.9 14.46 9.4 13.68" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
-<input id="ucret" class="fieldInput" inputmode="decimal" placeholder="Örn. 1502">
+<input id="ucret" class="fieldInput" inputmode="decimal" placeholder="Örn. 1503">
 </div>
 </div>
 
@@ -11504,7 +11806,7 @@ Destek: supportelevatorx@gmail.com
 
 
 
-<script id="exHybridSwipeScriptV1502">
+<script id="exHybridSwipeScriptV1503">
 (function(){
   var startX = 0;
   var startY = 0;
@@ -11693,9 +11995,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.02";
+const APP_VERSION = "v1.5.03";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1502", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1503", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
