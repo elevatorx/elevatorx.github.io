@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.98 — aktivasyon/splash preboot */
+/* v1.4.99 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1498_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1499_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.98 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.4.99 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1498_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1499_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1498_BUILD_VERIFIED | APP_VERSION v1.4.98 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1499_BUILD_VERIFIED | APP_VERSION v1.4.99 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1498_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.98 -->
+<!-- ELEVATORX_V1499_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.99 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1498">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1498">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1498">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1498">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1498">
-<link rel="manifest" href="/manifest.webmanifest?v=1498">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1499">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1499">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1499">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1499">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1499">
+<link rel="manifest" href="/manifest.webmanifest?v=1499">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.98 — Emoji-free premium line icon system === */
+/* === v1.4.99 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.98 — Eski premium alt bar restore ===
+/* === v1.4.99 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,13 +10071,13 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1498_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1499_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
-<!-- ELEVATORX_V1498_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
+<!-- ELEVATORX_V1499_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
 
 
-<style id="exHybridNavigationStyleV1498">
-/* === ElevatorX v1.4.98 — 3'lü alt bar + soldan yardımcı menü ===
+<style id="exHybridNavigationStyleV1499">
+/* === ElevatorX v1.4.99 — 3'lü alt bar + soldan yardımcı menü ===
    Bu stil gerçek ana <head> içindedir. PDF/rapor şablonlarına eklenmez. */
 
 /* Alt bar her ekranda yalnızca Bakım / Apartmanlar / Profil */
@@ -10483,7 +10483,7 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exHybridNavigationRefineV1498">
+<style id="exHybridNavigationRefineV1499">
 .exHybridHead{margin-bottom:14px!important;}
 .exHybridTitle{display:flex!important;align-items:center!important;}
 .exHybridBrand{margin:0!important;}
@@ -10495,11 +10495,69 @@ html.darkRoot .exHybridFooter{
 .exHybridNav{gap:10px!important;}
 </style>
 
+
+
+<style id="exTwoTabBottomBarStyleV1499">
+/* === ElevatorX v1.4.99 — Alt bar: Bakım + Apartmanlar ===
+   Profil yalnız hamburger menüdedir. PDF/rapor alanına eklenmez. */
+
+.tabbar,
+body.exShowYeniTab .tabbar,
+body:not(.exShowYeniTab) .tabbar{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:min(276px,calc(100vw - 104px))!important;
+  max-width:276px!important;
+  gap:8px!important;
+  padding:0 10px!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+}
+
+.tabbar .tabItem{
+  width:100%!important;
+  min-width:0!important;
+  transform:none!important;
+}
+
+.tabbar .tabItem[data-tab="bakim"]{
+  grid-column:1!important;
+  transform:none!important;
+}
+
+.tabbar .tabItem[data-tab="apartman"]{
+  grid-column:2!important;
+  transform:none!important;
+}
+
+.tabbar .tabItem[data-tab="profil"],
+.tabbar .tabItem[data-tab="yeni"],
+#quickAddBtn,
+.quickAddBtn{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+@media(max-width:430px){
+  .tabbar,
+  body.exShowYeniTab .tabbar,
+  body:not(.exShowYeniTab) .tabbar{
+    width:min(264px,calc(100vw - 112px))!important;
+    max-width:264px!important;
+    gap:7px!important;
+    padding:0 9px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- ElevatorX v1.4.98 hibrit navigasyon: yalnız ana uygulama body içinde -->
+<!-- ElevatorX v1.4.99 hibrit navigasyon: yalnız ana uygulama body içinde -->
 <button id="exHybridMenuBtn" class="exHybridMenuBtn" type="button" onclick="exHybridMenuOpen()" aria-label="Yardımcı menüyü aç">
   <span></span><span></span><span></span>
 </button>
@@ -10577,7 +10635,7 @@ html.darkRoot .exHybridFooter{
   </nav>
 </aside>
 
-<script id="exHybridNavigationScriptV1498">
+<script id="exHybridNavigationScriptV1499">
 (function(){
   function updateMenuProfile(){
     try{
@@ -10725,10 +10783,10 @@ html.darkRoot .exHybridFooter{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1498" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1499" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.98</div>
+<div class="motionSplashVersion" data-splash-version>v1.4.99</div>
 </div>
 </div>
 
@@ -10738,7 +10796,7 @@ html.darkRoot .exHybridFooter{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.98";
+  const SPLASH_VERSION = "v1.4.99";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -11195,16 +11253,6 @@ Destek: supportelevatorx@gmail.com
 </span>
 <span class="tabText">Apartmanlar</span>
 </button>
-<button type="button" class="tabItem" data-tab="profil" onclick="profilAc()">
-<span class="tabIcon" aria-hidden="true">
-<svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="8.2" r="3.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M5.5 18.6C6.7 15.9 9 14.5 12 14.5C15 14.5 17.3 15.9 18.5 18.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
-</svg>
-</span>
-<span class="tabText">Profil</span>
-</button>
-
 </div>
 
 
@@ -11261,9 +11309,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.98";
+const APP_VERSION = "v1.4.99";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1498", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1499", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
