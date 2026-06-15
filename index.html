@@ -11245,6 +11245,18 @@ html.darkRoot .exHybridMenuLabelSecondary{
 
 
 
+  window.exHybridLicenseModalClose = function(){
+    try{
+      var modal = document.getElementById("exLicenseModal");
+      if(!modal) return;
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden","true");
+      setTimeout(function(){
+        if(!modal.classList.contains("is-open")) modal.style.display = "none";
+      },180);
+    }catch(e){}
+  };
+
   window.exHybridLisansDurumu = function(){
     window.exHybridMenuClose();
     try{
@@ -11255,24 +11267,39 @@ html.darkRoot .exHybridMenuLabelSecondary{
       }catch(e){}
 
       var licenseNo = stored && stored.lisans ? stored.lisans : "-";
-      var customer = stored && stored.musteri ? stored.musteri : "";
+      var customer = stored && stored.musteri ? stored.musteri : "Belirtilmedi";
       var endDate = stored && stored.bitis ? stored.bitis : "Süresiz / belirtilmedi";
 
-      var message =
-        "Premium lisans aktif" +
-        (customer ? "\nMüşteri: " + customer : "") +
-        "\nLisans: " + licenseNo +
-        "\nBitiş: " + endDate +
-        "\nCihaz: " + device;
+      var modal = document.getElementById("exLicenseModal");
+      if(!modal) return;
+      var customerEl = document.getElementById("exLicenseCustomer");
+      var codeEl = document.getElementById("exLicenseCode");
+      var endEl = document.getElementById("exLicenseEnd");
+      var deviceEl = document.getElementById("exLicenseDevice");
 
-      alert(message);
+      if(customerEl) customerEl.textContent = customer;
+      if(codeEl) codeEl.textContent = licenseNo;
+      if(endEl) endEl.textContent = endDate;
+      if(deviceEl) deviceEl.textContent = device;
+
+      modal.style.display = "block";
+      requestAnimationFrame(function(){
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden","false");
+      });
     }catch(e){
       try{ if(typeof toast === "function") toast("Lisans bilgisi okunamadı"); }catch(_){}
     }
   };
 
   document.addEventListener("keydown",function(e){
-    if(e.key === "Escape") window.exHybridMenuClose();
+    if(e.key === "Escape"){
+      try{
+        var lm = document.getElementById("exLicenseModal");
+        if(lm && lm.classList.contains("is-open")) return window.exHybridLicenseModalClose();
+      }catch(_){}
+      window.exHybridMenuClose();
+    }
   });
 
   document.addEventListener("DOMContentLoaded",updateMenuProfile);
@@ -11280,6 +11307,53 @@ html.darkRoot .exHybridMenuLabelSecondary{
 })();
 </script>
 
+
+
+
+<div id="exLicenseModal" class="exLicenseModal" aria-hidden="true">
+  <div class="exLicenseBackdrop" onclick="exHybridLicenseModalClose()"></div>
+  <div class="exLicenseWrap">
+    <div class="exLicenseCard" role="dialog" aria-modal="true" aria-labelledby="exLicenseTitle">
+      <button class="exLicenseClose" type="button" aria-label="Kapat" onclick="exHybridLicenseModalClose()">×</button>
+      <div class="exLicenseCardTop">
+        <div class="exLicenseIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 10V7.8C8 5.70132 9.79086 4 12 4C14.2091 4 16 5.70132 16 7.8V10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <rect x="5" y="10" width="14" height="10" rx="3" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="2.2"/>
+            <circle cx="12" cy="15" r="1.2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 id="exLicenseTitle" class="exLicenseTitle">Premium Lisans</h3>
+        <p class="exLicenseSub">Cihaz ve aktivasyon bilgileri aşağıda görüntüleniyor.</p>
+        <div class="exLicenseBadge">AKTİF</div>
+      </div>
+      <div class="exLicenseBody">
+        <div class="exLicenseGrid">
+          <div class="exLicenseRow">
+            <div class="exLicenseLabel">Müşteri</div>
+            <div id="exLicenseCustomer" class="exLicenseValue">-</div>
+          </div>
+          <div class="exLicenseRow">
+            <div class="exLicenseLabel">Lisans Kodu</div>
+            <div id="exLicenseCode" class="exLicenseValue is-code">-</div>
+          </div>
+          <div class="exLicenseRow">
+            <div class="exLicenseLabel">Bitiş Tarihi</div>
+            <div id="exLicenseEnd" class="exLicenseValue">-</div>
+          </div>
+          <div class="exLicenseRow">
+            <div class="exLicenseLabel">Cihaz</div>
+            <div id="exLicenseDevice" class="exLicenseValue is-code">-</div>
+          </div>
+        </div>
+      </div>
+      <div class="exLicenseFoot">
+        <div class="exLicenseHint">Lisans bilgileri bu cihazdaki kayıtlar üzerinden okunur.</div>
+        <button class="exLicenseBtn" type="button" onclick="exHybridLicenseModalClose()">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div id="profileSetupOverlay" class="profileSetupOverlay" style="display:none">
@@ -12021,7 +12095,37 @@ return null;
 }
 
 function elevatorXPdfSafetyScript(){
-return `<script>
+return `
+<style id="exLicenseModalStyle">
+.exLicenseModal{position:fixed; inset:0; display:none; z-index:99999;}
+.exLicenseModal.is-open{display:block;}
+.exLicenseModal .exLicenseBackdrop{position:absolute; inset:0; background:rgba(9,16,28,.42); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+.exLicenseModal .exLicenseWrap{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:22px;}
+.exLicenseCard{position:relative; width:min(92vw,420px); border-radius:28px; background:linear-gradient(180deg,#ffffff 0%,#f6f8ff 100%); box-shadow:0 28px 90px rgba(9,18,38,.28), 0 6px 20px rgba(9,18,38,.08); overflow:hidden; border:1px solid rgba(112,138,255,.12);}
+.exLicenseCardTop{padding:24px 24px 10px; text-align:center;}
+.exLicenseClose{position:absolute; top:16px; right:16px; width:42px; height:42px; border:none; border-radius:50%; background:#eef3ff; color:#18233f; font-size:24px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.exLicenseIcon{width:68px; height:68px; border-radius:22px; margin:0 auto 14px; background:linear-gradient(135deg,#3f7cff 0%,#1d4ed8 100%); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 18px 34px rgba(63,124,255,.28);}
+.exLicenseIcon svg{width:32px; height:32px;}
+.exLicenseTitle{margin:0; font-size:28px; line-height:1.08; font-weight:800; color:#101828; letter-spacing:-.02em;}
+.exLicenseSub{margin:8px 0 0; font-size:14px; color:#667085; line-height:1.5;}
+.exLicenseBadge{display:inline-flex; align-items:center; justify-content:center; margin-top:14px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:800; color:#157347; background:#eaf8ef; border:1px solid rgba(21,115,71,.12); letter-spacing:.02em;}
+.exLicenseBody{padding:12px 18px 18px;}
+.exLicenseGrid{display:grid; gap:10px;}
+.exLicenseRow{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:14px 14px; border-radius:18px; background:#fff; border:1px solid #eef2ff; box-shadow:0 2px 8px rgba(15,23,42,.03);}
+.exLicenseLabel{font-size:12px; font-weight:800; color:#8a94a7; letter-spacing:.08em; text-transform:uppercase;}
+.exLicenseValue{font-size:16px; font-weight:700; color:#111827; text-align:right; line-height:1.35; word-break:break-word;}
+.exLicenseValue.is-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:15px; background:#f3f6ff; padding:6px 10px; border-radius:12px; display:inline-block;}
+.exLicenseFoot{padding:0 18px 18px;}
+.exLicenseHint{font-size:12px; color:#98a2b3; line-height:1.45; text-align:center; margin:6px 8px 14px;}
+.exLicenseBtn{width:100%; border:none; border-radius:18px; padding:16px 18px; font-size:16px; font-weight:800; color:#fff; background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%); box-shadow:0 12px 28px rgba(15,23,42,.22); cursor:pointer;}
+@media (max-width:420px){
+  .exLicenseCard{width:min(94vw,420px); border-radius:24px;}
+  .exLicenseTitle{font-size:24px;}
+  .exLicenseValue{font-size:15px;}
+}
+</style>
+
+<script>
 (function(){
 try{
 if(window.history && window.history.replaceState){
