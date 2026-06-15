@@ -37,14 +37,14 @@ lastTouchEnd = now;
 if(localStorage.getItem("tema")==="dark"){
 document.documentElement.classList.add("darkRoot");
 }
-/* v1.4.99 — aktivasyon/splash preboot */
+/* v1.5.00 — aktivasyon/splash preboot */
 document.documentElement.classList.add("ex-preboot");
 </script>
 
 
-<!-- ELEVATORX_V1499_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
+<!-- ELEVATORX_V1500_LICENSE_GATE_START | Google Sheet + Apps Script lisans kapısı geri kurulum -->
 <style id="exPrebootFixStyle">
-/* v1.4.99 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
+/* v1.5.00 — splash/aktivasyon gelmeden ana ekran flaşını engeller */
 html.ex-preboot:not(.appBooted) body > *:not(#splash):not(#exLicenseGate){
   visibility:hidden !important;
   pointer-events:none !important;
@@ -440,20 +440,20 @@ html.ex-preboot:not(.appBooted) body{
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startup, {once:true}); else startup();
 })();
 </script>
-<!-- ELEVATORX_V1499_LICENSE_GATE_END -->
+<!-- ELEVATORX_V1500_LICENSE_GATE_END -->
 
 <title>ElevatorX</title>
-<!-- ELEVATORX_V1499_BUILD_VERIFIED | APP_VERSION v1.4.99 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
+<!-- ELEVATORX_V1500_BUILD_VERIFIED | APP_VERSION v1.5.00 | LICENSE_GATE_PRESENT | SPLASH_VERSION_SYNCED -->
 
-<!-- ELEVATORX_V1499_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.4.99 -->
+<!-- ELEVATORX_V1500_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.00 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1499">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1499">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1499">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1499">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1499">
-<link rel="manifest" href="/manifest.webmanifest?v=1499">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1500">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1500">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1500">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1500">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1500">
+<link rel="manifest" href="/manifest.webmanifest?v=1500">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -9623,7 +9623,7 @@ body.darkMode .controlIssueCode{color:#f8fafc;}
 
 
 
-/* === v1.4.99 — Emoji-free premium line icon system === */
+/* === v1.5.00 — Emoji-free premium line icon system === */
 .exIcon{
 position:relative!important;
 font-size:0!important;
@@ -9769,7 +9769,7 @@ body.darkMode .profileActionIcon.exIcon,
 html.darkRoot .profileActionIcon.exIcon{background:#0f172a;}
 
 
-/* === v1.4.99 — Eski premium alt bar restore ===
+/* === v1.5.00 — Eski premium alt bar restore ===
    Lisans/aktivasyon kapısı korunur. Sadece alt bar ve +Yeni yerleşimi eski premium düzene çekildi. */
 #quickAddBtn.quickAddBtn,
 #quickAddBtn.quickAddBtn.quickAddVisible{
@@ -10071,13 +10071,13 @@ window.__ELEVATORX_BOOT_OK__ = false;
 
 <!-- v1.4.2 - bakım borcu sadece bakım yapıldıktan sonra cariye yansır -->
 
-<!-- ELEVATORX_V1499_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
+<!-- ELEVATORX_V1500_PDF_SAFE_STABLE_ROLLBACK | SIDENAV_REMOVED | PDF_TEMPLATES_UNTOUCHED -->
 
-<!-- ELEVATORX_V1499_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
+<!-- ELEVATORX_V1500_GERCEK_PDF_SAFE_KURTARMA | BASE_V1487 | LEFT_MENU_REMOVED | NO_SCRIPT_IN_PDF_TEMPLATE -->
 
 
-<style id="exHybridNavigationStyleV1499">
-/* === ElevatorX v1.4.99 — 3'lü alt bar + soldan yardımcı menü ===
+<style id="exHybridNavigationStyleV1500">
+/* === ElevatorX v1.5.00 — 3'lü alt bar + soldan yardımcı menü ===
    Bu stil gerçek ana <head> içindedir. PDF/rapor şablonlarına eklenmez. */
 
 /* Alt bar her ekranda yalnızca Bakım / Apartmanlar / Profil */
@@ -10483,7 +10483,7 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exHybridNavigationRefineV1499">
+<style id="exHybridNavigationRefineV1500">
 .exHybridHead{margin-bottom:14px!important;}
 .exHybridTitle{display:flex!important;align-items:center!important;}
 .exHybridBrand{margin:0!important;}
@@ -10497,8 +10497,8 @@ html.darkRoot .exHybridFooter{
 
 
 
-<style id="exTwoTabBottomBarStyleV1499">
-/* === ElevatorX v1.4.99 — Alt bar: Bakım + Apartmanlar ===
+<style id="exTwoTabBottomBarStyleV1500">
+/* === ElevatorX v1.5.00 — Alt bar: Bakım + Apartmanlar ===
    Profil yalnız hamburger menüdedir. PDF/rapor alanına eklenmez. */
 
 .tabbar,
@@ -10553,11 +10553,25 @@ body:not(.exShowYeniTab) .tabbar{
 }
 </style>
 
+
+
+<style id="exHybridSwipeStyleV1500">
+/* v1.5.00 — Sol kenardan sağa kaydırarak menüyü açma */
+.exHybridDrawer.exSwipeDragging{
+  transition:none!important;
+  will-change:transform!important;
+}
+.exHybridBackdrop.exSwipeDragging{
+  transition:none!important;
+  will-change:opacity!important;
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- ElevatorX v1.4.99 hibrit navigasyon: yalnız ana uygulama body içinde -->
+<!-- ElevatorX v1.5.00 hibrit navigasyon: yalnız ana uygulama body içinde -->
 <button id="exHybridMenuBtn" class="exHybridMenuBtn" type="button" onclick="exHybridMenuOpen()" aria-label="Yardımcı menüyü aç">
   <span></span><span></span><span></span>
 </button>
@@ -10635,7 +10649,7 @@ body:not(.exShowYeniTab) .tabbar{
   </nav>
 </aside>
 
-<script id="exHybridNavigationScriptV1499">
+<script id="exHybridNavigationScriptV1500">
 (function(){
   function updateMenuProfile(){
     try{
@@ -10783,10 +10797,10 @@ body:not(.exShowYeniTab) .tabbar{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1499" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1500" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.4.99</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.00</div>
 </div>
 </div>
 
@@ -10796,7 +10810,7 @@ body:not(.exShowYeniTab) .tabbar{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.4.99";
+  const SPLASH_VERSION = "v1.5.00";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1500;
@@ -11292,6 +11306,180 @@ Destek: supportelevatorx@gmail.com
 
 
 
+
+
+<script id="exHybridSwipeScriptV1500">
+(function(){
+  var startX = 0;
+  var startY = 0;
+  var currentX = 0;
+  var tracking = false;
+  var openingGesture = false;
+  var closingGesture = false;
+  var horizontalLock = false;
+
+  var EDGE_START = 34;
+  var OPEN_DISTANCE = 62;
+  var CLOSE_DISTANCE = 58;
+  var DRAWER_WIDTH_FALLBACK = 330;
+
+  function getDrawer(){
+    return document.getElementById("exHybridDrawer");
+  }
+
+  function getBackdrop(){
+    return document.getElementById("exHybridBackdrop");
+  }
+
+  function isMenuOpen(){
+    return !!(document.body && document.body.classList.contains("exHybridMenuOpen"));
+  }
+
+  function resetInlineStyles(){
+    var drawer = getDrawer();
+    var backdrop = getBackdrop();
+
+    if(drawer){
+      drawer.classList.remove("exSwipeDragging");
+      drawer.style.removeProperty("transform");
+    }
+
+    if(backdrop){
+      backdrop.classList.remove("exSwipeDragging");
+      backdrop.style.removeProperty("opacity");
+      backdrop.style.removeProperty("visibility");
+      backdrop.style.removeProperty("pointer-events");
+    }
+  }
+
+  function drawerWidth(){
+    var drawer = getDrawer();
+    if(!drawer) return DRAWER_WIDTH_FALLBACK;
+    var rect = drawer.getBoundingClientRect();
+    return rect.width || DRAWER_WIDTH_FALLBACK;
+  }
+
+  document.addEventListener("touchstart", function(e){
+    if(!e.touches || e.touches.length !== 1) return;
+
+    var touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    currentX = startX;
+    horizontalLock = false;
+
+    if(isMenuOpen()){
+      tracking = true;
+      closingGesture = true;
+      openingGesture = false;
+      return;
+    }
+
+    if(startX <= EDGE_START){
+      tracking = true;
+      openingGesture = true;
+      closingGesture = false;
+      return;
+    }
+
+    tracking = false;
+    openingGesture = false;
+    closingGesture = false;
+  }, {passive:true});
+
+  document.addEventListener("touchmove", function(e){
+    if(!tracking || !e.touches || e.touches.length !== 1) return;
+
+    var touch = e.touches[0];
+    currentX = touch.clientX;
+
+    var dx = currentX - startX;
+    var dy = touch.clientY - startY;
+
+    if(!horizontalLock){
+      if(Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+
+      if(Math.abs(dx) <= Math.abs(dy) * 1.15){
+        tracking = false;
+        resetInlineStyles();
+        return;
+      }
+
+      horizontalLock = true;
+    }
+
+    if(e.cancelable){
+      e.preventDefault();
+    }
+
+    var drawer = getDrawer();
+    var backdrop = getBackdrop();
+    var width = drawerWidth();
+
+    if(!drawer || !backdrop) return;
+
+    drawer.classList.add("exSwipeDragging");
+    backdrop.classList.add("exSwipeDragging");
+
+    if(openingGesture){
+      var openDx = Math.max(0, Math.min(dx, width));
+      var translateX = -width + openDx;
+      var progress = Math.max(0, Math.min(openDx / width, 1));
+
+      drawer.style.setProperty("transform", "translateX(" + translateX + "px)", "important");
+      backdrop.style.setProperty("opacity", String(progress), "important");
+      backdrop.style.setProperty("visibility", "visible", "important");
+      backdrop.style.setProperty("pointer-events", "none", "important");
+    }
+
+    if(closingGesture){
+      var closeDx = Math.min(0, dx);
+      var translateClose = Math.max(-width, closeDx);
+      var closeProgress = Math.max(0, Math.min(1 + translateClose / width, 1));
+
+      drawer.style.setProperty("transform", "translateX(" + translateClose + "px)", "important");
+      backdrop.style.setProperty("opacity", String(closeProgress), "important");
+    }
+  }, {passive:false});
+
+  function finishGesture(){
+    if(!tracking){
+      resetInlineStyles();
+      return;
+    }
+
+    var dx = currentX - startX;
+
+    resetInlineStyles();
+
+    if(openingGesture && horizontalLock && dx >= OPEN_DISTANCE){
+      if(typeof window.exHybridMenuOpen === "function"){
+        window.exHybridMenuOpen();
+      }
+    }else if(closingGesture && horizontalLock && dx <= -CLOSE_DISTANCE){
+      if(typeof window.exHybridMenuClose === "function"){
+        window.exHybridMenuClose();
+      }
+    }
+
+    tracking = false;
+    openingGesture = false;
+    closingGesture = false;
+    horizontalLock = false;
+  }
+
+  document.addEventListener("touchend", finishGesture, {passive:true});
+
+  document.addEventListener("touchcancel", function(){
+    resetInlineStyles();
+    tracking = false;
+    openingGesture = false;
+    closingGesture = false;
+    horizontalLock = false;
+  }, {passive:true});
+})();
+</script>
+
 <script>
 
 let data =
@@ -11309,9 +11497,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.4.99";
+const APP_VERSION = "v1.5.00";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1499", location.href).href;
+const APP_LOGO = new URL("elevatorx-icon-v69.png?v=1500", location.href).href;
 
 
 function elevatorXOpenReportWindow(){
