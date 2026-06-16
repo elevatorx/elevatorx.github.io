@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1505">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1505">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1505">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1505">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1505">
-<link rel="manifest" href="/manifest.webmanifest?v=1505">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1506">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1506">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1506">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1506">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1506">
+<link rel="manifest" href="/manifest.webmanifest?v=1506">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11147,6 +11147,95 @@ html.darkRoot .exHybridMenuLabelSecondary{
   @media(max-width:390px){#exMonthReportModal .exMonthCard{border-radius:25px}#exMonthReportModal .exMonthTitle{font-size:25px}#exMonthReportModal .exMonthStats{gap:6px}#exMonthReportModal .exMonthStat{padding:12px 5px}#exMonthReportModal .exMonthStat b{font-size:18px}#exMonthReportModal .exMonthActions{grid-template-columns:1fr}}
 </style>
 
+
+<style id="exStockInventoryStyle">
+  #exStockModal,#exStockFormModal,#exStockMoveModal{
+    position:fixed;inset:0;z-index:2147482980;display:none;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+    color:#111827;
+  }
+  #exStockFormModal,#exStockMoveModal{z-index:2147482990}
+  #exStockModal.is-open,#exStockFormModal.is-open,#exStockMoveModal.is-open{display:block}
+  #exStockModal *,#exStockFormModal *,#exStockMoveModal *{box-sizing:border-box}
+  .exStockBackdrop{position:absolute;inset:0;background:rgba(7,14,28,.52);-webkit-backdrop-filter:blur(11px);backdrop-filter:blur(11px)}
+  .exStockWrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:calc(14px + env(safe-area-inset-top)) 12px calc(14px + env(safe-area-inset-bottom))}
+  .exStockCard{
+    position:relative;width:min(560px,96vw);max-height:min(890px,94vh);overflow:auto;
+    border-radius:30px;background:linear-gradient(180deg,#fff 0%,#f5f8ff 100%);
+    border:1px solid rgba(99,126,187,.13);box-shadow:0 34px 100px rgba(7,16,35,.37)
+  }
+  .exStockClose{
+    position:absolute;top:14px;right:14px;width:41px;height:41px;border:0;border-radius:50%;
+    display:grid;place-items:center;background:#eef3ff;color:#15213d;font-size:27px;line-height:1;z-index:3;padding:0
+  }
+  .exStockHead{padding:25px 22px 12px}
+  .exStockKicker{color:#2376f3;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+  .exStockTitle{margin:7px 52px 0 0;font-size:30px;line-height:1.04;font-weight:880;letter-spacing:-.8px;color:#0f172a}
+  .exStockSub{margin:9px 52px 0 0;color:#667085;font-size:14px;line-height:1.45}
+  .exStockStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px 18px 14px}
+  .exStockStat{min-width:0;padding:14px 8px;border:1px solid #edf1f8;border-radius:18px;text-align:center;background:#fff}
+  .exStockStat b{display:block;color:#111827;font-size:21px;line-height:1.05;letter-spacing:-.6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .exStockStat span{display:block;margin-top:7px;color:#8a94a7;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .exStockToolbar{display:grid;grid-template-columns:1fr auto;gap:8px;padding:0 18px 14px}
+  .exStockSearch{width:100%;height:48px;border:1px solid #dde5f2;border-radius:16px;background:#fff;padding:0 14px;font:inherit;color:#111827;outline:none}
+  .exStockAdd{height:48px;border:0;border-radius:16px;padding:0 16px;background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;font-size:14px;font-weight:850;box-shadow:0 10px 22px rgba(15,23,42,.18)}
+  .exStockBody{padding:0 18px 18px}
+  .exStockEmpty{padding:34px 18px;border:1px dashed #ccd6e6;border-radius:20px;text-align:center;color:#7c879a;background:rgba(255,255,255,.62);font-size:14px;line-height:1.5}
+  .exStockList{display:grid;gap:10px}
+  .exStockItem{border:1px solid #e9eef7;border-radius:21px;background:#fff;overflow:hidden;box-shadow:0 3px 10px rgba(15,23,42,.035)}
+  .exStockItem.is-critical{border-color:#ffd4cf;background:linear-gradient(180deg,#fff,#fff8f7)}
+  .exStockItemTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:15px 15px 10px}
+  .exStockName{font-size:17px;font-weight:880;color:#111827;line-height:1.2}
+  .exStockMeta{margin-top:5px;color:#758096;font-size:12px;line-height:1.4}
+  .exStockBadge{flex-shrink:0;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.04em;background:#eaf8ef;color:#168a3a}
+  .exStockBadge.critical{background:#fff0ed;color:#d92d20}
+  .exStockQtyRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 15px 12px}
+  .exStockQtyBox{border-radius:15px;background:#f5f8fc;padding:10px 11px}
+  .exStockQtyBox span{display:block;color:#8a94a7;font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+  .exStockQtyBox b{display:block;margin-top:4px;color:#111827;font-size:16px;line-height:1.2}
+  .exStockActions{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;padding:0 15px 13px}
+  .exStockAction{min-height:40px;border:0;border-radius:13px;padding:8px 10px;font-size:12px;font-weight:850}
+  .exStockAction.in{background:#eaf8ef;color:#168a3a}
+  .exStockAction.out{background:#fff0ed;color:#d92d20}
+  .exStockAction.edit{width:42px;background:#eef3ff;color:#325ea8}
+  .exStockHistory{border-top:1px solid #eef1f6}
+  .exStockHistory summary{list-style:none;cursor:pointer;padding:11px 15px;color:#54709a;font-size:12px;font-weight:820}
+  .exStockHistory summary::-webkit-details-marker{display:none}
+  .exStockHistory summary::after{content:"⌄";float:right}
+  .exStockHistory[open] summary::after{content:"⌃"}
+  .exStockHistoryList{padding:0 15px 13px;display:grid;gap:7px}
+  .exStockMoveLine{padding:9px 10px;border-radius:12px;background:#f7f9fc;color:#5d687b;font-size:11px;line-height:1.4}
+  .exStockMoveLine b{color:#27344b}
+  .exStockFormCard{position:relative;width:min(460px,95vw);max-height:min(820px,92vh);overflow:auto;border-radius:28px;background:linear-gradient(180deg,#fff,#f6f8fc);box-shadow:0 30px 90px rgba(7,16,35,.38)}
+  .exStockFormHead{padding:25px 22px 12px}
+  .exStockFormTitle{margin:6px 50px 0 0;font-size:26px;line-height:1.08;font-weight:880;color:#0f172a;letter-spacing:-.6px}
+  .exStockFormBody{padding:8px 18px 18px}
+  .exStockField{display:grid;gap:7px;margin-bottom:12px}
+  .exStockField label{font-size:11px;font-weight:900;color:#69758a;letter-spacing:.03em}
+  .exStockField input,.exStockField select,.exStockField textarea{
+    width:100%;border:1px solid #dfe6f1;border-radius:16px;background:#fff;color:#111827;font:inherit;outline:none
+  }
+  .exStockField input,.exStockField select{height:50px;padding:0 13px}
+  .exStockField textarea{min-height:76px;padding:12px 13px;resize:vertical;line-height:1.45}
+  .exStockFieldGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .exStockFormActions{display:grid;grid-template-columns:1fr 1.15fr;gap:8px;margin-top:16px}
+  .exStockFormBtn{min-height:50px;border:0;border-radius:16px;padding:10px 12px;font-size:14px;font-weight:880}
+  .exStockFormBtn.secondary{background:#edf2fa;color:#41577c}
+  .exStockFormBtn.primary{background:linear-gradient(135deg,#111827,#1e3a8a);color:#fff}
+  .exStockFormBtn.danger{background:#fff0ed;color:#d92d20;grid-column:1/-1}
+  .exStockMoveApartment.is-hidden{display:none}
+  body.darkMode .exStockCard,body.darkMode .exStockFormCard,html.darkRoot .exStockCard,html.darkRoot .exStockFormCard{background:linear-gradient(180deg,#171d2a,#0f1420);border-color:rgba(255,255,255,.08);color:#fff}
+  body.darkMode .exStockTitle,body.darkMode .exStockFormTitle,body.darkMode .exStockName,body.darkMode .exStockStat b,body.darkMode .exStockQtyBox b,html.darkRoot .exStockTitle,html.darkRoot .exStockFormTitle,html.darkRoot .exStockName,html.darkRoot .exStockStat b,html.darkRoot .exStockQtyBox b{color:#fff}
+  body.darkMode .exStockStat,body.darkMode .exStockItem,body.darkMode .exStockSearch,body.darkMode .exStockField input,body.darkMode .exStockField select,body.darkMode .exStockField textarea,html.darkRoot .exStockStat,html.darkRoot .exStockItem,html.darkRoot .exStockSearch,html.darkRoot .exStockField input,html.darkRoot .exStockField select,html.darkRoot .exStockField textarea{background:#151b28;border-color:rgba(255,255,255,.08);color:#fff}
+  body.darkMode .exStockQtyBox,body.darkMode .exStockMoveLine,html.darkRoot .exStockQtyBox,html.darkRoot .exStockMoveLine{background:#101622}
+  @media(max-width:390px){
+    .exStockCard,.exStockFormCard{border-radius:24px}
+    .exStockTitle{font-size:26px}.exStockStats{gap:6px}.exStockStat{padding:12px 5px}.exStockStat b{font-size:18px}
+    .exStockToolbar{grid-template-columns:1fr}.exStockAdd{width:100%}
+    .exStockFieldGrid{grid-template-columns:1fr}
+  }
+</style>
+
 </head>
 
 <body>
@@ -11196,6 +11285,19 @@ html.darkRoot .exHybridMenuLabelSecondary{
       <span class="exHybridItemText"><b>Teknik Kütüphane</b><small>Kart, sürücü ve teknik notlar</small></span>
     </button>
 
+
+
+    <div class="exHybridMenuLabel exHybridMenuLabelSecondary">İş yönetimi</div>
+
+    <button class="exHybridItem" type="button" onclick="stokEnvanteriAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4.5 7.5 12 3l7.5 4.5v9L12 21l-7.5-4.5v-9Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <path d="M4.8 7.7 12 12l7.2-4.3M12 12v8.5M8.2 5.3l7.6 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Stok Envanteri</b><small>Parça, miktar ve kritik stok takibi</small></span>
+    </button>
 
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">Raporlar</div>
 
@@ -11381,6 +11483,140 @@ html.darkRoot .exHybridMenuLabelSecondary{
 
 
 
+
+<div id="exStockModal" aria-hidden="true">
+  <div class="exStockBackdrop" onclick="stokEnvanteriKapat()"></div>
+  <div class="exStockWrap">
+    <section class="exStockCard" role="dialog" aria-modal="true" aria-labelledby="exStockTitle">
+      <button class="exStockClose" type="button" aria-label="Kapat" onclick="stokEnvanteriKapat()">×</button>
+      <div class="exStockHead">
+        <div class="exStockKicker">Parça yönetimi</div>
+        <h2 id="exStockTitle" class="exStockTitle">Stok Envanteri</h2>
+        <p class="exStockSub">Eldeki parçaları, kritik seviyeleri ve kullanım hareketlerini tek yerden takip et.</p>
+      </div>
+
+      <div class="exStockStats">
+        <div class="exStockStat"><b id="exStockItemCount">0</b><span>Stok Kalemi</span></div>
+        <div class="exStockStat"><b id="exStockCriticalCount">0</b><span>Kritik</span></div>
+        <div class="exStockStat"><b id="exStockTotalValue">0 ₺</b><span>Stok Değeri</span></div>
+      </div>
+
+      <div class="exStockToolbar">
+        <input id="exStockSearch" class="exStockSearch" type="search" placeholder="Parça ara…" oninput="stokEnvanteriRender()">
+        <button class="exStockAdd" type="button" onclick="stokKalemFormAc()">+ Yeni Parça</button>
+      </div>
+
+      <div class="exStockBody">
+        <div id="exStockList" class="exStockList"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="exStockFormModal" aria-hidden="true">
+  <div class="exStockBackdrop" onclick="stokKalemFormKapat()"></div>
+  <div class="exStockWrap">
+    <section class="exStockFormCard" role="dialog" aria-modal="true" aria-labelledby="exStockFormTitle">
+      <button class="exStockClose" type="button" aria-label="Kapat" onclick="stokKalemFormKapat()">×</button>
+      <div class="exStockFormHead">
+        <div class="exStockKicker">Stok kartı</div>
+        <h2 id="exStockFormTitle" class="exStockFormTitle">Yeni Parça</h2>
+      </div>
+      <div class="exStockFormBody">
+        <input id="exStockEditId" type="hidden">
+
+        <div class="exStockField">
+          <label for="exStockName">Parça adı</label>
+          <input id="exStockName" type="text" placeholder="Örn. Fotosel">
+        </div>
+
+        <div class="exStockFieldGrid">
+          <div class="exStockField">
+            <label for="exStockCategory">Kategori</label>
+            <input id="exStockCategory" type="text" placeholder="Örn. Kapı">
+          </div>
+          <div class="exStockField">
+            <label for="exStockUnit">Birim</label>
+            <select id="exStockUnit">
+              <option value="Adet">Adet</option>
+              <option value="Metre">Metre</option>
+              <option value="Litre">Litre</option>
+              <option value="Paket">Paket</option>
+              <option value="Takım">Takım</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="exStockFieldGrid">
+          <div class="exStockField">
+            <label for="exStockQuantity">Mevcut miktar</label>
+            <input id="exStockQuantity" type="number" step="0.01" inputmode="decimal" placeholder="0">
+          </div>
+          <div class="exStockField">
+            <label for="exStockMinimum">Minimum stok</label>
+            <input id="exStockMinimum" type="number" step="0.01" inputmode="decimal" placeholder="0">
+          </div>
+        </div>
+
+        <div class="exStockField">
+          <label for="exStockCost">Birim alış fiyatı (₺)</label>
+          <input id="exStockCost" type="number" step="0.01" inputmode="decimal" placeholder="0">
+        </div>
+
+        <div class="exStockFormActions">
+          <button class="exStockFormBtn secondary" type="button" onclick="stokKalemFormKapat()">Vazgeç</button>
+          <button class="exStockFormBtn primary" type="button" onclick="stokKalemKaydet()">Kaydet</button>
+          <button id="exStockDeleteButton" class="exStockFormBtn danger" type="button" onclick="stokKalemSil()" style="display:none">Stok kartını sil</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="exStockMoveModal" aria-hidden="true">
+  <div class="exStockBackdrop" onclick="stokHareketFormKapat()"></div>
+  <div class="exStockWrap">
+    <section class="exStockFormCard" role="dialog" aria-modal="true" aria-labelledby="exStockMoveTitle">
+      <button class="exStockClose" type="button" aria-label="Kapat" onclick="stokHareketFormKapat()">×</button>
+      <div class="exStockFormHead">
+        <div id="exStockMoveKicker" class="exStockKicker">Stok hareketi</div>
+        <h2 id="exStockMoveTitle" class="exStockFormTitle">Stok Ekle</h2>
+      </div>
+      <div class="exStockFormBody">
+        <input id="exStockMoveId" type="hidden">
+        <input id="exStockMoveType" type="hidden">
+
+        <div class="exStockFieldGrid">
+          <div class="exStockField">
+            <label for="exStockMoveQuantity">Miktar</label>
+            <input id="exStockMoveQuantity" type="number" step="0.01" inputmode="decimal" value="1">
+          </div>
+          <div class="exStockField">
+            <label for="exStockMoveDate">Tarih</label>
+            <input id="exStockMoveDate" type="text" placeholder="GG.AA.YYYY">
+          </div>
+        </div>
+
+        <div id="exStockMoveApartmentWrap" class="exStockField exStockMoveApartment">
+          <label for="exStockMoveApartment">Kullanıldığı apartman (isteğe bağlı)</label>
+          <select id="exStockMoveApartment"></select>
+        </div>
+
+        <div class="exStockField">
+          <label for="exStockMoveNote">Not (isteğe bağlı)</label>
+          <textarea id="exStockMoveNote" placeholder="Örn. Bakımda kullanıldı"></textarea>
+        </div>
+
+        <div class="exStockFormActions">
+          <button class="exStockFormBtn secondary" type="button" onclick="stokHareketFormKapat()">Vazgeç</button>
+          <button class="exStockFormBtn primary" type="button" onclick="stokHareketKaydet()">Hareketi Kaydet</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
 <div id="exMonthReportModal" aria-hidden="true">
   <div class="exMonthBackdrop" onclick="exMonthReportModalClose()"></div>
   <div class="exMonthWrap">
@@ -11483,10 +11719,10 @@ html.darkRoot .exHybridMenuLabelSecondary{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1505" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1506" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.05</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.06</div>
 </div>
 </div>
 
@@ -11496,7 +11732,7 @@ html.darkRoot .exHybridMenuLabelSecondary{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.05";
+  const SPLASH_VERSION = "v1.5.06";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -12173,9 +12409,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.05";
+const APP_VERSION = "v1.5.06";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1505", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1506", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -13827,6 +14063,7 @@ apartmanSayisi:Array.isArray(data) ? data.length : 0,
 toplamTahsilat:tahsilat,
 acikBakiye:acikBakiye,
 apartmanlar:data,
+stokEnvanteri:stokEnvanteriGet(),
 profil:{
 ad:localStorage.getItem("profilAd") || (typeof profilAd !== "undefined" ? profilAd.value : "") || "",
 firma:localStorage.getItem("profilFirma") || (typeof profilFirma !== "undefined" ? profilFirma.value : "") || "",
@@ -16024,9 +16261,26 @@ data[i].kayitlar.push(
 "Parça değişti: " + ad.trim() + " • Tutar: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
 );
 
+let stokSonucu = stokParcaKullan(
+ad.trim(),
+adet,
+data[i].ad || "",
+tarih.trim()
+);
+
 kaydet();
 detayAc(i);
-toast(tutar > 0 ? "Parça geçmişine ve cari hesaba eklendi" : "Parça geçmişine eklendi");
+
+let parcaMesaji = tutar > 0
+? "Parça geçmişine ve cari hesaba eklendi"
+: "Parça geçmişine eklendi";
+
+if(stokSonucu && stokSonucu.eslesti){
+parcaMesaji += " • Stoktan " + stokMiktarMetni(stokSonucu.kullanilan) + " " + stokSonucu.birim + " düşüldü";
+if(stokSonucu.eksi) parcaMesaji += " • Eksi stok";
+}
+
+toast(parcaMesaji);
 }
 
 function parcaSil(i,idx){
@@ -18851,6 +19105,479 @@ ${elevatorXPdfSafetyScript()}
 };
 
 
+
+const EX_STOCK_KEY = "elevatorx_stock_inventory_v1506";
+
+function stokSayi(deger){
+  let sayi = Number(String(deger == null ? "" : deger).replace(",", "."));
+  return Number.isFinite(sayi) ? sayi : 0;
+}
+
+function stokYuvarla(deger){
+  return Math.round((stokSayi(deger) + Number.EPSILON) * 100) / 100;
+}
+
+function stokAdNormalize(metin){
+  return String(metin || "")
+    .toLocaleLowerCase("tr-TR")
+    .replace(/[ı]/g,"i")
+    .replace(/[ğ]/g,"g")
+    .replace(/[ü]/g,"u")
+    .replace(/[ş]/g,"s")
+    .replace(/[ö]/g,"o")
+    .replace(/[ç]/g,"c")
+    .replace(/\([^)]*\)/g," ")
+    .replace(/[^a-z0-9]+/g," ")
+    .trim()
+    .replace(/\s+/g," ");
+}
+
+function stokIdOlustur(){
+  return "stk_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,8);
+}
+
+function stokEnvanteriGet(){
+  try{
+    let kayit = JSON.parse(localStorage.getItem(EX_STOCK_KEY) || "[]");
+    return Array.isArray(kayit) ? kayit : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function stokEnvanteriSet(liste, yedekAl){
+  let temiz = Array.isArray(liste) ? liste : [];
+  localStorage.setItem(EX_STOCK_KEY, JSON.stringify(temiz));
+  if(yedekAl !== false){
+    try{ autoYedekAl(true); }catch(e){}
+  }
+}
+
+function stokPara(deger){
+  try{
+    if(typeof tutarFormat === "function") return tutarFormat(stokSayi(deger));
+  }catch(e){}
+  return stokSayi(deger).toLocaleString("tr-TR",{minimumFractionDigits:0,maximumFractionDigits:2}) + " ₺";
+}
+
+function stokMiktarMetni(deger){
+  return stokSayi(deger).toLocaleString("tr-TR",{minimumFractionDigits:0,maximumFractionDigits:2});
+}
+
+function stokHareketMetni(hareket, birim){
+  if(!hareket) return "";
+  let tip = hareket.tip === "giris" ? "Stok girişi" : (hareket.tip === "cikis" ? "Kullanım" : "Düzeltme");
+  let yer = hareket.apartman ? " • " + hareket.apartman : "";
+  let not = hareket.not ? " • " + hareket.not : "";
+  return tip + ": " + stokMiktarMetni(hareket.miktar) + " " + (birim || "Adet") + yer + " • " + (hareket.tarih || "-") + not;
+}
+
+function stokOzet(liste){
+  let kalem = Array.isArray(liste) ? liste.length : 0;
+  let kritik = 0;
+  let deger = 0;
+
+  (liste || []).forEach(function(k){
+    let adet = stokSayi(k.adet);
+    let minimum = stokSayi(k.minStok);
+    if(adet <= minimum) kritik += 1;
+    deger += adet * stokSayi(k.alisFiyati);
+  });
+
+  return {kalem:kalem,kritik:kritik,deger:stokYuvarla(deger)};
+}
+
+function stokEnvanteriAc(){
+  try{
+    if(typeof window.exHybridMenuClose === "function") window.exHybridMenuClose();
+    let modal = document.getElementById("exStockModal");
+    if(!modal) return;
+    let arama = document.getElementById("exStockSearch");
+    if(arama) arama.value = "";
+    stokEnvanteriRender();
+    modal.style.display = "block";
+    requestAnimationFrame(function(){
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden","false");
+    });
+    haptic("light");
+  }catch(e){
+    try{ toast("Stok ekranı açılamadı"); }catch(_){}
+  }
+}
+
+function stokEnvanteriKapat(){
+  let modal = document.getElementById("exStockModal");
+  if(!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+}
+
+function stokEnvanteriRender(){
+  let liste = stokEnvanteriGet();
+  let aramaEl = document.getElementById("exStockSearch");
+  let arama = stokAdNormalize(aramaEl ? aramaEl.value : "");
+
+  let ozet = stokOzet(liste);
+  let kalemEl = document.getElementById("exStockItemCount");
+  let kritikEl = document.getElementById("exStockCriticalCount");
+  let degerEl = document.getElementById("exStockTotalValue");
+
+  if(kalemEl) kalemEl.textContent = ozet.kalem;
+  if(kritikEl) kritikEl.textContent = ozet.kritik;
+  if(degerEl) degerEl.textContent = stokPara(ozet.deger);
+
+  let gorunen = liste.filter(function(k){
+    if(!arama) return true;
+    return stokAdNormalize((k.ad || "") + " " + (k.kategori || "")).includes(arama);
+  }).sort(function(a,b){
+    let aKritik = stokSayi(a.adet) <= stokSayi(a.minStok) ? 0 : 1;
+    let bKritik = stokSayi(b.adet) <= stokSayi(b.minStok) ? 0 : 1;
+    if(aKritik !== bKritik) return aKritik - bKritik;
+    return String(a.ad || "").localeCompare(String(b.ad || ""),"tr");
+  });
+
+  let alan = document.getElementById("exStockList");
+  if(!alan) return;
+
+  if(!gorunen.length){
+    alan.innerHTML = `<div class="exStockEmpty">${liste.length ? "Aramana uygun stok kalemi bulunamadı." : "Henüz stok kalemi yok.<br>“Yeni Parça” ile ilk kaydı oluştur."}</div>`;
+    return;
+  }
+
+  alan.innerHTML = gorunen.map(function(k){
+    let adet = stokSayi(k.adet);
+    let min = stokSayi(k.minStok);
+    let kritik = adet <= min;
+    let hareketler = Array.isArray(k.hareketler) ? k.hareketler.slice(0,20) : [];
+    let gecmis = hareketler.length
+      ? hareketler.map(function(h){
+          return `<div class="exStockMoveLine"><b>${ayHtml(h.tip === "giris" ? "Giriş" : (h.tip === "cikis" ? "Kullanım" : "Düzeltme"))}</b><br>${ayHtml(stokHareketMetni(h,k.birim))}</div>`;
+        }).join("")
+      : `<div class="exStockMoveLine">Henüz stok hareketi bulunmuyor.</div>`;
+
+    return `
+      <article class="exStockItem ${kritik ? "is-critical" : ""}">
+        <div class="exStockItemTop">
+          <div>
+            <div class="exStockName">${ayHtml(k.ad || "İsimsiz parça")}</div>
+            <div class="exStockMeta">${ayHtml(k.kategori || "Genel")} • Minimum ${ayHtml(stokMiktarMetni(min))} ${ayHtml(k.birim || "Adet")}</div>
+          </div>
+          <div class="exStockBadge ${kritik ? "critical" : ""}">${kritik ? (adet < 0 ? "EKSİ STOK" : "KRİTİK") : "YETERLİ"}</div>
+        </div>
+
+        <div class="exStockQtyRow">
+          <div class="exStockQtyBox">
+            <span>Mevcut</span>
+            <b>${ayHtml(stokMiktarMetni(adet))} ${ayHtml(k.birim || "Adet")}</b>
+          </div>
+          <div class="exStockQtyBox">
+            <span>Stok Değeri</span>
+            <b>${ayHtml(stokPara(adet * stokSayi(k.alisFiyati)))}</b>
+          </div>
+        </div>
+
+        <div class="exStockActions">
+          <button class="exStockAction in" type="button" onclick="stokHareketFormAc('${ayHtml(k.id)}','giris')">+ Stok Ekle</button>
+          <button class="exStockAction out" type="button" onclick="stokHareketFormAc('${ayHtml(k.id)}','cikis')">− Kullan</button>
+          <button class="exStockAction edit" type="button" aria-label="Düzenle" onclick="stokKalemFormAc('${ayHtml(k.id)}')">•••</button>
+        </div>
+
+        <details class="exStockHistory">
+          <summary>Hareket geçmişi (${hareketler.length})</summary>
+          <div class="exStockHistoryList">${gecmis}</div>
+        </details>
+      </article>
+    `;
+  }).join("");
+}
+
+function stokKalemFormAc(id){
+  let modal = document.getElementById("exStockFormModal");
+  if(!modal) return;
+
+  let liste = stokEnvanteriGet();
+  let kalem = id ? liste.find(function(k){ return k.id === id; }) : null;
+
+  document.getElementById("exStockEditId").value = kalem ? kalem.id : "";
+  document.getElementById("exStockName").value = kalem ? (kalem.ad || "") : "";
+  document.getElementById("exStockCategory").value = kalem ? (kalem.kategori || "") : "";
+  document.getElementById("exStockUnit").value = kalem ? (kalem.birim || "Adet") : "Adet";
+  document.getElementById("exStockQuantity").value = kalem ? stokSayi(kalem.adet) : "0";
+  document.getElementById("exStockMinimum").value = kalem ? stokSayi(kalem.minStok) : "0";
+  document.getElementById("exStockCost").value = kalem ? stokSayi(kalem.alisFiyati) : "0";
+  document.getElementById("exStockFormTitle").textContent = kalem ? "Stok Kartını Düzenle" : "Yeni Parça";
+  document.getElementById("exStockDeleteButton").style.display = kalem ? "block" : "none";
+
+  modal.style.display = "block";
+  requestAnimationFrame(function(){
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+  });
+
+  setTimeout(function(){
+    let ad = document.getElementById("exStockName");
+    if(ad) ad.focus();
+  },100);
+}
+
+function stokKalemFormKapat(){
+  let modal = document.getElementById("exStockFormModal");
+  if(!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+}
+
+function stokKalemKaydet(){
+  let id = document.getElementById("exStockEditId").value;
+  let ad = document.getElementById("exStockName").value.trim();
+  let kategori = document.getElementById("exStockCategory").value.trim();
+  let birim = document.getElementById("exStockUnit").value || "Adet";
+  let adet = stokYuvarla(document.getElementById("exStockQuantity").value);
+  let minStok = Math.max(0,stokYuvarla(document.getElementById("exStockMinimum").value));
+  let alisFiyati = Math.max(0,stokYuvarla(document.getElementById("exStockCost").value));
+
+  if(!ad){
+    toast("Parça adını yaz");
+    return;
+  }
+
+  let liste = stokEnvanteriGet();
+  let ayniAd = liste.find(function(k){
+    return k.id !== id && stokAdNormalize(k.ad) === stokAdNormalize(ad);
+  });
+
+  if(ayniAd){
+    toast("Bu parça stokta zaten kayıtlı");
+    return;
+  }
+
+  let simdi = new Date().toISOString();
+
+  if(id){
+    let index = liste.findIndex(function(k){ return k.id === id; });
+    if(index < 0) return;
+
+    let onceki = stokSayi(liste[index].adet);
+    let fark = stokYuvarla(adet - onceki);
+    let hareketler = Array.isArray(liste[index].hareketler) ? liste[index].hareketler : [];
+
+    if(fark !== 0){
+      hareketler.unshift({
+        id:stokIdOlustur(),
+        tip:"duzeltme",
+        miktar:Math.abs(fark),
+        fark:fark,
+        tarih:bugun(),
+        apartman:"",
+        not:"Stok kartından miktar düzeltildi",
+        createdAt:simdi
+      });
+    }
+
+    liste[index] = {
+      ...liste[index],
+      ad:ad,
+      kategori:kategori || "Genel",
+      birim:birim,
+      adet:adet,
+      minStok:minStok,
+      alisFiyati:alisFiyati,
+      hareketler:hareketler,
+      updatedAt:simdi
+    };
+  }else{
+    let hareketler = [];
+    if(adet !== 0){
+      hareketler.push({
+        id:stokIdOlustur(),
+        tip:"giris",
+        miktar:Math.abs(adet),
+        fark:adet,
+        tarih:bugun(),
+        apartman:"",
+        not:"İlk stok",
+        createdAt:simdi
+      });
+    }
+
+    liste.unshift({
+      id:stokIdOlustur(),
+      ad:ad,
+      kategori:kategori || "Genel",
+      birim:birim,
+      adet:adet,
+      minStok:minStok,
+      alisFiyati:alisFiyati,
+      hareketler:hareketler,
+      createdAt:simdi,
+      updatedAt:simdi
+    });
+  }
+
+  stokEnvanteriSet(liste,true);
+  stokKalemFormKapat();
+  stokEnvanteriRender();
+  toast(id ? "Stok kartı güncellendi" : "Parça stoğa eklendi");
+}
+
+function stokKalemSil(){
+  let id = document.getElementById("exStockEditId").value;
+  if(!id) return;
+
+  let liste = stokEnvanteriGet();
+  let kalem = liste.find(function(k){ return k.id === id; });
+  if(!kalem) return;
+
+  if(!confirm((kalem.ad || "Bu stok kartı") + " silinsin mi?")) return;
+
+  liste = liste.filter(function(k){ return k.id !== id; });
+  stokEnvanteriSet(liste,true);
+  stokKalemFormKapat();
+  stokEnvanteriRender();
+  toast("Stok kartı silindi");
+}
+
+function stokApartmanSecenekleri(secili){
+  let secim = document.getElementById("exStockMoveApartment");
+  if(!secim) return;
+
+  let satirlar = ['<option value="">Apartman seçilmedi</option>'];
+  (Array.isArray(data) ? data : []).slice().sort(function(a,b){
+    return String(a.ad || "").localeCompare(String(b.ad || ""),"tr");
+  }).forEach(function(a){
+    let ad = String(a.ad || "").trim();
+    if(!ad) return;
+    satirlar.push('<option value="' + ayHtml(ad) + '">' + ayHtml(ad) + '</option>');
+  });
+
+  secim.innerHTML = satirlar.join("");
+  secim.value = secili || "";
+}
+
+function stokHareketFormAc(id,tip){
+  let liste = stokEnvanteriGet();
+  let kalem = liste.find(function(k){ return k.id === id; });
+  if(!kalem) return;
+
+  let modal = document.getElementById("exStockMoveModal");
+  if(!modal) return;
+
+  document.getElementById("exStockMoveId").value = id;
+  document.getElementById("exStockMoveType").value = tip;
+  document.getElementById("exStockMoveQuantity").value = "1";
+  document.getElementById("exStockMoveDate").value = bugun();
+  document.getElementById("exStockMoveNote").value = "";
+  document.getElementById("exStockMoveTitle").textContent = tip === "giris" ? (kalem.ad + " • Stok Ekle") : (kalem.ad + " • Kullan");
+  document.getElementById("exStockMoveKicker").textContent = tip === "giris" ? "Stok girişi" : "Stok çıkışı";
+
+  let apartmanWrap = document.getElementById("exStockMoveApartmentWrap");
+  if(apartmanWrap) apartmanWrap.classList.toggle("is-hidden",tip === "giris");
+  stokApartmanSecenekleri("");
+
+  modal.style.display = "block";
+  requestAnimationFrame(function(){
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+  });
+}
+
+function stokHareketFormKapat(){
+  let modal = document.getElementById("exStockMoveModal");
+  if(!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+}
+
+function stokHareketKaydet(){
+  let id = document.getElementById("exStockMoveId").value;
+  let tip = document.getElementById("exStockMoveType").value;
+  let miktar = Math.abs(stokYuvarla(document.getElementById("exStockMoveQuantity").value));
+  let tarih = document.getElementById("exStockMoveDate").value.trim() || bugun();
+  let apartman = tip === "cikis" ? document.getElementById("exStockMoveApartment").value : "";
+  let not = document.getElementById("exStockMoveNote").value.trim();
+
+  if(miktar <= 0){
+    toast("Geçerli bir miktar yaz");
+    return;
+  }
+
+  let liste = stokEnvanteriGet();
+  let index = liste.findIndex(function(k){ return k.id === id; });
+  if(index < 0) return;
+
+  let fark = tip === "giris" ? miktar : -miktar;
+  liste[index].adet = stokYuvarla(stokSayi(liste[index].adet) + fark);
+  if(!Array.isArray(liste[index].hareketler)) liste[index].hareketler = [];
+
+  liste[index].hareketler.unshift({
+    id:stokIdOlustur(),
+    tip:tip,
+    miktar:miktar,
+    fark:fark,
+    tarih:tarih,
+    apartman:apartman,
+    not:not,
+    createdAt:new Date().toISOString()
+  });
+
+  liste[index].updatedAt = new Date().toISOString();
+
+  stokEnvanteriSet(liste,true);
+  stokHareketFormKapat();
+  stokEnvanteriRender();
+
+  if(stokSayi(liste[index].adet) < 0){
+    toast("Hareket kaydedildi • stok eksiye düştü");
+  }else{
+    toast(tip === "giris" ? "Stok girişi kaydedildi" : "Parça kullanımı kaydedildi");
+  }
+}
+
+function stokParcaKullan(parcaAdi,adet,apartman,tarih){
+  let miktar = Math.abs(stokYuvarla(adet));
+  if(miktar <= 0) miktar = 1;
+
+  let aranan = stokAdNormalize(parcaAdi);
+  if(!aranan) return {eslesti:false};
+
+  let liste = stokEnvanteriGet();
+  let index = liste.findIndex(function(k){
+    return stokAdNormalize(k.ad) === aranan;
+  });
+
+  if(index < 0) return {eslesti:false};
+
+  liste[index].adet = stokYuvarla(stokSayi(liste[index].adet) - miktar);
+  if(!Array.isArray(liste[index].hareketler)) liste[index].hareketler = [];
+
+  liste[index].hareketler.unshift({
+    id:stokIdOlustur(),
+    tip:"cikis",
+    miktar:miktar,
+    fark:-miktar,
+    tarih:tarih || bugun(),
+    apartman:apartman || "",
+    not:"Parça geçmişinden otomatik düşüm",
+    createdAt:new Date().toISOString()
+  });
+
+  liste[index].updatedAt = new Date().toISOString();
+  stokEnvanteriSet(liste,false);
+
+  return {
+    eslesti:true,
+    kullanilan:miktar,
+    kalan:stokSayi(liste[index].adet),
+    birim:liste[index].birim || "Adet",
+    eksi:stokSayi(liste[index].adet) < 0
+  };
+}
+
+
 async function yedekle(){
 
 haptic("medium");
@@ -18916,6 +19643,10 @@ localStorage.setItem(
 "apartmanlar",
 JSON.stringify(data)
 );
+
+if(Array.isArray(yedek.stokEnvanteri)){
+stokEnvanteriSet(yedek.stokEnvanteri,false);
+}
 
 if(yedek.profil){
 
