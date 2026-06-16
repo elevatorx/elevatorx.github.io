@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1513">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1513">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1513">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1513">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1513">
-<link rel="manifest" href="/manifest.webmanifest?v=1513">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1514">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1514">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1514">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1514">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1514">
+<link rel="manifest" href="/manifest.webmanifest?v=1514">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11807,6 +11807,457 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exLedgerModalStyle">
+  #exLedgerModal,#exLedgerEntryModal{
+    position:fixed;
+    inset:0;
+    z-index:2147483001;
+    display:none;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+    color:#101828;
+  }
+
+  #exLedgerEntryModal{z-index:2147483002}
+  #exLedgerModal.is-open,#exLedgerEntryModal.is-open{display:block}
+  #exLedgerModal *,#exLedgerEntryModal *{box-sizing:border-box}
+
+  .exLedgerBackdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(5,12,25,.50);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+  }
+
+  .exLedgerWrap{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:calc(14px + env(safe-area-inset-top)) 12px calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .exLedgerCard{
+    position:relative;
+    width:min(520px,96vw);
+    max-height:min(900px,94vh);
+    overflow:auto;
+    border-radius:30px;
+    background:linear-gradient(180deg,#fff 0%,#f5f8ff 100%);
+    border:1px solid rgba(99,126,187,.13);
+    box-shadow:0 34px 100px rgba(7,16,35,.38);
+  }
+
+  .exLedgerEntryCard{width:min(455px,95vw)}
+
+  .exLedgerClose{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:41px;
+    height:41px;
+    border:0;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#eef3ff;
+    color:#15213d;
+    font-size:27px;
+    line-height:1;
+    z-index:3;
+    padding:0;
+  }
+
+  .exLedgerHead{padding:25px 22px 12px}
+
+  .exLedgerKicker{
+    color:#1d4ed8;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .exLedgerTitle{
+    margin:7px 52px 0 0;
+    font-size:29px;
+    line-height:1.04;
+    font-weight:880;
+    letter-spacing:-.8px;
+    color:#0f172a;
+  }
+
+  .exLedgerSub{
+    margin:9px 52px 0 0;
+    color:#667085;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .exLedgerSummary{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    padding:8px 18px 14px;
+  }
+
+  .exLedgerSummaryCard{
+    min-width:0;
+    padding:14px 7px;
+    border:1px solid #edf1f8;
+    border-radius:18px;
+    text-align:center;
+    background:#fff;
+  }
+
+  .exLedgerSummaryCard b{
+    display:block;
+    color:#111827;
+    font-size:19px;
+    line-height:1.05;
+    letter-spacing:-.5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exLedgerSummaryCard span{
+    display:block;
+    margin-top:7px;
+    color:#8a94a7;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .exLedgerToolbar{
+    padding:0 18px 14px;
+  }
+
+  .exLedgerAdd{
+    width:100%;
+    min-height:49px;
+    border:0;
+    border-radius:16px;
+    padding:10px 15px;
+    background:linear-gradient(135deg,#111827,#1d4ed8);
+    color:#fff;
+    font-size:14px;
+    font-weight:900;
+    box-shadow:0 12px 25px rgba(29,78,216,.17);
+  }
+
+  .exLedgerBody{padding:0 18px 18px}
+
+  .exLedgerSection{
+    margin-top:14px;
+  }
+
+  .exLedgerSection:first-child{margin-top:0}
+
+  .exLedgerSectionHead{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:9px;
+  }
+
+  .exLedgerSectionTitle{
+    color:#344054;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+  }
+
+  .exLedgerSectionCount{
+    min-width:26px;
+    height:24px;
+    padding:0 8px;
+    border-radius:999px;
+    display:grid;
+    place-items:center;
+    background:#eef3ff;
+    color:#315ea5;
+    font-size:10px;
+    font-weight:900;
+  }
+
+  .exLedgerList{display:grid;gap:9px}
+
+  .exLedgerEmpty{
+    padding:22px 15px;
+    border:1px dashed #ccd6e6;
+    border-radius:17px;
+    text-align:center;
+    color:#8993a5;
+    background:rgba(255,255,255,.6);
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  .exLedgerItem{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:12px;
+    align-items:center;
+    padding:14px;
+    border:1px solid #e9eef7;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 3px 10px rgba(15,23,42,.035);
+  }
+
+  .exLedgerItemMain{min-width:0}
+
+  .exLedgerItemTitle{
+    color:#182033;
+    font-size:14px;
+    font-weight:900;
+    line-height:1.25;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exLedgerItemMeta{
+    margin-top:5px;
+    color:#7a8598;
+    font-size:11px;
+    line-height:1.4;
+  }
+
+  .exLedgerItemAmount{
+    color:#111827;
+    font-size:17px;
+    font-weight:950;
+    line-height:1;
+  }
+
+  .exLedgerItemAmount.payment{color:#1d4ed8}
+  .exLedgerItemAmount.balance{color:#c25100}
+
+  .exLedgerEditButton{
+    margin-top:8px;
+    min-height:34px;
+    border:0;
+    border-radius:11px;
+    padding:7px 11px;
+    background:#eef3ff;
+    color:#315ea5;
+    font-size:11px;
+    font-weight:900;
+  }
+
+  .exLedgerEntryBody{padding:5px 18px 18px}
+
+  .exLedgerContext{
+    margin:0 0 14px;
+    padding:14px;
+    border-radius:18px;
+    background:#eef5ff;
+    border:1px solid #dce8fb;
+  }
+
+  .exLedgerContext span{
+    display:block;
+    color:#6c7c94;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .exLedgerContext b{
+    display:block;
+    margin-top:5px;
+    color:#1c3154;
+    font-size:16px;
+    line-height:1.25;
+    font-weight:900;
+  }
+
+  .exLedgerField{
+    display:grid;
+    gap:7px;
+    margin-bottom:12px;
+  }
+
+  .exLedgerField label{
+    color:#69758a;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.03em;
+  }
+
+  .exLedgerField input,
+  .exLedgerField select,
+  .exLedgerField textarea{
+    width:100%;
+    border:1px solid #dfe6f1;
+    border-radius:16px;
+    background:#fff;
+    color:#111827;
+    font:inherit;
+    outline:none;
+    box-shadow:0 2px 8px rgba(15,23,42,.03);
+  }
+
+  .exLedgerField input,
+  .exLedgerField select{
+    height:51px;
+    padding:0 14px;
+  }
+
+  .exLedgerField textarea{
+    min-height:82px;
+    padding:12px 14px;
+    resize:vertical;
+    line-height:1.45;
+  }
+
+  .exLedgerAmountWrap{position:relative}
+  .exLedgerAmountWrap input{padding-right:48px}
+
+  .exLedgerCurrency{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#1d4ed8;
+    font-size:17px;
+    font-weight:900;
+    pointer-events:none;
+  }
+
+  .exLedgerEntryActions{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:8px;
+    margin-top:15px;
+  }
+
+  .exLedgerButton{
+    min-height:50px;
+    border:0;
+    border-radius:16px;
+    padding:10px 12px;
+    font-size:14px;
+    font-weight:900;
+  }
+
+  .exLedgerButton.cancel{
+    background:#edf2fa;
+    color:#41577c;
+  }
+
+  .exLedgerButton.save{
+    background:linear-gradient(135deg,#111827,#1d4ed8);
+    color:#fff;
+  }
+
+  .exLedgerDeleteButton{
+    width:100%;
+    min-height:46px;
+    margin-top:10px;
+    border:0;
+    border-radius:15px;
+    background:#fff0ed;
+    color:#d92d20;
+    font-size:13px;
+    font-weight:900;
+  }
+
+  .exLedgerDeleteConfirm{
+    display:none;
+    margin-top:10px;
+    padding:13px;
+    border-radius:16px;
+    background:#fff5f3;
+    border:1px solid #ffd5cf;
+  }
+
+  .exLedgerDeleteConfirm.is-visible{display:block}
+
+  .exLedgerDeleteConfirmText{
+    color:#8d2b20;
+    font-size:11px;
+    font-weight:800;
+    line-height:1.45;
+  }
+
+  .exLedgerDeleteConfirmActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:10px;
+  }
+
+  .exLedgerDeleteConfirmActions button{
+    min-height:40px;
+    border:0;
+    border-radius:13px;
+    font-size:12px;
+    font-weight:900;
+  }
+
+  .exLedgerDeleteCancel{
+    background:#fff;
+    color:#5d6675;
+  }
+
+  .exLedgerDeleteApprove{
+    background:#d92d20;
+    color:#fff;
+  }
+
+  body.darkMode .exLedgerCard,
+  html.darkRoot .exLedgerCard{
+    background:linear-gradient(180deg,#171d2a,#0f1420);
+    border-color:rgba(255,255,255,.08);
+    color:#fff;
+  }
+
+  body.darkMode .exLedgerTitle,
+  body.darkMode .exLedgerSummaryCard b,
+  body.darkMode .exLedgerItemTitle,
+  body.darkMode .exLedgerItemAmount,
+  html.darkRoot .exLedgerTitle,
+  html.darkRoot .exLedgerSummaryCard b,
+  html.darkRoot .exLedgerItemTitle,
+  html.darkRoot .exLedgerItemAmount{
+    color:#fff;
+  }
+
+  body.darkMode .exLedgerSummaryCard,
+  body.darkMode .exLedgerItem,
+  body.darkMode .exLedgerField input,
+  body.darkMode .exLedgerField select,
+  body.darkMode .exLedgerField textarea,
+  html.darkRoot .exLedgerSummaryCard,
+  html.darkRoot .exLedgerItem,
+  html.darkRoot .exLedgerField input,
+  html.darkRoot .exLedgerField select,
+  html.darkRoot .exLedgerField textarea{
+    background:#151b28;
+    border-color:rgba(255,255,255,.08);
+    color:#fff;
+  }
+
+  @media(max-width:390px){
+    .exLedgerCard{border-radius:24px}
+    .exLedgerTitle{font-size:25px}
+    .exLedgerSummary{gap:6px}
+    .exLedgerSummaryCard{padding:12px 5px}
+    .exLedgerSummaryCard b{font-size:17px}
+    .exLedgerEntryActions{grid-template-columns:1fr}
+  }
+</style>
+
 </head>
 
 <body>
@@ -12051,6 +12502,14 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   document.addEventListener("keydown",function(e){
     if(e.key === "Escape"){
       try{
+        var le = document.getElementById("exLedgerEntryModal");
+        if(le && le.classList.contains("is-open")) return window.cariKayitFormKapat();
+      }catch(_){}
+      try{
+        var lm = document.getElementById("exLedgerModal");
+        if(lm && lm.classList.contains("is-open")) return window.cariModalKapat();
+      }catch(_){}
+      try{
         var pm = document.getElementById("exPaymentModal");
         if(pm && pm.classList.contains("is-open")) return window.tahsilatModalKapat();
       }catch(_){}
@@ -12081,6 +12540,136 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 
 
+
+
+
+<div id="exLedgerModal" aria-hidden="true">
+  <div class="exLedgerBackdrop" onclick="cariModalKapat()"></div>
+
+  <div class="exLedgerWrap">
+    <section class="exLedgerCard" role="dialog" aria-modal="true" aria-labelledby="exLedgerTitle">
+      <button class="exLedgerClose" type="button" aria-label="Kapat" onclick="cariModalKapat()">×</button>
+
+      <div class="exLedgerHead">
+        <div class="exLedgerKicker">Cari hesap</div>
+        <h2 id="exLedgerTitle" class="exLedgerTitle">Cariyi Düzenle</h2>
+        <p class="exLedgerSub">Eski bakiye ve tahsilat kayıtlarını kartlar üzerinden düzenle veya sil.</p>
+      </div>
+
+      <div class="exLedgerSummary">
+        <div class="exLedgerSummaryCard">
+          <b id="exLedgerOldBalanceTotal">0 ₺</b>
+          <span>Eski Bakiye</span>
+        </div>
+        <div class="exLedgerSummaryCard">
+          <b id="exLedgerPaymentTotal">0 ₺</b>
+          <span>Tahsilat</span>
+        </div>
+        <div class="exLedgerSummaryCard">
+          <b id="exLedgerRemainingTotal">0 ₺</b>
+          <span>Kalan</span>
+        </div>
+      </div>
+
+      <div class="exLedgerToolbar">
+        <button class="exLedgerAdd" type="button" onclick="cariKayitFormAc(Number(document.getElementById('exLedgerApartmentIndex').value),'eski',-1)">
+          + Eski Bakiye Ekle
+        </button>
+      </div>
+
+      <div class="exLedgerBody">
+        <input id="exLedgerApartmentIndex" type="hidden">
+
+        <section class="exLedgerSection">
+          <div class="exLedgerSectionHead">
+            <div class="exLedgerSectionTitle">Eski Bakiye Kayıtları</div>
+            <div id="exLedgerBalanceCount" class="exLedgerSectionCount">0</div>
+          </div>
+          <div id="exLedgerBalanceList" class="exLedgerList"></div>
+        </section>
+
+        <section class="exLedgerSection">
+          <div class="exLedgerSectionHead">
+            <div class="exLedgerSectionTitle">Tahsilat Kayıtları</div>
+            <div id="exLedgerPaymentCount" class="exLedgerSectionCount">0</div>
+          </div>
+          <div id="exLedgerPaymentList" class="exLedgerList"></div>
+        </section>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="exLedgerEntryModal" aria-hidden="true">
+  <div class="exLedgerBackdrop" onclick="cariKayitFormKapat()"></div>
+
+  <div class="exLedgerWrap">
+    <section class="exLedgerCard exLedgerEntryCard" role="dialog" aria-modal="true" aria-labelledby="exLedgerEntryTitle">
+      <button class="exLedgerClose" type="button" aria-label="Kapat" onclick="cariKayitFormKapat()">×</button>
+
+      <div class="exLedgerHead">
+        <div id="exLedgerEntryKicker" class="exLedgerKicker">Cari kayıt</div>
+        <h2 id="exLedgerEntryTitle" class="exLedgerTitle">Eski Bakiye Ekle</h2>
+        <p id="exLedgerEntrySub" class="exLedgerSub">Tutar, tarih ve açıklama bilgisini kaydet.</p>
+      </div>
+
+      <div class="exLedgerEntryBody">
+        <input id="exLedgerEntryApartmentIndex" type="hidden">
+        <input id="exLedgerEntryKind" type="hidden">
+        <input id="exLedgerEntryIndex" type="hidden">
+
+        <div class="exLedgerContext">
+          <span>Apartman / Site</span>
+          <b id="exLedgerEntryApartmentName">-</b>
+        </div>
+
+        <div class="exLedgerField">
+          <label for="exLedgerEntryAmount">Tutar</label>
+          <div class="exLedgerAmountWrap">
+            <input id="exLedgerEntryAmount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0">
+            <span class="exLedgerCurrency">₺</span>
+          </div>
+        </div>
+
+        <div class="exLedgerField">
+          <label for="exLedgerEntryDate">Tarih</label>
+          <input id="exLedgerEntryDate" type="date">
+        </div>
+
+        <div id="exLedgerEntryTypeField" class="exLedgerField" style="display:none">
+          <label for="exLedgerEntryType">Tahsilat türü</label>
+          <select id="exLedgerEntryType">
+            <option value="bakim">Bakım</option>
+            <option value="parca">Parça / işlem</option>
+            <option value="cari">Cari / eski bakiye</option>
+          </select>
+        </div>
+
+        <div class="exLedgerField">
+          <label for="exLedgerEntryDescription">Açıklama</label>
+          <textarea id="exLedgerEntryDescription" placeholder="Kısa açıklama"></textarea>
+        </div>
+
+        <div class="exLedgerEntryActions">
+          <button class="exLedgerButton cancel" type="button" onclick="cariKayitFormKapat()">Vazgeç</button>
+          <button class="exLedgerButton save" type="button" onclick="cariKayitKaydet()">Kaydet</button>
+        </div>
+
+        <button id="exLedgerDeleteButton" class="exLedgerDeleteButton" type="button" onclick="cariKayitSilmeSor()">
+          Kaydı Sil
+        </button>
+
+        <div id="exLedgerDeleteConfirm" class="exLedgerDeleteConfirm">
+          <div class="exLedgerDeleteConfirmText">Bu kayıt kalıcı olarak silinecek. İşlem geri alınamaz.</div>
+          <div class="exLedgerDeleteConfirmActions">
+            <button class="exLedgerDeleteCancel" type="button" onclick="cariKayitSilmeVazgec()">Vazgeç</button>
+            <button class="exLedgerDeleteApprove" type="button" onclick="cariKayitSilOnayla()">Silme İşlemini Onayla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 
 
 <div id="exPaymentModal" aria-hidden="true">
@@ -12611,10 +13200,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1513" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1514" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.13</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.14</div>
 </div>
 </div>
 
@@ -12624,7 +13213,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.13";
+  const SPLASH_VERSION = "v1.5.14";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -13317,9 +13906,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.13";
+const APP_VERSION = "v1.5.14";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1513", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1514", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14321,415 +14910,437 @@ return (idx + 1) + ") " + tutar + " • " + tarih + tip + " • " + aciklama;
 
 }
 
+
+function cariTarihInputDegeri(tarih){
+  try{
+    return muayeneTarihISO(tarih) || "";
+  }catch(e){
+    return "";
+  }
+}
+
+function cariTarihKayitDegeri(iso){
+  try{
+    return tahsilatTarihKayitDegeri(iso);
+  }catch(e){
+    let eslesme = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return eslesme ? eslesme[3] + "." + eslesme[2] + "." + eslesme[1] : (iso || bugun());
+  }
+}
+
+function cariModalAc(i){
+  let a = data[i];
+
+  if(!a){
+    toast("Apartman bulunamadı");
+    return;
+  }
+
+  odemeleriHazirla(a);
+  eskiBakiyeListesi(a);
+
+  let modal = document.getElementById("exLedgerModal");
+  if(!modal) return;
+
+  document.getElementById("exLedgerApartmentIndex").value = String(i);
+  document.getElementById("exLedgerTitle").textContent = (a.ad || "Apartman") + " • Cari";
+  cariModalRender();
+
+  modal.style.display = "block";
+
+  requestAnimationFrame(function(){
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+  });
+
+  haptic("medium");
+}
+
+function cariModalKapat(){
+  let modal = document.getElementById("exLedgerModal");
+  if(!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+}
+
+function cariModalRender(){
+  let i = Number(document.getElementById("exLedgerApartmentIndex").value);
+  let a = data[i];
+  if(!a) return;
+
+  let bakiyeler = eskiBakiyeListesi(a);
+  odemeleriHazirla(a);
+  let odemeler = Array.isArray(a.odemeler) ? a.odemeler : [];
+  let cari = cariOzet(a);
+
+  let eskiToplamEl = document.getElementById("exLedgerOldBalanceTotal");
+  let tahsilatEl = document.getElementById("exLedgerPaymentTotal");
+  let kalanEl = document.getElementById("exLedgerRemainingTotal");
+  let bakiyeCountEl = document.getElementById("exLedgerBalanceCount");
+  let odemeCountEl = document.getElementById("exLedgerPaymentCount");
+
+  if(eskiToplamEl) eskiToplamEl.textContent = tutarFormat(cari.eskiBakiyeToplami || 0);
+  if(tahsilatEl) tahsilatEl.textContent = tutarFormat(cari.toplamGenel || 0);
+  if(kalanEl) kalanEl.textContent = tutarFormat(cari.kalanPozitif || 0);
+  if(bakiyeCountEl) bakiyeCountEl.textContent = bakiyeler.length;
+  if(odemeCountEl) odemeCountEl.textContent = odemeler.length;
+
+  let bakiyeAlan = document.getElementById("exLedgerBalanceList");
+  let odemeAlan = document.getElementById("exLedgerPaymentList");
+
+  if(bakiyeAlan){
+    if(!bakiyeler.length){
+      bakiyeAlan.innerHTML = '<div class="exLedgerEmpty">Henüz eski bakiye kaydı yok.</div>';
+    }else{
+      bakiyeAlan.innerHTML = bakiyeler.map(function(kayit,idx){
+        return `
+          <article class="exLedgerItem">
+            <div class="exLedgerItemMain">
+              <div class="exLedgerItemTitle">${ayHtml(kayit.aciklama || "Eski bakiye")}</div>
+              <div class="exLedgerItemMeta">${ayHtml(kayit.tarih || "-")}</div>
+              <button class="exLedgerEditButton" type="button" onclick="cariKayitFormAc(${i},'eski',${idx})">Düzenle</button>
+            </div>
+            <div class="exLedgerItemAmount balance">${ayHtml(tutarFormat(Number(kayit.tutar || 0)))}</div>
+          </article>
+        `;
+      }).join("");
+    }
+  }
+
+  if(odemeAlan){
+    if(!odemeler.length){
+      odemeAlan.innerHTML = '<div class="exLedgerEmpty">Henüz tahsilat kaydı yok.</div>';
+    }else{
+      odemeAlan.innerHTML = odemeler.map(function(odeme,idx){
+        let aciklama = odeme.aciklama || odeme.kalem || odemeKalemMetni(odeme,a);
+        let tip = odemeTipTahminEt(odeme);
+
+        return `
+          <article class="exLedgerItem">
+            <div class="exLedgerItemMain">
+              <div class="exLedgerItemTitle">${ayHtml(aciklama || "Tahsilat")}</div>
+              <div class="exLedgerItemMeta">${ayHtml(odeme.tarih || "-")} • ${ayHtml(odemeTipEtiket(tip))}</div>
+              <button class="exLedgerEditButton" type="button" onclick="cariKayitFormAc(${i},'odeme',${idx})">Düzenle</button>
+            </div>
+            <div class="exLedgerItemAmount payment">${ayHtml(tutarFormat(Number(odeme.tutar || 0)))}</div>
+          </article>
+        `;
+      }).join("");
+    }
+  }
+}
+
+function cariKayitFormAc(i,tur,idx){
+  let a = data[i];
+
+  if(!a){
+    toast("Apartman bulunamadı");
+    return;
+  }
+
+  let modal = document.getElementById("exLedgerEntryModal");
+  if(!modal) return;
+
+  let yeniKayit = Number(idx) < 0;
+  let kayit = null;
+
+  odemeleriHazirla(a);
+  eskiBakiyeListesi(a);
+
+  if(tur === "eski" && !yeniKayit){
+    kayit = a.eskiBakiyeler[idx];
+  }
+
+  if(tur === "odeme" && !yeniKayit){
+    kayit = a.odemeler[idx];
+  }
+
+  if(!yeniKayit && !kayit){
+    toast("Cari kaydı bulunamadı");
+    return;
+  }
+
+  document.getElementById("exLedgerEntryApartmentIndex").value = String(i);
+  document.getElementById("exLedgerEntryKind").value = tur;
+  document.getElementById("exLedgerEntryIndex").value = String(idx);
+  document.getElementById("exLedgerEntryApartmentName").textContent = a.ad || "-";
+
+  let title = document.getElementById("exLedgerEntryTitle");
+  let kicker = document.getElementById("exLedgerEntryKicker");
+  let sub = document.getElementById("exLedgerEntrySub");
+  let amount = document.getElementById("exLedgerEntryAmount");
+  let date = document.getElementById("exLedgerEntryDate");
+  let typeField = document.getElementById("exLedgerEntryTypeField");
+  let type = document.getElementById("exLedgerEntryType");
+  let description = document.getElementById("exLedgerEntryDescription");
+  let deleteButton = document.getElementById("exLedgerDeleteButton");
+
+  if(tur === "eski"){
+    if(kicker) kicker.textContent = "Eski bakiye";
+    if(title) title.textContent = yeniKayit ? "Eski Bakiye Ekle" : "Eski Bakiyeyi Düzenle";
+    if(sub) sub.textContent = "Tutar, tarih ve açıklama bilgisini kaydet.";
+    if(typeField) typeField.style.display = "none";
+    if(type) type.value = "cari";
+    if(description) description.value = kayit ? (kayit.aciklama || "Eski bakiye") : "Eski bakiye";
+  }else{
+    if(kicker) kicker.textContent = "Tahsilat kaydı";
+    if(title) title.textContent = "Tahsilatı Düzenle";
+    if(sub) sub.textContent = "Tahsilat tutarı, tarihi, türü ve açıklamasını güncelle.";
+    if(typeField) typeField.style.display = "grid";
+    if(type) type.value = odemeTipNormalize(kayit && kayit.tip ? kayit.tip : odemeTipTahminEt(kayit));
+    if(description) description.value = kayit ? (kayit.aciklama || kayit.kalem || odemeKalemMetni(kayit,a)) : "";
+  }
+
+  if(amount) amount.value = kayit ? Number(kayit.tutar || 0) : "";
+  if(date) date.value = kayit ? cariTarihInputDegeri(kayit.tarih) : bugunISO();
+  if(deleteButton) deleteButton.style.display = yeniKayit ? "none" : "block";
+
+  cariKayitSilmeVazgec();
+
+  modal.style.display = "block";
+
+  requestAnimationFrame(function(){
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+  });
+
+  setTimeout(function(){
+    if(amount){
+      amount.focus();
+      try{ amount.select(); }catch(e){}
+    }
+  },120);
+}
+
+function cariKayitFormKapat(){
+  let modal = document.getElementById("exLedgerEntryModal");
+  if(!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+  cariKayitSilmeVazgec();
+}
+
+function cariKayitKaydet(){
+  let i = Number(document.getElementById("exLedgerEntryApartmentIndex").value);
+  let tur = document.getElementById("exLedgerEntryKind").value;
+  let idx = Number(document.getElementById("exLedgerEntryIndex").value);
+  let a = data[i];
+
+  if(!a){
+    toast("Apartman bulunamadı");
+    return;
+  }
+
+  let tutar = Number(String(document.getElementById("exLedgerEntryAmount").value || "").replace(",", "."));
+  let tarihIso = document.getElementById("exLedgerEntryDate").value || bugunISO();
+  let tarih = cariTarihKayitDegeri(tarihIso);
+  let aciklama = document.getElementById("exLedgerEntryDescription").value.trim();
+
+  if(!tutar || tutar <= 0){
+    toast("Geçerli bir tutar gir");
+    return;
+  }
+
+  if(tur === "eski"){
+    let liste = eskiBakiyeListesi(a);
+    let yeniKayit = idx < 0;
+
+    if(yeniKayit){
+      liste.unshift({
+        tutar:tutar,
+        tarih:tarih,
+        aciklama:aciklama || "Eski bakiye",
+        createdAt:new Date().toISOString()
+      });
+
+      if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
+      a.kayitlar.push("Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih + ")");
+    }else{
+      let kayit = liste[idx];
+
+      if(!kayit){
+        toast("Eski bakiye kaydı bulunamadı");
+        return;
+      }
+
+      kayit.tutar = tutar;
+      kayit.tarih = tarih;
+      kayit.aciklama = aciklama || "Eski bakiye";
+      kayit.updatedAt = new Date().toISOString();
+
+      if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
+      a.kayitlar.push("Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + tarih + ")");
+    }
+
+    cariOdemeDurumunuGuncelle(a);
+    kaydet();
+    cariKayitFormKapat();
+    cariModalRender();
+
+    if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
+
+    toast(yeniKayit ? "Eski bakiye cariye eklendi" : "Eski bakiye güncellendi");
+    return;
+  }
+
+  odemeleriHazirla(a);
+
+  let odeme = a.odemeler[idx];
+
+  if(!odeme){
+    toast("Tahsilat kaydı bulunamadı");
+    return;
+  }
+
+  let tip = odemeTipNormalize(document.getElementById("exLedgerEntryType").value);
+
+  odeme.tutar = tutar;
+  odeme.tarih = tarih;
+  odeme.tip = tip;
+  odeme.aciklama = aciklama || odemeKalemMetni(odeme,a);
+  odeme.kalem = odeme.aciklama;
+  odeme.updatedAt = new Date().toISOString();
+
+  if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
+  a.kayitlar.push(
+    "Tahsilat düzenlendi: " +
+    tutarFormat(tutar) +
+    " • " +
+    odemeTipEtiket(tip) +
+    " (" +
+    tarih +
+    ")"
+  );
+
+  cariOdemeDurumunuGuncelle(a);
+  kaydet();
+  cariKayitFormKapat();
+  cariModalRender();
+
+  if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
+
+  toast("Tahsilat güncellendi");
+}
+
+function cariKayitSilmeSor(){
+  let alan = document.getElementById("exLedgerDeleteConfirm");
+  let buton = document.getElementById("exLedgerDeleteButton");
+
+  if(alan) alan.classList.add("is-visible");
+  if(buton) buton.style.display = "none";
+}
+
+function cariKayitSilmeVazgec(){
+  let alan = document.getElementById("exLedgerDeleteConfirm");
+  let buton = document.getElementById("exLedgerDeleteButton");
+  let idxEl = document.getElementById("exLedgerEntryIndex");
+
+  if(alan) alan.classList.remove("is-visible");
+
+  if(buton){
+    let yeniKayit = !idxEl || Number(idxEl.value) < 0;
+    buton.style.display = yeniKayit ? "none" : "block";
+  }
+}
+
+function cariKayitSilOnayla(){
+  let i = Number(document.getElementById("exLedgerEntryApartmentIndex").value);
+  let tur = document.getElementById("exLedgerEntryKind").value;
+  let idx = Number(document.getElementById("exLedgerEntryIndex").value);
+  let a = data[i];
+
+  if(!a || idx < 0){
+    toast("Cari kaydı bulunamadı");
+    return;
+  }
+
+  if(tur === "eski"){
+    let liste = eskiBakiyeListesi(a);
+    let kayit = liste[idx];
+
+    if(!kayit){
+      toast("Eski bakiye kaydı bulunamadı");
+      return;
+    }
+
+    liste.splice(idx,1);
+
+    if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
+    a.kayitlar.push(
+      "Eski bakiye silindi: " +
+      tutarFormat(kayit.tutar || 0) +
+      " (" +
+      bugun() +
+      ")"
+    );
+
+    cariOdemeDurumunuGuncelle(a);
+    kaydet();
+    cariKayitFormKapat();
+    cariModalRender();
+
+    if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
+
+    toast("Eski bakiye silindi");
+    return;
+  }
+
+  odemeleriHazirla(a);
+
+  let odeme = a.odemeler[idx];
+
+  if(!odeme){
+    toast("Tahsilat kaydı bulunamadı");
+    return;
+  }
+
+  a.odemeler.splice(idx,1);
+
+  if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
+  a.kayitlar.push(
+    "Tahsilat silindi: " +
+    tutarFormat(odeme.tutar || 0) +
+    " (" +
+    bugun() +
+    ")"
+  );
+
+  cariOdemeDurumunuGuncelle(a);
+  kaydet();
+  cariKayitFormKapat();
+  cariModalRender();
+
+  if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
+
+  toast("Tahsilat silindi");
+}
+
 function eskiBakiyeEkle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let tutarGiris = prompt("Eski bakiye tutarı ₺", "");
-if(tutarGiris === null){
-toast("Eski bakiye iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Eski bakiye tarihi", bugun()) || bugun();
-let aciklama = prompt("Açıklama", "Eski bakiye") || "Eski bakiye";
-
-let liste = eskiBakiyeListesi(a);
-
-liste.unshift({
-tutar:tutar,
-tarih:tarih.trim(),
-aciklama:aciklama.trim(),
-createdAt:new Date().toISOString()
-});
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye cariye eklendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}else{
-anaSayfa();
-}
-
+  cariKayitFormAc(i,"eski",-1);
 }
 
 function eskiBakiyeDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let liste = eskiBakiyeListesi(a);
-
-if(!liste.length){
-toast("Düzenlenecek eski bakiye yok");
-return;
-}
-
-let secim = prompt(
-"Düzenlenecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
-"1"
-);
-
-if(secim === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= liste.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let kayit = liste[idx];
-
-let tutarGiris = prompt("Tutar ₺", paraPromptDegeri(kayit.tutar));
-if(tutarGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Tarih", kayit.tarih || bugun()) || kayit.tarih || bugun();
-let aciklama = prompt("Açıklama", kayit.aciklama || "Eski bakiye") || kayit.aciklama || "Eski bakiye";
-
-kayit.tutar = tutar;
-kayit.tarih = tarih.trim();
-kayit.aciklama = aciklama.trim();
-kayit.updatedAt = new Date().toISOString();
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + kayit.tarih + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye güncellendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
+  cariModalAc(i);
 }
 
 function eskiBakiyeSil(i){
-
-haptic("warning");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-let liste = eskiBakiyeListesi(a);
-
-if(!liste.length){
-toast("Silinecek eski bakiye yok");
-return;
-}
-
-let secim = prompt(
-"Silinecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
-"1"
-);
-
-if(secim === null){
-toast("Silme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= liste.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let kayit = liste[idx];
-
-let onay = confirm(
-"Bu eski bakiye kaydı silinsin mi?\n\n" +
-tutarFormat(kayit.tutar || 0) + " • " + (kayit.tarih || "-") + "\n" +
-(kayit.aciklama || "Eski bakiye")
-);
-
-if(!onay){
-toast("Silme iptal edildi");
-return;
-}
-
-liste.splice(idx,1);
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Eski bakiye silindi: " + tutarFormat(kayit.tutar || 0) + " (" + bugun() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Eski bakiye silindi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
+  cariModalAc(i);
 }
 
 function odemeDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-
-if(!Array.isArray(a.odemeler) || !a.odemeler.length){
-toast("Düzenlenecek tahsilat yok");
-return;
-}
-
-let secim = prompt(
-"Düzenlenecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
-"1"
-);
-
-if(secim === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= a.odemeler.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let odeme = a.odemeler[idx];
-
-let tutarGiris = prompt("Tahsil edilen tutar ₺", paraPromptDegeri(odeme.tutar));
-if(tutarGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tutar = Number(String(tutarGiris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Ödeme tarihi", odeme.tarih || bugun()) || odeme.tarih || bugun();
-let tipGiris = prompt("Ödeme türü: bakım / parça / cari", odeme.tip || "cari");
-if(tipGiris === null){
-toast("Düzenleme iptal edildi");
-return;
-}
-
-let tip = odemeTipNormalize(tipGiris);
-let aciklama = prompt("Makbuz açıklaması", odeme.aciklama || odeme.kalem || odemeKalemMetni(odeme,a)) || odeme.aciklama || odeme.kalem || "";
-
-odeme.tutar = tutar;
-odeme.tarih = tarih.trim();
-odeme.tip = tip;
-odeme.aciklama = aciklama.trim();
-odeme.kalem = aciklama.trim();
-odeme.updatedAt = new Date().toISOString();
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Tahsilat düzenlendi: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + odeme.tarih + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Tahsilat güncellendi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
+  cariModalAc(i);
 }
 
 function odemeSil(i){
-
-haptic("warning");
-
-let a = data[i];
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-
-if(!Array.isArray(a.odemeler) || !a.odemeler.length){
-toast("Silinecek tahsilat yok");
-return;
-}
-
-let secim = prompt(
-"Silinecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
-"1"
-);
-
-if(secim === null){
-toast("Silme iptal edildi");
-return;
-}
-
-let idx = Number(secim) - 1;
-
-if(idx < 0 || idx >= a.odemeler.length){
-toast("Geçerli bir seçim yapılmadı");
-return;
-}
-
-let odeme = a.odemeler[idx];
-
-let onay = confirm(
-"Bu tahsilat kaydı silinsin mi?\n\n" +
-tutarFormat(odeme.tutar || 0) + " • " + (odeme.tarih || "-") + "\n" +
-(odeme.aciklama || odeme.kalem || "Tahsilat")
-);
-
-if(!onay){
-toast("Silme iptal edildi");
-return;
-}
-
-a.odemeler.splice(idx,1);
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Tahsilat silindi: " + tutarFormat(odeme.tutar || 0) + " (" + bugun() + ")"
-);
-
-cariOdemeDurumunuGuncelle(a);
-
-kaydet();
-
-toast("Tahsilat silindi");
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
+  cariModalAc(i);
 }
 
 function cariIslemleriDuzenle(i){
-
-haptic("medium");
-
-let a = data[i];
-
-if(!a){
-toast("Apartman bulunamadı");
-return;
-}
-
-odemeleriHazirla(a);
-eskiBakiyeListesi(a);
-
-let secim = prompt(
-"Cari düzenleme\n\n" +
-"1 - Eski bakiye düzenle\n" +
-"2 - Eski bakiye sil\n" +
-"3 - Tahsilat düzenle\n" +
-"4 - Tahsilat sil\n\n" +
-"Yeni eski bakiye eklemek için cari kartındaki + Eski Bakiye butonunu kullan.",
-"1"
-);
-
-if(secim === null){
-toast("Cari düzenleme iptal edildi");
-return;
-}
-
-if(secim === "1"){
-eskiBakiyeDuzenle(i);
-return;
-}
-
-if(secim === "2"){
-eskiBakiyeSil(i);
-return;
-}
-
-if(secim === "3"){
-odemeDuzenle(i);
-return;
-}
-
-if(secim === "4"){
-odemeSil(i);
-return;
-}
-
-toast("Geçerli bir seçim yapılmadı");
-
+  cariModalAc(i);
 }
 
 
