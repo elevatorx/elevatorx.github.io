@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1504">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1504">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1504">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1504">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1504">
-<link rel="manifest" href="/manifest.webmanifest?v=1504">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1505">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1505">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1505">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1505">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1505">
+<link rel="manifest" href="/manifest.webmanifest?v=1505">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11113,6 +11113,40 @@ html.darkRoot .exHybridMenuLabelSecondary{
   }
 </style>
 
+
+<style id="exMonthReportStyle">
+  #exMonthReportModal{position:fixed;inset:0;z-index:2147482990;display:none;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:#111827}
+  #exMonthReportModal.is-open{display:block}
+  #exMonthReportModal *{box-sizing:border-box}
+  #exMonthReportModal .exMonthBackdrop{position:absolute;inset:0;background:rgba(5,12,24,.48);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  #exMonthReportModal .exMonthWrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom))}
+  #exMonthReportModal .exMonthCard{position:relative;width:min(470px,95vw);max-height:min(820px,91vh);overflow:auto;border-radius:30px;background:linear-gradient(180deg,#fff 0%,#f5f8ff 100%);border:1px solid rgba(95,120,180,.14);box-shadow:0 34px 100px rgba(8,18,38,.35)}
+  #exMonthReportModal .exMonthClose{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;display:grid;place-items:center;background:#eef3ff;color:#14213d;font-size:26px;line-height:1;z-index:2;padding:0}
+  #exMonthReportModal .exMonthTop{padding:25px 24px 12px}
+  #exMonthReportModal .exMonthKicker{color:#2376f3;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+  #exMonthReportModal .exMonthTitle{margin:7px 0 0;max-width:340px;font-size:29px;line-height:1.05;font-weight:850;letter-spacing:-.7px;color:#0f172a}
+  #exMonthReportModal .exMonthSub{margin:10px 0 0;max-width:380px;font-size:14px;line-height:1.48;color:#667085}
+  #exMonthReportModal .exMonthBody{padding:10px 18px 18px}
+  #exMonthReportModal .exMonthField{display:grid;gap:7px;margin-bottom:13px}
+  #exMonthReportModal .exMonthField label{font-size:12px;font-weight:850;color:#667085;letter-spacing:.02em}
+  #exMonthReportModal input,#exMonthReportModal textarea{width:100%;border:1px solid #dfe6f2;outline:none;border-radius:17px;background:#fff;color:#111827;font:inherit;box-shadow:0 2px 9px rgba(15,23,42,.035)}
+  #exMonthReportModal input{min-height:52px;padding:0 15px;font-size:16px;font-weight:750}
+  #exMonthReportModal textarea{min-height:82px;padding:13px 15px;resize:vertical;font-size:14px;line-height:1.45}
+  #exMonthReportModal .exMonthStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}
+  #exMonthReportModal .exMonthStat{min-width:0;border-radius:17px;padding:13px 8px;text-align:center;background:#fff;border:1px solid #edf1fb}
+  #exMonthReportModal .exMonthStat b{display:block;font-size:21px;line-height:1;letter-spacing:-.5px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #exMonthReportModal .exMonthStat span{display:block;margin-top:7px;color:#8a94a7;font-size:10px;font-weight:850;letter-spacing:.03em;text-transform:uppercase}
+  #exMonthReportModal .exMonthHint{margin:5px 2px 15px;padding:12px 13px;border-radius:15px;background:#eef5ff;color:#40608c;font-size:12px;line-height:1.45}
+  #exMonthReportModal .exMonthActions{display:grid;grid-template-columns:1fr 1.15fr;gap:9px}
+  #exMonthReportModal .exMonthBtn{min-height:52px;border:0;border-radius:17px;padding:11px 12px;font-size:14px;font-weight:850}
+  #exMonthReportModal .exMonthBtn.secondary{color:#1d4ed8;background:#eaf2ff}
+  #exMonthReportModal .exMonthBtn.primary{color:#fff;background:linear-gradient(135deg,#111827 0%,#1e3a8a 100%);box-shadow:0 14px 30px rgba(15,23,42,.20)}
+  body.darkMode #exMonthReportModal .exMonthCard,html.darkRoot #exMonthReportModal .exMonthCard{background:linear-gradient(180deg,#171d2a 0%,#0f1420 100%);border-color:rgba(255,255,255,.08);color:#fff}
+  body.darkMode #exMonthReportModal .exMonthTitle,html.darkRoot #exMonthReportModal .exMonthTitle,body.darkMode #exMonthReportModal .exMonthStat b,html.darkRoot #exMonthReportModal .exMonthStat b{color:#fff}
+  body.darkMode #exMonthReportModal input,body.darkMode #exMonthReportModal textarea,body.darkMode #exMonthReportModal .exMonthStat,html.darkRoot #exMonthReportModal input,html.darkRoot #exMonthReportModal textarea,html.darkRoot #exMonthReportModal .exMonthStat{background:#151b28;border-color:rgba(255,255,255,.08);color:#fff}
+  @media(max-width:390px){#exMonthReportModal .exMonthCard{border-radius:25px}#exMonthReportModal .exMonthTitle{font-size:25px}#exMonthReportModal .exMonthStats{gap:6px}#exMonthReportModal .exMonthStat{padding:12px 5px}#exMonthReportModal .exMonthStat b{font-size:18px}#exMonthReportModal .exMonthActions{grid-template-columns:1fr}}
+</style>
+
 </head>
 
 <body>
@@ -11160,6 +11194,19 @@ html.darkRoot .exHybridMenuLabelSecondary{
         </svg>
       </span>
       <span class="exHybridItemText"><b>Teknik Kütüphane</b><small>Kart, sürücü ve teknik notlar</small></span>
+    </button>
+
+
+    <div class="exHybridMenuLabel exHybridMenuLabelSecondary">Raporlar</div>
+
+    <button class="exHybridItem" type="button" onclick="aySonuRaporu()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6.5 3.5h8l3 3V20a1.5 1.5 0 0 1-1.5 1.5H6.5A1.5 1.5 0 0 1 5 20V5A1.5 1.5 0 0 1 6.5 3.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <path d="M14.5 3.8V7h3.2M8.5 11h6.8M8.5 14.5h6.8M8.5 18h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Ay Sonu Raporu</b><small>Bakım ve tahsilat özetini hazırla</small></span>
     </button>
 
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">Hesap ve güvenlik</div>
@@ -11333,6 +11380,46 @@ html.darkRoot .exHybridMenuLabelSecondary{
 
 
 
+
+<div id="exMonthReportModal" aria-hidden="true">
+  <div class="exMonthBackdrop" onclick="exMonthReportModalClose()"></div>
+  <div class="exMonthWrap">
+    <section class="exMonthCard" role="dialog" aria-modal="true" aria-labelledby="exMonthReportTitle">
+      <button class="exMonthClose" type="button" aria-label="Kapat" onclick="exMonthReportModalClose()">×</button>
+      <div class="exMonthTop">
+        <div class="exMonthKicker">Yönetim Raporu</div>
+        <h2 id="exMonthReportTitle" class="exMonthTitle">Ay Sonu Raporu</h2>
+        <p class="exMonthSub">Bakım, tahsilat ve geciken işleri tek raporda topla. PDF olarak kaydet veya özetini doğrudan paylaş.</p>
+      </div>
+      <div class="exMonthBody">
+        <div class="exMonthField">
+          <label for="exMonthReportMonth">Rapor dönemi</label>
+          <input id="exMonthReportMonth" type="month" onchange="exMonthReportRefresh()">
+        </div>
+        <div class="exMonthField">
+          <label for="exMonthReportRecipient">Sunulacak kişi / kurum (isteğe bağlı)</label>
+          <input id="exMonthReportRecipient" type="text" placeholder="Örn. Firma sahibi veya yönetici">
+        </div>
+        <div class="exMonthStats">
+          <div class="exMonthStat"><b id="exMonthReportMaintenance">0</b><span>Bakım</span></div>
+          <div class="exMonthStat"><b id="exMonthReportRevenue">0 ₺</b><span>Tahsilat</span></div>
+          <div class="exMonthStat"><b id="exMonthReportLate">0</b><span>Geciken</span></div>
+        </div>
+        <div class="exMonthField">
+          <label for="exMonthReportNote">Yönetici notu (isteğe bağlı)</label>
+          <textarea id="exMonthReportNote" placeholder="Örn. Geciken iki bakım için randevu oluşturuldu."></textarea>
+        </div>
+        <div class="exMonthHint">Rapor açıldığında “PDF Oluştur / Paylaş” düğmesiyle iPhone’un PDF ekranına geçebilirsin.</div>
+        <div class="exMonthActions">
+          <button class="exMonthBtn secondary" type="button" onclick="aySonuRaporOzetPaylas()">Özeti Paylaş</button>
+          <button class="exMonthBtn primary" type="button" onclick="aySonuRaporuOlustur()">Raporu Aç / PDF</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
 <div id="exLicenseModal" aria-hidden="true">
   <div class="exLicenseBackdrop" onclick="exHybridLicenseModalClose()"></div>
   <div class="exLicenseWrap">
@@ -11396,10 +11483,10 @@ html.darkRoot .exHybridMenuLabelSecondary{
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1504" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1505" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.04</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.05</div>
 </div>
 </div>
 
@@ -11409,7 +11496,7 @@ html.darkRoot .exHybridMenuLabelSecondary{
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.04";
+  const SPLASH_VERSION = "v1.5.05";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -12086,9 +12173,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.04";
+const APP_VERSION = "v1.5.05";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1504", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1505", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -18349,1001 +18436,419 @@ w.document.close();
 
 
 
-function aySonuRaporu(){
 
-haptic("medium");
+function aySonuRaporSecimCoz(deger){
+  let simdi = new Date();
+  let eslesme = String(deger || "").match(/^(\d{4})-(\d{2})$/);
+  let yil = eslesme ? Number(eslesme[1]) : simdi.getFullYear();
+  let ay = eslesme ? Number(eslesme[2]) : (simdi.getMonth() + 1);
 
-let profil = profilBilgileri();
-let servisFirma = profil.firma || APP_NAME;
-let servisAd = profil.ad || "Teknik Servis";
-let servisTel = profil.telefon || "";
+  if(ay < 1 || ay > 12){
+    yil = simdi.getFullYear();
+    ay = simdi.getMonth() + 1;
+  }
 
-let buAyBakim =
-data.filter(a=>tarihBuAyMi(a.bakimTarihi));
+  let aylar = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 
-let buAyOdeme =
-data.filter(a=>odemeListesi(a).some(o=>tarihBuAyMi(o.tarih)));
-
-let tahsilat =
-data.reduce((t,a)=>{
-return t + odemeListesi(a)
-.filter(o=>tarihBuAyMi(o.tarih))
-.reduce((ara,o)=>ara + Number(o.tutar || 0),0);
-},0);
-
-let bekleyen =
-data.filter(a=>cariOzet(a).kalanPozitif > 0);
-
-let bekleyenTutar =
-bekleyen.reduce((t,a)=>t + cariOzet(a).kalanPozitif,0);
-
-let geciken =
-data.filter(a=>bakimGeciktiMi(a));
-
-let notlu =
-data.filter(a=>a.not && a.not.trim() !== "");
-
-let raporNo =
-"AY-AY-" +
-new Date().getFullYear() +
-"-" +
-String(new Date().getMonth() + 1).padStart(2,"0");
-
-
-let pdfMarka = pdfFirmaBilgi();
-let pdfFirma = pdfMarka.firma;
-let pdfLogo = pdfMarka.logo;
-let pdfSorumlu = pdfMarka.ad;
-let pdfTel = pdfMarka.telefon;
-
-let w = elevatorXOpenReportWindow();
-
-if(!w){
-toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
-return;
+  return {
+    yil:yil,
+    ay:ay,
+    deger:String(yil) + "-" + String(ay).padStart(2,"0"),
+    etiket:aylar[ay - 1] + " " + yil
+  };
 }
 
-w.document.write(`
+function aySonuRaporTarihEslesir(tarih,yil,ay){
+  let parca = tarihParcala(tarih);
+  return !!parca && parca.yil === yil && parca.ay === ay;
+}
 
+function aySonuRaporBakimTarihleri(a){
+  let tarihler = [];
+
+  function ekle(tarih){
+    let temiz = String(tarih || "").trim();
+    if(!temiz || !tarihParcala(temiz)) return;
+    if(!tarihler.includes(temiz)) tarihler.push(temiz);
+  }
+
+  if(a){
+    ekle(a.bakimTarihi);
+
+    if(Array.isArray(a.bakimChecklist)){
+      a.bakimChecklist.forEach(function(k){
+        if(k) ekle(k.tarih || k.createdAt);
+      });
+    }
+
+    if(Array.isArray(a.kayitlar)){
+      a.kayitlar.forEach(function(kayit){
+        let metin = String(kayit || "");
+        let re = /Bakım yapıldı\s*\(([^)]+)\)/gi;
+        let sonuc;
+        while((sonuc = re.exec(metin))) ekle(sonuc[1]);
+      });
+    }
+  }
+
+  return tarihler;
+}
+
+function aySonuRaporPlanGunu(a){
+  if(!a) return 0;
+
+  let parca = tarihParcala(a.bakimGunu);
+  if(parca && parca.gun) return Number(parca.gun);
+
+  let sayi = Number(String(a.bakimGunu || "").replace(/\D/g,""));
+  return (sayi >= 1 && sayi <= 31) ? sayi : 0;
+}
+
+function aySonuRaporVerisi(deger){
+  let donem = aySonuRaporSecimCoz(deger);
+  let yil = donem.yil;
+  let ay = donem.ay;
+  let bugunTarih = new Date();
+  bugunTarih.setHours(23,59,59,999);
+
+  let bakimlar = [];
+  let odemeler = [];
+  let parcalar = [];
+  let gecikenler = [];
+
+  (Array.isArray(data) ? data : []).forEach(function(a){
+    let seciliBakimTarihleri = aySonuRaporBakimTarihleri(a)
+      .filter(function(tarih){ return aySonuRaporTarihEslesir(tarih,yil,ay); });
+
+    if(seciliBakimTarihleri.length){
+      bakimlar.push({
+        apartman:a,
+        tarih:seciliBakimTarihleri[seciliBakimTarihleri.length - 1]
+      });
+    }
+
+    odemeListesi(a).forEach(function(o){
+      if(aySonuRaporTarihEslesir(o.tarih,yil,ay)){
+        odemeler.push({
+          apartman:a,
+          tarih:o.tarih,
+          tutar:Number(o.tutar || 0),
+          aciklama:odemeKalemMetni(o,a)
+        });
+      }
+    });
+
+    if(Array.isArray(a.parcalar)){
+      a.parcalar.forEach(function(p){
+        if(p && aySonuRaporTarihEslesir(p.tarih,yil,ay)){
+          parcalar.push({
+            apartman:a,
+            tarih:p.tarih,
+            ad:p.ad || "Parça / işlem",
+            adet:p.adet || "1",
+            tutar:Number(p.tutar || 0),
+            not:p.not || ""
+          });
+        }
+      });
+    }
+
+    let planGunu = aySonuRaporPlanGunu(a);
+    if(planGunu > 0 && !seciliBakimTarihleri.length){
+      let aySonGun = new Date(yil,ay,0).getDate();
+      let planTarih = new Date(yil,ay - 1,Math.min(planGunu,aySonGun),23,59,59,999);
+
+      if(planTarih <= bugunTarih){
+        gecikenler.push({
+          apartman:a,
+          plan:String(Math.min(planGunu,aySonGun)).padStart(2,"0") + "." + String(ay).padStart(2,"0") + "." + yil
+        });
+      }
+    }
+  });
+
+  let tahsilat = odemeler.reduce(function(toplam,o){ return toplam + Number(o.tutar || 0); },0);
+  let parcaToplam = parcalar.reduce(function(toplam,p){ return toplam + Number(p.tutar || 0); },0);
+
+  let bekleyen = (Array.isArray(data) ? data : []).filter(function(a){
+    return cariOzet(a).kalanPozitif > 0;
+  });
+
+  let bekleyenTutar = bekleyen.reduce(function(toplam,a){
+    return toplam + cariOzet(a).kalanPozitif;
+  },0);
+
+  let teknikNotlu = (Array.isArray(data) ? data : []).filter(function(a){
+    return a && a.not && String(a.not).trim() !== "";
+  });
+
+  let toplamApartman = Array.isArray(data) ? data.length : 0;
+  let oran = toplamApartman ? Math.min(100,Math.round((bakimlar.length / toplamApartman) * 100)) : 0;
+
+  return {
+    donem:donem,
+    toplamApartman:toplamApartman,
+    bakimlar:bakimlar,
+    odemeler:odemeler,
+    tahsilat:tahsilat,
+    parcalar:parcalar,
+    parcaToplam:parcaToplam,
+    gecikenler:gecikenler,
+    bekleyen:bekleyen,
+    bekleyenTutar:bekleyenTutar,
+    teknikNotlu:teknikNotlu,
+    tamamlanmaOrani:oran
+  };
+}
+
+window.exMonthReportModalClose = function(){
+  try{
+    let modal = document.getElementById("exMonthReportModal");
+    if(!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+    modal.style.display = "none";
+  }catch(e){}
+};
+
+window.exMonthReportRefresh = function(){
+  try{
+    let input = document.getElementById("exMonthReportMonth");
+    let rapor = aySonuRaporVerisi(input ? input.value : "");
+
+    let bakimEl = document.getElementById("exMonthReportMaintenance");
+    let tahsilatEl = document.getElementById("exMonthReportRevenue");
+    let gecikenEl = document.getElementById("exMonthReportLate");
+
+    if(bakimEl) bakimEl.textContent = rapor.bakimlar.length;
+    if(tahsilatEl) tahsilatEl.textContent = tutarFormat(rapor.tahsilat);
+    if(gecikenEl) gecikenEl.textContent = rapor.gecikenler.length;
+  }catch(e){}
+};
+
+window.aySonuRaporu = function(){
+  haptic("light");
+
+  try{
+    if(typeof window.exHybridMenuClose === "function") window.exHybridMenuClose();
+
+    let modal = document.getElementById("exMonthReportModal");
+    let input = document.getElementById("exMonthReportMonth");
+    let simdi = new Date();
+    let varsayilan = simdi.getFullYear() + "-" + String(simdi.getMonth() + 1).padStart(2,"0");
+
+    if(input && !input.value) input.value = varsayilan;
+    window.exMonthReportRefresh();
+
+    if(modal){
+      modal.style.display = "block";
+      requestAnimationFrame(function(){
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden","false");
+      });
+    }
+  }catch(e){
+    try{ if(typeof toast === "function") toast("Rapor ekranı açılamadı"); }catch(_){}
+  }
+};
+
+window.aySonuRaporOzetPaylas = async function(){
+  haptic("light");
+
+  try{
+    let input = document.getElementById("exMonthReportMonth");
+    let recipientEl = document.getElementById("exMonthReportRecipient");
+    let noteEl = document.getElementById("exMonthReportNote");
+    let rapor = aySonuRaporVerisi(input ? input.value : "");
+    let profil = profilBilgileri();
+    let alici = recipientEl ? recipientEl.value.trim() : "";
+    let notMetni = noteEl ? noteEl.value.trim() : "";
+
+    let satirlar = [];
+    if(alici){ satirlar.push("Sayın " + alici + ","); satirlar.push(""); }
+
+    satirlar.push(rapor.donem.etiket + " Ay Sonu Faaliyet Özeti");
+    satirlar.push("");
+    satirlar.push("Toplam apartman: " + rapor.toplamApartman);
+    satirlar.push("Bakımı tamamlanan: " + rapor.bakimlar.length);
+    satirlar.push("Geciken bakım: " + rapor.gecikenler.length);
+    satirlar.push("Tahsilat: " + tutarFormat(rapor.tahsilat));
+    satirlar.push("Güncel bekleyen ödeme: " + tutarFormat(rapor.bekleyenTutar));
+    satirlar.push("Parça / işlem kaydı: " + rapor.parcalar.length);
+
+    if(notMetni){ satirlar.push(""); satirlar.push("Not: " + notMetni); }
+
+    satirlar.push("");
+    satirlar.push("Hazırlayan: " + (profil.ad || "Teknik Servis"));
+    satirlar.push(profil.firma || APP_NAME);
+
+    let paylasimMetni = satirlar.join("\n");
+    let baslik = rapor.donem.etiket + " Ay Sonu Raporu";
+
+    if(navigator.share){
+      await navigator.share({title:baslik,text:paylasimMetni});
+      toast("Paylaşım ekranı açıldı");
+      return;
+    }
+
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(paylasimMetni);
+      toast("Rapor özeti panoya kopyalandı");
+      return;
+    }
+
+    toast("Paylaşım bu cihazda desteklenmiyor");
+  }catch(e){
+    if(e && e.name === "AbortError") return;
+    try{ if(typeof toast === "function") toast("Rapor özeti paylaşılamadı"); }catch(_){}
+  }
+};
+
+window.aySonuRaporuOlustur = function(){
+  haptic("medium");
+
+  let input = document.getElementById("exMonthReportMonth");
+  let recipientEl = document.getElementById("exMonthReportRecipient");
+  let noteEl = document.getElementById("exMonthReportNote");
+
+  let rapor = aySonuRaporVerisi(input ? input.value : "");
+  let raporNotu = noteEl ? noteEl.value.trim() : "";
+  let raporAlici = recipientEl ? recipientEl.value.trim() : "";
+
+  let pdfMarka = pdfFirmaBilgi();
+  let pdfFirma = pdfMarka.firma;
+  let pdfLogo = pdfMarka.logo;
+  let pdfSorumlu = pdfMarka.ad;
+  let pdfTel = pdfMarka.telefon;
+
+  let raporNo = "AY-" + rapor.donem.yil + "-" + String(rapor.donem.ay).padStart(2,"0") + "-" + String(new Date().getDate()).padStart(2,"0");
+  let w = elevatorXOpenReportWindow();
+
+  if(!w){
+    toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.");
+    return;
+  }
+
+  window.exMonthReportModalClose();
+
+  let durumBaslik = rapor.gecikenler.length ? rapor.gecikenler.length + " geciken bakım bulunuyor" : "Planlanan bakımlar kontrol altında";
+  let durumAciklama = rapor.gecikenler.length ? "Geciken kayıtların randevu ve saha planlamasının yapılması önerilir." : "Seçilen dönem için geciken bakım kaydı bulunmuyor.";
+
+  w.document.write(`
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ay Sonu Raporu - ElevatorX</title>
-
+<title>${ayHtml(rapor.donem.etiket)} Ay Sonu Raporu - ElevatorX</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef1f6;color:#111827;padding:26px}
-.page{max-width:840px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
+.page{max-width:880px;margin:0 auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(15,23,42,.10)}
 .topBand{height:10px;background:linear-gradient(90deg,#007aff,#60a5fa,#34c759)}
 .header{padding:28px 30px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #eef0f4}
 .brand{display:flex;align-items:center;gap:14px}.brand img{width:52px;height:52px;border-radius:16px;object-fit:cover}.brandTitle{font-size:25px;font-weight:900;letter-spacing:-.4px}.brandSub{font-size:13px;color:#6b7280;font-weight:700;margin-top:2px}
 .reportMeta{text-align:right;font-size:13px;color:#6b7280;line-height:1.7}.reportMeta b{color:#111827}
-.titleBox{padding:26px 30px 18px}.docTitle{font-size:30px;font-weight:900;letter-spacing:-.6px;margin:0}.docDesc{margin:8px 0 0;color:#6b7280;font-size:15px;line-height:1.45}
-.statusBox{margin:8px 30px 24px;border-radius:22px;padding:18px;display:flex;gap:14px;align-items:flex-start}.statusBlue{background:#eff6ff;border:1px solid #dbeafe}.statusGreen{background:#eaf8f0;border:1px solid #c9efd7}
-.statusIcon{width:36px;height:36px;border-radius:50%;color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;flex-shrink:0}.iconBlue{background:#007aff}.iconGreen{background:#34c759}
-.statusTitle{font-size:18px;font-weight:900;margin-bottom:4px}.titleBlue{color:#1d4ed8}.titleGreen{color:#168a3a}.statusText{font-size:14px;line-height:1.45;color:#4b5563}
-.infoGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 30px 26px}.infoCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:16px;min-height:78px}.label{font-size:12px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;color:#8a94a6;margin-bottom:7px}.value{font-size:18px;font-weight:850;color:#111827;line-height:1.25;word-break:break-word}.amountCard{grid-column:1/-1;background:linear-gradient(135deg,#effaf3,#f8fffb);border-color:#d6f4df}.amountCard .value{font-size:32px;color:#168a3a}
-.noteBox{margin:0 30px 28px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;padding:18px}.noteTitle{font-size:14px;font-weight:900;color:#111827;margin-bottom:8px}.noteText{font-size:14px;color:#4b5563;line-height:1.6;white-space:pre-wrap}
-.checkList{margin:0 30px 28px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.checkItem{background:#fff;border:1px solid #edf0f5;border-radius:16px;padding:13px 14px;font-size:13px;font-weight:800;color:#4b5563;display:flex;align-items:center;gap:9px}.checkDot{width:18px;height:18px;border-radius:50%;background:#eaf8f0;color:#22a859;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 30px 26px}.summaryCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:16px}.summaryLabel{font-size:12px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;color:#8a94a6;margin-bottom:8px}.summaryValue{font-size:26px;font-weight:950;letter-spacing:-.5px;color:#111827}
-.section{margin:0 30px 18px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;overflow:hidden}.sectionTitle{padding:16px 18px;font-size:17px;font-weight:950;border-bottom:1px solid #edf0f5;background:#fff}.list{padding:14px 18px;font-size:14px;color:#4b5563;line-height:1.8}.listItem{padding:7px 0;border-bottom:1px solid rgba(229,231,235,.8)}.listItem:last-child{border-bottom:none}.empty{color:#9ca3af;font-style:italic}
-.signatureArea{padding:6px 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:22px}.signatureBox{border-top:1.5px solid #cfd5df;padding-top:10px;font-size:13px;color:#6b7280;font-weight:800;text-align:center}
-.footer{background:#f8fafc;padding:18px 30px;display:flex;justify-content:space-between;gap:16px;font-size:12px;color:#8a94a6;line-height:1.5;border-top:1px solid #eef0f4;margin-top:10px}.printBtn{position:fixed;right:24px;bottom:24px;background:#007aff;color:white;border:none;border-radius:999px;padding:14px 20px;font-size:15px;font-weight:900;box-shadow:0 12px 28px rgba(0,122,255,.28)}
+.titleBox{padding:26px 30px 18px}.docKicker{color:#1976ed;font-size:12px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.docTitle{font-size:31px;font-weight:950;letter-spacing:-.7px;margin:6px 0 0}.docDesc{margin:8px 0 0;color:#6b7280;font-size:15px;line-height:1.45}
+.recipient{margin-top:12px;display:inline-flex;padding:8px 12px;border-radius:999px;background:#eef5ff;color:#315a91;font-size:12px;font-weight:850}
+.statusBox{margin:8px 30px 24px;border-radius:22px;padding:18px;display:flex;gap:14px;align-items:flex-start;background:${rapor.gecikenler.length ? "#fff4f2" : "#eaf8f0"};border:1px solid ${rapor.gecikenler.length ? "#ffd9d2" : "#c9efd7"}}
+.statusIcon{width:36px;height:36px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:950;font-size:19px;flex-shrink:0;background:${rapor.gecikenler.length ? "#ff453a" : "#34c759"}}
+.statusTitle{font-size:18px;font-weight:950;margin-bottom:4px;color:${rapor.gecikenler.length ? "#b42318" : "#168a3a"}}.statusText{font-size:14px;line-height:1.45;color:#4b5563}
+.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 30px 26px}.summaryCard{background:#f8fafc;border:1px solid #edf0f5;border-radius:18px;padding:16px}.summaryLabel{font-size:11px;font-weight:950;letter-spacing:.4px;text-transform:uppercase;color:#8a94a6;margin-bottom:8px}.summaryValue{font-size:25px;font-weight:950;letter-spacing:-.5px;color:#111827}
+.progressCard{grid-column:1/-1;background:linear-gradient(135deg,#eff6ff,#f8fbff)}.progressTrack{height:10px;border-radius:999px;background:#dce8f8;overflow:hidden;margin-top:12px}.progressFill{height:100%;border-radius:999px;background:linear-gradient(90deg,#247cf2,#34c759);width:${rapor.tamamlanmaOrani}%}
+.section{margin:0 30px 18px;background:#f8fafc;border:1px solid #edf0f5;border-radius:20px;overflow:hidden}.sectionTitle{padding:16px 18px;font-size:17px;font-weight:950;border-bottom:1px solid #edf0f5;background:#fff}.list{padding:14px 18px;font-size:14px;color:#4b5563;line-height:1.7}.listItem{padding:8px 0;border-bottom:1px solid rgba(229,231,235,.8)}.listItem:last-child{border-bottom:none}.empty{color:#9ca3af;font-style:italic}
+.noteBox{margin:0 30px 22px;padding:17px 18px;border-radius:18px;background:#fff8e8;border:1px solid #f4dfaa}.noteTitle{font-size:13px;font-weight:950;color:#8a5a00;margin-bottom:7px}.noteText{font-size:14px;color:#5f4b20;line-height:1.55;white-space:pre-wrap}
+.signatureArea{padding:10px 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:22px}.signatureBox{border-top:1.5px solid #cfd5df;padding-top:10px;font-size:13px;color:#6b7280;font-weight:800;text-align:center}
+.footer{background:#f8fafc;padding:18px 30px;display:flex;justify-content:space-between;gap:16px;font-size:12px;color:#8a94a6;line-height:1.5;border-top:1px solid #eef0f4;margin-top:10px}
+.actions{position:fixed;right:18px;bottom:18px;display:flex;gap:8px;z-index:1000}.actionBtn{border:0;border-radius:999px;padding:13px 17px;font-size:14px;font-weight:900;box-shadow:0 12px 28px rgba(15,23,42,.18)}.actionPrimary{background:#007aff;color:#fff}.actionSecondary{background:#fff;color:#111827}
 @page{size:A4;margin:7mm}
-.pdfBackBtn{position:fixed;left:16px;top:16px;z-index:9999;border:none;border-radius:999px;background:#ffffff;color:#111827;padding:12px 16px;font-size:15px;font-weight:900;box-shadow:0 10px 30px rgba(15,23,42,.16)}
-@media print{html,body{background:#fff!important;padding:0!important;margin:0!important;zoom:.72}.page{max-width:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}.topBand{height:5px!important}.header{padding:12px 18px 10px!important}.brandTitle{font-size:18px!important}.brandSub{font-size:10.5px!important}.reportMeta{font-size:10px!important}.titleBox{padding:12px 18px 8px!important}.docTitle{font-size:22px!important}.docDesc{font-size:12px!important;margin-top:4px!important}.statusBox{margin:6px 18px 10px!important;padding:10px!important;border-radius:14px!important}.statusIcon{width:26px!important;height:26px!important;font-size:15px!important}.statusTitle{font-size:14px!important}.statusText{font-size:11.5px!important;line-height:1.32!important}.infoGrid{padding:0 18px 10px!important;gap:7px!important}.infoCard{padding:9px 10px!important;min-height:auto!important;border-radius:12px!important}.label{font-size:9.5px!important;margin-bottom:3px!important}.value{font-size:13px!important}.amountCard .value,.summaryValue{font-size:20px!important}.noteBox{margin:0 18px 10px!important;padding:10px!important;border-radius:12px!important}.noteTitle{font-size:11px!important;margin-bottom:4px!important}.noteText,.list{font-size:10.5px!important;line-height:1.35!important}.checkList{margin:0 18px 10px!important;gap:6px!important}.checkItem{padding:7px 8px!important;font-size:10.5px!important;border-radius:10px!important}.checkDot{width:14px!important;height:14px!important;font-size:9px!important}.signatureArea{padding:4px 18px 10px!important;gap:12px!important}.signatureBox{font-size:10px!important;padding-top:6px!important}.footer{padding:8px 18px!important;font-size:9.5px!important}.summaryGrid{padding:0 18px 10px!important;gap:7px!important}.summaryCard{padding:10px!important;border-radius:12px!important}.summaryLabel{font-size:9.5px!important;margin-bottom:3px!important}.section{margin:0 18px 8px!important;border-radius:12px!important}.sectionTitle{padding:8px 10px!important;font-size:12px!important}.list{padding:7px 10px!important}.listItem{padding:3px 0!important}.printBtn,.pdfBackBtn{display:none!important}}
-@media(max-width:720px){body{padding:14px}.header,.footer{flex-direction:column;align-items:flex-start;text-align:left}.reportMeta{text-align:left}.summaryGrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){.infoGrid,.checkList,.signatureArea{grid-template-columns:1fr}.signatureArea{gap:34px}}
-@media(max-width:480px){.summaryGrid{grid-template-columns:1fr}}
-
-/* PDF print fix v119 */
-.backBtn{position:fixed;left:16px;top:16px;z-index:9999;border:none;border-radius:999px;background:#fff;color:#111827;padding:11px 15px;font-size:14px;font-weight:900;box-shadow:0 10px 30px rgba(15,23,42,.16)}
-@page{size:A4;margin:7mm}
-@media print{
-html,body{background:#fff!important;margin:0!important;padding:0!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-body{zoom:.68!important}
-.page{max-width:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
-.topBand{height:4px!important}
-.header{padding:10px 16px 8px!important;gap:10px!important}
-.brand{gap:10px!important}
-.brand img{width:36px!important;height:36px!important;border-radius:11px!important;object-fit:cover!important}
-.brandTitle{font-size:16px!important;letter-spacing:-.2px!important}
-.brandSub{font-size:9px!important;margin-top:1px!important}
-.reportMeta{font-size:8.7px!important;line-height:1.3!important}
-.titleBox{padding:10px 16px 6px!important}
-.docTitle{font-size:19px!important;letter-spacing:-.25px!important}
-.docDesc{font-size:9.4px!important;line-height:1.2!important;margin-top:3px!important}
-.summaryGrid{grid-template-columns:repeat(3,1fr)!important;padding:0 16px 6px!important;gap:5px!important}
-.summaryCard{padding:7px!important;border-radius:10px!important;break-inside:avoid!important;page-break-inside:avoid!important}
-.summaryLabel{font-size:7.8px!important;margin-bottom:2px!important}
-.summaryValue{font-size:15px!important}
-.section{margin:0 16px 6px!important;border-radius:10px!important;break-inside:avoid!important;page-break-inside:avoid!important}
-.sectionTitle{padding:6px 8px!important;font-size:10px!important}
-.list{padding:5px 8px!important;font-size:8.5px!important;line-height:1.22!important}
-.listItem{padding:2px 0!important}
-.footer{padding:6px 16px!important;font-size:7.8px!important;line-height:1.18!important;margin-top:4px!important}
-.printBtn,.backBtn,.pdfBackBtn{display:none!important}
-}
-
-
-/* === v1.4.1 - Cari düzenleme / eski bakiye edit === */
-.cariEditActions{
-display:flex!important;
-gap:10px!important;
-margin-top:12px!important;
-flex-wrap:wrap!important;
-}
-
-.cariEditBtn{
-width:auto!important;
-min-width:0!important;
-height:38px!important;
-border:1px solid rgba(37,99,235,.16)!important;
-border-radius:999px!important;
-padding:0 15px!important;
-display:inline-flex!important;
-align-items:center!important;
-justify-content:center!important;
-background:linear-gradient(180deg,#ffffff,#f7faff)!important;
-color:#2563eb!important;
-font-size:13px!important;
-font-weight:850!important;
-box-shadow:0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.9)!important;
-}
-
-.cariEditBtn.oldBalance{
-background:linear-gradient(180deg,#eff6ff,#e8f1ff)!important;
-border-color:rgba(37,99,235,.22)!important;
-}
-
-body.darkMode .cariEditBtn,
-html.darkRoot .cariEditBtn{
-background:linear-gradient(180deg,rgba(30,41,59,.92),rgba(15,23,42,.86))!important;
-border-color:rgba(96,165,250,.2)!important;
-color:#93c5fd!important;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
-}
-
-
-
-/* === v1.4.1 - Stabil kilit: Luna kapalı / 3 sekmeli tab bar / + Yeni butonu === */
-.aiBtn,
-#aiOverlay{
-display:none!important;
-visibility:hidden!important;
-pointer-events:none!important;
-}
-
-.searchRow{
-display:flex!important;
-align-items:center!important;
-gap:12px!important;
-}
-
-#arama{
-flex:1 1 auto!important;
-width:auto!important;
-min-width:0!important;
-}
-
-.filterBtn{
-flex:0 0 118px!important;
-width:118px!important;
-}
-
-.tabGap,
-.middleButton{
-display:none!important;
-visibility:hidden!important;
-pointer-events:none!important;
-}
-
-.tabbar,
-.tabbar button{
--webkit-appearance:none!important;
-appearance:none!important;
-}
-
-.tabbar{
-position:fixed!important;
-left:50%!important;
-right:auto!important;
-bottom:calc(10px + env(safe-area-inset-bottom))!important;
-transform:translateX(-50%)!important;
-width:min(360px,calc(100vw - 36px))!important;
-height:74px!important;
-padding:0 10px!important;
-display:flex!important;
-align-items:center!important;
-justify-content:space-between!important;
-border-radius:28px!important;
-border:1px solid rgba(255,255,255,.75)!important;
-background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(246,248,252,.82))!important;
-box-shadow:0 18px 42px rgba(15,23,42,.12),0 8px 18px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.95)!important;
-backdrop-filter:blur(24px) saturate(170%)!important;
--webkit-backdrop-filter:blur(24px) saturate(170%)!important;
-overflow:visible!important;
-z-index:10020!important;
-box-sizing:border-box!important;
-}
-
-.tabbar .tabItem{
-width:31.5%!important;
-height:56px!important;
-margin:0!important;
-padding:0!important;
-background:transparent!important;
-border:none!important;
-border-radius:20px!important;
-display:flex!important;
-flex-direction:column!important;
-align-items:center!important;
-justify-content:center!important;
-gap:4px!important;
-color:#7d8796!important;
-font:inherit!important;
-line-height:1!important;
-text-align:center!important;
-box-shadow:none!important;
-}
-
-.tabbar .tabItem.activeTab{
-color:#2f6ff0!important;
-background:linear-gradient(180deg,rgba(47,111,240,.11),rgba(47,111,240,.05))!important;
-border:1px solid rgba(125,178,255,.34)!important;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
-}
-
-.tabbar .tabIcon{
-width:22px!important;
-height:22px!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-margin:0!important;
-color:currentColor!important;
-background:none!important;
-box-shadow:none!important;
-}
-
-.tabbar .tabSvg{
-width:100%!important;
-height:100%!important;
-display:block!important;
-stroke:currentColor!important;
-fill:none!important;
-}
-
-.tabbar .tabText{
-font-size:11px!important;
-font-weight:860!important;
-letter-spacing:-.12px!important;
-white-space:nowrap!important;
-}
-
-.quickAddBtn{
-position:fixed!important;
-right:18px!important;
-bottom:calc(94px + env(safe-area-inset-bottom))!important;
-width:auto!important;
-min-width:0!important;
-height:48px!important;
-padding:0 18px!important;
-border:none!important;
-border-radius:999px!important;
-display:none;
-align-items:center!important;
-justify-content:center!important;
-gap:9px!important;
-background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
-color:#fff!important;
-font:inherit!important;
-font-weight:900!important;
-box-shadow:0 16px 32px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.44)!important;
-z-index:10030!important;
-}
-
-.quickAddBtn span{
-width:24px!important;
-height:24px!important;
-border-radius:50%!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-background:rgba(255,255,255,.18)!important;
-font-size:22px!important;
-line-height:1!important;
-font-weight:800!important;
-}
-
-.quickAddBtn b{
-font-size:14px!important;
-font-weight:900!important;
-}
-
-body.darkMode .tabbar,
-html.darkRoot .tabbar{
-background:linear-gradient(180deg,rgba(22,28,39,.88),rgba(13,18,27,.82))!important;
-border-color:rgba(255,255,255,.08)!important;
-box-shadow:0 16px 38px rgba(0,0,0,.34),0 8px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.05)!important;
-}
-
-body.darkMode .tabbar .tabItem,
-html.darkRoot .tabbar .tabItem{
-color:#94a1b2!important;
-}
-
-body.darkMode .tabbar .tabItem.activeTab,
-html.darkRoot .tabbar .tabItem.activeTab{
-color:#7db2ff!important;
-background:linear-gradient(180deg,rgba(59,130,246,.16),rgba(59,130,246,.07))!important;
-border-color:rgba(96,165,250,.28)!important;
-}
-
-@media(max-width:430px){
-.filterBtn{
-flex:0 0 110px!important;
-width:110px!important;
-}
-.tabbar{
-width:min(348px,calc(100vw - 34px))!important;
-height:72px!important;
-bottom:calc(8px + env(safe-area-inset-bottom))!important;
-}
-.tabbar .tabText{
-font-size:10.6px!important;
-}
-.quickAddBtn{
-right:16px!important;
-bottom:calc(88px + env(safe-area-inset-bottom))!important;
-height:46px!important;
-padding:0 16px!important;
-}
-}
-
-
-
-/* === v1.4.2 - Bakım borcu fix + Yeni buton konum fix === */
-.quickAddBtn{
-right:20px!important;
-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
-}
-
-@media(max-width:430px){
-.quickAddBtn{
-right:18px!important;
-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
-}
-}
-
-
-
-/* === v1.4.3 - + Yeni butonu konum kilidi === */
-#quickAddBtn.quickAddBtn{
-position:fixed!important;
-left:auto!important;
-right:18px!important;
-top:auto!important;
-bottom:calc(122px + env(safe-area-inset-bottom,0px))!important;
-transform:none!important;
-width:auto!important;
-min-width:108px!important;
-max-width:132px!important;
-height:48px!important;
-padding:0 18px!important;
-margin:0!important;
-box-sizing:border-box!important;
-display:none!important;
-flex-direction:row!important;
-align-items:center!important;
-justify-content:center!important;
-gap:9px!important;
-border:1px solid rgba(255,255,255,.38)!important;
-border-radius:999px!important;
-background:linear-gradient(180deg,#5b95ff 0%,#2f6ff0 100%)!important;
-color:#fff!important;
-font:inherit!important;
-font-weight:900!important;
-line-height:1!important;
-text-decoration:none!important;
-box-shadow:0 16px 34px rgba(47,111,240,.28),0 8px 18px rgba(15,23,42,.13),inset 0 1px 0 rgba(255,255,255,.44)!important;
-z-index:10080!important;
-opacity:1!important;
-visibility:visible!important;
-pointer-events:auto!important;
--webkit-appearance:none!important;
-appearance:none!important;
-overflow:hidden!important;
-}
-
-#quickAddBtn.quickAddBtn.quickAddVisible{
-display:inline-flex!important;
-}
-
-#quickAddBtn.quickAddBtn span{
-width:24px!important;
-height:24px!important;
-min-width:24px!important;
-border-radius:50%!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-background:rgba(255,255,255,.18)!important;
-color:#fff!important;
-font-size:22px!important;
-line-height:1!important;
-font-weight:850!important;
-margin:0!important;
-}
-
-#quickAddBtn.quickAddBtn b{
-display:block!important;
-font-size:14px!important;
-font-weight:900!important;
-letter-spacing:-.12px!important;
-color:#fff!important;
-white-space:nowrap!important;
-margin:0!important;
-}
-
-body.darkMode #quickAddBtn.quickAddBtn,
-html.darkRoot #quickAddBtn.quickAddBtn{
-background:linear-gradient(180deg,#4b82f3 0%,#2563eb 100%)!important;
-border-color:rgba(255,255,255,.12)!important;
-box-shadow:0 16px 34px rgba(37,99,235,.28),0 8px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.16)!important;
-}
-
-@media(max-width:430px){
-#quickAddBtn.quickAddBtn{
-right:16px!important;
-bottom:calc(118px + env(safe-area-inset-bottom,0px))!important;
-height:46px!important;
-min-width:104px!important;
-max-width:126px!important;
-padding:0 16px!important;
-}
-}
-
-
-
-/* === v1.4.8 — Premium Mikro Cila (sadece görsel dokunuş) ===
-   Mantık / cari / ödeme / PDF / yedek / tab bar layout kodlarına dokunulmadı. */
-body:not(.darkMode){
-background:
-radial-gradient(circle at 50% -12%, rgba(47,111,240,.085), transparent 34%),
-radial-gradient(circle at 100% 12%, rgba(96,165,250,.06), transparent 30%),
-linear-gradient(180deg,#f7f8fc 0%,#f3f5fa 100%)!important;
-}
-
-body.darkMode{
-background:
-radial-gradient(circle at 50% -10%, rgba(59,130,246,.13), transparent 36%),
-linear-gradient(180deg,#0b0f17 0%,#080c13 100%)!important;
-}
-
-.elevatorXWordmark{
-position:relative;
-text-shadow:0 10px 28px rgba(15,23,42,.075);
-}
-
-.elevatorXWordmark span{
-text-shadow:0 8px 22px rgba(0,122,255,.24);
-}
-
-/* === v1.4.14 — Animated X Shine === */
-.animatedX{
-position:relative;
-display:inline-block;
-color:#2f7df6!important;
-text-shadow:0 0 10px rgba(47,125,246,.14),0 0 22px rgba(96,165,250,.10)!important;
-}
-
-.animatedX::after{
-content:attr(data-letter);
-position:absolute;
-inset:0;
-background-image:linear-gradient(108deg,
-rgba(255,255,255,0) 0%,
-rgba(255,255,255,0) 38%,
-rgba(255,255,255,.98) 49%,
-rgba(255,255,255,.16) 56%,
-rgba(255,255,255,0) 64%,
-rgba(255,255,255,0) 100%);
-background-size:220% 100%;
-background-position:-175% 0;
--webkit-background-clip:text;
-background-clip:text;
--webkit-text-fill-color:transparent;
-color:transparent;
-text-shadow:none!important;
-pointer-events:none;
-filter:drop-shadow(0 0 7px rgba(255,255,255,.28));
-animation:xShineSweep 4s cubic-bezier(.4,0,.2,1) infinite;
-}
-
-@keyframes xShineSweep{
-0%,72%,100%{background-position:-175% 0;opacity:0;}
-8%{opacity:1;}
-28%{background-position:175% 0;opacity:1;}
-34%{opacity:0;}
-}
-
-.headerThemeBtn,
-.filterBtn,
-#arama,
-.statCard,
-.lastActionCard,
-.aptCard,
-.profileBox,
-.profileStatCard,
-.profileBio,
-.referenceLogoCard,
-.maintHeader,
-.maintStat,
-.maintRow{
-border-color:rgba(226,232,240,.86)!important;
-}
-
-.statCard,
-.lastActionCard,
-.aptCard,
-.profileBox,
-.profileStatCard,
-.profileBio,
-.referenceLogoCard{
-box-shadow:
-0 14px 34px rgba(15,23,42,.055),
-0 2px 8px rgba(15,23,42,.025),
-inset 0 1px 0 rgba(255,255,255,.78)!important;
-}
-
-.statIcon{
-box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 18px rgba(15,23,42,.045);
-}
-
-.aptCard,
-.lastActionCard,
-.statCard,
-.referenceLogoCard{
-position:relative;
-}
-
-.aptCard::after,
-.lastActionCard::after,
-.statCard::after,
-.referenceLogoCard::after{
-content:"";
-position:absolute;
-inset:0;
-border-radius:inherit;
-pointer-events:none;
-background:linear-gradient(135deg,rgba(255,255,255,.38),transparent 34%,rgba(47,111,240,.035) 100%);
-opacity:.72;
-}
-
-.aptCard > *,
-.lastActionCard > *,
-.statCard > *,
-.referenceLogoCard > *{
-position:relative;
-z-index:1;
-}
-
-.aptCard:active,
-.statCard:active,
-.lastActionCard:active,
-.referenceLogoCard:active{
-transform:scale(.982);
-}
-
-.lastActionLabel,
-.sectionHead h2,
-.referenceTitle{
-letter-spacing:.34px;
-}
-
-.filterChip.active{
-box-shadow:0 10px 22px rgba(0,122,255,.18),inset 0 1px 0 rgba(255,255,255,.3)!important;
-}
-
-#quickAddBtn.quickAddBtn{
-box-shadow:
-0 18px 36px rgba(47,111,240,.30),
-0 8px 18px rgba(15,23,42,.13),
-inset 0 1px 0 rgba(255,255,255,.46)!important;
-}
-
-#quickAddBtn.quickAddBtn::after{
-content:"";
-position:absolute;
-inset:0;
-border-radius:inherit;
-pointer-events:none;
-background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.28) 42%,transparent 62%);
-transform:translateX(-120%);
-animation:elevatorXQuickSheen 4.8s ease-in-out infinite;
-}
-
-@keyframes elevatorXQuickSheen{
-0%,68%{transform:translateX(-120%);opacity:0;}
-76%{opacity:1;}
-92%,100%{transform:translateX(120%);opacity:0;}
-}
-
-body.darkMode .headerThemeBtn,
-body.darkMode .filterBtn,
-body.darkMode #arama,
-body.darkMode .statCard,
-body.darkMode .lastActionCard,
-body.darkMode .aptCard,
-body.darkMode .profileBox,
-body.darkMode .profileStatCard,
-body.darkMode .profileBio,
-body.darkMode .referenceLogoCard,
-html.darkRoot .headerThemeBtn,
-html.darkRoot .filterBtn,
-html.darkRoot #arama,
-html.darkRoot .statCard,
-html.darkRoot .lastActionCard,
-html.darkRoot .aptCard,
-html.darkRoot .profileBox,
-html.darkRoot .profileStatCard,
-html.darkRoot .profileBio,
-html.darkRoot .referenceLogoCard{
-border-color:rgba(255,255,255,.075)!important;
-box-shadow:
-0 14px 34px rgba(0,0,0,.24),
-0 2px 8px rgba(0,0,0,.16),
-inset 0 1px 0 rgba(255,255,255,.055)!important;
-}
-
-body.darkMode .aptCard::after,
-body.darkMode .lastActionCard::after,
-body.darkMode .statCard::after,
-body.darkMode .referenceLogoCard::after,
-html.darkRoot .aptCard::after,
-html.darkRoot .lastActionCard::after,
-html.darkRoot .statCard::after,
-html.darkRoot .referenceLogoCard::after{
-background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 34%,rgba(59,130,246,.06) 100%);
-opacity:.9;
-}
-
-@media (prefers-reduced-motion: reduce){
-#quickAddBtn.quickAddBtn::after{animation:none!important;}
-}
-
-
-
-/* === v1.4.98 — 2. resimdeki alt bar restore ===
-   Hedef: 4 parçalı bar: Bakım / Apartmanlar / Yeni / Profil.
-   Ortadaki havada duran + kaldırıldı; Yeni sekmesi bar içine alındı. */
-#quickAddBtn,
-#quickAddBtn.quickAddBtn,
-.quickAddBtn,
-.middleButton{
-  display:none!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
-
-.tabbar{
-  position:fixed!important;
-  left:50%!important;
-  right:auto!important;
-  bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;
-  transform:translateX(-50%)!important;
-  width:min(390px,calc(100vw - 34px))!important;
-  height:82px!important;
-  padding:8px!important;
-  box-sizing:border-box!important;
-  display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  align-items:center!important;
-  justify-items:center!important;
-  gap:6px!important;
-  border-radius:32px!important;
-  border:1px solid rgba(255,255,255,.78)!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.91),rgba(246,249,255,.82))!important;
-  backdrop-filter:blur(24px) saturate(180%)!important;
-  -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
-  box-shadow:0 18px 45px rgba(15,23,42,.13),0 7px 18px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.86)!important;
-  z-index:10020!important;
-  overflow:visible!important;
-}
-
-.tabbar::before,
-.tabbar::after{
-  display:none!important;
-  content:none!important;
-}
-
-.tabbar .tabGap{
-  display:none!important;
-}
-
-.tabbar .tabItem{
-  position:relative!important;
-  grid-column:auto!important;
-  width:100%!important;
-  min-width:0!important;
-  max-width:none!important;
-  height:64px!important;
-  margin:0!important;
-  padding:8px 4px!important;
-  border:1px solid transparent!important;
-  border-radius:25px!important;
-  background:transparent!important;
-  color:#6f7888!important;
-  box-shadow:none!important;
-  transform:none!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:3px!important;
-  font:inherit!important;
-  line-height:1!important;
-  text-align:center!important;
-  -webkit-appearance:none!important;
-  appearance:none!important;
-}
-
-.tabbar .tabItem::before,
-.tabbar .tabItem::after{
-  display:none!important;
-  content:none!important;
-}
-
-.tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
-.tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
-.tabbar .tabItem[data-tab="yeni"]{grid-column:3!important;}
-.tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
-
-.tabbar .tabItem:active{
-  transform:scale(.97)!important;
-  opacity:.88!important;
-}
-
-.tabbar .tabIcon{
-  width:25px!important;
-  height:25px!important;
-  min-width:25px!important;
-  max-width:25px!important;
-  margin:0 0 2px!important;
-  color:currentColor!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-}
-
-.tabbar .tabSvg{
-  width:100%!important;
-  height:100%!important;
-  display:block!important;
-  stroke:currentColor!important;
-  fill:none!important;
-}
-
-.tabbar .tabText{
-  display:block!important;
-  font-size:11px!important;
-  font-weight:850!important;
-  letter-spacing:-.15px!important;
-  line-height:1.05!important;
-  white-space:nowrap!important;
-  color:currentColor!important;
-}
-
-.tabbar .tabItem.activeTab{
-  color:#ffffff!important;
-  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;
-  border-color:rgba(255,255,255,.16)!important;
-  box-shadow:0 13px 28px rgba(15,23,42,.24),0 4px 10px rgba(15,23,42,.14),inset 0 1px 0 rgba(255,255,255,.16)!important;
-}
-
-.tabbar .tabItem[data-tab="yeni"]{
-  color:#2f7df6!important;
-  background:linear-gradient(180deg,rgba(239,246,255,.98),rgba(219,234,254,.92))!important;
-  border-color:rgba(96,165,250,.32)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 8px 18px rgba(47,125,246,.08)!important;
-}
-
-.tabbar .tabItem[data-tab="yeni"] .tabIcon{
-  width:27px!important;
-  height:27px!important;
-}
-
-.tabbar .tabItem[data-tab="yeni"].activeTab{
-  color:#ffffff!important;
-  background:linear-gradient(180deg,#5b95ff 0%,#2876f3 100%)!important;
-  border-color:rgba(255,255,255,.35)!important;
-  box-shadow:0 14px 30px rgba(47,125,246,.28),inset 0 1px 0 rgba(255,255,255,.32)!important;
-}
-
-body.darkMode .tabbar,
-html.darkRoot .tabbar{
-  background:linear-gradient(180deg,rgba(23,30,43,.92),rgba(12,17,27,.86))!important;
-  border-color:rgba(255,255,255,.09)!important;
-  box-shadow:0 18px 45px rgba(0,0,0,.38),0 7px 18px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06)!important;
-}
-
-body.darkMode .tabbar .tabItem,
-html.darkRoot .tabbar .tabItem{
-  color:#96a2b2!important;
-}
-
-body.darkMode .tabbar .tabItem.activeTab,
-html.darkRoot .tabbar .tabItem.activeTab{
-  color:#ffffff!important;
-  background:linear-gradient(180deg,#151b29 0%,#0b1020 100%)!important;
-  border-color:rgba(255,255,255,.13)!important;
-}
-
-body.darkMode .tabbar .tabItem[data-tab="yeni"],
-html.darkRoot .tabbar .tabItem[data-tab="yeni"]{
-  color:#83b8ff!important;
-  background:linear-gradient(180deg,rgba(29,78,216,.22),rgba(37,99,235,.13))!important;
-  border-color:rgba(96,165,250,.24)!important;
-}
-
-body.darkMode .tabbar .tabItem[data-tab="yeni"].activeTab,
-html.darkRoot .tabbar .tabItem[data-tab="yeni"].activeTab{
-  color:#ffffff!important;
-  background:linear-gradient(180deg,#4d8cff 0%,#2563eb 100%)!important;
-}
-
-@media(max-width:430px){
-  .tabbar{
-    width:min(370px,calc(100vw - 30px))!important;
-    height:78px!important;
-    bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
-    padding:7px!important;
-    gap:5px!important;
-    border-radius:30px!important;
-  }
-  .tabbar .tabItem{
-    height:61px!important;
-    border-radius:23px!important;
-    padding:7px 3px!important;
-  }
-  .tabbar .tabIcon{
-    width:23px!important;
-    height:23px!important;
-    min-width:23px!important;
-    max-width:23px!important;
-  }
-  .tabbar .tabItem[data-tab="yeni"] .tabIcon{
-    width:25px!important;
-    height:25px!important;
-  }
-  .tabbar .tabText{
-    font-size:10.4px!important;
-  }
-}
-
-
-
-/* === v1.4.98 — + Yeni yalnız Apartman ekranında === */
-body:not(.exShowYeniTab) .tabbar{
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  width:min(340px,calc(100vw - 48px))!important;
-}
-
-body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="yeni"]{
-  display:none!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
-
-body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
-body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
-body:not(.exShowYeniTab) .tabbar .tabItem[data-tab="profil"]{grid-column:3!important;}
-
-body.exShowYeniTab .tabbar{
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  width:min(390px,calc(100vw - 34px))!important;
-}
-
-body.exShowYeniTab .tabbar .tabItem[data-tab="yeni"]{
-  display:flex!important;
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-}
-
-body.exShowYeniTab .tabbar .tabItem[data-tab="bakim"]{grid-column:1!important;}
-body.exShowYeniTab .tabbar .tabItem[data-tab="apartman"]{grid-column:2!important;}
-body.exShowYeniTab .tabbar .tabItem[data-tab="yeni"]{grid-column:3!important;}
-body.exShowYeniTab .tabbar .tabItem[data-tab="profil"]{grid-column:4!important;}
-
-@media(max-width:430px){
-  body:not(.exShowYeniTab) .tabbar{
-    width:min(322px,calc(100vw - 54px))!important;
-  }
-  body.exShowYeniTab .tabbar{
-    width:min(370px,calc(100vw - 30px))!important;
-  }
-}
-
+@media print{html,body{background:#fff!important;padding:0!important;margin:0!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{zoom:.68!important}.page{max-width:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important}.header{padding:13px 18px 10px!important}.titleBox{padding:12px 18px 9px!important}.docTitle{font-size:22px!important}.docDesc{font-size:11px!important}.statusBox{margin:6px 18px 10px!important;padding:10px!important;border-radius:14px!important}.summaryGrid{padding:0 18px 10px!important;gap:7px!important}.summaryCard{padding:9px!important;border-radius:12px!important}.summaryLabel{font-size:9px!important;margin-bottom:3px!important}.summaryValue{font-size:18px!important}.section{margin:0 18px 8px!important;border-radius:12px!important}.sectionTitle{padding:8px 10px!important;font-size:12px!important}.list{padding:7px 10px!important;font-size:10px!important;line-height:1.35!important}.listItem{padding:3px 0!important}.noteBox{margin:0 18px 8px!important;padding:9px!important}.noteTitle,.noteText{font-size:10px!important}.signatureArea{padding:4px 18px 10px!important}.footer{padding:8px 18px!important;font-size:9px!important}.actions{display:none!important}}
+@media(max-width:720px){body{padding:12px}.header,.footer{flex-direction:column;align-items:flex-start}.reportMeta{text-align:left}.summaryGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.summaryGrid{grid-template-columns:1fr 1fr}.actions{left:12px;right:12px;bottom:12px}.actionBtn{flex:1}}
 </style>
-
-${elevatorXPdfSafetyScript()}</head>
+${elevatorXPdfSafetyScript()}
+</head>
 <body>
-
-<button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
-
 <div class="page">
-<div class="topBand"></div>
+  <div class="topBand"></div>
+  <div class="header">
+    <div class="brand">
+      <img src="${pdfLogo}">
+      <div><div class="brandTitle">${ayHtml(pdfFirma)}</div><div class="brandSub">ElevatorX • Yönetim faaliyet raporu</div></div>
+    </div>
+    <div class="reportMeta"><b>Rapor No:</b> ${ayHtml(raporNo)}<br><b>Rapor Tarihi:</b> ${ayHtml(bugun())}<br><b>Dönem:</b> ${ayHtml(rapor.donem.etiket)}</div>
+  </div>
 
-<div class="header">
-<div class="brand">
-<img src="${pdfLogo}">
-<div>
-<div class="brandTitle">${pdfFirma}</div>
-<div class="brandSub">ElevatorX • Asansör takip sistemi</div>
+  <div class="titleBox">
+    <div class="docKicker">Ay Sonu Faaliyet Özeti</div>
+    <h1 class="docTitle">${ayHtml(rapor.donem.etiket)} Raporu</h1>
+    <p class="docDesc">Bakım, tahsilat, parça/işlem ve açık iş kayıtlarının yönetim özetidir.</p>
+    ${raporAlici ? `<div class="recipient">Sunulan: ${ayHtml(raporAlici)}</div>` : ""}
+  </div>
+
+  <div class="statusBox">
+    <div class="statusIcon">${rapor.gecikenler.length ? "!" : "✓"}</div>
+    <div><div class="statusTitle">${ayHtml(durumBaslik)}</div><div class="statusText">${ayHtml(durumAciklama)}</div></div>
+  </div>
+
+  <div class="summaryGrid">
+    <div class="summaryCard"><div class="summaryLabel">Toplam Apartman</div><div class="summaryValue">${rapor.toplamApartman}</div></div>
+    <div class="summaryCard"><div class="summaryLabel">Tamamlanan Bakım</div><div class="summaryValue">${rapor.bakimlar.length}</div></div>
+    <div class="summaryCard"><div class="summaryLabel">Geciken Bakım</div><div class="summaryValue">${rapor.gecikenler.length}</div></div>
+    <div class="summaryCard"><div class="summaryLabel">Tahsilat</div><div class="summaryValue">${ayHtml(tutarFormat(rapor.tahsilat))}</div></div>
+    <div class="summaryCard"><div class="summaryLabel">Güncel Bekleyen</div><div class="summaryValue">${ayHtml(tutarFormat(rapor.bekleyenTutar))}</div></div>
+    <div class="summaryCard"><div class="summaryLabel">Parça / İşlem</div><div class="summaryValue">${rapor.parcalar.length}</div></div>
+    <div class="summaryCard progressCard"><div class="summaryLabel">Bakım Tamamlanma Oranı</div><div class="summaryValue">%${rapor.tamamlanmaOrani}</div><div class="progressTrack"><div class="progressFill"></div></div></div>
+  </div>
+
+  ${raporNotu ? `<div class="noteBox"><div class="noteTitle">Yönetici Notu</div><div class="noteText">${ayHtml(raporNotu)}</div></div>` : ""}
+
+  <div class="section"><div class="sectionTitle">Bakımı Tamamlanan Apartmanlar</div><div class="list">
+    ${rapor.bakimlar.length ? rapor.bakimlar.map(function(k){ return `<div class="listItem"><b>${ayHtml(k.apartman.ad || "-")}</b> — ${ayHtml(k.tarih || "-")}</div>`; }).join("") : `<div class="empty">Seçilen dönemde bakım kaydı bulunamadı.</div>`}
+  </div></div>
+
+  <div class="section"><div class="sectionTitle">Tahsilatlar</div><div class="list">
+    ${rapor.odemeler.length ? rapor.odemeler.map(function(o){ return `<div class="listItem"><b>${ayHtml(o.apartman.ad || "-")}</b> — ${ayHtml(tutarFormat(o.tutar))} — ${ayHtml(o.aciklama || "")}</div>`; }).join("") : `<div class="empty">Seçilen dönemde tahsilat kaydı bulunamadı.</div>`}
+  </div></div>
+
+  <div class="section"><div class="sectionTitle">Parça ve İşlem Kayıtları</div><div class="list">
+    ${rapor.parcalar.length ? rapor.parcalar.map(function(p){ return `<div class="listItem"><b>${ayHtml(p.apartman.ad || "-")}</b> — ${ayHtml(p.ad)} • Adet: ${ayHtml(p.adet)}${p.tutar ? " • " + ayHtml(tutarFormat(p.tutar)) : ""}</div>`; }).join("") : `<div class="empty">Seçilen dönemde parça veya işlem kaydı bulunamadı.</div>`}
+  </div></div>
+
+  <div class="section"><div class="sectionTitle">Geciken Bakımlar</div><div class="list">
+    ${rapor.gecikenler.length ? rapor.gecikenler.map(function(g){ return `<div class="listItem"><b>${ayHtml(g.apartman.ad || "-")}</b> — Plan: ${ayHtml(g.plan)}</div>`; }).join("") : `<div class="empty">Geciken bakım bulunmuyor.</div>`}
+  </div></div>
+
+  <div class="section"><div class="sectionTitle">Güncel Bekleyen Ödemeler</div><div class="list">
+    ${rapor.bekleyen.length ? rapor.bekleyen.map(function(a){ return `<div class="listItem"><b>${ayHtml(a.ad || "-")}</b> — Kalan: ${ayHtml(tutarFormat(cariOzet(a).kalanPozitif))}</div>`; }).join("") : `<div class="empty">Bekleyen ödeme bulunmuyor.</div>`}
+  </div></div>
+
+  <div class="section"><div class="sectionTitle">Teknik Notlar</div><div class="list">
+    ${rapor.teknikNotlu.length ? rapor.teknikNotlu.map(function(a){ return `<div class="listItem"><b>${ayHtml(a.ad || "-")}</b> — ${ayHtml(String(a.not || "").trim())}</div>`; }).join("") : `<div class="empty">Teknik not bulunmuyor.</div>`}
+  </div></div>
+
+  <div class="signatureArea">
+    <div class="signatureBox">${ayHtml(pdfFirma)}<br>${ayHtml(pdfSorumlu || "Teknik Servis")}${pdfTel ? "<br>" + ayHtml(pdfTel) : ""}</div>
+    <div class="signatureBox">${raporAlici ? ayHtml(raporAlici) : "Yönetici / İşveren"}<br>Onay</div>
+  </div>
+
+  <div class="footer">
+    <div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>supportelevatorx@gmail.com</div>
+    <div>Bu belge ElevatorX üzerinden oluşturulmuştur.</div>
+  </div>
 </div>
+
+<div class="actions">
+  <button class="actionBtn actionSecondary" onclick="return elevatorXReportBack()">Geri</button>
+  <button class="actionBtn actionPrimary" onclick="window.print()">PDF Oluştur / Paylaş</button>
 </div>
-<div class="reportMeta">
-<b>Rapor No:</b> ${raporNo}<br>
-<b>Rapor Tarihi:</b> ${bugun()}
-</div>
-</div>
-
-<div class="titleBox">
-<h1 class="docTitle">${ayAdi()} Ay Sonu Raporu</h1>
-<p class="docDesc">Bu rapor, ilgili ay içerisindeki bakım, tahsilat, bekleyen ödeme ve geciken bakım kayıtlarının özetidir.</p>
-</div>
-
-<div class="summaryGrid">
-<div class="summaryCard"><div class="summaryLabel">Toplam Apartman</div><div class="summaryValue">${data.length}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Bu Ay Bakım</div><div class="summaryValue">${buAyBakim.length}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Bu Ay Tahsilat</div><div class="summaryValue">${tutarFormat(tahsilat)}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Bekleyen Ödeme</div><div class="summaryValue">${tutarFormat(bekleyenTutar)}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Geciken Bakım</div><div class="summaryValue">${geciken.length}</div></div>
-<div class="summaryCard"><div class="summaryLabel">Teknik Notlu</div><div class="summaryValue">${notlu.length}</div></div>
-</div>
-
-<div class="section"><div class="sectionTitle">Bakım Yapılanlar</div><div class="list">
-${buAyBakim.length ? buAyBakim.map(a=>`<div class="listItem">${a.ad || "-"} — ${a.bakimTarihi || "-"}</div>`).join("") : `<div class="empty">Bu ay bakım kaydı yok.</div>`}
-</div></div>
-
-<div class="section"><div class="sectionTitle">Ödeme Alınanlar</div><div class="list">
-${buAyOdeme.length ? buAyOdeme.map(a=>`<div class="listItem">${a.ad || "-"} — ${tutarFormat(odemeListesi(a).filter(o=>tarihBuAyMi(o.tarih)).reduce((t,o)=>t+Number(o.tutar||0),0))} — ${cariOzet(a).durum}</div>`).join("") : `<div class="empty">Bu ay ödeme kaydı yok.</div>`}
-</div></div>
-
-<div class="section"><div class="sectionTitle">Bekleyen Ödemeler</div><div class="list">
-${bekleyen.length ? bekleyen.map(a=>`<div class="listItem">${a.ad || "-"} — Kalan: ${tutarFormat(cariOzet(a).kalanPozitif)} / Ücret: ${tutarFormat(cariOzet(a).beklenen)}</div>`).join("") : `<div class="empty">Bekleyen ödeme yok.</div>`}
-</div></div>
-
-<div class="section"><div class="sectionTitle">Geciken Bakımlar</div><div class="list">
-${geciken.length ? geciken.map(a=>`<div class="listItem">${a.ad || "-"} — ${bakimPlanTarih(a)}</div>`).join("") : `<div class="empty">Geciken bakım yok.</div>`}
-</div></div>
-
-
-<div class="footer">
-<div>© 2026 ${APP_NAME}. Tüm hakları saklıdır.<br>Sürüm ${APP_VERSION} • Destek: supportelevatorx@gmail.com</div><div>Asansör takip sistemi</div>
-</div>
-
-
-</div>
-
-<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
-
 </body>
 </html>
+  `);
 
-`);
-
-toast("Ay sonu raporu oluşturuldu");
-
-}
-
-
+  w.document.close();
+  toast("Ay sonu raporu oluşturuldu");
+};
 
 
 async function yedekle(){
