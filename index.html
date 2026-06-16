@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1512">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1512">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1512">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1512">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1512">
-<link rel="manifest" href="/manifest.webmanifest?v=1512">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1513">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1513">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1513">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1513">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1513">
+<link rel="manifest" href="/manifest.webmanifest?v=1513">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11496,6 +11496,317 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   html.darkRoot .exDocOcrStatus{background:rgba(16,24,39,.85)}
 </style>
 
+
+<style id="exPaymentModalStyle">
+  #exPaymentModal{
+    position:fixed;
+    inset:0;
+    z-index:2147483000;
+    display:none;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+    color:#101828;
+  }
+
+  #exPaymentModal.is-open{display:block}
+  #exPaymentModal *{box-sizing:border-box}
+
+  .exPaymentBackdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(5,12,25,.48);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+  }
+
+  .exPaymentWrap{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:calc(16px + env(safe-area-inset-top)) 14px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .exPaymentCard{
+    position:relative;
+    width:min(455px,95vw);
+    max-height:min(820px,92vh);
+    overflow:auto;
+    border-radius:30px;
+    background:linear-gradient(180deg,#ffffff 0%,#f6f8fc 100%);
+    border:1px solid rgba(99,126,187,.13);
+    box-shadow:0 34px 100px rgba(7,16,35,.36);
+  }
+
+  .exPaymentClose{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:41px;
+    height:41px;
+    border:0;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#eef3ff;
+    color:#15213d;
+    font-size:27px;
+    line-height:1;
+    z-index:3;
+    padding:0;
+  }
+
+  .exPaymentHead{
+    padding:25px 22px 12px;
+  }
+
+  .exPaymentKicker{
+    color:#168a3a;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .exPaymentTitle{
+    margin:7px 52px 0 0;
+    font-size:29px;
+    line-height:1.04;
+    font-weight:880;
+    letter-spacing:-.8px;
+    color:#0f172a;
+  }
+
+  .exPaymentSub{
+    margin:9px 52px 0 0;
+    color:#667085;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .exPaymentSummary{
+    margin:4px 18px 14px;
+    padding:15px;
+    border-radius:20px;
+    background:linear-gradient(145deg,#ecfdf3 0%,#f7fffa 100%);
+    border:1px solid #ccefd8;
+  }
+
+  .exPaymentSummaryTop{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  .exPaymentApartment{
+    min-width:0;
+  }
+
+  .exPaymentApartment span{
+    display:block;
+    color:#6b7280;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .exPaymentApartment b{
+    display:block;
+    margin-top:4px;
+    color:#152238;
+    font-size:17px;
+    line-height:1.2;
+    font-weight:900;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exPaymentDebt{
+    flex:0 0 auto;
+    text-align:right;
+  }
+
+  .exPaymentDebt span{
+    display:block;
+    color:#5d8069;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+  }
+
+  .exPaymentDebt b{
+    display:block;
+    margin-top:4px;
+    color:#168a3a;
+    font-size:22px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:-.5px;
+  }
+
+  .exPaymentBody{
+    padding:0 18px 18px;
+  }
+
+  .exPaymentField{
+    display:grid;
+    gap:7px;
+    margin-bottom:12px;
+  }
+
+  .exPaymentField label{
+    font-size:11px;
+    font-weight:900;
+    color:#69758a;
+    letter-spacing:.03em;
+  }
+
+  .exPaymentField input,
+  .exPaymentField textarea{
+    width:100%;
+    border:1px solid #dfe6f1;
+    border-radius:16px;
+    background:#fff;
+    color:#111827;
+    font:inherit;
+    outline:none;
+    box-shadow:0 2px 8px rgba(15,23,42,.03);
+  }
+
+  .exPaymentField input{
+    height:52px;
+    padding:0 14px;
+    font-size:16px;
+    font-weight:750;
+  }
+
+  .exPaymentField textarea{
+    min-height:82px;
+    padding:12px 14px;
+    resize:vertical;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .exPaymentAmountWrap{
+    position:relative;
+  }
+
+  .exPaymentAmountWrap input{
+    padding-right:48px;
+  }
+
+  .exPaymentCurrency{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#168a3a;
+    font-size:17px;
+    font-weight:900;
+    pointer-events:none;
+  }
+
+  .exPaymentWarning{
+    display:none;
+    margin:-2px 0 12px;
+    padding:11px 12px;
+    border-radius:14px;
+    background:#fff6e5;
+    border:1px solid #f5dfab;
+    color:#8a5b00;
+    font-size:11px;
+    line-height:1.45;
+    font-weight:750;
+  }
+
+  .exPaymentWarning.is-visible{
+    display:block;
+  }
+
+  .exPaymentTypeHint{
+    margin:-2px 0 14px;
+    padding:10px 12px;
+    border-radius:14px;
+    background:#eef5ff;
+    color:#48658e;
+    font-size:11px;
+    line-height:1.4;
+  }
+
+  .exPaymentActions{
+    display:grid;
+    grid-template-columns:1fr 1.25fr;
+    gap:8px;
+    margin-top:15px;
+  }
+
+  .exPaymentButton{
+    min-height:52px;
+    border:0;
+    border-radius:17px;
+    padding:10px 12px;
+    font-size:14px;
+    font-weight:900;
+  }
+
+  .exPaymentButton.cancel{
+    background:#edf2fa;
+    color:#41577c;
+  }
+
+  .exPaymentButton.save{
+    background:linear-gradient(135deg,#111827 0%,#168a3a 100%);
+    color:#fff;
+    box-shadow:0 13px 27px rgba(22,138,58,.20);
+  }
+
+  .exPaymentButton:disabled{
+    opacity:.55;
+  }
+
+  body.darkMode .exPaymentCard,
+  html.darkRoot .exPaymentCard{
+    background:linear-gradient(180deg,#171d2a,#0f1420);
+    border-color:rgba(255,255,255,.08);
+    color:#fff;
+  }
+
+  body.darkMode .exPaymentTitle,
+  body.darkMode .exPaymentApartment b,
+  html.darkRoot .exPaymentTitle,
+  html.darkRoot .exPaymentApartment b{
+    color:#fff;
+  }
+
+  body.darkMode .exPaymentField input,
+  body.darkMode .exPaymentField textarea,
+  html.darkRoot .exPaymentField input,
+  html.darkRoot .exPaymentField textarea{
+    background:#151b28;
+    border-color:rgba(255,255,255,.08);
+    color:#fff;
+  }
+
+  @media(max-width:390px){
+    .exPaymentCard{
+      border-radius:24px;
+    }
+
+    .exPaymentTitle{
+      font-size:25px;
+    }
+
+    .exPaymentActions{
+      grid-template-columns:1fr;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -11739,6 +12050,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
   document.addEventListener("keydown",function(e){
     if(e.key === "Escape"){
+      try{
+        var pm = document.getElementById("exPaymentModal");
+        if(pm && pm.classList.contains("is-open")) return window.tahsilatModalKapat();
+      }catch(_){}
       try{var pf=document.getElementById("exProfessionalDocFormModal");if(pf&&pf.classList.contains("is-open"))return window.meslekiBelgeFormKapat();}catch(_){}
       try{var po=document.getElementById("exProfessionalDocsModal");if(po&&po.classList.contains("is-open"))return window.meslekiBelgelerKapat();}catch(_){}
       try{var cf=document.getElementById("exContractFormModal");if(cf&&cf.classList.contains("is-open"))return window.sozlesmeFormKapat();}catch(_){}
@@ -11765,6 +12080,82 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 
 
+
+
+
+<div id="exPaymentModal" aria-hidden="true">
+  <div class="exPaymentBackdrop" onclick="tahsilatModalKapat()"></div>
+
+  <div class="exPaymentWrap">
+    <section class="exPaymentCard" role="dialog" aria-modal="true" aria-labelledby="exPaymentTitle">
+      <button class="exPaymentClose" type="button" aria-label="Kapat" onclick="tahsilatModalKapat()">×</button>
+
+      <div class="exPaymentHead">
+        <div class="exPaymentKicker">Cari işlem</div>
+        <h2 id="exPaymentTitle" class="exPaymentTitle">Tahsilat Al</h2>
+        <p class="exPaymentSub">Ödeme bilgisini kaydet; makbuz otomatik oluşturulsun.</p>
+      </div>
+
+      <div class="exPaymentSummary">
+        <div class="exPaymentSummaryTop">
+          <div class="exPaymentApartment">
+            <span>Apartman / Site</span>
+            <b id="exPaymentApartmentName">-</b>
+          </div>
+
+          <div class="exPaymentDebt">
+            <span>Kalan Borç</span>
+            <b id="exPaymentRemainingDebt">0 ₺</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="exPaymentBody">
+        <input id="exPaymentApartmentIndex" type="hidden">
+        <input id="exPaymentAutoType" type="hidden">
+
+        <div class="exPaymentField">
+          <label for="exPaymentAmount">Tahsil edilen tutar</label>
+          <div class="exPaymentAmountWrap">
+            <input
+              id="exPaymentAmount"
+              type="number"
+              min="0"
+              step="0.01"
+              inputmode="decimal"
+              placeholder="0"
+              oninput="tahsilatModalKontrol()"
+            >
+            <span class="exPaymentCurrency">₺</span>
+          </div>
+        </div>
+
+        <div id="exPaymentWarning" class="exPaymentWarning">
+          Girilen tutar mevcut borçtan fazla. Kayıt yapılırsa cari hesapta fazla ödeme oluşur.
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exPaymentDate">Ödeme tarihi</label>
+          <input id="exPaymentDate" type="date">
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exPaymentDescription">Açıklama (isteğe bağlı)</label>
+          <textarea id="exPaymentDescription" placeholder="Örn. Haziran ayı bakım tahsilatı"></textarea>
+        </div>
+
+        <div id="exPaymentTypeHint" class="exPaymentTypeHint">
+          Tahsilat türü mevcut cari kalemlere göre otomatik belirlenecek.
+        </div>
+
+        <div class="exPaymentActions">
+          <button class="exPaymentButton cancel" type="button" onclick="tahsilatModalKapat()">Vazgeç</button>
+          <button id="exPaymentSaveButton" class="exPaymentButton save" type="button" onclick="tahsilatKaydet()">Ödemeyi Kaydet</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 
 
 <div id="exProfessionalDocsModal" aria-hidden="true">
@@ -12220,10 +12611,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1512" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1513" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.12</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.13</div>
 </div>
 </div>
 
@@ -12233,7 +12624,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.12";
+  const SPLASH_VERSION = "v1.5.13";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -12926,9 +13317,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.12";
+const APP_VERSION = "v1.5.13";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1512", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1513", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -18536,114 +18927,235 @@ toast("Apartman silindi");
 
 }
 
+
+function tahsilatTarihKayitDegeri(iso){
+  let temiz = String(iso || "").trim();
+  let eslesme = temiz.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+  if(!eslesme) return temiz || bugun();
+
+  return eslesme[3] + "." + eslesme[2] + "." + eslesme[1];
+}
+
+function tahsilatVarsayilanTip(cari){
+  if(cari.parcaToplam > 0 && cari.bakimUcreti > 0) return "parca";
+  if(cari.parcaToplam > 0) return "parca";
+  if(cari.bakimUcreti > 0) return "bakim";
+  return "cari";
+}
+
+function tahsilatVarsayilanAciklama(a,cari,tip){
+  let sonParca = sonParcaAdi(a);
+
+  if(tip === "parca"){
+    return sonParca ? "Parça ödemesi: " + sonParca : "Parça / işlem ödemesi";
+  }
+
+  if(tip === "bakim"){
+    return "Bakım ücreti tahsilatı";
+  }
+
+  return (cari.eskiBakiyeToplami || 0) > 0
+    ? "Eski bakiye tahsilatı"
+    : "Cari tahsilat";
+}
+
+function tahsilatModalAc(i){
+  haptic("success");
+
+  let a = data[i];
+  if(!a) return;
+
+  odemeleriHazirla(a);
+
+  let cari = cariOzet(a);
+
+  if(cari.beklenen > 0 && cari.kalanPozitif <= 0 && cari.toplam > 0){
+    toast("Son ödeme makbuzu oluşturuldu");
+    odemeMakbuzuPdf(i);
+    return;
+  }
+
+  let varsayilan = cari.kalanPozitif > 0
+    ? cari.kalanPozitif
+    : (Number(a.ucret || 0) || 0);
+
+  let tip = tahsilatVarsayilanTip(cari);
+  let aciklama = tahsilatVarsayilanAciklama(a,cari,tip);
+
+  let indexEl = document.getElementById("exPaymentApartmentIndex");
+  let tipEl = document.getElementById("exPaymentAutoType");
+  let adEl = document.getElementById("exPaymentApartmentName");
+  let kalanEl = document.getElementById("exPaymentRemainingDebt");
+  let tutarEl = document.getElementById("exPaymentAmount");
+  let tarihEl = document.getElementById("exPaymentDate");
+  let aciklamaEl = document.getElementById("exPaymentDescription");
+  let hintEl = document.getElementById("exPaymentTypeHint");
+  let modal = document.getElementById("exPaymentModal");
+
+  if(!modal) return;
+
+  if(indexEl) indexEl.value = String(i);
+  if(tipEl) tipEl.value = tip;
+  if(adEl) adEl.textContent = a.ad || "-";
+  if(kalanEl) kalanEl.textContent = tutarFormat(cari.kalanPozitif || 0);
+  if(tutarEl) tutarEl.value = varsayilan > 0 ? String(varsayilan) : "";
+  if(tarihEl) tarihEl.value = bugunISO();
+  if(aciklamaEl) aciklamaEl.value = aciklama;
+
+  if(hintEl){
+    hintEl.textContent =
+      "Tahsilat türü otomatik olarak “" +
+      odemeTipEtiket(tip) +
+      "” şeklinde kaydedilecek.";
+  }
+
+  tahsilatModalKontrol();
+
+  modal.style.display = "block";
+
+  requestAnimationFrame(function(){
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+  });
+
+  setTimeout(function(){
+    if(tutarEl){
+      tutarEl.focus();
+      try{ tutarEl.select(); }catch(e){}
+    }
+  },120);
+}
+
+function tahsilatModalKapat(){
+  let modal = document.getElementById("exPaymentModal");
+  if(!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  modal.style.display = "none";
+}
+
+function tahsilatModalKontrol(){
+  let i = Number(document.getElementById("exPaymentApartmentIndex").value);
+  let a = data[i];
+  if(!a) return;
+
+  let cari = cariOzet(a);
+  let tutar = Number(
+    String(document.getElementById("exPaymentAmount").value || "")
+      .replace(",", ".")
+  );
+
+  let warning = document.getElementById("exPaymentWarning");
+  let save = document.getElementById("exPaymentSaveButton");
+  let fazla = tutar > 0 && cari.kalanPozitif > 0 && tutar > cari.kalanPozitif;
+
+  if(warning) warning.classList.toggle("is-visible",fazla);
+  if(save) save.disabled = !(tutar > 0);
+}
+
+function tahsilatKaydet(){
+  let i = Number(document.getElementById("exPaymentApartmentIndex").value);
+  let a = data[i];
+  if(!a) return;
+
+  odemeleriHazirla(a);
+
+  let tutar = Number(
+    String(document.getElementById("exPaymentAmount").value || "")
+      .replace(",", ".")
+  );
+
+  if(!tutar || tutar <= 0){
+    toast("Geçerli bir tutar gir");
+    return;
+  }
+
+  let tarihIso = document.getElementById("exPaymentDate").value || bugunISO();
+  let tarih = tahsilatTarihKayitDegeri(tarihIso);
+  let tip = odemeTipNormalize(document.getElementById("exPaymentAutoType").value);
+  let aciklama = document.getElementById("exPaymentDescription").value.trim();
+
+  let cari = cariOzet(a);
+
+  if(!aciklama){
+    aciklama = tahsilatVarsayilanAciklama(a,cari,tip);
+  }
+
+  let save = document.getElementById("exPaymentSaveButton");
+  if(save) save.disabled = true;
+
+  let yeniOdeme = {
+    tutar:tutar,
+    tarih:tarih,
+    aciklama:aciklama,
+    tip:tip,
+    kalem:aciklama,
+    createdAt:new Date().toISOString()
+  };
+
+  a.odemeler.unshift(yeniOdeme);
+  a.sonOdemeTarihi = yeniOdeme.tarih;
+
+  let yeniCari = cariOzet(a);
+
+  if(yeniCari.kalanPozitif <= 0 && yeniCari.toplam > 0){
+    a.odemeTarihi = yeniOdeme.tarih;
+  }else{
+    a.odemeTarihi = "";
+  }
+
+  if(!Array.isArray(a.kayitlar)){
+    a.kayitlar = [];
+  }
+
+  a.kayitlar.push(
+    "Ödeme alındı: " +
+    tutarFormat(tutar) +
+    " • " +
+    odemeTipEtiket(tip) +
+    " (" +
+    yeniOdeme.tarih +
+    ")"
+  );
+
+  if(yeniCari.kalanPozitif > 0){
+    a.kayitlar.push(
+      "Kısmi ödeme - Kalan bakiye: " +
+      tutarFormat(yeniCari.kalanPozitif) +
+      " (" +
+      yeniOdeme.tarih +
+      ")"
+    );
+  }
+
+  kaydet();
+  tahsilatModalKapat();
+
+  toast(
+    tip === "parca"
+      ? "Parça ödemesi kaydedildi"
+      : (
+          yeniCari.kalanPozitif > 0
+            ? "Kısmi ödeme kaydedildi"
+            : "Ödeme tamamlandı"
+        )
+  );
+
+  odemeMakbuzuPdf(i,yeniOdeme);
+
+  if(aktifDetay !== null && data[aktifDetay]){
+    detayAc(aktifDetay);
+  }
+
+  if(save) save.disabled = false;
+}
+
 function odeme(i){
-
-haptic("success");
-
-let a = data[i];
-if(!a) return;
-
-odemeleriHazirla(a);
-
-let cari = cariOzet(a);
-
-if(cari.beklenen > 0 && cari.kalanPozitif <= 0 && cari.toplam > 0){
-toast("Son ödeme makbuzu oluşturuldu");
-odemeMakbuzuPdf(i);
-return;
+  tahsilatModalAc(i);
 }
 
-let varsayilan = cari.kalanPozitif > 0 ? cari.kalanPozitif : (Number(a.ucret || 0) || 0);
-
-let giris = prompt(
-"Tahsil edilen tutar ₺",
-String(varsayilan)
-);
-
-if(giris === null){
-toast("Ödeme kaydı iptal edildi");
-return;
-}
-
-let tutar = Number(String(giris).replace(",", "."));
-
-if(!tutar || tutar <= 0){
-toast("Geçerli bir tutar girilmedi");
-return;
-}
-
-let tarih = prompt("Ödeme tarihi", bugun()) || bugun();
-
-let varsayilanTip =
-cari.parcaToplam > 0 && cari.bakimUcreti > 0
-? "parça"
-: (cari.parcaToplam > 0 ? "parça" : (cari.bakimUcreti > 0 ? "bakım" : "cari"));
-
-let tipGiris = prompt(
-"Ödeme türü yazın: bakım / parça / cari",
-varsayilanTip
-);
-
-if(tipGiris === null){
-toast("Ödeme kaydı iptal edildi");
-return;
-}
-
-let tip = odemeTipNormalize(tipGiris);
-let sonParca = sonParcaAdi(a);
-
-let varsayilanAciklama =
-tip === "parca"
-? (sonParca ? "Parça ödemesi: " + sonParca : "Parça / işlem ödemesi")
-: (tip === "bakim" ? "Bakım ücreti tahsilatı" : ((cari.eskiBakiyeToplami || 0) > 0 ? "Eski bakiye tahsilatı" : "Cari tahsilat"));
-
-let aciklama = prompt("Makbuz açıklaması", varsayilanAciklama) || varsayilanAciklama;
-
-let yeniOdeme = {
-tutar:tutar,
-tarih:tarih.trim(),
-aciklama:aciklama.trim(),
-tip:tip,
-kalem:aciklama.trim(),
-createdAt:new Date().toISOString()
-};
-
-a.odemeler.unshift(yeniOdeme);
-a.sonOdemeTarihi = yeniOdeme.tarih;
-
-let yeniCari = cariOzet(a);
-
-if(yeniCari.kalanPozitif <= 0 && yeniCari.toplam > 0){
-a.odemeTarihi = yeniOdeme.tarih;
-}else{
-a.odemeTarihi = "";
-}
-
-if(!Array.isArray(a.kayitlar)){
-a.kayitlar = [];
-}
-
-a.kayitlar.push(
-"Ödeme alındı: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + yeniOdeme.tarih + ")"
-);
-
-if(yeniCari.kalanPozitif > 0){
-a.kayitlar.push(
-"Kısmi ödeme - Kalan bakiye: " + tutarFormat(yeniCari.kalanPozitif) + " (" + yeniOdeme.tarih + ")"
-);
-}
-
-kaydet();
-
-toast(tip === "parca" ? "Parça ödemesi kaydedildi" : (yeniCari.kalanPozitif > 0 ? "Kısmi ödeme kaydedildi" : "Ödeme tamamlandı"));
-
-odemeMakbuzuPdf(i,yeniOdeme);
-
-if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
-}
-
-}
 
 function bakim(i){
 
