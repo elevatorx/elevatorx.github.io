@@ -11081,6 +11081,38 @@ html.darkRoot .exHybridMenuLabelSecondary{
 }
 </style>
 
+
+<style id="exLicenseModalStyle">
+  #exLicenseModal{position:fixed;inset:0;z-index:2147483000;display:none;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:#111827;}
+  #exLicenseModal.is-open{display:block;}
+  #exLicenseModal *{box-sizing:border-box;}
+  #exLicenseModal .exLicenseBackdrop{position:absolute;inset:0;background:rgba(5,12,24,.48);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+  #exLicenseModal .exLicenseWrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:calc(22px + env(safe-area-inset-top)) 18px calc(22px + env(safe-area-inset-bottom));}
+  #exLicenseModal .exLicenseCard{position:relative;width:min(420px,94vw);max-height:min(720px,86vh);overflow:auto;border-radius:30px;background:linear-gradient(180deg,#fff 0%,#f6f8ff 100%);border:1px solid rgba(95,120,180,.14);box-shadow:0 34px 100px rgba(8,18,38,.34);}
+  #exLicenseModal .exLicenseClose{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;display:grid;place-items:center;background:#eef3ff;color:#14213d;font-size:26px;line-height:1;z-index:2;padding:0;}
+  #exLicenseModal .exLicenseTop{padding:26px 24px 12px;text-align:center;}
+  #exLicenseModal .exLicenseIcon{width:64px;height:64px;margin:0 auto 14px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#287cff,#1854d8);box-shadow:0 18px 36px rgba(40,124,255,.28);}
+  #exLicenseModal .exLicenseIcon svg{display:block;width:30px!important;height:30px!important;max-width:30px!important;max-height:30px!important;color:#fff;}
+  #exLicenseModal .exLicenseTitle{margin:0;font-size:27px;line-height:1.08;font-weight:800;letter-spacing:-.5px;color:#0f172a;}
+  #exLicenseModal .exLicenseSub{margin:8px auto 0;max-width:300px;font-size:14px;line-height:1.45;color:#667085;}
+  #exLicenseModal .exLicenseBadge{display:inline-flex;margin-top:13px;padding:7px 13px;border-radius:999px;background:#e9f8ee;color:#16824b;font-size:12px;font-weight:800;letter-spacing:.04em;}
+  #exLicenseModal .exLicenseBody{padding:10px 18px 12px;display:grid;gap:10px;}
+  #exLicenseModal .exLicenseRow{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center;padding:14px;border-radius:17px;background:#fff;border:1px solid #edf1fb;box-shadow:0 2px 10px rgba(15,23,42,.035);}
+  #exLicenseModal .exLicenseLabel{font-size:11px;font-weight:800;color:#8a94a7;letter-spacing:.07em;text-transform:uppercase;}
+  #exLicenseModal .exLicenseValue{text-align:right;font-size:15px;font-weight:750;line-height:1.3;color:#111827;word-break:break-word;}
+  #exLicenseModal .exLicenseValue.code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:14px;color:#1d4ed8;}
+  #exLicenseModal .exLicenseFoot{padding:4px 18px 18px;}
+  #exLicenseModal .exLicenseHint{margin:4px 8px 14px;text-align:center;font-size:11px;line-height:1.4;color:#98a2b3;}
+  #exLicenseModal .exLicenseButton{width:100%;min-height:52px;border:0;border-radius:17px;background:linear-gradient(135deg,#111827 0%,#1e3a8a 100%);color:#fff;font-size:16px;font-weight:800;box-shadow:0 14px 30px rgba(15,23,42,.2);}
+  @media(max-width:390px){
+    #exLicenseModal .exLicenseCard{width:95vw;border-radius:25px;}
+    #exLicenseModal .exLicenseTop{padding-top:24px;}
+    #exLicenseModal .exLicenseTitle{font-size:24px;}
+    #exLicenseModal .exLicenseRow{grid-template-columns:96px 1fr;padding:13px;}
+    #exLicenseModal .exLicenseValue{font-size:14px;}
+  }
+</style>
+
 </head>
 
 <body>
@@ -11251,9 +11283,7 @@ html.darkRoot .exHybridMenuLabelSecondary{
       if(!modal) return;
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden","true");
-      setTimeout(function(){
-        if(!modal.classList.contains("is-open")) modal.style.display = "none";
-      },180);
+      modal.style.display = "none";
     }catch(e){}
   };
 
@@ -11262,31 +11292,26 @@ html.darkRoot .exHybridMenuLabelSecondary{
     try{
       var device = localStorage.getItem("elevatorx_device_code_v1476") || "-";
       var stored = null;
-      try{
-        stored = JSON.parse(localStorage.getItem("elevatorx_google_license_v1480") || "null");
-      }catch(e){}
+      try{ stored = JSON.parse(localStorage.getItem("elevatorx_google_license_v1480") || "null"); }catch(e){}
 
       var licenseNo = stored && stored.lisans ? stored.lisans : "-";
       var customer = stored && stored.musteri ? stored.musteri : "Belirtilmedi";
       var endDate = stored && stored.bitis ? stored.bitis : "Süresiz / belirtilmedi";
-
       var modal = document.getElementById("exLicenseModal");
       if(!modal) return;
+
       var customerEl = document.getElementById("exLicenseCustomer");
       var codeEl = document.getElementById("exLicenseCode");
       var endEl = document.getElementById("exLicenseEnd");
       var deviceEl = document.getElementById("exLicenseDevice");
-
       if(customerEl) customerEl.textContent = customer;
       if(codeEl) codeEl.textContent = licenseNo;
       if(endEl) endEl.textContent = endDate;
       if(deviceEl) deviceEl.textContent = device;
 
       modal.style.display = "block";
-      requestAnimationFrame(function(){
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden","false");
-      });
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden","false");
     }catch(e){
       try{ if(typeof toast === "function") toast("Lisans bilgisi okunamadı"); }catch(_){}
     }
@@ -11294,10 +11319,8 @@ html.darkRoot .exHybridMenuLabelSecondary{
 
   document.addEventListener("keydown",function(e){
     if(e.key === "Escape"){
-      try{
-        var lm = document.getElementById("exLicenseModal");
-        if(lm && lm.classList.contains("is-open")) return window.exHybridLicenseModalClose();
-      }catch(_){}
+      var modal = document.getElementById("exLicenseModal");
+      if(modal && modal.classList.contains("is-open")) return window.exHybridLicenseModalClose();
       window.exHybridMenuClose();
     }
   });
@@ -11310,48 +11333,34 @@ html.darkRoot .exHybridMenuLabelSecondary{
 
 
 
-<div id="exLicenseModal" class="exLicenseModal" aria-hidden="true">
+<div id="exLicenseModal" aria-hidden="true">
   <div class="exLicenseBackdrop" onclick="exHybridLicenseModalClose()"></div>
   <div class="exLicenseWrap">
-    <div class="exLicenseCard" role="dialog" aria-modal="true" aria-labelledby="exLicenseTitle">
+    <section class="exLicenseCard" role="dialog" aria-modal="true" aria-labelledby="exLicenseTitle">
       <button class="exLicenseClose" type="button" aria-label="Kapat" onclick="exHybridLicenseModalClose()">×</button>
-      <div class="exLicenseCardTop">
+      <div class="exLicenseTop">
         <div class="exLicenseIcon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 10V7.8C8 5.70132 9.79086 4 12 4C14.2091 4 16 5.70132 16 7.8V10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <rect x="5" y="10" width="14" height="10" rx="3" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="2.2"/>
-            <circle cx="12" cy="15" r="1.2" fill="currentColor"/>
+            <path d="M8 10V7.8C8 5.7 9.79 4 12 4s4 1.7 4 3.8V10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <rect x="5" y="10" width="14" height="10" rx="3" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="2.2"/>
+            <circle cx="12" cy="15" r="1.25" fill="currentColor"/>
           </svg>
         </div>
         <h3 id="exLicenseTitle" class="exLicenseTitle">Premium Lisans</h3>
-        <p class="exLicenseSub">Cihaz ve aktivasyon bilgileri aşağıda görüntüleniyor.</p>
-        <div class="exLicenseBadge">AKTİF</div>
+        <p class="exLicenseSub">Cihaz ve aktivasyon bilgilerin güvenli biçimde görüntüleniyor.</p>
+        <span class="exLicenseBadge">AKTİF</span>
       </div>
       <div class="exLicenseBody">
-        <div class="exLicenseGrid">
-          <div class="exLicenseRow">
-            <div class="exLicenseLabel">Müşteri</div>
-            <div id="exLicenseCustomer" class="exLicenseValue">-</div>
-          </div>
-          <div class="exLicenseRow">
-            <div class="exLicenseLabel">Lisans Kodu</div>
-            <div id="exLicenseCode" class="exLicenseValue is-code">-</div>
-          </div>
-          <div class="exLicenseRow">
-            <div class="exLicenseLabel">Bitiş Tarihi</div>
-            <div id="exLicenseEnd" class="exLicenseValue">-</div>
-          </div>
-          <div class="exLicenseRow">
-            <div class="exLicenseLabel">Cihaz</div>
-            <div id="exLicenseDevice" class="exLicenseValue is-code">-</div>
-          </div>
-        </div>
+        <div class="exLicenseRow"><span class="exLicenseLabel">Müşteri</span><span id="exLicenseCustomer" class="exLicenseValue">-</span></div>
+        <div class="exLicenseRow"><span class="exLicenseLabel">Lisans Kodu</span><span id="exLicenseCode" class="exLicenseValue code">-</span></div>
+        <div class="exLicenseRow"><span class="exLicenseLabel">Bitiş Tarihi</span><span id="exLicenseEnd" class="exLicenseValue">-</span></div>
+        <div class="exLicenseRow"><span class="exLicenseLabel">Cihaz</span><span id="exLicenseDevice" class="exLicenseValue code">-</span></div>
       </div>
       <div class="exLicenseFoot">
-        <div class="exLicenseHint">Lisans bilgileri bu cihazdaki kayıtlar üzerinden okunur.</div>
-        <button class="exLicenseBtn" type="button" onclick="exHybridLicenseModalClose()">Kapat</button>
+        <div class="exLicenseHint">Bu bilgiler cihazındaki lisans kaydından okunur.</div>
+        <button class="exLicenseButton" type="button" onclick="exHybridLicenseModalClose()">Kapat</button>
       </div>
-    </div>
+    </section>
   </div>
 </div>
 
@@ -12095,37 +12104,7 @@ return null;
 }
 
 function elevatorXPdfSafetyScript(){
-return `
-<style id="exLicenseModalStyle">
-.exLicenseModal{position:fixed; inset:0; display:none; z-index:99999;}
-.exLicenseModal.is-open{display:block;}
-.exLicenseModal .exLicenseBackdrop{position:absolute; inset:0; background:rgba(9,16,28,.42); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
-.exLicenseModal .exLicenseWrap{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:22px;}
-.exLicenseCard{position:relative; width:min(92vw,420px); border-radius:28px; background:linear-gradient(180deg,#ffffff 0%,#f6f8ff 100%); box-shadow:0 28px 90px rgba(9,18,38,.28), 0 6px 20px rgba(9,18,38,.08); overflow:hidden; border:1px solid rgba(112,138,255,.12);}
-.exLicenseCardTop{padding:24px 24px 10px; text-align:center;}
-.exLicenseClose{position:absolute; top:16px; right:16px; width:42px; height:42px; border:none; border-radius:50%; background:#eef3ff; color:#18233f; font-size:24px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.05);}
-.exLicenseIcon{width:68px; height:68px; border-radius:22px; margin:0 auto 14px; background:linear-gradient(135deg,#3f7cff 0%,#1d4ed8 100%); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 18px 34px rgba(63,124,255,.28);}
-.exLicenseIcon svg{width:32px; height:32px;}
-.exLicenseTitle{margin:0; font-size:28px; line-height:1.08; font-weight:800; color:#101828; letter-spacing:-.02em;}
-.exLicenseSub{margin:8px 0 0; font-size:14px; color:#667085; line-height:1.5;}
-.exLicenseBadge{display:inline-flex; align-items:center; justify-content:center; margin-top:14px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:800; color:#157347; background:#eaf8ef; border:1px solid rgba(21,115,71,.12); letter-spacing:.02em;}
-.exLicenseBody{padding:12px 18px 18px;}
-.exLicenseGrid{display:grid; gap:10px;}
-.exLicenseRow{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:14px 14px; border-radius:18px; background:#fff; border:1px solid #eef2ff; box-shadow:0 2px 8px rgba(15,23,42,.03);}
-.exLicenseLabel{font-size:12px; font-weight:800; color:#8a94a7; letter-spacing:.08em; text-transform:uppercase;}
-.exLicenseValue{font-size:16px; font-weight:700; color:#111827; text-align:right; line-height:1.35; word-break:break-word;}
-.exLicenseValue.is-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:15px; background:#f3f6ff; padding:6px 10px; border-radius:12px; display:inline-block;}
-.exLicenseFoot{padding:0 18px 18px;}
-.exLicenseHint{font-size:12px; color:#98a2b3; line-height:1.45; text-align:center; margin:6px 8px 14px;}
-.exLicenseBtn{width:100%; border:none; border-radius:18px; padding:16px 18px; font-size:16px; font-weight:800; color:#fff; background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%); box-shadow:0 12px 28px rgba(15,23,42,.22); cursor:pointer;}
-@media (max-width:420px){
-  .exLicenseCard{width:min(94vw,420px); border-radius:24px;}
-  .exLicenseTitle{font-size:24px;}
-  .exLicenseValue{font-size:15px;}
-}
-</style>
-
-<script>
+return `<script>
 (function(){
 try{
 if(window.history && window.history.replaceState){
