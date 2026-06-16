@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1511">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1511">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1511">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1511">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1511">
-<link rel="manifest" href="/manifest.webmanifest?v=1511">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1512">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1512">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1512">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1512">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1512">
+<link rel="manifest" href="/manifest.webmanifest?v=1512">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11415,6 +11415,87 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 @media(max-width:430px){.exDocCard{border-radius:24px}.exDocTitle{font-size:25px}.exDocGrid{grid-template-columns:1fr}.exDocStats{gap:6px}.exDocStat{padding:12px 5px}.exDocInfoGrid{grid-template-columns:1fr 1fr}}
 </style>
 
+
+<style id="exProfessionalOcrStyle">
+  .exDocAutoScanBox{
+    margin-bottom:16px;
+    padding:16px;
+    border-radius:21px;
+    background:linear-gradient(145deg,#eaf3ff 0%,#f4f0ff 100%);
+    border:1px solid #d9e5fb;
+    box-shadow:0 8px 22px rgba(45,79,145,.07);
+  }
+  .exDocAutoScanIcon{
+    width:48px;height:48px;border-radius:16px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#1478f2,#6757ec);
+    color:#fff;font-size:23px;font-weight:900;
+    box-shadow:0 12px 25px rgba(44,91,201,.23);
+  }
+  .exDocAutoScanTop{
+    display:flex;align-items:center;gap:12px;
+  }
+  .exDocAutoScanTitle{
+    color:#172641;font-size:15px;font-weight:900;line-height:1.2;
+  }
+  .exDocAutoScanSub{
+    margin-top:4px;color:#667994;font-size:11px;line-height:1.4;
+  }
+  .exDocAutoScanButton{
+    width:100%;min-height:50px;margin-top:14px;border:0;border-radius:16px;
+    background:#fff;color:#1d4ed8;font-size:14px;font-weight:900;
+    box-shadow:0 8px 20px rgba(65,93,150,.09);
+  }
+  .exDocAutoScanButton:disabled{opacity:.55}
+  .exDocOcrStatus{
+    display:none;margin-top:12px;padding:12px;border-radius:15px;
+    background:rgba(255,255,255,.72);border:1px solid rgba(126,151,200,.17)
+  }
+  .exDocOcrStatus.is-visible{display:block}
+  .exDocOcrStatus.is-success{background:#ecf9f1;border-color:#c9edd7}
+  .exDocOcrStatus.is-error{background:#fff2ef;border-color:#ffd5cf}
+  .exDocOcrStatusLine{
+    display:flex;align-items:center;justify-content:space-between;gap:10px
+  }
+  .exDocOcrStatusText{
+    color:#405572;font-size:11px;font-weight:850;line-height:1.35
+  }
+  .exDocOcrStatusPercent{
+    color:#1d4ed8;font-size:11px;font-weight:900;white-space:nowrap
+  }
+  .exDocOcrBar{
+    height:7px;margin-top:9px;border-radius:999px;overflow:hidden;background:#dce6f6
+  }
+  .exDocOcrBarFill{
+    width:0%;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,#1478f2,#6757ec);
+    transition:width .25s ease
+  }
+  .exDocOcrDetected{
+    display:none;margin-top:9px;color:#61738d;font-size:10px;line-height:1.45
+  }
+  .exDocOcrDetected.is-visible{display:block}
+  .exDocManualDivider{
+    display:flex;align-items:center;gap:10px;margin:5px 0 14px;
+    color:#99a3b3;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase
+  }
+  .exDocManualDivider::before,.exDocManualDivider::after{
+    content:"";height:1px;flex:1;background:#e2e7ef
+  }
+  .exDocOcrPrivacy{
+    margin-top:10px;color:#76869e;font-size:10px;line-height:1.45
+  }
+  body.darkMode .exDocAutoScanBox,
+  html.darkRoot .exDocAutoScanBox{
+    background:linear-gradient(145deg,#17233a,#211b3b);
+    border-color:rgba(255,255,255,.08)
+  }
+  body.darkMode .exDocAutoScanTitle,
+  html.darkRoot .exDocAutoScanTitle{color:#fff}
+  body.darkMode .exDocOcrStatus,
+  html.darkRoot .exDocOcrStatus{background:rgba(16,24,39,.85)}
+</style>
+
 </head>
 
 <body>
@@ -11697,26 +11778,116 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   </section></div>
 </div>
 
+
 <div id="exProfessionalDocFormModal" aria-hidden="true">
   <div class="exDocBackdrop" onclick="meslekiBelgeFormKapat()"></div>
-  <div class="exDocWrap"><section class="exDocCard exDocFormCard" role="dialog" aria-modal="true">
-    <button class="exDocClose" type="button" aria-label="Kapat" onclick="meslekiBelgeFormKapat()">×</button>
-    <div class="exDocHead"><div class="exDocKicker">Belge kartı</div><h2 id="exProfessionalDocFormTitle" class="exDocTitle">Yeni Mesleki Belge</h2><p class="exDocSub">Belge dosyası yalnızca bu cihazda saklanır. PDF’lerde sadece kısa mesleki ibare kullanılır.</p></div>
-    <div class="exDocFormBody">
-      <input id="exProfessionalDocId" type="hidden">
-      <div class="exDocField"><label for="exProfessionalDocName">Belge adı</label><input id="exProfessionalDocName" type="text" placeholder="Örn. Asansör Bakım ve Onarımcısı"></div>
-      <div class="exDocGrid"><div class="exDocField"><label for="exProfessionalDocLevel">Seviye / sınıf</label><input id="exProfessionalDocLevel" type="text" placeholder="Örn. MYK Seviye 4"></div><div class="exDocField"><label for="exProfessionalDocNumber">Belge numarası</label><input id="exProfessionalDocNumber" type="text" placeholder="Yalnız profilde görünür"></div></div>
-      <div class="exDocGrid"><div class="exDocField"><label for="exProfessionalDocIssueDate">Veriliş tarihi</label><input id="exProfessionalDocIssueDate" type="date"></div><div class="exDocField"><label for="exProfessionalDocExpiryDate">Geçerlilik bitişi</label><input id="exProfessionalDocExpiryDate" type="date"></div></div>
-      <div class="exDocField"><label for="exProfessionalDocPdfText">PDF’lerde görünecek kısa ibare</label><input id="exProfessionalDocPdfText" type="text" placeholder="Örn. MYK Seviye 4 Belgeli Teknik Personel"></div>
-      <div class="exDocFileBox"><div class="exDocFileTitle">Belge fotoğrafı veya PDF</div><div id="exProfessionalDocFileMeta" class="exDocFileMeta">Dosya seçilmedi.</div><button class="exDocFileButton" type="button" onclick="document.getElementById('exProfessionalDocFile').click()">Dosya Seç</button><input id="exProfessionalDocFile" type="file" accept="image/*,application/pdf" hidden onchange="meslekiBelgeDosyaSecildi(event)"></div>
-      <div class="exDocToggleList">
-        <label class="exDocToggle"><span class="exDocToggleText"><b>Servis raporu ve tekliflerde göster</b><span>Belge numarası değil, yalnızca kısa mesleki ibare eklenir.</span></span><input id="exProfessionalDocShowPdf" type="checkbox"></label>
-        <label class="exDocToggle"><span class="exDocToggleText"><b>Dosyayı manuel yedeğe dahil et</b><span>Belge dosyası JSON yedeğini büyütebilir. Otomatik yedek yalnızca belge bilgilerini saklar.</span></span><input id="exProfessionalDocBackupFile" type="checkbox"></label>
+  <div class="exDocWrap">
+    <section class="exDocCard exDocFormCard" role="dialog" aria-modal="true">
+      <button class="exDocClose" type="button" aria-label="Kapat" onclick="meslekiBelgeFormKapat()">×</button>
+
+      <div class="exDocHead">
+        <div class="exDocKicker">Belge kartı</div>
+        <h2 id="exProfessionalDocFormTitle" class="exDocTitle">Yeni Mesleki Belge</h2>
+        <p class="exDocSub">Belgeyi seç; ElevatorX bilgileri okuyup alanları otomatik doldursun. Kaydetmeden önce kontrol edebilirsin.</p>
       </div>
-      <div class="exDocFormActions"><button class="exDocFormBtn secondary" type="button" onclick="meslekiBelgeFormKapat()">Vazgeç</button><button class="exDocFormBtn primary" type="button" onclick="meslekiBelgeKaydet()">Kaydet</button><button id="exProfessionalDocDeleteButton" class="exDocFormBtn danger" type="button" onclick="meslekiBelgeSil()" style="display:none">Belgeyi Sil</button></div>
-      <div class="exDocPrivacy">T.C. kimlik numarası, QR kod ve belge numarası müşteriye gönderilen raporlarda otomatik olarak paylaşılmaz.</div>
-    </div>
-  </section></div>
+
+      <div class="exDocFormBody">
+        <input id="exProfessionalDocId" type="hidden">
+
+        <div class="exDocAutoScanBox">
+          <div class="exDocAutoScanTop">
+            <div class="exDocAutoScanIcon" aria-hidden="true">⌁</div>
+            <div>
+              <div class="exDocAutoScanTitle">Belge Seç ve Otomatik Doldur</div>
+              <div class="exDocAutoScanSub">Fotoğraf veya PDF içindeki belge adı, seviye, numara ve tarihleri tarar.</div>
+            </div>
+          </div>
+
+          <button id="exProfessionalDocScanButton" class="exDocAutoScanButton" type="button" onclick="document.getElementById('exProfessionalDocFile').click()">
+            Fotoğraf veya PDF Seç
+          </button>
+
+          <input id="exProfessionalDocFile" type="file" accept="image/*,application/pdf" hidden onchange="meslekiBelgeDosyaSecildi(event)">
+
+          <div id="exProfessionalDocOcrStatus" class="exDocOcrStatus">
+            <div class="exDocOcrStatusLine">
+              <div id="exProfessionalDocOcrText" class="exDocOcrStatusText">Belge hazırlanıyor…</div>
+              <div id="exProfessionalDocOcrPercent" class="exDocOcrStatusPercent">0%</div>
+            </div>
+            <div class="exDocOcrBar">
+              <div id="exProfessionalDocOcrBarFill" class="exDocOcrBarFill"></div>
+            </div>
+            <div id="exProfessionalDocOcrDetected" class="exDocOcrDetected"></div>
+          </div>
+
+          <div id="exProfessionalDocFileMeta" class="exDocFileMeta" style="margin-top:10px">Dosya seçilmedi.</div>
+          <div class="exDocOcrPrivacy">İlk taramada OCR bileşenleri internetten yüklenir. Belge dosyası bir OCR servisine gönderilmeden tarayıcı içinde işlenir.</div>
+        </div>
+
+        <div class="exDocManualDivider">Otomatik sonuçları kontrol et</div>
+
+        <div class="exDocField">
+          <label for="exProfessionalDocName">Belge adı</label>
+          <input id="exProfessionalDocName" type="text" placeholder="Örn. Asansör Bakım ve Onarımcısı">
+        </div>
+
+        <div class="exDocGrid">
+          <div class="exDocField">
+            <label for="exProfessionalDocLevel">Seviye / sınıf</label>
+            <input id="exProfessionalDocLevel" type="text" placeholder="Örn. MYK Seviye 4">
+          </div>
+          <div class="exDocField">
+            <label for="exProfessionalDocNumber">Belge numarası</label>
+            <input id="exProfessionalDocNumber" type="text" placeholder="Yalnız profilde görünür">
+          </div>
+        </div>
+
+        <div class="exDocGrid">
+          <div class="exDocField">
+            <label for="exProfessionalDocIssueDate">Veriliş tarihi</label>
+            <input id="exProfessionalDocIssueDate" type="date">
+          </div>
+          <div class="exDocField">
+            <label for="exProfessionalDocExpiryDate">Geçerlilik bitişi</label>
+            <input id="exProfessionalDocExpiryDate" type="date">
+          </div>
+        </div>
+
+        <div class="exDocField">
+          <label for="exProfessionalDocPdfText">PDF’lerde görünecek kısa ibare</label>
+          <input id="exProfessionalDocPdfText" type="text" placeholder="Örn. MYK Seviye 4 Belgeli Teknik Personel">
+        </div>
+
+        <div class="exDocToggleList">
+          <label class="exDocToggle">
+            <span class="exDocToggleText">
+              <b>Servis raporu ve tekliflerde göster</b>
+              <span>Belge numarası değil, yalnızca kısa mesleki ibare eklenir.</span>
+            </span>
+            <input id="exProfessionalDocShowPdf" type="checkbox">
+          </label>
+
+          <label class="exDocToggle">
+            <span class="exDocToggleText">
+              <b>Dosyayı manuel yedeğe dahil et</b>
+              <span>Belge dosyası JSON yedeğini büyütebilir. Otomatik yedek yalnızca belge bilgilerini saklar.</span>
+            </span>
+            <input id="exProfessionalDocBackupFile" type="checkbox">
+          </label>
+        </div>
+
+        <div class="exDocFormActions">
+          <button class="exDocFormBtn secondary" type="button" onclick="meslekiBelgeFormKapat()">Vazgeç</button>
+          <button id="exProfessionalDocSaveButton" class="exDocFormBtn primary" type="button" onclick="meslekiBelgeKaydet()">Kaydet</button>
+          <button id="exProfessionalDocDeleteButton" class="exDocFormBtn danger" type="button" onclick="meslekiBelgeSil()" style="display:none">Belgeyi Sil</button>
+        </div>
+
+        <div class="exDocPrivacy">
+          T.C. kimlik numarası, QR kod ve belge numarası müşteriye gönderilen raporlarda otomatik olarak paylaşılmaz.
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
 
@@ -12049,10 +12220,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1511" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1512" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.11</div>
+<div class="motionSplashVersion" data-splash-version>v1.5.12</div>
 </div>
 </div>
 
@@ -12062,7 +12233,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.11";
+  const SPLASH_VERSION = "v1.5.12";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -12755,9 +12926,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.11";
+const APP_VERSION = "v1.5.12";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1511", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1512", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14600,9 +14771,546 @@ function meslekiBelgePdfIbaresi(){return meslekiBelgelerGet().filter(function(b)
 function meslekiBelgelerAc(){if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose();let modal=document.getElementById("exProfessionalDocsModal");if(!modal)return;meslekiBelgelerRender();modal.style.display="block";requestAnimationFrame(function(){modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");});haptic("light");}
 function meslekiBelgelerKapat(){let modal=document.getElementById("exProfessionalDocsModal");if(!modal)return;modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");modal.style.display="none";}
 function meslekiBelgelerRender(){let liste=meslekiBelgelerGet();let ozet=meslekiBelgeOzeti();let toplam=document.getElementById("exDocTotalCount"),yaklasan=document.getElementById("exDocSoonCount"),dolan=document.getElementById("exDocExpiredCount");if(toplam)toplam.textContent=ozet.toplam;if(yaklasan)yaklasan.textContent=ozet.yaklasan;if(dolan)dolan.textContent=ozet.dolan;let alan=document.getElementById("exProfessionalDocsList");if(!alan)return;if(!liste.length){alan.innerHTML='<div class="exDocEmpty">Henüz mesleki belge eklenmedi.<br>“Yeni Belge Ekle” ile MYK veya diğer sertifikalarını kaydet.</div>';return;}liste=liste.slice().sort(function(a,b){let ad=meslekiBelgeDurumu(a),bd=meslekiBelgeDurumu(b);if(ad.rank!==bd.rank)return ad.rank-bd.rank;return String(a.ad||"").localeCompare(String(b.ad||""),"tr");});alan.innerHTML=liste.map(function(b){let durum=meslekiBelgeDurumu(b);let itemClass=durum.key==="expired"?"is-expired":(durum.key==="soon"?"is-soon":"");let dosya=b.dosyaVar?'<span class="exDocMiniBadge file">'+ayHtml(b.dosyaTipi==="application/pdf"?"PDF Dosyası":"Görsel Dosyası")+'</span>':"";let pdf=b.pdfGoster?'<span class="exDocMiniBadge">PDF’lerde Göster</span>':"";let yedek=b.dosyayiYedekle?'<span class="exDocMiniBadge backup">Dosya Yedeğe Dahil</span>':"";return `<article class="exDocItem ${itemClass}"><div class="exDocItemTop"><div><div class="exDocName">${ayHtml(b.ad||"İsimsiz belge")}</div><div class="exDocMeta">${ayHtml(b.seviye||"Seviye belirtilmedi")}${b.belgeNo?" • Belge No: "+ayHtml(b.belgeNo):""}</div></div><span class="exDocStatus ${durum.cls}">${ayHtml(durum.text)}</span></div><div class="exDocInfoGrid"><div class="exDocInfo"><span>Veriliş Tarihi</span><b>${ayHtml(kartTarih(b.verilisTarihi||""))}</b></div><div class="exDocInfo"><span>Geçerlilik</span><b>${ayHtml(kartTarih(b.gecerlilikTarihi||""))}</b></div></div><div class="exDocBadges">${dosya}${pdf}${yedek}</div><div class="exDocActions"><button class="exDocAction view" type="button" ${b.dosyaVar?"":"disabled"} onclick="meslekiBelgeDosyaGoruntule('${ayHtml(b.id)}')">Belgeyi Görüntüle</button><button class="exDocAction edit" type="button" onclick="meslekiBelgeFormAc('${ayHtml(b.id)}')">Düzenle</button></div></article>`;}).join("");}
-function meslekiBelgeFormAc(id){let liste=meslekiBelgelerGet();let belge=id?liste.find(function(b){return b.id===id;}):null;exProfessionalDocPendingFile=null;document.getElementById("exProfessionalDocId").value=belge?belge.id:"";document.getElementById("exProfessionalDocName").value=belge?(belge.ad||""):"";document.getElementById("exProfessionalDocLevel").value=belge?(belge.seviye||""):"";document.getElementById("exProfessionalDocNumber").value=belge?(belge.belgeNo||""):"";document.getElementById("exProfessionalDocIssueDate").value=belge?muayeneTarihISO(belge.verilisTarihi):"";document.getElementById("exProfessionalDocExpiryDate").value=belge?muayeneTarihISO(belge.gecerlilikTarihi):"";document.getElementById("exProfessionalDocPdfText").value=belge?(belge.pdfIbare||""):"";document.getElementById("exProfessionalDocShowPdf").checked=belge?!!belge.pdfGoster:true;document.getElementById("exProfessionalDocBackupFile").checked=belge?!!belge.dosyayiYedekle:false;document.getElementById("exProfessionalDocFormTitle").textContent=belge?"Mesleki Belgeyi Düzenle":"Yeni Mesleki Belge";document.getElementById("exProfessionalDocDeleteButton").style.display=belge?"block":"none";document.getElementById("exProfessionalDocFile").value="";let meta=document.getElementById("exProfessionalDocFileMeta");if(meta)meta.textContent=belge&&belge.dosyaVar?(belge.dosyaAdi||"Belge dosyası kayıtlı")+" • Yeni dosya seçersen değiştirilir.":"Dosya seçilmedi.";let modal=document.getElementById("exProfessionalDocFormModal");if(!modal)return;modal.style.display="block";requestAnimationFrame(function(){modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");});setTimeout(function(){let ad=document.getElementById("exProfessionalDocName");if(ad)ad.focus();},100);}
+function meslekiBelgeFormAc(id){let liste=meslekiBelgelerGet();let belge=id?liste.find(function(b){return b.id===id;}):null;exProfessionalDocPendingFile=null;meslekiBelgeOcrDurumSifirla();meslekiBelgeOcrButonDurumu(false);document.getElementById("exProfessionalDocId").value=belge?belge.id:"";document.getElementById("exProfessionalDocName").value=belge?(belge.ad||""):"";document.getElementById("exProfessionalDocLevel").value=belge?(belge.seviye||""):"";document.getElementById("exProfessionalDocNumber").value=belge?(belge.belgeNo||""):"";document.getElementById("exProfessionalDocIssueDate").value=belge?muayeneTarihISO(belge.verilisTarihi):"";document.getElementById("exProfessionalDocExpiryDate").value=belge?muayeneTarihISO(belge.gecerlilikTarihi):"";document.getElementById("exProfessionalDocPdfText").value=belge?(belge.pdfIbare||""):"";document.getElementById("exProfessionalDocShowPdf").checked=belge?!!belge.pdfGoster:true;document.getElementById("exProfessionalDocBackupFile").checked=belge?!!belge.dosyayiYedekle:false;document.getElementById("exProfessionalDocFormTitle").textContent=belge?"Mesleki Belgeyi Düzenle":"Yeni Mesleki Belge";document.getElementById("exProfessionalDocDeleteButton").style.display=belge?"block":"none";document.getElementById("exProfessionalDocFile").value="";let meta=document.getElementById("exProfessionalDocFileMeta");if(meta)meta.textContent=belge&&belge.dosyaVar?(belge.dosyaAdi||"Belge dosyası kayıtlı")+" • Yeni dosya seçersen değiştirilir.":"Dosya seçilmedi.";let modal=document.getElementById("exProfessionalDocFormModal");if(!modal)return;modal.style.display="block";requestAnimationFrame(function(){modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");});setTimeout(function(){let ad=document.getElementById("exProfessionalDocName");if(ad)ad.focus();},100);}
 function meslekiBelgeFormKapat(){let modal=document.getElementById("exProfessionalDocFormModal");if(!modal)return;modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");modal.style.display="none";exProfessionalDocPendingFile=null;}
-function meslekiBelgeDosyaSecildi(event){let file=event&&event.target&&event.target.files?event.target.files[0]:null;if(!file)return;let izinli=file.type==="application/pdf"||String(file.type||"").startsWith("image/");if(!izinli){toast("Yalnızca fotoğraf veya PDF seçebilirsin");event.target.value="";return;}if(file.size>12*1024*1024){toast("Belge dosyası en fazla 12 MB olabilir");event.target.value="";return;}exProfessionalDocPendingFile=file;let meta=document.getElementById("exProfessionalDocFileMeta");if(meta)meta.textContent=file.name+" • "+(file.size/1024/1024).toFixed(2)+" MB";}
+
+let exProfessionalOcrLibraryPromise = null;
+let exProfessionalPdfLibraryPromise = null;
+let exProfessionalOcrRunning = false;
+
+function meslekiBelgeOcrDurum(mesaj,yuzde,tip,detay){
+  let kutu = document.getElementById("exProfessionalDocOcrStatus");
+  let metin = document.getElementById("exProfessionalDocOcrText");
+  let oran = document.getElementById("exProfessionalDocOcrPercent");
+  let bar = document.getElementById("exProfessionalDocOcrBarFill");
+  let tespit = document.getElementById("exProfessionalDocOcrDetected");
+
+  if(!kutu) return;
+
+  kutu.classList.add("is-visible");
+  kutu.classList.toggle("is-success",tip === "success");
+  kutu.classList.toggle("is-error",tip === "error");
+
+  let temizYuzde = Math.max(0,Math.min(100,Math.round(Number(yuzde || 0))));
+  if(metin) metin.textContent = mesaj || "Belge okunuyor…";
+  if(oran) oran.textContent = temizYuzde + "%";
+  if(bar) bar.style.width = temizYuzde + "%";
+
+  if(tespit){
+    tespit.textContent = detay || "";
+    tespit.classList.toggle("is-visible",!!detay);
+  }
+}
+
+function meslekiBelgeOcrDurumSifirla(){
+  let kutu = document.getElementById("exProfessionalDocOcrStatus");
+  let bar = document.getElementById("exProfessionalDocOcrBarFill");
+  let tespit = document.getElementById("exProfessionalDocOcrDetected");
+
+  if(kutu){
+    kutu.classList.remove("is-visible","is-success","is-error");
+  }
+  if(bar) bar.style.width = "0%";
+  if(tespit){
+    tespit.textContent = "";
+    tespit.classList.remove("is-visible");
+  }
+}
+
+function meslekiBelgeOcrButonDurumu(calismada){
+  exProfessionalOcrRunning = !!calismada;
+
+  let tara = document.getElementById("exProfessionalDocScanButton");
+  let kaydet = document.getElementById("exProfessionalDocSaveButton");
+
+  if(tara){
+    tara.disabled = !!calismada;
+    tara.textContent = calismada ? "Belge Okunuyor…" : "Fotoğraf veya PDF Seç";
+  }
+
+  if(kaydet) kaydet.disabled = !!calismada;
+}
+
+function meslekiBelgeScriptYukle(src,globalName){
+  if(globalName && window[globalName]) return Promise.resolve(window[globalName]);
+
+  return new Promise(function(resolve,reject){
+    let mevcut = document.querySelector('script[data-ex-library="' + src + '"]');
+
+    if(mevcut){
+      mevcut.addEventListener("load",function(){ resolve(globalName ? window[globalName] : true); },{once:true});
+      mevcut.addEventListener("error",function(){ reject(new Error("Kütüphane yüklenemedi")); },{once:true});
+      return;
+    }
+
+    let script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.dataset.exLibrary = src;
+    script.onload = function(){ resolve(globalName ? window[globalName] : true); };
+    script.onerror = function(){ reject(new Error("Kütüphane yüklenemedi")); };
+    document.head.appendChild(script);
+  });
+}
+
+function meslekiBelgeTesseractYukle(){
+  if(window.Tesseract) return Promise.resolve(window.Tesseract);
+
+  if(!exProfessionalOcrLibraryPromise){
+    exProfessionalOcrLibraryPromise = meslekiBelgeScriptYukle(
+      "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js",
+      "Tesseract"
+    ).catch(function(error){
+      exProfessionalOcrLibraryPromise = null;
+      throw error;
+    });
+  }
+
+  return exProfessionalOcrLibraryPromise;
+}
+
+function meslekiBelgePdfJsYukle(){
+  if(!exProfessionalPdfLibraryPromise){
+    exProfessionalPdfLibraryPromise = import(
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@6.0.227/build/pdf.mjs"
+    ).then(function(pdfjsLib){
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdn.jsdelivr.net/npm/pdfjs-dist@6.0.227/build/pdf.worker.mjs";
+      return pdfjsLib;
+    }).catch(function(error){
+      exProfessionalPdfLibraryPromise = null;
+      throw error;
+    });
+  }
+
+  return exProfessionalPdfLibraryPromise;
+}
+
+function meslekiBelgeOcrDurumMetni(status){
+  let sozluk = {
+    "loading tesseract core":"OCR motoru yükleniyor",
+    "initializing tesseract":"OCR motoru hazırlanıyor",
+    "loading language traineddata":"Türkçe dil verisi yükleniyor",
+    "initializing api":"Belge taraması hazırlanıyor",
+    "recognizing text":"Belgedeki yazılar okunuyor"
+  };
+
+  return sozluk[String(status || "").toLowerCase()] || "Belge okunuyor";
+}
+
+function meslekiBelgeGorselYukle(file){
+  return new Promise(function(resolve,reject){
+    let url = URL.createObjectURL(file);
+    let img = new Image();
+
+    img.onload = function(){
+      try{ URL.revokeObjectURL(url); }catch(e){}
+      resolve(img);
+    };
+
+    img.onerror = function(){
+      try{ URL.revokeObjectURL(url); }catch(e){}
+      reject(new Error("Görsel açılamadı"));
+    };
+
+    img.src = url;
+  });
+}
+
+async function meslekiBelgeGorselCanvas(file){
+  let img = await meslekiBelgeGorselYukle(file);
+  let maxKenar = 2400;
+  let oran = Math.min(1,maxKenar / Math.max(img.naturalWidth || img.width,img.naturalHeight || img.height));
+  let genislik = Math.max(1,Math.round((img.naturalWidth || img.width) * oran));
+  let yukseklik = Math.max(1,Math.round((img.naturalHeight || img.height) * oran));
+
+  let canvas = document.createElement("canvas");
+  canvas.width = genislik;
+  canvas.height = yukseklik;
+
+  let ctx = canvas.getContext("2d",{willReadFrequently:true});
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0,0,genislik,yukseklik);
+
+  try{ ctx.filter = "grayscale(1) contrast(1.18)"; }catch(e){}
+  ctx.drawImage(img,0,0,genislik,yukseklik);
+  try{ ctx.filter = "none"; }catch(e){}
+
+  return canvas;
+}
+
+async function meslekiBelgePdfOku(file){
+  meslekiBelgeOcrDurum("PDF hazırlanıyor",8,"progress");
+
+  let pdfjsLib = await meslekiBelgePdfJsYukle();
+  let veri = new Uint8Array(await file.arrayBuffer());
+  let yukleme = pdfjsLib.getDocument({data:veri});
+  let pdf = await yukleme.promise;
+  let sayfaSayisi = Math.min(pdf.numPages,2);
+  let metinler = [];
+
+  for(let sayfaNo = 1; sayfaNo <= sayfaSayisi; sayfaNo++){
+    let sayfa = await pdf.getPage(sayfaNo);
+    let icerik = await sayfa.getTextContent();
+    let sayfaMetni = (icerik.items || []).map(function(item){
+      return String(item.str || "").trim();
+    }).filter(Boolean).join("\n");
+
+    if(sayfaMetni) metinler.push(sayfaMetni);
+  }
+
+  let metin = metinler.join("\n").trim();
+
+  if(metin.replace(/\s/g,"").length >= 60){
+    try{ await pdf.destroy(); }catch(e){}
+    return {metin:metin,canvas:null,kaynak:"PDF metni"};
+  }
+
+  meslekiBelgeOcrDurum("Taranmış PDF görsele dönüştürülüyor",15,"progress");
+
+  let sayfa = await pdf.getPage(1);
+  let temel = sayfa.getViewport({scale:1});
+  let olcek = Math.min(2.8,2400 / Math.max(temel.width,1));
+  let viewport = sayfa.getViewport({scale:olcek});
+  let canvas = document.createElement("canvas");
+  canvas.width = Math.max(1,Math.round(viewport.width));
+  canvas.height = Math.max(1,Math.round(viewport.height));
+
+  let ctx = canvas.getContext("2d",{willReadFrequently:true});
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  await sayfa.render({canvasContext:ctx,viewport:viewport}).promise;
+  try{ await pdf.destroy(); }catch(e){}
+
+  return {metin:"",canvas:canvas,kaynak:"Taranmış PDF"};
+}
+
+async function meslekiBelgeOcrCalistir(gorsel){
+  let TesseractLib = await meslekiBelgeTesseractYukle();
+  let worker = null;
+
+  try{
+    worker = await TesseractLib.createWorker(["tur","eng"],1,{
+      logger:function(m){
+        let ilerleme = Number(m && m.progress);
+        let yuzde = Number.isFinite(ilerleme) ? 20 + ilerleme * 72 : 20;
+        meslekiBelgeOcrDurum(
+          meslekiBelgeOcrDurumMetni(m && m.status),
+          yuzde,
+          "progress"
+        );
+      }
+    });
+
+    let sonuc = await worker.recognize(gorsel);
+    return String(sonuc && sonuc.data && sonuc.data.text || "");
+  }finally{
+    if(worker){
+      try{ await worker.terminate(); }catch(e){}
+    }
+  }
+}
+
+function meslekiBelgeOcrMetinTemizle(metin){
+  return String(metin || "")
+    .replace(/\r/g,"\n")
+    .replace(/[ \t]+/g," ")
+    .replace(/\n[ \t]+/g,"\n")
+    .replace(/\n{3,}/g,"\n\n")
+    .trim();
+}
+
+function meslekiBelgeOcrSatirlar(metin){
+  return meslekiBelgeOcrMetinTemizle(metin)
+    .split(/\n+/)
+    .map(function(s){ return s.trim(); })
+    .filter(Boolean);
+}
+
+function meslekiBelgeOcrTarihISO(deger){
+  let temiz = String(deger || "")
+    .replace(/[Oo]/g,"0")
+    .replace(/[Il|]/g,"1");
+
+  let eslesme = temiz.match(/\b([0-3]?\d)[.\/-]([01]?\d)[.\/-]((?:19|20)\d{2})\b/);
+  if(!eslesme) return "";
+
+  let gun = Number(eslesme[1]);
+  let ay = Number(eslesme[2]);
+  let yil = Number(eslesme[3]);
+
+  if(gun < 1 || gun > 31 || ay < 1 || ay > 12) return "";
+
+  return String(yil).padStart(4,"0") + "-" +
+    String(ay).padStart(2,"0") + "-" +
+    String(gun).padStart(2,"0");
+}
+
+function meslekiBelgeOcrEtiketTarihi(satirlar,anahtarlar){
+  let buyuk = satirlar.map(function(s){ return s.toLocaleUpperCase("tr-TR"); });
+
+  for(let i = 0; i < buyuk.length; i++){
+    let eslesti = anahtarlar.some(function(k){ return buyuk[i].includes(k); });
+    if(!eslesti) continue;
+
+    for(let j = i; j <= Math.min(i + 2,satirlar.length - 1); j++){
+      let tarih = meslekiBelgeOcrTarihISO(satirlar[j]);
+      if(tarih) return tarih;
+    }
+  }
+
+  return "";
+}
+
+function meslekiBelgeOcrBelgeNo(satirlar){
+  let anahtarlar = [
+    "YETERLİLİK BELGE NO",
+    "BELGE NUMARASI",
+    "BELGE NO",
+    "SERTİFİKA NO"
+  ];
+  let buyuk = satirlar.map(function(s){ return s.toLocaleUpperCase("tr-TR"); });
+
+  for(let i = 0; i < buyuk.length; i++){
+    let anahtar = anahtarlar.find(function(k){ return buyuk[i].includes(k); });
+    if(!anahtar) continue;
+
+    let ayniSatir = satirlar[i].replace(new RegExp(anahtar.replace(/[İI]/g,"[İI]"),"i"),"");
+    ayniSatir = ayniSatir.replace(/^[\s:;#\-–—]+/,"").trim();
+
+    let adaylar = [ayniSatir,satirlar[i + 1] || "",satirlar[i + 2] || ""];
+
+    for(let aday of adaylar){
+      let temiz = String(aday || "").trim();
+      if(!temiz || meslekiBelgeOcrTarihISO(temiz)) continue;
+
+      let kod = temiz.match(/[A-ZÇĞİÖŞÜ0-9][A-ZÇĞİÖŞÜ0-9._\/-]{3,}/i);
+      if(kod) return kod[0].replace(/[.,;:]+$/,"");
+    }
+  }
+
+  return "";
+}
+
+function meslekiBelgeOcrSeviye(metin){
+  let buyuk = String(metin || "").toLocaleUpperCase("tr-TR");
+  let eslesme = buyuk.match(/(?:MYK\s*)?(?:SEVİYE|SEVIYE|LEVEL)\s*[:\-()]?\s*([0-9IVX]+)/i);
+
+  if(!eslesme){
+    eslesme = buyuk.match(/\((?:SEVİYE|SEVIYE)\s*([0-9IVX]+)\)/i);
+  }
+
+  if(!eslesme) return "";
+
+  let deger = eslesme[1];
+  let myk = buyuk.includes("MYK") || buyuk.includes("MESLEKİ YETERLİLİK") || buyuk.includes("MESLEKI YETERLILIK");
+  return (myk ? "MYK " : "") + "Seviye " + deger;
+}
+
+function meslekiBelgeOcrBelgeAdi(metin,satirlar){
+  let buyuk = String(metin || "").toLocaleUpperCase("tr-TR");
+
+  if(buyuk.includes("ASANSÖR BAKIM VE ONARIMCISI") || buyuk.includes("ASANSOR BAKIM VE ONARIMCISI")){
+    return "Asansör Bakım ve Onarımcısı";
+  }
+
+  if(buyuk.includes("ASANSÖR MONTAJCISI") || buyuk.includes("ASANSOR MONTAJCISI")){
+    return "Asansör Montajcısı";
+  }
+
+  let aday = satirlar.find(function(s){
+    let u = s.toLocaleUpperCase("tr-TR");
+    return u.includes("ASANS") &&
+      (u.includes("BAKIM") || u.includes("MONTAJ") || u.includes("ONARIM")) &&
+      s.length >= 8 && s.length <= 100;
+  });
+
+  if(aday){
+    return aday
+      .replace(/\([^)]*SEV[Iİ]YE[^)]*\)/i,"")
+      .replace(/^\s*[-–—:]+\s*/,"")
+      .trim();
+  }
+
+  if(buyuk.includes("MESLEKİ YETERLİLİK BELGESİ") || buyuk.includes("MESLEKI YETERLILIK BELGESI")){
+    return "Mesleki Yeterlilik Belgesi";
+  }
+
+  if(buyuk.includes("USTALIK BELGESİ") || buyuk.includes("USTALIK BELGESI")){
+    return "Ustalık Belgesi";
+  }
+
+  return "";
+}
+
+function meslekiBelgeOcrCozumle(metin){
+  let temiz = meslekiBelgeOcrMetinTemizle(metin);
+  let satirlar = meslekiBelgeOcrSatirlar(temiz);
+  let ad = meslekiBelgeOcrBelgeAdi(temiz,satirlar);
+  let seviye = meslekiBelgeOcrSeviye(temiz);
+  let belgeNo = meslekiBelgeOcrBelgeNo(satirlar);
+
+  let verilisTarihi = meslekiBelgeOcrEtiketTarihi(satirlar,[
+    "İLK BELGELENDİRME TARİHİ",
+    "ILK BELGELENDIRME TARIHI",
+    "BELGE DÜZENLEME TARİHİ",
+    "BELGE DUZENLEME TARIHI",
+    "VERİLİŞ TARİHİ",
+    "VERILIS TARIHI",
+    "BELGE TARİHİ",
+    "BELGE TARIHI"
+  ]);
+
+  let gecerlilikTarihi = meslekiBelgeOcrEtiketTarihi(satirlar,[
+    "BELGE GEÇERLİLİK TARİHİ",
+    "BELGE GECERLILIK TARIHI",
+    "GEÇERLİLİK BİTİŞ",
+    "GECERLILIK BITIS",
+    "SON GEÇERLİLİK TARİHİ",
+    "SON GECERLILIK TARIHI",
+    "GEÇERLİLİK TARİHİ",
+    "GECERLILIK TARIHI"
+  ]);
+
+  let pdfIbare = "";
+
+  if(seviye){
+    pdfIbare = seviye + " Belgeli Teknik Personel";
+  }else if(ad){
+    pdfIbare = ad + " Belgeli Teknik Personel";
+  }
+
+  return {
+    ad:ad,
+    seviye:seviye,
+    belgeNo:belgeNo,
+    verilisTarihi:verilisTarihi,
+    gecerlilikTarihi:gecerlilikTarihi,
+    pdfIbare:pdfIbare,
+    hamMetin:temiz
+  };
+}
+
+function meslekiBelgeOcrFormDoldur(sonuc){
+  let alanlar = [
+    ["exProfessionalDocName",sonuc.ad],
+    ["exProfessionalDocLevel",sonuc.seviye],
+    ["exProfessionalDocNumber",sonuc.belgeNo],
+    ["exProfessionalDocIssueDate",sonuc.verilisTarihi],
+    ["exProfessionalDocExpiryDate",sonuc.gecerlilikTarihi],
+    ["exProfessionalDocPdfText",sonuc.pdfIbare]
+  ];
+
+  let doldurulan = [];
+
+  alanlar.forEach(function(kayit){
+    let el = document.getElementById(kayit[0]);
+    let deger = String(kayit[1] || "").trim();
+
+    if(el && deger){
+      el.value = deger;
+      doldurulan.push(
+        kayit[0] === "exProfessionalDocName" ? "belge adı" :
+        kayit[0] === "exProfessionalDocLevel" ? "seviye" :
+        kayit[0] === "exProfessionalDocNumber" ? "belge numarası" :
+        kayit[0] === "exProfessionalDocIssueDate" ? "veriliş tarihi" :
+        kayit[0] === "exProfessionalDocExpiryDate" ? "geçerlilik tarihi" :
+        "PDF ibaresi"
+      );
+    }
+  });
+
+  return doldurulan;
+}
+
+async function meslekiBelgeOtomatikDoldur(file){
+  meslekiBelgeOcrButonDurumu(true);
+  meslekiBelgeOcrDurum("Belge hazırlanıyor",3,"progress");
+
+  try{
+    let metin = "";
+    let kaynak = "Görsel";
+
+    if(file.type === "application/pdf"){
+      let pdfSonucu = await meslekiBelgePdfOku(file);
+      metin = pdfSonucu.metin || "";
+      kaynak = pdfSonucu.kaynak || "PDF";
+
+      if(!metin && pdfSonucu.canvas){
+        meslekiBelgeOcrDurum("OCR motoru hazırlanıyor",18,"progress");
+        metin = await meslekiBelgeOcrCalistir(pdfSonucu.canvas);
+      }
+    }else{
+      meslekiBelgeOcrDurum("Görsel hazırlanıyor",10,"progress");
+      let canvas = await meslekiBelgeGorselCanvas(file);
+      meslekiBelgeOcrDurum("OCR motoru hazırlanıyor",18,"progress");
+      metin = await meslekiBelgeOcrCalistir(canvas);
+    }
+
+    meslekiBelgeOcrDurum("Belge bilgileri ayıklanıyor",94,"progress");
+
+    let sonuc = meslekiBelgeOcrCozumle(metin);
+    let doldurulan = meslekiBelgeOcrFormDoldur(sonuc);
+
+    if(!doldurulan.length){
+      throw new Error("Belgeden güvenilir alan bulunamadı");
+    }
+
+    meslekiBelgeOcrDurum(
+      "Otomatik doldurma tamamlandı",
+      100,
+      "success",
+      kaynak + " üzerinden " + doldurulan.join(", ") + " bulundu. Alanları kontrol edip kaydet."
+    );
+
+    toast("Belge bilgileri otomatik dolduruldu");
+  }catch(error){
+    console.error("Mesleki belge OCR hatası:",error);
+
+    meslekiBelgeOcrDurum(
+      "Belge otomatik okunamadı",
+      100,
+      "error",
+      "Dosya kaydedilmeye devam edecek. Alanları elle düzelterek kullanabilirsin."
+    );
+
+    toast("Otomatik okuma başarısız • Alanları elle doldurabilirsin");
+  }finally{
+    meslekiBelgeOcrButonDurumu(false);
+  }
+}
+
+async function meslekiBelgeDosyaSecildi(event){
+  let file = event && event.target && event.target.files ? event.target.files[0] : null;
+  if(!file) return;
+
+  let izinli = file.type === "application/pdf" || String(file.type || "").startsWith("image/");
+
+  if(!izinli){
+    toast("Yalnızca fotoğraf veya PDF seçebilirsin");
+    event.target.value = "";
+    return;
+  }
+
+  if(file.size > 12 * 1024 * 1024){
+    toast("Belge dosyası en fazla 12 MB olabilir");
+    event.target.value = "";
+    return;
+  }
+
+  exProfessionalDocPendingFile = file;
+
+  let meta = document.getElementById("exProfessionalDocFileMeta");
+  if(meta){
+    meta.textContent = file.name + " • " + (file.size / 1024 / 1024).toFixed(2) + " MB";
+  }
+
+  await meslekiBelgeOtomatikDoldur(file);
+}
+
+
 async function meslekiBelgeKaydet(){let id=document.getElementById("exProfessionalDocId").value||meslekiBelgeIdOlustur();let ad=document.getElementById("exProfessionalDocName").value.trim();let seviye=document.getElementById("exProfessionalDocLevel").value.trim();let belgeNo=document.getElementById("exProfessionalDocNumber").value.trim();let verilisTarihi=document.getElementById("exProfessionalDocIssueDate").value||"";let gecerlilikTarihi=document.getElementById("exProfessionalDocExpiryDate").value||"";let pdfIbare=document.getElementById("exProfessionalDocPdfText").value.trim();let pdfGoster=document.getElementById("exProfessionalDocShowPdf").checked;let dosyayiYedekle=document.getElementById("exProfessionalDocBackupFile").checked;if(!ad){toast("Belge adını yaz");return;}let liste=meslekiBelgelerGet();let index=liste.findIndex(function(b){return b.id===id;});let eski=index>=0?liste[index]:null;let dosyaVar=eski?!!eski.dosyaVar:false;let dosyaAdi=eski?(eski.dosyaAdi||""):"";let dosyaTipi=eski?(eski.dosyaTipi||""):"";let dosyaBoyutu=eski?Number(eski.dosyaBoyutu||0):0;if(exProfessionalDocPendingFile){try{await ayDbKaydet(EX_PROFESSIONAL_DOC_FILE_PREFIX+id,exProfessionalDocPendingFile);dosyaVar=true;dosyaAdi=exProfessionalDocPendingFile.name||"mesleki-belge";dosyaTipi=exProfessionalDocPendingFile.type||"application/octet-stream";dosyaBoyutu=exProfessionalDocPendingFile.size||0;}catch(e){toast("Belge dosyası cihazda saklanamadı");return;}}let kayit={id:id,ad:ad,seviye:seviye,belgeNo:belgeNo,verilisTarihi:verilisTarihi,gecerlilikTarihi:gecerlilikTarihi,pdfIbare:pdfIbare,pdfGoster:pdfGoster,dosyayiYedekle:dosyayiYedekle,dosyaVar:dosyaVar,dosyaAdi:dosyaAdi,dosyaTipi:dosyaTipi,dosyaBoyutu:dosyaBoyutu,createdAt:eski?eski.createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};if(index>=0)liste[index]=kayit;else liste.unshift(kayit);meslekiBelgelerSet(liste,true);meslekiBelgeFormKapat();meslekiBelgelerRender();toast(index>=0?"Mesleki belge güncellendi":"Mesleki belge eklendi");}
 async function meslekiBelgeSil(){let id=document.getElementById("exProfessionalDocId").value;if(!id)return;let liste=meslekiBelgelerGet();let belge=liste.find(function(b){return b.id===id;});if(!belge)return;if(!confirm((belge.ad||"Bu belge")+" silinsin mi?"))return;liste=liste.filter(function(b){return b.id!==id;});meslekiBelgelerSet(liste,true);try{await meslekiBelgeDbSil(EX_PROFESSIONAL_DOC_FILE_PREFIX+id);}catch(e){}meslekiBelgeFormKapat();meslekiBelgelerRender();toast("Mesleki belge silindi");}
 async function meslekiBelgeDosyaGoruntule(id){let pencere=null;try{pencere=window.open("about:blank","_blank");}catch(e){}try{let blob=await ayDbOku(EX_PROFESSIONAL_DOC_FILE_PREFIX+id);if(!blob){if(pencere)pencere.close();toast("Belge dosyası bulunamadı");return;}let url=URL.createObjectURL(blob);if(pencere)pencere.location.href=url;else window.open(url,"_blank");setTimeout(function(){try{URL.revokeObjectURL(url);}catch(e){}},120000);}catch(e){if(pencere)pencere.close();toast("Belge dosyası açılamadı");}}
