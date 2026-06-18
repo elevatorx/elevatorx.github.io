@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1603">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1603">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1603">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1603">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1603">
-<link rel="manifest" href="/manifest.webmanifest?v=1603">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1604">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1604">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1604">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1604">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1604">
+<link rel="manifest" href="/manifest.webmanifest?v=1604">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13199,6 +13199,38 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exApartmentDetailSpaceFix1604">
+  /* Önceki sürümde hem sekme içinde hem ana kartta bırakılan çift
+     güvenlik payını teke indir. */
+  #detayPanel .exDetailTabPane{
+    min-height:0!important;
+    padding-bottom:0!important;
+  }
+
+  #detayPanel .exDetailTabPane.is-active{
+    min-height:0!important;
+  }
+
+  /* Alt sabit menünün içeriği örtmemesi için yalnızca tek, kontrollü pay. */
+  #detayPanel .detailPremiumHero{
+    min-height:0!important;
+    height:auto!important;
+    padding-bottom:calc(125px + env(safe-area-inset-bottom))!important;
+  }
+
+  /* Son karttan sonra görünmez yükseklik üreten boş blokları engelle. */
+  #detayPanel .exDetailTabPane > :last-child{
+    margin-bottom:0!important;
+  }
+
+  @media(max-width:430px){
+    #detayPanel .detailPremiumHero{
+      padding-bottom:calc(132px + env(safe-area-inset-bottom))!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -14084,10 +14116,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1603" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1604" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.6.03</div>
+<div class="motionSplashVersion" data-splash-version>v1.6.04</div>
 </div>
 </div>
 
@@ -14097,7 +14129,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.6.03";
+  const SPLASH_VERSION = "v1.6.04";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -14818,9 +14850,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.6.03";
+const APP_VERSION = "v1.6.04";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1603", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1604", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
