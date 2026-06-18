@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1514">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1514">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1514">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1514">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1514">
-<link rel="manifest" href="/manifest.webmanifest?v=1514">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1600">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1600">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1600">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1600">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1600">
+<link rel="manifest" href="/manifest.webmanifest?v=1600">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11808,29 +11808,383 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </style>
 
 
-<style id="exLedgerModalStyle">
-  #exLedgerModal,#exLedgerEntryModal{
+<style id="exMapFeatureStyle">
+  body.exMapOpen,
+  body.exMapPickerOpen{
+    overflow:hidden!important;
+  }
+
+  #exMapModal,
+  #exMapPickerModal{
     position:fixed;
     inset:0;
-    z-index:2147483001;
     display:none;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
-    color:#101828;
   }
 
-  #exLedgerEntryModal{z-index:2147483002}
-  #exLedgerModal.is-open,#exLedgerEntryModal.is-open{display:block}
-  #exLedgerModal *,#exLedgerEntryModal *{box-sizing:border-box}
+  #exMapModal{
+    z-index:2147482995;
+    background:#f3f6fb;
+    color:#0f172a;
+  }
 
-  .exLedgerBackdrop{
+  #exMapPickerModal{
+    z-index:2147482997;
+    color:#0f172a;
+  }
+
+  #exMapModal.is-open,
+  #exMapPickerModal.is-open{
+    display:block;
+  }
+
+  #exMapModal *,
+  #exMapPickerModal *{
+    box-sizing:border-box;
+  }
+
+  .exMapScreen{
     position:absolute;
     inset:0;
-    background:rgba(5,12,25,.50);
-    -webkit-backdrop-filter:blur(12px);
-    backdrop-filter:blur(12px);
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(180deg,#f8faff 0%,#eef3fa 100%);
   }
 
-  .exLedgerWrap{
+  .exMapTopbar{
+    position:relative;
+    z-index:500;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:calc(13px + env(safe-area-inset-top)) 15px 13px;
+    background:rgba(255,255,255,.92);
+    border-bottom:1px solid rgba(89,113,158,.12);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+  }
+
+  .exMapTopbarLeft{
+    min-width:0;
+  }
+
+  .exMapKicker{
+    color:#196fe8;
+    font-size:10px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .exMapTitle{
+    margin-top:5px;
+    color:#101828;
+    font-size:23px;
+    line-height:1.05;
+    font-weight:920;
+    letter-spacing:-.55px;
+  }
+
+  .exMapBetaBadge{
+    display:inline-flex;
+    margin-left:7px;
+    transform:translateY(-2px);
+    padding:4px 7px;
+    border-radius:999px;
+    background:#eaf2ff;
+    color:#196fe8;
+    font-size:8px;
+    font-weight:950;
+    letter-spacing:.07em;
+    vertical-align:middle;
+  }
+
+  .exMapClose{
+    width:42px;
+    height:42px;
+    flex:0 0 auto;
+    border:0;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#edf2fa;
+    color:#172033;
+    font-size:27px;
+    line-height:1;
+    padding:0;
+  }
+
+  .exMapTools{
+    position:relative;
+    z-index:450;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:10px 12px;
+    background:rgba(248,250,255,.96);
+    border-bottom:1px solid rgba(89,113,158,.10);
+  }
+
+  .exMapToolButton{
+    min-height:44px;
+    border:0;
+    border-radius:15px;
+    padding:9px 12px;
+    font-size:12px;
+    font-weight:900;
+  }
+
+  .exMapToolButton.primary{
+    background:linear-gradient(135deg,#111827,#176fe8);
+    color:#fff;
+    box-shadow:0 10px 22px rgba(23,111,232,.18);
+  }
+
+  .exMapToolButton.secondary{
+    background:#fff;
+    border:1px solid #e2e8f2;
+    color:#405573;
+  }
+
+  .exMapStatusBar{
+    position:relative;
+    z-index:440;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 13px;
+    background:#fff;
+    border-bottom:1px solid #edf1f7;
+    color:#64748b;
+    font-size:10px;
+    font-weight:800;
+  }
+
+  .exMapStatusBar b{
+    color:#253149;
+    font-size:11px;
+  }
+
+  #exMapCanvas{
+    flex:0 0 min(50vh,510px);
+    width:100%;
+    background:#dfe7f2;
+  }
+
+  .exMapLower{
+    flex:1 1 auto;
+    min-height:0;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:13px 12px calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .exMapLegend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:11px;
+  }
+
+  .exMapLegendItem{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 9px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid #e8edf5;
+    color:#667085;
+    font-size:9px;
+    font-weight:900;
+  }
+
+  .exMapLegendDot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+  }
+
+  .exMapList{
+    display:grid;
+    gap:8px;
+  }
+
+  .exMapEmpty{
+    padding:30px 18px;
+    border-radius:20px;
+    border:1px dashed #cdd7e6;
+    background:rgba(255,255,255,.72);
+    color:#718096;
+    text-align:center;
+    font-size:13px;
+    line-height:1.55;
+  }
+
+  .exMapApartmentCard{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:12px;
+    align-items:center;
+    padding:13px 14px;
+    border:1px solid #e8edf5;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 4px 14px rgba(15,23,42,.035);
+  }
+
+  .exMapApartmentCard:active{
+    transform:scale(.992);
+  }
+
+  .exMapApartmentMain{
+    min-width:0;
+  }
+
+  .exMapApartmentName{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#172033;
+    font-size:14px;
+    line-height:1.2;
+    font-weight:920;
+  }
+
+  .exMapApartmentNameDot{
+    width:9px;
+    height:9px;
+    flex:0 0 auto;
+    border-radius:50%;
+  }
+
+  .exMapApartmentMeta{
+    margin-top:5px;
+    color:#7a8699;
+    font-size:10px;
+    line-height:1.4;
+  }
+
+  .exMapApartmentDistance{
+    color:#176fe8;
+    font-size:12px;
+    font-weight:950;
+    white-space:nowrap;
+  }
+
+  .exMapCardButtons{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .exMapCardButton{
+    min-height:39px;
+    border:0;
+    border-radius:13px;
+    padding:8px 10px;
+    font-size:11px;
+    font-weight:900;
+  }
+
+  .exMapCardButton.open{
+    background:#edf3ff;
+    color:#275cae;
+  }
+
+  .exMapCardButton.route{
+    background:#eaf8ef;
+    color:#187b3a;
+  }
+
+  .exMapPin{
+    width:31px;
+    height:31px;
+    display:grid;
+    place-items:center;
+    border-radius:50% 50% 50% 13%;
+    transform:rotate(-45deg);
+    border:3px solid #fff;
+    box-shadow:0 7px 18px rgba(15,23,42,.28);
+  }
+
+  .exMapPin span{
+    display:block;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#fff;
+    transform:rotate(45deg);
+    box-shadow:0 1px 4px rgba(15,23,42,.24);
+  }
+
+  .exMapUserMarker{
+    width:20px;
+    height:20px;
+    border:4px solid #fff;
+    border-radius:50%;
+    background:#1775f1;
+    box-shadow:0 0 0 8px rgba(23,117,241,.18),0 4px 15px rgba(15,23,42,.25);
+  }
+
+  .exMapPopup{
+    min-width:185px;
+  }
+
+  .exMapPopup b{
+    display:block;
+    color:#111827;
+    font-size:14px;
+    line-height:1.25;
+  }
+
+  .exMapPopup span{
+    display:block;
+    margin-top:5px;
+    color:#64748b;
+    font-size:10px;
+    line-height:1.4;
+  }
+
+  .exMapPopupActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    margin-top:10px;
+  }
+
+  .exMapPopupActions button{
+    min-height:34px;
+    border:0;
+    border-radius:11px;
+    padding:7px 8px;
+    font-size:10px;
+    font-weight:900;
+  }
+
+  .exMapPopupActions button:first-child{
+    background:#edf3ff;
+    color:#275cae;
+  }
+
+  .exMapPopupActions button:last-child{
+    background:#eaf8ef;
+    color:#187b3a;
+  }
+
+  .exMapPickerBackdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(5,12,25,.52);
+    -webkit-backdrop-filter:blur(11px);
+    backdrop-filter:blur(11px);
+  }
+
+  .exMapPickerWrap{
     position:absolute;
     inset:0;
     display:flex;
@@ -11839,422 +12193,324 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     padding:calc(14px + env(safe-area-inset-top)) 12px calc(14px + env(safe-area-inset-bottom));
   }
 
-  .exLedgerCard{
+  .exMapPickerCard{
     position:relative;
     width:min(520px,96vw);
-    max-height:min(900px,94vh);
+    max-height:min(850px,94vh);
     overflow:auto;
-    border-radius:30px;
-    background:linear-gradient(180deg,#fff 0%,#f5f8ff 100%);
-    border:1px solid rgba(99,126,187,.13);
+    border-radius:27px;
+    background:linear-gradient(180deg,#fff 0%,#f5f8fc 100%);
+    border:1px solid rgba(99,126,187,.14);
     box-shadow:0 34px 100px rgba(7,16,35,.38);
   }
 
-  .exLedgerEntryCard{width:min(455px,95vw)}
+  .exMapPickerHead{
+    padding:22px 20px 13px;
+  }
 
-  .exLedgerClose{
+  .exMapPickerKicker{
+    color:#176fe8;
+    font-size:10px;
+    font-weight:950;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+
+  .exMapPickerTitle{
+    margin:6px 50px 0 0;
+    color:#111827;
+    font-size:24px;
+    line-height:1.05;
+    font-weight:920;
+    letter-spacing:-.55px;
+  }
+
+  .exMapPickerSub{
+    margin-top:8px;
+    color:#6b778b;
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  .exMapPickerClose{
     position:absolute;
-    top:14px;
-    right:14px;
-    width:41px;
-    height:41px;
+    right:13px;
+    top:13px;
+    width:40px;
+    height:40px;
     border:0;
     border-radius:50%;
     display:grid;
     place-items:center;
-    background:#eef3ff;
-    color:#15213d;
-    font-size:27px;
+    background:#edf2fa;
+    color:#172033;
+    font-size:26px;
     line-height:1;
-    z-index:3;
-    padding:0;
   }
 
-  .exLedgerHead{padding:25px 22px 12px}
-
-  .exLedgerKicker{
-    color:#1d4ed8;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:.13em;
-    text-transform:uppercase;
-  }
-
-  .exLedgerTitle{
-    margin:7px 52px 0 0;
-    font-size:29px;
-    line-height:1.04;
-    font-weight:880;
-    letter-spacing:-.8px;
-    color:#0f172a;
-  }
-
-  .exLedgerSub{
-    margin:9px 52px 0 0;
-    color:#667085;
-    font-size:14px;
-    line-height:1.45;
-  }
-
-  .exLedgerSummary{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:8px;
-    padding:8px 18px 14px;
-  }
-
-  .exLedgerSummaryCard{
-    min-width:0;
-    padding:14px 7px;
-    border:1px solid #edf1f8;
-    border-radius:18px;
-    text-align:center;
-    background:#fff;
-  }
-
-  .exLedgerSummaryCard b{
-    display:block;
-    color:#111827;
-    font-size:19px;
-    line-height:1.05;
-    letter-spacing:-.5px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-
-  .exLedgerSummaryCard span{
-    display:block;
-    margin-top:7px;
-    color:#8a94a7;
-    font-size:8px;
-    font-weight:900;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-  }
-
-  .exLedgerToolbar{
-    padding:0 18px 14px;
-  }
-
-  .exLedgerAdd{
+  #exMapPickerCanvas{
     width:100%;
+    height:min(52vh,440px);
+    background:#dfe7f2;
+  }
+
+  .exMapPickerCoordinates{
+    padding:10px 16px;
+    color:#65758d;
+    background:#fff;
+    border-top:1px solid #edf1f7;
+    border-bottom:1px solid #edf1f7;
+    text-align:center;
+    font-size:10px;
+    font-weight:800;
+  }
+
+  .exMapPickerActions{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:8px;
+    padding:13px 16px 16px;
+  }
+
+  .exMapPickerButton{
     min-height:49px;
     border:0;
     border-radius:16px;
-    padding:10px 15px;
-    background:linear-gradient(135deg,#111827,#1d4ed8);
-    color:#fff;
-    font-size:14px;
+    padding:9px 11px;
+    font-size:12px;
     font-weight:900;
-    box-shadow:0 12px 25px rgba(29,78,216,.17);
   }
 
-  .exLedgerBody{padding:0 18px 18px}
-
-  .exLedgerSection{
-    margin-top:14px;
+  .exMapPickerButton.locate{
+    background:#edf3ff;
+    color:#275cae;
   }
 
-  .exLedgerSection:first-child{margin-top:0}
+  .exMapPickerButton.save{
+    background:linear-gradient(135deg,#111827,#176fe8);
+    color:#fff;
+  }
 
-  .exLedgerSectionHead{
+  .exLocationFormBox{
+    border-radius:21px;
+    padding:15px;
+    background:linear-gradient(145deg,#eef5ff 0%,#f8faff 100%);
+    border:1px solid #dce8f8;
+  }
+
+  .exLocationFormStatus{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    margin-bottom:9px;
+    margin-bottom:11px;
   }
 
-  .exLedgerSectionTitle{
-    color:#344054;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:.07em;
-    text-transform:uppercase;
+  .exLocationFormStatusText{
+    min-width:0;
   }
 
-  .exLedgerSectionCount{
-    min-width:26px;
-    height:24px;
-    padding:0 8px;
-    border-radius:999px;
-    display:grid;
-    place-items:center;
-    background:#eef3ff;
-    color:#315ea5;
-    font-size:10px;
-    font-weight:900;
-  }
-
-  .exLedgerList{display:grid;gap:9px}
-
-  .exLedgerEmpty{
-    padding:22px 15px;
-    border:1px dashed #ccd6e6;
-    border-radius:17px;
-    text-align:center;
-    color:#8993a5;
-    background:rgba(255,255,255,.6);
-    font-size:12px;
-    line-height:1.45;
-  }
-
-  .exLedgerItem{
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:12px;
-    align-items:center;
-    padding:14px;
-    border:1px solid #e9eef7;
-    border-radius:18px;
-    background:#fff;
-    box-shadow:0 3px 10px rgba(15,23,42,.035);
-  }
-
-  .exLedgerItemMain{min-width:0}
-
-  .exLedgerItemTitle{
-    color:#182033;
-    font-size:14px;
-    font-weight:900;
+  .exLocationFormStatusText b{
+    display:block;
+    color:#263651;
+    font-size:13px;
     line-height:1.25;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
   }
 
-  .exLedgerItemMeta{
-    margin-top:5px;
-    color:#7a8598;
-    font-size:11px;
+  .exLocationFormStatusText span{
+    display:block;
+    margin-top:4px;
+    color:#718198;
+    font-size:10px;
     line-height:1.4;
   }
 
-  .exLedgerItemAmount{
-    color:#111827;
-    font-size:17px;
+  .exLocationFormBadge{
+    flex:0 0 auto;
+    padding:6px 9px;
+    border-radius:999px;
+    background:#e7edf6;
+    color:#61718b;
+    font-size:9px;
     font-weight:950;
-    line-height:1;
   }
 
-  .exLedgerItemAmount.payment{color:#1d4ed8}
-  .exLedgerItemAmount.balance{color:#c25100}
+  .exLocationFormBadge.is-set{
+    background:#e8f8ee;
+    color:#17803b;
+  }
 
-  .exLedgerEditButton{
-    margin-top:8px;
-    min-height:34px;
+  .exLocationFormActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .exLocationFormButton{
+    min-height:44px;
     border:0;
-    border-radius:11px;
-    padding:7px 11px;
-    background:#eef3ff;
-    color:#315ea5;
+    border-radius:14px;
+    padding:8px 10px;
     font-size:11px;
     font-weight:900;
   }
 
-  .exLedgerEntryBody{padding:5px 18px 18px}
-
-  .exLedgerContext{
-    margin:0 0 14px;
-    padding:14px;
-    border-radius:18px;
-    background:#eef5ff;
-    border:1px solid #dce8fb;
+  .exLocationFormButton.current{
+    background:#176fe8;
+    color:#fff;
   }
 
-  .exLedgerContext span{
-    display:block;
-    color:#6c7c94;
+  .exLocationFormButton.pick{
+    background:#fff;
+    color:#315b9c;
+    border:1px solid #dfe7f2;
+  }
+
+  .exLocationClear{
+    width:100%;
+    min-height:38px;
+    margin-top:8px;
+    border:0;
+    border-radius:13px;
+    background:transparent;
+    color:#8b6570;
     font-size:10px;
-    font-weight:900;
-    letter-spacing:.06em;
+    font-weight:850;
+  }
+
+  .exDetailLocationCard{
+    margin-top:12px;
+    padding:14px;
+    border-radius:20px;
+    border:1px solid #dfe8f4;
+    background:linear-gradient(145deg,#f2f7ff,#fff);
+  }
+
+  .exDetailLocationHead{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .exDetailLocationHead span{
+    display:block;
+    color:#64748b;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:.08em;
     text-transform:uppercase;
   }
 
-  .exLedgerContext b{
+  .exDetailLocationHead b{
     display:block;
     margin-top:5px;
-    color:#1c3154;
-    font-size:16px;
-    line-height:1.25;
-    font-weight:900;
-  }
-
-  .exLedgerField{
-    display:grid;
-    gap:7px;
-    margin-bottom:12px;
-  }
-
-  .exLedgerField label{
-    color:#69758a;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:.03em;
-  }
-
-  .exLedgerField input,
-  .exLedgerField select,
-  .exLedgerField textarea{
-    width:100%;
-    border:1px solid #dfe6f1;
-    border-radius:16px;
-    background:#fff;
-    color:#111827;
-    font:inherit;
-    outline:none;
-    box-shadow:0 2px 8px rgba(15,23,42,.03);
-  }
-
-  .exLedgerField input,
-  .exLedgerField select{
-    height:51px;
-    padding:0 14px;
-  }
-
-  .exLedgerField textarea{
-    min-height:82px;
-    padding:12px 14px;
-    resize:vertical;
-    line-height:1.45;
-  }
-
-  .exLedgerAmountWrap{position:relative}
-  .exLedgerAmountWrap input{padding-right:48px}
-
-  .exLedgerCurrency{
-    position:absolute;
-    right:15px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#1d4ed8;
-    font-size:17px;
-    font-weight:900;
-    pointer-events:none;
-  }
-
-  .exLedgerEntryActions{
-    display:grid;
-    grid-template-columns:1fr 1.2fr;
-    gap:8px;
-    margin-top:15px;
-  }
-
-  .exLedgerButton{
-    min-height:50px;
-    border:0;
-    border-radius:16px;
-    padding:10px 12px;
+    color:#172033;
     font-size:14px;
-    font-weight:900;
   }
 
-  .exLedgerButton.cancel{
-    background:#edf2fa;
-    color:#41577c;
+  .exDetailLocationBadge{
+    flex:0 0 auto;
+    padding:6px 9px;
+    border-radius:999px;
+    background:#e8f8ee;
+    color:#17803b;
+    font-size:9px;
+    font-weight:950;
   }
 
-  .exLedgerButton.save{
-    background:linear-gradient(135deg,#111827,#1d4ed8);
-    color:#fff;
-  }
-
-  .exLedgerDeleteButton{
-    width:100%;
-    min-height:46px;
-    margin-top:10px;
-    border:0;
-    border-radius:15px;
-    background:#fff0ed;
-    color:#d92d20;
-    font-size:13px;
-    font-weight:900;
-  }
-
-  .exLedgerDeleteConfirm{
-    display:none;
-    margin-top:10px;
-    padding:13px;
-    border-radius:16px;
-    background:#fff5f3;
-    border:1px solid #ffd5cf;
-  }
-
-  .exLedgerDeleteConfirm.is-visible{display:block}
-
-  .exLedgerDeleteConfirmText{
-    color:#8d2b20;
-    font-size:11px;
-    font-weight:800;
-    line-height:1.45;
-  }
-
-  .exLedgerDeleteConfirmActions{
+  .exDetailLocationActions{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:7px;
-    margin-top:10px;
+    margin-top:12px;
   }
 
-  .exLedgerDeleteConfirmActions button{
+  .exDetailLocationButton{
     min-height:40px;
     border:0;
     border-radius:13px;
-    font-size:12px;
+    padding:8px 10px;
+    font-size:11px;
     font-weight:900;
   }
 
-  .exLedgerDeleteCancel{
-    background:#fff;
-    color:#5d6675;
+  .exDetailLocationButton.map{
+    background:#edf3ff;
+    color:#275cae;
   }
 
-  .exLedgerDeleteApprove{
-    background:#d92d20;
+  .exDetailLocationButton.route{
+    background:#eaf8ef;
+    color:#187b3a;
+  }
+
+  body.darkMode #exMapModal,
+  html.darkRoot #exMapModal{
+    background:#0e1420;
     color:#fff;
   }
 
-  body.darkMode .exLedgerCard,
-  html.darkRoot .exLedgerCard{
-    background:linear-gradient(180deg,#171d2a,#0f1420);
+  body.darkMode .exMapScreen,
+  html.darkRoot .exMapScreen{
+    background:linear-gradient(180deg,#101725,#0c111b);
+  }
+
+  body.darkMode .exMapTopbar,
+  body.darkMode .exMapTools,
+  body.darkMode .exMapStatusBar,
+  html.darkRoot .exMapTopbar,
+  html.darkRoot .exMapTools,
+  html.darkRoot .exMapStatusBar{
+    background:rgba(15,22,34,.94);
     border-color:rgba(255,255,255,.08);
+  }
+
+  body.darkMode .exMapTitle,
+  body.darkMode .exMapApartmentName,
+  body.darkMode .exMapStatusBar b,
+  body.darkMode .exMapPickerTitle,
+  body.darkMode .exLocationFormStatusText b,
+  body.darkMode .exDetailLocationHead b,
+  html.darkRoot .exMapTitle,
+  html.darkRoot .exMapApartmentName,
+  html.darkRoot .exMapStatusBar b,
+  html.darkRoot .exMapPickerTitle,
+  html.darkRoot .exLocationFormStatusText b,
+  html.darkRoot .exDetailLocationHead b{
     color:#fff;
   }
 
-  body.darkMode .exLedgerTitle,
-  body.darkMode .exLedgerSummaryCard b,
-  body.darkMode .exLedgerItemTitle,
-  body.darkMode .exLedgerItemAmount,
-  html.darkRoot .exLedgerTitle,
-  html.darkRoot .exLedgerSummaryCard b,
-  html.darkRoot .exLedgerItemTitle,
-  html.darkRoot .exLedgerItemAmount{
-    color:#fff;
-  }
-
-  body.darkMode .exLedgerSummaryCard,
-  body.darkMode .exLedgerItem,
-  body.darkMode .exLedgerField input,
-  body.darkMode .exLedgerField select,
-  body.darkMode .exLedgerField textarea,
-  html.darkRoot .exLedgerSummaryCard,
-  html.darkRoot .exLedgerItem,
-  html.darkRoot .exLedgerField input,
-  html.darkRoot .exLedgerField select,
-  html.darkRoot .exLedgerField textarea{
-    background:#151b28;
+  body.darkMode .exMapApartmentCard,
+  body.darkMode .exMapLegendItem,
+  body.darkMode .exMapPickerCard,
+  body.darkMode .exLocationFormBox,
+  body.darkMode .exDetailLocationCard,
+  html.darkRoot .exMapApartmentCard,
+  html.darkRoot .exMapLegendItem,
+  html.darkRoot .exMapPickerCard,
+  html.darkRoot .exLocationFormBox,
+  html.darkRoot .exDetailLocationCard{
+    background:#151d2b;
     border-color:rgba(255,255,255,.08);
-    color:#fff;
   }
 
-  @media(max-width:390px){
-    .exLedgerCard{border-radius:24px}
-    .exLedgerTitle{font-size:25px}
-    .exLedgerSummary{gap:6px}
-    .exLedgerSummaryCard{padding:12px 5px}
-    .exLedgerSummaryCard b{font-size:17px}
-    .exLedgerEntryActions{grid-template-columns:1fr}
+  @media(max-width:430px){
+    #exMapCanvas{
+      flex-basis:45vh;
+    }
+
+    .exMapTitle{
+      font-size:21px;
+    }
+
+    .exMapApartmentCard{
+      padding:12px;
+    }
+
+    .exMapPickerCard{
+      border-radius:23px;
+    }
   }
 </style>
 
@@ -12310,6 +12566,17 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">İş yönetimi</div>
+
+
+    <button class="exHybridItem" type="button" onclick="haritaMerkeziAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 21s6.5-5.75 6.5-11.1A6.5 6.5 0 1 0 5.5 9.9C5.5 15.25 12 21 12 21Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Harita & Yakındakiler</b><small>Apartmanları haritada gör ve yol tarifi al</small></span>
+    </button>
 
     <button class="exHybridItem" type="button" onclick="stokEnvanteriAc()">
       <span class="exHybridItemIcon" aria-hidden="true">
@@ -12502,12 +12769,12 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   document.addEventListener("keydown",function(e){
     if(e.key === "Escape"){
       try{
-        var le = document.getElementById("exLedgerEntryModal");
-        if(le && le.classList.contains("is-open")) return window.cariKayitFormKapat();
+        var mp = document.getElementById("exMapPickerModal");
+        if(mp && mp.classList.contains("is-open")) return window.haritaKonumSeciciKapat();
       }catch(_){}
       try{
-        var lm = document.getElementById("exLedgerModal");
-        if(lm && lm.classList.contains("is-open")) return window.cariModalKapat();
+        var mm = document.getElementById("exMapModal");
+        if(mm && mm.classList.contains("is-open")) return window.haritaMerkeziKapat();
       }catch(_){}
       try{
         var pm = document.getElementById("exPaymentModal");
@@ -12543,133 +12810,65 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 
 
-<div id="exLedgerModal" aria-hidden="true">
-  <div class="exLedgerBackdrop" onclick="cariModalKapat()"></div>
+<div id="exMapModal" aria-hidden="true">
+  <div class="exMapScreen">
+    <div class="exMapTopbar">
+      <div class="exMapTopbarLeft">
+        <div class="exMapKicker">ElevatorX Konum Merkezi</div>
+        <div class="exMapTitle">Harita & Yakındakiler <span class="exMapBetaBadge">BETA</span></div>
+      </div>
+      <button class="exMapClose" type="button" aria-label="Kapat" onclick="haritaMerkeziKapat()">×</button>
+    </div>
 
-  <div class="exLedgerWrap">
-    <section class="exLedgerCard" role="dialog" aria-modal="true" aria-labelledby="exLedgerTitle">
-      <button class="exLedgerClose" type="button" aria-label="Kapat" onclick="cariModalKapat()">×</button>
+    <div class="exMapTools">
+      <button id="exMapLocateButton" class="exMapToolButton primary" type="button" onclick="haritaKullaniciKonumunuBul()">Konumumu Göster</button>
+      <button class="exMapToolButton secondary" type="button" onclick="haritaTumPinleriGoster()">Tüm Apartmanlar</button>
+    </div>
 
-      <div class="exLedgerHead">
-        <div class="exLedgerKicker">Cari hesap</div>
-        <h2 id="exLedgerTitle" class="exLedgerTitle">Cariyi Düzenle</h2>
-        <p class="exLedgerSub">Eski bakiye ve tahsilat kayıtlarını kartlar üzerinden düzenle veya sil.</p>
+    <div class="exMapStatusBar">
+      <span id="exMapStatusText">Harita hazırlanıyor…</span>
+      <b id="exMapLocatedCount">0 konum</b>
+    </div>
+
+    <div id="exMapCanvas"></div>
+
+    <div class="exMapLower">
+      <div class="exMapLegend">
+        <span class="exMapLegendItem"><i class="exMapLegendDot" style="background:#21a65b"></i> Güncel</span>
+        <span class="exMapLegendItem"><i class="exMapLegendDot" style="background:#e33d4f"></i> Gecikmiş / kritik</span>
+        <span class="exMapLegendItem"><i class="exMapLegendDot" style="background:#f2a51a"></i> Yaklaşan / bekleyen</span>
+        <span class="exMapLegendItem"><i class="exMapLegendDot" style="background:#2478e8"></i> Bugün</span>
       </div>
 
-      <div class="exLedgerSummary">
-        <div class="exLedgerSummaryCard">
-          <b id="exLedgerOldBalanceTotal">0 ₺</b>
-          <span>Eski Bakiye</span>
-        </div>
-        <div class="exLedgerSummaryCard">
-          <b id="exLedgerPaymentTotal">0 ₺</b>
-          <span>Tahsilat</span>
-        </div>
-        <div class="exLedgerSummaryCard">
-          <b id="exLedgerRemainingTotal">0 ₺</b>
-          <span>Kalan</span>
-        </div>
+      <div id="exMapApartmentList" class="exMapList"></div>
+    </div>
+  </div>
+</div>
+
+<div id="exMapPickerModal" aria-hidden="true">
+  <div class="exMapPickerBackdrop" onclick="haritaKonumSeciciKapat()"></div>
+
+  <div class="exMapPickerWrap">
+    <section class="exMapPickerCard" role="dialog" aria-modal="true">
+      <button class="exMapPickerClose" type="button" aria-label="Kapat" onclick="haritaKonumSeciciKapat()">×</button>
+
+      <div class="exMapPickerHead">
+        <div class="exMapPickerKicker">Apartman konumu</div>
+        <h2 class="exMapPickerTitle">Haritadan İşaretle</h2>
+        <p class="exMapPickerSub">Haritaya dokunarak veya işaretçiyi sürükleyerek binanın konumunu belirle.</p>
       </div>
 
-      <div class="exLedgerToolbar">
-        <button class="exLedgerAdd" type="button" onclick="cariKayitFormAc(Number(document.getElementById('exLedgerApartmentIndex').value),'eski',-1)">
-          + Eski Bakiye Ekle
-        </button>
-      </div>
+      <div id="exMapPickerCanvas"></div>
+      <div id="exMapPickerCoordinates" class="exMapPickerCoordinates">Konum seçilmedi</div>
 
-      <div class="exLedgerBody">
-        <input id="exLedgerApartmentIndex" type="hidden">
-
-        <section class="exLedgerSection">
-          <div class="exLedgerSectionHead">
-            <div class="exLedgerSectionTitle">Eski Bakiye Kayıtları</div>
-            <div id="exLedgerBalanceCount" class="exLedgerSectionCount">0</div>
-          </div>
-          <div id="exLedgerBalanceList" class="exLedgerList"></div>
-        </section>
-
-        <section class="exLedgerSection">
-          <div class="exLedgerSectionHead">
-            <div class="exLedgerSectionTitle">Tahsilat Kayıtları</div>
-            <div id="exLedgerPaymentCount" class="exLedgerSectionCount">0</div>
-          </div>
-          <div id="exLedgerPaymentList" class="exLedgerList"></div>
-        </section>
+      <div class="exMapPickerActions">
+        <button class="exMapPickerButton locate" type="button" onclick="haritaSecicideKonumumuBul()">Konumumu Bul</button>
+        <button class="exMapPickerButton save" type="button" onclick="haritaKonumSeciciKaydet()">Bu Konumu Kullan</button>
       </div>
     </section>
   </div>
 </div>
 
-<div id="exLedgerEntryModal" aria-hidden="true">
-  <div class="exLedgerBackdrop" onclick="cariKayitFormKapat()"></div>
-
-  <div class="exLedgerWrap">
-    <section class="exLedgerCard exLedgerEntryCard" role="dialog" aria-modal="true" aria-labelledby="exLedgerEntryTitle">
-      <button class="exLedgerClose" type="button" aria-label="Kapat" onclick="cariKayitFormKapat()">×</button>
-
-      <div class="exLedgerHead">
-        <div id="exLedgerEntryKicker" class="exLedgerKicker">Cari kayıt</div>
-        <h2 id="exLedgerEntryTitle" class="exLedgerTitle">Eski Bakiye Ekle</h2>
-        <p id="exLedgerEntrySub" class="exLedgerSub">Tutar, tarih ve açıklama bilgisini kaydet.</p>
-      </div>
-
-      <div class="exLedgerEntryBody">
-        <input id="exLedgerEntryApartmentIndex" type="hidden">
-        <input id="exLedgerEntryKind" type="hidden">
-        <input id="exLedgerEntryIndex" type="hidden">
-
-        <div class="exLedgerContext">
-          <span>Apartman / Site</span>
-          <b id="exLedgerEntryApartmentName">-</b>
-        </div>
-
-        <div class="exLedgerField">
-          <label for="exLedgerEntryAmount">Tutar</label>
-          <div class="exLedgerAmountWrap">
-            <input id="exLedgerEntryAmount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0">
-            <span class="exLedgerCurrency">₺</span>
-          </div>
-        </div>
-
-        <div class="exLedgerField">
-          <label for="exLedgerEntryDate">Tarih</label>
-          <input id="exLedgerEntryDate" type="date">
-        </div>
-
-        <div id="exLedgerEntryTypeField" class="exLedgerField" style="display:none">
-          <label for="exLedgerEntryType">Tahsilat türü</label>
-          <select id="exLedgerEntryType">
-            <option value="bakim">Bakım</option>
-            <option value="parca">Parça / işlem</option>
-            <option value="cari">Cari / eski bakiye</option>
-          </select>
-        </div>
-
-        <div class="exLedgerField">
-          <label for="exLedgerEntryDescription">Açıklama</label>
-          <textarea id="exLedgerEntryDescription" placeholder="Kısa açıklama"></textarea>
-        </div>
-
-        <div class="exLedgerEntryActions">
-          <button class="exLedgerButton cancel" type="button" onclick="cariKayitFormKapat()">Vazgeç</button>
-          <button class="exLedgerButton save" type="button" onclick="cariKayitKaydet()">Kaydet</button>
-        </div>
-
-        <button id="exLedgerDeleteButton" class="exLedgerDeleteButton" type="button" onclick="cariKayitSilmeSor()">
-          Kaydı Sil
-        </button>
-
-        <div id="exLedgerDeleteConfirm" class="exLedgerDeleteConfirm">
-          <div class="exLedgerDeleteConfirmText">Bu kayıt kalıcı olarak silinecek. İşlem geri alınamaz.</div>
-          <div class="exLedgerDeleteConfirmActions">
-            <button class="exLedgerDeleteCancel" type="button" onclick="cariKayitSilmeVazgec()">Vazgeç</button>
-            <button class="exLedgerDeleteApprove" type="button" onclick="cariKayitSilOnayla()">Silme İşlemini Onayla</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
 
 
 <div id="exPaymentModal" aria-hidden="true">
@@ -13200,10 +13399,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1514" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1600" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.5.14</div>
+<div class="motionSplashVersion" data-splash-version>v1.6.00</div>
 </div>
 </div>
 
@@ -13213,7 +13412,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.5.14";
+  const SPLASH_VERSION = "v1.6.00";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -13370,6 +13569,34 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 </div>
 <div class="helperLine">Bakım günü kaydı, bakım listesi ve geciken kontrol ekranlarında kullanılır.</div>
+</div>
+
+
+<div class="aptFormSection">
+  <div class="sectionMiniTitle">Harita Konumu</div>
+
+  <div class="exLocationFormBox">
+    <input id="exLocationLat" type="hidden">
+    <input id="exLocationLng" type="hidden">
+    <input id="exLocationSource" type="hidden">
+
+    <div class="exLocationFormStatus">
+      <div class="exLocationFormStatusText">
+        <b id="exLocationFormTitle">Konum eklenmedi</b>
+        <span id="exLocationFormMeta">Apartmanın önündeyken konumunu kaydedebilir veya haritadan işaretleyebilirsin.</span>
+      </div>
+      <span id="exLocationFormBadge" class="exLocationFormBadge">Kayıtsız</span>
+    </div>
+
+    <div class="exLocationFormActions">
+      <button class="exLocationFormButton current" type="button" onclick="haritaFormKonumumuKaydet()">Konumumu Kaydet</button>
+      <button class="exLocationFormButton pick" type="button" onclick="haritaKonumSeciciAc()">Haritadan Seç</button>
+    </div>
+
+    <button id="exLocationClearButton" class="exLocationClear" type="button" onclick="haritaFormKonumTemizle()" style="display:none">Kayıtlı konumu kaldır</button>
+  </div>
+
+  <div class="helperLine">Konum bilgisi yalnızca cihazındaki ElevatorX verisine kaydedilir ve normal yedeğe dahil edilir.</div>
 </div>
 
 <div class="aptFormSection">
@@ -13906,9 +14133,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.5.14";
+const APP_VERSION = "v1.6.00";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1514", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1600", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -14910,437 +15137,415 @@ return (idx + 1) + ") " + tutar + " • " + tarih + tip + " • " + aciklama;
 
 }
 
-
-function cariTarihInputDegeri(tarih){
-  try{
-    return muayeneTarihISO(tarih) || "";
-  }catch(e){
-    return "";
-  }
-}
-
-function cariTarihKayitDegeri(iso){
-  try{
-    return tahsilatTarihKayitDegeri(iso);
-  }catch(e){
-    let eslesme = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    return eslesme ? eslesme[3] + "." + eslesme[2] + "." + eslesme[1] : (iso || bugun());
-  }
-}
-
-function cariModalAc(i){
-  let a = data[i];
-
-  if(!a){
-    toast("Apartman bulunamadı");
-    return;
-  }
-
-  odemeleriHazirla(a);
-  eskiBakiyeListesi(a);
-
-  let modal = document.getElementById("exLedgerModal");
-  if(!modal) return;
-
-  document.getElementById("exLedgerApartmentIndex").value = String(i);
-  document.getElementById("exLedgerTitle").textContent = (a.ad || "Apartman") + " • Cari";
-  cariModalRender();
-
-  modal.style.display = "block";
-
-  requestAnimationFrame(function(){
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden","false");
-  });
-
-  haptic("medium");
-}
-
-function cariModalKapat(){
-  let modal = document.getElementById("exLedgerModal");
-  if(!modal) return;
-
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden","true");
-  modal.style.display = "none";
-}
-
-function cariModalRender(){
-  let i = Number(document.getElementById("exLedgerApartmentIndex").value);
-  let a = data[i];
-  if(!a) return;
-
-  let bakiyeler = eskiBakiyeListesi(a);
-  odemeleriHazirla(a);
-  let odemeler = Array.isArray(a.odemeler) ? a.odemeler : [];
-  let cari = cariOzet(a);
-
-  let eskiToplamEl = document.getElementById("exLedgerOldBalanceTotal");
-  let tahsilatEl = document.getElementById("exLedgerPaymentTotal");
-  let kalanEl = document.getElementById("exLedgerRemainingTotal");
-  let bakiyeCountEl = document.getElementById("exLedgerBalanceCount");
-  let odemeCountEl = document.getElementById("exLedgerPaymentCount");
-
-  if(eskiToplamEl) eskiToplamEl.textContent = tutarFormat(cari.eskiBakiyeToplami || 0);
-  if(tahsilatEl) tahsilatEl.textContent = tutarFormat(cari.toplamGenel || 0);
-  if(kalanEl) kalanEl.textContent = tutarFormat(cari.kalanPozitif || 0);
-  if(bakiyeCountEl) bakiyeCountEl.textContent = bakiyeler.length;
-  if(odemeCountEl) odemeCountEl.textContent = odemeler.length;
-
-  let bakiyeAlan = document.getElementById("exLedgerBalanceList");
-  let odemeAlan = document.getElementById("exLedgerPaymentList");
-
-  if(bakiyeAlan){
-    if(!bakiyeler.length){
-      bakiyeAlan.innerHTML = '<div class="exLedgerEmpty">Henüz eski bakiye kaydı yok.</div>';
-    }else{
-      bakiyeAlan.innerHTML = bakiyeler.map(function(kayit,idx){
-        return `
-          <article class="exLedgerItem">
-            <div class="exLedgerItemMain">
-              <div class="exLedgerItemTitle">${ayHtml(kayit.aciklama || "Eski bakiye")}</div>
-              <div class="exLedgerItemMeta">${ayHtml(kayit.tarih || "-")}</div>
-              <button class="exLedgerEditButton" type="button" onclick="cariKayitFormAc(${i},'eski',${idx})">Düzenle</button>
-            </div>
-            <div class="exLedgerItemAmount balance">${ayHtml(tutarFormat(Number(kayit.tutar || 0)))}</div>
-          </article>
-        `;
-      }).join("");
-    }
-  }
-
-  if(odemeAlan){
-    if(!odemeler.length){
-      odemeAlan.innerHTML = '<div class="exLedgerEmpty">Henüz tahsilat kaydı yok.</div>';
-    }else{
-      odemeAlan.innerHTML = odemeler.map(function(odeme,idx){
-        let aciklama = odeme.aciklama || odeme.kalem || odemeKalemMetni(odeme,a);
-        let tip = odemeTipTahminEt(odeme);
-
-        return `
-          <article class="exLedgerItem">
-            <div class="exLedgerItemMain">
-              <div class="exLedgerItemTitle">${ayHtml(aciklama || "Tahsilat")}</div>
-              <div class="exLedgerItemMeta">${ayHtml(odeme.tarih || "-")} • ${ayHtml(odemeTipEtiket(tip))}</div>
-              <button class="exLedgerEditButton" type="button" onclick="cariKayitFormAc(${i},'odeme',${idx})">Düzenle</button>
-            </div>
-            <div class="exLedgerItemAmount payment">${ayHtml(tutarFormat(Number(odeme.tutar || 0)))}</div>
-          </article>
-        `;
-      }).join("");
-    }
-  }
-}
-
-function cariKayitFormAc(i,tur,idx){
-  let a = data[i];
-
-  if(!a){
-    toast("Apartman bulunamadı");
-    return;
-  }
-
-  let modal = document.getElementById("exLedgerEntryModal");
-  if(!modal) return;
-
-  let yeniKayit = Number(idx) < 0;
-  let kayit = null;
-
-  odemeleriHazirla(a);
-  eskiBakiyeListesi(a);
-
-  if(tur === "eski" && !yeniKayit){
-    kayit = a.eskiBakiyeler[idx];
-  }
-
-  if(tur === "odeme" && !yeniKayit){
-    kayit = a.odemeler[idx];
-  }
-
-  if(!yeniKayit && !kayit){
-    toast("Cari kaydı bulunamadı");
-    return;
-  }
-
-  document.getElementById("exLedgerEntryApartmentIndex").value = String(i);
-  document.getElementById("exLedgerEntryKind").value = tur;
-  document.getElementById("exLedgerEntryIndex").value = String(idx);
-  document.getElementById("exLedgerEntryApartmentName").textContent = a.ad || "-";
-
-  let title = document.getElementById("exLedgerEntryTitle");
-  let kicker = document.getElementById("exLedgerEntryKicker");
-  let sub = document.getElementById("exLedgerEntrySub");
-  let amount = document.getElementById("exLedgerEntryAmount");
-  let date = document.getElementById("exLedgerEntryDate");
-  let typeField = document.getElementById("exLedgerEntryTypeField");
-  let type = document.getElementById("exLedgerEntryType");
-  let description = document.getElementById("exLedgerEntryDescription");
-  let deleteButton = document.getElementById("exLedgerDeleteButton");
-
-  if(tur === "eski"){
-    if(kicker) kicker.textContent = "Eski bakiye";
-    if(title) title.textContent = yeniKayit ? "Eski Bakiye Ekle" : "Eski Bakiyeyi Düzenle";
-    if(sub) sub.textContent = "Tutar, tarih ve açıklama bilgisini kaydet.";
-    if(typeField) typeField.style.display = "none";
-    if(type) type.value = "cari";
-    if(description) description.value = kayit ? (kayit.aciklama || "Eski bakiye") : "Eski bakiye";
-  }else{
-    if(kicker) kicker.textContent = "Tahsilat kaydı";
-    if(title) title.textContent = "Tahsilatı Düzenle";
-    if(sub) sub.textContent = "Tahsilat tutarı, tarihi, türü ve açıklamasını güncelle.";
-    if(typeField) typeField.style.display = "grid";
-    if(type) type.value = odemeTipNormalize(kayit && kayit.tip ? kayit.tip : odemeTipTahminEt(kayit));
-    if(description) description.value = kayit ? (kayit.aciklama || kayit.kalem || odemeKalemMetni(kayit,a)) : "";
-  }
-
-  if(amount) amount.value = kayit ? Number(kayit.tutar || 0) : "";
-  if(date) date.value = kayit ? cariTarihInputDegeri(kayit.tarih) : bugunISO();
-  if(deleteButton) deleteButton.style.display = yeniKayit ? "none" : "block";
-
-  cariKayitSilmeVazgec();
-
-  modal.style.display = "block";
-
-  requestAnimationFrame(function(){
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden","false");
-  });
-
-  setTimeout(function(){
-    if(amount){
-      amount.focus();
-      try{ amount.select(); }catch(e){}
-    }
-  },120);
-}
-
-function cariKayitFormKapat(){
-  let modal = document.getElementById("exLedgerEntryModal");
-  if(!modal) return;
-
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden","true");
-  modal.style.display = "none";
-  cariKayitSilmeVazgec();
-}
-
-function cariKayitKaydet(){
-  let i = Number(document.getElementById("exLedgerEntryApartmentIndex").value);
-  let tur = document.getElementById("exLedgerEntryKind").value;
-  let idx = Number(document.getElementById("exLedgerEntryIndex").value);
-  let a = data[i];
-
-  if(!a){
-    toast("Apartman bulunamadı");
-    return;
-  }
-
-  let tutar = Number(String(document.getElementById("exLedgerEntryAmount").value || "").replace(",", "."));
-  let tarihIso = document.getElementById("exLedgerEntryDate").value || bugunISO();
-  let tarih = cariTarihKayitDegeri(tarihIso);
-  let aciklama = document.getElementById("exLedgerEntryDescription").value.trim();
-
-  if(!tutar || tutar <= 0){
-    toast("Geçerli bir tutar gir");
-    return;
-  }
-
-  if(tur === "eski"){
-    let liste = eskiBakiyeListesi(a);
-    let yeniKayit = idx < 0;
-
-    if(yeniKayit){
-      liste.unshift({
-        tutar:tutar,
-        tarih:tarih,
-        aciklama:aciklama || "Eski bakiye",
-        createdAt:new Date().toISOString()
-      });
-
-      if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
-      a.kayitlar.push("Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih + ")");
-    }else{
-      let kayit = liste[idx];
-
-      if(!kayit){
-        toast("Eski bakiye kaydı bulunamadı");
-        return;
-      }
-
-      kayit.tutar = tutar;
-      kayit.tarih = tarih;
-      kayit.aciklama = aciklama || "Eski bakiye";
-      kayit.updatedAt = new Date().toISOString();
-
-      if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
-      a.kayitlar.push("Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + tarih + ")");
-    }
-
-    cariOdemeDurumunuGuncelle(a);
-    kaydet();
-    cariKayitFormKapat();
-    cariModalRender();
-
-    if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
-
-    toast(yeniKayit ? "Eski bakiye cariye eklendi" : "Eski bakiye güncellendi");
-    return;
-  }
-
-  odemeleriHazirla(a);
-
-  let odeme = a.odemeler[idx];
-
-  if(!odeme){
-    toast("Tahsilat kaydı bulunamadı");
-    return;
-  }
-
-  let tip = odemeTipNormalize(document.getElementById("exLedgerEntryType").value);
-
-  odeme.tutar = tutar;
-  odeme.tarih = tarih;
-  odeme.tip = tip;
-  odeme.aciklama = aciklama || odemeKalemMetni(odeme,a);
-  odeme.kalem = odeme.aciklama;
-  odeme.updatedAt = new Date().toISOString();
-
-  if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
-  a.kayitlar.push(
-    "Tahsilat düzenlendi: " +
-    tutarFormat(tutar) +
-    " • " +
-    odemeTipEtiket(tip) +
-    " (" +
-    tarih +
-    ")"
-  );
-
-  cariOdemeDurumunuGuncelle(a);
-  kaydet();
-  cariKayitFormKapat();
-  cariModalRender();
-
-  if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
-
-  toast("Tahsilat güncellendi");
-}
-
-function cariKayitSilmeSor(){
-  let alan = document.getElementById("exLedgerDeleteConfirm");
-  let buton = document.getElementById("exLedgerDeleteButton");
-
-  if(alan) alan.classList.add("is-visible");
-  if(buton) buton.style.display = "none";
-}
-
-function cariKayitSilmeVazgec(){
-  let alan = document.getElementById("exLedgerDeleteConfirm");
-  let buton = document.getElementById("exLedgerDeleteButton");
-  let idxEl = document.getElementById("exLedgerEntryIndex");
-
-  if(alan) alan.classList.remove("is-visible");
-
-  if(buton){
-    let yeniKayit = !idxEl || Number(idxEl.value) < 0;
-    buton.style.display = yeniKayit ? "none" : "block";
-  }
-}
-
-function cariKayitSilOnayla(){
-  let i = Number(document.getElementById("exLedgerEntryApartmentIndex").value);
-  let tur = document.getElementById("exLedgerEntryKind").value;
-  let idx = Number(document.getElementById("exLedgerEntryIndex").value);
-  let a = data[i];
-
-  if(!a || idx < 0){
-    toast("Cari kaydı bulunamadı");
-    return;
-  }
-
-  if(tur === "eski"){
-    let liste = eskiBakiyeListesi(a);
-    let kayit = liste[idx];
-
-    if(!kayit){
-      toast("Eski bakiye kaydı bulunamadı");
-      return;
-    }
-
-    liste.splice(idx,1);
-
-    if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
-    a.kayitlar.push(
-      "Eski bakiye silindi: " +
-      tutarFormat(kayit.tutar || 0) +
-      " (" +
-      bugun() +
-      ")"
-    );
-
-    cariOdemeDurumunuGuncelle(a);
-    kaydet();
-    cariKayitFormKapat();
-    cariModalRender();
-
-    if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
-
-    toast("Eski bakiye silindi");
-    return;
-  }
-
-  odemeleriHazirla(a);
-
-  let odeme = a.odemeler[idx];
-
-  if(!odeme){
-    toast("Tahsilat kaydı bulunamadı");
-    return;
-  }
-
-  a.odemeler.splice(idx,1);
-
-  if(!Array.isArray(a.kayitlar)) a.kayitlar = [];
-  a.kayitlar.push(
-    "Tahsilat silindi: " +
-    tutarFormat(odeme.tutar || 0) +
-    " (" +
-    bugun() +
-    ")"
-  );
-
-  cariOdemeDurumunuGuncelle(a);
-  kaydet();
-  cariKayitFormKapat();
-  cariModalRender();
-
-  if(aktifDetay !== null && data[aktifDetay]) detayAc(aktifDetay);
-
-  toast("Tahsilat silindi");
-}
-
 function eskiBakiyeEkle(i){
-  cariKayitFormAc(i,"eski",-1);
+
+haptic("medium");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+let tutarGiris = prompt("Eski bakiye tutarı ₺", "");
+if(tutarGiris === null){
+toast("Eski bakiye iptal edildi");
+return;
+}
+
+let tutar = Number(String(tutarGiris).replace(",", "."));
+
+if(!tutar || tutar <= 0){
+toast("Geçerli bir tutar girilmedi");
+return;
+}
+
+let tarih = prompt("Eski bakiye tarihi", bugun()) || bugun();
+let aciklama = prompt("Açıklama", "Eski bakiye") || "Eski bakiye";
+
+let liste = eskiBakiyeListesi(a);
+
+liste.unshift({
+tutar:tutar,
+tarih:tarih.trim(),
+aciklama:aciklama.trim(),
+createdAt:new Date().toISOString()
+});
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
+);
+
+cariOdemeDurumunuGuncelle(a);
+
+kaydet();
+
+toast("Eski bakiye cariye eklendi");
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}else{
+anaSayfa();
+}
+
 }
 
 function eskiBakiyeDuzenle(i){
-  cariModalAc(i);
+
+haptic("medium");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+let liste = eskiBakiyeListesi(a);
+
+if(!liste.length){
+toast("Düzenlenecek eski bakiye yok");
+return;
+}
+
+let secim = prompt(
+"Düzenlenecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
+"1"
+);
+
+if(secim === null){
+toast("Düzenleme iptal edildi");
+return;
+}
+
+let idx = Number(secim) - 1;
+
+if(idx < 0 || idx >= liste.length){
+toast("Geçerli bir seçim yapılmadı");
+return;
+}
+
+let kayit = liste[idx];
+
+let tutarGiris = prompt("Tutar ₺", paraPromptDegeri(kayit.tutar));
+if(tutarGiris === null){
+toast("Düzenleme iptal edildi");
+return;
+}
+
+let tutar = Number(String(tutarGiris).replace(",", "."));
+
+if(!tutar || tutar <= 0){
+toast("Geçerli bir tutar girilmedi");
+return;
+}
+
+let tarih = prompt("Tarih", kayit.tarih || bugun()) || kayit.tarih || bugun();
+let aciklama = prompt("Açıklama", kayit.aciklama || "Eski bakiye") || kayit.aciklama || "Eski bakiye";
+
+kayit.tutar = tutar;
+kayit.tarih = tarih.trim();
+kayit.aciklama = aciklama.trim();
+kayit.updatedAt = new Date().toISOString();
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + kayit.tarih + ")"
+);
+
+cariOdemeDurumunuGuncelle(a);
+
+kaydet();
+
+toast("Eski bakiye güncellendi");
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}
+
 }
 
 function eskiBakiyeSil(i){
-  cariModalAc(i);
+
+haptic("warning");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+let liste = eskiBakiyeListesi(a);
+
+if(!liste.length){
+toast("Silinecek eski bakiye yok");
+return;
+}
+
+let secim = prompt(
+"Silinecek eski bakiye kaydını seç:\n\n" + cariKayitListesiMetni(liste),
+"1"
+);
+
+if(secim === null){
+toast("Silme iptal edildi");
+return;
+}
+
+let idx = Number(secim) - 1;
+
+if(idx < 0 || idx >= liste.length){
+toast("Geçerli bir seçim yapılmadı");
+return;
+}
+
+let kayit = liste[idx];
+
+let onay = confirm(
+"Bu eski bakiye kaydı silinsin mi?\n\n" +
+tutarFormat(kayit.tutar || 0) + " • " + (kayit.tarih || "-") + "\n" +
+(kayit.aciklama || "Eski bakiye")
+);
+
+if(!onay){
+toast("Silme iptal edildi");
+return;
+}
+
+liste.splice(idx,1);
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Eski bakiye silindi: " + tutarFormat(kayit.tutar || 0) + " (" + bugun() + ")"
+);
+
+cariOdemeDurumunuGuncelle(a);
+
+kaydet();
+
+toast("Eski bakiye silindi");
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}
+
 }
 
 function odemeDuzenle(i){
-  cariModalAc(i);
+
+haptic("medium");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+odemeleriHazirla(a);
+
+if(!Array.isArray(a.odemeler) || !a.odemeler.length){
+toast("Düzenlenecek tahsilat yok");
+return;
+}
+
+let secim = prompt(
+"Düzenlenecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
+"1"
+);
+
+if(secim === null){
+toast("Düzenleme iptal edildi");
+return;
+}
+
+let idx = Number(secim) - 1;
+
+if(idx < 0 || idx >= a.odemeler.length){
+toast("Geçerli bir seçim yapılmadı");
+return;
+}
+
+let odeme = a.odemeler[idx];
+
+let tutarGiris = prompt("Tahsil edilen tutar ₺", paraPromptDegeri(odeme.tutar));
+if(tutarGiris === null){
+toast("Düzenleme iptal edildi");
+return;
+}
+
+let tutar = Number(String(tutarGiris).replace(",", "."));
+
+if(!tutar || tutar <= 0){
+toast("Geçerli bir tutar girilmedi");
+return;
+}
+
+let tarih = prompt("Ödeme tarihi", odeme.tarih || bugun()) || odeme.tarih || bugun();
+let tipGiris = prompt("Ödeme türü: bakım / parça / cari", odeme.tip || "cari");
+if(tipGiris === null){
+toast("Düzenleme iptal edildi");
+return;
+}
+
+let tip = odemeTipNormalize(tipGiris);
+let aciklama = prompt("Makbuz açıklaması", odeme.aciklama || odeme.kalem || odemeKalemMetni(odeme,a)) || odeme.aciklama || odeme.kalem || "";
+
+odeme.tutar = tutar;
+odeme.tarih = tarih.trim();
+odeme.tip = tip;
+odeme.aciklama = aciklama.trim();
+odeme.kalem = aciklama.trim();
+odeme.updatedAt = new Date().toISOString();
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Tahsilat düzenlendi: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + odeme.tarih + ")"
+);
+
+cariOdemeDurumunuGuncelle(a);
+
+kaydet();
+
+toast("Tahsilat güncellendi");
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}
+
 }
 
 function odemeSil(i){
-  cariModalAc(i);
+
+haptic("warning");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+odemeleriHazirla(a);
+
+if(!Array.isArray(a.odemeler) || !a.odemeler.length){
+toast("Silinecek tahsilat yok");
+return;
+}
+
+let secim = prompt(
+"Silinecek tahsilatı seç:\n\n" + cariKayitListesiMetni(a.odemeler),
+"1"
+);
+
+if(secim === null){
+toast("Silme iptal edildi");
+return;
+}
+
+let idx = Number(secim) - 1;
+
+if(idx < 0 || idx >= a.odemeler.length){
+toast("Geçerli bir seçim yapılmadı");
+return;
+}
+
+let odeme = a.odemeler[idx];
+
+let onay = confirm(
+"Bu tahsilat kaydı silinsin mi?\n\n" +
+tutarFormat(odeme.tutar || 0) + " • " + (odeme.tarih || "-") + "\n" +
+(odeme.aciklama || odeme.kalem || "Tahsilat")
+);
+
+if(!onay){
+toast("Silme iptal edildi");
+return;
+}
+
+a.odemeler.splice(idx,1);
+
+if(!Array.isArray(a.kayitlar)){
+a.kayitlar = [];
+}
+
+a.kayitlar.push(
+"Tahsilat silindi: " + tutarFormat(odeme.tutar || 0) + " (" + bugun() + ")"
+);
+
+cariOdemeDurumunuGuncelle(a);
+
+kaydet();
+
+toast("Tahsilat silindi");
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}
+
 }
 
 function cariIslemleriDuzenle(i){
-  cariModalAc(i);
+
+haptic("medium");
+
+let a = data[i];
+
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+odemeleriHazirla(a);
+eskiBakiyeListesi(a);
+
+let secim = prompt(
+"Cari düzenleme\n\n" +
+"1 - Eski bakiye düzenle\n" +
+"2 - Eski bakiye sil\n" +
+"3 - Tahsilat düzenle\n" +
+"4 - Tahsilat sil\n\n" +
+"Yeni eski bakiye eklemek için cari kartındaki + Eski Bakiye butonunu kullan.",
+"1"
+);
+
+if(secim === null){
+toast("Cari düzenleme iptal edildi");
+return;
+}
+
+if(secim === "1"){
+eskiBakiyeDuzenle(i);
+return;
+}
+
+if(secim === "2"){
+eskiBakiyeSil(i);
+return;
+}
+
+if(secim === "3"){
+odemeDuzenle(i);
+return;
+}
+
+if(secim === "4"){
+odemeSil(i);
+return;
+}
+
+toast("Geçerli bir seçim yapılmadı");
+
 }
 
 
@@ -15752,6 +15957,855 @@ JSON.stringify(data)
 autoYedekAl(true);
 goster();
 }
+
+
+
+let exMapLeafletPromise = null;
+let exMapInstance = null;
+let exMapPickerInstance = null;
+let exMapPickerMarker = null;
+let exMapUserMarker = null;
+let exMapUserLocation = null;
+let exMapMarkerByIndex = {};
+let exMapCurrentItems = [];
+
+function haritaLeafletYukle(){
+  if(window.L) return Promise.resolve(window.L);
+  if(exMapLeafletPromise) return exMapLeafletPromise;
+
+  exMapLeafletPromise = new Promise(function(resolve,reject){
+    if(!document.querySelector('link[data-ex-leaflet="1"]')){
+      let css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      css.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
+      css.crossOrigin = "";
+      css.dataset.exLeaflet = "1";
+      document.head.appendChild(css);
+    }
+
+    let mevcut = document.querySelector('script[data-ex-leaflet="1"]');
+    if(mevcut){
+      mevcut.addEventListener("load",function(){ resolve(window.L); },{once:true});
+      mevcut.addEventListener("error",function(){ reject(new Error("Harita kütüphanesi yüklenemedi")); },{once:true});
+      return;
+    }
+
+    let script = document.createElement("script");
+    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+    script.crossOrigin = "";
+    script.dataset.exLeaflet = "1";
+    script.onload = function(){ resolve(window.L); };
+    script.onerror = function(){
+      exMapLeafletPromise = null;
+      reject(new Error("Harita kütüphanesi yüklenemedi"));
+    };
+    document.head.appendChild(script);
+  });
+
+  return exMapLeafletPromise;
+}
+
+function haritaSayi(v){
+  let n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+function haritaKonumGet(a){
+  if(!a || !a.konum) return null;
+
+  let lat = haritaSayi(a.konum.lat);
+  let lng = haritaSayi(a.konum.lng);
+
+  if(lat === null || lng === null) return null;
+  if(lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+
+  return {
+    lat:lat,
+    lng:lng,
+    kaynak:a.konum.kaynak || "",
+    updatedAt:a.konum.updatedAt || ""
+  };
+}
+
+function haritaFormKonumVerisi(){
+  let lat = haritaSayi(document.getElementById("exLocationLat").value);
+  let lng = haritaSayi(document.getElementById("exLocationLng").value);
+  let kaynak = document.getElementById("exLocationSource").value || "harita";
+
+  if(lat === null || lng === null) return null;
+
+  return {
+    lat:lat,
+    lng:lng,
+    kaynak:kaynak,
+    updatedAt:new Date().toISOString()
+  };
+}
+
+function haritaKoordinatMetni(lat,lng){
+  return Number(lat).toFixed(6) + ", " + Number(lng).toFixed(6);
+}
+
+function haritaFormKonumDurumuGuncelle(){
+  let latEl = document.getElementById("exLocationLat");
+  let lngEl = document.getElementById("exLocationLng");
+  let title = document.getElementById("exLocationFormTitle");
+  let meta = document.getElementById("exLocationFormMeta");
+  let badge = document.getElementById("exLocationFormBadge");
+  let clear = document.getElementById("exLocationClearButton");
+
+  if(!latEl || !lngEl) return;
+
+  let lat = haritaSayi(latEl.value);
+  let lng = haritaSayi(lngEl.value);
+  let kayitli = lat !== null && lng !== null;
+
+  if(title) title.textContent = kayitli ? "Apartman konumu hazır" : "Konum eklenmedi";
+  if(meta){
+    meta.textContent = kayitli
+      ? haritaKoordinatMetni(lat,lng)
+      : "Apartmanın önündeyken konumunu kaydedebilir veya haritadan işaretleyebilirsin.";
+  }
+
+  if(badge){
+    badge.textContent = kayitli ? "Kayıtlı" : "Kayıtsız";
+    badge.classList.toggle("is-set",kayitli);
+  }
+
+  if(clear) clear.style.display = kayitli ? "block" : "none";
+}
+
+function haritaFormKonumYukle(a){
+  let konum = haritaKonumGet(a);
+  let latEl = document.getElementById("exLocationLat");
+  let lngEl = document.getElementById("exLocationLng");
+  let kaynakEl = document.getElementById("exLocationSource");
+
+  if(!latEl || !lngEl || !kaynakEl) return;
+
+  latEl.value = konum ? String(konum.lat) : "";
+  lngEl.value = konum ? String(konum.lng) : "";
+  kaynakEl.value = konum ? (konum.kaynak || "harita") : "";
+
+  haritaFormKonumDurumuGuncelle();
+}
+
+function haritaFormKonumSifirla(){
+  let latEl = document.getElementById("exLocationLat");
+  let lngEl = document.getElementById("exLocationLng");
+  let kaynakEl = document.getElementById("exLocationSource");
+
+  if(latEl) latEl.value = "";
+  if(lngEl) lngEl.value = "";
+  if(kaynakEl) kaynakEl.value = "";
+
+  haritaFormKonumDurumuGuncelle();
+}
+
+function haritaFormKonumTemizle(){
+  haritaFormKonumSifirla();
+  toast("Konum kaldırıldı • Kaydettiğinde uygulanacak");
+}
+
+function haritaKonumHataMetni(error){
+  if(!error) return "Konum alınamadı";
+  if(error.code === 1) return "Konum izni verilmedi";
+  if(error.code === 2) return "Telefon konumu belirleyemedi";
+  if(error.code === 3) return "Konum isteği zaman aşımına uğradı";
+  return "Konum alınamadı";
+}
+
+function haritaCihazKonumuAl(){
+  return new Promise(function(resolve,reject){
+    if(!navigator.geolocation){
+      reject(new Error("Bu cihaz konum özelliğini desteklemiyor"));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      function(position){
+        resolve({
+          lat:position.coords.latitude,
+          lng:position.coords.longitude,
+          accuracy:position.coords.accuracy || 0
+        });
+      },
+      reject,
+      {
+        enableHighAccuracy:true,
+        timeout:16000,
+        maximumAge:25000
+      }
+    );
+  });
+}
+
+async function haritaFormKonumumuKaydet(){
+  haptic("light");
+
+  let title = document.getElementById("exLocationFormTitle");
+  let meta = document.getElementById("exLocationFormMeta");
+
+  if(title) title.textContent = "Konum alınıyor…";
+  if(meta) meta.textContent = "Telefonun konum izni istenebilir.";
+
+  try{
+    let pos = await haritaCihazKonumuAl();
+
+    document.getElementById("exLocationLat").value = String(pos.lat);
+    document.getElementById("exLocationLng").value = String(pos.lng);
+    document.getElementById("exLocationSource").value = "gps";
+
+    haritaFormKonumDurumuGuncelle();
+
+    if(meta){
+      meta.textContent =
+        haritaKoordinatMetni(pos.lat,pos.lng) +
+        (pos.accuracy ? " • Yaklaşık ±" + Math.round(pos.accuracy) + " m" : "");
+    }
+
+    toast("Apartman konumu hazır • Kaydetmeyi unutma");
+  }catch(error){
+    haritaFormKonumDurumuGuncelle();
+    toast(haritaKonumHataMetni(error));
+  }
+}
+
+function haritaPinBilgisi(a){
+  let etiket = "";
+
+  try{
+    etiket = muayeneNormalizeEtiket(muayeneMevcut(a).etiket);
+  }catch(e){}
+
+  if(etiket === "kirmizi"){
+    return {color:"#e33d4f",text:"Kırmızı etiket"};
+  }
+
+  try{
+    if(sozlesmeSuresiDolduMu(a)){
+      return {color:"#e33d4f",text:"Sözleşme süresi doldu"};
+    }
+  }catch(e){}
+
+  if(bakimGeciktiMi(a)){
+    return {color:"#e33d4f",text:"Bakım gecikmiş"};
+  }
+
+  if(etiket === "sari"){
+    return {color:"#f2a51a",text:"Sarı etiket"};
+  }
+
+  try{
+    if(muayeneYaklasiyorMu(a) || sozlesmeYaklasiyorMu(a)){
+      return {color:"#f2a51a",text:"Yaklaşan işlem"};
+    }
+  }catch(e){}
+
+  if(bakimBugunMu(a)){
+    return {color:"#2478e8",text:"Bugün bakım"};
+  }
+
+  if(bakimBuAyYapildi(a)){
+    return {color:"#21a65b",text:"Bakım güncel"};
+  }
+
+  return {color:"#f2a51a",text:"Bakım bekliyor"};
+}
+
+function haritaDivIcon(color){
+  return L.divIcon({
+    className:"",
+    html:'<div class="exMapPin" style="background:' + color + '"><span></span></div>',
+    iconSize:[34,34],
+    iconAnchor:[17,33],
+    popupAnchor:[0,-31]
+  });
+}
+
+function haritaUserIcon(){
+  return L.divIcon({
+    className:"",
+    html:'<div class="exMapUserMarker"></div>',
+    iconSize:[24,24],
+    iconAnchor:[12,12]
+  });
+}
+
+function haritaMesafeMetni(metre){
+  if(!Number.isFinite(metre)) return "Mesafe yok";
+  if(metre < 1000) return Math.max(1,Math.round(metre)) + " m";
+  return (metre / 1000).toFixed(metre < 10000 ? 1 : 0).replace(".",",") + " km";
+}
+
+function haritaMesafeMetre(lat1,lng1,lat2,lng2){
+  let R = 6371000;
+  let p1 = lat1 * Math.PI / 180;
+  let p2 = lat2 * Math.PI / 180;
+  let dp = (lat2 - lat1) * Math.PI / 180;
+  let dl = (lng2 - lng1) * Math.PI / 180;
+
+  let x =
+    Math.sin(dp / 2) * Math.sin(dp / 2) +
+    Math.cos(p1) * Math.cos(p2) *
+    Math.sin(dl / 2) * Math.sin(dl / 2);
+
+  return R * 2 * Math.atan2(Math.sqrt(x),Math.sqrt(1 - x));
+}
+
+function haritaKonumluApartmanlar(){
+  return data.map(function(a,index){
+    let konum = haritaKonumGet(a);
+    if(!konum) return null;
+
+    let pin = haritaPinBilgisi(a);
+    let mesafe = null;
+
+    if(exMapUserLocation){
+      mesafe = haritaMesafeMetre(
+        exMapUserLocation.lat,
+        exMapUserLocation.lng,
+        konum.lat,
+        konum.lng
+      );
+    }
+
+    return {
+      index:index,
+      apartman:a,
+      konum:konum,
+      pin:pin,
+      mesafe:mesafe
+    };
+  }).filter(Boolean);
+}
+
+function haritaPopupHtml(item){
+  let a = item.apartman;
+  let cari = cariOzet(a);
+
+  return `
+    <div class="exMapPopup">
+      <b>${ayHtml(a.ad || "Apartman")}</b>
+      <span>${ayHtml(item.pin.text)} • Kalan bakiye: ${ayHtml(tutarFormat(cari.kalanPozitif || 0))}</span>
+      <div class="exMapPopupActions">
+        <button type="button" onclick="haritaApartmanAc(${item.index})">Apartmanı Aç</button>
+        <button type="button" onclick="haritaYolTarifi(${item.index})">Yol Tarifi</button>
+      </div>
+    </div>
+  `;
+}
+
+function haritaListeRender(items){
+  let alan = document.getElementById("exMapApartmentList");
+  if(!alan) return;
+
+  let sirali = items.slice().sort(function(a,b){
+    if(Number.isFinite(a.mesafe) && Number.isFinite(b.mesafe)){
+      return a.mesafe - b.mesafe;
+    }
+
+    if(Number.isFinite(a.mesafe)) return -1;
+    if(Number.isFinite(b.mesafe)) return 1;
+
+    return String(a.apartman.ad || "").localeCompare(
+      String(b.apartman.ad || ""),
+      "tr"
+    );
+  });
+
+  if(!sirali.length){
+    let konumsuz = data.length;
+    alan.innerHTML =
+      '<div class="exMapEmpty">Henüz konumu kayıtlı apartman yok.<br>Apartmanı düzenleyip “Konumumu Kaydet” veya “Haritadan Seç” düğmesini kullan.</div>';
+
+    let status = document.getElementById("exMapStatusText");
+    if(status){
+      status.textContent = konumsuz
+        ? konumsuz + " apartmanın konumu henüz eklenmemiş"
+        : "Henüz apartman kaydı yok";
+    }
+    return;
+  }
+
+  alan.innerHTML = sirali.map(function(item){
+    let a = item.apartman;
+    let cari = cariOzet(a);
+
+    return `
+      <article class="exMapApartmentCard" onclick="haritaPineGit(${item.index})">
+        <div class="exMapApartmentMain">
+          <div class="exMapApartmentName">
+            <i class="exMapApartmentNameDot" style="background:${item.pin.color}"></i>
+            <span>${ayHtml(a.ad || "Apartman")}</span>
+          </div>
+          <div class="exMapApartmentMeta">
+            ${ayHtml(item.pin.text)} • Kalan: ${ayHtml(tutarFormat(cari.kalanPozitif || 0))}
+          </div>
+        </div>
+
+        <div class="exMapApartmentDistance">
+          ${Number.isFinite(item.mesafe) ? ayHtml(haritaMesafeMetni(item.mesafe)) : "Konum kayıtlı"}
+        </div>
+
+        <div class="exMapCardButtons">
+          <button class="exMapCardButton open" type="button" onclick="event.stopPropagation();haritaApartmanAc(${item.index})">Apartmanı Aç</button>
+          <button class="exMapCardButton route" type="button" onclick="event.stopPropagation();haritaYolTarifi(${item.index})">Yol Tarifi</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function haritaMarkerleriOlustur(){
+  if(!exMapInstance || !window.L) return;
+
+  exMapMarkerByIndex = {};
+  exMapCurrentItems = haritaKonumluApartmanlar();
+
+  exMapCurrentItems.forEach(function(item){
+    let marker = L.marker(
+      [item.konum.lat,item.konum.lng],
+      {icon:haritaDivIcon(item.pin.color)}
+    ).addTo(exMapInstance);
+
+    marker.bindPopup(haritaPopupHtml(item),{
+      closeButton:true,
+      minWidth:205
+    });
+
+    exMapMarkerByIndex[item.index] = marker;
+  });
+
+  haritaListeRender(exMapCurrentItems);
+
+  let count = document.getElementById("exMapLocatedCount");
+  if(count){
+    count.textContent =
+      exMapCurrentItems.length +
+      " konum • " +
+      Math.max(0,data.length - exMapCurrentItems.length) +
+      " eksik";
+  }
+
+  haritaTumPinleriGoster();
+}
+
+async function haritaMerkeziAc(odakIndex){
+  if(typeof window.exHybridMenuClose === "function"){
+    window.exHybridMenuClose();
+  }
+
+  haptic("light");
+
+  let modal = document.getElementById("exMapModal");
+  let status = document.getElementById("exMapStatusText");
+  if(!modal) return;
+
+  modal.style.display = "block";
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("exMapOpen");
+
+  if(status) status.textContent = "Harita hazırlanıyor…";
+
+  try{
+    await haritaLeafletYukle();
+
+    if(exMapInstance){
+      try{ exMapInstance.remove(); }catch(e){}
+      exMapInstance = null;
+    }
+
+    exMapInstance = L.map("exMapCanvas",{
+      zoomControl:true,
+      attributionControl:true
+    }).setView([39.1,35.2],6);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      maxZoom:19,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(exMapInstance);
+
+    haritaMarkerleriOlustur();
+
+    setTimeout(function(){
+      try{ exMapInstance.invalidateSize(); }catch(e){}
+
+      if(Number.isInteger(Number(odakIndex))){
+        haritaPineGit(Number(odakIndex));
+      }
+    },180);
+
+    if(status){
+      status.textContent = exMapCurrentItems.length
+        ? "Pinlerden birine dokun veya yakındaki apartmanları sırala"
+        : "Konumu olan apartman bekleniyor";
+    }
+  }catch(error){
+    console.error("ElevatorX harita yükleme hatası:",error);
+
+    if(status){
+      status.textContent = "Harita yüklenemedi • İnternet bağlantısını kontrol et";
+    }
+
+    let alan = document.getElementById("exMapApartmentList");
+    if(alan){
+      alan.innerHTML =
+        '<div class="exMapEmpty">Harita bileşeni yüklenemedi. ElevatorX’in diğer bölümleri etkilenmedi.<br>İnternet bağlantısını kontrol edip tekrar aç.</div>';
+    }
+  }
+}
+
+function haritaMerkeziKapat(){
+  let modal = document.getElementById("exMapModal");
+  if(modal){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+    modal.style.display = "none";
+  }
+
+  document.body.classList.remove("exMapOpen");
+
+  if(exMapInstance){
+    try{ exMapInstance.remove(); }catch(e){}
+    exMapInstance = null;
+  }
+
+  exMapMarkerByIndex = {};
+  exMapCurrentItems = [];
+}
+
+function haritaTumPinleriGoster(){
+  if(!exMapInstance) return;
+
+  let noktalar = exMapCurrentItems.map(function(item){
+    return [item.konum.lat,item.konum.lng];
+  });
+
+  if(exMapUserLocation){
+    noktalar.push([exMapUserLocation.lat,exMapUserLocation.lng]);
+  }
+
+  if(!noktalar.length){
+    exMapInstance.setView([39.1,35.2],6);
+    return;
+  }
+
+  if(noktalar.length === 1){
+    exMapInstance.setView(noktalar[0],16);
+    return;
+  }
+
+  exMapInstance.fitBounds(noktalar,{
+    padding:[34,34],
+    maxZoom:16
+  });
+}
+
+async function haritaKullaniciKonumunuBul(){
+  let button = document.getElementById("exMapLocateButton");
+  let status = document.getElementById("exMapStatusText");
+
+  if(button){
+    button.disabled = true;
+    button.textContent = "Konum alınıyor…";
+  }
+
+  if(status) status.textContent = "Telefon konumu belirleniyor…";
+
+  try{
+    let pos = await haritaCihazKonumuAl();
+    exMapUserLocation = pos;
+
+    if(exMapUserMarker && exMapInstance){
+      try{ exMapUserMarker.remove(); }catch(e){}
+    }
+
+    if(exMapInstance){
+      exMapUserMarker = L.marker(
+        [pos.lat,pos.lng],
+        {icon:haritaUserIcon(),zIndexOffset:1000}
+      ).addTo(exMapInstance);
+
+      exMapUserMarker.bindPopup(
+        "<b>Mevcut konumun</b><br><small>Yaklaşık ±" +
+        Math.round(pos.accuracy || 0) +
+        " m</small>"
+      );
+
+      exMapInstance.setView([pos.lat,pos.lng],15);
+    }
+
+    exMapCurrentItems = haritaKonumluApartmanlar();
+    haritaListeRender(exMapCurrentItems);
+
+    if(status){
+      status.textContent =
+        exMapCurrentItems.length
+          ? "Apartmanlar sana olan uzaklığa göre sıralandı"
+          : "Konumun bulundu • Kayıtlı apartman konumu yok";
+    }
+
+    toast("Yakındaki apartmanlar sıralandı");
+  }catch(error){
+    if(status) status.textContent = haritaKonumHataMetni(error);
+    toast(haritaKonumHataMetni(error));
+  }finally{
+    if(button){
+      button.disabled = false;
+      button.textContent = "Konumumu Göster";
+    }
+  }
+}
+
+function haritaPineGit(index){
+  let marker = exMapMarkerByIndex[index];
+  let a = data[index];
+  let konum = haritaKonumGet(a);
+
+  if(!exMapInstance || !marker || !konum) return;
+
+  exMapInstance.setView([konum.lat,konum.lng],17,{
+    animate:true
+  });
+
+  setTimeout(function(){
+    try{ marker.openPopup(); }catch(e){}
+  },260);
+}
+
+function haritaApartmanAc(index){
+  if(!data[index]) return;
+
+  haritaMerkeziKapat();
+
+  setTimeout(function(){
+    detayAc(index);
+  },90);
+}
+
+function haritaYolTarifi(index){
+  let a = data[index];
+  let konum = haritaKonumGet(a);
+
+  if(!konum){
+    toast("Bu apartmanın konumu kayıtlı değil");
+    return;
+  }
+
+  let hedef = konum.lat + "," + konum.lng;
+  let ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  let url = ios
+    ? "https://maps.apple.com/?daddr=" + encodeURIComponent(hedef) + "&dirflg=d"
+    : "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(hedef);
+
+  window.open(url,"_blank");
+}
+
+function haritaApartmanDetayHtml(a,index){
+  let konum = haritaKonumGet(a);
+
+  if(!konum){
+    return `
+      <div class="exDetailLocationCard">
+        <div class="exDetailLocationHead">
+          <div>
+            <span>Harita Konumu</span>
+            <b>Henüz konum eklenmedi</b>
+          </div>
+        </div>
+        <div class="exDetailLocationActions" style="grid-template-columns:1fr">
+          <button class="exDetailLocationButton map" type="button" onclick="duzenle(${index})">Konum Ekle</button>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="exDetailLocationCard">
+      <div class="exDetailLocationHead">
+        <div>
+          <span>Harita Konumu</span>
+          <b>${ayHtml(haritaKoordinatMetni(konum.lat,konum.lng))}</b>
+        </div>
+        <span class="exDetailLocationBadge">Kayıtlı</span>
+      </div>
+
+      <div class="exDetailLocationActions">
+        <button class="exDetailLocationButton map" type="button" onclick="haritaMerkeziAc(${index})">Haritada Gör</button>
+        <button class="exDetailLocationButton route" type="button" onclick="haritaYolTarifi(${index})">Yol Tarifi</button>
+      </div>
+    </div>
+  `;
+}
+
+function haritaPickerMerkez(){
+  let lat = haritaSayi(document.getElementById("exLocationLat").value);
+  let lng = haritaSayi(document.getElementById("exLocationLng").value);
+
+  if(lat !== null && lng !== null){
+    return {lat:lat,lng:lng,zoom:17};
+  }
+
+  if(exMapUserLocation){
+    return {
+      lat:exMapUserLocation.lat,
+      lng:exMapUserLocation.lng,
+      zoom:16
+    };
+  }
+
+  let mevcut = haritaKonumluApartmanlar();
+  if(mevcut.length){
+    return {
+      lat:mevcut[0].konum.lat,
+      lng:mevcut[0].konum.lng,
+      zoom:14
+    };
+  }
+
+  return {lat:39.1,lng:35.2,zoom:6};
+}
+
+function haritaPickerKoordinatGuncelle(lat,lng){
+  let el = document.getElementById("exMapPickerCoordinates");
+  if(el){
+    el.textContent = haritaKoordinatMetni(lat,lng);
+  }
+}
+
+function haritaPickerMarkerAyarla(lat,lng,pan){
+  if(!exMapPickerInstance || !window.L) return;
+
+  if(!exMapPickerMarker){
+    exMapPickerMarker = L.marker(
+      [lat,lng],
+      {
+        draggable:true,
+        icon:haritaDivIcon("#176fe8")
+      }
+    ).addTo(exMapPickerInstance);
+
+    exMapPickerMarker.on("dragend",function(){
+      let p = exMapPickerMarker.getLatLng();
+      haritaPickerKoordinatGuncelle(p.lat,p.lng);
+    });
+  }else{
+    exMapPickerMarker.setLatLng([lat,lng]);
+  }
+
+  if(pan){
+    exMapPickerInstance.setView([lat,lng],17);
+  }
+
+  haritaPickerKoordinatGuncelle(lat,lng);
+}
+
+async function haritaKonumSeciciAc(){
+  haptic("light");
+
+  let modal = document.getElementById("exMapPickerModal");
+  if(!modal) return;
+
+  modal.style.display = "block";
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("exMapPickerOpen");
+
+  try{
+    await haritaLeafletYukle();
+
+    if(exMapPickerInstance){
+      try{ exMapPickerInstance.remove(); }catch(e){}
+    }
+
+    exMapPickerMarker = null;
+
+    let merkez = haritaPickerMerkez();
+
+    exMapPickerInstance = L.map("exMapPickerCanvas",{
+      zoomControl:true,
+      attributionControl:true
+    }).setView([merkez.lat,merkez.lng],merkez.zoom);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      maxZoom:19,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(exMapPickerInstance);
+
+    exMapPickerInstance.on("click",function(e){
+      haritaPickerMarkerAyarla(e.latlng.lat,e.latlng.lng,false);
+    });
+
+    let mevcutLat = haritaSayi(document.getElementById("exLocationLat").value);
+    let mevcutLng = haritaSayi(document.getElementById("exLocationLng").value);
+
+    if(mevcutLat !== null && mevcutLng !== null){
+      haritaPickerMarkerAyarla(mevcutLat,mevcutLng,false);
+    }
+
+    setTimeout(function(){
+      try{ exMapPickerInstance.invalidateSize(); }catch(e){}
+    },180);
+  }catch(error){
+    console.error("Konum seçici harita açılamadı:",error);
+    toast("Harita yüklenemedi • İnternet bağlantısını kontrol et");
+  }
+}
+
+function haritaKonumSeciciKapat(){
+  let modal = document.getElementById("exMapPickerModal");
+
+  if(modal){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+    modal.style.display = "none";
+  }
+
+  document.body.classList.remove("exMapPickerOpen");
+
+  if(exMapPickerInstance){
+    try{ exMapPickerInstance.remove(); }catch(e){}
+    exMapPickerInstance = null;
+  }
+
+  exMapPickerMarker = null;
+}
+
+async function haritaSecicideKonumumuBul(){
+  try{
+    let pos = await haritaCihazKonumuAl();
+    exMapUserLocation = pos;
+    haritaPickerMarkerAyarla(pos.lat,pos.lng,true);
+    toast("Mevcut konum işaretlendi");
+  }catch(error){
+    toast(haritaKonumHataMetni(error));
+  }
+}
+
+function haritaKonumSeciciKaydet(){
+  if(!exMapPickerMarker){
+    toast("Önce haritadan bir konum seç");
+    return;
+  }
+
+  let p = exMapPickerMarker.getLatLng();
+
+  document.getElementById("exLocationLat").value = String(p.lat);
+  document.getElementById("exLocationLng").value = String(p.lng);
+  document.getElementById("exLocationSource").value = "harita";
+
+  haritaFormKonumDurumuGuncelle();
+  haritaKonumSeciciKapat();
+
+  toast("Harita konumu hazır • Kaydetmeyi unutma");
+}
+
 
 
 
@@ -16904,6 +17958,7 @@ goster();
 if(formBox.style.display=="none"){
 
 guncelleApartmanFormDurumu();
+haritaFormKonumDurumuGuncelle();
 
 formBox.style.display="block";
 quickAddGuncelle();
@@ -17084,6 +18139,7 @@ tel: tel.value,
 ucret: Number(ucret.value)||0,
 bakimGunu: bakimGunu.value,
 not: not.value || "",
+konum:haritaFormKonumVerisi(),
 odemeTarihi:"",
 sonOdemeTarihi:"",
 odemeler:[],
@@ -17103,6 +18159,7 @@ data[editIndex].tel = tel.value;
 data[editIndex].ucret = Number(ucret.value)||0;
 data[editIndex].bakimGunu = bakimGunu.value;
 data[editIndex].not = not.value || "";
+data[editIndex].konum = haritaFormKonumVerisi();
 
 toast("Apartman güncellendi");
 
@@ -17114,6 +18171,7 @@ tel.value="";
 ucret.value="";
 bakimGunu.value="";
 not.value="";
+haritaFormKonumSifirla();
 
 editIndex=null;
 guncelleApartmanFormDurumu();
@@ -19367,6 +20425,8 @@ detayPanel.innerHTML = `
 ${ayHtml(a.not || "Teknik not yok")}
 </div>
 
+${haritaApartmanDetayHtml(a,i)}
+
 ${muayeneDetayHtml(a,i)}
 
 ${sozlesmeDetayHtml(a,i)}
@@ -19494,6 +20554,7 @@ tel.value = a.tel;
 ucret.value = a.ucret;
 bakimGunu.value = a.bakimGunu || "";
 not.value = a.not || "";
+haritaFormKonumYukle(a);
 
 editIndex = i;
 guncelleApartmanFormDurumu();
