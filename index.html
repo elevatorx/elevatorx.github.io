@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1601">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1601">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1601">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1601">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1601">
-<link rel="manifest" href="/manifest.webmanifest?v=1601">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1602">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1602">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1602">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1602">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1602">
+<link rel="manifest" href="/manifest.webmanifest?v=1602">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13037,6 +13037,49 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exApartmentDetailOverviewHeaderFix">
+  .exDetailOverviewHeader{
+    align-items:flex-start!important;
+  }
+
+  .exDetailOverviewHeader > div{
+    flex:1 1 auto!important;
+    min-width:0!important;
+    max-width:calc(100% - 92px)!important;
+  }
+
+  .exDetailOverviewHeader b{
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+
+  button.exDetailOverviewEdit{
+    width:auto!important;
+    min-width:78px!important;
+    max-width:92px!important;
+    flex:0 0 auto!important;
+    margin:0!important;
+    padding:9px 13px!important;
+    align-self:flex-start!important;
+    white-space:nowrap!important;
+    line-height:1.1!important;
+  }
+
+  @media(max-width:390px){
+    .exDetailOverviewHeader > div{
+      max-width:calc(100% - 84px)!important;
+    }
+
+    button.exDetailOverviewEdit{
+      min-width:72px!important;
+      max-width:84px!important;
+      padding:9px 11px!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -13922,10 +13965,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1601" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1602" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.6.01</div>
+<div class="motionSplashVersion" data-splash-version>v1.6.02</div>
 </div>
 </div>
 
@@ -13935,7 +13978,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.6.01";
+  const SPLASH_VERSION = "v1.6.02";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -14656,9 +14699,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.6.01";
+const APP_VERSION = "v1.6.02";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1601", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1602", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
