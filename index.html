@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1602">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1602">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1602">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1602">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1602">
-<link rel="manifest" href="/manifest.webmanifest?v=1602">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1603">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1603">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1603">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1603">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1603">
+<link rel="manifest" href="/manifest.webmanifest?v=1603">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13109,6 +13109,96 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exApartmentDetailTopEdit1603">
+  .exDetailTopActions{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:10px!important;
+    width:100%!important;
+    margin-bottom:14px!important;
+  }
+
+  .exDetailTopActions .detailBackBtn{
+    margin:0!important;
+    flex:0 0 auto!important;
+    width:auto!important;
+    max-width:none!important;
+  }
+
+  .exDetailTopEdit{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:7px!important;
+    width:auto!important;
+    min-width:96px!important;
+    max-width:125px!important;
+    min-height:42px!important;
+    margin:0!important;
+    padding:10px 14px!important;
+    border:0!important;
+    border-radius:999px!important;
+    background:linear-gradient(145deg,#eef4ff,#ffffff)!important;
+    color:#245797!important;
+    box-shadow:0 8px 20px rgba(40,85,150,.10)!important;
+    font-size:12px!important;
+    line-height:1!important;
+    font-weight:900!important;
+    white-space:nowrap!important;
+    flex:0 0 auto!important;
+  }
+
+  .exDetailTopEdit span{
+    font-size:15px!important;
+    line-height:1!important;
+    transform:translateY(-1px);
+  }
+
+  .exDetailTopEdit:active{
+    transform:scale(.97);
+  }
+
+  .exDetailOverviewHeader{
+    display:block!important;
+    width:100%!important;
+    margin:3px 1px 11px!important;
+  }
+
+  .exDetailOverviewHeader > div{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  .exDetailOverviewHeader b{
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+
+  body.darkMode .exDetailTopEdit,
+  html.darkRoot .exDetailTopEdit{
+    background:#263246!important;
+    color:#dce9ff!important;
+    box-shadow:0 8px 20px rgba(0,0,0,.22)!important;
+  }
+
+  @media(max-width:430px){
+    .exDetailTopActions{
+      margin-bottom:12px!important;
+    }
+
+    .exDetailTopEdit{
+      min-width:91px!important;
+      max-width:110px!important;
+      min-height:40px!important;
+      padding:9px 12px!important;
+      font-size:11px!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -13994,10 +14084,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1602" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1603" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.6.02</div>
+<div class="motionSplashVersion" data-splash-version>v1.6.03</div>
 </div>
 </div>
 
@@ -14007,7 +14097,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.6.02";
+  const SPLASH_VERSION = "v1.6.03";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -14728,9 +14818,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.6.02";
+const APP_VERSION = "v1.6.03";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1602", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1603", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -21095,9 +21185,16 @@ detayPanel.innerHTML = `
 
 <div class="detailHero detailPremiumHero">
 
-<button class="detailTopBtn detailBackBtn" onclick="geriDon()">
-← Geri
-</button>
+<div class="exDetailTopActions">
+  <button class="detailTopBtn detailBackBtn" type="button" onclick="geriDon()">
+    ← Geri
+  </button>
+
+  <button class="exDetailTopEdit" type="button" onclick="duzenle(${i})">
+    <span aria-hidden="true">✎</span>
+    Düzenle
+  </button>
+</div>
 
 <div class="detailHeroTop">
   <div class="detailHeroText">
@@ -21127,10 +21224,9 @@ detayPanel.innerHTML = `
 <section class="exDetailTabPane" data-detail-pane="ozet" role="tabpanel">
   <div class="exDetailOverviewHeader">
     <div>
-      <span>Genel görünüm</span>
-      <b>Önemli bilgiler tek ekranda</b>
+      <span>Özet</span>
+      <b>Genel Görünüm</b>
     </div>
-    <button class="exDetailOverviewEdit" type="button" onclick="duzenle(${i})">Düzenle</button>
   </div>
 
   <div class="detailBalanceCard ${cariDurumClass}">
