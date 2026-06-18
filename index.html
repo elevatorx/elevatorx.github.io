@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1600">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1600">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1600">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1600">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1600">
-<link rel="manifest" href="/manifest.webmanifest?v=1600">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1601">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1601">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1601">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1601">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1601">
+<link rel="manifest" href="/manifest.webmanifest?v=1601">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12514,6 +12514,529 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exApartmentDetailTabsStyle">
+  .exDetailTabs{
+    position:sticky;
+    top:calc(env(safe-area-inset-top) + 8px);
+    z-index:80;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:5px;
+    margin:8px 0 14px;
+    padding:5px;
+    border-radius:18px;
+    background:rgba(232,237,246,.92);
+    border:1px solid rgba(203,213,225,.82);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+    box-shadow:0 13px 30px rgba(15,23,42,.10);
+  }
+
+  .exDetailTabButton{
+    min-width:0;
+    min-height:42px;
+    border:0;
+    border-radius:14px;
+    padding:7px 5px;
+    background:transparent;
+    color:#718096;
+    font-size:10px;
+    line-height:1.1;
+    font-weight:950;
+    letter-spacing:-.05px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease;
+  }
+
+  .exDetailTabButton:active{
+    transform:scale(.97);
+  }
+
+  .exDetailTabButton.is-active{
+    background:#fff;
+    color:#101828;
+    box-shadow:0 7px 18px rgba(15,23,42,.09);
+  }
+
+  .exDetailTabPane{
+    display:none;
+    animation:exDetailTabIn .20s ease both;
+  }
+
+  .exDetailTabPane.is-active{
+    display:block;
+  }
+
+  @keyframes exDetailTabIn{
+    from{opacity:0;transform:translateY(6px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  .exDetailOverviewHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:3px 1px 10px;
+  }
+
+  .exDetailOverviewHeader div{
+    min-width:0;
+  }
+
+  .exDetailOverviewHeader span{
+    display:block;
+    color:#007aff;
+    font-size:10px;
+    font-weight:950;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .exDetailOverviewHeader b{
+    display:block;
+    margin-top:4px;
+    color:#0f172a;
+    font-size:17px;
+    line-height:1.2;
+    font-weight:950;
+    letter-spacing:-.25px;
+  }
+
+  .exDetailOverviewEdit{
+    flex:0 0 auto;
+    min-height:38px;
+    border:0;
+    border-radius:13px;
+    padding:8px 12px;
+    background:#eef3fb;
+    color:#315d9f;
+    font-size:11px;
+    font-weight:900;
+  }
+
+  .exDetailStatusGrid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin:11px 0 13px;
+  }
+
+  .exDetailStatusCard{
+    min-width:0;
+    min-height:105px;
+    border:1px solid rgba(226,232,240,.94);
+    border-radius:19px;
+    padding:12px 10px;
+    background:rgba(255,255,255,.84);
+    box-shadow:0 8px 22px rgba(15,23,42,.04);
+    text-align:left;
+    color:#111827;
+  }
+
+  .exDetailStatusCard:active{
+    transform:scale(.98);
+  }
+
+  .exDetailStatusCard i{
+    display:block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    margin-bottom:9px;
+    background:#94a3b8;
+    box-shadow:0 0 0 5px rgba(148,163,184,.12);
+  }
+
+  .exDetailStatusCard span{
+    display:block;
+    color:#8a94a7;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+  }
+
+  .exDetailStatusCard b{
+    display:block;
+    margin-top:6px;
+    color:#172033;
+    font-size:12px;
+    line-height:1.25;
+    font-weight:950;
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+  }
+
+  .exDetailStatusCard em{
+    display:block;
+    margin-top:5px;
+    color:#748197;
+    font-size:9.5px;
+    line-height:1.3;
+    font-style:normal;
+    font-weight:750;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+
+  .exDetailQuickGrid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin-top:12px;
+  }
+
+  .exDetailQuickButton{
+    min-width:0;
+    min-height:78px;
+    border:1px solid rgba(226,232,240,.94);
+    border-radius:18px;
+    padding:10px 7px;
+    background:#fff;
+    color:#172033;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(15,23,42,.035);
+  }
+
+  .exDetailQuickButton:active{
+    transform:scale(.97);
+  }
+
+  .exDetailQuickButton .exIcon{
+    width:31px;
+    height:31px;
+    margin:0 auto 7px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eef5ff;
+    color:#176fe8;
+  }
+
+  .exDetailQuickButton.pay .exIcon{
+    background:#eaf8ef;
+    color:#168a3a;
+  }
+
+  .exDetailQuickButton.edit .exIcon{
+    background:#f1f3f7;
+    color:#596579;
+  }
+
+  .exDetailQuickButton b{
+    display:block;
+    color:inherit;
+    font-size:10.5px;
+    line-height:1.15;
+    font-weight:950;
+  }
+
+  .exDetailTabSection{
+    margin-top:12px;
+    padding:14px;
+    border-radius:25px;
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(226,232,240,.92);
+    box-shadow:0 13px 32px rgba(15,23,42,.04);
+  }
+
+  .exDetailTabSection + .exDetailTabSection{
+    margin-top:11px;
+  }
+
+  .exDetailSectionTitle{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:11px;
+  }
+
+  .exDetailSectionTitle span{
+    display:block;
+    color:#007aff;
+    font-size:10px;
+    font-weight:950;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .exDetailSectionTitle b{
+    display:block;
+    margin-top:4px;
+    color:#0f172a;
+    font-size:16px;
+    line-height:1.2;
+    font-weight:950;
+  }
+
+  .exDetailSectionButton{
+    flex:0 0 auto;
+    min-height:36px;
+    border:0;
+    border-radius:12px;
+    padding:7px 11px;
+    background:#edf3ff;
+    color:#315d9f;
+    font-size:10px;
+    font-weight:900;
+  }
+
+  .exDetailActionPair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .exDetailActionPair .detailActionCard{
+    min-height:76px;
+  }
+
+  .exDetailPdfQuick{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin-top:11px;
+  }
+
+  .exDetailPdfQuick button{
+    min-height:58px;
+    border:1px solid #e5eaf2;
+    border-radius:16px;
+    padding:9px 6px;
+    background:#f8fafc;
+    color:#43536c;
+    font-size:9.5px;
+    line-height:1.2;
+    font-weight:900;
+  }
+
+  .exDetailPdfQuick button:active{
+    transform:scale(.97);
+  }
+
+  .exDetailTechnicalInfo{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .exDetailTechnicalInfo .infoCard{
+    min-width:0;
+    border-radius:18px!important;
+  }
+
+  .exDetailNoteBox{
+    padding:13px 14px;
+    border-radius:18px;
+    background:#f4f7fb;
+    border:1px solid #e4eaf2;
+    color:#506078;
+    font-size:12px;
+    line-height:1.5;
+    font-weight:750;
+  }
+
+  .exDetailPaneHint{
+    padding:12px 13px;
+    border-radius:16px;
+    background:#eef5ff;
+    color:#506b91;
+    font-size:10.5px;
+    line-height:1.45;
+    font-weight:750;
+    margin-bottom:11px;
+  }
+
+  .exDetailHistoryPane .elevatorHistoryCard,
+  .exDetailTechnicalPane .partsHistoryCard,
+  .exDetailTechnicalPane .inspectionDetailBox,
+  .exDetailTechnicalPane .contractDetailBox,
+  .exDetailTechnicalPane .exDetailLocationCard,
+  .exDetailCariPane .cariSummaryCard{
+    margin-top:0!important;
+    margin-bottom:11px!important;
+  }
+
+  .exDetailHistoryPane .detailReportSection{
+    margin-top:11px;
+  }
+
+  .exDetailHistoryPane .detailDangerZone{
+    margin-top:11px;
+  }
+
+  body.darkMode .exDetailTabs,
+  html.darkRoot .exDetailTabs{
+    background:rgba(18,26,39,.92);
+    border-color:rgba(255,255,255,.08);
+  }
+
+  body.darkMode .exDetailTabButton,
+  html.darkRoot .exDetailTabButton{
+    color:#8e9bb0;
+  }
+
+  body.darkMode .exDetailTabButton.is-active,
+  html.darkRoot .exDetailTabButton.is-active{
+    background:#283244;
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.25);
+  }
+
+  body.darkMode .exDetailOverviewHeader b,
+  body.darkMode .exDetailStatusCard b,
+  body.darkMode .exDetailQuickButton,
+  body.darkMode .exDetailSectionTitle b,
+  html.darkRoot .exDetailOverviewHeader b,
+  html.darkRoot .exDetailStatusCard b,
+  html.darkRoot .exDetailQuickButton,
+  html.darkRoot .exDetailSectionTitle b{
+    color:#f8fafc;
+  }
+
+  body.darkMode .exDetailStatusCard,
+  body.darkMode .exDetailQuickButton,
+  body.darkMode .exDetailTabSection,
+  body.darkMode .exDetailNoteBox,
+  body.darkMode .exDetailPdfQuick button,
+  html.darkRoot .exDetailStatusCard,
+  html.darkRoot .exDetailQuickButton,
+  html.darkRoot .exDetailTabSection,
+  html.darkRoot .exDetailNoteBox,
+  html.darkRoot .exDetailPdfQuick button{
+    background:rgba(17,24,39,.82);
+    border-color:rgba(255,255,255,.08);
+    color:#cbd5e1;
+  }
+
+  @media(max-width:430px){
+    .exDetailTabs{
+      gap:4px;
+      padding:4px;
+      border-radius:16px;
+    }
+
+    .exDetailTabButton{
+      min-height:40px;
+      padding:6px 3px;
+      font-size:9.4px;
+    }
+
+    .exDetailStatusGrid{
+      grid-template-columns:1fr;
+    }
+
+    .exDetailStatusCard{
+      min-height:0;
+      display:grid;
+      grid-template-columns:18px minmax(0,1fr);
+      grid-template-rows:auto auto;
+      column-gap:8px;
+      align-items:start;
+      padding:11px 12px;
+    }
+
+    .exDetailStatusCard i{
+      grid-row:1/3;
+      margin:4px 0 0;
+    }
+
+    .exDetailStatusCard span{
+      grid-column:2;
+    }
+
+    .exDetailStatusCard b{
+      grid-column:2;
+      margin-top:4px;
+      -webkit-line-clamp:1;
+    }
+
+    .exDetailStatusCard em{
+      grid-column:2;
+      margin-top:4px;
+    }
+
+    .exDetailActionPair{
+      grid-template-columns:1fr;
+    }
+
+    .exDetailPdfQuick{
+      grid-template-columns:repeat(3,1fr);
+    }
+  }
+
+  @media(max-width:355px){
+    .exDetailTabButton{
+      font-size:8.7px;
+    }
+
+    .exDetailQuickGrid{
+      grid-template-columns:1fr;
+    }
+
+    .exDetailQuickButton{
+      min-height:54px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      text-align:left;
+      padding:9px 11px;
+    }
+
+    .exDetailQuickButton .exIcon{
+      margin:0;
+      flex:0 0 auto;
+    }
+  }
+</style>
+
+
+<style id="exApartmentDetailCompactPatch">
+  .detailPremiumHero{
+    padding-bottom:118px!important;
+  }
+
+  .exDetailTabPane > .detailBalanceCard:first-child{
+    margin-top:0;
+  }
+
+  @media(max-width:430px){
+    .detailPremiumHero{
+      padding-top:15px!important;
+      padding-left:13px!important;
+      padding-right:13px!important;
+    }
+
+    .detailHeroTop{
+      margin-bottom:9px;
+    }
+
+    .detailPremiumHero .detailTitle{
+      font-size:27px!important;
+    }
+
+    .inspectionHeroBadgeStack{
+      gap:5px;
+    }
+
+    .inspectionHeroBadgeStack .badge,
+    .inspectionHeroBadgeStack .inspectionBadge,
+    .inspectionHeroBadgeStack .contractBadge{
+      font-size:8.5px!important;
+      padding:5px 7px!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -13399,10 +13922,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1600" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1601" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.6.00</div>
+<div class="motionSplashVersion" data-splash-version>v1.6.01</div>
 </div>
 </div>
 
@@ -13412,7 +13935,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.6.00";
+  const SPLASH_VERSION = "v1.6.01";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -14133,9 +14656,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.6.00";
+const APP_VERSION = "v1.6.01";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1600", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1601", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -20307,6 +20830,132 @@ detayAc(aktifDetay);
 }
 }
 
+
+let exDetailActiveTab = "ozet";
+let exDetailLastApartmentIndex = null;
+
+function apartmanDetaySekmeGecerli(tab){
+  return ["ozet","cari","teknik","gecmis"].includes(tab) ? tab : "ozet";
+}
+
+function apartmanDetaySekmeAc(tab,kaydirmali){
+  tab = apartmanDetaySekmeGecerli(tab);
+  exDetailActiveTab = tab;
+
+  let panel = document.getElementById("detayPanel");
+  if(!panel) return;
+
+  panel.querySelectorAll(".exDetailTabButton").forEach(function(button){
+    let aktif = button.dataset.detailTab === tab;
+    button.classList.toggle("is-active",aktif);
+    button.setAttribute("aria-selected",aktif ? "true" : "false");
+    button.tabIndex = aktif ? 0 : -1;
+  });
+
+  panel.querySelectorAll(".exDetailTabPane").forEach(function(pane){
+    let aktif = pane.dataset.detailPane === tab;
+    pane.classList.toggle("is-active",aktif);
+    pane.hidden = !aktif;
+  });
+
+  if(kaydirmali){
+    let tabs = document.getElementById("exDetailTabs");
+    if(tabs){
+      let hedef = window.scrollY + tabs.getBoundingClientRect().top - 8;
+      window.scrollTo({
+        top:Math.max(0,hedef),
+        behavior:"smooth"
+      });
+    }
+  }
+
+  try{
+    sessionStorage.setItem("elevatorx_detail_active_tab",tab);
+  }catch(e){}
+}
+
+function apartmanDetaySekmeKlavye(event){
+  let tuslar = ["ArrowLeft","ArrowRight","Home","End"];
+  if(!tuslar.includes(event.key)) return;
+
+  event.preventDefault();
+
+  let siralama = ["ozet","cari","teknik","gecmis"];
+  let mevcut = siralama.indexOf(exDetailActiveTab);
+  let yeni = mevcut;
+
+  if(event.key === "ArrowLeft") yeni = (mevcut - 1 + siralama.length) % siralama.length;
+  if(event.key === "ArrowRight") yeni = (mevcut + 1) % siralama.length;
+  if(event.key === "Home") yeni = 0;
+  if(event.key === "End") yeni = siralama.length - 1;
+
+  apartmanDetaySekmeAc(siralama[yeni],false);
+
+  let buton = document.querySelector('.exDetailTabButton[data-detail-tab="' + siralama[yeni] + '"]');
+  if(buton) buton.focus();
+}
+
+function apartmanDetayOzetKartlariHtml(a,i){
+  let konum = typeof haritaKonumGet === "function" ? haritaKonumGet(a) : null;
+
+  let muayene = typeof muayeneMevcut === "function" ? muayeneMevcut(a) : {};
+  let muayeneEtiket = typeof muayeneEtiketBilgisi === "function"
+    ? muayeneEtiketBilgisi(muayene.etiket)
+    : {text:"Etiket Bilgisi Yok",key:""};
+
+  let muayeneDurum = typeof muayeneTakvimDurumu === "function"
+    ? muayeneTakvimDurumu(a)
+    : {text:"Tarih Yok"};
+
+  let sozlesme = typeof sozlesmeMevcut === "function" ? sozlesmeMevcut(a) : {};
+  let sozlesmeDurum = typeof sozlesmeDurumBilgisi === "function"
+    ? sozlesmeDurumBilgisi(a)
+    : {short:"Bilgi Yok",key:"none"};
+
+  let haritaRenk = konum ? "#21a65b" : "#94a3b8";
+  let muayeneRenk =
+    muayeneEtiket.key === "kirmizi" ? "#e33d4f" :
+    muayeneEtiket.key === "sari" ? "#f2a51a" :
+    (muayeneEtiket.key === "yesil" || muayeneEtiket.key === "mavi") ? "#21a65b" :
+    "#94a3b8";
+
+  let sozlesmeRenk =
+    sozlesmeDurum.key === "expired" ? "#e33d4f" :
+    sozlesmeDurum.key === "soon" ? "#f2a51a" :
+    sozlesmeDurum.key === "active" ? "#21a65b" :
+    "#94a3b8";
+
+  let konumIslem = konum
+    ? "haritaMerkeziAc(" + i + ")"
+    : "duzenle(" + i + ")";
+
+  return `
+    <div class="exDetailStatusGrid">
+      <button class="exDetailStatusCard" type="button" onclick="${konumIslem}">
+        <i style="background:${haritaRenk};box-shadow:0 0 0 5px ${konum ? "rgba(33,166,91,.12)" : "rgba(148,163,184,.12)"}"></i>
+        <span>Harita</span>
+        <b>${konum ? "Konum Kayıtlı" : "Konum Eklenmedi"}</b>
+        <em>${konum ? "Haritada gör ve yol tarifi al" : "Apartman konumunu belirle"}</em>
+      </button>
+
+      <button class="exDetailStatusCard" type="button" onclick="apartmanDetaySekmeAc('teknik',true)">
+        <i style="background:${muayeneRenk};box-shadow:0 0 0 5px ${muayeneEtiket.key ? "rgba(36,120,232,.10)" : "rgba(148,163,184,.12)"}"></i>
+        <span>Muayene</span>
+        <b>${ayHtml(muayeneEtiket.text)}</b>
+        <em>${ayHtml(muayeneDurum.text)}</em>
+      </button>
+
+      <button class="exDetailStatusCard" type="button" onclick="apartmanDetaySekmeAc('teknik',true)">
+        <i style="background:${sozlesmeRenk};box-shadow:0 0 0 5px ${sozlesmeDurum.key !== "none" ? "rgba(112,71,200,.10)" : "rgba(148,163,184,.12)"}"></i>
+        <span>Sözleşme</span>
+        <b>${ayHtml(sozlesmeDurum.short)}</b>
+        <em>${ayHtml(sozlesme.bitisTarihi ? "Bitiş: " + kartTarih(sozlesme.bitisTarihi) : "Tarih bilgisi yok")}</em>
+      </button>
+    </div>
+  `;
+}
+
+
 function detayAc(i){
 
 haptic("light");
@@ -20320,6 +20969,12 @@ aktifEkran = "detay";
 aktifDetay = i;
 
 let a = data[i];
+
+if(exDetailLastApartmentIndex !== i){
+  exDetailLastApartmentIndex = i;
+  exDetailActiveTab = "ozet";
+}
+
 let d = durumBilgisi(a);
 let cari = cariOzet(a);
 
@@ -20369,169 +21024,233 @@ detayPanel.innerHTML = `
     </div>
   </div>
 
-  <div class="inspectionHeroBadgeStack"><span class="badge ${d.badgeClass} detailHeroBadge">${d.durum}</span>${muayeneEtiketRozeti(a)}${sozlesmeKartRozeti(a)}</div>
-</div>
-
-<div class="detailBalanceCard ${cariDurumClass}">
-  <div>
-    <span>Güncel Cari</span>
-    <strong>${kalanText}</strong>
-  </div>
-  <em>Toplam borç ${tutarFormat(cari.beklenen)} • Tahsil ${tutarFormat(cari.toplam)}</em>
-</div>
-
-<div class="detailMiniStats">
-  <div>
-    <span>Bu Ay Bakım</span>
-    <b>${bakimBuAyYapildi(a) ? (a.bakimTarihi || "-") : "Yapılmadı"}</b>
-  </div>
-  <div>
-    <span>Bakım Günü</span>
-    <b>${a.bakimGunu || "-"}</b>
-  </div>
-  <div>
-    <span>Son Parça</span>
-    <b>${ayHtml(sonParca || "-")}</b>
+  <div class="inspectionHeroBadgeStack">
+    <span class="badge ${d.badgeClass} detailHeroBadge">${d.durum}</span>
+    ${muayeneEtiketRozeti(a)}
+    ${sozlesmeKartRozeti(a)}
   </div>
 </div>
 
-<div class="detailInfoGrid premiumDetailInfo">
-
-<div class="infoCard">
-<span class="infoLabel">Yönetici</span>
-<span class="infoValue">${ayHtml(a.yonetici || "-")}</span>
+<div id="exDetailTabs" class="exDetailTabs" role="tablist" aria-label="Apartman detay bölümleri" onkeydown="apartmanDetaySekmeKlavye(event)">
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="ozet" onclick="apartmanDetaySekmeAc('ozet',true)">Özet</button>
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="cari" onclick="apartmanDetaySekmeAc('cari',true)">Bakım / Cari</button>
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="teknik" onclick="apartmanDetaySekmeAc('teknik',true)">Teknik</button>
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="gecmis" onclick="apartmanDetaySekmeAc('gecmis',true)">Geçmiş / PDF</button>
 </div>
 
-<div class="infoCard">
-<span class="infoLabel">Telefon</span>
-<span class="infoValue small">
-<a class="infoPhone" href="tel:${telTemiz}">${ayHtml(a.tel || "-")}</a>
-</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Apartman Kodu</span>
-<span class="infoValue">${apartmanKodu(i)}</span>
-</div>
-
-<div class="infoCard">
-<span class="infoLabel">Cari Durumu</span>
-<span class="infoValue small">${ayHtml(cari.durum)}</span>
-</div>
-
-</div>
-
-<div class="detailNote premiumDetailNote">
-${ayHtml(a.not || "Teknik not yok")}
-</div>
-
-${haritaApartmanDetayHtml(a,i)}
-
-${muayeneDetayHtml(a,i)}
-
-${sozlesmeDetayHtml(a,i)}
-
-${cariOzetHtml(a,i)}
-
-<div class="detailActionSection">
-  <div class="detailSectionHead">
+<section class="exDetailTabPane" data-detail-pane="ozet" role="tabpanel">
+  <div class="exDetailOverviewHeader">
     <div>
-      <span>Hızlı İşlemler</span>
-      <b>Günlük saha işlemleri</b>
+      <span>Genel görünüm</span>
+      <b>Önemli bilgiler tek ekranda</b>
+    </div>
+    <button class="exDetailOverviewEdit" type="button" onclick="duzenle(${i})">Düzenle</button>
+  </div>
+
+  <div class="detailBalanceCard ${cariDurumClass}">
+    <div>
+      <span>Güncel Cari</span>
+      <strong>${kalanText}</strong>
+    </div>
+    <em>Toplam borç ${tutarFormat(cari.beklenen)} • Tahsil ${tutarFormat(cari.toplam)}</em>
+  </div>
+
+  <div class="detailMiniStats">
+    <div>
+      <span>Bu Ay Bakım</span>
+      <b>${bakimBuAyYapildi(a) ? (a.bakimTarihi || "-") : "Yapılmadı"}</b>
+    </div>
+    <div>
+      <span>Bakım Günü</span>
+      <b>${a.bakimGunu || "-"}</b>
+    </div>
+    <div>
+      <span>Son Parça</span>
+      <b>${ayHtml(sonParca || "-")}</b>
     </div>
   </div>
 
-  <div class="detailPrimaryActions">
+  ${apartmanDetayOzetKartlariHtml(a,i)}
 
-    <button class="detailActionCard payAction ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
-      <span class="detailActionIcon exIcon exMoney" aria-hidden="true"></span>
-      <span>
-        <b>${odemeText}</b>
-        <em>Tahsilat / makbuz</em>
+  <div class="detailInfoGrid premiumDetailInfo">
+    <div class="infoCard">
+      <span class="infoLabel">Yönetici</span>
+      <span class="infoValue">${ayHtml(a.yonetici || "-")}</span>
+    </div>
+
+    <div class="infoCard">
+      <span class="infoLabel">Telefon</span>
+      <span class="infoValue small">
+        <a class="infoPhone" href="tel:${telTemiz}">${ayHtml(a.tel || "-")}</a>
       </span>
-    </button>
-
-    <button class="detailActionCard maintAction ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
-      <span class="detailActionIcon exIcon exCheck" aria-hidden="true"></span>
-      <span>
-        <b>${bakimText}</b>
-        <em>Bakım raporu</em>
-      </span>
-    </button>
-
-    <button class="detailActionCard editAction" onclick="duzenle(${i})">
-      <span class="detailActionIcon exIcon exEdit" aria-hidden="true"></span>
-      <span>
-        <b>Düzenle</b>
-        <em>Apartman bilgileri</em>
-      </span>
-    </button>
-
-  </div>
-</div>
-
-${parcaGecmisiHtml(i)}
-
-<div class="detailReportSection">
-  <div class="detailSectionHead">
-    <div>
-      <span>PDF Merkezi</span>
-      <b>Yöneticiye gönderilecek belgeler</b>
     </div>
   </div>
 
-  <div class="detailReportGrid">
-
-    <button class="detailReportCard" onclick="pdf(${i})">
-      <span class="exIcon exDoc" aria-hidden="true"></span>
-      <b>Bakım Raporu</b>
-      <em>Servis / bakım PDF</em>
-    </button>
-
-    <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
+  <div class="exDetailQuickGrid">
+    <button class="exDetailQuickButton pay" type="button" onclick="odeme(${i})">
       <span class="exIcon exMoney" aria-hidden="true"></span>
-      <b>Ödeme Makbuzu</b>
-      <em>Son tahsilat belgesi</em>
+      <b>${odemeText}</b>
     </button>
 
-    <button class="detailReportCard" onclick="cariHesapPdf(${i})">
-      <span class="exIcon exChart" aria-hidden="true"></span>
-      <b>Cari Özeti</b>
-      <em>Borç ve tahsilat</em>
+    <button class="exDetailQuickButton" type="button" onclick="bakim(${i})">
+      <span class="exIcon exCheck" aria-hidden="true"></span>
+      <b>${bakimText}</b>
     </button>
 
-    <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
-      <span class="exIcon exCard" aria-hidden="true"></span>
-      <b>Sicil Kartı</b>
-      <em>Asansör kayıt kartı</em>
+    <button class="exDetailQuickButton edit" type="button" onclick="duzenle(${i})">
+      <span class="exIcon exEdit" aria-hidden="true"></span>
+      <b>Düzenle</b>
     </button>
-
-    <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
-      <span class="exIcon exPart" aria-hidden="true"></span>
-      <b>Parça Geçmişi</b>
-      <em>Değişen parçalar</em>
-    </button>
-
-    <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
-      <span class="exIcon exReport" aria-hidden="true"></span>
-      <div>
-        <b>Kontrol Raporu & Revizyon Teklifi</b>
-        <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
-      </div>
-    </button>
-
   </div>
-</div>
+</section>
 
-<div class="detailDangerZone">
-<button class="detailDeleteBtn" onclick="sil(${i})">
-Kaydı Sil
-</button>
-</div>
+<section class="exDetailTabPane exDetailCariPane" data-detail-pane="cari" role="tabpanel">
+  <div class="exDetailPaneHint">
+    Bakım, ödeme ve cari hesap işlemleri bu bölümde toplandı.
+  </div>
+
+  <div class="exDetailTabSection">
+    <div class="exDetailSectionTitle">
+      <div>
+        <span>Hızlı işlem</span>
+        <b>Bakım ve tahsilat</b>
+      </div>
+    </div>
+
+    <div class="exDetailActionPair">
+      <button class="detailActionCard payAction ${cari.kalanPozitif <= 0 && cari.toplam > 0 ? "done" : ""}" onclick="odeme(${i})">
+        <span class="detailActionIcon exIcon exMoney" aria-hidden="true"></span>
+        <span>
+          <b>${odemeText}</b>
+          <em>Tahsilat / makbuz</em>
+        </span>
+      </button>
+
+      <button class="detailActionCard maintAction ${a.bakimTarihi ? "done" : ""}" onclick="bakim(${i})">
+        <span class="detailActionIcon exIcon exCheck" aria-hidden="true"></span>
+        <span>
+          <b>${bakimText}</b>
+          <em>Bakım kaydı</em>
+        </span>
+      </button>
+    </div>
+
+    <div class="exDetailPdfQuick">
+      <button type="button" onclick="pdf(${i})">Bakım Raporu</button>
+      <button type="button" onclick="odemeMakbuzuPdf(${i})">Ödeme Makbuzu</button>
+      <button type="button" onclick="cariHesapPdf(${i})">Cari Özeti</button>
+    </div>
+  </div>
+
+  ${cariOzetHtml(a,i)}
+</section>
+
+<section class="exDetailTabPane exDetailTechnicalPane" data-detail-pane="teknik" role="tabpanel">
+  <div class="exDetailPaneHint">
+    Teknik notlar, konum, muayene, sözleşme ve parça geçmişi bu bölümde.
+  </div>
+
+  <div class="exDetailTabSection">
+    <div class="exDetailSectionTitle">
+      <div>
+        <span>Apartman bilgileri</span>
+        <b>Teknik kart</b>
+      </div>
+      <button class="exDetailSectionButton" type="button" onclick="duzenle(${i})">Düzenle</button>
+    </div>
+
+    <div class="exDetailTechnicalInfo">
+      <div class="infoCard">
+        <span class="infoLabel">Apartman Kodu</span>
+        <span class="infoValue">${apartmanKodu(i)}</span>
+      </div>
+      <div class="infoCard">
+        <span class="infoLabel">Cari Durumu</span>
+        <span class="infoValue small">${ayHtml(cari.durum)}</span>
+      </div>
+    </div>
+
+    <div style="height:9px"></div>
+
+    <div class="exDetailNoteBox">
+      ${ayHtml(a.not || "Teknik not yok")}
+    </div>
+  </div>
+
+  ${haritaApartmanDetayHtml(a,i)}
+  ${muayeneDetayHtml(a,i)}
+  ${sozlesmeDetayHtml(a,i)}
+  ${parcaGecmisiHtml(i)}
+</section>
+
+<section class="exDetailTabPane exDetailHistoryPane" data-detail-pane="gecmis" role="tabpanel">
+  <div class="exDetailPaneHint">
+    İşlem geçmişi ve yöneticiye gönderilecek bütün belgeler burada.
+  </div>
+
+  ${asansorGecmisiHtml(i)}
+
+  <div class="detailReportSection">
+    <div class="detailSectionHead">
+      <div>
+        <span>PDF Merkezi</span>
+        <b>Yöneticiye gönderilecek belgeler</b>
+      </div>
+    </div>
+
+    <div class="detailReportGrid">
+      <button class="detailReportCard" onclick="pdf(${i})">
+        <span class="exIcon exDoc" aria-hidden="true"></span>
+        <b>Bakım Raporu</b>
+        <em>Servis / bakım PDF</em>
+      </button>
+
+      <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
+        <span class="exIcon exMoney" aria-hidden="true"></span>
+        <b>Ödeme Makbuzu</b>
+        <em>Son tahsilat belgesi</em>
+      </button>
+
+      <button class="detailReportCard" onclick="cariHesapPdf(${i})">
+        <span class="exIcon exChart" aria-hidden="true"></span>
+        <b>Cari Özeti</b>
+        <em>Borç ve tahsilat</em>
+      </button>
+
+      <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
+        <span class="exIcon exCard" aria-hidden="true"></span>
+        <b>Sicil Kartı</b>
+        <em>Asansör kayıt kartı</em>
+      </button>
+
+      <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
+        <span class="exIcon exPart" aria-hidden="true"></span>
+        <b>Parça Geçmişi</b>
+        <em>Değişen parçalar</em>
+      </button>
+
+      <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
+        <span class="exIcon exReport" aria-hidden="true"></span>
+        <div>
+          <b>Kontrol Raporu & Revizyon Teklifi</b>
+          <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="detailDangerZone">
+    <button class="detailDeleteBtn" onclick="sil(${i})">
+      Kaydı Sil
+    </button>
+  </div>
+</section>
 
 </div>
 
 `;
+
+apartmanDetaySekmeAc(exDetailActiveTab,false);
 
 animateIn(detayPanel,"screenInRight");
 
