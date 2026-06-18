@@ -13038,44 +13038,73 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </style>
 
 
-<style id="exApartmentDetailOverviewHeaderFix">
-  .exDetailOverviewHeader{
-    align-items:flex-start!important;
-  }
-
-  .exDetailOverviewHeader > div{
-    flex:1 1 auto!important;
+<style id="exApartmentDetailFix1602">
+  /* Teknik kart başlığındaki Düzenle butonu global buton kurallarından
+     etkilenip kart dışına taşmasın. */
+  .exDetailSectionTitle{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:start!important;
+    width:100%!important;
     min-width:0!important;
-    max-width:calc(100% - 92px)!important;
   }
 
-  .exDetailOverviewHeader b{
-    white-space:normal!important;
-    word-break:normal!important;
-    overflow-wrap:normal!important;
+  .exDetailSectionTitle > div{
+    min-width:0!important;
   }
 
-  button.exDetailOverviewEdit{
+  .exDetailSectionButton{
     width:auto!important;
-    min-width:78px!important;
-    max-width:92px!important;
-    flex:0 0 auto!important;
+    min-width:82px!important;
+    max-width:118px!important;
+    min-height:38px!important;
     margin:0!important;
-    padding:9px 13px!important;
-    align-self:flex-start!important;
+    padding:8px 12px!important;
+    justify-self:end!important;
+    align-self:start!important;
+    flex:none!important;
     white-space:nowrap!important;
-    line-height:1.1!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
   }
 
-  @media(max-width:390px){
-    .exDetailOverviewHeader > div{
-      max-width:calc(100% - 84px)!important;
+  /* Alt sabit menünün son kartları örtmesini engelle. */
+  #detayPanel .exDetailTabPane{
+    padding-bottom:calc(170px + env(safe-area-inset-bottom))!important;
+  }
+
+  #detayPanel .exDetailTabPane.is-active{
+    min-height:calc(100vh - 190px)!important;
+  }
+
+  /* Ana detay taşıyıcısında da ikinci bir emniyet payı bırak. */
+  #detayPanel .detailPremiumHero{
+    padding-bottom:calc(165px + env(safe-area-inset-bottom))!important;
+    overflow-x:hidden!important;
+  }
+
+  /* Kart içindeki uzun içeriklerin yatay taşmasını önle. */
+  #detayPanel .exDetailTabSection,
+  #detayPanel .exDetailTechnicalInfo,
+  #detayPanel .exDetailSectionTitle{
+    max-width:100%!important;
+    overflow:hidden!important;
+  }
+
+  @media(max-width:430px){
+    .exDetailSectionButton{
+      min-width:76px!important;
+      max-width:96px!important;
+      font-size:10px!important;
+      padding:8px 10px!important;
     }
 
-    button.exDetailOverviewEdit{
-      min-width:72px!important;
-      max-width:84px!important;
-      padding:9px 11px!important;
+    #detayPanel .exDetailTabPane{
+      padding-bottom:calc(185px + env(safe-area-inset-bottom))!important;
+    }
+
+    #detayPanel .detailPremiumHero{
+      padding-bottom:calc(178px + env(safe-area-inset-bottom))!important;
     }
   }
 </style>
@@ -16574,6 +16603,12 @@ function haritaLeafletYukle(){
 }
 
 function haritaSayi(v){
+  if(v === null || v === undefined) return null;
+
+  if(typeof v === "string" && v.trim() === ""){
+    return null;
+  }
+
   let n = Number(v);
   return Number.isFinite(n) ? n : null;
 }
@@ -16586,6 +16621,10 @@ function haritaKonumGet(a){
 
   if(lat === null || lng === null) return null;
   if(lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+
+  // Boş form alanlarının eski sürümlerde 0,0 olarak kaydedilmiş olması
+  // gerçek bir apartman konumu sayılmaz.
+  if(Math.abs(lat) < 0.000001 && Math.abs(lng) < 0.000001) return null;
 
   return {
     lat:lat,
@@ -16601,6 +16640,7 @@ function haritaFormKonumVerisi(){
   let kaynak = document.getElementById("exLocationSource").value || "harita";
 
   if(lat === null || lng === null) return null;
+  if(Math.abs(lat) < 0.000001 && Math.abs(lng) < 0.000001) return null;
 
   return {
     lat:lat,
@@ -16626,7 +16666,10 @@ function haritaFormKonumDurumuGuncelle(){
 
   let lat = haritaSayi(latEl.value);
   let lng = haritaSayi(lngEl.value);
-  let kayitli = lat !== null && lng !== null;
+  let kayitli =
+    lat !== null &&
+    lng !== null &&
+    !(Math.abs(lat) < 0.000001 && Math.abs(lng) < 0.000001);
 
   if(title) title.textContent = kayitli ? "Apartman konumu hazır" : "Konum eklenmedi";
   if(meta){
