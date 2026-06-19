@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1711">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1711">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1711">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1711">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1711">
-<link rel="manifest" href="/manifest.webmanifest?v=1711">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1712">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1712">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1712">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1712">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1712">
+<link rel="manifest" href="/manifest.webmanifest?v=1712">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14788,6 +14788,25 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exDashboardClean1712">
+  /* Takip Merkezi kaldırıldıktan sonra metrikler ile Son İşlem
+     arasındaki ritmi koru. */
+  .exDashMetricGrid{
+    margin-bottom:11px!important;
+  }
+
+  .exDashActivity{
+    margin-top:0!important;
+    margin-bottom:14px!important;
+  }
+
+  /* Eski pulse kartı CSS'i dosyada kalsa da hiçbir alan üretmesin. */
+  .exDashPulseCard{
+    display:none!important;
+  }
+</style>
+
 </head>
 
 <body>
@@ -15673,10 +15692,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1711" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1712" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.7.11</div>
+<div class="motionSplashVersion" data-splash-version>v1.7.12</div>
 </div>
 </div>
 
@@ -15686,7 +15705,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.7.11";
+  const SPLASH_VERSION = "v1.7.12";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -16407,9 +16426,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.7.11";
+const APP_VERSION = "v1.7.12";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1711", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1712", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -20756,34 +20775,6 @@ let h = `
     </div>
     <div class="exDashMetricNumber">${ayHtml(tutarFormat(toplam))}</div>
     <div class="exDashMetricLabel">Bu ay tahsilat</div>
-  </div>
-</div>
-
-<div class="exDashPulseCard">
-  <div class="exDashPulseHead">
-    <div>
-      <span>Takip Merkezi</span>
-      <b>Muayene ve sözleşme</b>
-    </div>
-    <em>Detay için dokun</em>
-  </div>
-
-  <div class="exDashPulseRow">
-    <div class="exDashPulseLabel">Muayene</div>
-    <div class="exDashPulseChips">
-      <button class="exDashPulseChip ${muayeneOzet.yaklasan ? 'warning' : 'is-zero'}" type="button" onclick="setFilter('inspection_soon')"><b>${muayeneOzet.yaklasan}</b>Yaklaşan</button>
-      <button class="exDashPulseChip ${muayeneOzet.geciken ? 'danger' : 'is-zero'}" type="button" onclick="setFilter('inspection_overdue')"><b>${muayeneOzet.geciken}</b>Geciken</button>
-      <button class="exDashPulseChip ${muayeneOzet.sari ? 'warning' : 'is-zero'}" type="button" onclick="setFilter('label_yellow')"><b>${muayeneOzet.sari}</b>Sarı</button>
-      <button class="exDashPulseChip ${muayeneOzet.kirmizi ? 'danger' : 'is-zero'}" type="button" onclick="setFilter('label_red')"><b>${muayeneOzet.kirmizi}</b>Kırmızı</button>
-    </div>
-  </div>
-
-  <div class="exDashPulseRow">
-    <div class="exDashPulseLabel">Sözleşme</div>
-    <div class="exDashPulseChips">
-      <button class="exDashPulseChip ${sozlesmeOzet.yaklasan ? 'purple' : 'is-zero'}" type="button" onclick="setFilter('contract_soon')"><b>${sozlesmeOzet.yaklasan}</b>Yenileme Yakın</button>
-      <button class="exDashPulseChip ${sozlesmeOzet.dolan ? 'danger' : 'is-zero'}" type="button" onclick="setFilter('contract_expired')"><b>${sozlesmeOzet.dolan}</b>Süresi Dolan</button>
-    </div>
   </div>
 </div>
 
