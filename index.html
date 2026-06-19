@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1720">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1720">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1720">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1720">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1720">
-<link rel="manifest" href="/manifest.webmanifest?v=1720">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1721">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1721">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1721">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1721">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1721">
+<link rel="manifest" href="/manifest.webmanifest?v=1721">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14808,23 +14808,30 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </style>
 
 
-<style id="exElevatorXIslandStyle1720">
+
+<style id="exElevatorXIslandStyle1721">
+  /*
+    Web içeriği sistem arayüzünün üstüne çıkamaz. Bu nedenle kapsül,
+    gerçek Dynamic Island hizasının arkasında başlar ve yalnızca alt
+    bölümü aşağı doğru büyüyerek görünür. Böylece "adanın altından
+    çıkıyor" yanılsaması oluşur.
+  */
   #exElevatorXIsland{
     position:fixed;
-    top:calc(env(safe-area-inset-top) + 7px);
+    top:max(0px,calc(env(safe-area-inset-top) - 48px));
     left:50%;
     z-index:2147483010;
-    width:54px;
-    height:18px;
+    width:124px;
+    height:35px;
     opacity:0;
     pointer-events:none;
-    transform:translate3d(-50%,-12px,0) scale(.82);
+    transform:translate3d(-50%,-2px,0) scale(.96);
     transform-origin:50% 0%;
     transition:
-      width .46s cubic-bezier(.2,.88,.22,1.12),
-      height .46s cubic-bezier(.2,.88,.22,1.12),
-      opacity .18s ease,
-      transform .46s cubic-bezier(.2,.88,.22,1.12);
+      width .48s cubic-bezier(.2,.9,.2,1.08),
+      height .48s cubic-bezier(.2,.9,.2,1.08),
+      opacity .16s ease,
+      transform .48s cubic-bezier(.2,.9,.2,1.08);
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
     -webkit-tap-highlight-color:transparent;
   }
@@ -14836,15 +14843,15 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   #exElevatorXIsland.is-expanded{
-    width:min(326px,calc(100vw - 28px));
-    height:64px;
+    width:min(330px,calc(100vw - 24px));
+    height:88px;
   }
 
   #exElevatorXIsland.is-collapsing{
-    width:58px;
-    height:19px;
-    opacity:.95;
-    transform:translate3d(-50%,0,0) scale(.96);
+    width:124px;
+    height:35px;
+    opacity:.98;
+    transform:translate3d(-50%,0,0) scale(.98);
   }
 
   .exIslandCapsule{
@@ -14853,33 +14860,38 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     height:100%;
     overflow:hidden;
     display:flex;
-    align-items:center;
+    align-items:flex-end;
     gap:10px;
     padding:0;
     border:0;
     border-radius:999px;
     background:
-      radial-gradient(circle at 28% -30%,rgba(255,255,255,.15),transparent 42%),
-      linear-gradient(180deg,#101010 0%,#000 68%,#050505 100%);
+      radial-gradient(circle at 28% -25%,rgba(255,255,255,.13),transparent 41%),
+      linear-gradient(180deg,#111 0%,#000 62%,#050505 100%);
     box-shadow:
-      0 15px 36px rgba(0,0,0,.34),
-      0 3px 8px rgba(0,0,0,.28),
-      inset 0 1px 0 rgba(255,255,255,.12),
+      0 18px 42px rgba(0,0,0,.34),
+      0 3px 9px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.11),
       inset 0 -1px 0 rgba(255,255,255,.035);
     color:#fff;
     outline:none;
+    transform-origin:50% 0;
     transition:
-      padding .38s cubic-bezier(.2,.88,.22,1.12),
-      border-radius .46s cubic-bezier(.2,.88,.22,1.12);
+      padding .40s cubic-bezier(.2,.9,.2,1.08),
+      border-radius .48s cubic-bezier(.2,.9,.2,1.08);
   }
 
+  /*
+    Üstteki 31px sistem adasının arkasında kalacak alan gibi davranır.
+    Asıl mesaj bunun altından görünür.
+  */
   #exElevatorXIsland.is-expanded .exIslandCapsule{
-    padding:8px 12px 8px 10px;
-    border-radius:32px;
+    padding:34px 12px 9px 10px;
+    border-radius:0 0 31px 31px;
   }
 
   .exIslandCapsule:active{
-    transform:scale(.985);
+    transform:scale(.987);
   }
 
   .exIslandOrb{
@@ -14896,16 +14908,16 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     opacity:0;
     transform:scale(.35);
     transition:
-      width .34s cubic-bezier(.2,.88,.22,1.12),
-      height .34s cubic-bezier(.2,.88,.22,1.12),
-      opacity .22s ease,
-      transform .38s cubic-bezier(.2,.88,.22,1.12),
+      width .35s cubic-bezier(.2,.9,.2,1.08),
+      height .35s cubic-bezier(.2,.9,.2,1.08),
+      opacity .20s ease .08s,
+      transform .38s cubic-bezier(.2,.9,.2,1.08) .05s,
       background .22s ease;
   }
 
   #exElevatorXIsland.is-expanded .exIslandOrb{
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
     opacity:1;
     transform:scale(1);
   }
@@ -14915,16 +14927,15 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     position:absolute;
     inset:5px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.24);
+    border:1px solid rgba(255,255,255,.23);
   }
 
   .exIslandOrbGlyph{
     position:relative;
     z-index:2;
-    font-size:17px;
+    font-size:16px;
     line-height:1;
     font-weight:950;
-    transform:translateY(-.5px);
   }
 
   .exIslandOrbPulse{
@@ -14940,7 +14951,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   #exElevatorXIsland[data-type="success"] .exIslandOrb{
-    background:linear-gradient(145deg,#20b25b,#0e7f3b);
+    background:linear-gradient(145deg,#27bd66,#0d803b);
   }
 
   #exElevatorXIsland[data-type="warning"] .exIslandOrb{
@@ -14963,24 +14974,25 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   .exIslandCopy{
     min-width:0;
     flex:1 1 auto;
+    padding-bottom:1px;
     opacity:0;
-    transform:translateX(-9px);
+    transform:translateY(-7px);
     transition:
-      opacity .20s ease .10s,
-      transform .34s cubic-bezier(.2,.88,.22,1.12) .07s;
+      opacity .21s ease .13s,
+      transform .36s cubic-bezier(.2,.9,.2,1.08) .10s;
   }
 
   #exElevatorXIsland.is-expanded .exIslandCopy{
     opacity:1;
-    transform:translateX(0);
+    transform:translateY(0);
   }
 
   .exIslandTitle{
     display:block;
     max-width:100%;
     color:#fff;
-    font-size:13px;
-    line-height:1.18;
+    font-size:12.8px;
+    line-height:1.16;
     font-weight:900;
     letter-spacing:-.12px;
     white-space:nowrap;
@@ -14993,8 +15005,8 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     max-width:100%;
     margin-top:4px;
     color:rgba(255,255,255,.58);
-    font-size:9.5px;
-    line-height:1.25;
+    font-size:9.3px;
+    line-height:1.2;
     font-weight:750;
     white-space:nowrap;
     overflow:hidden;
@@ -15003,34 +15015,34 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
   .exIslandMeta{
     flex:0 0 auto;
-    min-width:0;
-    max-width:68px;
+    max-width:72px;
+    padding-bottom:5px;
     opacity:0;
-    color:rgba(255,255,255,.63);
-    font-size:9px;
+    color:#8fc1ff;
+    font-size:8.8px;
     line-height:1;
     font-weight:900;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    transform:translateX(7px);
+    transform:translateY(-7px);
     transition:
-      opacity .20s ease .13s,
-      transform .32s cubic-bezier(.2,.88,.22,1.12) .09s;
+      opacity .21s ease .16s,
+      transform .34s cubic-bezier(.2,.9,.2,1.08) .12s;
   }
 
   #exElevatorXIsland.is-expanded .exIslandMeta{
     opacity:1;
-    transform:translateX(0);
+    transform:translateY(0);
   }
 
   #exElevatorXIsland[data-type="loading"] .exIslandMeta:after{
     content:"";
     display:inline-block;
-    width:11px;
-    height:11px;
+    width:10px;
+    height:10px;
     margin-left:5px;
-    border:1.7px solid rgba(255,255,255,.27);
+    border:1.6px solid rgba(255,255,255,.27);
     border-top-color:#fff;
     border-radius:50%;
     vertical-align:-2px;
@@ -15043,30 +15055,30 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
   @media(max-width:390px){
     #exElevatorXIsland.is-expanded{
-      width:calc(100vw - 22px);
-      height:62px;
+      width:calc(100vw - 18px);
+      height:86px;
     }
 
     #exElevatorXIsland.is-expanded .exIslandCapsule{
-      padding:8px 10px 8px 9px;
+      padding:34px 10px 9px 9px;
     }
 
     #exElevatorXIsland.is-expanded .exIslandOrb{
-      width:40px;
-      height:40px;
+      width:37px;
+      height:37px;
     }
 
     .exIslandTitle{
-      font-size:12.5px;
+      font-size:12.3px;
     }
 
     .exIslandSubtitle{
-      font-size:9px;
+      font-size:8.9px;
     }
 
     .exIslandMeta{
-      max-width:58px;
-      font-size:8.5px;
+      max-width:64px;
+      font-size:8.3px;
     }
   }
 
@@ -15082,6 +15094,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     }
   }
 </style>
+
 
 </head>
 
@@ -15985,10 +15998,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1720" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1721" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.7.20</div>
+<div class="motionSplashVersion" data-splash-version>v1.7.21</div>
 </div>
 </div>
 
@@ -15998,7 +16011,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.7.20";
+  const SPLASH_VERSION = "v1.7.21";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -16719,9 +16732,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.7.20";
+const APP_VERSION = "v1.7.21";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1720", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1721", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -17123,6 +17136,28 @@ function elevatorXIslandFromMessage(message){
   });
 }
 
+
+function elevatorXIslandMaintenanceDone(index){
+  try{
+    let a = Array.isArray(data) ? data[index] : null;
+    if(!a) return false;
+
+    return elevatorXIslandShow({
+      type:"success",
+      glyph:"✓",
+      title:String(a.ad || "Apartman") + " • Bakım yapıldı",
+      subtitle:"Bakım kaydı başarıyla tamamlandı",
+      meta:"Raporu Aç",
+      duration:5600,
+      action:function(){
+        pdf(index);
+      }
+    });
+  }catch(e){
+    return false;
+  }
+}
+
 function elevatorXIslandMaintenance(index){
   try{
     let a = Array.isArray(data) ? data[index] : null;
@@ -17153,15 +17188,7 @@ document.addEventListener("DOMContentLoaded",function(){
     });
   }
 
-  setTimeout(function(){
-    elevatorXIslandShow({
-      type:"info",
-      title:"ElevatorX",
-      subtitle:"Sistem hazır",
-      meta:"v1.7.20",
-      duration:1750
-    });
-  },900);
+
 });
 
 
@@ -23844,12 +23871,14 @@ data[i].kayitlar.push(
 
 kaydet();
 
-toast("Bakım checklist kaydedildi");
+let islandGosterildi = elevatorXIslandMaintenanceDone(i);
 
-pdf(i);
+if(!islandGosterildi){
+  toast("Bakım checklist kaydedildi");
+}
 
 if(aktifDetay !== null && data[aktifDetay]){
-detayAc(aktifDetay);
+  detayAc(aktifDetay);
 }
 }
 
@@ -24580,10 +24609,6 @@ function odeme(i){
 function bakim(i){
 
 haptic("success");
-
-if(!bakimBuAyYapildi(data[i])){
-  elevatorXIslandMaintenance(i);
-}
 
 if(bakimBuAyYapildi(data[i])){
 toast("Bakım raporu oluşturuldu");
