@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1710">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1710">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1710">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1710">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1710">
-<link rel="manifest" href="/manifest.webmanifest?v=1710">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1711">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1711">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1711">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1711">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1711">
+<link rel="manifest" href="/manifest.webmanifest?v=1711">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14765,6 +14765,29 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exDashboardEmergencyFix1711">
+  /* Yeni dashboard hata verirse v1.7.00 klasik görünüm gizlenmesin. */
+  body.exDashboardFallbackMode #liste .statGrid{
+    display:grid!important;
+  }
+
+  body.exDashboardFallbackMode #liste .dashboardFollowCard,
+  body.exDashboardFallbackMode #liste .lastActionCard,
+  body.exDashboardFallbackMode #liste .sectionHead,
+  body.exDashboardFallbackMode #liste .aptCard{
+    display:block!important;
+  }
+
+  body.exDashboardFallbackMode #searchArea.searchRow{
+    display:flex!important;
+  }
+
+  body.exDashboardFallbackMode #searchArea .filterBtn{
+    flex:0 0 52px!important;
+  }
+</style>
+
 </head>
 
 <body>
@@ -15650,10 +15673,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1710" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1711" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.7.10</div>
+<div class="motionSplashVersion" data-splash-version>v1.7.11</div>
 </div>
 </div>
 
@@ -15663,7 +15686,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.7.10";
+  const SPLASH_VERSION = "v1.7.11";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -16384,9 +16407,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.7.10";
+const APP_VERSION = "v1.7.11";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1710", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1711", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -20589,7 +20612,7 @@ function exDashboardSonIslemHtml(){
       <div class="exDashActivityIcon">✓</div>
       <div class="exDashActivityMain">
         <div class="exDashActivityLabel">Son işlem</div>
-        <div class="exDashActivityValue">${ayHtml(son.ad)} • ${ayHtml(son.islem.replace(/\s*\(.*?\)/,""))}</div>
+        <div class="exDashActivityValue">${ayHtml(String(son.ad || "-"))} • ${ayHtml(String(son.islem || "").replace(/\s*\(.*?\)/,""))}</div>
       </div>
       <div class="exDashActivityDate">${ayHtml(son.tarih || "Tarih yok")}</div>
     </div>
@@ -20597,49 +20620,59 @@ function exDashboardSonIslemHtml(){
 }
 
 
-function goster(){
+function gosterDashboardYeni(){
 
-if(profilPanel.style.display=="block") return;
+let profilEl = document.getElementById("profilPanel");
+let searchEl = document.getElementById("searchArea");
+let listeEl = document.getElementById("liste");
+let detayEl = document.getElementById("detayPanel");
+let aramaEl = document.getElementById("arama");
 
-searchArea.style.display="grid";
-searchArea.classList.toggle("has-filter",aktifFiltre !== "all");
-liste.style.display="block";
-detayPanel.style.display="none";
+if(profilEl && profilEl.style.display === "block") return;
+if(!searchEl || !listeEl || !detayEl || !aramaEl){
+  throw new Error("Ana ekran elemanları bulunamadı");
+}
 
-let aramaMetni = arama.value.toLocaleLowerCase("tr-TR");
+searchEl.style.display="grid";
+searchEl.classList.toggle("has-filter",aktifFiltre !== "all");
+listeEl.style.display="block";
+detayEl.style.display="none";
+
+let aramaMetni = String(aramaEl.value || "").toLocaleLowerCase("tr-TR");
+let guvenliData = Array.isArray(data) ? data.filter(Boolean) : [];
 
 let toplam = toplamTahsilat();
-let acikBakiye = data.reduce(function(t,a){
+let acikBakiye = guvenliData.reduce(function(t,a){
   return t + cariOzet(a).kalanPozitif;
 },0);
 
-let bugunCount = data.filter(function(x){ return bakimBugunMu(x); }).length;
-let gecikenCount = data.filter(function(x){ return bakimGeciktiMi(x); }).length;
-let tamamlananCount = data.filter(function(x){ return bakimBuAyYapildi(x); }).length;
-let bekleyenCount = Math.max(0,data.length - tamamlananCount);
-let tamamlanmaOrani = data.length
-  ? Math.round((tamamlananCount / data.length) * 100)
+let bugunCount = guvenliData.filter(function(x){ return bakimBugunMu(x); }).length;
+let gecikenCount = guvenliData.filter(function(x){ return bakimGeciktiMi(x); }).length;
+let tamamlananCount = guvenliData.filter(function(x){ return bakimBuAyYapildi(x); }).length;
+let bekleyenCount = Math.max(0,guvenliData.length - tamamlananCount);
+let tamamlanmaOrani = guvenliData.length
+  ? Math.round((tamamlananCount / guvenliData.length) * 100)
   : 0;
 
 let muayeneOzet = muayeneKisaOzet();
 let sozlesmeOzet = sozlesmeKisaOzet();
 
 let filtreli =
-data
-.map(function(a,i){ return {a:a,i:i}; })
+guvenliData
+.map(function(a){ return {a:a,i:data.indexOf(a)}; })
 .filter(function(item){
   let a = item.a;
 
   let aramaUygun =
     !aramaMetni ||
-    (a.ad || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (a.yonetici || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (a.tel || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (a.not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (muayeneMevcut(a).firma || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (muayeneMevcut(a).raporNo || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (muayeneMevcut(a).not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
-    (sozlesmeMevcut(a).not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni);
+    String(a.ad || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(a.yonetici || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(a.tel || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(a.not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(muayeneMevcut(a).firma || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(muayeneMevcut(a).raporNo || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(muayeneMevcut(a).not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni) ||
+    String(sozlesmeMevcut(a).not || "").toLocaleLowerCase("tr-TR").includes(aramaMetni);
 
   return aramaUygun && filtreKontrol(a);
 });
@@ -20656,7 +20689,7 @@ let h = `
       <div class="exDashHeroKicker">Portföy Merkezi • ${ayHtml(ayAdi())}</div>
       <h1 class="exDashHeroTitle">${selamBaslik}</h1>
       <p class="exDashHeroSub">
-        ${data.length} apartmanın bakım, cari ve teknik durumunu tek ekrandan yönet.
+        ${guvenliData.length} apartmanın bakım, cari ve teknik durumunu tek ekrandan yönet.
       </p>
     </div>
 
@@ -20671,7 +20704,7 @@ let h = `
   <div class="exDashProgress">
     <div class="exDashProgressHead">
       <span>Bu ay ${tamamlananCount} bakım tamamlandı</span>
-      <b>${tamamlananCount}/${data.length}</b>
+      <b>${tamamlananCount}/${guvenliData.length}</b>
     </div>
     <div class="exDashProgressTrack">
       <div class="exDashProgressFill" style="width:${tamamlanmaOrani}%"></div>
@@ -20694,7 +20727,7 @@ let h = `
       <div class="exDashMetricIcon">▦</div>
       <div class="exDashMetricTrend">Aktif portföy</div>
     </div>
-    <div class="exDashMetricNumber">${data.length}</div>
+    <div class="exDashMetricNumber">${guvenliData.length}</div>
     <div class="exDashMetricLabel">Apartman kaydı</div>
   </div>
 
@@ -20779,16 +20812,17 @@ if(filtreli.length === 0){
 }else{
 
   filtreli.forEach(function(item,sira){
-    let a = item.a;
-    let i = item.i;
-    let d = durumBilgisi(a);
-    let cari = cariOzet(a);
-    let colorClass = "c" + (sira % 5);
-    let muayeneBilgi = muayeneEtiketBilgisi(muayeneMevcut(a).etiket);
-    let sozlesmeBilgi = sozlesmeDurumBilgisi(a);
-    let tel = a.tel || "Telefon yok";
+    try{
+      let a = item.a || {};
+      let i = item.i;
+      let d = durumBilgisi(a) || {badgeClass:"badgeGray",durum:"Beklemede"};
+      let cari = cariOzet(a) || {toplam:0,kalanPozitif:0};
+      let colorClass = "c" + (sira % 5);
+      let muayeneBilgi = muayeneEtiketBilgisi(muayeneMevcut(a).etiket) || {cls:"inspectionNone",text:"Etiket Bilgisi Yok"};
+      let sozlesmeBilgi = sozlesmeDurumBilgisi(a) || {cls:"contractNone",short:"Bilgi Yok"};
+      let tel = String(a.tel || "Telefon yok");
 
-    h += `
+      h += `
       <article class="exPortfolioCard ${durumClass(a)}" style="--i:${sira}" onclick="detayAc(${i})">
         <div class="exPortfolioTop">
           <div class="exPortfolioAvatar ${colorClass}"></div>
@@ -20831,23 +20865,272 @@ if(filtreli.length === 0){
           <div class="exPortfolioArrow">›</div>
         </div>
       </article>
-    `;
+      `;
+    }catch(kartHatasi){
+      console.warn("Apartman kartı oluşturulamadı:",kartHatasi,item);
+    }
   });
 
 }
 
-liste.innerHTML = h;
+listeEl.innerHTML = h;
 
 if(window.toplamApartman) toplamApartman.innerText = data.length;
 if(window.toplamKazanc) toplamKazanc.innerText = tutarFormat(toplam);
 
-if(typeof profilKontrolMerkeziGuncelle === "function"){
-  profilKontrolMerkeziGuncelle();
+try{
+  if(typeof profilKontrolMerkeziGuncelle === "function"){
+    profilKontrolMerkeziGuncelle();
+  }
+}catch(e){
+  console.warn("Profil özeti güncellenemedi:",e);
 }
 
+try{
+  if(typeof quickAddGuncelle === "function"){
+    quickAddGuncelle();
+  }
+}catch(e){
+  console.warn("Hızlı ekleme güncellenemedi:",e);
+}
+
+}
+
+function gosterDashboardKlasik(){
+
+let profilEl = document.getElementById("profilPanel");
+let searchEl = document.getElementById("searchArea");
+let listeEl = document.getElementById("liste");
+let detayEl = document.getElementById("detayPanel");
+let aramaEl = document.getElementById("arama");
+
+if(profilEl && profilEl.style.display === "block") return;
+if(!searchEl || !listeEl || !detayEl || !aramaEl) return;
+
+searchEl.style.display="flex";
+listeEl.style.display="block";
+detayEl.style.display="none";
+
+let aramaMetni = String(aramaEl.value || "").toLowerCase();
+
+let toplam =
+toplamTahsilat();
+
+let bugunCount = data.filter(x => bakimBugunMu(x)).length;
+
+let gecikenCount = data.filter(x => bakimGeciktiMi(x)).length;
+
+let muayeneOzet = muayeneKisaOzet();
+
+let sozlesmeOzet = sozlesmeKisaOzet();
+
+let filtreli =
+data
+.map((a,i)=>({a,i}))
+.filter(item=>{
+let a = item.a;
+
+let aramaUygun =
+!aramaMetni ||
+(a.ad || "").toLowerCase().includes(aramaMetni) ||
+(a.yonetici || "").toLowerCase().includes(aramaMetni) ||
+(a.tel || "").toLowerCase().includes(aramaMetni) ||
+(a.not || "").toLowerCase().includes(aramaMetni) ||
+(muayeneMevcut(a).firma || "").toLowerCase().includes(aramaMetni) ||
+(muayeneMevcut(a).raporNo || "").toLowerCase().includes(aramaMetni) ||
+(muayeneMevcut(a).not || "").toLowerCase().includes(aramaMetni) ||
+(sozlesmeMevcut(a).not || "").toLowerCase().includes(aramaMetni);
+
+return aramaUygun && filtreKontrol(a);
+
+});
+
+let h = `
+
+<div class="statGrid">
+
+<div class="statCard">
+<div class="statIcon iconBuilding statBlue"></div>
+<div class="statNumber">${data.length}</div>
+<div class="statLabel">Apartman</div>
+</div>
+
+<div class="statCard">
+<div class="statIcon iconTool statGreen"></div>
+<div class="statNumber">${bugunCount}</div>
+<div class="statLabel">Bakım Bugün</div>
+</div>
+
+<div class="statCard">
+<div class="statIcon iconCalendar statOrange"></div>
+<div class="statNumber">${gecikenCount}</div>
+<div class="statLabel">Geciken</div>
+</div>
+
+<div class="statCard">
+<div class="statIcon iconMoney statPurple"></div>
+<div class="statNumber">${toplam} ₺</div>
+<div class="statLabel">Tahsilat</div>
+</div>
+
+</div>
+
+<div class="dashboardFollowCard">
+  <div class="dashboardFollowHead">
+    <div class="dashboardFollowTitle">Takip Özeti</div>
+    <div class="dashboardFollowHint">Detay için dokun</div>
+  </div>
+
+  <div class="dashboardFollowRows">
+    <div class="dashboardFollowRow">
+      <div class="dashboardFollowLabel">Muayene</div>
+      <div class="dashboardFollowMetrics inspection">
+        <button class="dashboardFollowMetric ${muayeneOzet.yaklasan === 0 ? 'is-zero' : 'is-warning'}" type="button" onclick="setFilter('inspection_soon')">
+          <b>${muayeneOzet.yaklasan}</b><span>Yaklaşan</span>
+        </button>
+        <button class="dashboardFollowMetric ${muayeneOzet.geciken === 0 ? 'is-zero' : 'is-danger'}" type="button" onclick="setFilter('inspection_overdue')">
+          <b>${muayeneOzet.geciken}</b><span>Geciken</span>
+        </button>
+        <button class="dashboardFollowMetric ${muayeneOzet.sari === 0 ? 'is-zero' : 'is-warning'}" type="button" onclick="setFilter('label_yellow')">
+          <b>${muayeneOzet.sari}</b><span>Sarı</span>
+        </button>
+        <button class="dashboardFollowMetric ${muayeneOzet.kirmizi === 0 ? 'is-zero' : 'is-danger'}" type="button" onclick="setFilter('label_red')">
+          <b>${muayeneOzet.kirmizi}</b><span>Kırmızı</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="dashboardFollowRow">
+      <div class="dashboardFollowLabel">Sözleşme</div>
+      <div class="dashboardFollowMetrics contract">
+        <button class="dashboardFollowMetric ${sozlesmeOzet.yaklasan === 0 ? 'is-zero' : 'is-purple'}" type="button" onclick="setFilter('contract_soon')">
+          <b>${sozlesmeOzet.yaklasan}</b><span>Yenileme Yakın</span>
+        </button>
+        <button class="dashboardFollowMetric ${sozlesmeOzet.dolan === 0 ? 'is-zero' : 'is-danger'}" type="button" onclick="setFilter('contract_expired')">
+          <b>${sozlesmeOzet.dolan}</b><span>Süresi Dolan</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+${sonIslemHtml()}
+
+<div class="sectionHead">
+<h2>Apartmanlarım (${filtreli.length})</h2>
+</div>
+
+`;
+
+if(filtreli.length === 0){
+
+h += `
+<div class="emptyBox">
+Henüz apartman yok veya arama sonucu bulunamadı.
+</div>
+`;
+
+}else{
+
+filtreli.forEach((item,sira)=>{
+
+let a = item.a;
+let i = item.i;
+let d = durumBilgisi(a);
+let cari = cariOzet(a);
+let colorClass = "c" + (sira % 5);
+
+h += `
+
+<div class="aptCard ${durumClass(a)}" style="--i:${sira}" onclick="detayAc(${i})">
+
+<div class="aptIcon ${colorClass}"></div>
+
+<div class="aptMain">
+<div class="aptName">${a.ad || "-"}</div>
+<div class="aptCode">${apartmanKodu(i)}</div>
+<div class="aptMeta">
+<span class="metaLine"><span class="miniMetaIcon person"></span>${a.yonetici || "-"}</span>
+<span class="metaLine metaPhone" onclick="apartmanRehberGuncelle(event,${i})"><span class="miniMetaIcon phone"></span>${a.tel || "Rehberden seç"}</span>
+</div>
+</div>
+
+<div class="aptRight aptRightPremium">
+<div class="aptStatusStack">
+<span class="badge ${d.badgeClass}">${d.durum}</span>
+${muayeneEtiketRozeti(a)}
+${sozlesmeKartRozeti(a)}
+${odemeBadge(a)}
+</div>
+<div class="aptPlanDate">Plan <b>${bakimPlanTarih(a)}</b></div>
+<div class="aptMoneyLine">${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}</div>
+<div class="aptBalanceLine ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">Kalan ${tutarFormat(cari.kalanPozitif)}</div>
+</div>
+
+<div class="arrow aptArrowPremium">›</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+listeEl.innerHTML = h;
+
+if(window.toplamApartman) toplamApartman.innerText = data.length;
+if(window.toplamKazanc) toplamKazanc.innerText = tutarFormat(toplam);
+if(typeof profilKontrolMerkeziGuncelle === "function"){
+profilKontrolMerkeziGuncelle();
+}
 quickAddGuncelle();
 
 }
+
+
+function bakimBuAyYapildi(a){
+return tarihBuAyMi(a && a.bakimTarihi);
+}
+
+
+
+function goster(){
+  let listeEl = document.getElementById("liste");
+
+  try{
+    document.body.classList.remove("exDashboardFallbackMode");
+    gosterDashboardYeni();
+
+    if(listeEl && !String(listeEl.innerHTML || "").trim()){
+      throw new Error("Yeni dashboard boş çıktı");
+    }
+
+    window.__elevatorXDashboardMode = "new";
+    window.__elevatorXDashboardError = "";
+  }catch(error){
+    console.error("Dashboard Refresh hatası, güvenli görünüme dönülüyor:",error);
+
+    window.__elevatorXDashboardMode = "fallback";
+    window.__elevatorXDashboardError =
+      error && error.message ? error.message : String(error || "Bilinmeyen hata");
+
+    document.body.classList.add("exDashboardFallbackMode");
+
+    try{
+      gosterDashboardKlasik();
+    }catch(fallbackError){
+      console.error("Klasik dashboard da açılamadı:",fallbackError);
+
+      if(listeEl){
+        listeEl.innerHTML =
+          '<div class="emptyBox">Ana ekran güvenli şekilde açılamadı. Verileriniz cihazda duruyor. Uygulamayı kapatıp yeniden açın.</div>';
+        listeEl.style.display = "block";
+      }
+    }
+  }
+}
+
 function bakimPlanISO(a){
 
 let kaynak =
