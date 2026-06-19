@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1712">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1712">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1712">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1712">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1712">
-<link rel="manifest" href="/manifest.webmanifest?v=1712">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1720">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1720">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1720">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1720">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1720">
+<link rel="manifest" href="/manifest.webmanifest?v=1720">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14807,9 +14807,302 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exElevatorXIslandStyle1720">
+  #exElevatorXIsland{
+    position:fixed;
+    top:calc(env(safe-area-inset-top) + 7px);
+    left:50%;
+    z-index:2147483010;
+    width:54px;
+    height:18px;
+    opacity:0;
+    pointer-events:none;
+    transform:translate3d(-50%,-12px,0) scale(.82);
+    transform-origin:50% 0%;
+    transition:
+      width .46s cubic-bezier(.2,.88,.22,1.12),
+      height .46s cubic-bezier(.2,.88,.22,1.12),
+      opacity .18s ease,
+      transform .46s cubic-bezier(.2,.88,.22,1.12);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  #exElevatorXIsland.is-visible{
+    opacity:1;
+    pointer-events:auto;
+    transform:translate3d(-50%,0,0) scale(1);
+  }
+
+  #exElevatorXIsland.is-expanded{
+    width:min(326px,calc(100vw - 28px));
+    height:64px;
+  }
+
+  #exElevatorXIsland.is-collapsing{
+    width:58px;
+    height:19px;
+    opacity:.95;
+    transform:translate3d(-50%,0,0) scale(.96);
+  }
+
+  .exIslandCapsule{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0;
+    border:0;
+    border-radius:999px;
+    background:
+      radial-gradient(circle at 28% -30%,rgba(255,255,255,.15),transparent 42%),
+      linear-gradient(180deg,#101010 0%,#000 68%,#050505 100%);
+    box-shadow:
+      0 15px 36px rgba(0,0,0,.34),
+      0 3px 8px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.12),
+      inset 0 -1px 0 rgba(255,255,255,.035);
+    color:#fff;
+    outline:none;
+    transition:
+      padding .38s cubic-bezier(.2,.88,.22,1.12),
+      border-radius .46s cubic-bezier(.2,.88,.22,1.12);
+  }
+
+  #exElevatorXIsland.is-expanded .exIslandCapsule{
+    padding:8px 12px 8px 10px;
+    border-radius:32px;
+  }
+
+  .exIslandCapsule:active{
+    transform:scale(.985);
+  }
+
+  .exIslandOrb{
+    position:relative;
+    width:0;
+    height:0;
+    flex:0 0 auto;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    border-radius:50%;
+    background:#176fe8;
+    color:#fff;
+    opacity:0;
+    transform:scale(.35);
+    transition:
+      width .34s cubic-bezier(.2,.88,.22,1.12),
+      height .34s cubic-bezier(.2,.88,.22,1.12),
+      opacity .22s ease,
+      transform .38s cubic-bezier(.2,.88,.22,1.12),
+      background .22s ease;
+  }
+
+  #exElevatorXIsland.is-expanded .exIslandOrb{
+    width:42px;
+    height:42px;
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .exIslandOrb:after{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.24);
+  }
+
+  .exIslandOrbGlyph{
+    position:relative;
+    z-index:2;
+    font-size:17px;
+    line-height:1;
+    font-weight:950;
+    transform:translateY(-.5px);
+  }
+
+  .exIslandOrbPulse{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.36);
+    opacity:0;
+  }
+
+  #exElevatorXIsland[data-type="loading"] .exIslandOrbPulse{
+    animation:exIslandPulse 1.35s ease-out infinite;
+  }
+
+  #exElevatorXIsland[data-type="success"] .exIslandOrb{
+    background:linear-gradient(145deg,#20b25b,#0e7f3b);
+  }
+
+  #exElevatorXIsland[data-type="warning"] .exIslandOrb{
+    background:linear-gradient(145deg,#f2ae20,#bd7200);
+  }
+
+  #exElevatorXIsland[data-type="error"] .exIslandOrb{
+    background:linear-gradient(145deg,#f24d43,#b91f1a);
+  }
+
+  #exElevatorXIsland[data-type="maintenance"] .exIslandOrb{
+    background:linear-gradient(145deg,#8b63ea,#5a36b4);
+  }
+
+  @keyframes exIslandPulse{
+    0%{transform:scale(.55);opacity:.55}
+    75%,100%{transform:scale(1.35);opacity:0}
+  }
+
+  .exIslandCopy{
+    min-width:0;
+    flex:1 1 auto;
+    opacity:0;
+    transform:translateX(-9px);
+    transition:
+      opacity .20s ease .10s,
+      transform .34s cubic-bezier(.2,.88,.22,1.12) .07s;
+  }
+
+  #exElevatorXIsland.is-expanded .exIslandCopy{
+    opacity:1;
+    transform:translateX(0);
+  }
+
+  .exIslandTitle{
+    display:block;
+    max-width:100%;
+    color:#fff;
+    font-size:13px;
+    line-height:1.18;
+    font-weight:900;
+    letter-spacing:-.12px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .exIslandSubtitle{
+    display:block;
+    max-width:100%;
+    margin-top:4px;
+    color:rgba(255,255,255,.58);
+    font-size:9.5px;
+    line-height:1.25;
+    font-weight:750;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .exIslandMeta{
+    flex:0 0 auto;
+    min-width:0;
+    max-width:68px;
+    opacity:0;
+    color:rgba(255,255,255,.63);
+    font-size:9px;
+    line-height:1;
+    font-weight:900;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    transform:translateX(7px);
+    transition:
+      opacity .20s ease .13s,
+      transform .32s cubic-bezier(.2,.88,.22,1.12) .09s;
+  }
+
+  #exElevatorXIsland.is-expanded .exIslandMeta{
+    opacity:1;
+    transform:translateX(0);
+  }
+
+  #exElevatorXIsland[data-type="loading"] .exIslandMeta:after{
+    content:"";
+    display:inline-block;
+    width:11px;
+    height:11px;
+    margin-left:5px;
+    border:1.7px solid rgba(255,255,255,.27);
+    border-top-color:#fff;
+    border-radius:50%;
+    vertical-align:-2px;
+    animation:exIslandSpin .75s linear infinite;
+  }
+
+  @keyframes exIslandSpin{
+    to{transform:rotate(360deg)}
+  }
+
+  @media(max-width:390px){
+    #exElevatorXIsland.is-expanded{
+      width:calc(100vw - 22px);
+      height:62px;
+    }
+
+    #exElevatorXIsland.is-expanded .exIslandCapsule{
+      padding:8px 10px 8px 9px;
+    }
+
+    #exElevatorXIsland.is-expanded .exIslandOrb{
+      width:40px;
+      height:40px;
+    }
+
+    .exIslandTitle{
+      font-size:12.5px;
+    }
+
+    .exIslandSubtitle{
+      font-size:9px;
+    }
+
+    .exIslandMeta{
+      max-width:58px;
+      font-size:8.5px;
+    }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    #exElevatorXIsland,
+    .exIslandCapsule,
+    .exIslandOrb,
+    .exIslandCopy,
+    .exIslandMeta{
+      transition-duration:.01ms!important;
+      animation-duration:.01ms!important;
+      animation-iteration-count:1!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
+
+<div id="exElevatorXIsland" aria-live="polite" aria-hidden="true" data-type="info">
+  <button id="exIslandCapsule" class="exIslandCapsule" type="button" aria-label="ElevatorX canlı bildirim">
+    <span class="exIslandOrb" aria-hidden="true">
+      <span id="exIslandOrbGlyph" class="exIslandOrbGlyph">X</span>
+      <span class="exIslandOrbPulse"></span>
+    </span>
+
+    <span class="exIslandCopy">
+      <b id="exIslandTitle" class="exIslandTitle">ElevatorX</b>
+      <small id="exIslandSubtitle" class="exIslandSubtitle">Hazır</small>
+    </span>
+
+    <span id="exIslandMeta" class="exIslandMeta"></span>
+  </button>
+</div>
+
 
 <!-- ElevatorX v1.5.04 hibrit navigasyon: yalnız ana uygulama body içinde -->
 <button id="exHybridMenuBtn" class="exHybridMenuBtn" type="button" onclick="exHybridMenuOpen()" aria-label="Yardımcı menüyü aç">
@@ -15692,10 +15985,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 <div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1712" alt="ElevatorX logo">
+<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1720" alt="ElevatorX logo">
 <div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
 <div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.7.12</div>
+<div class="motionSplashVersion" data-splash-version>v1.7.20</div>
 </div>
 </div>
 
@@ -15705,7 +15998,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
    Normal açılışlar: 1.5 sn
    Takılırsa zorla açma: 3.2 sn */
 (function(){
-  const SPLASH_VERSION = "v1.7.12";
+  const SPLASH_VERSION = "v1.7.20";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 3000;
   const NORMAL_MS = 1504;
@@ -16426,9 +16719,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.7.12";
+const APP_VERSION = "v1.7.20";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1712", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1720", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
@@ -16627,9 +16920,265 @@ navigator.vibrate(10);
 
 }
 
+
+let exIslandTimer = null;
+let exIslandCollapseTimer = null;
+let exIslandAction = null;
+let exIslandVisibleSince = 0;
+
+function elevatorXIslandElements(){
+  return {
+    root:document.getElementById("exElevatorXIsland"),
+    capsule:document.getElementById("exIslandCapsule"),
+    glyph:document.getElementById("exIslandOrbGlyph"),
+    title:document.getElementById("exIslandTitle"),
+    subtitle:document.getElementById("exIslandSubtitle"),
+    meta:document.getElementById("exIslandMeta")
+  };
+}
+
+function elevatorXIslandGlyph(type){
+  let glyphs = {
+    success:"✓",
+    error:"!",
+    warning:"!",
+    loading:"•",
+    maintenance:"⌁",
+    info:"X"
+  };
+
+  return glyphs[type] || "X";
+}
+
+function elevatorXIslandShow(options){
+  options = options || {};
+
+  let el = elevatorXIslandElements();
+  if(!el.root || !el.capsule || !el.title) return false;
+
+  let type = String(options.type || "info");
+  let title = String(options.title || "ElevatorX").trim();
+  let subtitle = String(options.subtitle || "").trim();
+  let meta = String(options.meta || "").trim();
+  let duration = Number(options.duration);
+
+  if(!Number.isFinite(duration)){
+    duration = type === "error" ? 3600 : 2700;
+  }
+
+  clearTimeout(exIslandTimer);
+  clearTimeout(exIslandCollapseTimer);
+
+  exIslandAction = typeof options.action === "function"
+    ? options.action
+    : null;
+
+  el.root.dataset.type = type;
+  el.root.setAttribute("aria-hidden","false");
+
+  if(el.glyph) el.glyph.textContent = options.glyph || elevatorXIslandGlyph(type);
+  if(el.title) el.title.textContent = title || "ElevatorX";
+
+  if(el.subtitle){
+    el.subtitle.textContent = subtitle || "ElevatorX";
+    el.subtitle.style.display = subtitle ? "block" : "none";
+  }
+
+  if(el.meta){
+    el.meta.textContent = meta;
+    el.meta.style.display = meta || type === "loading" ? "block" : "none";
+  }
+
+  el.capsule.style.cursor = exIslandAction ? "pointer" : "default";
+
+  el.root.classList.remove("is-collapsing");
+  el.root.classList.add("is-visible");
+
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      el.root.classList.add("is-expanded");
+    });
+  });
+
+  exIslandVisibleSince = Date.now();
+
+  if(duration > 0){
+    exIslandTimer = setTimeout(function(){
+      elevatorXIslandHide();
+    },duration);
+  }
+
+  return true;
+}
+
+function elevatorXIslandHide(immediate){
+  let el = elevatorXIslandElements();
+  if(!el.root) return;
+
+  clearTimeout(exIslandTimer);
+  clearTimeout(exIslandCollapseTimer);
+  exIslandAction = null;
+
+  if(immediate){
+    el.root.classList.remove("is-visible","is-expanded","is-collapsing");
+    el.root.setAttribute("aria-hidden","true");
+    return;
+  }
+
+  let minimumVisible = 650;
+  let elapsed = Date.now() - exIslandVisibleSince;
+  let wait = Math.max(0,minimumVisible - elapsed);
+
+  exIslandCollapseTimer = setTimeout(function(){
+    el.root.classList.remove("is-expanded");
+    el.root.classList.add("is-collapsing");
+
+    exIslandCollapseTimer = setTimeout(function(){
+      el.root.classList.remove("is-visible","is-collapsing");
+      el.root.setAttribute("aria-hidden","true");
+    },410);
+  },wait);
+}
+
+function elevatorXIslandMessageType(message){
+  let m = String(message || "").toLocaleLowerCase("tr-TR");
+
+  if(
+    m.includes("hazırlanıyor") ||
+    m.includes("alınıyor") ||
+    m.includes("yükleniyor") ||
+    m.includes("okunuyor") ||
+    m.includes("aranıyor") ||
+    m.includes("belirleniyor")
+  ){
+    return "loading";
+  }
+
+  if(
+    m.includes("hata") ||
+    m.includes("başarısız") ||
+    m.includes("geçersiz") ||
+    m.includes("bulunamadı") ||
+    m.includes("açılamadı") ||
+    m.includes("yüklenemedi") ||
+    m.includes("saklanamadı") ||
+    m.includes("izin verilmedi") ||
+    m.includes("alınamadı")
+  ){
+    return "error";
+  }
+
+  if(
+    m.includes("fazla") ||
+    m.includes("uyarı") ||
+    m.includes("yaklaşıyor") ||
+    m.includes("bekliyor") ||
+    m.includes("dikkat")
+  ){
+    return "warning";
+  }
+
+  if(
+    m.includes("kaydedildi") ||
+    m.includes("tamamlandı") ||
+    m.includes("oluşturuldu") ||
+    m.includes("eklendi") ||
+    m.includes("güncellendi") ||
+    m.includes("yüklendi") ||
+    m.includes("sıralandı") ||
+    m.includes("hazır") ||
+    m.includes("alındı") ||
+    m.includes("silindi")
+  ){
+    return "success";
+  }
+
+  return "info";
+}
+
+function elevatorXIslandFromMessage(message){
+  let text = String(message || "").trim();
+  if(!text) return false;
+
+  let type = elevatorXIslandMessageType(text);
+  let title = text;
+  let subtitle = "";
+
+  if(text.length > 43){
+    let cut = text.lastIndexOf(" ",43);
+    if(cut < 22) cut = 43;
+
+    title = text.slice(0,cut).trim();
+    subtitle = text.slice(cut).trim();
+  }
+
+  let isLoading = type === "loading";
+
+  return elevatorXIslandShow({
+    type:type,
+    title:title,
+    subtitle:subtitle || (isLoading ? "Lütfen bekle" : "ElevatorX"),
+    meta:isLoading ? "İşleniyor" : "",
+    duration:isLoading ? 0 : (type === "error" ? 3800 : 2700)
+  });
+}
+
+function elevatorXIslandMaintenance(index){
+  try{
+    let a = Array.isArray(data) ? data[index] : null;
+    if(!a) return;
+
+    elevatorXIslandShow({
+      type:"maintenance",
+      title:String(a.ad || "Apartman"),
+      subtitle:"Bakım formu açıldı",
+      meta:"Bakım",
+      duration:2400
+    });
+  }catch(e){}
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  let el = elevatorXIslandElements();
+
+  if(el.capsule){
+    el.capsule.addEventListener("click",function(){
+      if(exIslandAction){
+        let action = exIslandAction;
+        elevatorXIslandHide(true);
+        try{ action(); }catch(e){}
+      }else{
+        elevatorXIslandHide();
+      }
+    });
+  }
+
+  setTimeout(function(){
+    elevatorXIslandShow({
+      type:"info",
+      title:"ElevatorX",
+      subtitle:"Sistem hazır",
+      meta:"v1.7.20",
+      duration:1750
+    });
+  },900);
+});
+
+
 function toast(mesaj){
 
+let islandRendered = false;
+
+try{
+  islandRendered = elevatorXIslandFromMessage(mesaj);
+}catch(e){
+  islandRendered = false;
+}
+
+if(islandRendered) return;
+
 let t = document.getElementById("toast");
+if(!t) return;
 
 t.innerText = mesaj;
 t.classList.add("show");
@@ -24031,6 +24580,10 @@ function odeme(i){
 function bakim(i){
 
 haptic("success");
+
+if(!bakimBuAyYapildi(data[i])){
+  elevatorXIslandMaintenance(i);
+}
 
 if(bakimBuAyYapildi(data[i])){
 toast("Bakım raporu oluşturuldu");
