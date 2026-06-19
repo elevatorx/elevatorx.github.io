@@ -449,12 +449,12 @@ html.ex-preboot:not(.appBooted) body{
 <!-- ELEVATORX_V1504_ACTIVATION_RESTORE_INDEX_FIX | BASE UPLOADED INDEX | APPS_SCRIPT_LICENSE_GATE | APP_VERSION v1.5.04 -->
 
 
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1722">
-<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1722">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1722">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1722">
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1722">
-<link rel="manifest" href="/manifest.webmanifest?v=1722">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=1730">
+<link rel="icon" type="image/png" sizes="192x192" href="/elevatorx-icon-192.png?v=1730">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1730">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1730">
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png?v=1730">
+<link rel="manifest" href="/manifest.webmanifest?v=1730">
 
 <meta name="theme-color" content="#020817">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14807,6 +14807,521 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 </style>
 
+
+<style id="exLaunchSequence1730">
+  #splash.exLaunchSplash{
+    position:fixed!important;
+    inset:0!important;
+    top:calc(env(safe-area-inset-top) * -1)!important;
+    bottom:calc(env(safe-area-inset-bottom) * -1)!important;
+    width:100vw!important;
+    min-height:calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom))!important;
+    padding:0!important;
+    overflow:hidden!important;
+    display:grid!important;
+    place-items:center!important;
+    background:transparent!important;
+    opacity:1!important;
+    visibility:visible!important;
+    isolation:isolate;
+    transition:none!important;
+  }
+
+  #splash.exLaunchSplash::before,
+  #splash.exLaunchSplash::after{
+    content:none!important;
+    display:none!important;
+  }
+
+  html.appBooted #splash.exLaunchSplash.launchOpening,
+  body.appBooted #splash.exLaunchSplash.launchOpening{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:none!important;
+  }
+
+  .exLaunchDoor{
+    position:absolute;
+    top:0;
+    bottom:0;
+    z-index:1;
+    width:50.5%;
+    background:
+      radial-gradient(circle at 50% 42%,rgba(28,111,241,.15),transparent 32%),
+      linear-gradient(180deg,#050c19 0%,#0b1b32 48%,#050c18 100%);
+    transition:transform .56s cubic-bezier(.65,0,.22,1);
+    will-change:transform;
+  }
+
+  .exLaunchDoor::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(90deg,rgba(255,255,255,.022),transparent 18%,transparent 82%,rgba(0,0,0,.22)),
+      repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 118px,
+        rgba(105,156,224,.035) 119px,
+        transparent 120px
+      );
+    pointer-events:none;
+  }
+
+  .exLaunchDoorLeft{
+    left:0;
+    border-right:1px solid rgba(91,158,255,.18);
+    box-shadow:inset -20px 0 42px rgba(0,0,0,.25);
+  }
+
+  .exLaunchDoorRight{
+    right:0;
+    border-left:1px solid rgba(91,158,255,.11);
+    box-shadow:inset 20px 0 42px rgba(0,0,0,.24);
+  }
+
+  .exLaunchCenterSeam{
+    position:absolute;
+    z-index:2;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:1px;
+    background:linear-gradient(
+      180deg,
+      transparent,
+      rgba(72,143,255,.35) 28%,
+      rgba(155,202,255,.65) 50%,
+      rgba(72,143,255,.30) 72%,
+      transparent
+    );
+    box-shadow:0 0 18px rgba(43,126,255,.42);
+    opacity:.82;
+    transition:opacity .20s ease;
+  }
+
+  #splash.hide .exLaunchDoorLeft{
+    transform:translate3d(-102%,0,0);
+  }
+
+  #splash.hide .exLaunchDoorRight{
+    transform:translate3d(102%,0,0);
+  }
+
+  #splash.hide .exLaunchCenterSeam{
+    opacity:0;
+  }
+
+  .exLaunchStage{
+    position:relative;
+    z-index:4;
+    width:min(330px,84vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transform:translateY(-1.5vh);
+    transition:
+      opacity .22s ease,
+      transform .32s cubic-bezier(.4,0,.2,1);
+  }
+
+  #splash.hide .exLaunchStage{
+    opacity:0;
+    transform:translateY(-3vh) scale(.985);
+  }
+
+  .exLaunchFloorIndicator{
+    height:34px;
+    min-width:78px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    margin-bottom:12px;
+    padding:0 12px;
+    border:1px solid rgba(118,174,255,.19);
+    border-radius:12px;
+    background:rgba(1,7,18,.68);
+    box-shadow:
+      0 9px 25px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.045);
+    opacity:0;
+    transform:translateY(-6px);
+    animation:exFloorIndicatorIn .30s ease .10s forwards;
+  }
+
+  .exLaunchDirection{
+    color:#48a1ff;
+    font-size:10px;
+    line-height:1;
+    filter:drop-shadow(0 0 7px rgba(52,142,255,.8));
+    animation:exDirectionPulse .74s ease-in-out .18s 2;
+  }
+
+  .exLaunchFloorWindow{
+    position:relative;
+    width:24px;
+    height:18px;
+    overflow:hidden;
+    display:block;
+  }
+
+  .exLaunchFloorRoll{
+    position:absolute;
+    inset:0 auto auto 0;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    animation:exFloorTravel 1.10s steps(1,end) .12s both;
+  }
+
+  .exLaunchFloorRoll b{
+    height:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d9ecff;
+    font-size:13px;
+    line-height:18px;
+    font-weight:900;
+    letter-spacing:.08em;
+  }
+
+  .exLaunchFloorRoll b:last-child{
+    color:#218cff;
+    text-shadow:0 0 10px rgba(33,140,255,.65);
+  }
+
+  .exLaunchShaft{
+    position:relative;
+    width:168px;
+    height:260px;
+    overflow:hidden;
+    border-radius:28px;
+    background:
+      linear-gradient(90deg,rgba(255,255,255,.022),transparent 17%,transparent 83%,rgba(255,255,255,.022)),
+      linear-gradient(180deg,rgba(2,10,25,.34),rgba(2,9,22,.08));
+  }
+
+  .exLaunchRail{
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:2px;
+    border-radius:999px;
+    background:linear-gradient(
+      180deg,
+      transparent,
+      rgba(88,153,239,.23) 14%,
+      rgba(117,177,255,.56) 50%,
+      rgba(88,153,239,.20) 86%,
+      transparent
+    );
+    box-shadow:0 0 12px rgba(40,124,240,.22);
+  }
+
+  .exLaunchRailLeft{left:18px}
+  .exLaunchRailRight{right:18px}
+
+  .exLaunchCable{
+    position:absolute;
+    z-index:1;
+    left:50%;
+    top:-5px;
+    width:1px;
+    height:110px;
+    background:linear-gradient(180deg,rgba(132,187,255,.04),rgba(132,187,255,.48));
+    box-shadow:0 0 8px rgba(65,144,255,.25);
+    transform:translateX(-50%);
+  }
+
+  .exLaunchFloorLine{
+    position:absolute;
+    left:20px;
+    right:20px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(118,174,255,.13),transparent);
+  }
+
+  .exLaunchFloorLine1{top:62px}
+  .exLaunchFloorLine2{top:126px}
+  .exLaunchFloorLine3{top:190px}
+
+  .exLaunchCabin{
+    position:absolute;
+    z-index:3;
+    left:50%;
+    bottom:8px;
+    width:96px;
+    height:96px;
+    transform:translate3d(-50%,145px,0) scale(.90);
+    opacity:.12;
+    animation:exCabinRise 1.13s cubic-bezier(.18,.84,.24,1) .06s forwards;
+  }
+
+  .exLaunchCabinFrame{
+    position:relative;
+    z-index:2;
+    width:96px;
+    height:96px;
+    overflow:hidden;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.96);
+    box-shadow:
+      0 21px 42px rgba(0,0,0,.40),
+      0 0 0 1px rgba(77,145,245,.13),
+      0 0 32px rgba(35,126,255,.26),
+      inset 0 1px 0 rgba(255,255,255,.88);
+  }
+
+  .exLaunchCabinFrame::before,
+  .exLaunchCabinFrame::after{
+    content:"";
+    position:absolute;
+    z-index:3;
+    top:0;
+    bottom:0;
+    width:50%;
+    background:linear-gradient(90deg,rgba(8,19,37,.05),rgba(8,19,37,.14));
+    opacity:.38;
+    animation:exCabinDoorsOpen .38s cubic-bezier(.65,0,.22,1) 1.15s forwards;
+    pointer-events:none;
+  }
+
+  .exLaunchCabinFrame::before{
+    left:0;
+    border-right:1px solid rgba(3,13,29,.12);
+    transform-origin:left center;
+  }
+
+  .exLaunchCabinFrame::after{
+    right:0;
+    border-left:1px solid rgba(255,255,255,.28);
+    transform-origin:right center;
+  }
+
+  .exLaunchCabinFrame img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+
+  .exLaunchCabinGlow{
+    position:absolute;
+    z-index:1;
+    left:50%;
+    bottom:-12px;
+    width:100px;
+    height:28px;
+    border-radius:50%;
+    background:rgba(31,134,255,.38);
+    filter:blur(15px);
+    transform:translateX(-50%) scale(.7);
+    opacity:0;
+    animation:exCabinGlow .55s ease .90s forwards;
+  }
+
+  .exLaunchBrand{
+    margin-top:-4px;
+    color:#f8fbff;
+    font-size:34px;
+    line-height:1;
+    font-weight:820;
+    letter-spacing:-.035em;
+    opacity:0;
+    transform:translateY(9px);
+    animation:exBrandReveal .38s cubic-bezier(.2,.85,.25,1) 1.05s forwards;
+  }
+
+  .exLaunchBrand span{
+    color:#0a84ff;
+  }
+
+  .exLaunchReady{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:10px;
+    color:rgba(221,234,250,.64);
+    font-size:10px;
+    line-height:1;
+    font-weight:850;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    opacity:0;
+    transform:translateY(5px);
+    animation:exReadyReveal .30s ease 1.25s forwards;
+  }
+
+  .exLaunchReadyDot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#31c86b;
+    box-shadow:0 0 10px rgba(49,200,107,.68);
+  }
+
+  .exLaunchVersion{
+    position:absolute;
+    z-index:4;
+    left:50%;
+    bottom:calc(30px + env(safe-area-inset-bottom));
+    transform:translateX(-50%);
+    color:rgba(213,228,247,.34);
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:.16em;
+    opacity:0;
+    animation:exVersionReveal .28s ease 1.30s forwards;
+    transition:opacity .16s ease;
+  }
+
+  #splash.hide .exLaunchVersion{
+    opacity:0!important;
+  }
+
+  @keyframes exFloorIndicatorIn{
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @keyframes exDirectionPulse{
+    0%,100%{opacity:.55;transform:translateY(1px)}
+    50%{opacity:1;transform:translateY(-2px)}
+  }
+
+  @keyframes exFloorTravel{
+    0%,22%{transform:translateY(0)}
+    23%,46%{transform:translateY(-18px)}
+    47%,70%{transform:translateY(-36px)}
+    71%,100%{transform:translateY(-54px)}
+  }
+
+  @keyframes exCabinRise{
+    0%{
+      opacity:.10;
+      transform:translate3d(-50%,145px,0) scale(.90);
+      filter:blur(1px);
+    }
+    62%{
+      opacity:1;
+      transform:translate3d(-50%,-81px,0) scale(1.015);
+      filter:blur(0);
+    }
+    82%{
+      transform:translate3d(-50%,-74px,0) scale(.998);
+    }
+    100%{
+      opacity:1;
+      transform:translate3d(-50%,-77px,0) scale(1);
+      filter:blur(0);
+    }
+  }
+
+  @keyframes exCabinDoorsOpen{
+    to{transform:scaleX(.03);opacity:.08}
+  }
+
+  @keyframes exCabinGlow{
+    to{opacity:1;transform:translateX(-50%) scale(1)}
+  }
+
+  @keyframes exBrandReveal{
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @keyframes exReadyReveal{
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @keyframes exVersionReveal{
+    to{opacity:1}
+  }
+
+  @media(max-width:430px){
+    .exLaunchStage{
+      transform:translateY(-1vh);
+    }
+
+    .exLaunchShaft{
+      width:154px;
+      height:240px;
+    }
+
+    .exLaunchCabin,
+    .exLaunchCabinFrame{
+      width:90px;
+      height:90px;
+    }
+
+    .exLaunchCabinFrame{
+      border-radius:24px;
+    }
+
+    .exLaunchBrand{
+      font-size:31px;
+      margin-top:-2px;
+    }
+  }
+
+  @media(max-height:700px){
+    .exLaunchShaft{
+      height:218px;
+    }
+
+    .exLaunchCabin{
+      animation-name:exCabinRiseCompact;
+    }
+
+    .exLaunchFloorIndicator{
+      margin-bottom:6px;
+    }
+
+    .exLaunchBrand{
+      margin-top:-8px;
+    }
+
+    @keyframes exCabinRiseCompact{
+      0%{
+        opacity:.10;
+        transform:translate3d(-50%,125px,0) scale(.90);
+      }
+      65%{
+        opacity:1;
+        transform:translate3d(-50%,-61px,0) scale(1.012);
+      }
+      100%{
+        opacity:1;
+        transform:translate3d(-50%,-58px,0) scale(1);
+      }
+    }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .exLaunchFloorIndicator,
+    .exLaunchFloorRoll,
+    .exLaunchDirection,
+    .exLaunchCabin,
+    .exLaunchCabinFrame::before,
+    .exLaunchCabinFrame::after,
+    .exLaunchCabinGlow,
+    .exLaunchBrand,
+    .exLaunchReady,
+    .exLaunchVersion{
+      animation-duration:.01ms!important;
+      animation-delay:0ms!important;
+      animation-iteration-count:1!important;
+    }
+
+    .exLaunchDoor{
+      transition-duration:.20s!important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -15675,55 +16190,80 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 </div>
 
 
-<div id="splash">
-<div class="splashMotion" aria-hidden="true">
-  <span class="motionLine l1"></span>
-  <span class="motionLine l2"></span>
-  <span class="motionLine l3"></span>
-  <span class="motionLine l4"></span>
-  <span class="motionLine l5"></span>
-  <span class="motionArrow a1">↑</span>
-  <span class="motionArrow a2">⇈</span>
-  <span class="motionArrow a3">↓</span>
-  <span class="motionDot d1"></span>
-  <span class="motionDot d2"></span>
-  <span class="motionDot d3"></span>
-  <span class="motionDot d4"></span>
-</div>
 
-<div class="splashWrap motionSplashWrap">
-<img class="splashNewLogo motionSplashLogo" src="/elevatorx-icon-v69.png?v=1722" alt="ElevatorX logo">
-<div class="splashBrand elevatorXWordmark motionSplashTitle">Elevator<span class="animatedX" data-letter="X">X</span></div>
-<div class="motionSplashSub">Asansör takip sistemi</div>
-<div class="motionSplashVersion" data-splash-version>v1.7.22</div>
-</div>
+<div id="splash" class="exLaunchSplash" aria-label="ElevatorX açılıyor">
+  <div class="exLaunchDoor exLaunchDoorLeft" aria-hidden="true"></div>
+  <div class="exLaunchDoor exLaunchDoorRight" aria-hidden="true"></div>
+  <div class="exLaunchCenterSeam" aria-hidden="true"></div>
+
+  <div class="exLaunchStage">
+    <div class="exLaunchFloorIndicator" aria-hidden="true">
+      <span class="exLaunchDirection">▲</span>
+      <span class="exLaunchFloorWindow">
+        <span class="exLaunchFloorRoll">
+          <b>01</b>
+          <b>02</b>
+          <b>03</b>
+          <b>X</b>
+        </span>
+      </span>
+    </div>
+
+    <div class="exLaunchShaft" aria-hidden="true">
+      <span class="exLaunchRail exLaunchRailLeft"></span>
+      <span class="exLaunchRail exLaunchRailRight"></span>
+      <span class="exLaunchCable"></span>
+      <span class="exLaunchFloorLine exLaunchFloorLine1"></span>
+      <span class="exLaunchFloorLine exLaunchFloorLine2"></span>
+      <span class="exLaunchFloorLine exLaunchFloorLine3"></span>
+
+      <div class="exLaunchCabin">
+        <div class="exLaunchCabinFrame">
+          <img src="/elevatorx-icon-v69.png?v=1730" alt="ElevatorX logo">
+        </div>
+        <span class="exLaunchCabinGlow"></span>
+      </div>
+    </div>
+
+    <div class="exLaunchBrand">Elevator<span>X</span></div>
+    <div class="exLaunchReady">
+      <span class="exLaunchReadyDot"></span>
+      Sistem hazır
+    </div>
+  </div>
+
+  <div class="exLaunchVersion" data-splash-version>v1.7.30</div>
 </div>
 
 <script>
-/* ElevatorX v1.4.20 — Akıllı Splash Süresi
-   Güncellemeden sonra ilk açılış: 3 sn
-   Normal açılışlar: 1.5 sn
-   Takılırsa zorla açma: 3.2 sn */
+/* ElevatorX v1.7.30 — Launch Sequence
+   Güncellemeden sonra ilk açılış: 2.25 sn
+   Normal açılışlar: 1.85 sn
+   Kapı açılma geçişi: 0.58 sn
+   Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v1.7.22";
+  const SPLASH_VERSION = "v1.7.30";
   const KEY = "elevatorxSmartSplashSeenVersion";
-  const FIRST_MS = 3000;
-  const NORMAL_MS = 1504;
-  const FAILSAFE_MS = 3200;
+  const FIRST_MS = 2250;
+  const NORMAL_MS = 1850;
+  const EXIT_MS = 580;
+  const FAILSAFE_MS = 3000;
 
   function hideSplashSmart(){
     try{
       const splash = document.getElementById("splash");
       if(!splash || splash.dataset.hidden === "1") return;
       splash.dataset.hidden = "1";
-      splash.classList.add("hide");
-      splash.style.opacity = "0";
+      splash.classList.add("hide","launchOpening");
       splash.style.pointerEvents = "none";
-      setTimeout(function(){
-        if(splash && splash.parentNode){ splash.parentNode.removeChild(splash); }
-      }, 420);
+
       document.documentElement.classList.add("appBooted");
       if(document.body){ document.body.classList.add("appBooted"); }
+
+      setTimeout(function(){
+        splash.classList.add("launchRemoved");
+        if(splash && splash.parentNode){ splash.parentNode.removeChild(splash); }
+      }, EXIT_MS);
     }catch(e){}
   }
 
@@ -16426,9 +16966,9 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 8;
 
 const APP_NAME = "ElevatorX";
-const APP_VERSION = "v1.7.22";
+const APP_VERSION = "v1.7.30";
 window.APP_VERSION = APP_VERSION;
-const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1722", location.origin).href;
+const APP_LOGO = new URL("/elevatorx-icon-v69.png?v=1730", location.origin).href;
 
 
 function elevatorXOpenReportWindow(){
