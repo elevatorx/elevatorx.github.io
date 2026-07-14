@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.22_PORTFOLIO_GLASS_CENTER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.23_FLOATING_GLASS_TABBAR -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -59,6 +59,162 @@ html.ex-preboot:not(.appBooted) body::after{
 html.ex-preboot:not(.appBooted),
 html.ex-preboot:not(.appBooted) body{
   background:#fbfbf9 !important;
+}
+</style>
+
+<style id="abrFloatingGlassTabbar2023Foundation" media="not all">
+/* v2.0.23 — Portföy ekranıyla uyumlu, iki sekmeli floating glass dock */
+.tabbar,
+body.exShowYeniTab .tabbar,
+body:not(.exShowYeniTab) .tabbar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:center!important;
+  width:min(306px,calc(100vw - 54px))!important;
+  max-width:306px!important;
+  height:64px!important;
+  min-height:64px!important;
+  margin:0!important;
+  padding:5px!important;
+  gap:4px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.90)!important;
+  border-radius:25px!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.82),rgba(241,246,255,.70))!important;
+  -webkit-backdrop-filter:blur(26px) saturate(160%)!important;
+  backdrop-filter:blur(26px) saturate(160%)!important;
+  box-shadow:
+    0 16px 36px rgba(22,40,72,.15),
+    0 3px 10px rgba(22,40,72,.07),
+    inset 0 1px 0 rgba(255,255,255,.96)!important;
+  transform:translate3d(-50%,0,0)!important;
+  z-index:9999!important;
+}
+
+.tabbar .tabItem{
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  height:52px!important;
+  min-height:52px!important;
+  margin:0!important;
+  padding:0 12px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:20px!important;
+  background:transparent!important;
+  color:#64748b!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  transform:none!important;
+  transition:background-color .12s linear,color .12s linear!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+.tabbar .tabItem::before,
+.tabbar .tabItem::after{
+  content:none!important;
+  display:none!important;
+}
+
+.tabbar .tabItem.activeTab{
+  color:#fff!important;
+  background:
+    radial-gradient(circle at 82% 10%,rgba(85,154,255,.34),transparent 38%),
+    linear-gradient(145deg,#17233a 0%,#1b3762 58%,#176fe8 145%)!important;
+  box-shadow:
+    0 8px 18px rgba(23,67,132,.20),
+    inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+
+.tabbar .tabItem:active{
+  opacity:.86!important;
+  transform:none!important;
+}
+
+.tabbar .tabIcon{
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 21px!important;
+  width:21px!important;
+  height:21px!important;
+  min-width:21px!important;
+  margin:0!important;
+  color:currentColor!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.tabbar .tabSvg{
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+  overflow:visible!important;
+}
+
+.tabbar .tabText{
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:currentColor!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:-.12px!important;
+  white-space:nowrap!important;
+  text-shadow:none!important;
+}
+
+.tabbar .tabText::before,
+.tabbar .tabText::after{
+  content:none!important;
+  display:none!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  border-color:rgba(255,255,255,.10)!important;
+  background:linear-gradient(145deg,rgba(31,41,57,.88),rgba(17,24,39,.80))!important;
+  box-shadow:0 17px 38px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+  color:#a9b5c7!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#fff!important;
+  background:
+    radial-gradient(circle at 82% 10%,rgba(85,154,255,.35),transparent 38%),
+    linear-gradient(145deg,#1b2a44,#174d92)!important;
+}
+
+@media(max-width:360px){
+  .tabbar,
+  body.exShowYeniTab .tabbar,
+  body:not(.exShowYeniTab) .tabbar{
+    width:min(286px,calc(100vw - 42px))!important;
+  }
+
+  .tabbar .tabItem{
+    padding:0 9px!important;
+    gap:6px!important;
+  }
 }
 </style>
 
@@ -16067,6 +16223,100 @@ body:not(.exShowYeniTab) .tabbar{
 }
 </style>
 
+<style id="abrFloatingGlassTabbar2023">
+/* v2.0.23 — son katman: eski siyah segmented bar kurallarını kontrollü biçimde geçersiz kılar */
+.tabbar,
+body.exShowYeniTab .tabbar,
+body:not(.exShowYeniTab) .tabbar{
+  bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:min(306px,calc(100vw - 54px))!important;
+  max-width:306px!important;
+  height:64px!important;
+  min-height:64px!important;
+  padding:5px!important;
+  gap:4px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.90)!important;
+  border-radius:25px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(241,246,255,.70))!important;
+  -webkit-backdrop-filter:blur(26px) saturate(160%)!important;
+  backdrop-filter:blur(26px) saturate(160%)!important;
+  box-shadow:0 16px 36px rgba(22,40,72,.15),0 3px 10px rgba(22,40,72,.07),inset 0 1px 0 rgba(255,255,255,.96)!important;
+  transform:translate3d(-50%,0,0)!important;
+}
+
+.tabbar .tabItem{
+  height:52px!important;
+  min-height:52px!important;
+  padding:0 12px!important;
+  gap:7px!important;
+  border-radius:20px!important;
+  background:transparent!important;
+  color:#64748b!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+
+.tabbar .tabItem.activeTab{
+  color:#fff!important;
+  background:radial-gradient(circle at 82% 10%,rgba(85,154,255,.34),transparent 38%),linear-gradient(145deg,#17233a 0%,#1b3762 58%,#176fe8 145%)!important;
+  box-shadow:0 8px 18px rgba(23,67,132,.20),inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+
+.tabbar .tabIcon{
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 21px!important;
+  width:21px!important;
+  height:21px!important;
+  min-width:21px!important;
+  margin:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.tabbar .tabSvg{
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+}
+
+.tabbar .tabText{
+  color:currentColor!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  letter-spacing:-.12px!important;
+}
+
+body.darkMode .tabbar,
+html.darkRoot .tabbar{
+  border-color:rgba(255,255,255,.10)!important;
+  background:linear-gradient(145deg,rgba(31,41,57,.88),rgba(17,24,39,.80))!important;
+  box-shadow:0 17px 38px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+
+body.darkMode .tabbar .tabItem,
+html.darkRoot .tabbar .tabItem{
+  color:#a9b5c7!important;
+}
+
+body.darkMode .tabbar .tabItem.activeTab,
+html.darkRoot .tabbar .tabItem.activeTab{
+  color:#fff!important;
+  background:radial-gradient(circle at 82% 10%,rgba(85,154,255,.35),transparent 38%),linear-gradient(145deg,#1b2a44,#174d92)!important;
+}
+
+@media(max-width:360px){
+  .tabbar,
+  body.exShowYeniTab .tabbar,
+  body:not(.exShowYeniTab) .tabbar{
+    width:min(286px,calc(100vw - 42px))!important;
+  }
+  .tabbar .tabItem{padding:0 9px!important;gap:6px!important;}
+}
+</style>
+
 <style id="abrPortfolioGlassCenter2022">
 /* v2.0.22 — Portföy Merkezi: dört kutu yerine iki kompakt cam özet paneli */
 .exDashOverviewGrid{
@@ -17625,7 +17875,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.22</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.23</div>
     </div>
   </div>
 </div>
@@ -17637,7 +17887,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.22";
+  const SPLASH_VERSION = "v2.0.23";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -18358,7 +18608,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.22";
+const APP_VERSION = "v2.0.23";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
