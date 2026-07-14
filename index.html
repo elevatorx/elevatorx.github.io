@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.24_COMPACT_GLASS_SEARCH -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.25_GLASS_SERVICE_CARDS -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16709,6 +16709,188 @@ html.darkRoot .exDashFinanceOpen{
 }
 </style>
 
+<style id="abrGlassServiceCards2025">
+/* v2.0.25 — Apartman listesi: kompakt cam servis kartları */
+.exPortfolioCard{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-bottom:7px!important;
+  padding:11px 12px 10px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.86)!important;
+  border-radius:21px!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(87,145,235,.075),transparent 37%),
+    linear-gradient(145deg,rgba(255,255,255,.84),rgba(245,249,255,.67))!important;
+  -webkit-backdrop-filter:blur(20px) saturate(145%)!important;
+  backdrop-filter:blur(20px) saturate(145%)!important;
+  box-shadow:0 9px 24px rgba(27,45,77,.06),inset 0 1px 0 rgba(255,255,255,.96)!important;
+}
+
+.exPortfolioCard:before{
+  top:11px!important;
+  bottom:11px!important;
+  width:3px!important;
+  box-shadow:none!important;
+}
+
+.exPortfolioCard.statusDone:before{box-shadow:0 0 10px rgba(33,166,91,.28)!important;}
+.exPortfolioCard.statusToday:before{box-shadow:0 0 10px rgba(23,111,232,.28)!important;}
+.exPortfolioCard.statusOverdue:before{box-shadow:0 0 10px rgba(239,68,68,.30)!important;}
+.exPortfolioCard.statusWaiting:before{box-shadow:0 0 10px rgba(242,165,26,.28)!important;}
+
+.exPortfolioTop{
+  grid-template-columns:38px minmax(0,1fr) auto!important;
+  gap:9px!important;
+}
+
+.exPortfolioAvatar{
+  width:38px!important;
+  height:38px!important;
+  border-radius:13px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+
+.exPortfolioAvatar:before{
+  width:15px!important;
+  height:19px!important;
+  border-width:1.8px!important;
+}
+
+.exPortfolioAvatar:after{
+  width:2.5px!important;
+  height:2.5px!important;
+  left:13px!important;
+  top:12px!important;
+  box-shadow:6px 0 currentColor,0 6px currentColor,6px 6px currentColor!important;
+}
+
+.exPortfolioName{
+  font-size:13.5px!important;
+  letter-spacing:-.2px!important;
+}
+
+.exPortfolioIdentityLine{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-width:0;
+  margin-top:4px;
+}
+
+.exPortfolioCode{
+  min-height:19px!important;
+  margin-top:0!important;
+  padding:3px 6px!important;
+  border-radius:7px!important;
+  background:rgba(235,240,248,.72)!important;
+  font-size:7px!important;
+  letter-spacing:.08em!important;
+}
+
+.exPortfolioIdentityLine .exPortfolioChip{
+  min-height:19px!important;
+  max-width:98px;
+  overflow:hidden;
+  padding:3px 6px!important;
+  border-radius:7px!important;
+  font-size:7px!important;
+  text-overflow:ellipsis;
+}
+
+.exPortfolioStatus{
+  min-height:24px!important;
+  padding:4px 7px!important;
+  font-size:7.5px!important;
+}
+
+.exPortfolioMeta{
+  display:grid!important;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;
+  gap:6px!important;
+  margin:8px 0 0 47px!important;
+  color:#778499!important;
+  font-size:8.5px!important;
+  line-height:1.2!important;
+}
+
+.exPortfolioMeta span{
+  min-width:0!important;
+  overflow:hidden!important;
+  gap:4px!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+.exPortfolioMeta i{
+  width:5px!important;
+  height:5px!important;
+}
+
+.exPortfolioChips{
+  gap:4px!important;
+  margin:7px 0 0 47px!important;
+}
+
+.exPortfolioChips .exPortfolioChip{
+  min-height:20px!important;
+  padding:3px 6px!important;
+  border-radius:7px!important;
+  font-size:7px!important;
+}
+
+.exPortfolioBottom{
+  grid-template-columns:repeat(3,minmax(0,1fr)) 13px!important;
+  gap:5px!important;
+  margin-top:8px!important;
+  padding:8px 2px 0 47px!important;
+  border-top:1px solid rgba(139,156,181,.14)!important;
+}
+
+.exPortfolioBottomItem{
+  display:flex!important;
+  min-width:0!important;
+  flex-direction:column!important;
+  gap:3px!important;
+}
+
+.exPortfolioBottomItem span{
+  font-size:6.5px!important;
+  letter-spacing:.06em!important;
+}
+
+.exPortfolioBottomItem b{
+  margin-top:0!important;
+  font-size:8.8px!important;
+}
+
+.exPortfolioArrow{
+  font-size:18px!important;
+  color:#aeb8c7!important;
+}
+
+body.darkMode .exPortfolioCard,
+html.darkRoot .exPortfolioCard{
+  border-color:rgba(255,255,255,.08)!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(70,130,225,.10),transparent 37%),
+    linear-gradient(145deg,rgba(31,41,57,.90),rgba(17,24,39,.78))!important;
+  box-shadow:0 10px 25px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+body.darkMode .exPortfolioCode,
+html.darkRoot .exPortfolioCode{
+  background:rgba(255,255,255,.06)!important;
+}
+
+@media(max-width:350px){
+  .exPortfolioTop{grid-template-columns:36px minmax(0,1fr) auto!important;}
+  .exPortfolioStatus{grid-column:auto!important;margin-left:0!important;}
+  .exPortfolioMeta,.exPortfolioChips{margin-left:45px!important;}
+  .exPortfolioBottom{padding-left:45px!important;}
+}
+</style>
+
 <style id="abrDrawerPremiumHeaderV2019">
 /* v2.0.19 — Yan menü üst alanı: teknik marka zemini + kompakt lisans kartı */
 .abrDrawerHead{
@@ -18017,7 +18199,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.24</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.25</div>
     </div>
   </div>
 </div>
@@ -18029,7 +18211,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.24";
+  const SPLASH_VERSION = "v2.0.25";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -18750,7 +18932,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.24";
+const APP_VERSION = "v2.0.25";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -23793,6 +23975,15 @@ if(filtreli.length === 0){
       let muayeneBilgi = muayeneEtiketBilgisi(muayeneMevcut(a).etiket) || {cls:"inspectionNone",text:"Etiket Bilgisi Yok"};
       let sozlesmeBilgi = sozlesmeDurumBilgisi(a) || {cls:"contractNone",short:"Bilgi Yok"};
       let tel = String(a.tel || "Telefon yok");
+      let operasyonChipleri = [];
+
+      if(muayeneBilgi.cls !== "inspectionNone"){
+        operasyonChipleri.push(`<span class="exPortfolioChip ${muayeneBilgi.cls}">${ayHtml(muayeneBilgi.text)}</span>`);
+      }
+
+      if(sozlesmeBilgi.cls !== "contractNone"){
+        operasyonChipleri.push(`<span class="exPortfolioChip ${sozlesmeBilgi.cls}">${ayHtml(sozlesmeBilgi.short)}</span>`);
+      }
 
       h += `
       <article class="exPortfolioCard ${durumClass(a)}" style="--i:${sira}" onclick="detayAc(${i})">
@@ -23801,7 +23992,10 @@ if(filtreli.length === 0){
 
           <div class="exPortfolioIdentity">
             <div class="exPortfolioName">${ayHtml(a.ad || "-")}</div>
-            <div class="exPortfolioCode">${ayHtml(apartmanKodu(i))}</div>
+            <div class="exPortfolioIdentityLine">
+              <div class="exPortfolioCode">${ayHtml(apartmanKodu(i))}</div>
+              ${exDashboardOdemeChip(a)}
+            </div>
           </div>
 
           <span class="exPortfolioStatus ${d.badgeClass}">${ayHtml(d.durum)}</span>
@@ -23812,11 +24006,7 @@ if(filtreli.length === 0){
           <span onclick="apartmanRehberGuncelle(event,${i})"><i></i>${ayHtml(tel)}</span>
         </div>
 
-        <div class="exPortfolioChips">
-          <span class="exPortfolioChip ${muayeneBilgi.cls}">${ayHtml(muayeneBilgi.text)}</span>
-          <span class="exPortfolioChip ${sozlesmeBilgi.cls}">${ayHtml(sozlesmeBilgi.short)}</span>
-          ${exDashboardOdemeChip(a)}
-        </div>
+        ${operasyonChipleri.length ? `<div class="exPortfolioChips">${operasyonChipleri.join("")}</div>` : ""}
 
         <div class="exPortfolioBottom">
           <div class="exPortfolioBottomItem">
