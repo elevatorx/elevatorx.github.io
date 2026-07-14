@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.21_STABLE_PREMIUM_MENU -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.22_PORTFOLIO_GLASS_CENTER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16067,6 +16067,256 @@ body:not(.exShowYeniTab) .tabbar{
 }
 </style>
 
+<style id="abrPortfolioGlassCenter2022">
+/* v2.0.22 — Portföy Merkezi: dört kutu yerine iki kompakt cam özet paneli */
+.exDashOverviewGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:8px;
+  margin:0 0 10px;
+}
+
+.exDashOverviewCard{
+  position:relative;
+  isolation:isolate;
+  min-width:0;
+  min-height:132px;
+  overflow:hidden;
+  padding:13px;
+  border:1px solid rgba(255,255,255,.84);
+  border-radius:23px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(92,156,255,.13),transparent 44%),
+    linear-gradient(145deg,rgba(255,255,255,.88),rgba(245,249,255,.67));
+  -webkit-backdrop-filter:blur(22px) saturate(145%);
+  backdrop-filter:blur(22px) saturate(145%);
+  box-shadow:
+    0 13px 32px rgba(28,45,78,.075),
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(160,180,210,.10);
+}
+
+.exDashOverviewCard:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:82px;
+  height:82px;
+  right:-38px;
+  bottom:-42px;
+  border-radius:50%;
+  background:rgba(35,119,235,.08);
+  box-shadow:0 0 34px rgba(35,119,235,.08);
+}
+
+.exDashOverviewFinance:before{
+  background:rgba(112,71,200,.09);
+  box-shadow:0 0 34px rgba(112,71,200,.09);
+}
+
+.exDashOverviewHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:7px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(133,151,179,.15);
+}
+
+.exDashOverviewTitle{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  gap:7px;
+  color:#172033;
+  font-size:10px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.exDashOverviewIcon{
+  width:27px;
+  height:27px;
+  flex:0 0 27px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(145deg,#e6f0ff,#f7fbff);
+  color:#176fe8;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  font-size:12px;
+  font-weight:950;
+}
+
+.exDashOverviewFinance .exDashOverviewIcon{
+  background:linear-gradient(145deg,#f0e9ff,#fbf9ff);
+  color:#7047c8;
+}
+
+.exDashOverviewPeriod{
+  color:#929daf;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.exDashOverviewStats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:13px;
+}
+
+.exDashOverviewStat{
+  min-width:0;
+  padding:0 6px;
+  text-align:center;
+}
+
+.exDashOverviewStat:first-child{padding-left:0;}
+.exDashOverviewStat:last-child{padding-right:0;}
+.exDashOverviewStat + .exDashOverviewStat{
+  border-left:1px solid rgba(133,151,179,.16);
+}
+
+.exDashOverviewStat b{
+  display:block;
+  overflow:hidden;
+  color:#111827;
+  font-size:18px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.45px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.exDashOverviewStat span{
+  display:block;
+  margin-top:6px;
+  color:#7c889b;
+  font-size:7px;
+  line-height:1.15;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.exDashOverviewStat.is-danger b{
+  color:#d92d20;
+}
+
+.exDashFinanceMain{
+  margin-top:12px;
+}
+
+.exDashFinanceMain b{
+  display:block;
+  overflow:hidden;
+  color:#111827;
+  font-size:21px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.65px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.exDashFinanceMain span{
+  display:block;
+  margin-top:5px;
+  color:#7c889b;
+  font-size:8px;
+  font-weight:850;
+}
+
+.exDashFinanceOpen{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:7px;
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid rgba(133,151,179,.15);
+  color:#7c889b;
+  font-size:7.5px;
+  font-weight:900;
+}
+
+.exDashFinanceOpen b{
+  min-width:0;
+  overflow:hidden;
+  color:#7047c8;
+  font-size:10px;
+  font-weight:950;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Son işlemi özet panelleriyle aynı cam diline getir. */
+.exDashActivity{
+  grid-template-columns:34px minmax(0,1fr) auto!important;
+  min-height:60px!important;
+  gap:10px!important;
+  margin:0 0 14px!important;
+  padding:9px 12px!important;
+  border-color:rgba(255,255,255,.82)!important;
+  border-radius:19px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(245,249,255,.65))!important;
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  backdrop-filter:blur(20px) saturate(140%);
+  box-shadow:0 10px 25px rgba(28,45,78,.06),inset 0 1px 0 rgba(255,255,255,.94)!important;
+}
+
+.exDashActivityIcon{
+  width:34px!important;
+  height:34px!important;
+  border-radius:12px!important;
+  font-size:15px!important;
+}
+
+.exDashActivityValue{
+  margin-top:3px!important;
+  font-size:10.5px!important;
+}
+
+.exDashActivityDate{
+  font-size:7.5px!important;
+}
+
+body.darkMode .exDashOverviewCard,
+html.darkRoot .exDashOverviewCard{
+  border-color:rgba(255,255,255,.10)!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(65,130,235,.16),transparent 44%),
+    linear-gradient(145deg,rgba(31,41,57,.90),rgba(19,27,41,.78))!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+
+body.darkMode .exDashOverviewTitle,
+body.darkMode .exDashOverviewStat b,
+body.darkMode .exDashFinanceMain b,
+html.darkRoot .exDashOverviewTitle,
+html.darkRoot .exDashOverviewStat b,
+html.darkRoot .exDashFinanceMain b{
+  color:#f8fafc;
+}
+
+body.darkMode .exDashOverviewHead,
+body.darkMode .exDashOverviewStat + .exDashOverviewStat,
+body.darkMode .exDashFinanceOpen,
+html.darkRoot .exDashOverviewHead,
+html.darkRoot .exDashOverviewStat + .exDashOverviewStat,
+html.darkRoot .exDashFinanceOpen{
+  border-color:rgba(255,255,255,.08);
+}
+
+@media(max-width:350px){
+  .exDashOverviewGrid{grid-template-columns:1fr;}
+  .exDashOverviewCard{min-height:118px;}
+}
+</style>
+
 <style id="abrDrawerPremiumHeaderV2019">
 /* v2.0.19 — Yan menü üst alanı: teknik marka zemini + kompakt lisans kartı */
 .abrDrawerHead{
@@ -17375,7 +17625,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.21</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.22</div>
     </div>
   </div>
 </div>
@@ -17387,7 +17637,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.21";
+  const SPLASH_VERSION = "v2.0.22";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -18108,7 +18358,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.21";
+const APP_VERSION = "v2.0.22";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -23070,42 +23320,51 @@ let h = `
   </div>
 </div>
 
-<div class="exDashMetricGrid">
-  <div class="exDashMetricCard" style="--metric:#176fe8;--metric-soft:#eaf2ff">
-    <div class="exDashMetricTop">
-      <div class="exDashMetricIcon">▦</div>
-      <div class="exDashMetricTrend">Aktif portföy</div>
+<div class="exDashOverviewGrid">
+  <section class="exDashOverviewCard exDashOverviewStatus" aria-label="Genel durum özeti">
+    <div class="exDashOverviewHead">
+      <div class="exDashOverviewTitle">
+        <span class="exDashOverviewIcon">✓</span>
+        <span>Genel Durum</span>
+      </div>
+      <span class="exDashOverviewPeriod">Bu ay</span>
     </div>
-    <div class="exDashMetricNumber">${guvenliData.length}</div>
-    <div class="exDashMetricLabel">Apartman kaydı</div>
-  </div>
 
-  <div class="exDashMetricCard" style="--metric:#168a3a;--metric-soft:#e8f8ee">
-    <div class="exDashMetricTop">
-      <div class="exDashMetricIcon">✓</div>
-      <div class="exDashMetricTrend">${bekleyenCount} bekliyor</div>
+    <div class="exDashOverviewStats">
+      <div class="exDashOverviewStat">
+        <b>${guvenliData.length}</b>
+        <span>Portföy</span>
+      </div>
+      <div class="exDashOverviewStat">
+        <b>${tamamlananCount}</b>
+        <span>Tamam</span>
+      </div>
+      <div class="exDashOverviewStat${gecikenCount > 0 ? " is-danger" : ""}">
+        <b>${gecikenCount}</b>
+        <span>Geciken</span>
+      </div>
     </div>
-    <div class="exDashMetricNumber">${tamamlananCount}</div>
-    <div class="exDashMetricLabel">Bu ay bakım yapıldı</div>
-  </div>
+  </section>
 
-  <div class="exDashMetricCard" style="--metric:#d92d20;--metric-soft:#fff0ef">
-    <div class="exDashMetricTop">
-      <div class="exDashMetricIcon">!</div>
-      <div class="exDashMetricTrend">${bugunCount} bugün</div>
+  <section class="exDashOverviewCard exDashOverviewFinance" aria-label="Finans özeti">
+    <div class="exDashOverviewHead">
+      <div class="exDashOverviewTitle">
+        <span class="exDashOverviewIcon">₺</span>
+        <span>Finans Özeti</span>
+      </div>
+      <span class="exDashOverviewPeriod">Bu ay</span>
     </div>
-    <div class="exDashMetricNumber">${gecikenCount}</div>
-    <div class="exDashMetricLabel">Geciken bakım</div>
-  </div>
 
-  <div class="exDashMetricCard" style="--metric:#7047c8;--metric-soft:#f3edff">
-    <div class="exDashMetricTop">
-      <div class="exDashMetricIcon">₺</div>
-      <div class="exDashMetricTrend">Açık ${ayHtml(tutarFormat(acikBakiye))}</div>
+    <div class="exDashFinanceMain">
+      <b>${ayHtml(tutarFormat(toplam))}</b>
+      <span>Tahsilat</span>
     </div>
-    <div class="exDashMetricNumber">${ayHtml(tutarFormat(toplam))}</div>
-    <div class="exDashMetricLabel">Bu ay tahsilat</div>
-  </div>
+
+    <div class="exDashFinanceOpen">
+      <span>Açık bakiye</span>
+      <b>${ayHtml(tutarFormat(acikBakiye))}</b>
+    </div>
+  </section>
 </div>
 
 ${exDashboardSonIslemHtml()}
