@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.18_NATIVE_TEKNIK_SPLASH -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.19_PREMIUM_DRAWER_HEADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16066,6 +16066,178 @@ body:not(.exShowYeniTab) .tabbar{
   line-height:1.2!important;
 }
 </style>
+
+<style id="abrDrawerPremiumHeaderV2019">
+/* v2.0.19 — Yan menü üst alanı: teknik marka zemini + kompakt lisans kartı */
+.abrDrawerHead{
+  position:relative!important;
+  isolation:isolate!important;
+  min-height:82px!important;
+  margin:0 0 10px!important;
+  padding:7px 2px 9px!important;
+  overflow:hidden!important;
+}
+
+.abrDrawerHead::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-8px 38px -2px -8px;
+  border-radius:22px;
+  opacity:.34;
+  background:
+    linear-gradient(90deg,transparent 23%,rgba(255,103,0,.10) 23.5%,transparent 24%),
+    linear-gradient(0deg,transparent 43%,rgba(255,103,0,.09) 43.5%,transparent 44%),
+    linear-gradient(135deg,transparent 62%,rgba(148,163,184,.14) 62.4%,transparent 63%);
+  background-size:46px 46px,46px 46px,92px 92px;
+  pointer-events:none;
+}
+
+.abrDrawerLogo{
+  position:relative!important;
+  z-index:1!important;
+  width:min(100%,235px)!important;
+  max-height:76px!important;
+}
+
+.abrDrawerHead .exHybridClose{
+  position:relative!important;
+  z-index:2!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  border:1px solid rgba(255,255,255,.96)!important;
+  border-radius:50%!important;
+  background:rgba(248,250,252,.76)!important;
+  box-shadow:0 8px 22px rgba(15,23,42,.10),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  backdrop-filter:blur(16px) saturate(150%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(150%)!important;
+}
+
+.exHybridProfile{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:76px!important;
+  margin:0 0 18px!important;
+  padding:14px 15px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.92)!important;
+  border-radius:22px!important;
+  color:#111827!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(247,249,252,.72))!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.98)!important;
+  backdrop-filter:blur(18px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(145%)!important;
+}
+
+.exHybridProfileIdentity{
+  min-width:0!important;
+}
+
+.exHybridProfileName{
+  overflow:hidden!important;
+  color:#172033!important;
+  font-size:17px!important;
+  font-weight:950!important;
+  letter-spacing:-.35px!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+.exHybridProfileMeta{
+  overflow:hidden!important;
+  margin-top:5px!important;
+  color:#8590a1!important;
+  font-size:10.8px!important;
+  font-weight:850!important;
+  letter-spacing:.15px!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+.exHybridProfileAccess{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  gap:8px!important;
+  flex:0 0 auto!important;
+}
+
+.exHybridPremiumPill{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:25px!important;
+  padding:4px 10px!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,#ff7a1a,#ff6200)!important;
+  box-shadow:0 6px 14px rgba(255,103,0,.21),inset 0 1px 0 rgba(255,255,255,.28)!important;
+  font-size:10.5px!important;
+  font-weight:900!important;
+  letter-spacing:.05px!important;
+}
+
+.exHybridLicenseActive{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  color:#7a8494!important;
+  font-size:9.8px!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+}
+
+.exHybridLicenseDot{
+  width:7px!important;
+  height:7px!important;
+  border-radius:50%!important;
+  background:#19c76b!important;
+  box-shadow:0 0 0 3px rgba(25,199,107,.11)!important;
+}
+
+body.darkMode .abrDrawerHead::before,
+html.darkRoot .abrDrawerHead::before{
+  opacity:.22;
+}
+
+body.darkMode .abrDrawerHead .exHybridClose,
+html.darkRoot .abrDrawerHead .exHybridClose{
+  border-color:rgba(255,255,255,.10)!important;
+  background:rgba(30,41,59,.72)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+body.darkMode .exHybridProfile,
+html.darkRoot .exHybridProfile{
+  border-color:rgba(255,255,255,.09)!important;
+  color:#f8fafc!important;
+  background:linear-gradient(135deg,rgba(30,41,59,.86),rgba(17,24,39,.72))!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.darkMode .exHybridProfileName,
+html.darkRoot .exHybridProfileName{
+  color:#f8fafc!important;
+}
+
+body.darkMode .exHybridProfileMeta,
+html.darkRoot .exHybridProfileMeta,
+body.darkMode .exHybridLicenseActive,
+html.darkRoot .exHybridLicenseActive{
+  color:#94a3b8!important;
+}
+
+@media(max-width:390px){
+  .abrDrawerHead{min-height:76px!important;}
+  .abrDrawerLogo{width:min(100%,220px)!important;max-height:70px!important;}
+  .exHybridProfile{min-height:72px!important;padding:12px 13px!important;gap:9px!important;}
+  .exHybridProfileName{font-size:16px!important;}
+  .exHybridPremiumPill{padding-left:9px!important;padding-right:9px!important;}
+}
+</style>
 </head>
 
 <body>
@@ -16084,8 +16256,14 @@ body:not(.exShowYeniTab) .tabbar{
   </div>
 
   <div class="exHybridProfile">
-    <div class="exHybridProfileName" id="exHybridProfileName">Uğur AY</div>
-    <div class="exHybridProfileMeta" id="exHybridProfileMeta">Premium lisans aktif</div>
+    <div class="exHybridProfileIdentity">
+      <div class="exHybridProfileName" id="exHybridProfileName">Uğur AY</div>
+      <div class="exHybridProfileMeta" id="exHybridProfileMeta">AY ASANSÖR</div>
+    </div>
+    <div class="exHybridProfileAccess" aria-label="Premium lisans aktif">
+      <span class="exHybridPremiumPill">Premium</span>
+      <span class="exHybridLicenseActive"><i class="exHybridLicenseDot" aria-hidden="true"></i>Lisans aktif</span>
+    </div>
   </div>
 
   <div class="exHybridMenuLabel">Hızlı işlemler</div>
@@ -16214,7 +16392,7 @@ body:not(.exShowYeniTab) .tabbar{
       var adEl = document.getElementById("exHybridProfileName");
       var metaEl = document.getElementById("exHybridProfileMeta");
       if(adEl) adEl.textContent = ad || "Uğur AY";
-      if(metaEl) metaEl.textContent = (firma || "AY ASANSÖR") + " • Premium lisans aktif";
+      if(metaEl) metaEl.textContent = firma || "AY ASANSÖR";
     }catch(e){}
   }
 
@@ -17199,7 +17377,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.18</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.19</div>
     </div>
   </div>
 </div>
@@ -17211,7 +17389,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.18";
+  const SPLASH_VERSION = "v2.0.19";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -17932,7 +18110,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.18";
+const APP_VERSION = "v2.0.19";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
