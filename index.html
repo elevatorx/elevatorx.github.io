@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.23_FLOATING_GLASS_TABBAR -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.24_COMPACT_GLASS_SEARCH -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16317,6 +16317,148 @@ html.darkRoot .tabbar .tabItem.activeTab{
 }
 </style>
 
+<style id="abrCompactGlassSearch2024">
+/* v2.0.24 — Portföy Merkezi kompakt cam arama ve filtre kapsülü */
+#searchArea.searchRow{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 46px!important;
+  align-items:center!important;
+  gap:3px!important;
+  min-height:56px!important;
+  margin:0 0 10px!important;
+  padding:4px!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  border-radius:21px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.77),rgba(242,247,255,.64))!important;
+  -webkit-backdrop-filter:blur(24px) saturate(155%)!important;
+  backdrop-filter:blur(24px) saturate(155%)!important;
+  box-shadow:0 12px 29px rgba(23,43,76,.075),inset 0 1px 0 rgba(255,255,255,.96)!important;
+  transition:border-color .16s ease,box-shadow .16s ease!important;
+}
+
+#searchArea.searchRow:focus-within{
+  border-color:rgba(23,111,232,.34)!important;
+  box-shadow:0 13px 31px rgba(23,75,145,.11),0 0 0 3px rgba(23,111,232,.055),inset 0 1px 0 rgba(255,255,255,.96)!important;
+}
+
+#searchArea.searchRow:before{
+  left:17px!important;
+  top:50%!important;
+  width:12px!important;
+  height:12px!important;
+  border-width:1.8px!important;
+  border-color:#75849a!important;
+  transform:translateY(-59%)!important;
+}
+
+#searchArea.searchRow:after{
+  left:28px!important;
+  top:calc(50% + 6px)!important;
+  width:6px!important;
+  height:1.8px!important;
+  background:#75849a!important;
+  transform:rotate(45deg)!important;
+}
+
+#searchArea #arama{
+  width:100%!important;
+  height:46px!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 10px 0 39px!important;
+  border:0!important;
+  border-radius:17px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#142033!important;
+  font-size:13px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:-.12px!important;
+  outline:none!important;
+}
+
+#searchArea #arama::placeholder{
+  color:#8996a9!important;
+  font-weight:750!important;
+  opacity:1!important;
+}
+
+#searchArea .filterBtn{
+  position:relative!important;
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+  border-radius:17px!important;
+  background:linear-gradient(145deg,rgba(229,240,255,.92),rgba(250,252,255,.88))!important;
+  color:transparent!important;
+  font-size:0!important;
+  box-shadow:0 5px 13px rgba(31,83,150,.085),inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+
+#searchArea .filterBtn:before,
+#searchArea .filterBtn:after{
+  background:#176fe8!important;
+}
+
+#searchArea .filterBtn:before{
+  left:13px!important;
+  top:17px!important;
+  width:20px!important;
+  height:2px!important;
+  box-shadow:0 9px 0 #176fe8!important;
+}
+
+#searchArea .filterBtn:after{
+  left:19px!important;
+  top:14px!important;
+  width:5px!important;
+  height:8px!important;
+  border:2px solid #176fe8!important;
+  background:#f7fbff!important;
+  box-shadow:-8px 9px 0 -2px #f7fbff,-8px 9px 0 0 #176fe8!important;
+}
+
+#searchArea.has-filter .filterBtn{
+  border-color:rgba(75,139,235,.28)!important;
+  background:linear-gradient(145deg,#17233a,#176fe8)!important;
+  box-shadow:0 7px 16px rgba(23,75,145,.20),inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+
+#searchArea.has-filter .filterBtn:before{
+  background:#fff!important;
+  box-shadow:0 9px 0 #fff!important;
+}
+
+#searchArea.has-filter .filterBtn:after{
+  border-color:#fff!important;
+  background:#1d579f!important;
+  box-shadow:-8px 9px 0 -2px #1d579f,-8px 9px 0 0 #fff!important;
+}
+
+body.darkMode #searchArea.searchRow,
+html.darkRoot #searchArea.searchRow{
+  border-color:rgba(255,255,255,.09)!important;
+  background:linear-gradient(145deg,rgba(31,41,57,.87),rgba(17,24,39,.74))!important;
+  box-shadow:0 13px 30px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+
+body.darkMode #searchArea #arama,
+html.darkRoot #searchArea #arama{
+  color:#f8fafc!important;
+}
+
+body.darkMode #searchArea .filterBtn,
+html.darkRoot #searchArea .filterBtn{
+  border-color:rgba(255,255,255,.08)!important;
+  background:linear-gradient(145deg,rgba(44,59,82,.92),rgba(29,40,57,.90))!important;
+}
+</style>
+
 <style id="abrPortfolioGlassCenter2022">
 /* v2.0.22 — Portföy Merkezi: dört kutu yerine iki kompakt cam özet paneli */
 .exDashOverviewGrid{
@@ -17875,7 +18017,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.23</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.24</div>
     </div>
   </div>
 </div>
@@ -17887,7 +18029,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.23";
+  const SPLASH_VERSION = "v2.0.24";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -17946,7 +18088,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
 <div class="container">
 
 <div id="searchArea" class="searchRow">
-<input id="arama" placeholder="Apartman ara..." onkeyup="goster()">
+<input id="arama" placeholder="Portföyde ara…" onkeyup="goster()">
 <button class="filterBtn" onclick="toggleFilter()">Filtrele</button>
 </div>
 
@@ -18608,7 +18750,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.23";
+const APP_VERSION = "v2.0.24";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
