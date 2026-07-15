@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.25_GLASS_SERVICE_CARDS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.26_COMPACT_PORTFOLIO_FLOW -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16891,6 +16891,157 @@ html.darkRoot .exPortfolioCode{
 }
 </style>
 
+<style id="abrCompactPortfolioFlow2026">
+/* v2.0.26 — Son hareket finans kartına alındı, apartman başlığı tek satıra indirildi */
+.exDashOverviewCard{
+  min-height:148px!important;
+}
+
+.exDashOverviewStatus .exDashOverviewStats{
+  margin-top:20px!important;
+}
+
+.exDashFinanceMain{
+  margin-top:9px!important;
+}
+
+.exDashFinanceOpen{
+  margin-top:7px!important;
+  padding-top:7px!important;
+}
+
+.exDashFinanceActivity{
+  display:grid;
+  grid-template-columns:7px minmax(0,1fr) auto;
+  align-items:center;
+  gap:6px;
+  margin-top:7px;
+  padding-top:7px;
+  border-top:1px solid rgba(133,151,179,.15);
+}
+
+.exDashFinanceActivityDot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#21a65b;
+  box-shadow:0 0 0 3px rgba(33,166,91,.10);
+}
+
+.exDashFinanceActivityMain{
+  min-width:0;
+}
+
+.exDashFinanceActivityMain small{
+  display:block;
+  color:#929daf;
+  font-size:6.5px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+.exDashFinanceActivityMain b{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:#29364a;
+  font-size:7.5px;
+  line-height:1.15;
+  font-weight:900;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.exDashFinanceActivity time{
+  color:#9aa5b5;
+  font-size:6.5px;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+.exPortfolioHeader{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin:4px 2px 8px!important;
+}
+
+.exPortfolioHeader > div{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+}
+
+.exPortfolioHeader > div > span{
+  display:none!important;
+}
+
+.exPortfolioHeader h2{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin:0!important;
+  color:#111827!important;
+  font-size:19px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.45px!important;
+  white-space:nowrap!important;
+}
+
+.exPortfolioHeader h2 b{
+  display:inline-grid;
+  min-width:25px;
+  height:25px;
+  place-items:center;
+  padding:0 7px;
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:9px;
+  background:rgba(255,255,255,.62);
+  color:#176fe8;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.90);
+  font-size:9px;
+  letter-spacing:0;
+}
+
+.exPortfolioFilterState{
+  min-width:54px!important;
+  min-height:29px!important;
+  padding:5px 10px!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+  border-radius:10px!important;
+  background:rgba(255,255,255,.61)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+  box-shadow:0 5px 14px rgba(25,47,82,.045),inset 0 1px 0 rgba(255,255,255,.90)!important;
+  color:#607089!important;
+  font-size:8px!important;
+}
+
+body.darkMode .exDashFinanceActivityMain b,
+body.darkMode .exPortfolioHeader h2,
+html.darkRoot .exDashFinanceActivityMain b,
+html.darkRoot .exPortfolioHeader h2{
+  color:#f8fafc!important;
+}
+
+body.darkMode .exDashFinanceActivity,
+html.darkRoot .exDashFinanceActivity{
+  border-color:rgba(255,255,255,.08)!important;
+}
+
+body.darkMode .exPortfolioHeader h2 b,
+body.darkMode .exPortfolioFilterState,
+html.darkRoot .exPortfolioHeader h2 b,
+html.darkRoot .exPortfolioFilterState{
+  border-color:rgba(255,255,255,.08)!important;
+  background:rgba(255,255,255,.055)!important;
+}
+</style>
+
 <style id="abrDrawerPremiumHeaderV2019">
 /* v2.0.19 — Yan menü üst alanı: teknik marka zemini + kompakt lisans kartı */
 .abrDrawerHead{
@@ -18199,7 +18350,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.25</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.26</div>
     </div>
   </div>
 </div>
@@ -18211,7 +18362,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.25";
+  const SPLASH_VERSION = "v2.0.26";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -18932,7 +19083,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.25";
+const APP_VERSION = "v2.0.26";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -23769,25 +23920,25 @@ function exDashboardSonIslemHtml(){
 
   if(!son){
     return `
-      <div class="exDashActivity">
-        <div class="exDashActivityIcon">✓</div>
-        <div class="exDashActivityMain">
-          <div class="exDashActivityLabel">Son işlem</div>
-          <div class="exDashActivityValue">Henüz işlem kaydı yok</div>
+      <div class="exDashFinanceActivity">
+        <span class="exDashFinanceActivityDot"></span>
+        <div class="exDashFinanceActivityMain">
+          <small>Son hareket</small>
+          <b>Henüz işlem kaydı yok</b>
         </div>
-        <div class="exDashActivityDate">—</div>
+        <time>—</time>
       </div>
     `;
   }
 
   return `
-    <div class="exDashActivity">
-      <div class="exDashActivityIcon">✓</div>
-      <div class="exDashActivityMain">
-        <div class="exDashActivityLabel">Son işlem</div>
-        <div class="exDashActivityValue">${ayHtml(String(son.ad || "-"))} • ${ayHtml(String(son.islem || "").replace(/\s*\(.*?\)/,""))}</div>
+    <div class="exDashFinanceActivity">
+      <span class="exDashFinanceActivityDot"></span>
+      <div class="exDashFinanceActivityMain">
+        <small>Son hareket</small>
+        <b>${ayHtml(String(son.ad || "-"))} • ${ayHtml(String(son.islem || "").replace(/\s*\(.*?\)/,""))}</b>
       </div>
-      <div class="exDashActivityDate">${ayHtml(son.tarih || "Tarih yok")}</div>
+      <time>${ayHtml(son.tarih || "—")}</time>
     </div>
   `;
 }
@@ -23938,19 +24089,18 @@ let h = `
       <span>Açık bakiye</span>
       <b>${ayHtml(tutarFormat(acikBakiye))}</b>
     </div>
+
+    ${exDashboardSonIslemHtml()}
   </section>
 </div>
 
-${exDashboardSonIslemHtml()}
-
 <div class="exPortfolioHeader">
   <div>
-    <span>Portföy</span>
-    <h2>Apartmanlarım (${filtreli.length})</h2>
+    <h2>Apartmanlar <b>${filtreli.length}</b></h2>
   </div>
 
   <button class="exPortfolioFilterState" type="button" onclick="${aktifFiltre === 'all' ? "toggleFilter()" : "setFilter('all')"}">
-    ${ayHtml(filtreEtiketi)}${aktifFiltre === "all" ? "" : " ×"}
+    ${aktifFiltre === "all" ? "Tümü" : ayHtml(filtreEtiketi) + " ×"}
   </button>
 </div>
 `;
