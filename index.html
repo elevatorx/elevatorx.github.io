@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.31_COMPACT_SYSTEM_STATUS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.32_CARI_CLOSURE_CONSISTENCY -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18842,7 +18842,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.31</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.32</div>
     </div>
   </div>
 </div>
@@ -18854,7 +18854,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.31";
+  const SPLASH_VERSION = "v2.0.32";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19623,7 +19623,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.31";
+const APP_VERSION = "v2.0.32";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -20816,8 +20816,6 @@ a.sonOdemeTarihi = odemeler.length ? (odemeler[0].tarih || "") : "";
 
 if(c.kalanPozitif <= 0 && c.toplam > 0){
 a.odemeTarihi = a.sonOdemeTarihi || bugun();
-}else{
-a.odemeTarihi = "";
 }
 
 }
@@ -21043,7 +21041,8 @@ return t + Number(k && k.tutar ? k.tutar : 0);
 let bakimBorcuAktif = bakimKalemleri.length > 0;
 let parcaToplam = parcaToplamTutar(a);
 let eskiBakiyeToplami = eskiBakiyeToplam(a);
-let beklenen = bakimUcreti + parcaToplam + eskiBakiyeToplami;
+let beklenenHam = bakimUcreti + parcaToplam + eskiBakiyeToplami;
+let beklenen = beklenenHam;
 let kalemler = [];
 
 bakimKalemleri.forEach(function(k){
@@ -21087,6 +21086,43 @@ tutar:tutar
 }
 
 let odemeler = odemeListesi(a);
+
+/*
+v2.0.32 cari kapanış uyumluluğu:
+Eski sürümlerde tahsilat sırasında kapanmış bir cari, sonradan içeri alınan
+geçmiş bakım kaydı yüzünden yeniden borçlu görünmemelidir. Kapanış tarihinden
+önceki kalemlerle o tarihe kadarki tahsilat arasındaki fark mahsup edilir;
+kapanıştan sonraki gerçek bakım/parça kayıtları borç oluşturmaya devam eder.
+*/
+let kapanisKey = bakimTarihKey(a && a.odemeTarihi);
+let kapanisMahsubu = 0;
+
+if(kapanisKey && odemeler.length){
+let kapanisaKadarBorc = kalemler.reduce(function(t,k){
+let key = bakimTarihKey(k && k.tarih);
+return t + ((!key || key <= kapanisKey) ? Number(k && k.tutar ? k.tutar : 0) : 0);
+},0);
+
+let kapanisaKadarTahsilat = odemeler.reduce(function(t,o){
+let key = bakimTarihKey(o && o.tarih);
+return t + ((!key || key <= kapanisKey) ? Number(o && o.tutar ? o.tutar : 0) : 0);
+},0);
+
+kapanisMahsubu = Math.min(
+Math.max(kapanisaKadarBorc - kapanisaKadarTahsilat,0),
+beklenenHam
+);
+
+if(kapanisMahsubu > 0){
+beklenen = Math.max(beklenenHam - kapanisMahsubu,0);
+kalemler.push({
+tip:"Mahsup",
+tarih:bakimTarihGoster(kapanisKey),
+aciklama:"Önceki cari kapanış mahsubu",
+tutar:-kapanisMahsubu
+});
+}
+}
 
 /*
 v2.0.15 cari kuralı:
@@ -21140,6 +21176,8 @@ bakimUcreti:bakimUcreti,
 parcaToplam:parcaToplam,
 eskiBakiyeToplami:eskiBakiyeToplami,
 beklenen:beklenen,
+beklenenHam:beklenenHam,
+kapanisMahsubu:kapanisMahsubu,
 kalemler:kalemler,
 toplam:toplam,
 toplamGenel:toplamGenel,
@@ -21467,6 +21505,8 @@ return;
 }
 
 let odeme = a.odemeler[idx];
+let kapanisKeyOnce = bakimTarihKey(a.odemeTarihi);
+let eskiOdemeKey = bakimTarihKey(odeme.tarih);
 
 let tutarGiris = prompt("Tahsil edilen tutar ₺", paraPromptDegeri(odeme.tutar));
 if(tutarGiris === null){
@@ -21505,6 +21545,10 @@ a.kayitlar = [];
 a.kayitlar.push(
 "Tahsilat düzenlendi: " + tutarFormat(tutar) + " • " + odemeTipEtiket(tip) + " (" + odeme.tarih + ")"
 );
+
+if(kapanisKeyOnce && eskiOdemeKey && eskiOdemeKey <= kapanisKeyOnce){
+a.odemeTarihi = "";
+}
 
 cariOdemeDurumunuGuncelle(a);
 
@@ -21553,6 +21597,8 @@ return;
 }
 
 let odeme = a.odemeler[idx];
+let kapanisKeyOnce = bakimTarihKey(a.odemeTarihi);
+let silinenOdemeKey = bakimTarihKey(odeme.tarih);
 
 let onay = confirm(
 "Bu tahsilat kaydı silinsin mi?\n\n" +
@@ -21574,6 +21620,10 @@ a.kayitlar = [];
 a.kayitlar.push(
 "Tahsilat silindi: " + tutarFormat(odeme.tutar || 0) + " (" + bugun() + ")"
 );
+
+if(kapanisKeyOnce && silinenOdemeKey && silinenOdemeKey <= kapanisKeyOnce){
+a.odemeTarihi = "";
+}
 
 cariOdemeDurumunuGuncelle(a);
 
