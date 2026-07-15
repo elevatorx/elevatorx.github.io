@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.26_COMPACT_PORTFOLIO_FLOW -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.27_CLEAN_PORTFOLIO_HEADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -17008,6 +17008,9 @@ html.darkRoot .exPortfolioCode{
 }
 
 .exPortfolioFilterState{
+  width:auto!important;
+  max-width:150px!important;
+  flex:0 0 auto!important;
   min-width:54px!important;
   min-height:29px!important;
   padding:5px 10px!important;
@@ -18350,7 +18353,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.26</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.27</div>
     </div>
   </div>
 </div>
@@ -18362,7 +18365,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.26";
+  const SPLASH_VERSION = "v2.0.27";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19083,7 +19086,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.26";
+const APP_VERSION = "v2.0.27";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -24099,9 +24102,11 @@ let h = `
     <h2>Apartmanlar <b>${filtreli.length}</b></h2>
   </div>
 
-  <button class="exPortfolioFilterState" type="button" onclick="${aktifFiltre === 'all' ? "toggleFilter()" : "setFilter('all')"}">
-    ${aktifFiltre === "all" ? "Tümü" : ayHtml(filtreEtiketi) + " ×"}
-  </button>
+  ${aktifFiltre === "all" ? "" : `
+    <button class="exPortfolioFilterState" type="button" onclick="setFilter('all')">
+      ${ayHtml(filtreEtiketi)} ×
+    </button>
+  `}
 </div>
 `;
 
