@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.29_ELEVATOR_STATUS_ICONS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.30_SYSTEM_APPEARANCE_PICKER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -36,7 +36,9 @@ lastTouchEnd = now;
 })();
 
 
-if(localStorage.getItem("tema")==="dark"){
+const abrIlkTema = localStorage.getItem("tema") || "light";
+const abrIlkSistemKoyu = abrIlkTema === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+if(abrIlkTema === "dark" || abrIlkSistemKoyu){
 document.documentElement.classList.add("darkRoot");
 }
 /* v1.5.04 — aktivasyon/splash preboot */
@@ -17174,6 +17176,155 @@ body.darkMode .exPortfolioCard.statusDone .exPortfolioAvatar,
 html.darkRoot .exPortfolioCard.statusDone .exPortfolioAvatar{color:#62d38e!important;}
 </style>
 
+<style id="abrAppearancePicker2030">
+/* v2.0.30 — Açık / Sistem / Koyu üçlü Apple tarzı görünüm seçici */
+.appearanceCard.appearancePickerCard{
+  display:block!important;
+  margin-top:8px!important;
+  padding:13px!important;
+  border:1px solid rgba(255,255,255,.86)!important;
+  border-radius:22px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(244,248,255,.67))!important;
+  -webkit-backdrop-filter:blur(22px) saturate(150%)!important;
+  backdrop-filter:blur(22px) saturate(150%)!important;
+  box-shadow:0 11px 28px rgba(24,44,76,.065),inset 0 1px 0 rgba(255,255,255,.96)!important;
+}
+
+.appearancePickerHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding:1px 2px 11px;
+}
+
+.appearancePickerTitle{
+  min-width:0;
+}
+
+.appearancePickerTitle b{
+  display:block;
+  color:#111827;
+  font-size:14px;
+  line-height:1.1;
+  font-weight:950;
+  letter-spacing:-.2px;
+}
+
+.appearancePickerTitle em{
+  display:block;
+  margin-top:4px;
+  color:#7d899c;
+  font-size:8.5px;
+  line-height:1.3;
+  font-style:normal;
+  font-weight:750;
+}
+
+.appearanceCurrent{
+  display:inline-flex;
+  min-height:23px;
+  align-items:center;
+  justify-content:center;
+  padding:4px 8px;
+  border-radius:8px;
+  background:rgba(232,240,252,.78);
+  color:#176fe8;
+  font-size:7.5px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.appearanceSegment{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:4px;
+  padding:4px;
+  border:1px solid rgba(211,221,236,.72);
+  border-radius:17px;
+  background:rgba(231,237,247,.64);
+  box-shadow:inset 0 1px 3px rgba(23,43,76,.045);
+}
+
+.appearanceChoice{
+  width:100%!important;
+  min-width:0!important;
+  min-height:45px!important;
+  margin:0!important;
+  padding:6px 7px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:transparent!important;
+  color:#69778c!important;
+  box-shadow:none!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+.appearanceChoice.is-active{
+  color:#fff!important;
+  background:radial-gradient(circle at 85% 5%,rgba(86,154,255,.32),transparent 40%),linear-gradient(145deg,#17233a,#1b4f90)!important;
+  box-shadow:0 7px 16px rgba(23,67,132,.18),inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+
+.appearanceChoiceIcon{
+  width:17px;
+  height:17px;
+  flex:0 0 17px;
+  display:grid;
+  place-items:center;
+}
+
+.appearanceChoiceIcon svg{
+  display:block;
+  width:17px;
+  height:17px;
+}
+
+.appearancePickerNote{
+  margin:9px 2px 0;
+  color:#8793a5;
+  font-size:7.8px;
+  line-height:1.35;
+  font-weight:750;
+}
+
+body.darkMode .appearanceCard.appearancePickerCard,
+html.darkRoot .appearanceCard.appearancePickerCard{
+  border-color:rgba(255,255,255,.08)!important;
+  background:linear-gradient(145deg,rgba(31,41,57,.90),rgba(17,24,39,.78))!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+body.darkMode .appearancePickerTitle b,
+html.darkRoot .appearancePickerTitle b{
+  color:#f8fafc;
+}
+
+body.darkMode .appearanceSegment,
+html.darkRoot .appearanceSegment{
+  border-color:rgba(255,255,255,.07);
+  background:rgba(255,255,255,.045);
+}
+
+body.darkMode .appearanceChoice,
+html.darkRoot .appearanceChoice{
+  color:#aab5c6!important;
+}
+
+body.darkMode .appearanceChoice.is-active,
+html.darkRoot .appearanceChoice.is-active{
+  color:#fff!important;
+}
+</style>
+
 <style id="abrDrawerPremiumHeaderV2019">
 /* v2.0.19 — Yan menü üst alanı: teknik marka zemini + kompakt lisans kartı */
 .abrDrawerHead{
@@ -18482,7 +18633,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.29</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.30</div>
     </div>
   </div>
 </div>
@@ -18494,7 +18645,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.29";
+  const SPLASH_VERSION = "v2.0.30";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -18860,17 +19011,39 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="profileSectionTitle">Görünüm</div>
 
-<div class="appearanceCard">
-  <div class="appearanceInfo">
-    <span class="appearanceIcon exIcon exMoon" id="profileThemeIcon" aria-hidden="true"></span>
-    <span class="appearanceText">
-      <b>Gece Modu</b>
-      <em>Uygulama temasını buradan değiştir.</em>
-    </span>
+<div class="appearanceCard appearancePickerCard">
+  <div class="appearancePickerHead">
+    <div class="appearancePickerTitle">
+      <b>Uygulama Teması</b>
+      <em>Görünümü cihazına veya kullanımına göre ayarla.</em>
+    </div>
+    <span class="appearanceCurrent" id="profileThemeText">Açık</span>
   </div>
-  <button class="appearanceToggle" onclick="temaDegistir()">
-    <span id="profileThemeText">Koyu Mod</span>
-  </button>
+
+  <div class="appearanceSegment" role="radiogroup" aria-label="Uygulama teması">
+    <button class="appearanceChoice" type="button" data-theme-option="light" role="radio" onclick="temaSec('light')">
+      <span class="appearanceChoiceIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <span>Açık</span>
+    </button>
+
+    <button class="appearanceChoice" type="button" data-theme-option="system" role="radio" onclick="temaSec('system')">
+      <span class="appearanceChoiceIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="3.4" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 6h5M10.4 18h3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <span>Sistem</span>
+    </button>
+
+    <button class="appearanceChoice" type="button" data-theme-option="dark" role="radio" onclick="temaSec('dark')">
+      <span class="appearanceChoiceIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19.4 15.4A8.2 8.2 0 0 1 8.6 4.6a8.2 8.2 0 1 0 10.8 10.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Koyu</span>
+    </button>
+  </div>
+
+  <div class="appearancePickerNote" id="profileThemeDescription">Açık görünüm kullanılıyor.</div>
 </div>
 
 <div class="profileSystemCard">
@@ -19215,7 +19388,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.29";
+const APP_VERSION = "v2.0.30";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -19975,11 +20148,26 @@ function temaUygula(){
 let tema =
 localStorage.getItem("tema") || "light";
 
+if(!["light","system","dark"].includes(tema)){
+tema = "light";
+localStorage.setItem("tema",tema);
+}
+
+let sistemKoyu = false;
+try{
+sistemKoyu = !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+}catch(e){}
+
 let dark =
-tema === "dark";
+tema === "dark" || (tema === "system" && sistemKoyu);
 
 document.body.classList.toggle("darkMode",dark);
 document.documentElement.classList.toggle("darkRoot",dark);
+
+let themeMeta = document.querySelector('meta[name="theme-color"]');
+if(themeMeta){
+themeMeta.setAttribute("content",dark ? "#0b0f17" : "#f6f8fc");
+}
 
 let headerIcon =
 document.getElementById("headerThemeIcon");
@@ -20005,15 +20193,43 @@ let profileText =
 document.getElementById("profileThemeText");
 
 if(profileText){
-profileText.innerText =
-dark ? "Açık Mod" : "Koyu Mod";
+profileText.innerText = tema === "system" ? "Sistem" : (tema === "dark" ? "Koyu" : "Açık");
 }
+
+document.querySelectorAll("[data-theme-option]").forEach(function(secenek){
+let aktif = secenek.getAttribute("data-theme-option") === tema;
+secenek.classList.toggle("is-active",aktif);
+secenek.setAttribute("aria-checked",aktif ? "true" : "false");
+});
+
+let profileDescription = document.getElementById("profileThemeDescription");
+if(profileDescription){
+if(tema === "system"){
+profileDescription.innerText = "iPhone görünümü takip ediliyor · Şu an " + (dark ? "koyu" : "açık") + " tema.";
+}else{
+profileDescription.innerText = tema === "dark" ? "Koyu görünüm kullanılıyor." : "Açık görünüm kullanılıyor.";
+}
+}
+
+}
+
+function temaSec(yeniTema){
+
+if(!["light","system","dark"].includes(yeniTema)) return;
+
+haptic("light");
+localStorage.setItem("tema",yeniTema);
+temaUygula();
+
+toast(
+yeniTema === "system"
+? "Sistem görünümü"
+: (yeniTema === "dark" ? "Koyu görünüm" : "Açık görünüm")
+);
 
 }
 
 function temaDegistir(){
-
-haptic("light");
 
 let mevcut =
 localStorage.getItem("tema") || "light";
@@ -20021,17 +20237,34 @@ localStorage.getItem("tema") || "light";
 let yeni =
 mevcut === "dark" ? "light" : "dark";
 
-localStorage.setItem("tema",yeni);
-
-temaUygula();
-
-toast(
-yeni === "dark"
-? "Dark"
-: "Light"
-);
+temaSec(yeni);
 
 }
+
+var abrTemaMediaQuery = null;
+
+function abrTemaSistemDinleyiciKur(){
+try{
+if(!window.matchMedia || abrTemaMediaQuery) return;
+abrTemaMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+let sistemTemaDegisti = function(){
+if((localStorage.getItem("tema") || "light") === "system"){
+temaUygula();
+}
+};
+
+if(typeof abrTemaMediaQuery.addEventListener === "function"){
+abrTemaMediaQuery.addEventListener("change",sistemTemaDegisti);
+}else if(typeof abrTemaMediaQuery.addListener === "function"){
+abrTemaMediaQuery.addListener(sistemTemaDegisti);
+}
+}catch(e){
+console.warn("Sistem teması dinleyicisi kurulamadı",e);
+}
+}
+
+abrTemaSistemDinleyiciKur();
 
 
 function setAktifTab(tab){
