@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.34_PROFILE_IDENTITY_ALIGNMENT -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.35_PROFILE_QUICK_ACTION_GRID -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -17928,6 +17928,105 @@ html.darkRoot body.profileMode #profilPanel .profileStatsFour .profileStatCard:n
   body.profileMode #profilPanel .profileNameInput{font-size:22px!important;}
 }
 </style>
+<style>
+/* v2.0.35 — profil hızlı işlemler kompakt kontrol paneli */
+body.profileMode #profilPanel .profileSectionTitle{
+  margin:22px 0 11px!important;
+  font-size:16px!important;
+  letter-spacing:-.3px!important;
+}
+
+body.profileMode #profilPanel .profileActionGrid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+
+body.profileMode #profilPanel .profileActionCard{
+  min-width:0!important;
+  min-height:112px!important;
+  padding:13px!important;
+  border-radius:20px!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+  overflow:hidden!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(248,250,252,.80))!important;
+  border:1px solid rgba(226,232,240,.90)!important;
+  box-shadow:0 12px 26px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+
+body.profileMode #profilPanel .profileActionIcon{
+  width:38px!important;
+  height:38px!important;
+  border-radius:13px!important;
+  margin:0!important;
+  color:#176fe8!important;
+  background:linear-gradient(145deg,#eef6ff,#dcecff)!important;
+  box-shadow:inset 0 0 0 1px rgba(37,99,235,.06)!important;
+}
+
+body.profileMode #profilPanel .profileActionCard:nth-child(2) .profileActionIcon{
+  color:#7c3aed!important;
+  background:linear-gradient(145deg,#f4f0ff,#e9e0ff)!important;
+}
+
+body.profileMode #profilPanel .profileActionCard:nth-child(3) .profileActionIcon{
+  color:#d97706!important;
+  background:linear-gradient(145deg,#fff8e7,#ffedc2)!important;
+}
+
+body.profileMode #profilPanel .profileActionCard:nth-child(4) .profileActionIcon{
+  color:#0891b2!important;
+  background:linear-gradient(145deg,#e8fbff,#cdf5fb)!important;
+}
+
+body.profileMode #profilPanel .profileActionCard:nth-child(5) .profileActionIcon{
+  color:#64748b!important;
+  background:linear-gradient(145deg,#f1f5f9,#e2e8f0)!important;
+}
+
+body.profileMode #profilPanel .profileActionCard:nth-child(6) .profileActionIcon{
+  color:#16a34a!important;
+  background:linear-gradient(145deg,#edfff3,#d5f7df)!important;
+}
+
+body.profileMode #profilPanel .profileActionText{
+  display:block!important;
+  min-width:0!important;
+  width:100%!important;
+}
+
+body.profileMode #profilPanel .profileActionText b{
+  font-size:13px!important;
+  line-height:1.16!important;
+  letter-spacing:-.12px!important;
+  white-space:normal!important;
+}
+
+body.profileMode #profilPanel .profileActionText em{
+  display:-webkit-box!important;
+  margin-top:5px!important;
+  overflow:hidden!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  font-size:10.4px!important;
+  line-height:1.32!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileActionCard,
+html.darkRoot body.profileMode #profilPanel .profileActionCard{
+  background:linear-gradient(145deg,rgba(30,41,59,.88),rgba(17,24,39,.80))!important;
+  border-color:rgba(255,255,255,.08)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+@media(max-width:350px){
+  body.profileMode #profilPanel .profileActionGrid{gap:8px!important;}
+  body.profileMode #profilPanel .profileActionCard{min-height:108px!important;padding:11px!important;}
+  body.profileMode #profilPanel .profileActionText b{font-size:12px!important;}
+}
+</style>
 </head>
 
 <body>
@@ -19065,7 +19164,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.34</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.35</div>
     </div>
   </div>
 </div>
@@ -19077,7 +19176,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.34";
+  const SPLASH_VERSION = "v2.0.35";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19394,7 +19493,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exLibrary" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Teknik Kütüphane</b>
-    <em>Kumanda kartı, sürücü ve arıza kodu saha notları.</em>
+    <em>Kart, sürücü ve arıza notları.</em>
   </span>
 </button>
 
@@ -19402,7 +19501,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exDoc" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Ay Sonu Raporu</b>
-    <em>Bakım, tahsilat ve geciken işlemleri özetle.</em>
+    <em>Bakım ve tahsilat özeti.</em>
   </span>
 </button>
 
@@ -19418,7 +19517,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Verileri Yedekle</b>
-    <em>Apartman kayıtlarının dosya yedeğini al.</em>
+    <em>JSON dosyası oluştur.</em>
   </span>
 </button>
 
@@ -19426,7 +19525,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Yedekten Geri Yükle</b>
-    <em>Daha önce alınan JSON yedeğini içeri aktar.</em>
+    <em>Yedek dosyasını içeri aktar.</em>
   </span>
 </button>
 
@@ -19434,7 +19533,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exRefresh" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Güvenli Yenile</b>
-    <em>Cihaz içi yedek alır, dosya açmadan güncel sürümü yükler.</em>
+    <em>Yedek al ve güncelle.</em>
   </span>
 </button>
 
@@ -19846,7 +19945,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.34";
+const APP_VERSION = "v2.0.35";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
