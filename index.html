@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.32_CARI_CLOSURE_CONSISTENCY -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.33_PROFILE_IDENTITY_CENTER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -17705,6 +17705,226 @@ html.darkRoot .exHybridLicenseActive{
   .exHybridPremiumPill{padding-left:9px!important;padding-right:9px!important;}
 }
 </style>
+<style>
+/* v2.0.33 — modern firma kimliği ve birleşik profil özeti */
+body.profileMode #profilPanel .coverArea{
+  height:128px!important;
+  margin:8px 4px 0!important;
+  border-radius:28px!important;
+  background:linear-gradient(135deg,#dbeafe,#eef2ff)!important;
+  box-shadow:0 16px 36px rgba(30,64,175,.10)!important;
+}
+
+body.profileMode #profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(15,23,42,.02),rgba(15,23,42,.20))!important;
+}
+
+body.profileMode #profilPanel .coverEdit{
+  right:12px!important;
+  bottom:12px!important;
+  width:38px!important;
+  height:38px!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  background:rgba(255,255,255,.82)!important;
+  box-shadow:0 8px 20px rgba(15,23,42,.12)!important;
+}
+
+body.profileMode #profilPanel .profileWrap{
+  justify-content:flex-start!important;
+  margin-top:-38px!important;
+  padding-left:18px!important;
+}
+
+body.profileMode #profilPanel .profilePhoto{
+  width:78px!important;
+  height:78px!important;
+  border:4px solid rgba(255,255,255,.96)!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.16),0 0 0 1px rgba(148,163,184,.12)!important;
+}
+
+body.profileMode #profilPanel .profileContent{
+  margin-top:-70px!important;
+  padding:0 18px 18px!important;
+  text-align:left!important;
+}
+
+body.profileMode #profilPanel .profileNameInput,
+body.profileMode #profilPanel .profileJobInput{
+  display:block!important;
+  width:calc(100% - 96px)!important;
+  margin-left:96px!important;
+  text-align:left!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.profileMode #profilPanel .profileNameInput{
+  min-height:29px!important;
+  margin-bottom:1px!important;
+  padding:0!important;
+  font-size:24px!important;
+  line-height:1.08!important;
+  letter-spacing:-.55px!important;
+}
+
+body.profileMode #profilPanel .profileJobInput{
+  min-height:20px!important;
+  margin-top:0!important;
+  padding:0!important;
+  color:#64748b!important;
+  font-size:12.5px!important;
+  line-height:1.25!important;
+  font-weight:800!important;
+}
+
+body.profileMode #profilPanel #profilTelefon{
+  color:#2563eb!important;
+}
+
+body.profileMode #profilPanel .profileBio{
+  width:100%!important;
+  min-height:58px!important;
+  margin:20px 0 0!important;
+  padding:13px 15px!important;
+  border-radius:18px!important;
+  text-align:left!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  color:#334155!important;
+  background:rgba(255,255,255,.74)!important;
+  border:1px solid rgba(255,255,255,.92)!important;
+  box-shadow:0 10px 26px rgba(15,23,42,.055),inset 0 1px 0 rgba(255,255,255,.8)!important;
+}
+
+body.profileMode #profilPanel .profileControlHero{
+  margin:14px 0 12px!important;
+  padding:15px!important;
+  min-height:82px!important;
+  border-radius:22px!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  background:linear-gradient(135deg,rgba(239,246,255,.96),rgba(255,255,255,.84))!important;
+  border-color:rgba(191,219,254,.82)!important;
+}
+
+body.profileMode #profilPanel .profileControlKicker{
+  margin-bottom:4px!important;
+  font-size:9.5px!important;
+}
+
+body.profileMode #profilPanel .profileControlTitle{
+  font-size:17px!important;
+}
+
+body.profileMode #profilPanel .profileControlText{
+  max-width:245px!important;
+  margin-top:4px!important;
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+
+body.profileMode #profilPanel .profileEditBtn{
+  width:auto!important;
+  min-width:86px!important;
+  padding:11px 13px!important;
+  border-radius:14px!important;
+  background:linear-gradient(145deg,#173b71,#0f2b54)!important;
+  font-size:11.5px!important;
+  box-shadow:0 10px 22px rgba(23,59,113,.20)!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour{
+  margin-top:0!important;
+  gap:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(226,232,240,.88)!important;
+  border-radius:22px!important;
+  background:rgba(255,255,255,.76)!important;
+  box-shadow:0 14px 30px rgba(15,23,42,.055),inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard{
+  min-height:76px!important;
+  padding:13px 8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(odd){
+  border-right:1px solid rgba(226,232,240,.86)!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(-n+2){
+  border-bottom:1px solid rgba(226,232,240,.86)!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour b{
+  font-size:18px!important;
+  color:#0f172a!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(2) b{
+  color:#176fe8!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(3) b{
+  color:#7c3aed!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour span{
+  margin-top:5px!important;
+  color:#7b8798!important;
+  font-size:10.5px!important;
+  letter-spacing:.02em!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileBio,
+html.darkRoot body.profileMode #profilPanel .profileBio,
+body.darkMode.profileMode #profilPanel .profileStatsFour,
+html.darkRoot body.profileMode #profilPanel .profileStatsFour{
+  background:rgba(17,24,39,.78)!important;
+  border-color:rgba(255,255,255,.08)!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileControlHero,
+html.darkRoot body.profileMode #profilPanel .profileControlHero{
+  background:linear-gradient(135deg,rgba(23,37,61,.96),rgba(17,24,39,.88))!important;
+  border-color:rgba(96,165,250,.16)!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileNameInput,
+html.darkRoot body.profileMode #profilPanel .profileNameInput,
+body.darkMode.profileMode #profilPanel .profileStatsFour b,
+html.darkRoot body.profileMode #profilPanel .profileStatsFour b{
+  color:#f8fafc!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileBio,
+html.darkRoot body.profileMode #profilPanel .profileBio{
+  color:#cbd5e1!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(odd),
+html.darkRoot body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(odd){
+  border-right-color:rgba(255,255,255,.08)!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(-n+2),
+html.darkRoot body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(-n+2){
+  border-bottom-color:rgba(255,255,255,.08)!important;
+}
+
+@media(max-width:390px){
+  body.profileMode #profilPanel .profileControlText{display:none!important;}
+  body.profileMode #profilPanel .profileEditBtn{min-width:82px!important;}
+  body.profileMode #profilPanel .profileNameInput{font-size:22px!important;}
+}
+</style>
 </head>
 
 <body>
@@ -18842,7 +19062,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.32</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.33</div>
     </div>
   </div>
 </div>
@@ -18854,7 +19074,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.32";
+  const SPLASH_VERSION = "v2.0.33";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19130,13 +19350,13 @@ placeholder="Bilgi yaz..."></textarea>
 
 <div class="profileControlHero">
   <div>
-    <div class="profileControlKicker">Kontrol Merkezi</div>
-    <div class="profileControlTitle">Profil, rapor ve yedekleme işlemleri</div>
+    <div class="profileControlKicker">Firma Merkezi</div>
+    <div class="profileControlTitle">Kimlik ve belge ayarları</div>
     <div class="profileControlText">
-      Bu bilgiler raporlara, makbuzlara, sicil kartlarına ve yedek dosyalarına otomatik işlenir.
+      Rapor, makbuz ve sicil kartlarında kullanılan firma bilgileri.
     </div>
   </div>
-  <button class="profileEditBtn" onclick="profilKurulumuAc()">Düzenle</button>
+  <button class="profileEditBtn" onclick="profilKurulumuAc()">Profili Düzenle</button>
 </div>
 
 <div class="profileStats profileStatsFour">
@@ -19623,7 +19843,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.32";
+const APP_VERSION = "v2.0.33";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
