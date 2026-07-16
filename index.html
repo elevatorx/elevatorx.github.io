@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.35_PROFILE_QUICK_ACTION_GRID -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.36_EARLY_PAYMENT_FLOW -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18418,7 +18418,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
           </div>
 
           <div class="exPaymentDebt">
-            <span>Kalan Borç</span>
+            <span id="exPaymentDebtLabel">Kalan Borç</span>
             <b id="exPaymentRemainingDebt">0 ₺</b>
           </div>
         </div>
@@ -19164,7 +19164,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.35</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.36</div>
     </div>
   </div>
 </div>
@@ -19176,7 +19176,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.35";
+  const SPLASH_VERSION = "v2.0.36";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19945,7 +19945,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.35";
+const APP_VERSION = "v2.0.36";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -21465,6 +21465,10 @@ return t + Number(o.tutar || 0);
 let kalan = beklenen - toplam;
 let kalanPozitif = Math.max(kalan,0);
 let alacak = kalan < 0 ? Math.abs(kalan) : 0;
+let erkenTahsilatToplami = aktifOdemeler.reduce(function(t,o){
+return t + ((o && o.erkenTahsilat) ? Number(o.tutar || 0) : 0);
+},0);
+let erkenTahsilat = alacak > 0 && (erkenTahsilatToplami > 0 || beklenen <= 0);
 
 let durum = "Bekliyor";
 let durumClass = "waiting";
@@ -21484,7 +21488,10 @@ durum = "Borç Yok";
 durumClass = "paid";
 }
 
-if(alacak > 0){
+if(erkenTahsilat){
+durum = "Erken Tahsilat";
+durumClass = "paid";
+}else if(alacak > 0){
 durum = "Fazla Ödeme";
 durumClass = "over";
 }
@@ -21506,6 +21513,8 @@ toplamGenel:toplamGenel,
 kalan:kalan,
 kalanPozitif:kalanPozitif,
 alacak:alacak,
+erkenTahsilat:erkenTahsilat,
+erkenTahsilatToplami:erkenTahsilatToplami,
 durum:durum,
 durumClass:durumClass,
 sonOdeme:sonOdeme,
@@ -21520,7 +21529,9 @@ tumOdemeler:odemeler
 function cariOzetHtml(a,i){
 
 let c = cariOzet(a);
-let kalanText = c.alacak > 0 ? "Alacak: " + tutarFormat(c.alacak) : "Kalan: " + tutarFormat(c.kalanPozitif);
+let kalanText = c.erkenTahsilat
+? "Avans: " + tutarFormat(c.alacak)
+: (c.alacak > 0 ? "Alacak: " + tutarFormat(c.alacak) : "Kalan: " + tutarFormat(c.kalanPozitif));
 let kalanClass = c.kalanPozitif > 0 ? "debt" : "ok";
 
 return `
@@ -21547,7 +21558,7 @@ return `
       <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
     </div>
     <div class="cariMini">
-      <div class="cariMiniLabel">${c.alacak > 0 ? "Alacak" : "Kalan"}</div>
+      <div class="cariMiniLabel">${c.erkenTahsilat ? "Avans" : (c.alacak > 0 ? "Alacak" : "Kalan")}</div>
       <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
     </div>
   </div>
@@ -22035,6 +22046,10 @@ let c = cariOzet(a);
 
 if(c.beklenen <= 0 && c.toplam <= 0){
 return `<span class="payBadge payPaid">Borç Yok</span>`;
+}
+
+if(c.erkenTahsilat){
+return `<span class="payBadge payPaid">Erken Tahsilat</span>`;
 }
 
 if(c.alacak > 0){
@@ -24867,6 +24882,10 @@ function exDashboardFiltreEtiketi(filter){
 
 function exDashboardOdemeChip(a){
   let c = cariOzet(a);
+
+  if(c.erkenTahsilat){
+    return '<span class="exPortfolioChip payPaid">Erken Tahsilat</span>';
+  }
 
   if(c.alacak > 0){
     return '<span class="exPortfolioChip payPaid">Fazla Ödeme</span>';
@@ -27804,7 +27823,7 @@ detayPanel.style.display="block";
 quickAddGuncelle();
 
 let odemeText =
-cari.kalanPozitif > 0 ? "Ödeme Al" : "Makbuz Oluştur";
+cari.kalanPozitif > 0 ? "Ödeme Al" : "Erken Tahsilat";
 
 let bakimText =
 bakimBuAyYapildi(a) ? "Bakım Yapıldı" : "Bakım Yapıldı";
@@ -27816,7 +27835,9 @@ let telTemiz =
 (a.tel || "").replace(/\s/g,"");
 
 let kalanText =
-cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif);
+cari.erkenTahsilat
+? "Avans: " + tutarFormat(cari.alacak)
+: (cari.alacak > 0 ? "Alacak: " + tutarFormat(cari.alacak) : tutarFormat(cari.kalanPozitif));
 
 let cariDurumClass =
 cari.kalanPozitif > 0 ? "detailBalanceDebt" : "detailBalanceOk";
@@ -28181,10 +28202,11 @@ function tahsilatTarihKayitDegeri(iso){
   return eslesme[3] + "." + eslesme[2] + "." + eslesme[1];
 }
 
-function tahsilatVarsayilanTip(cari){
+function tahsilatVarsayilanTip(cari,a){
   if(cari.parcaToplam > 0 && cari.bakimUcreti > 0) return "parca";
   if(cari.parcaToplam > 0) return "parca";
   if(cari.bakimUcreti > 0) return "bakim";
+  if(cari.kalanPozitif <= 0 && Number(a && a.ucret ? a.ucret : 0) > 0) return "bakim";
   return "cari";
 }
 
@@ -28196,7 +28218,9 @@ function tahsilatVarsayilanAciklama(a,cari,tip){
   }
 
   if(tip === "bakim"){
-    return "Bakım ücreti tahsilatı";
+    return cari.kalanPozitif <= 0
+      ? "Bakım öncesi erken tahsilat"
+      : "Bakım ücreti tahsilatı";
   }
 
   return (cari.eskiBakiyeToplami || 0) > 0
@@ -28213,23 +28237,20 @@ function tahsilatModalAc(i){
   odemeleriHazirla(a);
 
   let cari = cariOzet(a);
-
-  if(cari.beklenen > 0 && cari.kalanPozitif <= 0 && cari.toplam > 0){
-    toast("Son ödeme makbuzu oluşturuldu");
-    odemeMakbuzuPdf(i);
-    return;
-  }
+  let erkenTahsilat = cari.kalanPozitif <= 0;
 
   let varsayilan = cari.kalanPozitif > 0
     ? cari.kalanPozitif
     : (Number(a.ucret || 0) || 0);
 
-  let tip = tahsilatVarsayilanTip(cari);
+  let tip = tahsilatVarsayilanTip(cari,a);
   let aciklama = tahsilatVarsayilanAciklama(a,cari,tip);
 
   let indexEl = document.getElementById("exPaymentApartmentIndex");
   let tipEl = document.getElementById("exPaymentAutoType");
   let adEl = document.getElementById("exPaymentApartmentName");
+  let titleEl = document.getElementById("exPaymentTitle");
+  let debtLabelEl = document.getElementById("exPaymentDebtLabel");
   let kalanEl = document.getElementById("exPaymentRemainingDebt");
   let tutarEl = document.getElementById("exPaymentAmount");
   let tarihEl = document.getElementById("exPaymentDate");
@@ -28242,16 +28263,21 @@ function tahsilatModalAc(i){
   if(indexEl) indexEl.value = String(i);
   if(tipEl) tipEl.value = tip;
   if(adEl) adEl.textContent = a.ad || "-";
+  if(titleEl) titleEl.textContent = erkenTahsilat ? "Erken Tahsilat" : "Tahsilat Al";
+  if(debtLabelEl) debtLabelEl.textContent = erkenTahsilat ? "Mevcut Borç" : "Kalan Borç";
   if(kalanEl) kalanEl.textContent = tutarFormat(cari.kalanPozitif || 0);
   if(tutarEl) tutarEl.value = varsayilan > 0 ? String(varsayilan) : "";
   if(tarihEl) tarihEl.value = bugunISO();
   if(aciklamaEl) aciklamaEl.value = aciklama;
 
   if(hintEl){
-    hintEl.textContent =
-      "Tahsilat türü otomatik olarak “" +
-      odemeTipEtiket(tip) +
-      "” şeklinde kaydedilecek.";
+    hintEl.textContent = erkenTahsilat
+      ? "Bakım henüz girilmediyse ödeme avans olarak kaydedilir; bakım yapıldığında otomatik mahsup edilir."
+      : (
+          "Tahsilat türü otomatik olarak “" +
+          odemeTipEtiket(tip) +
+          "” şeklinde kaydedilecek."
+        );
   }
 
   tahsilatModalKontrol();
@@ -28337,6 +28363,7 @@ function tahsilatKaydet(){
     let tip = odemeTipNormalize(document.getElementById("exPaymentAutoType").value);
     let aciklama = document.getElementById("exPaymentDescription").value.trim();
     let cari = cariOzet(a);
+    let erkenTahsilat = cari.kalanPozitif <= 0;
 
     if(!aciklama){
       aciklama = tahsilatVarsayilanAciklama(a,cari,tip);
@@ -28349,6 +28376,7 @@ function tahsilatKaydet(){
       aciklama:aciklama,
       tip:tip,
       kalem:aciklama,
+      erkenTahsilat:erkenTahsilat,
       createdAt:new Date().toISOString()
     };
 
@@ -28375,7 +28403,7 @@ function tahsilatKaydet(){
     }
 
     a.kayitlar.push(
-      "Ödeme alındı: " +
+      (erkenTahsilat ? "Erken tahsilat alındı: " : "Ödeme alındı: ") +
       tutarFormat(tutar) +
       " • " +
       odemeTipEtiket(tip) +
@@ -28401,7 +28429,9 @@ function tahsilatKaydet(){
     tahsilatModalKapat();
 
     toast(
-      tip === "parca"
+      erkenTahsilat
+        ? "Erken tahsilat kaydedildi"
+        : tip === "parca"
         ? "Parça ödemesi kaydedildi"
         : (
             yeniCari.kalanPozitif > 0
@@ -29717,6 +29747,7 @@ let tahsilEdilen = tutarFormat(aktifOdeme.tutar || 0);
 let tahsilatTuru = odemeTipEtiket(odemeTip);
 let makbuzBaslik = odemeMakbuzBaslik(odemeTip);
 let ilgiliIslem = ayHtml(odemeKalemMetni(aktifOdeme,a));
+let erkenTahsilat = !!aktifOdeme.erkenTahsilat || (cari.beklenen <= 0 && cari.alacak > 0);
 /* v2.0.16 — tahsilat makbuzu cari durumu
 Geçmiş aya ait bakım borcu bugün tahsil edilse bile ay değişimine göre değil,
 ödeme öncesindeki gerçek borca göre değerlendirilir.
@@ -29727,7 +29758,9 @@ let odemeOncesiBorc = Math.max(0, Number(cari.beklenen || 0) - odemeOncesiTahsil
 let odemeSonrasiBakiye = Number(cari.beklenen || 0) - Number(cari.toplam || 0);
 let cariDurumu = "Cari tahsilat";
 
-if(odemeOncesiBorc > 0){
+if(erkenTahsilat){
+  cariDurumu = "Erken tahsilat / avans";
+}else if(odemeOncesiBorc > 0){
   if(aktifTutar < odemeOncesiBorc){
     cariDurumu = "Borç devam ediyor";
   }else if(aktifTutar === odemeOncesiBorc){
@@ -29742,11 +29775,16 @@ if(odemeOncesiBorc > 0){
 }
 let durumText = "Tahsilat Kaydı";
 let durumAciklama =
-odemeTip === "parca"
+erkenTahsilat
+? `${aptAd} için ${tahsilEdilen} tutarında bakım öncesi erken tahsilat kaydedilmiştir.`
+: odemeTip === "parca"
 ? `${aptAd} için ${tahsilEdilen} tutarında parça / işlem ödemesi tahsil edilmiştir.`
 : (odemeTip === "bakim"
 ? `${aptAd} için ${tahsilEdilen} tutarında bakım ücreti tahsilatı kaydedilmiştir.`
 : `${aptAd} için ${tahsilEdilen} tutarında cari tahsilat kaydedilmiştir.`);
+let makbuzNotu = erkenTahsilat
+? "Bu ödeme bakım hizmeti tamamlanmadan önce avans olarak kaydedilmiştir. Bakım kaydı girildiğinde tutar cari hesaba otomatik mahsup edilir."
+: "Bu makbuz yalnızca yukarıda belirtilen tahsilat işlemi için düzenlenmiştir. Cari durum, ödemenin yapıldığı aya göre değil, ödeme öncesindeki gerçek borç bakiyesine göre hesaplanır. Bakım ücreti, parça kalemleri ve genel borç durumu için ayrıca Cari Hesap Özeti kullanılabilir.";
 
 let w = elevatorXOpenReportWindow();
 
@@ -29872,7 +29910,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="note">
 <div class="noteTitle">Açıklama</div>
-<div class="noteText">Bu makbuz yalnızca yukarıda belirtilen tahsilat işlemi için düzenlenmiştir. Cari durum, ödemenin yapıldığı aya göre değil, ödeme öncesindeki gerçek borç bakiyesine göre hesaplanır. Bakım ücreti, parça kalemleri ve genel borç durumu için ayrıca Cari Hesap Özeti kullanılabilir.</div>
+<div class="noteText">${ayHtml(makbuzNotu)}</div>
 </div>
 
 <div class="signature">
