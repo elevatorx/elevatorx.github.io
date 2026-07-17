@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.36_EARLY_PAYMENT_FLOW -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.38_HAPTIC_FEEDBACK -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -17296,6 +17296,47 @@ html.darkRoot .exPortfolioCard.statusDone .exPortfolioAvatar{color:#62d38e!impor
   font-weight:750;
 }
 
+.hapticSettingCard{
+  width:100%;
+  margin:12px 0 0;
+  padding:16px;
+  border:1px solid rgba(203,213,225,.82);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(247,250,255,.76));
+  box-shadow:0 12px 30px rgba(15,23,42,.055),inset 0 1px 0 rgba(255,255,255,.92);
+  color:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  text-align:left;
+}
+
+.hapticSettingInfo{display:flex;align-items:center;gap:12px;min-width:0}
+.hapticSettingIcon{
+  width:42px;height:42px;border-radius:15px;flex:0 0 42px;
+  display:grid;place-items:center;background:#eef4ff;color:#1677e8;
+  font-size:20px;font-weight:900;
+}
+.hapticSettingText{display:flex;flex-direction:column;min-width:0}
+.hapticSettingText b{font-size:15px;font-weight:950;letter-spacing:-.2px}
+.hapticSettingText em{margin-top:3px;color:#718096;font-size:11.5px;line-height:1.35;font-style:normal;font-weight:720}
+.hapticSwitch{
+  width:50px;height:30px;border-radius:999px;padding:3px;flex:0 0 50px;
+  background:#cbd5e1;box-shadow:inset 0 1px 3px rgba(15,23,42,.14);
+  transition:background .2s ease;
+}
+.hapticSwitchKnob{
+  display:block;width:24px;height:24px;border-radius:50%;background:#fff;
+  box-shadow:0 3px 8px rgba(15,23,42,.22);transform:translateX(0);
+  transition:transform .22s cubic-bezier(.2,.8,.2,1);
+}
+.hapticSettingCard.is-active .hapticSwitch{background:#1677e8}
+.hapticSettingCard.is-active .hapticSwitchKnob{transform:translateX(20px)}
+body.darkMode .hapticSettingCard,html.darkRoot .hapticSettingCard{background:linear-gradient(145deg,#151b26,#111722);border-color:#263241;color:#f8fafc}
+body.darkMode .hapticSettingIcon,html.darkRoot .hapticSettingIcon{background:#12223a;color:#60a5fa}
+body.darkMode .hapticSettingText em,html.darkRoot .hapticSettingText em{color:#9aa7b8}
+
 body.darkMode .appearanceCard.appearancePickerCard,
 html.darkRoot .appearanceCard.appearancePickerCard{
   border-color:rgba(255,255,255,.08)!important;
@@ -19164,7 +19205,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.36</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.38</div>
     </div>
   </div>
 </div>
@@ -19176,7 +19217,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.36";
+  const SPLASH_VERSION = "v2.0.38";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19577,6 +19618,17 @@ placeholder="Bilgi yaz..."></textarea>
   <div class="appearancePickerNote" id="profileThemeDescription">Açık görünüm kullanılıyor.</div>
 </div>
 
+<button id="profileHapticSetting" class="hapticSettingCard is-active" type="button" role="switch" aria-checked="true" onclick="hapticAyarDegistir()">
+  <span class="hapticSettingInfo">
+    <span class="hapticSettingIcon" aria-hidden="true">⌁</span>
+    <span class="hapticSettingText">
+      <b>Dokunsal Geri Bildirim</b>
+      <em id="profileHapticDescription">Butonlar ve önemli işlemler dokunuş hissi verir.</em>
+    </span>
+  </span>
+  <span class="hapticSwitch" aria-hidden="true"><span class="hapticSwitchKnob"></span></span>
+</button>
+
 <div class="profileSystemCard profileSystemCompact">
   <div class="profileSystemTop">
     <div class="profileSystemIdentity">
@@ -19945,7 +19997,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.36";
+const APP_VERSION = "v2.0.38";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.17 Stabilite Paketi
@@ -20437,35 +20489,91 @@ el.classList.add(cls);
 
 }
 
+const ABR_HAPTIC_KEY = "abrHapticEnabled";
+let abrHapticLastAt = 0;
+
+function hapticAcikMi(){
+try{
+return localStorage.getItem(ABR_HAPTIC_KEY) !== "0";
+}catch(e){
+return true;
+}
+}
+
+function abrIosHapticPulse(){
+try{
+let pulse = document.getElementById("abrIosHapticPulse");
+if(!pulse){
+pulse = document.createElement("input");
+pulse.id = "abrIosHapticPulse";
+pulse.type = "checkbox";
+pulse.setAttribute("switch","");
+pulse.setAttribute("aria-hidden","true");
+pulse.setAttribute("data-no-haptic","true");
+pulse.tabIndex = -1;
+pulse.style.cssText = "position:fixed;left:-20px;top:-20px;width:1px;height:1px;opacity:0;pointer-events:none";
+document.body.appendChild(pulse);
+}
+pulse.click();
+}catch(e){}
+}
+
 function haptic(type="light"){
+if(!hapticAcikMi()) return;
 
-if(!navigator.vibrate){
-return;
+let simdi = Date.now();
+if(simdi - abrHapticLastAt < 45) return;
+abrHapticLastAt = simdi;
+
+let desen = 8;
+if(type === "medium") desen = 18;
+if(type === "success") desen = [10,35,10];
+if(type === "warning") desen = [25,40,25];
+
+let calisti = false;
+try{
+if(navigator.vibrate){
+calisti = navigator.vibrate(desen) !== false;
+}
+}catch(e){}
+
+if(!calisti){
+abrIosHapticPulse();
+}
 }
 
-if(type === "light"){
-navigator.vibrate(8);
-return;
+function hapticAyarGuncelle(){
+let acik = hapticAcikMi();
+let kart = document.getElementById("profileHapticSetting");
+let aciklama = document.getElementById("profileHapticDescription");
+if(kart){
+kart.classList.toggle("is-active",acik);
+kart.setAttribute("aria-checked",acik ? "true" : "false");
+}
+if(aciklama){
+aciklama.textContent = acik
+? "Butonlar ve önemli işlemler dokunuş hissi verir."
+: "Dokunsal geri bildirim kapalı.";
+}
 }
 
-if(type === "medium"){
-navigator.vibrate(18);
-return;
+function hapticAyarDegistir(){
+let acik = !hapticAcikMi();
+try{ localStorage.setItem(ABR_HAPTIC_KEY,acik ? "1" : "0"); }catch(e){}
+hapticAyarGuncelle();
+if(acik) haptic("success");
+toast(acik ? "Dokunsal geri bildirim açıldı" : "Dokunsal geri bildirim kapatıldı");
 }
 
-if(type === "success"){
-navigator.vibrate([10,35,10]);
-return;
-}
+document.addEventListener("click",function(event){
+let hedef = event.target && event.target.closest
+? event.target.closest("button,a[href],[role='button'],[role='tab'],input[type='checkbox'],select")
+: null;
+if(!hedef || hedef.disabled || hedef.closest("[data-no-haptic]")) return;
+haptic("light");
+});
 
-if(type === "warning"){
-navigator.vibrate([25,40,25]);
-return;
-}
-
-navigator.vibrate(10);
-
-}
+document.addEventListener("DOMContentLoaded",hapticAyarGuncelle);
 
 function toast(mesaj){
 
@@ -21554,7 +21662,7 @@ return `
       <div class="cariMiniValue debt">${tutarFormat(c.eskiBakiyeToplami || 0)}</div>
     </div>
     <div class="cariMini">
-      <div class="cariMiniLabel">Tahsil</div>
+      <div class="cariMiniLabel">Ödenen</div>
       <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
     </div>
     <div class="cariMini">
@@ -27842,6 +27950,16 @@ cari.erkenTahsilat
 let cariDurumClass =
 cari.kalanPozitif > 0 ? "detailBalanceDebt" : "detailBalanceOk";
 
+let cariOzetMetni = "Borç bulunmuyor";
+
+if(cari.erkenTahsilat){
+cariOzetMetni = "Bakım öncesi avans • " + tutarFormat(cari.alacak) + " ödendi";
+}else if(cari.beklenen > 0 && cari.kalanPozitif <= 0 && cari.toplam > 0){
+cariOzetMetni = "Ödeme tamamlandı • " + tutarFormat(cari.toplam) + " ödendi";
+}else if(cari.kalanPozitif > 0){
+cariOzetMetni = "Toplam " + tutarFormat(cari.beklenen) + " • Ödenen " + tutarFormat(cari.toplam);
+}
+
 let sonParca =
 sonParcaBilgisi(a);
 
@@ -27898,7 +28016,7 @@ detayPanel.innerHTML = `
       <span>Güncel Cari</span>
       <strong>${kalanText}</strong>
     </div>
-    <em>Toplam borç ${tutarFormat(cari.beklenen)} • Tahsil ${tutarFormat(cari.toplam)}</em>
+    <em>${cariOzetMetni}</em>
   </div>
 
   <div class="detailMiniStats">
@@ -31393,6 +31511,8 @@ try{ if(window.exTabbarYeniDurum) setTimeout(window.exTabbarYeniDurum,40); }catc
 
 
 function profilKontrolMerkeziGuncelle(){
+
+hapticAyarGuncelle();
 
 let toplam = toplamTahsilat();
 let acik = data.reduce(function(t,a){
