@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.38_HAPTIC_FEEDBACK -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.39_EARLY_PAYMENT_TYPE_FIX -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -19205,7 +19205,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.38</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.39</div>
     </div>
   </div>
 </div>
@@ -19217,7 +19217,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.38";
+  const SPLASH_VERSION = "v2.0.39";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19997,8 +19997,43 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.38";
+const APP_VERSION = "v2.0.39";
 window.APP_VERSION = APP_VERSION;
+
+/* v2.0.39 — eski parça geçmişine yanlış bağlanan erken tahsilatları düzelt */
+(function abrErkenTahsilatTurleriniDuzelt(){
+let degisti = false;
+
+data.forEach(function(a){
+if(!a || !Array.isArray(a.odemeler)) return;
+
+a.odemeler.forEach(function(o){
+if(!o || !o.erkenTahsilat) return;
+
+if(odemeTipNormalize(o.tip) !== "bakim" || String(o.aciklama || "") !== "Bakım öncesi erken tahsilat"){
+o.tip = "bakim";
+o.aciklama = "Bakım öncesi erken tahsilat";
+o.kalem = "Bakım öncesi erken tahsilat";
+degisti = true;
+}
+});
+
+if(Array.isArray(a.kayitlar)){
+a.kayitlar = a.kayitlar.map(function(kayit){
+let metin = String(kayit || "");
+if(metin.includes("Erken tahsilat alındı:") && metin.includes("Parça / İşlem Ödemesi")){
+degisti = true;
+return metin.replace("Parça / İşlem Ödemesi","Bakım Ücreti Ödemesi");
+}
+return kayit;
+});
+}
+});
+
+if(degisti){
+try{ localStorage.setItem("apartmanlar",JSON.stringify(data)); }catch(e){}
+}
+})();
 
 /* v2.0.17 Stabilite Paketi
    Güvenli açılış, veri normalizasyonu, işlem kilidi, kayıt geri dönüşü,
@@ -21062,13 +21097,15 @@ if(!a) return [];
 
 if(Array.isArray(a.odemeler) && a.odemeler.length){
 return a.odemeler.map(function(o){
+let erkenTahsilat = !!(o && o.erkenTahsilat);
 return {
 id:o.id || "",
 tutar:Number(o.tutar || 0),
 tarih:o.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun(),
-aciklama:o.aciklama || "",
-tip:o.tip || "",
-kalem:o.kalem || "",
+aciklama:erkenTahsilat ? "Bakım öncesi erken tahsilat" : (o.aciklama || ""),
+tip:erkenTahsilat ? "bakim" : (o.tip || ""),
+kalem:erkenTahsilat ? "Bakım öncesi erken tahsilat" : (o.kalem || ""),
+erkenTahsilat:erkenTahsilat,
 createdAt:o.createdAt || "",
 updatedAt:o.updatedAt || ""
 };
@@ -28321,10 +28358,10 @@ function tahsilatTarihKayitDegeri(iso){
 }
 
 function tahsilatVarsayilanTip(cari,a){
+  if(cari.kalanPozitif <= 0 && Number(a && a.ucret ? a.ucret : 0) > 0) return "bakim";
   if(cari.parcaToplam > 0 && cari.bakimUcreti > 0) return "parca";
   if(cari.parcaToplam > 0) return "parca";
   if(cari.bakimUcreti > 0) return "bakim";
-  if(cari.kalanPozitif <= 0 && Number(a && a.ucret ? a.ucret : 0) > 0) return "bakim";
   return "cari";
 }
 
@@ -29848,7 +29885,8 @@ tip:"cari",
 kalem:"Ödeme kaydı"
 });
 
-let odemeTip = odemeTipTahminEt(aktifOdeme);
+let erkenTahsilat = !!aktifOdeme.erkenTahsilat || (cari.beklenen <= 0 && cari.alacak > 0);
+let odemeTip = erkenTahsilat ? "bakim" : odemeTipTahminEt(aktifOdeme);
 let odemeTarihi = aktifOdeme.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun();
 
 let pdfMarka = pdfFirmaBilgi();
@@ -29864,8 +29902,7 @@ let odeme = ayHtml(odemeTarihi);
 let tahsilEdilen = tutarFormat(aktifOdeme.tutar || 0);
 let tahsilatTuru = odemeTipEtiket(odemeTip);
 let makbuzBaslik = odemeMakbuzBaslik(odemeTip);
-let ilgiliIslem = ayHtml(odemeKalemMetni(aktifOdeme,a));
-let erkenTahsilat = !!aktifOdeme.erkenTahsilat || (cari.beklenen <= 0 && cari.alacak > 0);
+let ilgiliIslem = ayHtml(erkenTahsilat ? "Bakım öncesi erken tahsilat" : odemeKalemMetni(aktifOdeme,a));
 /* v2.0.16 — tahsilat makbuzu cari durumu
 Geçmiş aya ait bakım borcu bugün tahsil edilse bile ay değişimine göre değil,
 ödeme öncesindeki gerçek borca göre değerlendirilir.
