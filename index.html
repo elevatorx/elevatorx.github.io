@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.39_EARLY_PAYMENT_TYPE_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.41_PARTS_PDF_FIX -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -19205,7 +19205,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.39</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.41</div>
     </div>
   </div>
 </div>
@@ -19217,7 +19217,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.39";
+  const SPLASH_VERSION = "v2.0.41";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19997,11 +19997,12 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.39";
+const APP_VERSION = "v2.0.41";
 window.APP_VERSION = APP_VERSION;
 
-/* v2.0.39 — eski parça geçmişine yanlış bağlanan erken tahsilatları düzelt */
-(function abrErkenTahsilatTurleriniDuzelt(){
+/* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
+/* v2.0.41 — parça değişim geçmişi PDF çıktısını Safari/iPhone için düzelt */
+(function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
 data.forEach(function(a){
@@ -20018,7 +20019,26 @@ degisti = true;
 }
 });
 
+let erkenGorulen = Object.create(null);
+a.odemeler = a.odemeler.filter(function(o){
+if(!o || !o.erkenTahsilat) return true;
+
+let anahtar = [
+Number(o.tutar || 0).toFixed(2),
+String(o.tarih || "").trim()
+].join("|");
+
+if(erkenGorulen[anahtar]){
+degisti = true;
+return false;
+}
+
+erkenGorulen[anahtar] = true;
+return true;
+});
+
 if(Array.isArray(a.kayitlar)){
+let erkenGecmisGorulen = Object.create(null);
 a.kayitlar = a.kayitlar.map(function(kayit){
 let metin = String(kayit || "");
 if(metin.includes("Erken tahsilat alındı:") && metin.includes("Parça / İşlem Ödemesi")){
@@ -20026,6 +20046,15 @@ degisti = true;
 return metin.replace("Parça / İşlem Ödemesi","Bakım Ücreti Ödemesi");
 }
 return kayit;
+}).filter(function(kayit){
+let metin = String(kayit || "");
+if(!metin.includes("Erken tahsilat alındı:")) return true;
+if(erkenGecmisGorulen[metin]){
+degisti = true;
+return false;
+}
+erkenGecmisGorulen[metin] = true;
+return true;
 });
 }
 });
@@ -20309,6 +20338,16 @@ function abrStbOdemeParmakIzi(odeme){
 
 function abrStbYakinOdemeVarMi(a, yeniOdeme){
   if(!a || !Array.isArray(a.odemeler)) return false;
+
+  if(yeniOdeme && yeniOdeme.erkenTahsilat){
+    let ayniErkenTahsilat = a.odemeler.some(function(o){
+      return !!(o && o.erkenTahsilat) &&
+        Number(o.tutar || 0).toFixed(2) === Number(yeniOdeme.tutar || 0).toFixed(2) &&
+        String(o.tarih || "").trim() === String(yeniOdeme.tarih || "").trim();
+    });
+
+    if(ayniErkenTahsilat) return true;
+  }
 
   let yeniImza = abrStbOdemeParmakIzi(yeniOdeme);
   let simdi = Date.now();
@@ -26181,6 +26220,7 @@ return `
 <div class="partsHistoryHead">
 <div class="partsHistoryTitle">Parça Değişim Geçmişi</div>
 <div class="partsHistoryActions">
+${parcalar.length ? `<button class="partsAddBtn" onclick="parcaGecmisiPdf(${i})">PDF Raporu</button>` : ""}
 <button class="partsAddBtn" onclick="parcaEkle(${i})">+ Parça Ekle</button>
 </div>
 </div>
@@ -26834,6 +26874,7 @@ toast("PDF penceresi açılamadı. Safari açılır pencere iznini kontrol et.")
 return;
 }
 
+w.document.open();
 w.document.write(`
 
 <!DOCTYPE html>
@@ -27380,6 +27421,7 @@ ${satirlar}
 </html>
 
 `);
+w.document.close();
 
 }
 
