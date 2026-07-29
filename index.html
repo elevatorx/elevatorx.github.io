@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.41_PARTS_PDF_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.42_RECEIPT_REMAINING_DEBT -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -19205,7 +19205,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.41</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.42</div>
     </div>
   </div>
 </div>
@@ -19217,7 +19217,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.41";
+  const SPLASH_VERSION = "v2.0.42";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19997,11 +19997,12 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.41";
+const APP_VERSION = "v2.0.42";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
 /* v2.0.41 — parça değişim geçmişi PDF çıktısını Safari/iPhone için düzelt */
+/* v2.0.42 — tahsilat makbuzuna ödeme öncesi ve ödeme sonrası kalan borcu ekle */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -21146,7 +21147,15 @@ tip:erkenTahsilat ? "bakim" : (o.tip || ""),
 kalem:erkenTahsilat ? "Bakım öncesi erken tahsilat" : (o.kalem || ""),
 erkenTahsilat:erkenTahsilat,
 createdAt:o.createdAt || "",
-updatedAt:o.updatedAt || ""
+updatedAt:o.updatedAt || "",
+odemeOncesiBorc:
+o.odemeOncesiBorc === undefined || o.odemeOncesiBorc === null
+? null
+: Number(o.odemeOncesiBorc || 0),
+kalanBorc:
+o.kalanBorc === undefined || o.kalanBorc === null
+? null
+: Number(o.kalanBorc || 0)
 };
 });
 }
@@ -28588,6 +28597,8 @@ function tahsilatKaydet(){
     a.sonOdemeTarihi = yeniOdeme.tarih;
 
     let yeniCari = cariOzet(a);
+    yeniOdeme.odemeOncesiBorc = Math.max(0,Number(cari.kalanPozitif || 0));
+    yeniOdeme.kalanBorc = Math.max(0,Number(yeniCari.kalanPozitif || 0));
 
     if(yeniCari.kalanPozitif <= 0 && yeniCari.toplam > 0){
       a.odemeTarihi = yeniOdeme.tarih;
@@ -29951,8 +29962,21 @@ Geçmiş aya ait bakım borcu bugün tahsil edilse bile ay değişimine göre de
 */
 let aktifTutar = Number(aktifOdeme.tutar || 0);
 let odemeOncesiTahsilat = Math.max(0, Number(cari.toplam || 0) - aktifTutar);
-let odemeOncesiBorc = Math.max(0, Number(cari.beklenen || 0) - odemeOncesiTahsilat);
+let kayitliOdemeOncesiBorc =
+aktifOdeme.odemeOncesiBorc === undefined || aktifOdeme.odemeOncesiBorc === null
+? null
+: Math.max(0,Number(aktifOdeme.odemeOncesiBorc || 0));
+let kayitliKalanBorc =
+aktifOdeme.kalanBorc === undefined || aktifOdeme.kalanBorc === null
+? null
+: Math.max(0,Number(aktifOdeme.kalanBorc || 0));
+let odemeOncesiBorc = kayitliOdemeOncesiBorc === null
+? Math.max(0, Number(cari.beklenen || 0) - odemeOncesiTahsilat)
+: kayitliOdemeOncesiBorc;
 let odemeSonrasiBakiye = Number(cari.beklenen || 0) - Number(cari.toplam || 0);
+let kalanBorc = kayitliKalanBorc === null
+? Math.max(0,odemeSonrasiBakiye)
+: kayitliKalanBorc;
 let cariDurumu = "Cari tahsilat";
 
 if(erkenTahsilat){
@@ -29981,7 +30005,7 @@ erkenTahsilat
 : `${aptAd} için ${tahsilEdilen} tutarında cari tahsilat kaydedilmiştir.`);
 let makbuzNotu = erkenTahsilat
 ? "Bu ödeme bakım hizmeti tamamlanmadan önce avans olarak kaydedilmiştir. Bakım kaydı girildiğinde tutar cari hesaba otomatik mahsup edilir."
-: "Bu makbuz yalnızca yukarıda belirtilen tahsilat işlemi için düzenlenmiştir. Cari durum, ödemenin yapıldığı aya göre değil, ödeme öncesindeki gerçek borç bakiyesine göre hesaplanır. Bakım ücreti, parça kalemleri ve genel borç durumu için ayrıca Cari Hesap Özeti kullanılabilir.";
+: "Bu makbuz yalnızca yukarıda belirtilen tahsilat işlemi için düzenlenmiştir. Ödeme öncesi borç ve kalan borç, tahsilatın kaydedildiği andaki gerçek cari bakiyeye göre gösterilir. Bakım ücreti, parça kalemleri ve ayrıntılı hesap hareketleri için ayrıca Cari Hesap Özeti kullanılabilir.";
 
 let w = elevatorXOpenReportWindow();
 
@@ -30023,10 +30047,11 @@ body{padding:18px}
 .amountLabel{font-size:10px;color:#64748b;font-weight:950;text-transform:uppercase;letter-spacing:.35px;margin-bottom:7px}
 .amountValue{font-size:32px;line-height:1;font-weight:950;color:#15803d;letter-spacing:-.7px}
 .statusLine{margin-top:8px;font-size:12px;font-weight:850;color:#15803d}
+.statusLine.debt{color:var(--orange)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
 .card{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:10px 12px}
 .label{font-size:9.5px;font-weight:950;color:#8a94a6;text-transform:uppercase;letter-spacing:.28px;margin-bottom:5px}
-.value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}.value.info{color:#2563eb}.value.ok{color:#16a34a}
+.value{font-size:13.5px;font-weight:850;color:var(--ink);line-height:1.25;word-break:break-word}.value.info{color:#2563eb}.value.ok{color:#16a34a}.value.debt{color:var(--orange)}
 .note{border:1px solid #dbeafe;background:linear-gradient(180deg,#f8fbff,#f1f7ff);border-radius:18px;padding:13px 15px;margin-top:12px}
 .noteTitle{font-size:12px;font-weight:950;margin-bottom:5px}.noteText{font-size:12px;color:#475569;line-height:1.45}
 .signature{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
@@ -30090,7 +30115,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="amountBox">
 <div class="amountLabel">Bu Tahsilat</div>
 <div class="amountValue">${tahsilEdilen}</div>
-<div class="statusLine">✓ Kaydedildi</div>
+<div class="statusLine ${kalanBorc > 0 ? "debt" : ""}">Kalan borç: ${ayHtml(tutarFormat(kalanBorc))}</div>
 </div>
 </div>
 
@@ -30101,6 +30126,8 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="card"><div class="label">Tahsilat Türü</div><div class="value info">${ayHtml(tahsilatTuru)}</div></div>
 <div class="card"><div class="label">İlgili İşlem</div><div class="value">${ilgiliIslem}</div></div>
 <div class="card"><div class="label">Bu Tahsilat</div><div class="value ok">${tahsilEdilen}</div></div>
+<div class="card"><div class="label">Ödeme Öncesi Borç</div><div class="value">${ayHtml(tutarFormat(odemeOncesiBorc))}</div></div>
+<div class="card"><div class="label">Kalan Borç</div><div class="value ${kalanBorc > 0 ? "debt" : "ok"}">${ayHtml(tutarFormat(kalanBorc))}</div></div>
 <div class="card"><div class="label">Ödeme Tarihi</div><div class="value">${odeme}</div></div>
 <div class="card"><div class="label">Cari Durumu</div><div class="value">${ayHtml(cariDurumu)}</div></div>
 </div>
