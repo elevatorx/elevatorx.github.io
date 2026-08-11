@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.46_PREMIUM_SPARKLE -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.47_SLIDING_TAB_COUNTUP -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18874,6 +18874,120 @@ html.darkRoot .tabbar .tabItem.activeTab::before{
   }
 }
 </style>
+
+<style id="abrSlidingTabCountup2047">
+/* v2.0.47 — kayan alt sekme kapsülü ve değer değişiminde çalışan canlı rakamlar */
+.tabbar{
+  isolation:isolate!important;
+}
+
+.tabbar::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:5px;
+  left:5px;
+  width:calc((100% - 14px) / 2);
+  height:52px;
+  border-radius:20px;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(96,166,255,.34),transparent 38%),
+    radial-gradient(circle at 14% 86%,rgba(86,126,255,.15),transparent 42%),
+    linear-gradient(145deg,#17233a 0%,#1b3762 58%,#176fe8 145%);
+  background-size:150% 150%,150% 150%,100% 100%;
+  box-shadow:0 8px 18px rgba(23,67,132,.20),inset 0 1px 0 rgba(255,255,255,.18);
+  transform:translate3d(0,0,0);
+  transition:transform .38s cubic-bezier(.22,.82,.24,1),opacity .16s ease;
+  animation:abrSlidingTabAurora 5.8s ease-in-out infinite;
+  will-change:transform;
+}
+
+.tabbar[data-active-tab="bakim"]::after{
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+
+.tabbar[data-active-tab="apartman"]::after{
+  opacity:1;
+  transform:translate3d(calc(100% + 4px),0,0);
+}
+
+.tabbar .tabItem{
+  position:relative!important;
+  z-index:1!important;
+}
+
+.tabbar .tabItem.activeTab{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.tabbar .tabItem.activeTab::before{
+  content:none!important;
+  display:none!important;
+  animation:none!important;
+}
+
+.tabbar .tabItem.activeTab .tabIcon{
+  animation:abrTabIconLift .42s cubic-bezier(.2,.8,.2,1) both!important;
+}
+
+[data-abr-count]{
+  font-variant-numeric:tabular-nums;
+}
+
+[data-abr-count].abrCountRunning{
+  animation:abrCountGlow .66s ease-out both;
+}
+
+body.darkMode .tabbar::after,
+html.darkRoot .tabbar::after{
+  background:
+    radial-gradient(circle at 82% 12%,rgba(111,181,255,.42),transparent 38%),
+    radial-gradient(circle at 14% 86%,rgba(91,132,255,.22),transparent 42%),
+    linear-gradient(145deg,#1b2a44 0%,#1b3b67 58%,#176fe8 145%);
+  box-shadow:0 9px 22px rgba(0,54,133,.34),inset 0 1px 0 rgba(255,255,255,.19);
+}
+
+@keyframes abrSlidingTabAurora{
+  0%,100%{background-position:78% 10%,18% 88%,center;}
+  50%{background-position:22% 72%,82% 24%,center;}
+}
+
+@keyframes abrTabIconLift{
+  0%{transform:translate3d(0,1px,0) scale(.94);opacity:.72;}
+  52%{transform:translate3d(0,-2px,0) scale(1.08);opacity:1;}
+  100%{transform:translate3d(0,0,0) scale(1);opacity:1;}
+}
+
+@keyframes abrCountGlow{
+  0%{filter:brightness(1);text-shadow:0 0 0 currentColor;}
+  42%{filter:brightness(1.10);text-shadow:0 0 12px color-mix(in srgb,currentColor 26%,transparent);}
+  100%{filter:brightness(1);text-shadow:0 0 0 transparent;}
+}
+
+@supports not (color:color-mix(in srgb,white,transparent)){
+  @keyframes abrCountGlow{
+    0%{filter:brightness(1);}
+    42%{filter:brightness(1.10);}
+    100%{filter:brightness(1);}
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .tabbar::after{
+    transition:none!important;
+    animation:none!important;
+  }
+
+  .tabbar .tabItem.activeTab .tabIcon,
+  [data-abr-count].abrCountRunning{
+    animation:none!important;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -20219,7 +20333,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.46</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.47</div>
     </div>
   </div>
 </div>
@@ -20231,7 +20345,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.46";
+  const SPLASH_VERSION = "v2.0.47";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -20763,7 +20877,7 @@ Destek: Yeni domain ile eklenecek
   <div id="teknikListe" class="teknikListe"></div>
 
 </div>
-<div class="tabbar">
+<div class="tabbar" data-active-tab="apartman">
 
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
 <span class="tabIcon" aria-hidden="true">
@@ -21011,7 +21125,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.46";
+const APP_VERSION = "v2.0.47";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21021,6 +21135,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.44 — eski bakiye girişini Safari prompt yerine uygulama içi panele taşı */
 /* v2.0.45 — cari düzenleme, kayıt seçimi ve silme onayını uygulama içi panele taşı */
 /* v2.0.46 — kontrollü premium ışıltı ve mikro hareket katmanı */
+/* v2.0.47 — kayan alt sekme kapsülü ve değer değişiminde çalışan canlı rakamlar */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -21698,6 +21813,86 @@ t.classList.remove("show","abrToastSuccess");
 
 }
 
+const ABR_COUNT_ANIMATION_MS = 660;
+let abrCountHafiza = Object.create(null);
+let abrCountAnimasyonlari = Object.create(null);
+let abrCountBootTimer = null;
+
+function abrCanliSayiMetni(deger,tur){
+let yuvarlanmis = Math.round(Number(deger) || 0);
+
+if(tur === "para"){
+if(typeof tutarFormat === "function") return tutarFormat(yuvarlanmis);
+return yuvarlanmis.toLocaleString("tr-TR") + " ₺";
+}
+
+if(tur === "yuzde") return yuvarlanmis + "%";
+return yuvarlanmis.toLocaleString("tr-TR");
+}
+
+function abrCanliSayilariBaslat(kok){
+kok = kok || document;
+
+if(!document.documentElement.classList.contains("appBooted") && document.getElementById("splash")){
+clearTimeout(abrCountBootTimer);
+abrCountBootTimer = setTimeout(function(){
+abrCanliSayilariBaslat(kok && kok.isConnected === false ? document : kok);
+},140);
+return;
+}
+
+let hareketAzalt = false;
+try{
+hareketAzalt = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+}catch(e){}
+
+kok.querySelectorAll("[data-abr-count]").forEach(function(el,index){
+let hedef = Number(el.getAttribute("data-abr-count"));
+if(!Number.isFinite(hedef)) return;
+
+let tur = el.getAttribute("data-abr-count-format") || "sayi";
+let anahtar = el.getAttribute("data-abr-count-key") || (tur + "-" + index);
+let oncekiVar = Object.prototype.hasOwnProperty.call(abrCountHafiza,anahtar);
+let baslangic = oncekiVar ? Number(abrCountHafiza[anahtar]) : 0;
+
+if(abrCountAnimasyonlari[anahtar]){
+cancelAnimationFrame(abrCountAnimasyonlari[anahtar]);
+delete abrCountAnimasyonlari[anahtar];
+}
+
+abrCountHafiza[anahtar] = hedef;
+
+if(hareketAzalt || baslangic === hedef || !window.requestAnimationFrame){
+el.textContent = abrCanliSayiMetni(hedef,tur);
+el.classList.remove("abrCountRunning");
+return;
+}
+
+el.classList.remove("abrCountRunning");
+void el.offsetWidth;
+el.classList.add("abrCountRunning");
+
+let baslamaAni = performance.now();
+
+function kare(simdi){
+let ilerleme = Math.min(1,(simdi - baslamaAni) / ABR_COUNT_ANIMATION_MS);
+let yumusak = 1 - Math.pow(1 - ilerleme,3);
+let guncel = baslangic + ((hedef - baslangic) * yumusak);
+el.textContent = abrCanliSayiMetni(guncel,tur);
+
+if(ilerleme < 1 && el.isConnected){
+abrCountAnimasyonlari[anahtar] = requestAnimationFrame(kare);
+}else{
+el.textContent = abrCanliSayiMetni(hedef,tur);
+el.classList.remove("abrCountRunning");
+delete abrCountAnimasyonlari[anahtar];
+}
+}
+
+abrCountAnimasyonlari[anahtar] = requestAnimationFrame(kare);
+});
+}
+
 
 function versiyonParcala(v){
 
@@ -22046,6 +22241,15 @@ function setAktifTab(tab){
 
 let items =
 document.querySelectorAll(".tabItem");
+
+let altBar = document.querySelector(".tabbar");
+if(altBar){
+if(tab === "bakim" || tab === "apartman"){
+altBar.setAttribute("data-active-tab",tab);
+}else{
+altBar.removeAttribute("data-active-tab");
+}
+}
 
 items.forEach(item=>{
 item.classList.remove("activeTab");
@@ -26855,7 +27059,7 @@ let h = `
 
     <div class="exDashHeroScore">
       <div>
-        <b>${tamamlanmaOrani}%</b>
+        <b data-abr-count="${tamamlanmaOrani}" data-abr-count-format="yuzde" data-abr-count-key="bakim-orani">${tamamlanmaOrani}%</b>
         <span>Bakım tamamlandı</span>
       </div>
     </div>
@@ -26893,15 +27097,15 @@ let h = `
 
     <div class="exDashOverviewStats">
       <div class="exDashOverviewStat">
-        <b>${guvenliData.length}</b>
+        <b data-abr-count="${guvenliData.length}" data-abr-count-key="portfoy-adedi">${guvenliData.length}</b>
         <span>Portföy</span>
       </div>
       <div class="exDashOverviewStat">
-        <b>${tamamlananCount}</b>
+        <b data-abr-count="${tamamlananCount}" data-abr-count-key="tamamlanan-bakim">${tamamlananCount}</b>
         <span>Tamam</span>
       </div>
       <div class="exDashOverviewStat${gecikenCount > 0 ? " is-danger" : ""}">
-        <b>${gecikenCount}</b>
+        <b data-abr-count="${gecikenCount}" data-abr-count-key="geciken-bakim">${gecikenCount}</b>
         <span>Geciken</span>
       </div>
     </div>
@@ -26917,13 +27121,13 @@ let h = `
     </div>
 
     <div class="exDashFinanceMain">
-      <b>${ayHtml(tutarFormat(toplam))}</b>
+      <b data-abr-count="${toplam}" data-abr-count-format="para" data-abr-count-key="toplam-tahsilat">${ayHtml(tutarFormat(toplam))}</b>
       <span>Tahsilat</span>
     </div>
 
     <div class="exDashFinanceOpen">
       <span>Açık bakiye</span>
-      <b>${ayHtml(tutarFormat(acikBakiye))}</b>
+      <b data-abr-count="${acikBakiye}" data-abr-count-format="para" data-abr-count-key="acik-bakiye">${ayHtml(tutarFormat(acikBakiye))}</b>
     </div>
 
     ${exDashboardSonIslemHtml()}
@@ -27030,6 +27234,12 @@ if(filtreli.length === 0){
 }
 
 listeEl.innerHTML = h;
+
+try{
+  abrCanliSayilariBaslat(listeEl);
+}catch(e){
+  console.warn("Canlı rakamlar başlatılamadı:",e);
+}
 
 if(window.toplamApartman) toplamApartman.innerText = data.length;
 if(window.toplamKazanc) toplamKazanc.innerText = tutarFormat(toplam);
