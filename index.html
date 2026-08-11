@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.44_OLD_BALANCE_SHEET -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.45_CARI_MANAGER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -11816,7 +11816,9 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 <style id="exPaymentModalStyle">
   #exPaymentModal,
-  #exOldBalanceModal{
+  #exOldBalanceModal,
+  #exCariManagerModal,
+  #exCariEditModal{
     position:fixed;
     inset:0;
     z-index:2147483000;
@@ -11826,9 +11828,13 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   #exPaymentModal.is-open,
-  #exOldBalanceModal.is-open{display:block}
+  #exOldBalanceModal.is-open,
+  #exCariManagerModal.is-open,
+  #exCariEditModal.is-open{display:block}
   #exPaymentModal *,
-  #exOldBalanceModal *{box-sizing:border-box}
+  #exOldBalanceModal *,
+  #exCariManagerModal *,
+  #exCariEditModal *{box-sizing:border-box}
 
   .exPaymentBackdrop{
     position:absolute;
@@ -11986,7 +11992,8 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   .exPaymentField input,
-  .exPaymentField textarea{
+  .exPaymentField textarea,
+  .exPaymentField select{
     width:100%;
     border:1px solid #dfe6f1;
     border-radius:16px;
@@ -11997,7 +12004,8 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     box-shadow:0 2px 8px rgba(15,23,42,.03);
   }
 
-  .exPaymentField input{
+  .exPaymentField input,
+  .exPaymentField select{
     height:52px;
     padding:0 14px;
     font-size:16px;
@@ -12105,15 +12113,376 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
   body.darkMode .exPaymentField input,
   body.darkMode .exPaymentField textarea,
+  body.darkMode .exPaymentField select,
   html.darkRoot .exPaymentField input,
-  html.darkRoot .exPaymentField textarea{
+  html.darkRoot .exPaymentField textarea,
+  html.darkRoot .exPaymentField select{
     background:#151b28;
     border-color:rgba(255,255,255,.08);
     color:#fff;
   }
 
-  body.exOldBalanceOpen{
+  body.exOldBalanceOpen,
+  body.exCariModalOpen{
     overflow:hidden!important;
+  }
+
+  #exCariManagerModal .exPaymentCard,
+  #exCariEditModal .exPaymentCard{
+    overflow:auto;
+  }
+
+  #exCariManagerModal .exPaymentKicker,
+  #exCariEditModal .exPaymentKicker{
+    color:#2374d8;
+  }
+
+  #exCariEditModal .exPaymentSummary{
+    background:linear-gradient(145deg,#edf6ff,#f9fcff);
+    border-color:#d7e7fb;
+  }
+
+  #exCariEditModal .exPaymentDebt span{color:#56779f}
+  #exCariEditModal .exPaymentDebt b,
+  #exCariEditModal .exPaymentCurrency{color:#2374d8}
+
+  .exCariSummary{
+    margin:4px 18px 14px;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    overflow:hidden;
+    border-radius:21px;
+    background:linear-gradient(145deg,#eff6ff,#f8fbff);
+    border:1px solid #d7e7fb;
+  }
+
+  .exCariSummaryItem{
+    min-width:0;
+    padding:14px 10px;
+    text-align:center;
+  }
+
+  .exCariSummaryItem + .exCariSummaryItem{
+    border-left:1px solid #dce8f6;
+  }
+
+  .exCariSummaryItem span{
+    display:block;
+    color:#77869c;
+    font-size:8.5px;
+    line-height:1.2;
+    font-weight:950;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  .exCariSummaryItem b{
+    display:block;
+    margin-top:6px;
+    color:#14213a;
+    font-size:15px;
+    line-height:1.1;
+    font-weight:950;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exCariSummaryItem b.info{color:#2374d8}
+  .exCariSummaryItem b.debt{color:#c76709}
+  .exCariSummaryItem b.ok{color:#168a3a}
+
+  .exCariManagerBody{
+    padding:0 18px 20px;
+  }
+
+  .exCariAddBalance{
+    width:100%;
+    min-height:52px;
+    border:1px solid #d7e7fb;
+    border-radius:17px;
+    background:linear-gradient(145deg,#edf6ff,#fff);
+    color:#175cae;
+    font-size:13px;
+    font-weight:950;
+    box-shadow:0 7px 18px rgba(35,116,216,.08);
+  }
+
+  .exCariSection{
+    margin-top:17px;
+  }
+
+  .exCariSectionHead{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
+    padding:0 2px;
+  }
+
+  .exCariSectionHead b{
+    color:#172033;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  .exCariSectionHead span{
+    display:grid;
+    place-items:center;
+    min-width:25px;
+    height:25px;
+    padding:0 7px;
+    border-radius:999px;
+    background:#eef4fc;
+    color:#52709a;
+    font-size:10px;
+    font-weight:950;
+  }
+
+  .exCariRecordList{
+    display:grid;
+    gap:8px;
+  }
+
+  .exCariRecord{
+    width:100%;
+    min-width:0;
+    border:1px solid #e1e8f2;
+    border-radius:18px;
+    background:#fff;
+    padding:11px 12px;
+    display:grid;
+    grid-template-columns:38px minmax(0,1fr) auto;
+    align-items:center;
+    gap:10px;
+    text-align:left;
+    color:#152238;
+    box-shadow:0 4px 13px rgba(15,23,42,.035);
+  }
+
+  .exCariRecord:active{transform:scale(.988)}
+
+  .exCariRecordIcon{
+    width:38px;
+    height:38px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    background:#fff4df;
+    color:#c76709;
+    font-size:15px;
+    font-weight:950;
+  }
+
+  .exCariRecord.payment .exCariRecordIcon{
+    background:#eaf4ff;
+    color:#2374d8;
+  }
+
+  .exCariRecordCopy{min-width:0}
+
+  .exCariRecordCopy b{
+    display:block;
+    font-size:13px;
+    line-height:1.2;
+    font-weight:950;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exCariRecordCopy span{
+    display:block;
+    margin-top:4px;
+    color:#78869a;
+    font-size:10.5px;
+    line-height:1.3;
+    font-weight:750;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .exCariRecordSide{text-align:right}
+
+  .exCariRecordSide b{
+    display:block;
+    color:#14213a;
+    font-size:12px;
+    font-weight:950;
+    white-space:nowrap;
+  }
+
+  .exCariRecordSide span{
+    display:block;
+    margin-top:4px;
+    color:#2374d8;
+    font-size:9px;
+    font-weight:950;
+  }
+
+  .exCariEmpty{
+    padding:18px 13px;
+    border:1px dashed #d8e0eb;
+    border-radius:17px;
+    background:#f8fafc;
+    color:#8490a2;
+    text-align:center;
+    font-size:11px;
+    line-height:1.4;
+    font-weight:800;
+  }
+
+  .exCariManagerClose{
+    width:100%;
+    min-height:50px;
+    margin-top:16px;
+    border:0;
+    border-radius:17px;
+    background:#edf2fa;
+    color:#41577c;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  .exCariEditorHint{
+    margin:-2px 0 14px;
+    padding:11px 12px;
+    border-radius:15px;
+    background:#eef6ff;
+    border:1px solid #d7e7fb;
+    color:#48658e;
+    font-size:11px;
+    line-height:1.45;
+    font-weight:750;
+  }
+
+  .exCariEditorActions{
+    display:grid;
+    grid-template-columns:.75fr 1fr 1.2fr;
+    gap:8px;
+    margin-top:15px;
+  }
+
+  .exCariEditorButton{
+    min-height:52px;
+    border:0;
+    border-radius:17px;
+    padding:10px 9px;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  .exCariEditorButton.delete{background:#fff0f0;color:#c63232}
+  .exCariEditorButton.cancel{background:#edf2fa;color:#41577c}
+  .exCariEditorButton.save{background:linear-gradient(135deg,#172033,#2374d8);color:#fff;box-shadow:0 12px 26px rgba(35,116,216,.2)}
+  .exCariEditorButton:disabled{opacity:.5}
+
+  .exCariDeleteConfirm{
+    display:none;
+    margin-top:14px;
+    padding:14px;
+    border-radius:18px;
+    background:#fff2f2;
+    border:1px solid #f4cece;
+  }
+
+  .exCariDeleteConfirm.is-visible{display:block}
+
+  .exCariDeleteConfirm b{
+    display:block;
+    color:#9f2727;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  .exCariDeleteConfirm span{
+    display:block;
+    margin-top:5px;
+    color:#8f5a5a;
+    font-size:10.5px;
+    line-height:1.4;
+    font-weight:750;
+  }
+
+  .exCariDeleteConfirmActions{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:8px;
+    margin-top:12px;
+  }
+
+  .exCariDeleteConfirmActions button{
+    min-height:45px;
+    border:0;
+    border-radius:14px;
+    font-size:12px;
+    font-weight:950;
+  }
+
+  .exCariDeleteConfirmActions .keep{background:#fff;color:#53647c}
+  .exCariDeleteConfirmActions .confirm{background:#c63232;color:#fff}
+
+  body.darkMode .exCariSummary,
+  html.darkRoot .exCariSummary,
+  body.darkMode #exCariEditModal .exPaymentSummary,
+  html.darkRoot #exCariEditModal .exPaymentSummary{
+    background:linear-gradient(145deg,#17253a,#131c2c);
+    border-color:rgba(255,255,255,.08);
+  }
+
+  body.darkMode .exCariSummaryItem + .exCariSummaryItem,
+  html.darkRoot .exCariSummaryItem + .exCariSummaryItem{
+    border-color:rgba(255,255,255,.07);
+  }
+
+  body.darkMode .exCariSummaryItem b,
+  html.darkRoot .exCariSummaryItem b,
+  body.darkMode .exCariSectionHead b,
+  html.darkRoot .exCariSectionHead b,
+  body.darkMode .exCariRecordCopy b,
+  html.darkRoot .exCariRecordCopy b,
+  body.darkMode .exCariRecordSide b,
+  html.darkRoot .exCariRecordSide b{color:#f8fafc}
+
+  body.darkMode .exCariRecord,
+  html.darkRoot .exCariRecord,
+  body.darkMode .exCariEmpty,
+  html.darkRoot .exCariEmpty{
+    background:#151b28;
+    border-color:rgba(255,255,255,.08);
+  }
+
+  body.darkMode .exCariAddBalance,
+  html.darkRoot .exCariAddBalance,
+  body.darkMode .exCariEditorHint,
+  html.darkRoot .exCariEditorHint{
+    background:rgba(35,116,216,.13);
+    border-color:rgba(96,165,250,.16);
+    color:#a9c9ef;
+  }
+
+  body.darkMode .exCariDeleteConfirm,
+  html.darkRoot .exCariDeleteConfirm{
+    background:rgba(127,29,29,.19);
+    border-color:rgba(248,113,113,.2);
+  }
+
+  body.darkMode .exCariManagerClose,
+  html.darkRoot .exCariManagerClose,
+  body.darkMode .exCariEditorButton.cancel,
+  html.darkRoot .exCariEditorButton.cancel,
+  body.darkMode .exCariDeleteConfirmActions .keep,
+  html.darkRoot .exCariDeleteConfirmActions .keep{
+    background:#202a3a;
+    color:#c7d2e2;
+  }
+
+  body.darkMode .exCariEditorButton.delete,
+  html.darkRoot .exCariEditorButton.delete{
+    background:rgba(127,29,29,.2);
+    color:#fca5a5;
   }
 
   #exOldBalanceModal .exPaymentCard{
@@ -12201,18 +12570,27 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   @media(max-width:520px){
-    #exOldBalanceModal .exPaymentWrap{
+    #exOldBalanceModal .exPaymentWrap,
+    #exCariManagerModal .exPaymentWrap,
+    #exCariEditModal .exPaymentWrap{
       align-items:flex-end;
       padding:calc(12px + env(safe-area-inset-top)) 8px 0;
     }
 
-    #exOldBalanceModal .exPaymentCard{
+    #exOldBalanceModal .exPaymentCard,
+    #exCariManagerModal .exPaymentCard,
+    #exCariEditModal .exPaymentCard{
       width:100%;
       max-height:calc(94vh - env(safe-area-inset-top));
       border-radius:31px 31px 0 0;
       padding-bottom:env(safe-area-inset-bottom);
       animation:exOldBalanceRise .24s cubic-bezier(.2,.8,.2,1);
     }
+  }
+
+  @media(max-width:370px){
+    .exCariEditorActions{grid-template-columns:1fr 1fr}
+    .exCariEditorButton.delete{grid-column:1/-1}
   }
 
   @keyframes exOldBalanceRise{
@@ -18613,6 +18991,14 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
         var ob = document.getElementById("exOldBalanceModal");
         if(ob && ob.classList.contains("is-open")) return window.eskiBakiyeModalKapat();
       }catch(_){}
+      try{
+        var ce = document.getElementById("exCariEditModal");
+        if(ce && ce.classList.contains("is-open")) return window.cariKayitEditorKapat();
+      }catch(_){}
+      try{
+        var cm = document.getElementById("exCariManagerModal");
+        if(cm && cm.classList.contains("is-open")) return window.cariYonetimModalKapat();
+      }catch(_){}
       try{var pf=document.getElementById("exProfessionalDocFormModal");if(pf&&pf.classList.contains("is-open"))return window.meslekiBelgeFormKapat();}catch(_){}
       try{var po=document.getElementById("exProfessionalDocsModal");if(po&&po.classList.contains("is-open"))return window.meslekiBelgelerKapat();}catch(_){}
       try{var cf=document.getElementById("exContractFormModal");if(cf&&cf.classList.contains("is-open"))return window.sozlesmeFormKapat();}catch(_){}
@@ -18844,6 +19230,130 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
         <div class="exPaymentActions">
           <button class="exPaymentButton cancel" type="button" onclick="eskiBakiyeModalKapat()">Vazgeç</button>
           <button id="exOldBalanceSaveButton" class="exPaymentButton save" type="submit" disabled>Bakiyeyi Ekle</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="exCariManagerModal" aria-hidden="true">
+  <div class="exPaymentBackdrop" onclick="cariYonetimModalKapat()"></div>
+
+  <div class="exPaymentWrap">
+    <section class="exPaymentCard" role="dialog" aria-modal="true" aria-labelledby="exCariManagerTitle">
+      <button class="exPaymentClose" type="button" aria-label="Kapat" onclick="cariYonetimModalKapat()">×</button>
+
+      <div class="exPaymentHead">
+        <div class="exPaymentKicker">Cari hareket merkezi</div>
+        <h2 id="exCariManagerTitle" class="exPaymentTitle">Cariyi Düzenle</h2>
+        <p id="exCariManagerSubtitle" class="exPaymentSub">Eski bakiye ve tahsilat kayıtlarını tek ekrandan yönet.</p>
+      </div>
+
+      <div class="exCariSummary">
+        <div class="exCariSummaryItem">
+          <span>Toplam Borç</span>
+          <b id="exCariManagerDebt" class="debt">0 ₺</b>
+        </div>
+        <div class="exCariSummaryItem">
+          <span>Tahsilat</span>
+          <b id="exCariManagerPaid" class="info">0 ₺</b>
+        </div>
+        <div class="exCariSummaryItem">
+          <span id="exCariManagerBalanceLabel">Kalan</span>
+          <b id="exCariManagerBalance" class="ok">0 ₺</b>
+        </div>
+      </div>
+
+      <div class="exCariManagerBody">
+        <button class="exCariAddBalance" type="button" onclick="cariYonetimYeniEskiBakiye()">+ Yeni Eski Bakiye Ekle</button>
+
+        <div class="exCariSection">
+          <div class="exCariSectionHead"><b>Eski Bakiye Kayıtları</b><span id="exCariOldCount">0</span></div>
+          <div id="exCariOldList" class="exCariRecordList"></div>
+        </div>
+
+        <div class="exCariSection">
+          <div class="exCariSectionHead"><b>Tahsilatlar</b><span id="exCariPaymentCount">0</span></div>
+          <div id="exCariPaymentList" class="exCariRecordList"></div>
+        </div>
+
+        <button class="exCariManagerClose" type="button" onclick="cariYonetimModalKapat()">Kapat</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<div id="exCariEditModal" aria-hidden="true">
+  <div class="exPaymentBackdrop" onclick="cariKayitEditorKapat()"></div>
+
+  <div class="exPaymentWrap">
+    <form class="exPaymentCard" role="dialog" aria-modal="true" aria-labelledby="exCariEditTitle" onsubmit="event.preventDefault();cariKayitEditorKaydet()">
+      <button class="exPaymentClose" type="button" aria-label="Geri" onclick="cariKayitEditorKapat()">×</button>
+
+      <div class="exPaymentHead">
+        <div id="exCariEditKicker" class="exPaymentKicker">Cari kaydı</div>
+        <h2 id="exCariEditTitle" class="exPaymentTitle">Kaydı Düzenle</h2>
+        <p class="exPaymentSub">Tutar, tarih ve açıklamayı güncelle; cari hesap otomatik yeniden hesaplansın.</p>
+      </div>
+
+      <div class="exPaymentSummary">
+        <div class="exPaymentSummaryTop">
+          <div class="exPaymentApartment">
+            <span>Apartman / Site</span>
+            <b id="exCariEditApartmentName">-</b>
+          </div>
+          <div class="exPaymentDebt">
+            <span>Kayıt Türü</span>
+            <b id="exCariEditRecordType">-</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="exPaymentBody">
+        <div class="exPaymentField">
+          <label for="exCariEditAmount">Tutar</label>
+          <div class="exPaymentAmountWrap">
+            <input id="exCariEditAmount" type="number" min="0" step="0.01" inputmode="decimal" autocomplete="off" placeholder="0" oninput="cariKayitEditorKontrol()">
+            <span class="exPaymentCurrency">₺</span>
+          </div>
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exCariEditDate">İşlem tarihi</label>
+          <input id="exCariEditDate" type="date">
+        </div>
+
+        <div id="exCariEditTypeField" class="exPaymentField">
+          <label for="exCariEditPaymentType">Tahsilat türü</label>
+          <select id="exCariEditPaymentType">
+            <option value="bakim">Bakım Ücreti Ödemesi</option>
+            <option value="parca">Parça / İşlem Ödemesi</option>
+            <option value="cari">Cari Tahsilat</option>
+          </select>
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exCariEditDescription">Açıklama</label>
+          <textarea id="exCariEditDescription" maxlength="180" placeholder="İşlem açıklaması"></textarea>
+        </div>
+
+        <div id="exCariEditHint" class="exCariEditorHint">Değişiklikten sonra cari durum otomatik güncellenecek.</div>
+
+        <div id="exCariEditorActions" class="exCariEditorActions">
+          <button class="exCariEditorButton delete" type="button" onclick="cariKayitSilOnayiAc()">Sil</button>
+          <button class="exCariEditorButton cancel" type="button" onclick="cariKayitEditorKapat()">Vazgeç</button>
+          <button id="exCariEditSaveButton" class="exCariEditorButton save" type="submit">Kaydet</button>
+        </div>
+
+        <div id="exCariDeleteConfirm" class="exCariDeleteConfirm">
+          <b>Bu cari kaydı silinsin mi?</b>
+          <span id="exCariDeleteConfirmText">Silinen kayıt cari toplamından çıkarılır. Bu işlem geri alınamaz.</span>
+          <div class="exCariDeleteConfirmActions">
+            <button class="keep" type="button" onclick="cariKayitSilOnayiKapat()">Kaydı Koru</button>
+            <button class="confirm" type="button" onclick="cariKayitSil()">Evet, Sil</button>
+          </div>
         </div>
       </div>
     </form>
@@ -19543,7 +20053,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.44</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.45</div>
     </div>
   </div>
 </div>
@@ -19555,7 +20065,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.44";
+  const SPLASH_VERSION = "v2.0.45";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -20335,7 +20845,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.44";
+const APP_VERSION = "v2.0.45";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -20343,6 +20853,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.42 — tahsilat makbuzuna ödeme öncesi ve ödeme sonrası kalan borcu ekle */
 /* v2.0.43 — geçmiş tahsilatlardan ayrı ayrı makbuz oluştur */
 /* v2.0.44 — eski bakiye girişini Safari prompt yerine uygulama içi panele taşı */
+/* v2.0.45 — cari düzenleme, kayıt seçimi ve silme onayını uygulama içi panele taşı */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -22364,6 +22875,9 @@ eskiBakiyeModalKontrol();
 
 function eskiBakiyeDuzenle(i){
 
+cariYonetimModalAc(i);
+return;
+
 haptic("medium");
 
 let a = data[i];
@@ -22441,6 +22955,9 @@ detayAc(aktifDetay);
 
 function eskiBakiyeSil(i){
 
+cariYonetimModalAc(i);
+return;
+
 haptic("warning");
 
 let a = data[i];
@@ -22509,6 +23026,9 @@ detayAc(aktifDetay);
 }
 
 function odemeDuzenle(i){
+
+cariYonetimModalAc(i);
+return;
 
 haptic("medium");
 
@@ -22604,6 +23124,9 @@ detayAc(aktifDetay);
 
 function odemeSil(i){
 
+cariYonetimModalAc(i);
+return;
+
 haptic("warning");
 
 let a = data[i];
@@ -22677,12 +23200,122 @@ detayAc(aktifDetay);
 
 }
 
-function cariIslemleriDuzenle(i){
+let cariYonetimAktifIndex = null;
+let cariEditorTip = "";
+let cariEditorKayitIndex = -1;
 
-haptic("medium");
+
+function cariTarihInputDegeri(tarih){
+
+let parca = tarihParcala(tarih);
+if(!parca) return bugunISO();
+
+return (
+String(parca.yil).padStart(4,"0") + "-" +
+String(parca.ay).padStart(2,"0") + "-" +
+String(parca.gun).padStart(2,"0")
+);
+
+}
+
+
+function cariModalBodyKilidiGuncelle(){
+
+let manager = document.getElementById("exCariManagerModal");
+let editor = document.getElementById("exCariEditModal");
+let acik = !!(
+(manager && manager.classList.contains("is-open")) ||
+(editor && editor.classList.contains("is-open"))
+);
+
+document.body.classList.toggle("exCariModalOpen",acik);
+
+}
+
+
+function cariYonetimKayitSatiri(tip,kayit,idx){
+
+let odemeMi = tip === "odeme";
+let erken = odemeMi && !!(kayit && kayit.erkenTahsilat);
+let baslik = odemeMi
+? odemeTipEtiket(erken ? "bakim" : odemeTipTahminEt(kayit))
+: ((kayit && kayit.aciklama) || "Eski bakiye");
+let aciklama = odemeMi
+? ((kayit && (kayit.aciklama || kayit.kalem)) || "Tahsilat kaydı")
+: "Cari borç kalemi";
+let tarih = (kayit && kayit.tarih) || "Tarih yok";
+let ikon = odemeMi ? "₺" : "+";
+
+return `
+<button type="button" class="exCariRecord ${odemeMi ? "payment" : "old"}" onclick="cariKayitEditorAc('${tip}',${idx})">
+  <span class="exCariRecordIcon" aria-hidden="true">${ikon}</span>
+  <span class="exCariRecordCopy">
+    <b>${ayHtml(baslik)}</b>
+    <span>${ayHtml(tarih)} • ${ayHtml(aciklama)}</span>
+  </span>
+  <span class="exCariRecordSide">
+    <b>${ayHtml(tutarFormat((kayit && kayit.tutar) || 0))}</b>
+    <span>Düzenle ›</span>
+  </span>
+</button>
+`;
+
+}
+
+
+function cariYonetimRender(){
+
+let i = Number(cariYonetimAktifIndex);
+let a = data[i];
+if(!a) return;
+
+let cari = cariOzet(a);
+let eskiBakiyeler = eskiBakiyeListesi(a);
+let odemeler = Array.isArray(a.odemeler) ? a.odemeler : [];
+let kalanLabel = cari.alacak > 0 ? "Avans" : "Kalan";
+let kalanTutar = cari.alacak > 0 ? cari.alacak : cari.kalanPozitif;
+
+let subtitle = document.getElementById("exCariManagerSubtitle");
+let borc = document.getElementById("exCariManagerDebt");
+let tahsilat = document.getElementById("exCariManagerPaid");
+let bakiyeLabel = document.getElementById("exCariManagerBalanceLabel");
+let bakiye = document.getElementById("exCariManagerBalance");
+let eskiCount = document.getElementById("exCariOldCount");
+let odemeCount = document.getElementById("exCariPaymentCount");
+let eskiAlan = document.getElementById("exCariOldList");
+let odemeAlan = document.getElementById("exCariPaymentList");
+
+if(subtitle) subtitle.textContent = (a.ad || "Apartman") + " • Cari kayıtlarını güvenle yönet";
+if(borc) borc.textContent = tutarFormat(cari.beklenen || 0);
+if(tahsilat) tahsilat.textContent = tutarFormat(cari.toplam || 0);
+if(bakiyeLabel) bakiyeLabel.textContent = kalanLabel;
+if(bakiye){
+bakiye.textContent = tutarFormat(kalanTutar || 0);
+bakiye.className = cari.kalanPozitif > 0 ? "debt" : (cari.alacak > 0 ? "info" : "ok");
+}
+if(eskiCount) eskiCount.textContent = String(eskiBakiyeler.length);
+if(odemeCount) odemeCount.textContent = String(odemeler.length);
+
+if(eskiAlan){
+eskiAlan.innerHTML = eskiBakiyeler.length
+? eskiBakiyeler.map(function(k,idx){ return cariYonetimKayitSatiri("eski",k,idx); }).join("")
+: '<div class="exCariEmpty">Kayıtlı eski bakiye bulunmuyor.</div>';
+}
+
+if(odemeAlan){
+odemeAlan.innerHTML = odemeler.length
+? odemeler.map(function(k,idx){ return cariYonetimKayitSatiri("odeme",k,idx); }).join("")
+: '<div class="exCariEmpty">Henüz tahsilat kaydı bulunmuyor.</div>';
+}
+
+}
+
+
+function cariYonetimModalAc(i,sessiz){
+
+if(!sessiz) haptic("medium");
 
 let a = data[i];
-
 if(!a){
 toast("Apartman bulunamadı");
 return;
@@ -22690,43 +23323,364 @@ return;
 
 odemeleriHazirla(a);
 eskiBakiyeListesi(a);
+cariYonetimAktifIndex = i;
+cariYonetimRender();
 
-let secim = prompt(
-"Cari düzenleme\n\n" +
-"1 - Eski bakiye düzenle\n" +
-"2 - Eski bakiye sil\n" +
-"3 - Tahsilat düzenle\n" +
-"4 - Tahsilat sil\n\n" +
-"Yeni eski bakiye eklemek için cari kartındaki + Eski Bakiye butonunu kullan.",
-"1"
-);
-
-if(secim === null){
-toast("Cari düzenleme iptal edildi");
+let modal = document.getElementById("exCariManagerModal");
+if(!modal){
+toast("Cari düzenleme paneli açılamadı");
 return;
 }
 
-if(secim === "1"){
-eskiBakiyeDuzenle(i);
+modal.style.display = "block";
+
+requestAnimationFrame(function(){
+modal.classList.add("is-open");
+modal.setAttribute("aria-hidden","false");
+cariModalBodyKilidiGuncelle();
+});
+
+}
+
+
+function cariYonetimModalKapat(koruIndex){
+
+let modal = document.getElementById("exCariManagerModal");
+if(modal){
+modal.classList.remove("is-open");
+modal.setAttribute("aria-hidden","true");
+modal.style.display = "none";
+}
+
+if(!koruIndex) cariYonetimAktifIndex = null;
+cariModalBodyKilidiGuncelle();
+
+}
+
+
+function cariYonetimYeniEskiBakiye(){
+
+let i = Number(cariYonetimAktifIndex);
+if(!data[i]) return;
+
+cariYonetimModalKapat();
+eskiBakiyeModalAc(i);
+
+}
+
+
+function cariKayitEditorAc(tip,idx){
+
+haptic("light");
+
+let i = Number(cariYonetimAktifIndex);
+let a = data[i];
+if(!a) return;
+
+let odemeMi = tip === "odeme";
+let liste = odemeMi ? a.odemeler : eskiBakiyeListesi(a);
+let kayit = Array.isArray(liste) ? liste[Number(idx)] : null;
+
+if(!kayit){
+toast("Cari kaydı bulunamadı");
 return;
 }
 
-if(secim === "2"){
-eskiBakiyeSil(i);
+cariEditorTip = odemeMi ? "odeme" : "eski";
+cariEditorKayitIndex = Number(idx);
+
+let erken = odemeMi && !!kayit.erkenTahsilat;
+let baslik = odemeMi ? "Tahsilatı Düzenle" : "Eski Bakiyeyi Düzenle";
+let kayitTuru = odemeMi ? (erken ? "Erken Tahsilat" : "Tahsilat") : "Eski Bakiye";
+let aciklama = odemeMi
+? (kayit.aciklama || kayit.kalem || odemeKalemMetni(kayit,a))
+: (kayit.aciklama || "Eski bakiye");
+
+document.getElementById("exCariEditKicker").textContent = odemeMi ? "Tahsilat kaydı" : "Cari borç kaydı";
+document.getElementById("exCariEditTitle").textContent = baslik;
+document.getElementById("exCariEditApartmentName").textContent = a.ad || "-";
+document.getElementById("exCariEditRecordType").textContent = kayitTuru;
+document.getElementById("exCariEditAmount").value = String(Number(kayit.tutar || 0) || "");
+document.getElementById("exCariEditDate").value = cariTarihInputDegeri(kayit.tarih);
+document.getElementById("exCariEditDescription").value = aciklama;
+
+let tipField = document.getElementById("exCariEditTypeField");
+let tipEl = document.getElementById("exCariEditPaymentType");
+let hint = document.getElementById("exCariEditHint");
+
+if(tipField) tipField.style.display = odemeMi ? "grid" : "none";
+if(tipEl){
+tipEl.value = odemeTipNormalize(erken ? "bakim" : (kayit.tip || odemeTipTahminEt(kayit)));
+tipEl.disabled = erken;
+}
+if(hint){
+hint.textContent = erken
+? "Bu kayıt bakım öncesi erken tahsilattır. Tutar değişse bile avans niteliği korunur."
+: "Kaydettiğinde cari toplamı ve kalan bakiye otomatik yeniden hesaplanır.";
+}
+
+cariKayitSilOnayiKapat();
+cariKayitEditorKontrol();
+cariYonetimModalKapat(true);
+
+let modal = document.getElementById("exCariEditModal");
+if(!modal) return;
+
+modal.style.display = "block";
+requestAnimationFrame(function(){
+modal.classList.add("is-open");
+modal.setAttribute("aria-hidden","false");
+cariModalBodyKilidiGuncelle();
+});
+
+setTimeout(function(){
+let tutarEl = document.getElementById("exCariEditAmount");
+if(tutarEl){
+tutarEl.focus();
+try{ tutarEl.select(); }catch(e){}
+}
+},120);
+
+}
+
+
+function cariKayitEditorGizle(){
+
+let modal = document.getElementById("exCariEditModal");
+if(modal){
+modal.classList.remove("is-open");
+modal.setAttribute("aria-hidden","true");
+modal.style.display = "none";
+}
+
+cariModalBodyKilidiGuncelle();
+
+}
+
+
+function cariKayitEditorKapat(){
+
+let i = Number(cariYonetimAktifIndex);
+cariKayitEditorGizle();
+cariEditorTip = "";
+cariEditorKayitIndex = -1;
+
+if(data[i]) cariYonetimModalAc(i,true);
+
+}
+
+
+function cariKayitEditorKontrol(){
+
+let tutarEl = document.getElementById("exCariEditAmount");
+let save = document.getElementById("exCariEditSaveButton");
+let tutar = Number(String((tutarEl && tutarEl.value) || "").replace(",","."));
+
+if(save) save.disabled = !(Number.isFinite(tutar) && tutar > 0);
+
+}
+
+
+function cariKayitEditorSonrasi(i){
+
+cariKayitEditorGizle();
+cariEditorTip = "";
+cariEditorKayitIndex = -1;
+
+if(aktifDetay !== null && data[aktifDetay]){
+detayAc(aktifDetay);
+}
+
+if(data[i]) cariYonetimModalAc(i,true);
+
+}
+
+
+function cariKayitEditorKaydet(){
+
+let i = Number(cariYonetimAktifIndex);
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
 return;
 }
 
-if(secim === "3"){
-odemeDuzenle(i);
+let tip = cariEditorTip;
+let idx = Number(cariEditorKayitIndex);
+let liste = tip === "odeme" ? a.odemeler : eskiBakiyeListesi(a);
+let kayit = Array.isArray(liste) ? liste[idx] : null;
+
+if(!kayit){
+toast("Cari kaydı bulunamadı");
 return;
 }
 
-if(secim === "4"){
-odemeSil(i);
+let tutar = Number(String(document.getElementById("exCariEditAmount").value || "").replace(",","."));
+if(!Number.isFinite(tutar) || tutar <= 0){
+toast("Geçerli bir tutar gir");
 return;
 }
 
-toast("Geçerli bir seçim yapılmadı");
+let tarih = tahsilatTarihKayitDegeri(document.getElementById("exCariEditDate").value || bugunISO());
+let aciklama = document.getElementById("exCariEditDescription").value.trim();
+let kilit = "cari_duzenle_" + (a.id || i) + "_" + tip + "_" + idx;
+
+if(!abrStbIslemKilitle(kilit,2200)){
+toast("Cari kaydı güncelleniyor");
+return;
+}
+
+let save = document.getElementById("exCariEditSaveButton");
+
+try{
+
+if(save) save.disabled = true;
+
+if(tip === "odeme"){
+let kapanisKeyOnce = bakimTarihKey(a.odemeTarihi);
+let eskiOdemeKey = bakimTarihKey(kayit.tarih);
+let odemeTuru = kayit.erkenTahsilat
+? "bakim"
+: odemeTipNormalize(document.getElementById("exCariEditPaymentType").value);
+
+if(!aciklama) aciklama = odemeKalemMetni(kayit,a) || odemeTipEtiket(odemeTuru);
+
+kayit.tutar = tutar;
+kayit.tarih = tarih;
+kayit.tip = odemeTuru;
+kayit.aciklama = aciklama;
+kayit.kalem = aciklama;
+kayit.updatedAt = new Date().toISOString();
+delete kayit.odemeOncesiBorc;
+delete kayit.kalanBorc;
+
+if(kapanisKeyOnce && eskiOdemeKey && eskiOdemeKey <= kapanisKeyOnce){
+a.odemeTarihi = "";
+}
+
+a.kayitlar = Array.isArray(a.kayitlar) ? a.kayitlar : [];
+a.kayitlar.push("Tahsilat düzenlendi: " + tutarFormat(tutar) + " • " + odemeTipEtiket(odemeTuru) + " (" + tarih + ")");
+}else{
+if(!aciklama) aciklama = "Eski bakiye";
+kayit.tutar = tutar;
+kayit.tarih = tarih;
+kayit.aciklama = aciklama;
+kayit.updatedAt = new Date().toISOString();
+
+a.kayitlar = Array.isArray(a.kayitlar) ? a.kayitlar : [];
+a.kayitlar.push("Eski bakiye düzenlendi: " + tutarFormat(tutar) + " (" + tarih + ")");
+}
+
+cariOdemeDurumunuGuncelle(a);
+
+if(!kaydet()) return;
+
+toast(tip === "odeme" ? "Tahsilat güncellendi" : "Eski bakiye güncellendi");
+cariKayitEditorSonrasi(i);
+
+}finally{
+abrStbIslemKilidiniAc(kilit);
+cariKayitEditorKontrol();
+}
+
+}
+
+
+function cariKayitSilOnayiAc(){
+
+haptic("warning");
+
+let i = Number(cariYonetimAktifIndex);
+let a = data[i];
+if(!a) return;
+let liste = cariEditorTip === "odeme" ? (a && a.odemeler) : eskiBakiyeListesi(a);
+let kayit = Array.isArray(liste) ? liste[Number(cariEditorKayitIndex)] : null;
+if(!kayit) return;
+
+let onay = document.getElementById("exCariDeleteConfirm");
+let metin = document.getElementById("exCariDeleteConfirmText");
+let actions = document.getElementById("exCariEditorActions");
+
+if(metin){
+metin.textContent = tutarFormat(kayit.tutar || 0) + " • " + (kayit.tarih || "Tarih yok") + " kaydı cari hesaptan çıkarılacak.";
+}
+if(onay) onay.classList.add("is-visible");
+if(actions) actions.style.display = "none";
+
+}
+
+
+function cariKayitSilOnayiKapat(){
+
+let onay = document.getElementById("exCariDeleteConfirm");
+let actions = document.getElementById("exCariEditorActions");
+if(onay) onay.classList.remove("is-visible");
+if(actions) actions.style.display = "grid";
+
+}
+
+
+function cariKayitSil(){
+
+let i = Number(cariYonetimAktifIndex);
+let a = data[i];
+if(!a) return;
+
+let tip = cariEditorTip;
+let idx = Number(cariEditorKayitIndex);
+let liste = tip === "odeme" ? a.odemeler : eskiBakiyeListesi(a);
+let kayit = Array.isArray(liste) ? liste[idx] : null;
+
+if(!kayit){
+toast("Silinecek cari kaydı bulunamadı");
+return;
+}
+
+let kilit = "cari_sil_" + (a.id || i) + "_" + tip + "_" + idx;
+if(!abrStbIslemKilitle(kilit,2200)){
+toast("Silme işlemi sürüyor");
+return;
+}
+
+try{
+
+let tutar = Number(kayit.tutar || 0);
+let tarih = kayit.tarih || bugun();
+
+if(tip === "odeme"){
+let kapanisKeyOnce = bakimTarihKey(a.odemeTarihi);
+let silinenOdemeKey = bakimTarihKey(kayit.tarih);
+a.odemeler.splice(idx,1);
+
+if(kapanisKeyOnce && silinenOdemeKey && silinenOdemeKey <= kapanisKeyOnce){
+a.odemeTarihi = "";
+}
+
+a.kayitlar = Array.isArray(a.kayitlar) ? a.kayitlar : [];
+a.kayitlar.push("Tahsilat silindi: " + tutarFormat(tutar) + " (" + bugun() + ")");
+}else{
+liste.splice(idx,1);
+a.kayitlar = Array.isArray(a.kayitlar) ? a.kayitlar : [];
+a.kayitlar.push("Eski bakiye silindi: " + tutarFormat(tutar) + " (" + bugun() + ")");
+}
+
+cariOdemeDurumunuGuncelle(a);
+
+if(!kaydet()) return;
+
+toast(tip === "odeme" ? "Tahsilat silindi" : "Eski bakiye silindi");
+cariKayitEditorSonrasi(i);
+
+}finally{
+abrStbIslemKilidiniAc(kilit);
+}
+
+}
+
+
+function cariIslemleriDuzenle(i){
+
+cariYonetimModalAc(i);
 
 }
 
