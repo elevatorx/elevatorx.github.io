@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.42_RECEIPT_REMAINING_DEBT -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.43_HISTORICAL_RECEIPTS -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6615,6 +6615,147 @@ padding:14px;
 text-align:left;
 }
 
+.receiptHistorySection{
+margin-top:14px;
+border-radius:26px;
+background:rgba(255,255,255,.82);
+border:1px solid rgba(226,232,240,.92);
+box-shadow:0 14px 34px rgba(15,23,42,.045);
+padding:14px;
+text-align:left;
+}
+
+.receiptHistoryHead{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:12px;
+margin-bottom:11px;
+}
+
+.receiptHistoryHead span{
+display:block;
+font-size:10.5px;
+font-weight:950;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:#007aff;
+margin-bottom:4px;
+}
+
+.receiptHistoryHead b{
+display:block;
+font-size:16px;
+font-weight:950;
+letter-spacing:-.25px;
+color:#0f172a;
+}
+
+.receiptHistoryCount{
+padding:6px 9px;
+border-radius:999px;
+background:#eff6ff;
+color:#2563eb;
+font-size:10.5px;
+font-weight:950;
+white-space:nowrap;
+}
+
+.receiptHistoryList{
+display:grid;
+gap:9px;
+}
+
+.receiptHistoryItem{
+width:100%;
+border:1px solid rgba(226,232,240,.94);
+border-radius:20px;
+background:#f8fafc;
+padding:11px;
+display:grid;
+grid-template-columns:40px minmax(0,1fr) auto;
+gap:10px;
+align-items:center;
+text-align:left;
+color:#0f172a;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.74);
+transition:transform .16s ease,box-shadow .16s ease;
+}
+
+.receiptHistoryItem:active{
+transform:scale(.985);
+}
+
+.receiptHistoryIcon{
+width:40px;
+height:40px;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#ecfdf5;
+color:#16a34a;
+flex:0 0 auto;
+}
+
+.receiptHistoryCopy{
+min-width:0;
+}
+
+.receiptHistoryCopy b{
+display:block;
+font-size:13px;
+font-weight:950;
+line-height:1.2;
+color:#0f172a;
+}
+
+.receiptHistoryCopy em{
+display:block;
+margin-top:3px;
+font-style:normal;
+font-size:10.5px;
+font-weight:750;
+line-height:1.3;
+color:#64748b;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.receiptHistoryMeta{
+min-width:84px;
+text-align:right;
+}
+
+.receiptHistoryAmount{
+display:block;
+font-size:13px;
+font-weight:950;
+color:#168a3a;
+white-space:nowrap;
+}
+
+.receiptHistoryOpen{
+display:block;
+margin-top:4px;
+font-size:9.5px;
+font-weight:950;
+color:#2563eb;
+white-space:nowrap;
+}
+
+.receiptHistoryEmpty{
+padding:18px 14px;
+border-radius:18px;
+background:#f8fafc;
+border:1px dashed #dbe3ed;
+color:#7b8798;
+font-size:12px;
+font-weight:800;
+text-align:center;
+}
+
 .detailSectionHead{
 display:flex;
 align-items:center;
@@ -7327,10 +7468,14 @@ body.darkMode .detailActionSection,
 html.darkRoot .detailActionSection,
 body.darkMode .detailReportSection,
 html.darkRoot .detailReportSection,
+body.darkMode .receiptHistorySection,
+html.darkRoot .receiptHistorySection,
 body.darkMode .detailActionCard,
 html.darkRoot .detailActionCard,
 body.darkMode .detailReportCard,
-html.darkRoot .detailReportCard{
+html.darkRoot .detailReportCard,
+body.darkMode .receiptHistoryItem,
+html.darkRoot .receiptHistoryItem{
 background:rgba(17,24,39,.82)!important;
 border-color:rgba(255,255,255,.08)!important;
 box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
@@ -7343,8 +7488,24 @@ html.darkRoot .detailSectionHead b,
 body.darkMode .detailActionCard b,
 html.darkRoot .detailActionCard b,
 body.darkMode .detailReportCard b,
-html.darkRoot .detailReportCard b{
+html.darkRoot .detailReportCard b,
+body.darkMode .receiptHistoryHead b,
+html.darkRoot .receiptHistoryHead b,
+body.darkMode .receiptHistoryCopy b,
+html.darkRoot .receiptHistoryCopy b{
 color:#f8fafc!important;
+}
+
+body.darkMode .receiptHistoryCopy em,
+html.darkRoot .receiptHistoryCopy em{
+color:#94a3b8!important;
+}
+
+body.darkMode .receiptHistoryEmpty,
+html.darkRoot .receiptHistoryEmpty{
+background:rgba(15,23,42,.72)!important;
+border-color:rgba(255,255,255,.12)!important;
+color:#94a3b8!important;
 }
 
 body.darkMode .premiumDetailNote,
@@ -13023,6 +13184,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   }
 
   .exDetailHistoryPane .detailReportSection{
+    margin-top:11px;
+  }
+
+  .exDetailHistoryPane .receiptHistorySection{
     margin-top:11px;
   }
 
@@ -19205,7 +19370,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.42</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.43</div>
     </div>
   </div>
 </div>
@@ -19217,7 +19382,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.42";
+  const SPLASH_VERSION = "v2.0.43";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -19997,12 +20162,13 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.42";
+const APP_VERSION = "v2.0.43";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
 /* v2.0.41 — parça değişim geçmişi PDF çıktısını Safari/iPhone için düzelt */
 /* v2.0.42 — tahsilat makbuzuna ödeme öncesi ve ödeme sonrası kalan borcu ekle */
+/* v2.0.43 — geçmiş tahsilatlardan ayrı ayrı makbuz oluştur */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -21769,6 +21935,76 @@ return `
 }
 
 
+function tahsilatMakbuzGecmisiHtml(i){
+
+let a = data[i];
+if(!a) return "";
+
+let odemeler = odemeListesi(a);
+
+let liste = odemeler.length
+? odemeler.map(function(o,idx){
+let erkenTahsilat = !!(o && o.erkenTahsilat);
+let tip = erkenTahsilat ? "bakim" : odemeTipTahminEt(o);
+let aciklama = erkenTahsilat
+? "Bakım öncesi erken tahsilat"
+: odemeKalemMetni(o,a);
+
+return `
+<button type="button" class="receiptHistoryItem" onclick="odemeMakbuzuGecmistenAc(${i},${idx})" aria-label="Kayıtlı tahsilat makbuzunu aç">
+  <span class="receiptHistoryIcon exIcon exMoney" aria-hidden="true"></span>
+  <span class="receiptHistoryCopy">
+    <b>${ayHtml(o.tarih || "Tarih yok")} • ${ayHtml(odemeTipEtiket(tip))}</b>
+    <em>${ayHtml(aciklama || "Tahsilat kaydı")}</em>
+  </span>
+  <span class="receiptHistoryMeta">
+    <strong class="receiptHistoryAmount">${ayHtml(tutarFormat(o.tutar || 0))}</strong>
+    <small class="receiptHistoryOpen">Makbuzu Aç</small>
+  </span>
+</button>
+`;
+}).join("")
+: `<div class="receiptHistoryEmpty">Henüz kayıtlı tahsilat bulunmuyor.</div>`;
+
+return `
+<div class="receiptHistorySection">
+  <div class="receiptHistoryHead">
+    <div>
+      <span>Tahsilat Geçmişi</span>
+      <b>Kayıtlı Makbuzlar</b>
+    </div>
+    <div class="receiptHistoryCount">${odemeler.length} kayıt</div>
+  </div>
+  <div class="receiptHistoryList">${liste}</div>
+</div>
+`;
+
+}
+
+
+function odemeMakbuzuGecmistenAc(i,odemeIndex){
+
+haptic("medium");
+
+let a = data[i];
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+let odemeler = odemeListesi(a);
+let odeme = odemeler[Number(odemeIndex)];
+
+if(!odeme){
+toast("Tahsilat kaydı bulunamadı");
+return;
+}
+
+odemeMakbuzuPdf(i,odeme);
+
+}
+
+
 
 function paraPromptDegeri(v){
 
@@ -22063,6 +22299,8 @@ odeme.tip = tip;
 odeme.aciklama = aciklama.trim();
 odeme.kalem = aciklama.trim();
 odeme.updatedAt = new Date().toISOString();
+delete odeme.odemeOncesiBorc;
+delete odeme.kalanBorc;
 
 if(!Array.isArray(a.kayitlar)){
 a.kayitlar = [];
@@ -28242,6 +28480,8 @@ detayPanel.innerHTML = `
 
   ${asansorGecmisiHtml(i)}
 
+  ${tahsilatMakbuzGecmisiHtml(i)}
+
   <div class="detailReportSection">
     <div class="detailSectionHead">
       <div>
@@ -29910,6 +30150,90 @@ toast("Cari hesap özeti oluşturuldu");
 }
 
 
+function odemeMakbuzuKayitIndex(odemeler,aktifOdeme){
+
+if(!Array.isArray(odemeler) || !aktifOdeme) return -1;
+
+let aktifId = String(aktifOdeme.id || "").trim();
+if(aktifId){
+let idIndex = odemeler.findIndex(function(o){
+return String((o && o.id) || "").trim() === aktifId;
+});
+if(idIndex >= 0) return idIndex;
+}
+
+let aktifCreatedAt = String(aktifOdeme.createdAt || "").trim();
+if(aktifCreatedAt){
+let createdIndex = odemeler.findIndex(function(o){
+return String((o && o.createdAt) || "").trim() === aktifCreatedAt;
+});
+if(createdIndex >= 0) return createdIndex;
+}
+
+return odemeler.findIndex(function(o){
+return Number((o && o.tutar) || 0) === Number(aktifOdeme.tutar || 0) &&
+String((o && o.tarih) || "").trim() === String(aktifOdeme.tarih || "").trim() &&
+String((o && (o.aciklama || o.kalem)) || "").trim() === String(aktifOdeme.aciklama || aktifOdeme.kalem || "").trim();
+});
+
+}
+
+
+function odemeMakbuzuBakiyeHesapla(a,aktifOdeme,cari){
+
+let aktifTutar = Math.max(0,Number((aktifOdeme && aktifOdeme.tutar) || 0));
+let kayitliOnce = aktifOdeme && aktifOdeme.odemeOncesiBorc !== undefined && aktifOdeme.odemeOncesiBorc !== null;
+let kayitliKalan = aktifOdeme && aktifOdeme.kalanBorc !== undefined && aktifOdeme.kalanBorc !== null;
+
+if(kayitliOnce && kayitliKalan){
+let once = Math.max(0,Number(aktifOdeme.odemeOncesiBorc || 0));
+let kalan = Math.max(0,Number(aktifOdeme.kalanBorc || 0));
+return {
+odemeOncesiBorc:once,
+kalanBorc:kalan,
+netBakiye:kalan
+};
+}
+
+let odemeler = Array.isArray(cari && cari.odemeler) ? cari.odemeler : odemeListesi(a);
+let aktifIndex = odemeMakbuzuKayitIndex(odemeler,aktifOdeme);
+let oncekiTahsilat = 0;
+
+if(aktifIndex >= 0){
+oncekiTahsilat = odemeler.slice(aktifIndex + 1).reduce(function(t,o){
+return t + Number((o && o.tutar) || 0);
+},0);
+}else{
+oncekiTahsilat = Math.max(0,Number((cari && cari.toplam) || 0) - aktifTutar);
+}
+
+let borcToplami = Math.max(0,Number((cari && cari.beklenen) || 0));
+let aktifTarihKey = bakimTarihKey(aktifOdeme && aktifOdeme.tarih);
+
+if(aktifTarihKey && cari && Array.isArray(cari.kalemler)){
+borcToplami = Math.max(0,cari.kalemler.reduce(function(t,k){
+let kalemKey = bakimTarihKey(k && k.tarih);
+if(kalemKey && kalemKey > aktifTarihKey) return t;
+return t + Number((k && k.tutar) || 0);
+},0));
+}
+
+let netOnce = borcToplami - oncekiTahsilat;
+let netSonra = borcToplami - oncekiTahsilat - aktifTutar;
+
+return {
+odemeOncesiBorc:kayitliOnce
+? Math.max(0,Number(aktifOdeme.odemeOncesiBorc || 0))
+: Math.max(0,netOnce),
+kalanBorc:kayitliKalan
+? Math.max(0,Number(aktifOdeme.kalanBorc || 0))
+: Math.max(0,netSonra),
+netBakiye:netSonra
+};
+
+}
+
+
 function odemeMakbuzuPdf(i,sonOdeme){
 
 haptic("medium");
@@ -29938,7 +30262,7 @@ tip:"cari",
 kalem:"Ödeme kaydı"
 });
 
-let erkenTahsilat = !!aktifOdeme.erkenTahsilat || (cari.beklenen <= 0 && cari.alacak > 0);
+let erkenTahsilat = !!aktifOdeme.erkenTahsilat || (!sonOdeme && cari.beklenen <= 0 && cari.alacak > 0);
 let odemeTip = erkenTahsilat ? "bakim" : odemeTipTahminEt(aktifOdeme);
 let odemeTarihi = aktifOdeme.tarih || a.sonOdemeTarihi || a.odemeTarihi || bugun();
 
@@ -29961,22 +30285,10 @@ Geçmiş aya ait bakım borcu bugün tahsil edilse bile ay değişimine göre de
 ödeme öncesindeki gerçek borca göre değerlendirilir.
 */
 let aktifTutar = Number(aktifOdeme.tutar || 0);
-let odemeOncesiTahsilat = Math.max(0, Number(cari.toplam || 0) - aktifTutar);
-let kayitliOdemeOncesiBorc =
-aktifOdeme.odemeOncesiBorc === undefined || aktifOdeme.odemeOncesiBorc === null
-? null
-: Math.max(0,Number(aktifOdeme.odemeOncesiBorc || 0));
-let kayitliKalanBorc =
-aktifOdeme.kalanBorc === undefined || aktifOdeme.kalanBorc === null
-? null
-: Math.max(0,Number(aktifOdeme.kalanBorc || 0));
-let odemeOncesiBorc = kayitliOdemeOncesiBorc === null
-? Math.max(0, Number(cari.beklenen || 0) - odemeOncesiTahsilat)
-: kayitliOdemeOncesiBorc;
-let odemeSonrasiBakiye = Number(cari.beklenen || 0) - Number(cari.toplam || 0);
-let kalanBorc = kayitliKalanBorc === null
-? Math.max(0,odemeSonrasiBakiye)
-: kayitliKalanBorc;
+let makbuzBakiye = odemeMakbuzuBakiyeHesapla(a,aktifOdeme,cari);
+let odemeOncesiBorc = makbuzBakiye.odemeOncesiBorc;
+let odemeSonrasiBakiye = makbuzBakiye.netBakiye;
+let kalanBorc = makbuzBakiye.kalanBorc;
 let cariDurumu = "Cari tahsilat";
 
 if(erkenTahsilat){
