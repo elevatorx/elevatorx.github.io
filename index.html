@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.43_HISTORICAL_RECEIPTS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.44_OLD_BALANCE_SHEET -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -11815,7 +11815,8 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
 
 
 <style id="exPaymentModalStyle">
-  #exPaymentModal{
+  #exPaymentModal,
+  #exOldBalanceModal{
     position:fixed;
     inset:0;
     z-index:2147483000;
@@ -11824,8 +11825,10 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     color:#101828;
   }
 
-  #exPaymentModal.is-open{display:block}
-  #exPaymentModal *{box-sizing:border-box}
+  #exPaymentModal.is-open,
+  #exOldBalanceModal.is-open{display:block}
+  #exPaymentModal *,
+  #exOldBalanceModal *{box-sizing:border-box}
 
   .exPaymentBackdrop{
     position:absolute;
@@ -12109,6 +12112,80 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     color:#fff;
   }
 
+  body.exOldBalanceOpen{
+    overflow:hidden!important;
+  }
+
+  #exOldBalanceModal .exPaymentCard{
+    overflow:hidden;
+  }
+
+  #exOldBalanceModal .exPaymentKicker{
+    color:#c76709;
+  }
+
+  #exOldBalanceModal .exPaymentSummary{
+    background:linear-gradient(145deg,#fff8eb 0%,#fffdf8 100%);
+    border-color:#f5dfb6;
+  }
+
+  #exOldBalanceModal .exPaymentDebt span{
+    color:#9a6a2d;
+  }
+
+  #exOldBalanceModal .exPaymentDebt b,
+  #exOldBalanceModal .exPaymentCurrency{
+    color:#c76709;
+  }
+
+  #exOldBalanceModal .exPaymentButton.save{
+    background:linear-gradient(135deg,#172033 0%,#c76709 100%);
+    box-shadow:0 13px 27px rgba(199,103,9,.22);
+  }
+
+  .exOldBalanceHint{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin:-2px 0 14px;
+    padding:11px 12px;
+    border-radius:15px;
+    background:#fff8eb;
+    border:1px solid #f5dfb6;
+    color:#7c5423;
+    font-size:11px;
+    line-height:1.45;
+    font-weight:750;
+  }
+
+  .exOldBalanceHintIcon{
+    width:22px;
+    height:22px;
+    flex:0 0 22px;
+    display:grid;
+    place-items:center;
+    border-radius:8px;
+    background:#ffedd5;
+    color:#c76709;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  body.darkMode #exOldBalanceModal .exPaymentSummary,
+  html.darkRoot #exOldBalanceModal .exPaymentSummary,
+  body.darkMode .exOldBalanceHint,
+  html.darkRoot .exOldBalanceHint{
+    background:rgba(124,69,14,.18);
+    border-color:rgba(251,191,36,.18);
+    color:#f2c98c;
+  }
+
+  body.darkMode .exOldBalanceHintIcon,
+  html.darkRoot .exOldBalanceHintIcon{
+    background:rgba(251,146,60,.16);
+    color:#fbad5d;
+  }
+
   @media(max-width:390px){
     .exPaymentCard{
       border-radius:24px;
@@ -12121,6 +12198,26 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     .exPaymentActions{
       grid-template-columns:1fr;
     }
+  }
+
+  @media(max-width:520px){
+    #exOldBalanceModal .exPaymentWrap{
+      align-items:flex-end;
+      padding:calc(12px + env(safe-area-inset-top)) 8px 0;
+    }
+
+    #exOldBalanceModal .exPaymentCard{
+      width:100%;
+      max-height:calc(94vh - env(safe-area-inset-top));
+      border-radius:31px 31px 0 0;
+      padding-bottom:env(safe-area-inset-bottom);
+      animation:exOldBalanceRise .24s cubic-bezier(.2,.8,.2,1);
+    }
+  }
+
+  @keyframes exOldBalanceRise{
+    from{transform:translateY(28px);opacity:.5}
+    to{transform:translateY(0);opacity:1}
   }
 </style>
 
@@ -18512,6 +18609,10 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
         var pm = document.getElementById("exPaymentModal");
         if(pm && pm.classList.contains("is-open")) return window.tahsilatModalKapat();
       }catch(_){}
+      try{
+        var ob = document.getElementById("exOldBalanceModal");
+        if(ob && ob.classList.contains("is-open")) return window.eskiBakiyeModalKapat();
+      }catch(_){}
       try{var pf=document.getElementById("exProfessionalDocFormModal");if(pf&&pf.classList.contains("is-open"))return window.meslekiBelgeFormKapat();}catch(_){}
       try{var po=document.getElementById("exProfessionalDocsModal");if(po&&po.classList.contains("is-open"))return window.meslekiBelgelerKapat();}catch(_){}
       try{var cf=document.getElementById("exContractFormModal");if(cf&&cf.classList.contains("is-open"))return window.sozlesmeFormKapat();}catch(_){}
@@ -18674,6 +18775,78 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
         </div>
       </div>
     </section>
+  </div>
+</div>
+
+
+<div id="exOldBalanceModal" aria-hidden="true">
+  <div class="exPaymentBackdrop" onclick="eskiBakiyeModalKapat()"></div>
+
+  <div class="exPaymentWrap">
+    <form class="exPaymentCard" role="dialog" aria-modal="true" aria-labelledby="exOldBalanceTitle" onsubmit="event.preventDefault();eskiBakiyeKaydet()">
+      <button class="exPaymentClose" type="button" aria-label="Kapat" onclick="eskiBakiyeModalKapat()">×</button>
+
+      <div class="exPaymentHead">
+        <div class="exPaymentKicker">Cari başlangıç kaydı</div>
+        <h2 id="exOldBalanceTitle" class="exPaymentTitle">Eski Bakiye Ekle</h2>
+        <p class="exPaymentSub">Daha önce oluşmuş borcu cari hesaba tek seferde ve açıklamasıyla ekle.</p>
+      </div>
+
+      <div class="exPaymentSummary">
+        <div class="exPaymentSummaryTop">
+          <div class="exPaymentApartment">
+            <span>Apartman / Site</span>
+            <b id="exOldBalanceApartmentName">-</b>
+          </div>
+
+          <div class="exPaymentDebt">
+            <span>Kayıtlı Eski Bakiye</span>
+            <b id="exOldBalanceCurrentTotal">0 ₺</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="exPaymentBody">
+        <input id="exOldBalanceApartmentIndex" type="hidden">
+
+        <div class="exPaymentField">
+          <label for="exOldBalanceAmount">Eklenecek bakiye</label>
+          <div class="exPaymentAmountWrap">
+            <input
+              id="exOldBalanceAmount"
+              type="number"
+              min="0"
+              step="0.01"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="0"
+              oninput="eskiBakiyeModalKontrol()"
+            >
+            <span class="exPaymentCurrency">₺</span>
+          </div>
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exOldBalanceDate">Bakiye tarihi</label>
+          <input id="exOldBalanceDate" type="date">
+        </div>
+
+        <div class="exPaymentField">
+          <label for="exOldBalanceDescription">Açıklama</label>
+          <textarea id="exOldBalanceDescription" maxlength="160" placeholder="Örn. Önceki dönemden devreden borç">Eski bakiye</textarea>
+        </div>
+
+        <div class="exOldBalanceHint">
+          <span class="exOldBalanceHintIcon" aria-hidden="true">i</span>
+          <span>Bu kayıt tahsilat değildir; apartmanın toplam borcuna yeni bir cari kalem olarak eklenir.</span>
+        </div>
+
+        <div class="exPaymentActions">
+          <button class="exPaymentButton cancel" type="button" onclick="eskiBakiyeModalKapat()">Vazgeç</button>
+          <button id="exOldBalanceSaveButton" class="exPaymentButton save" type="submit" disabled>Bakiyeyi Ekle</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -19370,7 +19543,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.43</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.44</div>
     </div>
   </div>
 </div>
@@ -19382,7 +19555,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.43";
+  const SPLASH_VERSION = "v2.0.44";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -20162,13 +20335,14 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.43";
+const APP_VERSION = "v2.0.44";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
 /* v2.0.41 — parça değişim geçmişi PDF çıktısını Safari/iPhone için düzelt */
 /* v2.0.42 — tahsilat makbuzuna ödeme öncesi ve ödeme sonrası kalan borcu ekle */
 /* v2.0.43 — geçmiş tahsilatlardan ayrı ayrı makbuz oluştur */
+/* v2.0.44 — eski bakiye girişini Safari prompt yerine uygulama içi panele taşı */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -22031,6 +22205,13 @@ return (idx + 1) + ") " + tutar + " • " + tarih + tip + " • " + aciklama;
 
 function eskiBakiyeEkle(i){
 
+eskiBakiyeModalAc(i);
+
+}
+
+
+function eskiBakiyeModalAc(i){
+
 haptic("medium");
 
 let a = data[i];
@@ -22039,28 +22220,114 @@ toast("Apartman bulunamadı");
 return;
 }
 
-let tutarGiris = prompt("Eski bakiye tutarı ₺", "");
-if(tutarGiris === null){
-toast("Eski bakiye iptal edildi");
+let cari = cariOzet(a);
+let modal = document.getElementById("exOldBalanceModal");
+let indexEl = document.getElementById("exOldBalanceApartmentIndex");
+let adEl = document.getElementById("exOldBalanceApartmentName");
+let toplamEl = document.getElementById("exOldBalanceCurrentTotal");
+let tutarEl = document.getElementById("exOldBalanceAmount");
+let tarihEl = document.getElementById("exOldBalanceDate");
+let aciklamaEl = document.getElementById("exOldBalanceDescription");
+
+if(!modal){
+toast("Eski bakiye formu açılamadı");
 return;
 }
 
-let tutar = Number(String(tutarGiris).replace(",", "."));
+if(indexEl) indexEl.value = String(i);
+if(adEl) adEl.textContent = a.ad || "-";
+if(toplamEl) toplamEl.textContent = tutarFormat(cari.eskiBakiyeToplami || 0);
+if(tutarEl) tutarEl.value = "";
+if(tarihEl) tarihEl.value = bugunISO();
+if(aciklamaEl) aciklamaEl.value = "Eski bakiye";
 
-if(!tutar || tutar <= 0){
+eskiBakiyeModalKontrol();
+
+modal.style.display = "block";
+document.body.classList.add("exOldBalanceOpen");
+
+requestAnimationFrame(function(){
+modal.classList.add("is-open");
+modal.setAttribute("aria-hidden","false");
+});
+
+setTimeout(function(){
+if(tutarEl){
+tutarEl.focus();
+try{ tutarEl.select(); }catch(e){}
+}
+},120);
+
+}
+
+
+function eskiBakiyeModalKapat(){
+
+let modal = document.getElementById("exOldBalanceModal");
+if(!modal) return;
+
+modal.classList.remove("is-open");
+modal.setAttribute("aria-hidden","true");
+modal.style.display = "none";
+document.body.classList.remove("exOldBalanceOpen");
+
+}
+
+
+function eskiBakiyeModalKontrol(){
+
+let tutarEl = document.getElementById("exOldBalanceAmount");
+let save = document.getElementById("exOldBalanceSaveButton");
+let tutar = Number(String((tutarEl && tutarEl.value) || "").replace(",", "."));
+
+if(save) save.disabled = !(Number.isFinite(tutar) && tutar > 0);
+
+}
+
+
+function eskiBakiyeKaydet(){
+
+let indexEl = document.getElementById("exOldBalanceApartmentIndex");
+let i = Number(indexEl && indexEl.value);
+let a = data[i];
+
+if(!a){
+toast("Apartman bulunamadı");
+return;
+}
+
+let kilit = "eski_bakiye_" + (a.id || i);
+
+if(!abrStbIslemKilitle(kilit,2200)){
+toast("Eski bakiye kaydediliyor");
+return;
+}
+
+let save = document.getElementById("exOldBalanceSaveButton");
+
+try{
+
+let tutarEl = document.getElementById("exOldBalanceAmount");
+let tarihEl = document.getElementById("exOldBalanceDate");
+let aciklamaEl = document.getElementById("exOldBalanceDescription");
+let tutar = Number(String((tutarEl && tutarEl.value) || "").replace(",", "."));
+
+if(!Number.isFinite(tutar) || tutar <= 0){
 toast("Geçerli bir tutar girilmedi");
 return;
 }
 
-let tarih = prompt("Eski bakiye tarihi", bugun()) || bugun();
-let aciklama = prompt("Açıklama", "Eski bakiye") || "Eski bakiye";
+let tarih = tahsilatTarihKayitDegeri((tarihEl && tarihEl.value) || bugunISO());
+let aciklama = String((aciklamaEl && aciklamaEl.value) || "Eski bakiye").trim() || "Eski bakiye";
 
 let liste = eskiBakiyeListesi(a);
 
+if(save) save.disabled = true;
+
 liste.unshift({
 tutar:tutar,
-tarih:tarih.trim(),
-aciklama:aciklama.trim(),
+tarih:tarih,
+aciklama:aciklama,
 createdAt:new Date().toISOString()
 });
 
@@ -22069,12 +22336,16 @@ a.kayitlar = [];
 }
 
 a.kayitlar.push(
-"Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih.trim() + ")"
+"Eski bakiye eklendi: " + tutarFormat(tutar) + " (" + tarih + ")"
 );
 
 cariOdemeDurumunuGuncelle(a);
 
-kaydet();
+if(!kaydet()){
+return;
+}
+
+eskiBakiyeModalKapat();
 
 toast("Eski bakiye cariye eklendi");
 
@@ -22082,6 +22353,11 @@ if(aktifDetay !== null && data[aktifDetay]){
 detayAc(aktifDetay);
 }else{
 anaSayfa();
+}
+
+}finally{
+abrStbIslemKilidiniAc(kilit);
+eskiBakiyeModalKontrol();
 }
 
 }
