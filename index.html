@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.47_SLIDING_TAB_COUNTUP -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.48_MAINTENANCE_CONTROLS_FLOW -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18988,6 +18988,15 @@ html.darkRoot .tabbar::after{
   }
 }
 </style>
+
+<style id="abrMaintenanceControlsFlow2048">
+/* v2.0.48 — bakım filtre ve sıralama paneli sayfayla birlikte doğal biçimde kayar */
+body.abrBakimView .exMaintControls{
+  position:relative!important;
+  top:auto!important;
+  z-index:1!important;
+}
+</style>
 </head>
 
 <body>
@@ -20333,7 +20342,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.47</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.48</div>
     </div>
   </div>
 </div>
@@ -20345,7 +20354,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.47";
+  const SPLASH_VERSION = "v2.0.48";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21125,7 +21134,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.47";
+const APP_VERSION = "v2.0.48";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21136,6 +21145,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.45 — cari düzenleme, kayıt seçimi ve silme onayını uygulama içi panele taşı */
 /* v2.0.46 — kontrollü premium ışıltı ve mikro hareket katmanı */
 /* v2.0.47 — kayan alt sekme kapsülü ve değer değişiminde çalışan canlı rakamlar */
+/* v2.0.48 — bakım filtre ve sıralama panelinin ekrana yapışmasını kaldır */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
