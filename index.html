@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.45_CARI_MANAGER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.46_PREMIUM_SPARKLE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18708,6 +18708,172 @@ html.darkRoot body.profileMode #profilPanel .profileActionCard{
   body.profileMode #profilPanel .profileActionText b{font-size:12px!important;}
 }
 </style>
+
+<style id="abrPremiumSparkle2046">
+/* v2.0.46 — dikkat dağıtmayan premium ışıltı ve mikro hareket katmanı */
+.exDashHero{
+  --abrHeroSheen:rgba(255,255,255,.34);
+}
+
+.exDashHero::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  top:-58%;
+  left:-48%;
+  width:25%;
+  height:220%;
+  pointer-events:none;
+  opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.035) 24%,var(--abrHeroSheen) 50%,rgba(255,255,255,.035) 76%,transparent);
+  filter:blur(2px);
+  transform:translate3d(-15%,0,0) rotate(16deg);
+  animation:abrHeroLightSweep 9s ease-in-out infinite;
+}
+
+.exDashHeroScore{
+  animation:abrScoreGleam .9s .24s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.exDashOverviewCard{
+  animation:abrGlassSettle .42s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.exDashOverviewCard:nth-child(2){
+  animation-delay:70ms;
+}
+
+.exPortfolioHeader{
+  animation:abrGlassSettle .38s 120ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.exDashOverviewIcon{
+  position:relative;
+  overflow:visible;
+}
+
+.exDashOverviewIcon::after{
+  content:"";
+  position:absolute;
+  top:-3px;
+  right:-3px;
+  width:7px;
+  height:7px;
+  pointer-events:none;
+  opacity:0;
+  background:#fff;
+  clip-path:polygon(50% 0,61% 37%,100% 50%,61% 63%,50% 100%,39% 63%,0 50%,39% 37%);
+  filter:drop-shadow(0 0 4px rgba(55,132,255,.72));
+  animation:abrIconSparkle .95s .34s ease-out both;
+}
+
+.exDashOverviewFinance .exDashOverviewIcon::after{
+  filter:drop-shadow(0 0 4px rgba(126,73,224,.68));
+  animation-delay:.46s;
+}
+
+.tabbar .tabItem.activeTab::before{
+  --abrAuroraLow:.54;
+  --abrAuroraHigh:.80;
+  inset:2px!important;
+  border:0!important;
+  border-radius:18px!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 18% 28%,rgba(130,190,255,.25),transparent 31%),
+    radial-gradient(circle at 84% 72%,rgba(81,129,255,.20),transparent 36%),
+    linear-gradient(112deg,transparent 25%,rgba(255,255,255,.17) 47%,transparent 69%)!important;
+  background-size:150% 150%,150% 150%,220% 100%!important;
+  opacity:.62;
+  animation:abrActiveTabAurora 5.6s ease-in-out infinite!important;
+}
+
+.toast.abrToastSuccess{
+  overflow:hidden;
+  border:1px solid rgba(167,243,208,.34);
+  background:linear-gradient(135deg,rgba(7,73,48,.94),rgba(20,145,82,.92));
+  box-shadow:0 12px 34px rgba(16,120,72,.25),0 0 0 1px rgba(255,255,255,.05) inset;
+}
+
+.toast.abrToastSuccess::after{
+  content:"";
+  position:absolute;
+  inset:-65% auto -65% -38%;
+  width:30%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent);
+  transform:rotate(18deg);
+  animation:abrSuccessWave .9s .08s ease-out both;
+}
+
+body.darkMode .exDashHero,
+html.darkRoot .exDashHero{
+  --abrHeroSheen:rgba(132,190,255,.46);
+}
+
+body.darkMode .tabbar .tabItem.activeTab::before,
+html.darkRoot .tabbar .tabItem.activeTab::before{
+  --abrAuroraLow:.66;
+  --abrAuroraHigh:.92;
+  filter:saturate(1.12) brightness(1.06);
+}
+
+@keyframes abrHeroLightSweep{
+  0%,62%{opacity:0;transform:translate3d(-15%,0,0) rotate(16deg);}
+  69%{opacity:.52;}
+  82%{opacity:0;transform:translate3d(650%,0,0) rotate(16deg);}
+  100%{opacity:0;transform:translate3d(650%,0,0) rotate(16deg);}
+}
+
+@keyframes abrActiveTabAurora{
+  0%,100%{background-position:15% 25%,85% 75%,120% 0;opacity:var(--abrAuroraLow,.54);}
+  50%{background-position:80% 70%,20% 30%,-35% 0;opacity:var(--abrAuroraHigh,.80);}
+}
+
+@keyframes abrGlassSettle{
+  from{opacity:0;transform:translate3d(0,8px,0) scale(.992);filter:blur(.7px);}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0);}
+}
+
+@keyframes abrScoreGleam{
+  0%{box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 0 rgba(110,177,255,0);}
+  48%{box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 0 24px rgba(110,177,255,.24);}
+  100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 rgba(110,177,255,0);}
+}
+
+@keyframes abrIconSparkle{
+  0%{opacity:0;transform:scale(.25) rotate(-25deg);}
+  42%{opacity:1;transform:scale(1.16) rotate(8deg);}
+  100%{opacity:0;transform:scale(.72) rotate(24deg);}
+}
+
+@keyframes abrSuccessWave{
+  from{opacity:0;transform:translate3d(0,0,0) rotate(18deg);}
+  25%{opacity:.72;}
+  to{opacity:0;transform:translate3d(560%,0,0) rotate(18deg);}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .exDashHero::before,
+  .exDashOverviewIcon::after,
+  .toast.abrToastSuccess::after{
+    display:none!important;
+  }
+
+  .exDashHeroScore,
+  .exDashOverviewCard,
+  .exPortfolioHeader,
+  .exPortfolioCard,
+  .tabbar .tabItem.activeTab::before{
+    animation:none!important;
+  }
+
+  .tabbar .tabItem.activeTab::before{
+    opacity:.56!important;
+    background-position:center!important;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -20053,7 +20219,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.45</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.46</div>
     </div>
   </div>
 </div>
@@ -20065,7 +20231,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.45";
+  const SPLASH_VERSION = "v2.0.46";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -20845,7 +21011,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.45";
+const APP_VERSION = "v2.0.46";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -20854,6 +21020,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.43 — geçmiş tahsilatlardan ayrı ayrı makbuz oluştur */
 /* v2.0.44 — eski bakiye girişini Safari prompt yerine uygulama içi panele taşı */
 /* v2.0.45 — cari düzenleme, kayıt seçimi ve silme onayını uygulama içi panele taşı */
+/* v2.0.46 — kontrollü premium ışıltı ve mikro hareket katmanı */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -21504,12 +21671,29 @@ document.addEventListener("DOMContentLoaded",hapticAyarGuncelle);
 function toast(mesaj){
 
 let t = document.getElementById("toast");
+if(!t) return;
+
+let bildirimMetni = String(mesaj || "").toLocaleLowerCase("tr-TR");
+let basariliIslem = [
+"kaydedildi",
+"güncellendi",
+"tamamlandı",
+"eklendi",
+"oluşturuldu",
+"hazırlandı",
+"başarılı",
+"alındı",
+"silindi",
+"geri yüklendi",
+"aktarıldı"
+].some(function(ifade){ return bildirimMetni.includes(ifade); });
 
 t.innerText = mesaj;
+t.classList.toggle("abrToastSuccess",basariliIslem);
 t.classList.add("show");
 
 setTimeout(()=>{
-t.classList.remove("show");
+t.classList.remove("show","abrToastSuccess");
 },1800);
 
 }
