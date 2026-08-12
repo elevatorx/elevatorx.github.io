@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.49_SHARED_CARD_TRANSITION -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.50_NO_BLANK_SHARED_TRANSITION -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18998,17 +18998,17 @@ body.abrBakimView .exMaintControls{
 }
 </style>
 
-<style id="abrSharedCardTransition2049">
-/* v2.0.49 — apartman kartı ile detay başlığı arasında çift yönlü ortak öğe geçişi */
+<style id="abrSharedCardTransition2050">
+/* v2.0.50 — ortak öğe geçişinde iOS boş ara kare düzeltmesi */
 .abrSharedTransitionVeil{
   position:fixed;
   z-index:2147482700;
   inset:0;
   pointer-events:all;
-  background:rgba(238,243,251,.18);
-  -webkit-backdrop-filter:blur(.7px);
-  backdrop-filter:blur(.7px);
-  animation:abrSharedVeilIn .24s ease both;
+  background:rgba(238,243,251,.045);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  animation:abrSharedVeilIn .16s ease both;
 }
 
 .abrSharedMorphClone{
@@ -19037,44 +19037,51 @@ body.abrBakimView .exMaintControls{
   animation:none!important;
 }
 
-.abrSharedMorphClone.abrSharedOpening > *{
-  animation:abrSharedCloneContentOut .25s .04s ease both!important;
-}
-
+.abrSharedMorphClone.abrSharedOpening > *,
 .abrSharedMorphClone.abrSharedClosing > *{
-  animation:abrSharedCloneContentIn .36s ease both!important;
+  opacity:1!important;
+  filter:none!important;
+  animation:none!important;
 }
 
 #detayPanel.abrSharedDetailPreparing .exDetailTopActions,
 #detayPanel.abrSharedDetailPreparing .detailHeroTop,
 #detayPanel.abrSharedDetailPreparing .exDetailTabs,
 #detayPanel.abrSharedDetailPreparing .exDetailTabPane.is-active{
-  opacity:0!important;
+  opacity:1!important;
+  visibility:visible!important;
 }
 
 #detayPanel.abrSharedDetailReveal .exDetailTopActions,
 #detayPanel.abrSharedDetailReveal .detailHeroTop,
 #detayPanel.abrSharedDetailReveal .exDetailTabs,
 #detayPanel.abrSharedDetailReveal .exDetailTabPane.is-active{
-  animation:abrSharedDetailContentIn .34s cubic-bezier(.2,.8,.2,1) both!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
 }
-
-#detayPanel.abrSharedDetailReveal .detailHeroTop{animation-delay:35ms!important;}
-#detayPanel.abrSharedDetailReveal .exDetailTabs{animation-delay:70ms!important;}
-#detayPanel.abrSharedDetailReveal .exDetailTabPane.is-active{animation-delay:95ms!important;}
 
 body.abrSharedTransitionBusy #liste.screenInLeft,
 body.abrSharedTransitionBusy #liste.screenFadeUp,
 body.abrSharedTransitionBusy #searchArea.screenSoft,
+body.abrSharedTransitionBusy #liste .exDashHero,
+body.abrSharedTransitionBusy #liste .exDashHeroScore,
+body.abrSharedTransitionBusy #liste .exDashOverviewCard,
+body.abrSharedTransitionBusy #liste .exDashActivity,
+body.abrSharedTransitionBusy #liste .exDashFinanceActivity,
+body.abrSharedTransitionBusy #liste .lastActionCard,
+body.abrSharedTransitionBusy #liste .exPortfolioHeader,
 body.abrSharedTransitionBusy #liste .exPortfolioCard,
 body.abrSharedTransitionBusy #liste .aptCard,
 body.abrSharedTransitionBusy #liste .exMaintRow{
   animation:none!important;
+  filter:none!important;
 }
 
 body.darkMode .abrSharedTransitionVeil,
 html.darkRoot .abrSharedTransitionVeil{
-  background:rgba(2,8,23,.22);
+  background:rgba(2,8,23,.055);
 }
 
 @keyframes abrSharedVeilIn{
@@ -20464,7 +20471,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.49</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.50</div>
     </div>
   </div>
 </div>
@@ -20476,7 +20483,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.49";
+  const SPLASH_VERSION = "v2.0.50";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21256,7 +21263,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.49";
+const APP_VERSION = "v2.0.50";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21269,6 +21276,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.47 — kayan alt sekme kapsülü ve değer değişiminde çalışan canlı rakamlar */
 /* v2.0.48 — bakım filtre ve sıralama panelinin ekrana yapışmasını kaldır */
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
+/* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -30160,12 +30168,8 @@ if(tamamlandi) return;
 tamamlandi = true;
 
 panel.classList.remove("abrSharedDetailPreparing");
-panel.classList.add("abrSharedDetailReveal");
-abrSharedGeciciTemizle(ctx);
-
-setTimeout(function(){
 panel.classList.remove("abrSharedDetailReveal");
-},430);
+abrSharedGeciciTemizle(ctx);
 }
 
 requestAnimationFrame(function(){
@@ -30187,7 +30191,7 @@ left:hedef.left + "px",
 width:hedef.width + "px",
 height:hedef.height + "px",
 borderRadius:"29px",
-opacity:.96,
+opacity:.06,
 boxShadow:"0 20px 48px rgba(20,42,78,.13)"
 }
 ],{
@@ -30236,21 +30240,32 @@ anaSayfa();
 
 window.scrollTo({top:ctx.scrollY,left:0,behavior:"auto"});
 
-requestAnimationFrame(function(){
-requestAnimationFrame(function(){
 let hedefEl = document.querySelector('#liste [data-abr-apartment-index="' + ctx.index + '"]');
-let hedef = abrSharedRectAl(hedefEl);
 
-if(!hedefEl || !hedef){
+if(!hedefEl){
 abrSharedGeciciTemizle(ctx);
 abrSharedDetailContext = null;
-return;
+return true;
 }
 
 let eskiOpacity = hedefEl.style.opacity;
 let eskiPointer = hedefEl.style.pointerEvents;
 hedefEl.style.opacity = "0";
 hedefEl.style.pointerEvents = "none";
+
+requestAnimationFrame(function(){
+requestAnimationFrame(function(){
+let hedef = abrSharedRectAl(hedefEl);
+
+if(!hedef){
+if(hedefEl && hedefEl.isConnected){
+hedefEl.style.opacity = eskiOpacity;
+hedefEl.style.pointerEvents = eskiPointer;
+}
+abrSharedGeciciTemizle(ctx);
+abrSharedDetailContext = null;
+return;
+}
 
 let tamamlandi = false;
 
