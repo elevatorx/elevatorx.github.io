@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.48_MAINTENANCE_CONTROLS_FLOW -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.49_SHARED_CARD_TRANSITION -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -18997,6 +18997,128 @@ body.abrBakimView .exMaintControls{
   z-index:1!important;
 }
 </style>
+
+<style id="abrSharedCardTransition2049">
+/* v2.0.49 — apartman kartı ile detay başlığı arasında çift yönlü ortak öğe geçişi */
+.abrSharedTransitionVeil{
+  position:fixed;
+  z-index:2147482700;
+  inset:0;
+  pointer-events:all;
+  background:rgba(238,243,251,.18);
+  -webkit-backdrop-filter:blur(.7px);
+  backdrop-filter:blur(.7px);
+  animation:abrSharedVeilIn .24s ease both;
+}
+
+.abrSharedMorphClone{
+  position:fixed!important;
+  z-index:2147482701!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  transform:none!important;
+  transform-origin:top left!important;
+  animation:none!important;
+  transition:none!important;
+  will-change:top,left,width,height,border-radius,opacity,box-shadow;
+  contain:layout paint style;
+}
+
+.abrSharedMorphClone *,
+.abrSharedMorphClone button,
+.abrSharedMorphClone a{
+  pointer-events:none!important;
+}
+
+.abrSharedMorphClone::before,
+.abrSharedMorphClone::after{
+  animation:none!important;
+}
+
+.abrSharedMorphClone.abrSharedOpening > *{
+  animation:abrSharedCloneContentOut .25s .04s ease both!important;
+}
+
+.abrSharedMorphClone.abrSharedClosing > *{
+  animation:abrSharedCloneContentIn .36s ease both!important;
+}
+
+#detayPanel.abrSharedDetailPreparing .exDetailTopActions,
+#detayPanel.abrSharedDetailPreparing .detailHeroTop,
+#detayPanel.abrSharedDetailPreparing .exDetailTabs,
+#detayPanel.abrSharedDetailPreparing .exDetailTabPane.is-active{
+  opacity:0!important;
+}
+
+#detayPanel.abrSharedDetailReveal .exDetailTopActions,
+#detayPanel.abrSharedDetailReveal .detailHeroTop,
+#detayPanel.abrSharedDetailReveal .exDetailTabs,
+#detayPanel.abrSharedDetailReveal .exDetailTabPane.is-active{
+  animation:abrSharedDetailContentIn .34s cubic-bezier(.2,.8,.2,1) both!important;
+}
+
+#detayPanel.abrSharedDetailReveal .detailHeroTop{animation-delay:35ms!important;}
+#detayPanel.abrSharedDetailReveal .exDetailTabs{animation-delay:70ms!important;}
+#detayPanel.abrSharedDetailReveal .exDetailTabPane.is-active{animation-delay:95ms!important;}
+
+body.abrSharedTransitionBusy #liste.screenInLeft,
+body.abrSharedTransitionBusy #liste.screenFadeUp,
+body.abrSharedTransitionBusy #searchArea.screenSoft,
+body.abrSharedTransitionBusy #liste .exPortfolioCard,
+body.abrSharedTransitionBusy #liste .aptCard,
+body.abrSharedTransitionBusy #liste .exMaintRow{
+  animation:none!important;
+}
+
+body.darkMode .abrSharedTransitionVeil,
+html.darkRoot .abrSharedTransitionVeil{
+  background:rgba(2,8,23,.22);
+}
+
+@keyframes abrSharedVeilIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes abrSharedCloneContentOut{
+  from{opacity:1;filter:blur(0);}
+  to{opacity:0;filter:blur(2px);}
+}
+
+@keyframes abrSharedCloneContentIn{
+  from{opacity:.05;filter:blur(2px);}
+  58%{opacity:.34;filter:blur(1px);}
+  to{opacity:1;filter:blur(0);}
+}
+
+@keyframes abrSharedDetailContentIn{
+  from{opacity:0;transform:translate3d(0,8px,0);filter:blur(1px);}
+  to{opacity:1;transform:translate3d(0,0,0);filter:blur(0);}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .abrSharedTransitionVeil,
+  .abrSharedMorphClone{
+    display:none!important;
+  }
+
+  #detayPanel.abrSharedDetailPreparing .exDetailTopActions,
+  #detayPanel.abrSharedDetailPreparing .detailHeroTop,
+  #detayPanel.abrSharedDetailPreparing .exDetailTabs,
+  #detayPanel.abrSharedDetailPreparing .exDetailTabPane.is-active{
+    opacity:1!important;
+  }
+
+  #detayPanel.abrSharedDetailReveal .exDetailTopActions,
+  #detayPanel.abrSharedDetailReveal .detailHeroTop,
+  #detayPanel.abrSharedDetailReveal .exDetailTabs,
+  #detayPanel.abrSharedDetailReveal .exDetailTabPane.is-active{
+    animation:none!important;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -20342,7 +20464,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.48</div>
+      <div class="exLaunchVersion" data-splash-version>v2.0.49</div>
     </div>
   </div>
 </div>
@@ -20354,7 +20476,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.48";
+  const SPLASH_VERSION = "v2.0.49";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21134,7 +21256,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.48";
+const APP_VERSION = "v2.0.49";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21146,6 +21268,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.46 — kontrollü premium ışıltı ve mikro hareket katmanı */
 /* v2.0.47 — kayan alt sekme kapsülü ve değer değişiminde çalışan canlı rakamlar */
 /* v2.0.48 — bakım filtre ve sıralama panelinin ekrana yapışmasını kaldır */
+/* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -27187,7 +27310,7 @@ if(filtreli.length === 0){
       }
 
       h += `
-      <article class="exPortfolioCard ${durumClass(a)}" style="--i:${sira}" onclick="detayAc(${i})">
+      <article class="exPortfolioCard ${durumClass(a)}" data-abr-apartment-index="${i}" style="--i:${sira}" onclick="detayAc(${i},event)">
         <div class="exPortfolioTop">
           <div class="exPortfolioAvatar" aria-hidden="true">
             <svg class="exPortfolioAvatarSvg" viewBox="0 0 24 24" fill="none">
@@ -27418,7 +27541,7 @@ let colorClass = "c" + (sira % 5);
 
 h += `
 
-<div class="aptCard ${durumClass(a)}" style="--i:${sira}" onclick="detayAc(${i})">
+<div class="aptCard ${durumClass(a)}" data-abr-apartment-index="${i}" style="--i:${sira}" onclick="detayAc(${i},event)">
 
 <div class="aptIcon ${colorClass}"></div>
 
@@ -27746,8 +27869,8 @@ function bakimHaritasiAc(){
   haritaMerkeziAc();
 }
 
-function bakimMerkezKartAc(index){
-  detayAc(index);
+function bakimMerkezKartAc(index,event){
+  detayAc(index,event);
 }
 
 function bakimMerkezIslem(event,index,yapildi){
@@ -27946,7 +28069,7 @@ if(!tumSatirlar.length){
         : "";
 
       h += `
-        <article class="exMaintRow ${bakimRowClass(bilgi)}" onclick="bakimMerkezKartAc(${i})">
+        <article class="exMaintRow ${bakimRowClass(bilgi)}" data-abr-apartment-index="${i}" onclick="bakimMerkezKartAc(${i},event)">
           <div class="exMaintIcon">${bakimRowIcon(bilgi)}</div>
 
           <div class="exMaintMain">
@@ -28028,6 +28151,12 @@ pdf(i);
 }
 
 function geriDon(){
+
+if(abrSharedDetayGeriDon()){
+return;
+}
+
+abrSharedDetailContext = null;
 
 if(oncekiEkran === "bakim"){
 bakimListesiAc();
@@ -29858,10 +29987,331 @@ function apartmanDetayOzetKartlariHtml(a,i){
   `;
 }
 
+let abrSharedDetailContext = null;
+let abrSharedDetailBusy = false;
 
-function detayAc(i){
+function abrSharedHareketAzalt(){
+try{
+return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+}catch(e){
+return false;
+}
+}
+
+function abrSharedRectAl(el){
+if(!el || typeof el.getBoundingClientRect !== "function") return null;
+let r = el.getBoundingClientRect();
+if(!r || r.width < 40 || r.height < 35) return null;
+return {
+top:r.top,
+left:r.left,
+width:r.width,
+height:r.height,
+right:r.right,
+bottom:r.bottom
+};
+}
+
+function abrSharedKaynakKart(event){
+let kaynak = event && event.currentTarget ? event.currentTarget : null;
+
+if((!kaynak || !kaynak.matches) && event && event.target && event.target.closest){
+kaynak = event.target.closest(".exPortfolioCard,.aptCard,.exMaintRow");
+}
+
+if(!kaynak || !kaynak.matches || !kaynak.matches(".exPortfolioCard,.aptCard,.exMaintRow")){
+return null;
+}
+
+return kaynak;
+}
+
+function abrSharedVeilOlustur(){
+let veil = document.createElement("div");
+veil.className = "abrSharedTransitionVeil";
+veil.setAttribute("aria-hidden","true");
+document.body.appendChild(veil);
+return veil;
+}
+
+function abrSharedCloneOlustur(sablon,rect,yon){
+if(!sablon || !rect) return null;
+
+let clone = sablon.cloneNode(true);
+clone.classList.add("abrSharedMorphClone",yon === "geri" ? "abrSharedClosing" : "abrSharedOpening");
+clone.removeAttribute("id");
+clone.removeAttribute("onclick");
+clone.removeAttribute("data-abr-apartment-index");
+clone.setAttribute("aria-hidden","true");
+
+clone.querySelectorAll("[id]").forEach(function(el){ el.removeAttribute("id"); });
+clone.querySelectorAll("[onclick]").forEach(function(el){ el.removeAttribute("onclick"); });
+clone.querySelectorAll("button,a,input,select,textarea").forEach(function(el){ el.setAttribute("tabindex","-1"); });
+
+try{ clone.inert = true; }catch(e){}
+
+clone.style.setProperty("position","fixed","important");
+clone.style.setProperty("top",rect.top + "px","important");
+clone.style.setProperty("left",rect.left + "px","important");
+clone.style.setProperty("width",rect.width + "px","important");
+clone.style.setProperty("height",rect.height + "px","important");
+clone.style.setProperty("margin","0","important");
+clone.style.setProperty("animation","none","important");
+clone.style.setProperty("transition","none","important");
+
+document.body.appendChild(clone);
+return clone;
+}
+
+function abrSharedGeciciTemizle(ctx){
+if(!ctx) return;
+try{ if(ctx.animation) ctx.animation.cancel(); }catch(e){}
+try{ if(ctx.clone && ctx.clone.isConnected) ctx.clone.remove(); }catch(e){}
+try{ if(ctx.veil && ctx.veil.isConnected) ctx.veil.remove(); }catch(e){}
+ctx.animation = null;
+ctx.clone = null;
+ctx.veil = null;
+document.body.classList.remove("abrSharedTransitionBusy");
+abrSharedDetailBusy = false;
+}
+
+function abrSharedDetayHedefRect(panel){
+if(!panel) return null;
+
+let hero = panel.querySelector(".detailPremiumHero");
+let baslik = panel.querySelector(".detailHeroTop");
+let sekmeler = panel.querySelector(".exDetailTabs");
+let heroRect = abrSharedRectAl(hero);
+let sonRect = abrSharedRectAl(sekmeler) || abrSharedRectAl(baslik);
+
+if(!heroRect || !sonRect) return abrSharedRectAl(baslik);
+
+let alt = Math.min(window.innerHeight - 8,sonRect.bottom + 10);
+return {
+top:heroRect.top,
+left:heroRect.left,
+width:heroRect.width,
+height:Math.max(126,alt - heroRect.top),
+right:heroRect.right,
+bottom:alt
+};
+}
+
+function abrSharedDetayBaslat(i,event){
+if(abrSharedDetailBusy || abrSharedHareketAzalt()) return null;
+
+let kaynak = abrSharedKaynakKart(event);
+if(!kaynak || typeof kaynak.animate !== "function") return null;
+
+let rect = abrSharedRectAl(kaynak);
+if(!rect) return null;
+
+let sablon = kaynak.cloneNode(true);
+let ctx = {
+index:Number(i),
+originScreen:aktifEkran === "bakim" ? "bakim" : "apartman",
+scrollY:window.scrollY || window.pageYOffset || 0,
+sourceRect:rect,
+template:sablon,
+clone:null,
+veil:null,
+animation:null
+};
+
+ctx.veil = abrSharedVeilOlustur();
+ctx.clone = abrSharedCloneOlustur(sablon,rect,"ileri");
+
+if(!ctx.clone){
+abrSharedGeciciTemizle(ctx);
+return null;
+}
+
+abrSharedDetailBusy = true;
+abrSharedDetailContext = ctx;
+document.body.classList.add("abrSharedTransitionBusy");
+return ctx;
+}
+
+function abrSharedDetayAcisiniTamamla(ctx,panel){
+if(!ctx || !panel || !ctx.clone){
+abrSharedGeciciTemizle(ctx);
+return false;
+}
+
+panel.classList.remove("screenInRight","screenInLeft","screenFadeUp","screenSoft");
+window.scrollTo({top:0,left:0,behavior:"auto"});
+
+let hedef = abrSharedDetayHedefRect(panel);
+if(!hedef){
+abrSharedGeciciTemizle(ctx);
+abrSharedDetailContext = null;
+return false;
+}
+
+ctx.detailRect = hedef;
+panel.classList.add("abrSharedDetailPreparing");
+
+let clone = ctx.clone;
+let baslangic = ctx.sourceRect;
+let tamamlandi = false;
+
+function bitir(){
+if(tamamlandi) return;
+tamamlandi = true;
+
+panel.classList.remove("abrSharedDetailPreparing");
+panel.classList.add("abrSharedDetailReveal");
+abrSharedGeciciTemizle(ctx);
+
+setTimeout(function(){
+panel.classList.remove("abrSharedDetailReveal");
+},430);
+}
+
+requestAnimationFrame(function(){
+requestAnimationFrame(function(){
+try{
+ctx.animation = clone.animate([
+{
+top:baslangic.top + "px",
+left:baslangic.left + "px",
+width:baslangic.width + "px",
+height:baslangic.height + "px",
+borderRadius:"21px",
+opacity:1,
+boxShadow:"0 10px 28px rgba(15,23,42,.08)"
+},
+{
+top:hedef.top + "px",
+left:hedef.left + "px",
+width:hedef.width + "px",
+height:hedef.height + "px",
+borderRadius:"29px",
+opacity:.96,
+boxShadow:"0 20px 48px rgba(20,42,78,.13)"
+}
+],{
+duration:440,
+easing:"cubic-bezier(.22,.82,.24,1)",
+fill:"forwards"
+});
+ctx.animation.onfinish = bitir;
+ctx.animation.oncancel = bitir;
+setTimeout(bitir,560);
+}catch(e){
+bitir();
+}
+});
+});
+
+return true;
+}
+
+function abrSharedDetayGeriDon(){
+let ctx = abrSharedDetailContext;
+
+if(!ctx || abrSharedDetailBusy || abrSharedHareketAzalt() || Number(aktifDetay) !== Number(ctx.index)){
+return false;
+}
+
+let baslangic = abrSharedDetayHedefRect(detayPanel);
+if(!baslangic) return false;
+
+abrSharedDetailBusy = true;
+document.body.classList.add("abrSharedTransitionBusy");
+ctx.veil = abrSharedVeilOlustur();
+ctx.clone = abrSharedCloneOlustur(ctx.template,baslangic,"geri");
+
+if(!ctx.clone){
+abrSharedGeciciTemizle(ctx);
+abrSharedDetailContext = null;
+return false;
+}
+
+if(ctx.originScreen === "bakim"){
+bakimListesiAc({sessiz:true,scroll:false});
+}else{
+anaSayfa();
+}
+
+window.scrollTo({top:ctx.scrollY,left:0,behavior:"auto"});
+
+requestAnimationFrame(function(){
+requestAnimationFrame(function(){
+let hedefEl = document.querySelector('#liste [data-abr-apartment-index="' + ctx.index + '"]');
+let hedef = abrSharedRectAl(hedefEl);
+
+if(!hedefEl || !hedef){
+abrSharedGeciciTemizle(ctx);
+abrSharedDetailContext = null;
+return;
+}
+
+let eskiOpacity = hedefEl.style.opacity;
+let eskiPointer = hedefEl.style.pointerEvents;
+hedefEl.style.opacity = "0";
+hedefEl.style.pointerEvents = "none";
+
+let tamamlandi = false;
+
+function bitir(){
+if(tamamlandi) return;
+tamamlandi = true;
+if(hedefEl && hedefEl.isConnected){
+hedefEl.style.opacity = eskiOpacity;
+hedefEl.style.pointerEvents = eskiPointer;
+}
+abrSharedGeciciTemizle(ctx);
+abrSharedDetailContext = null;
+}
+
+try{
+ctx.animation = ctx.clone.animate([
+{
+top:baslangic.top + "px",
+left:baslangic.left + "px",
+width:baslangic.width + "px",
+height:baslangic.height + "px",
+borderRadius:"29px",
+opacity:.12,
+boxShadow:"0 20px 48px rgba(20,42,78,.13)"
+},
+{
+top:hedef.top + "px",
+left:hedef.left + "px",
+width:hedef.width + "px",
+height:hedef.height + "px",
+borderRadius:"21px",
+opacity:1,
+boxShadow:"0 10px 28px rgba(15,23,42,.08)"
+}
+],{
+duration:420,
+easing:"cubic-bezier(.22,.82,.24,1)",
+fill:"forwards"
+});
+ctx.animation.onfinish = bitir;
+ctx.animation.oncancel = bitir;
+setTimeout(bitir,540);
+}catch(e){
+bitir();
+}
+});
+});
+
+return true;
+}
+
+
+function detayAc(i,event){
 
 haptic("light");
+
+let abrPaylasimliGecis = abrSharedDetayBaslat(i,event);
+
+if(!abrPaylasimliGecis && abrSharedDetailContext && Number(abrSharedDetailContext.index) !== Number(i)){
+abrSharedDetailContext = null;
+}
 
 if(aktifEkran !== "detay"){
 oncekiEkran = aktifEkran || "apartman";
@@ -30178,12 +30628,16 @@ detayPanel.innerHTML = `
 
 apartmanDetaySekmeAc(exDetailActiveTab,false);
 
+if(abrPaylasimliGecis){
+abrSharedDetayAcisiniTamamla(abrPaylasimliGecis,detayPanel);
+}else{
 animateIn(detayPanel,"screenInRight");
 
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
+}
 
 }
 
