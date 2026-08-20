@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.0.50_NO_BLANK_SHARED_TRANSITION -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.00_TEAM_FAULT_CENTER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -19179,6 +19179,17 @@ html.darkRoot .abrSharedTransitionVeil{
 
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">İş yönetimi</div>
 
+    <button class="exHybridItem abrTeamDrawerItem" type="button" onclick="ekipArizaMerkeziAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7.2 18.5 4 20l1.15-3.65A8 8 0 1 1 7.2 18.5Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.2 10.3h7.6M8.2 13.7h4.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Ekip Arıza Merkezi</b><small>Arızayı ekibe ilet ve canlı takip et</small></span>
+      <span id="abrTeamMenuBadge" class="abrTeamMenuBadge" aria-label="Okunmamış arıza" hidden>0</span>
+    </button>
+
 
     <button class="exHybridItem" type="button" onclick="haritaMerkeziAc()">
       <span class="exHybridItemIcon" aria-hidden="true">
@@ -20471,7 +20482,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.0.50</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.00</div>
     </div>
   </div>
 </div>
@@ -20483,7 +20494,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.0.50";
+  const SPLASH_VERSION = "v2.1.00";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -20795,6 +20806,16 @@ placeholder="Bilgi yaz..."></textarea>
 <div class="profileSectionTitle">Hızlı İşlemler</div>
 
 <div class="profileActionGrid">
+
+<button class="profileActionCard abrTeamProfileCard" onclick="ekipArizaMerkeziAc()">
+  <span class="profileActionIcon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14v10H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.5 9h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </span>
+  <span class="profileActionText">
+    <b>Ekip Arıza Merkezi</b>
+    <em>Arızayı ekibe ilet ve canlı takip et.</em>
+  </span>
+</button>
 
 <button class="profileActionCard techLibraryProfileCard" onclick="teknikKutuphaneAc()">
   <span class="profileActionIcon exIcon exLibrary" aria-hidden="true"></span>
@@ -21263,7 +21284,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.0.50";
+const APP_VERSION = "v2.1.00";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21277,6 +21298,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.48 — bakım filtre ve sıralama panelinin ekrana yapışmasını kaldır */
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
+/* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -37522,6 +37544,1561 @@ async function montajKesifYedekFotograflariOlustur(){let list=montajKesifGet(),o
 async function montajKesifYedektenFotografYukle(list){if(!Array.isArray(list))return;for(let x of list){try{if(!x||!x.key||!x.data)continue;let b=await (await fetch(x.data)).blob();await ayDbKaydet(x.key,b)}catch(e){console.warn("Keşif fotoğrafı yüklenemedi",e)}}}
 
 document.addEventListener("DOMContentLoaded",function(){let input=document.getElementById("exSurveyPhotoInput");if(input)input.addEventListener("change",function(e){montajKesifFotoEkle(e.target.files)})});
+</script>
+
+<style id="abrTeamFaultCenter2100">
+/* v2.1.00 — Ekip Arıza Merkezi; mevcut yerel verilerden tamamen bağımsız bulut katmanı */
+.abrTeamDrawerItem{position:relative!important}
+.abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
+.abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
+.abrTeamDrawerItem .exHybridItemText{padding-right:38px}
+.abrTeamMenuBadge{
+  position:absolute;
+  top:50%;
+  right:14px;
+  min-width:27px;
+  height:27px;
+  padding:0 8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(145deg,#ef4444,#c81e3a);
+  border:2px solid rgba(255,255,255,.92);
+  box-shadow:0 7px 18px rgba(214,36,66,.28);
+  font-size:12px;
+  line-height:1;
+  font-weight:900;
+  transform:translateY(-50%);
+  font-variant-numeric:tabular-nums;
+}
+.abrTeamMenuBadge[hidden]{display:none!important}
+.abrTeamMenuBadge.abrTeamBadgePulse{animation:abrTeamBadgePulse .58s ease-out both}
+
+body.abrTeamOpen{overflow:hidden!important;touch-action:none}
+body.abrTeamOpen .tabbar,
+body.abrTeamOpen #exHybridMenuBtn{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+#abrTeamCenter{
+  --abr-team-bg:#eef3fb;
+  --abr-team-surface:rgba(255,255,255,.91);
+  --abr-team-surface-strong:#fff;
+  --abr-team-ink:#10192b;
+  --abr-team-muted:#748198;
+  --abr-team-line:rgba(125,146,180,.20);
+  --abr-team-blue:#1976e8;
+  --abr-team-navy:#132541;
+  --abr-team-green:#16a263;
+  --abr-team-red:#dc3554;
+  --abr-team-amber:#e7a019;
+  position:fixed;
+  z-index:2147482700;
+  inset:0;
+  display:none;
+  color:var(--abr-team-ink);
+  background:
+    radial-gradient(circle at 12% 8%,rgba(77,145,255,.15),transparent 32%),
+    radial-gradient(circle at 92% 78%,rgba(122,92,255,.10),transparent 34%),
+    linear-gradient(180deg,#f4f7fc 0%,var(--abr-team-bg) 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  overscroll-behavior:none;
+}
+#abrTeamCenter.is-open{display:block;animation:abrTeamCenterIn .24s ease both}
+.abrTeamShell{
+  position:relative;
+  width:min(100%,760px);
+  height:100dvh;
+  min-height:100%;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:rgba(244,247,252,.72);
+  box-shadow:0 0 80px rgba(39,68,112,.12);
+}
+.abrTeamTopbar{
+  position:relative;
+  z-index:5;
+  min-height:86px;
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr) 48px;
+  align-items:center;
+  gap:10px;
+  padding:calc(env(safe-area-inset-top) + 10px) 17px 12px;
+  background:rgba(247,250,255,.82);
+  border-bottom:1px solid rgba(132,153,185,.16);
+  -webkit-backdrop-filter:blur(22px) saturate(1.25);
+  backdrop-filter:blur(22px) saturate(1.25);
+}
+.abrTeamTopAction{
+  width:46px;
+  height:46px;
+  border:1px solid rgba(125,147,181,.18);
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#20324f;
+  background:rgba(255,255,255,.80);
+  box-shadow:0 8px 22px rgba(61,84,119,.09),inset 0 1px 0 rgba(255,255,255,.88);
+  font-size:25px;
+  font-weight:600;
+  cursor:pointer;
+}
+.abrTeamTopAction:active{transform:scale(.96)}
+.abrTeamTopAction[hidden]{visibility:hidden;pointer-events:none}
+.abrTeamTopIdentity{min-width:0;text-align:center}
+.abrTeamTopKicker{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  margin-bottom:3px;
+  color:#4381cf;
+  font-size:9px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.abrTeamOnlineDot{width:7px;height:7px;border-radius:50%;background:#23bd75;box-shadow:0 0 0 4px rgba(35,189,117,.12)}
+.abrTeamOnlineDot.is-offline{background:#94a0b3;box-shadow:none}
+.abrTeamOnlineDot.is-connecting{background:#f0a51c;animation:abrTeamDotPulse 1s ease-in-out infinite}
+.abrTeamTopTitle{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:18px;line-height:1.12;font-weight:900;letter-spacing:-.025em}
+.abrTeamBody{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  padding:18px 17px calc(112px + env(safe-area-inset-bottom));
+}
+.abrTeamBody.abrTeamBodyNoNav{padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+.abrTeamNav{
+  position:absolute;
+  z-index:6;
+  left:16px;
+  right:16px;
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  min-height:70px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  padding:5px;
+  border:1px solid rgba(255,255,255,.88);
+  border-radius:25px;
+  background:rgba(250,252,255,.88);
+  box-shadow:0 18px 44px rgba(45,68,103,.18),inset 0 1px 0 rgba(255,255,255,.94);
+  -webkit-backdrop-filter:blur(24px) saturate(1.25);
+  backdrop-filter:blur(24px) saturate(1.25);
+}
+.abrTeamNav[hidden]{display:none!important}
+.abrTeamNav button{
+  min-width:0;
+  min-height:58px;
+  border:0;
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  color:#78859a;
+  background:transparent;
+  font-size:11px;
+  line-height:1;
+  font-weight:850;
+}
+.abrTeamNav button svg{width:21px;height:21px;display:block}
+.abrTeamNav button.is-active{
+  color:#fff;
+  background:
+    radial-gradient(circle at 84% 8%,rgba(79,150,255,.38),transparent 38%),
+    linear-gradient(145deg,#142640,#1b5fad);
+  box-shadow:0 8px 18px rgba(22,73,137,.24),inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.abrTeamLoading{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.abrTeamLoader{
+  width:58px;
+  height:58px;
+  margin-bottom:19px;
+  border:4px solid rgba(47,116,210,.13);
+  border-top-color:#2679e4;
+  border-radius:50%;
+  animation:abrTeamSpin .85s linear infinite;
+}
+.abrTeamLoading b{font-size:19px;font-weight:900}
+.abrTeamLoading span{max-width:280px;margin-top:7px;color:var(--abr-team-muted);font-size:13px;line-height:1.45;font-weight:650}
+
+.abrTeamHero{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:14px;
+  padding:21px;
+  border-radius:29px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 92% 2%,rgba(76,157,255,.38),transparent 33%),
+    radial-gradient(circle at 5% 94%,rgba(87,105,230,.22),transparent 40%),
+    linear-gradient(138deg,#111d35 0%,#17345d 56%,#1767b7 130%);
+  box-shadow:0 18px 38px rgba(25,61,112,.20),inset 0 1px 0 rgba(255,255,255,.16);
+}
+.abrTeamHero::after{
+  content:"";
+  position:absolute;
+  right:-44px;
+  bottom:-66px;
+  width:180px;
+  height:180px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+  box-shadow:0 0 0 34px rgba(255,255,255,.035),0 0 0 68px rgba(255,255,255,.022);
+  pointer-events:none;
+}
+.abrTeamHeroTop{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.abrTeamHeroKicker{color:#88c4ff;font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+.abrTeamHero h3{margin:7px 0 6px;font-size:27px;line-height:1.05;font-weight:950;letter-spacing:-.045em}
+.abrTeamHero p{max-width:430px;margin:0;color:rgba(230,239,255,.76);font-size:13px;line-height:1.42;font-weight:650}
+.abrTeamHeroCount{
+  flex:0 0 72px;
+  min-height:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:22px;
+  background:rgba(255,255,255,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+.abrTeamHeroCount b{font-size:27px;line-height:1;font-weight:950}
+.abrTeamHeroCount span{margin-top:5px;color:rgba(227,238,255,.72);font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.abrTeamHeroActions{position:relative;z-index:1;margin-top:18px;display:grid;grid-template-columns:1fr auto;gap:9px}
+.abrTeamPrimary,.abrTeamSecondary,.abrTeamDanger,.abrTeamSoft{
+  min-height:48px;
+  border-radius:17px;
+  padding:0 17px;
+  border:0;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+}
+.abrTeamPrimary{color:#14325e;background:#fff;box-shadow:0 8px 20px rgba(2,19,49,.15)}
+.abrTeamSecondary{color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+.abrTeamSoft{color:#235991;background:#ecf4ff;border:1px solid rgba(54,125,219,.15)}
+.abrTeamDanger{color:#b6203e;background:#fff0f3;border:1px solid rgba(220,53,84,.15)}
+.abrTeamPrimary:active,.abrTeamSecondary:active,.abrTeamDanger:active,.abrTeamSoft:active{transform:scale(.98)}
+.abrTeamPrimary:disabled,.abrTeamSecondary:disabled,.abrTeamDanger:disabled,.abrTeamSoft:disabled{opacity:.52;pointer-events:none}
+
+.abrTeamSwitch{margin:0 0 14px;display:flex;align-items:center;gap:9px}
+.abrTeamSwitch label{color:var(--abr-team-muted);font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.abrTeamSwitch select{
+  flex:1;
+  min-width:0;
+  height:42px;
+  padding:0 36px 0 13px;
+  border:1px solid var(--abr-team-line);
+  border-radius:14px;
+  color:var(--abr-team-ink);
+  background:var(--abr-team-surface);
+  font:800 13px/1 inherit;
+}
+.abrTeamSegment{
+  margin-bottom:13px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  padding:5px;
+  border:1px solid rgba(137,158,190,.16);
+  border-radius:18px;
+  background:rgba(255,255,255,.58);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70);
+}
+.abrTeamSegment button{min-height:42px;border:0;border-radius:14px;color:#7b8799;background:transparent;font-size:12px;font-weight:900}
+.abrTeamSegment button.is-active{color:#fff;background:#172a47;box-shadow:0 7px 15px rgba(23,42,71,.18)}
+
+.abrTeamList{display:grid;gap:11px}
+.abrTeamReport{
+  position:relative;
+  overflow:hidden;
+  display:block;
+  width:100%;
+  padding:17px 17px 15px 20px;
+  border:1px solid rgba(129,151,185,.17);
+  border-radius:23px;
+  text-align:left;
+  color:var(--abr-team-ink);
+  background:var(--abr-team-surface);
+  box-shadow:0 11px 28px rgba(45,67,102,.08),inset 0 1px 0 rgba(255,255,255,.78);
+}
+.abrTeamReport::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 99px 99px 0;background:#4d8ee8}
+.abrTeamReport.priority-high::before{background:var(--abr-team-amber)}
+.abrTeamReport.priority-emergency::before{background:var(--abr-team-red);box-shadow:0 0 15px rgba(220,53,84,.35)}
+.abrTeamReport.is-unread{border-color:rgba(45,125,228,.35);box-shadow:0 12px 30px rgba(39,101,184,.13),inset 0 1px 0 rgba(255,255,255,.82)}
+.abrTeamReportTop{display:flex;align-items:flex-start;gap:11px}
+.abrTeamReportIcon{
+  flex:0 0 46px;
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  color:#2479e2;
+  background:#eaf3ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+.abrTeamReportIcon svg{width:24px;height:24px}
+.priority-high .abrTeamReportIcon{color:#ba7805;background:#fff4d8}
+.priority-emergency .abrTeamReportIcon{color:#cf2848;background:#fff0f3}
+.abrTeamReportMain{min-width:0;flex:1}
+.abrTeamReportName{display:flex;align-items:center;gap:7px;font-size:16px;line-height:1.15;font-weight:950;letter-spacing:-.02em}
+.abrTeamUnreadDot{flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:#247be5;box-shadow:0 0 0 4px rgba(36,123,229,.12)}
+.abrTeamReportMeta{margin-top:5px;color:var(--abr-team-muted);font-size:10px;font-weight:850;letter-spacing:.02em}
+.abrTeamStatusPill{flex:0 0 auto;padding:8px 10px;border-radius:999px;color:#246abf;background:#edf5ff;font-size:9px;font-weight:900;white-space:nowrap}
+.abrTeamStatusPill.seen{color:#80620e;background:#fff7db}
+.abrTeamStatusPill.en_route{color:#7b3ec3;background:#f4ecff}
+.abrTeamStatusPill.resolved{color:#16804e;background:#e9f9f0}
+.abrTeamReportText{margin:13px 0 12px;color:#45536a;font-size:12px;line-height:1.45;font-weight:650;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.abrTeamReportFoot{padding-top:11px;border-top:1px solid rgba(131,151,181,.14);display:flex;align-items:center;justify-content:space-between;gap:10px;color:#8490a3;font-size:9px;font-weight:800}
+.abrTeamReportFoot b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#536177;font-size:10px}
+
+.abrTeamEmpty{
+  min-height:250px;
+  padding:32px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px dashed rgba(115,145,188,.27);
+  border-radius:25px;
+  background:rgba(255,255,255,.46);
+}
+.abrTeamEmptyIcon{width:58px;height:58px;margin-bottom:15px;display:flex;align-items:center;justify-content:center;border-radius:19px;color:#287be1;background:#eaf3ff;font-size:28px;font-weight:900}
+.abrTeamEmpty b{font-size:17px;font-weight:950}
+.abrTeamEmpty p{max-width:310px;margin:7px 0 18px;color:var(--abr-team-muted);font-size:12px;line-height:1.5;font-weight:650}
+
+.abrTeamPageHead{margin:3px 1px 15px}
+.abrTeamPageHead span{color:#2679df;font-size:9px;font-weight:950;letter-spacing:.17em;text-transform:uppercase}
+.abrTeamPageHead h3{margin:5px 0 4px;font-size:25px;line-height:1.05;font-weight:950;letter-spacing:-.045em}
+.abrTeamPageHead p{margin:0;color:var(--abr-team-muted);font-size:12px;line-height:1.45;font-weight:650}
+.abrTeamCard{
+  margin-bottom:12px;
+  padding:18px;
+  border:1px solid var(--abr-team-line);
+  border-radius:24px;
+  background:var(--abr-team-surface);
+  box-shadow:0 11px 28px rgba(45,67,102,.075),inset 0 1px 0 rgba(255,255,255,.82);
+}
+.abrTeamCardTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.abrTeamCardTitle div{min-width:0}
+.abrTeamCardTitle span{display:block;color:#2679df;font-size:9px;font-weight:950;letter-spacing:.15em;text-transform:uppercase}
+.abrTeamCardTitle b{display:block;margin-top:4px;font-size:16px;line-height:1.15;font-weight:950}
+.abrTeamCountPill{flex:0 0 auto;min-width:30px;height:30px;padding:0 9px;display:flex;align-items:center;justify-content:center;border-radius:999px;color:#1769c7;background:#eaf3ff;font-size:11px;font-weight:950}
+.abrTeamField{display:block;margin-bottom:12px}
+.abrTeamField>span{display:block;margin:0 0 7px 2px;color:#65738a;font-size:9px;font-weight:950;letter-spacing:.10em;text-transform:uppercase}
+.abrTeamField input,.abrTeamField textarea,.abrTeamField select{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid rgba(123,148,184,.22);
+  border-radius:17px;
+  color:var(--abr-team-ink);
+  background:rgba(247,250,255,.92);
+  outline:none;
+  font:750 14px/1.35 inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.76);
+}
+.abrTeamField input,.abrTeamField select{height:52px;padding:0 14px}
+.abrTeamField textarea{min-height:122px;padding:14px;resize:vertical}
+.abrTeamField input:focus,.abrTeamField textarea:focus,.abrTeamField select:focus{border-color:rgba(33,119,225,.55);box-shadow:0 0 0 4px rgba(33,119,225,.10)}
+.abrTeamFormGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.abrTeamFormGrid .abrTeamField{min-width:0}
+.abrTeamFormActions{display:grid;grid-template-columns:1fr 1.35fr;gap:9px;margin-top:4px}
+.abrTeamFormActions .abrTeamPrimary{color:#fff;background:linear-gradient(145deg,#152743,#176ec9);box-shadow:0 10px 22px rgba(25,83,151,.20)}
+.abrTeamPrivacy{display:flex;align-items:flex-start;gap:10px;margin:12px 0 0;padding:12px;border-radius:16px;color:#5e6c81;background:#f1f6fd;font-size:10px;line-height:1.45;font-weight:700}
+.abrTeamPrivacy i{flex:0 0 21px;width:21px;height:21px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#267be1;font-style:normal;font-size:11px;font-weight:950}
+
+.abrTeamPriority{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}
+.abrTeamPriority label{position:relative}
+.abrTeamPriority input{position:absolute;opacity:0;pointer-events:none}
+.abrTeamPriority span{min-height:48px;padding:0 8px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(122,147,183,.20);border-radius:16px;color:#6e7b90;background:#f7f9fd;font-size:11px;font-weight:900;text-align:center}
+.abrTeamPriority input:checked+span{color:#fff;border-color:transparent;background:#1b65b5;box-shadow:0 8px 16px rgba(27,101,181,.18)}
+.abrTeamPriority label:nth-child(2) input:checked+span{background:#d69315}
+.abrTeamPriority label:nth-child(3) input:checked+span{background:#d73553}
+
+.abrTeamStatusHero{margin-bottom:12px;padding:18px;border-radius:25px;color:#fff;background:linear-gradient(140deg,#12233e,#1a5ea7);box-shadow:0 16px 34px rgba(30,77,136,.18)}
+.abrTeamStatusHero.is-resolved{background:linear-gradient(140deg,#0c6948,#1ca86a)}
+.abrTeamStatusHeroTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.abrTeamStatusHero span{color:rgba(226,239,255,.72);font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.abrTeamStatusHero h3{margin:6px 0 5px;font-size:24px;line-height:1.06;font-weight:950;letter-spacing:-.04em}
+.abrTeamStatusHero p{margin:0;color:rgba(232,241,255,.80);font-size:12px;line-height:1.48;font-weight:650;white-space:pre-wrap}
+.abrTeamPriorityPill{flex:0 0 auto;padding:8px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#fff!important;background:rgba(255,255,255,.10);font-size:9px!important;letter-spacing:0!important;white-space:nowrap}
+.abrTeamStepper{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:16px 0 0}
+.abrTeamStep{position:relative;min-width:0;text-align:center}
+.abrTeamStep::before{content:"";position:absolute;top:8px;left:-52%;right:52%;height:2px;background:rgba(255,255,255,.16)}
+.abrTeamStep:first-child::before{display:none}
+.abrTeamStep i{position:relative;z-index:1;width:17px;height:17px;margin:0 auto 6px;display:block;border:2px solid rgba(255,255,255,.30);border-radius:50%;background:rgba(255,255,255,.12)}
+.abrTeamStep b{display:block;overflow:hidden;text-overflow:ellipsis;color:rgba(226,238,255,.52);font-size:8px;font-weight:850;white-space:nowrap}
+.abrTeamStep.is-done::before{background:#7ec2ff}
+.abrTeamStep.is-done i{border-color:#fff;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.12)}
+.abrTeamStep.is-done b{color:#fff}
+.abrTeamDetailMeta{margin-bottom:12px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.abrTeamMetaBox{min-width:0;padding:14px;border:1px solid var(--abr-team-line);border-radius:18px;background:var(--abr-team-surface)}
+.abrTeamMetaBox span{display:block;color:#8792a5;font-size:8px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+.abrTeamMetaBox b{display:block;margin-top:5px;overflow:hidden;text-overflow:ellipsis;color:var(--abr-team-ink);font-size:12px;font-weight:900;white-space:nowrap}
+.abrTeamStatusAction{width:100%;min-height:52px;margin-bottom:12px;border:0;border-radius:18px;color:#fff;background:linear-gradient(145deg,#172b4a,#1a70cd);box-shadow:0 11px 24px rgba(28,91,165,.21);font-size:13px;font-weight:950}
+.abrTeamStatusAction.resolve{background:linear-gradient(145deg,#0c784e,#18aa68)}
+.abrTeamStatusAction.reopen{color:#215488;background:#eef5ff;border:1px solid rgba(47,120,213,.18);box-shadow:none}
+
+.abrTeamThreadTitle{margin:18px 2px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.abrTeamThreadTitle b{font-size:15px;font-weight:950}
+.abrTeamThreadTitle span{color:#8b96a8;font-size:9px;font-weight:850}
+.abrTeamMessages{display:grid;gap:8px;margin-bottom:11px}
+.abrTeamMessage{max-width:88%;padding:11px 13px;border:1px solid var(--abr-team-line);border-radius:17px 17px 17px 5px;background:var(--abr-team-surface);box-shadow:0 7px 18px rgba(50,71,104,.06)}
+.abrTeamMessage.is-me{justify-self:end;border-radius:17px 17px 5px 17px;color:#fff;background:linear-gradient(145deg,#1b4f8e,#1876d6);border-color:transparent}
+.abrTeamMessageHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:5px;color:#6d7b90;font-size:8px;font-weight:900}
+.abrTeamMessage.is-me .abrTeamMessageHead{color:rgba(228,240,255,.72)}
+.abrTeamMessageText{font-size:12px;line-height:1.45;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
+.abrTeamComposer{padding:10px;border:1px solid var(--abr-team-line);border-radius:20px;background:var(--abr-team-surface);box-shadow:0 10px 24px rgba(46,68,101,.07)}
+.abrTeamComposer textarea{width:100%;min-height:67px;padding:8px 9px;border:0;outline:0;resize:none;color:var(--abr-team-ink);background:transparent;font:700 13px/1.4 inherit;box-sizing:border-box}
+.abrTeamComposer button{width:100%;min-height:44px;border:0;border-radius:14px;color:#fff;background:#176dcc;font-size:12px;font-weight:950}
+
+.abrTeamMemberList{display:grid;gap:8px}
+.abrTeamMember{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid rgba(130,152,185,.15);border-radius:18px;background:rgba(247,250,255,.74)}
+.abrTeamAvatar{flex:0 0 42px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:14px;color:#fff;background:linear-gradient(145deg,#285d9e,#2785e7);font-size:15px;font-weight:950;text-transform:uppercase}
+.abrTeamMemberInfo{min-width:0;flex:1}
+.abrTeamMemberInfo b{display:block;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:950;white-space:nowrap}
+.abrTeamMemberInfo span{display:block;margin-top:3px;overflow:hidden;text-overflow:ellipsis;color:var(--abr-team-muted);font-size:9px;font-weight:750;white-space:nowrap}
+.abrTeamMemberRole{flex:0 0 auto;padding:7px 9px;border-radius:999px;color:#2265b5;background:#eaf3ff;font-size:8px;font-weight:950}
+.abrTeamMemberActions{display:flex;gap:5px}
+.abrTeamMemberActions button{min-height:35px;padding:0 10px;border:0;border-radius:11px;font-size:9px;font-weight:950}
+.abrTeamMemberActions .approve{color:#137a49;background:#e5f7ed}
+.abrTeamMemberActions .reject{color:#ba2440;background:#fff0f3}
+.abrTeamCodeBox{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.abrTeamCodeBox .abrTeamField{margin:0}
+.abrTeamCodeActions{display:flex;gap:6px}
+.abrTeamCodeActions button{width:45px;height:52px;padding:0;border:0;border-radius:15px;color:#2369bd;background:#eaf3ff;font-size:18px;font-weight:950}
+.abrTeamCodeKnown{margin:10px 0 0;padding:13px;border:1px dashed rgba(50,122,214,.30);border-radius:16px;text-align:center;color:#1768c5;background:#f0f7ff;font:950 17px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+
+.abrTeamSetupHero{padding:23px 20px;margin-bottom:13px;border-radius:28px;color:#fff;background:linear-gradient(140deg,#121f37,#164b82 72%,#167bd4 145%);box-shadow:0 17px 37px rgba(29,73,128,.18)}
+.abrTeamSetupHeroIcon{width:52px;height:52px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.10)}
+.abrTeamSetupHeroIcon svg{width:28px;height:28px}
+.abrTeamSetupHero span{color:#8bc6ff;font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}
+.abrTeamSetupHero h3{margin:7px 0 7px;font-size:27px;line-height:1.03;font-weight:950;letter-spacing:-.045em}
+.abrTeamSetupHero p{margin:0;color:rgba(230,240,255,.77);font-size:12px;line-height:1.48;font-weight:650}
+.abrTeamSetupTabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:13px;padding:5px;border:1px solid var(--abr-team-line);border-radius:18px;background:rgba(255,255,255,.57)}
+.abrTeamSetupTabs button{min-height:43px;border:0;border-radius:14px;color:#748197;background:transparent;font-size:12px;font-weight:900}
+.abrTeamSetupTabs button.is-active{color:#fff;background:#172b49;box-shadow:0 7px 17px rgba(23,43,73,.18)}
+.abrTeamPending{display:flex;align-items:flex-start;gap:11px;margin-bottom:13px;padding:15px;border:1px solid rgba(224,160,33,.22);border-radius:20px;background:#fff8df}
+.abrTeamPending i{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:12px;color:#a66b00;background:#ffe8a7;font-style:normal;font-weight:950}
+.abrTeamPending b{display:block;color:#70520d;font-size:13px;font-weight:950}
+.abrTeamPending span{display:block;margin-top:4px;color:#927329;font-size:10px;line-height:1.4;font-weight:700}
+.abrTeamError{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
+.abrTeamErrorIcon{width:62px;height:62px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;border-radius:21px;color:#c42b49;background:#fff0f3;font-size:28px;font-weight:950}
+.abrTeamError b{font-size:19px;font-weight:950}
+.abrTeamError p{max-width:340px;margin:8px 0 19px;color:var(--abr-team-muted);font-size:12px;line-height:1.5;font-weight:650}
+.abrTeamError button{min-width:170px}
+.abrTeamInfoRows{display:grid;gap:0}
+.abrTeamInfoRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(130,151,181,.14)}
+.abrTeamInfoRow:last-child{border-bottom:0}
+.abrTeamInfoRow span{color:#778499;font-size:10px;font-weight:800}
+.abrTeamInfoRow b{max-width:62%;overflow:hidden;text-overflow:ellipsis;color:var(--abr-team-ink);font-size:11px;font-weight:900;text-align:right;white-space:nowrap}
+
+body.darkMode #abrTeamCenter,
+html.darkRoot #abrTeamCenter{
+  --abr-team-bg:#08111f;
+  --abr-team-surface:rgba(16,28,46,.92);
+  --abr-team-surface-strong:#122038;
+  --abr-team-ink:#f2f6fc;
+  --abr-team-muted:#91a0b7;
+  --abr-team-line:rgba(143,166,199,.16);
+  background:radial-gradient(circle at 10% 5%,rgba(30,104,211,.15),transparent 34%),linear-gradient(180deg,#0b1525,#08111f);
+}
+body.darkMode #abrTeamCenter .abrTeamShell,
+html.darkRoot #abrTeamCenter .abrTeamShell{background:rgba(8,17,31,.80)}
+body.darkMode #abrTeamCenter .abrTeamTopbar,
+html.darkRoot #abrTeamCenter .abrTeamTopbar{background:rgba(10,19,33,.84);border-color:rgba(133,157,191,.12)}
+body.darkMode #abrTeamCenter .abrTeamTopAction,
+html.darkRoot #abrTeamCenter .abrTeamTopAction{color:#e8eef8;background:rgba(18,32,53,.88);border-color:rgba(143,166,199,.15);box-shadow:0 9px 22px rgba(0,0,0,.18)}
+body.darkMode #abrTeamCenter .abrTeamNav,
+html.darkRoot #abrTeamCenter .abrTeamNav{background:rgba(12,23,39,.91);border-color:rgba(139,163,197,.15);box-shadow:0 18px 44px rgba(0,0,0,.30)}
+body.darkMode #abrTeamCenter .abrTeamSegment,
+html.darkRoot #abrTeamCenter .abrTeamSegment,
+body.darkMode #abrTeamCenter .abrTeamSetupTabs,
+html.darkRoot #abrTeamCenter .abrTeamSetupTabs{background:rgba(17,30,49,.72)}
+body.darkMode #abrTeamCenter .abrTeamField input,
+body.darkMode #abrTeamCenter .abrTeamField textarea,
+body.darkMode #abrTeamCenter .abrTeamField select,
+html.darkRoot #abrTeamCenter .abrTeamField input,
+html.darkRoot #abrTeamCenter .abrTeamField textarea,
+html.darkRoot #abrTeamCenter .abrTeamField select{color:#eef4fc;background:#0e1b2e;border-color:rgba(143,166,199,.18)}
+body.darkMode #abrTeamCenter .abrTeamReportText,
+html.darkRoot #abrTeamCenter .abrTeamReportText{color:#b6c2d4}
+body.darkMode #abrTeamCenter .abrTeamPrivacy,
+html.darkRoot #abrTeamCenter .abrTeamPrivacy{color:#aab9cd;background:#10223a}
+body.darkMode #abrTeamCenter .abrTeamMember,
+html.darkRoot #abrTeamCenter .abrTeamMember{background:rgba(19,34,55,.76)}
+body.darkMode #abrTeamCenter .abrTeamPriority span,
+html.darkRoot #abrTeamCenter .abrTeamPriority span{color:#a4b2c6;background:#101e32}
+body.darkMode #abrTeamCenter .abrTeamEmpty,
+html.darkRoot #abrTeamCenter .abrTeamEmpty{background:rgba(16,29,48,.48)}
+body.darkMode #abrTeamCenter .abrTeamPending,
+html.darkRoot #abrTeamCenter .abrTeamPending{border-color:rgba(222,168,45,.20);background:#2b250f}
+body.darkMode #abrTeamCenter .abrTeamPending b,
+html.darkRoot #abrTeamCenter .abrTeamPending b{color:#f4d77b}
+body.darkMode #abrTeamCenter .abrTeamPending span,
+html.darkRoot #abrTeamCenter .abrTeamPending span{color:#c9b56e}
+
+@keyframes abrTeamCenterIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes abrTeamSpin{to{transform:rotate(360deg)}}
+@keyframes abrTeamDotPulse{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes abrTeamBadgePulse{0%{transform:translateY(-50%) scale(.65)}55%{transform:translateY(-50%) scale(1.14)}100%{transform:translateY(-50%) scale(1)}}
+@media(max-width:390px){
+  .abrTeamBody{padding-left:13px;padding-right:13px}
+  .abrTeamHero{padding:19px}
+  .abrTeamHero h3{font-size:24px}
+  .abrTeamFormGrid{grid-template-columns:1fr}
+  .abrTeamStatusPill{padding:7px 8px}
+  .abrTeamReport{padding-right:14px}
+}
+@media(min-width:761px){
+  #abrTeamCenter{padding:12px}
+  .abrTeamShell{height:calc(100dvh - 24px);border-radius:32px;border:1px solid rgba(255,255,255,.72)}
+}
+@media(prefers-reduced-motion:reduce){
+  #abrTeamCenter.is-open,.abrTeamMenuBadge.abrTeamBadgePulse,.abrTeamOnlineDot.is-connecting,.abrTeamLoader{animation:none!important}
+}
+</style>
+
+<section id="abrTeamCenter" aria-hidden="true" aria-label="Ekip Arıza Merkezi">
+  <div class="abrTeamShell" role="dialog" aria-modal="true" aria-labelledby="abrTeamTopTitle">
+    <header class="abrTeamTopbar">
+      <button id="abrTeamBackButton" class="abrTeamTopAction" type="button" onclick="ekipArizaGeri()" aria-label="Geri" hidden>‹</button>
+      <div class="abrTeamTopIdentity">
+        <div class="abrTeamTopKicker"><i id="abrTeamConnectionDot" class="abrTeamOnlineDot is-connecting" aria-hidden="true"></i><span id="abrTeamConnectionText">Bağlanıyor</span></div>
+        <div id="abrTeamTopTitle" class="abrTeamTopTitle">Ekip Arıza Merkezi</div>
+      </div>
+      <button class="abrTeamTopAction" type="button" onclick="ekipArizaMerkeziKapat()" aria-label="Kapat">×</button>
+    </header>
+    <main id="abrTeamBody" class="abrTeamBody abrTeamBodyNoNav"></main>
+    <nav id="abrTeamNav" class="abrTeamNav" aria-label="Ekip merkezi bölümleri" hidden>
+      <button type="button" data-abr-team-view="home" onclick="ekipArizaGorunum('home')">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5.5h14v10H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.5 9h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Arızalar</span>
+      </button>
+      <button type="button" data-abr-team-view="team" onclick="ekipArizaGorunum('team')">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.9"/><circle cx="16.5" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 19a4.5 4.5 0 0 1 9 0M14 18.5a3.5 3.5 0 0 1 6 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span>Ekip</span>
+      </button>
+      <button type="button" data-abr-team-view="settings" onclick="ekipArizaGorunum('settings')">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.9"/><path d="m19 13.4 1.2 1-.9 2.1-1.6-.1a7 7 0 0 1-1.3 1.3l.1 1.6-2.1.9-1-1.2a7 7 0 0 1-1.9 0l-1 1.2-2.1-.9.1-1.6a7 7 0 0 1-1.3-1.3l-1.6.1-.9-2.1 1.2-1a7 7 0 0 1 0-1.9l-1.2-1 .9-2.1 1.6.1a7 7 0 0 1 1.3-1.3l-.1-1.6 2.1-.9 1 1.2a7 7 0 0 1 1.9 0l1-1.2 2.1.9-.1 1.6a7 7 0 0 1 1.3 1.3l1.6-.1.9 2.1-1.2 1a7 7 0 0 1 0 1.9Z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/></svg>
+        <span>Ayarlar</span>
+      </button>
+    </nav>
+  </div>
+</section>
+
+<script id="abrTeamFaultCenterScript2100">
+(function(){
+"use strict";
+
+const ABR_TEAM_CONFIG = Object.freeze({
+  url:"https://vfadlxuujqcpkckvwjbl.supabase.co",
+  key:"sb_publishable_QvEWbZy98j_kUKd7rPp0ew_e4J2GqKQ",
+  sdk:"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+});
+const ABR_TEAM_LOCAL_KEY = "abrTeamCenterV2100";
+const ABR_TEAM_AUTH_KEY = "sb-vfadlxuujqcpkckvwjbl-auth-token";
+
+const abrTeamState = {
+  client:null,
+  user:null,
+  memberships:[],
+  activeTeams:[],
+  teamId:null,
+  activeMembership:null,
+  members:[],
+  profiles:Object.create(null),
+  apartments:[],
+  reports:[],
+  reads:Object.create(null),
+  messages:[],
+  view:"home",
+  filter:"active",
+  setupMode:"create",
+  reportId:null,
+  open:false,
+  loading:false,
+  error:null,
+  initPromise:null,
+  sdkPromise:null,
+  channel:null,
+  subscribedTeamId:null,
+  membershipChannel:null,
+  membershipUserId:null,
+  refreshTimer:null,
+  membershipRefreshTimer:null,
+  refreshing:false,
+  syncedTeams:Object.create(null),
+  lastBadge:-1,
+  connection:"idle"
+};
+
+function abrTeamEl(id){return document.getElementById(id)}
+function abrTeamEscape(value){
+  return String(value == null ? "" : value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+function abrTeamTrim(value,max){return String(value == null ? "" : value).trim().slice(0,max || 2000)}
+function abrTeamHaptic(type){try{if(typeof haptic === "function")haptic(type || "light")}catch(e){}}
+function abrTeamToast(message,type){
+  try{
+    if(typeof toast === "function"){
+      toast(message,type);
+    }
+  }catch(e){}
+}
+function abrTeamSettingsGet(){
+  try{
+    const value = JSON.parse(localStorage.getItem(ABR_TEAM_LOCAL_KEY) || "{}");
+    if(value && typeof value === "object"){
+      if(!value.teamCodes || typeof value.teamCodes !== "object")value.teamCodes = {};
+      return value;
+    }
+  }catch(e){}
+  return {teamCodes:{}};
+}
+function abrTeamSettingsPatch(patch){
+  const current = abrTeamSettingsGet();
+  Object.keys(patch || {}).forEach(function(key){current[key] = patch[key]});
+  try{localStorage.setItem(ABR_TEAM_LOCAL_KEY,JSON.stringify(current))}catch(e){}
+  return current;
+}
+function abrTeamSaveCode(teamId,code){
+  if(!teamId || !code)return;
+  const settings = abrTeamSettingsGet();
+  settings.teamCodes[teamId] = abrTeamNormalizeCode(code);
+  abrTeamSettingsPatch({teamCodes:settings.teamCodes});
+}
+function abrTeamKnownCode(teamId){
+  const settings = abrTeamSettingsGet();
+  return abrTeamTrim(settings.teamCodes && settings.teamCodes[teamId],32);
+}
+function abrTeamNormalizeCode(value){return abrTeamTrim(value,32).replace(/\s+/g,"").toLocaleUpperCase("tr-TR")}
+function abrTeamGenerateCode(){
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let out = "AY-";
+  try{
+    const values = new Uint32Array(7);
+    crypto.getRandomValues(values);
+    values.forEach(function(value){out += chars[value % chars.length]});
+  }catch(e){
+    for(let i=0;i<7;i++)out += chars[Math.floor(Math.random()*chars.length)];
+  }
+  return out;
+}
+function abrTeamDate(value,withTime){
+  if(!value)return "-";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime()))return String(value);
+  try{
+    return date.toLocaleString("tr-TR",withTime === false
+      ? {day:"2-digit",month:"2-digit",year:"numeric"}
+      : {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+  }catch(e){return date.toLocaleString("tr-TR")}
+}
+function abrTeamErrorText(error){
+  let text = abrTeamTrim(error && (error.message || error.error_description || error.details) || error || "İşlem tamamlanamadı",360);
+  const map = [
+    [/Failed to fetch|NetworkError|Load failed|fetch failed/i,"İnternet bağlantısı kurulamadı."],
+    [/Ekip kodu gecersiz/i,"Ekip kodu geçersiz."],
+    [/Bu ekip kodu kullanimda/i,"Bu ekip kodu kullanımda. Başka bir kod seç."],
+    [/Once profil olusturulmalidir/i,"Önce ekip profilinin hazırlanması gerekiyor."],
+    [/Bu islem icin ekip sahibi olmalisiniz/i,"Bu işlem yalnız ekip sahibi tarafından yapılabilir."],
+    [/Anonymous sign-ins are disabled/i,"Supabase Anonymous Sign-Ins ayarı kapalı görünüyor."],
+    [/JWT expired/i,"Ekip oturumunun süresi doldu. Yeniden dene."]
+  ];
+  map.some(function(item){if(item[0].test(text)){text=item[1];return true}return false});
+  return text || "İşlem tamamlanamadı.";
+}
+
+function abrTeamSetConnection(state){
+  abrTeamState.connection = state;
+  const dot = abrTeamEl("abrTeamConnectionDot");
+  const text = abrTeamEl("abrTeamConnectionText");
+  if(!dot || !text)return;
+  dot.className = "abrTeamOnlineDot";
+  if(state === "online"){
+    text.textContent = "Canlı bağlantı";
+  }else if(state === "offline"){
+    dot.classList.add("is-offline");
+    text.textContent = "Çevrimdışı";
+  }else{
+    dot.classList.add("is-connecting");
+    text.textContent = "Bağlanıyor";
+  }
+}
+function abrTeamSetChrome(title,back,navView){
+  const titleEl = abrTeamEl("abrTeamTopTitle");
+  const backEl = abrTeamEl("abrTeamBackButton");
+  const nav = abrTeamEl("abrTeamNav");
+  const body = abrTeamEl("abrTeamBody");
+  if(titleEl)titleEl.textContent = title || "Ekip Arıza Merkezi";
+  if(backEl)backEl.hidden = !back;
+  const showNav = !!navView;
+  if(nav)nav.hidden = !showNav;
+  if(body)body.classList.toggle("abrTeamBodyNoNav",!showNav);
+  if(nav){
+    nav.querySelectorAll("button[data-abr-team-view]").forEach(function(button){
+      button.classList.toggle("is-active",button.getAttribute("data-abr-team-view") === navView);
+    });
+  }
+}
+function abrTeamScrollTop(){const body=abrTeamEl("abrTeamBody");if(body)body.scrollTop=0}
+
+function abrTeamLoadSdk(){
+  if(window.supabase && typeof window.supabase.createClient === "function")return Promise.resolve(window.supabase);
+  if(abrTeamState.sdkPromise)return abrTeamState.sdkPromise;
+  abrTeamState.sdkPromise = new Promise(function(resolve,reject){
+    let settled = false;
+    const old = document.getElementById("abrSupabaseSdk2100");
+    if(old && old.parentNode)old.parentNode.removeChild(old);
+    const script = document.createElement("script");
+    const timeout = setTimeout(function(){
+      if(settled)return;
+      settled = true;
+      abrTeamState.sdkPromise = null;
+      reject(new Error("Ekip bağlantı bileşeni zamanında yüklenemedi."));
+    },15000);
+    function done(error){
+      if(settled)return;
+      settled = true;
+      clearTimeout(timeout);
+      if(error || !window.supabase || typeof window.supabase.createClient !== "function"){
+        abrTeamState.sdkPromise = null;
+        reject(error || new Error("Ekip bağlantı bileşeni yüklenemedi."));
+        return;
+      }
+      resolve(window.supabase);
+    }
+    script.id = "abrSupabaseSdk2100";
+    script.src = ABR_TEAM_CONFIG.sdk;
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.onload = function(){done()};
+    script.onerror = function(){done(new Error("Ekip bağlantı bileşeni indirilemedi."))};
+    document.head.appendChild(script);
+  });
+  return abrTeamState.sdkPromise;
+}
+async function abrTeamEnsureClient(){
+  if(abrTeamState.client)return abrTeamState.client;
+  const sdk = await abrTeamLoadSdk();
+  abrTeamState.client = sdk.createClient(ABR_TEAM_CONFIG.url,ABR_TEAM_CONFIG.key,{
+    auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false},
+    realtime:{params:{eventsPerSecond:5}},
+    global:{headers:{"x-client-info":"asansor-bakim-revizyon-team/2.1.0"}}
+  });
+  return abrTeamState.client;
+}
+async function abrTeamEnsureSession(createIfMissing){
+  const client = await abrTeamEnsureClient();
+  let result = await client.auth.getSession();
+  if(result.error)throw result.error;
+  let session = result.data && result.data.session;
+  if(!session && createIfMissing){
+    if(navigator.onLine === false)throw new Error("İlk ekip bağlantısı için internet gerekli.");
+    const signed = await client.auth.signInAnonymously();
+    if(signed.error)throw signed.error;
+    session = signed.data && signed.data.session;
+  }
+  abrTeamState.user = session && session.user || null;
+  return abrTeamState.user;
+}
+function abrTeamLocalProfile(){
+  let name = "Teknisyen";
+  let phone = "";
+  try{
+    name = abrTeamTrim(localStorage.getItem("profilAd") || "Teknisyen",60) || "Teknisyen";
+    phone = abrTeamTrim(localStorage.getItem("profilTelefon") || "",40);
+  }catch(e){}
+  if(name.length < 2)name = "Teknisyen";
+  return {name:name,phone:phone};
+}
+async function abrTeamProfileSync(){
+  if(!abrTeamState.user)return;
+  const profile = abrTeamLocalProfile();
+  const existing = await abrTeamState.client
+    .from("profiles")
+    .select("user_id")
+    .eq("user_id",abrTeamState.user.id)
+    .maybeSingle();
+  if(existing.error)throw existing.error;
+  const response = existing.data
+    ? await abrTeamState.client.from("profiles").update({
+        display_name:profile.name,
+        phone:profile.phone || null
+      }).eq("user_id",abrTeamState.user.id)
+    : await abrTeamState.client.from("profiles").insert({
+        user_id:abrTeamState.user.id,
+        display_name:profile.name,
+        phone:profile.phone || null
+      });
+  if(response.error)throw response.error;
+  abrTeamState.profiles[abrTeamState.user.id] = {
+    user_id:abrTeamState.user.id,
+    display_name:profile.name,
+    phone:profile.phone || null
+  };
+}
+async function abrTeamMembershipsLoad(){
+  const response = await abrTeamState.client
+    .from("team_members")
+    .select("team_id,user_id,role,state,joined_at")
+    .eq("user_id",abrTeamState.user.id)
+    .order("joined_at",{ascending:true});
+  if(response.error)throw response.error;
+  const memberships = Array.isArray(response.data) ? response.data : [];
+  const ids = memberships.map(function(item){return item.team_id}).filter(Boolean);
+  let teams = [];
+  if(ids.length){
+    const teamResponse = await abrTeamState.client.from("teams").select("id,name,created_by,created_at").in("id",ids);
+    if(teamResponse.error)throw teamResponse.error;
+    teams = Array.isArray(teamResponse.data) ? teamResponse.data : [];
+  }
+  const teamMap = Object.create(null);
+  teams.forEach(function(team){teamMap[team.id]=team});
+  abrTeamState.memberships = memberships.map(function(item){
+    return Object.assign({},item,{team:teamMap[item.team_id] || {id:item.team_id,name:"Ekip"}});
+  });
+  abrTeamState.activeTeams = abrTeamState.memberships.filter(function(item){return item.state === "active"});
+  const settings = abrTeamSettingsGet();
+  let selected = abrTeamState.activeTeams.find(function(item){return item.team_id === settings.activeTeamId});
+  if(!selected)selected = abrTeamState.activeTeams[0] || null;
+  abrTeamState.activeMembership = selected;
+  abrTeamState.teamId = selected ? selected.team_id : null;
+  if(selected)abrTeamSettingsPatch({activeTeamId:selected.team_id});
+}
+function abrTeamMembershipSubscribe(){
+  if(!abrTeamState.client || !abrTeamState.user)return;
+  if(abrTeamState.membershipChannel && abrTeamState.membershipUserId === abrTeamState.user.id)return;
+  if(abrTeamState.membershipChannel){
+    try{abrTeamState.client.removeChannel(abrTeamState.membershipChannel)}catch(e){}
+  }
+  abrTeamState.membershipUserId = abrTeamState.user.id;
+  abrTeamState.membershipChannel = abrTeamState.client
+    .channel("abr-membership-"+abrTeamState.user.id)
+    .on("postgres_changes",{event:"*",schema:"public",table:"team_members",filter:"user_id=eq."+abrTeamState.user.id},function(){
+      clearTimeout(abrTeamState.membershipRefreshTimer);
+      abrTeamState.membershipRefreshTimer = setTimeout(abrTeamMembershipRefresh,350);
+    })
+    .subscribe();
+}
+async function abrTeamMembershipRefresh(){
+  if(!abrTeamState.user)return;
+  if(abrTeamState.refreshing){
+    clearTimeout(abrTeamState.membershipRefreshTimer);
+    abrTeamState.membershipRefreshTimer = setTimeout(abrTeamMembershipRefresh,520);
+    return;
+  }
+  abrTeamState.refreshing = true;
+  try{
+    const previousTeam = abrTeamState.teamId;
+    await abrTeamMembershipsLoad();
+    if(abrTeamState.teamId){
+      await abrTeamContextLoad({sync:previousTeam !== abrTeamState.teamId});
+      if(!previousTeam)abrTeamState.view = "home";
+    }
+    if(abrTeamState.open)abrTeamRender();
+  }catch(error){console.warn("Ekip üyeliği yenilenemedi",error)}
+  finally{abrTeamState.refreshing=false}
+}
+function abrTeamLocalApartments(){
+  const unique = Object.create(null);
+  const output = [];
+  try{
+    if(typeof data === "undefined" || !Array.isArray(data))return output;
+    data.forEach(function(apartment,index){
+      if(!apartment)return;
+      let code = abrTeamTrim(apartment.sicilKod || "",60);
+      try{if(!code && typeof apartmanKodu === "function")code = abrTeamTrim(apartmanKodu(index),60)}catch(e){}
+      const name = abrTeamTrim(apartment.ad || "",120);
+      if(!code || name.length < 2 || unique[code])return;
+      unique[code] = true;
+      output.push({local_code:code,name:name});
+    });
+  }catch(e){}
+  return output;
+}
+async function abrTeamApartmentsSync(force){
+  if(!abrTeamState.teamId || !abrTeamState.user)return 0;
+  const last = Number(abrTeamState.syncedTeams[abrTeamState.teamId] || 0);
+  if(!force && Date.now()-last < 5*60*1000)return abrTeamLocalApartments().length;
+  const local = abrTeamLocalApartments();
+  if(!local.length){abrTeamState.syncedTeams[abrTeamState.teamId]=Date.now();return 0}
+  const currentResponse = await abrTeamState.client
+    .from("shared_apartments")
+    .select("id,local_code,name,created_by")
+    .eq("team_id",abrTeamState.teamId);
+  if(currentResponse.error)throw currentResponse.error;
+  const current = Array.isArray(currentResponse.data) ? currentResponse.data : [];
+  const currentMap = Object.create(null);
+  current.forEach(function(item){currentMap[item.local_code]=item});
+  const missing = [];
+  const updates = [];
+  local.forEach(function(item){
+    const existing = currentMap[item.local_code];
+    if(!existing){
+      missing.push({
+        team_id:abrTeamState.teamId,
+        local_code:item.local_code,
+        name:item.name,
+        created_by:abrTeamState.user.id
+      });
+    }else if(existing.name !== item.name){
+      updates.push({id:existing.id,name:item.name});
+    }
+  });
+  for(let start=0;start<missing.length;start+=100){
+    const insertResponse = await abrTeamState.client.from("shared_apartments").insert(missing.slice(start,start+100));
+    if(insertResponse.error && !/duplicate key/i.test(insertResponse.error.message || ""))throw insertResponse.error;
+  }
+  for(const item of updates){
+    const updateResponse = await abrTeamState.client.from("shared_apartments").update({name:item.name}).eq("id",item.id);
+    if(updateResponse.error)throw updateResponse.error;
+  }
+  abrTeamState.syncedTeams[abrTeamState.teamId] = Date.now();
+  return local.length;
+}
+async function abrTeamMembersLoad(){
+  const response = await abrTeamState.client
+    .from("team_members")
+    .select("team_id,user_id,role,state,joined_at")
+    .eq("team_id",abrTeamState.teamId)
+    .order("joined_at",{ascending:true});
+  if(response.error)throw response.error;
+  abrTeamState.members = Array.isArray(response.data) ? response.data : [];
+  const ids = abrTeamState.members.map(function(item){return item.user_id}).filter(Boolean);
+  if(!ids.length)return;
+  const profiles = await abrTeamState.client.from("profiles").select("user_id,display_name,phone").in("user_id",ids);
+  if(profiles.error)throw profiles.error;
+  (profiles.data || []).forEach(function(profile){abrTeamState.profiles[profile.user_id]=profile});
+}
+async function abrTeamApartmentsLoad(){
+  const response = await abrTeamState.client
+    .from("shared_apartments")
+    .select("id,team_id,local_code,name,assigned_to,created_by,updated_at")
+    .eq("team_id",abrTeamState.teamId)
+    .order("name",{ascending:true});
+  if(response.error)throw response.error;
+  abrTeamState.apartments = Array.isArray(response.data) ? response.data : [];
+}
+async function abrTeamReportsLoad(){
+  const response = await abrTeamState.client
+    .from("fault_reports")
+    .select("id,team_id,apartment_id,apartment_code,apartment_name,description,priority,status,reporter_id,assigned_to,created_at,updated_at,resolved_at")
+    .eq("team_id",abrTeamState.teamId)
+    .order("updated_at",{ascending:false})
+    .limit(150);
+  if(response.error)throw response.error;
+  abrTeamState.reports = Array.isArray(response.data) ? response.data : [];
+  abrTeamState.reads = Object.create(null);
+  const ids = abrTeamState.reports.map(function(item){return item.id});
+  if(ids.length){
+    const reads = await abrTeamState.client
+      .from("fault_reads")
+      .select("report_id,last_read_at")
+      .eq("user_id",abrTeamState.user.id)
+      .in("report_id",ids);
+    if(reads.error)throw reads.error;
+    (reads.data || []).forEach(function(item){abrTeamState.reads[item.report_id]=item.last_read_at});
+  }
+  abrTeamBadgeUpdate();
+}
+async function abrTeamMessagesLoad(reportId){
+  const response = await abrTeamState.client
+    .from("fault_messages")
+    .select("id,report_id,sender_id,body,created_at")
+    .eq("report_id",reportId)
+    .order("created_at",{ascending:true});
+  if(response.error)throw response.error;
+  abrTeamState.messages = Array.isArray(response.data) ? response.data : [];
+}
+async function abrTeamReadMark(reportId){
+  if(!reportId || !abrTeamState.user)return;
+  const now = new Date().toISOString();
+  const existed = !!abrTeamState.reads[reportId];
+  abrTeamState.reads[reportId] = now;
+  abrTeamBadgeUpdate();
+  let response = existed
+    ? await abrTeamState.client.from("fault_reads").update({last_read_at:now}).eq("report_id",reportId).eq("user_id",abrTeamState.user.id)
+    : await abrTeamState.client.from("fault_reads").insert({report_id:reportId,user_id:abrTeamState.user.id,last_read_at:now});
+  if(response.error && !existed && (response.error.code === "23505" || /duplicate key/i.test(response.error.message || ""))){
+    response = await abrTeamState.client.from("fault_reads").update({last_read_at:now}).eq("report_id",reportId).eq("user_id",abrTeamState.user.id);
+  }
+  if(response.error)console.warn("Arıza okuma bilgisi kaydedilemedi",response.error);
+}
+function abrTeamReportUnread(report){
+  const readAt = abrTeamState.reads[report.id];
+  if(!readAt)return report.reporter_id !== (abrTeamState.user && abrTeamState.user.id);
+  const updated = new Date(report.updated_at || report.created_at || 0).getTime();
+  const read = new Date(readAt).getTime();
+  return Number.isFinite(updated) && Number.isFinite(read) && updated > read + 750;
+}
+function abrTeamUnreadCount(){return abrTeamState.reports.filter(abrTeamReportUnread).length}
+function abrTeamBadgeUpdate(){
+  const badge = abrTeamEl("abrTeamMenuBadge");
+  if(!badge)return;
+  const count = abrTeamUnreadCount();
+  badge.hidden = count < 1;
+  badge.textContent = count > 99 ? "99+" : String(count);
+  badge.setAttribute("aria-label",count + " okunmamış arıza");
+  if(count > abrTeamState.lastBadge && abrTeamState.lastBadge >= 0){
+    badge.classList.remove("abrTeamBadgePulse");
+    void badge.offsetWidth;
+    badge.classList.add("abrTeamBadgePulse");
+  }
+  abrTeamState.lastBadge = count;
+}
+
+async function abrTeamContextLoad(options){
+  if(!abrTeamState.teamId)return;
+  const shouldSync = !options || options.sync !== false;
+  if(shouldSync){
+    try{await abrTeamApartmentsSync(false)}catch(error){console.warn("Ekip apartman eşitlemesi atlandı",error)}
+  }
+  await Promise.all([abrTeamMembersLoad(),abrTeamApartmentsLoad(),abrTeamReportsLoad()]);
+  abrTeamRealtimeSubscribe();
+}
+function abrTeamRealtimeSubscribe(){
+  if(!abrTeamState.client || !abrTeamState.teamId)return;
+  if(abrTeamState.subscribedTeamId === abrTeamState.teamId && abrTeamState.channel)return;
+  if(abrTeamState.channel){
+    try{abrTeamState.client.removeChannel(abrTeamState.channel)}catch(e){}
+  }
+  abrTeamState.subscribedTeamId = abrTeamState.teamId;
+  abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
+  const channel = abrTeamState.client
+    .channel("abr-team-"+abrTeamState.teamId)
+    .on("postgres_changes",{event:"*",schema:"public",table:"fault_reports",filter:"team_id=eq."+abrTeamState.teamId},abrTeamRealtimeSchedule)
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"fault_messages"},abrTeamRealtimeSchedule)
+    .on("postgres_changes",{event:"*",schema:"public",table:"team_members",filter:"team_id=eq."+abrTeamState.teamId},abrTeamRealtimeSchedule)
+    .subscribe(function(status){
+      if(status === "SUBSCRIBED")abrTeamSetConnection("online");
+      else if(status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED")abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
+    });
+  abrTeamState.channel = channel;
+}
+function abrTeamRealtimeSchedule(){
+  clearTimeout(abrTeamState.refreshTimer);
+  abrTeamState.refreshTimer = setTimeout(abrTeamRealtimeRefresh,430);
+}
+async function abrTeamRealtimeRefresh(){
+  if(!abrTeamState.teamId || !abrTeamState.client)return;
+  if(abrTeamState.refreshing){
+    clearTimeout(abrTeamState.refreshTimer);
+    abrTeamState.refreshTimer = setTimeout(abrTeamRealtimeRefresh,520);
+    return;
+  }
+  abrTeamState.refreshing = true;
+  try{
+    await Promise.all([abrTeamMembersLoad(),abrTeamApartmentsLoad(),abrTeamReportsLoad()]);
+    if(abrTeamState.view === "detail" && abrTeamState.reportId){
+      await abrTeamMessagesLoad(abrTeamState.reportId);
+      if(abrTeamState.open)await abrTeamReadMark(abrTeamState.reportId);
+    }
+    if(abrTeamState.open && abrTeamState.view !== "compose")abrTeamRender();
+  }catch(error){console.warn("Canlı ekip güncellemesi alınamadı",error)}
+  finally{abrTeamState.refreshing=false}
+}
+
+async function abrTeamInit(createSession){
+  if(abrTeamState.initPromise){
+    await abrTeamState.initPromise;
+    if(createSession && !abrTeamState.user && !abrTeamState.error)return abrTeamInit(true);
+    return;
+  }
+  abrTeamState.error = null;
+  abrTeamState.initPromise = (async function(){
+    try{
+      abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
+      const user = await abrTeamEnsureSession(!!createSession);
+      if(!user)return;
+      await abrTeamProfileSync();
+      await abrTeamMembershipsLoad();
+      abrTeamMembershipSubscribe();
+      if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
+      if(!abrTeamState.channel)abrTeamSetConnection(navigator.onLine === false ? "offline" : "online");
+    }catch(error){
+      abrTeamState.error = abrTeamErrorText(error);
+      console.warn("Ekip Arıza Merkezi başlatılamadı",error);
+      abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
+    }
+  })();
+  try{await abrTeamState.initPromise}finally{abrTeamState.initPromise=null}
+}
+
+function abrTeamProfileName(userId){
+  const profile = abrTeamState.profiles[userId];
+  if(profile && profile.display_name)return profile.display_name;
+  if(abrTeamState.user && userId === abrTeamState.user.id)return abrTeamLocalProfile().name;
+  return "Ekip üyesi";
+}
+function abrTeamInitials(name){
+  const pieces = abrTeamTrim(name,60).split(/\s+/).filter(Boolean);
+  return (pieces.slice(0,2).map(function(piece){return piece.charAt(0)}).join("") || "E").toLocaleUpperCase("tr-TR");
+}
+function abrTeamMembershipOwner(){return !!(abrTeamState.activeMembership && abrTeamState.activeMembership.role === "owner")}
+function abrTeamActiveTeam(){return abrTeamState.activeMembership && abrTeamState.activeMembership.team || {name:"Ekip"}}
+function abrTeamStatusLabel(status){return ({new:"Yeni",seen:"Görüldü",en_route:"Yolda",resolved:"Çözüldü"})[status] || "Yeni"}
+function abrTeamPriorityLabel(priority){return ({normal:"Normal",high:"Önemli",emergency:"Acil"})[priority] || "Normal"}
+function abrTeamStatusIndex(status){return Math.max(0,["new","seen","en_route","resolved"].indexOf(status))}
+function abrTeamLocalIndex(report){
+  try{
+    if(typeof data === "undefined" || !Array.isArray(data))return -1;
+    let found = data.findIndex(function(apartment){return abrTeamTrim(apartment && apartment.sicilKod,60) === report.apartment_code});
+    if(found >= 0)return found;
+    const wanted = abrTeamTrim(report.apartment_name,120).toLocaleLowerCase("tr-TR");
+    return data.findIndex(function(apartment){return abrTeamTrim(apartment && apartment.ad,120).toLocaleLowerCase("tr-TR") === wanted});
+  }catch(e){return -1}
+}
+
+function abrTeamRenderLoading(){
+  abrTeamSetChrome("Ekip Arıza Merkezi",false,null);
+  const body = abrTeamEl("abrTeamBody");
+  if(body)body.innerHTML = '<div class="abrTeamLoading"><div class="abrTeamLoader" aria-hidden="true"></div><b>Ekip hattı hazırlanıyor</b><span>Güvenli oturum, ekip ve arıza kayıtları eşleştiriliyor.</span></div>';
+}
+function abrTeamRenderError(){
+  abrTeamSetChrome("Bağlantı kurulamadı",false,null);
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  body.innerHTML = '<div class="abrTeamError"><div class="abrTeamErrorIcon" aria-hidden="true">!</div><b>Ekip hattına bağlanamadık</b><p>'+abrTeamEscape(abrTeamState.error || "Bağlantıyı kontrol edip yeniden deneyebilirsin.")+'</p><button class="abrTeamSoft" type="button" onclick="ekipArizaTekrarDene()">Yeniden Dene</button></div>';
+}
+function abrTeamPendingHtml(){
+  const pending = abrTeamState.memberships.filter(function(item){return item.state === "pending"});
+  if(!pending.length)return "";
+  return pending.map(function(item){
+    return '<div class="abrTeamPending"><i>…</i><div><b>'+abrTeamEscape(item.team && item.team.name || "Ekip")+'</b><span>Katılma isteğin ekip sahibinin onayını bekliyor. Onay geldiğinde ekran otomatik açılır.</span></div></div>';
+  }).join("");
+}
+function abrTeamRenderSetup(){
+  abrTeamSetChrome("Ekip bağlantısı",false,null);
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const profile = abrTeamLocalProfile();
+  let firm = "Asansör Ekibi";
+  try{firm = abrTeamTrim(localStorage.getItem("profilFirma") || "Asansör Ekibi",80) || "Asansör Ekibi"}catch(e){}
+  const create = abrTeamState.setupMode === "create";
+  const form = create ? `
+    <form class="abrTeamCard" onsubmit="ekipTakimOlustur(event)">
+      <div class="abrTeamCardTitle"><div><span>Yeni ekip</span><b>Ekibini kur</b></div></div>
+      <label class="abrTeamField"><span>Ekip adı</span><input id="abrTeamCreateName" maxlength="80" value="${abrTeamEscape(firm)}" required></label>
+      <label class="abrTeamField"><span>Paylaşım kodu</span><input id="abrTeamCreateCode" maxlength="32" autocapitalize="characters" value="${abrTeamEscape(abrTeamGenerateCode())}" required></label>
+      <button id="abrTeamCreateButton" class="abrTeamPrimary" style="width:100%;color:#fff;background:linear-gradient(145deg,#172a48,#176fcf)" type="submit">Ekibi Oluştur</button>
+      <div class="abrTeamPrivacy"><i>i</i><span>Kodu yalnız güvendiğin ekip üyeleriyle paylaş. Katılan kişi önce onayına düşer.</span></div>
+    </form>` : `
+    <form class="abrTeamCard" onsubmit="ekipTakimaKatil(event)">
+      <div class="abrTeamCardTitle"><div><span>Mevcut ekip</span><b>Kodla katıl</b></div></div>
+      <label class="abrTeamField"><span>Ekip kodu</span><input id="abrTeamJoinCode" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>
+      <button id="abrTeamJoinButton" class="abrTeamPrimary" style="width:100%;color:#fff;background:linear-gradient(145deg,#172a48,#176fcf)" type="submit">Katılma İsteği Gönder</button>
+      <div class="abrTeamPrivacy"><i>i</i><span>İstek gönderildikten sonra ekip sahibinin onayı gerekir.</span></div>
+    </form>`;
+  body.innerHTML = `
+    <div class="abrTeamSetupHero">
+      <div class="abrTeamSetupHeroIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14v10H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.5 9h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <span>Canlı saha iletişimi</span><h3>Arızayı telefonda bırakma.</h3>
+      <p>${abrTeamEscape(profile.name)}, apartmanı seç; arızayı ekibe ilet ve kimin yola çıktığını tek ekrandan gör.</p>
+    </div>
+    ${abrTeamPendingHtml()}
+    <div class="abrTeamSetupTabs">
+      <button class="${create?"is-active":""}" type="button" onclick="ekipKurulumSekmesi('create')">Ekip Kur</button>
+      <button class="${create?"":"is-active"}" type="button" onclick="ekipKurulumSekmesi('join')">Ekibe Katıl</button>
+    </div>
+    ${form}
+    <div class="abrTeamPrivacy"><i>✓</i><span>Buluta yalnız ekip profili, apartman adı/kodu ve arıza konuşması gider. Cari, tahsilat, yönetici telefonu ve lisans verileri bu cihazda kalır.</span></div>`;
+}
+function abrTeamSwitchHtml(){
+  if(abrTeamState.activeTeams.length < 2)return "";
+  return '<div class="abrTeamSwitch"><label>Ekip</label><select onchange="ekipTakimDegistir(this.value)">'+abrTeamState.activeTeams.map(function(item){
+    return '<option value="'+abrTeamEscape(item.team_id)+'" '+(item.team_id===abrTeamState.teamId?'selected':'')+'>'+abrTeamEscape(item.team && item.team.name || "Ekip")+'</option>';
+  }).join("")+'</select></div>';
+}
+function abrTeamReportCard(report){
+  const unread = abrTeamReportUnread(report);
+  const reporter = abrTeamProfileName(report.reporter_id);
+  const assigned = report.assigned_to ? abrTeamProfileName(report.assigned_to) : "Henüz atanmadı";
+  return `
+    <button class="abrTeamReport priority-${abrTeamEscape(report.priority)} ${unread?"is-unread":""}" type="button" onclick="ekipArizaAc('${abrTeamEscape(report.id)}')">
+      <div class="abrTeamReportTop">
+        <div class="abrTeamReportIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 4.8 7.7v8.6l7.2 4.2 7.2-4.2V7.7L12 3.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M12 8v5.2M12 16.4h.01" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></div>
+        <div class="abrTeamReportMain"><div class="abrTeamReportName">${unread?'<i class="abrTeamUnreadDot"></i>':''}${abrTeamEscape(report.apartment_name)}</div><div class="abrTeamReportMeta">${abrTeamEscape(report.apartment_code)} • ${abrTeamEscape(abrTeamPriorityLabel(report.priority))}</div></div>
+        <span class="abrTeamStatusPill ${abrTeamEscape(report.status)}">${abrTeamEscape(abrTeamStatusLabel(report.status))}</span>
+      </div>
+      <div class="abrTeamReportText">${abrTeamEscape(report.description)}</div>
+      <div class="abrTeamReportFoot"><b>${abrTeamEscape(reporter)} → ${abrTeamEscape(assigned)}</b><span>${abrTeamEscape(abrTeamDate(report.updated_at))}</span></div>
+    </button>`;
+}
+function abrTeamRenderHome(){
+  abrTeamSetChrome("Ekip Arıza Merkezi",false,"home");
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const team = abrTeamActiveTeam();
+  const unread = abrTeamUnreadCount();
+  const newCount = abrTeamState.reports.filter(function(item){return item.status === "new"}).length;
+  const activeCount = abrTeamState.reports.filter(function(item){return item.status !== "resolved"}).length;
+  let reports = abrTeamState.reports.slice();
+  if(abrTeamState.filter === "active")reports = reports.filter(function(item){return item.status !== "resolved"});
+  if(abrTeamState.filter === "resolved")reports = reports.filter(function(item){return item.status === "resolved"});
+  body.innerHTML = `
+    ${abrTeamSwitchHtml()}
+    <section class="abrTeamHero">
+      <div class="abrTeamHeroTop"><div><div class="abrTeamHeroKicker">${abrTeamEscape(team.name)}</div><h3>Saha hattı açık.</h3><p>${activeCount} aktif arıza • ${newCount} yeni kayıt • ${abrTeamState.members.filter(function(item){return item.state==='active'}).length} ekip üyesi</p></div><div class="abrTeamHeroCount"><b>${unread}</b><span>Okunmamış</span></div></div>
+      <div class="abrTeamHeroActions"><button class="abrTeamPrimary" type="button" onclick="ekipYeniArizaAc()">+ Yeni Arıza Bildir</button><button class="abrTeamSecondary" type="button" onclick="ekipArizaYenile()" aria-label="Yenile">↻</button></div>
+    </section>
+    <div class="abrTeamSegment"><button class="${abrTeamState.filter==='active'?'is-active':''}" type="button" onclick="ekipArizaFiltre('active')">Aktif ${activeCount}</button><button class="${abrTeamState.filter==='all'?'is-active':''}" type="button" onclick="ekipArizaFiltre('all')">Tümü ${abrTeamState.reports.length}</button><button class="${abrTeamState.filter==='resolved'?'is-active':''}" type="button" onclick="ekipArizaFiltre('resolved')">Çözüldü</button></div>
+    <div class="abrTeamList">${reports.length?reports.map(abrTeamReportCard).join(""):`<div class="abrTeamEmpty"><div class="abrTeamEmptyIcon" aria-hidden="true">✓</div><b>${abrTeamState.filter==='resolved'?'Çözülmüş kayıt yok':'Aktif arıza bulunmuyor'}</b><p>Yeni bir arıza geldiğinde burada ekibinle birlikte takip edebilirsin.</p><button class="abrTeamSoft" type="button" onclick="ekipYeniArizaAc()">Arıza Bildir</button></div>`}</div>`;
+}
+function abrTeamRenderCompose(){
+  abrTeamSetChrome("Yeni arıza bildir",true,null);
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const activeMembers = abrTeamState.members.filter(function(item){return item.state === "active"});
+  const apartmentOptions = abrTeamState.apartments.map(function(apartment){return '<option value="'+abrTeamEscape(apartment.id)+'">'+abrTeamEscape(apartment.name)+' • '+abrTeamEscape(apartment.local_code)+'</option>'}).join("");
+  const memberOptions = activeMembers.map(function(member){return '<option value="'+abrTeamEscape(member.user_id)+'">'+abrTeamEscape(abrTeamProfileName(member.user_id))+(member.user_id===abrTeamState.user.id?' (Ben)':'')+'</option>'}).join("");
+  body.innerHTML = `
+    <div class="abrTeamPageHead"><span>Saha bildirimi</span><h3>Arızayı ekibe ilet</h3><p>Apartmanı ve önceliği seç. Ekip, durumu anlık olarak güncelleyebilir.</p></div>
+    ${abrTeamState.apartments.length?`<form class="abrTeamCard" onsubmit="ekipArizaKaydet(event)">
+      <label class="abrTeamField"><span>Apartman / site</span><select id="abrTeamFaultApartment" required><option value="">Apartman seç</option>${apartmentOptions}</select></label>
+      <label class="abrTeamField"><span>Kime iletilecek</span><select id="abrTeamFaultAssignee"><option value="">Tüm ekip / atanmamış</option>${memberOptions}</select></label>
+      <div class="abrTeamField"><span>Öncelik</span><div class="abrTeamPriority"><label><input type="radio" name="abrTeamPriority" value="normal" checked><span>Normal</span></label><label><input type="radio" name="abrTeamPriority" value="high"><span>Önemli</span></label><label><input type="radio" name="abrTeamPriority" value="emergency"><span>Acil</span></label></div></div>
+      <label class="abrTeamField"><span>Arıza açıklaması</span><textarea id="abrTeamFaultDescription" maxlength="2000" placeholder="Örn. 3. katta kaldı, kapı açılmıyor…" required></textarea></label>
+      <button id="abrTeamFaultSaveButton" class="abrTeamPrimary" style="width:100%;color:#fff;background:linear-gradient(145deg,#172a48,#176fcf)" type="submit">Arızayı Ekibe Gönder</button>
+      <div class="abrTeamPrivacy"><i>i</i><span>Bu kayıtta müşteri telefonu veya cari bilgi paylaşılmaz.</span></div>
+    </form>`:`<div class="abrTeamEmpty"><div class="abrTeamEmptyIcon" aria-hidden="true">↻</div><b>Paylaşılan apartman yok</b><p>Yerel portföyündeki ad ve sicil kodlarını ekip alanına eşitle.</p><button class="abrTeamSoft" type="button" onclick="ekipApartmanlariEsitle()">Portföyü Eşitle</button></div>`}`;
+}
+function abrTeamStatusSteps(report){
+  const index = abrTeamStatusIndex(report.status);
+  return ["Yeni","Görüldü","Yolda","Çözüldü"].map(function(label,i){return '<div class="abrTeamStep '+(i<=index?'is-done':'')+'"><i></i><b>'+label+'</b></div>'}).join("");
+}
+function abrTeamNextStatus(report){
+  return ({new:{status:"seen",label:"Görüldü Olarak İşaretle",className:""},seen:{status:"en_route",label:"Yola Çıkıyorum",className:""},en_route:{status:"resolved",label:"Arızayı Çözüldü Yap",className:"resolve"},resolved:{status:"seen",label:"Arızayı Yeniden Aç",className:"reopen"}})[report.status] || {status:"seen",label:"Görüldü Olarak İşaretle",className:""};
+}
+function abrTeamRenderDetail(){
+  const report = abrTeamState.reports.find(function(item){return item.id === abrTeamState.reportId});
+  if(!report){abrTeamState.view="home";abrTeamRenderHome();return}
+  abrTeamSetChrome(report.apartment_name,true,null);
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const next = abrTeamNextStatus(report);
+  const reporter = abrTeamProfileName(report.reporter_id);
+  const assigned = report.assigned_to ? abrTeamProfileName(report.assigned_to) : "Tüm ekip";
+  const localIndex = abrTeamLocalIndex(report);
+  const messages = abrTeamState.messages.map(function(message){
+    const mine = abrTeamState.user && message.sender_id === abrTeamState.user.id;
+    return '<div class="abrTeamMessage '+(mine?'is-me':'')+'"><div class="abrTeamMessageHead"><b>'+abrTeamEscape(mine?'Ben':abrTeamProfileName(message.sender_id))+'</b><span>'+abrTeamEscape(abrTeamDate(message.created_at))+'</span></div><div class="abrTeamMessageText">'+abrTeamEscape(message.body)+'</div></div>';
+  }).join("");
+  body.innerHTML = `
+    <section class="abrTeamStatusHero ${report.status==='resolved'?'is-resolved':''}">
+      <div class="abrTeamStatusHeroTop"><div><span>${abrTeamEscape(report.apartment_code)}</span><h3>${abrTeamEscape(report.apartment_name)}</h3></div><span class="abrTeamPriorityPill">${abrTeamEscape(abrTeamPriorityLabel(report.priority))}</span></div>
+      <p>${abrTeamEscape(report.description)}</p><div class="abrTeamStepper">${abrTeamStatusSteps(report)}</div>
+    </section>
+    <div class="abrTeamDetailMeta"><div class="abrTeamMetaBox"><span>Bildiren</span><b>${abrTeamEscape(reporter)}</b></div><div class="abrTeamMetaBox"><span>Atanan</span><b>${abrTeamEscape(assigned)}</b></div><div class="abrTeamMetaBox"><span>Bildirim</span><b>${abrTeamEscape(abrTeamDate(report.created_at))}</b></div><div class="abrTeamMetaBox"><span>Durum</span><b>${abrTeamEscape(abrTeamStatusLabel(report.status))}</b></div></div>
+    <button class="abrTeamStatusAction ${next.className}" type="button" onclick="ekipArizaDurum('${abrTeamEscape(report.id)}','${abrTeamEscape(next.status)}')">${abrTeamEscape(next.label)}</button>
+    ${localIndex>=0?'<button class="abrTeamSoft" style="width:100%;margin-bottom:12px" type="button" onclick="ekipArizaApartmaniAc(\''+abrTeamEscape(report.id)+'\')">Yerel Apartman Kartını Aç</button>':''}
+    <div class="abrTeamThreadTitle"><b>Ekip konuşması</b><span>${abrTeamState.messages.length} ileti</span></div>
+    <div class="abrTeamMessages">${messages || '<div class="abrTeamEmpty" style="min-height:130px;padding:20px"><b>Henüz ileti yok</b><p style="margin-bottom:0">İlk saha notunu aşağıdan yazabilirsin.</p></div>'}</div>
+    <form class="abrTeamComposer" onsubmit="ekipArizaMesajGonder(event,'${abrTeamEscape(report.id)}')"><textarea id="abrTeamMessageInput" maxlength="2000" placeholder="Ekip notu yaz…" required></textarea><button id="abrTeamMessageButton" type="submit">İletiyi Gönder</button></form>`;
+}
+function abrTeamMemberHtml(member,pending){
+  const name = abrTeamProfileName(member.user_id);
+  const profile = abrTeamState.profiles[member.user_id] || {};
+  const me = abrTeamState.user && member.user_id === abrTeamState.user.id;
+  const actions = pending && abrTeamMembershipOwner() ? '<div class="abrTeamMemberActions"><button class="approve" type="button" onclick="ekipUyeOnayla(\''+abrTeamEscape(member.user_id)+'\')">Onayla</button><button class="reject" type="button" onclick="ekipUyeReddet(\''+abrTeamEscape(member.user_id)+'\')">Reddet</button></div>' : '<span class="abrTeamMemberRole">'+(member.role==='owner'?'SAHİP':(me?'SEN':'ÜYE'))+'</span>';
+  return '<div class="abrTeamMember"><div class="abrTeamAvatar">'+abrTeamEscape(abrTeamInitials(name))+'</div><div class="abrTeamMemberInfo"><b>'+abrTeamEscape(name)+(me?' • Sen':'')+'</b><span>'+abrTeamEscape(profile.phone || (pending?'Onay bekliyor':'Telefon eklenmedi'))+'</span></div>'+actions+'</div>';
+}
+function abrTeamRenderTeam(){
+  abrTeamSetChrome("Ekip yönetimi",true,"team");
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const active = abrTeamState.members.filter(function(item){return item.state === "active"}).sort(function(a,b){return a.role==='owner'?-1:b.role==='owner'?1:0});
+  const pending = abrTeamState.members.filter(function(item){return item.state === "pending"});
+  const team = abrTeamActiveTeam();
+  const knownCode = abrTeamKnownCode(abrTeamState.teamId);
+  body.innerHTML = `
+    ${abrTeamSwitchHtml()}
+    <div class="abrTeamPageHead"><span>${abrTeamEscape(team.name)}</span><h3>Kim nerede, kim yolda?</h3><p>Aktif üyeleri gör; yeni katılma isteklerini onayla.</p></div>
+    ${pending.length?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Onay bekliyor</span><b>Katılma istekleri</b></div><div class="abrTeamCountPill">${pending.length}</div></div><div class="abrTeamMemberList">${pending.map(function(item){return abrTeamMemberHtml(item,true)}).join("")}</div></section>`:''}
+    <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Aktif ekip</span><b>Üyeler</b></div><div class="abrTeamCountPill">${active.length}</div></div><div class="abrTeamMemberList">${active.map(function(item){return abrTeamMemberHtml(item,false)}).join("")}</div></section>
+    ${abrTeamMembershipOwner()?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Davet güvenliği</span><b>Ekip paylaşım kodu</b></div></div>${knownCode?'<div class="abrTeamCodeKnown">'+abrTeamEscape(knownCode)+'</div>':'<div class="abrTeamPrivacy" style="margin:0 0 11px"><i>i</i><span>Mevcut kod bu cihazda kayıtlı değil. Yeni bir kod belirleyebilirsin.</span></div>'}<div class="abrTeamCodeBox"><label class="abrTeamField"><span>Yeni kod</span><input id="abrTeamNewCode" maxlength="32" autocapitalize="characters" placeholder="En az 6 karakter"></label><div class="abrTeamCodeActions"><button type="button" onclick="ekipKodUret()" aria-label="Kod üret">↻</button><button type="button" onclick="ekipKoduPaylas()" aria-label="Kodu paylaş">↗</button></div></div><button class="abrTeamSoft" style="width:100%;margin-top:10px" type="button" onclick="ekipKoduYenile()">Yeni Kodu Etkinleştir</button><div class="abrTeamPrivacy"><i>!</i><span>Kodu değiştirirsen eski kod hemen geçersiz olur. Aktif üyeler ekipte kalır.</span></div></section>`:''}`;
+}
+function abrTeamRenderSettings(){
+  abrTeamSetChrome("Ekip ayarları",true,"settings");
+  const body = abrTeamEl("abrTeamBody");
+  if(!body)return;
+  const team = abrTeamActiveTeam();
+  const localCount = abrTeamLocalApartments().length;
+  const profile = abrTeamLocalProfile();
+  body.innerHTML = `
+    <div class="abrTeamPageHead"><span>Bağlantı ve gizlilik</span><h3>Ekip merkezi ayarları</h3><p>Paylaşılan alanı yenile ve bağlantı durumunu kontrol et.</p></div>
+    <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Portföy bağlantısı</span><b>Apartman adlarını eşitle</b></div></div><div class="abrTeamInfoRows"><div class="abrTeamInfoRow"><span>Yerel portföy</span><b>${localCount} apartman</b></div><div class="abrTeamInfoRow"><span>Ekip alanı</span><b>${abrTeamState.apartments.length} apartman</b></div><div class="abrTeamInfoRow"><span>Son durum</span><b>${navigator.onLine===false?'Çevrimdışı':'Bağlı'}</b></div></div><button id="abrTeamSyncButton" class="abrTeamSoft" style="width:100%;margin-top:12px" type="button" onclick="ekipApartmanlariEsitle()">Şimdi Eşitle</button><div class="abrTeamPrivacy"><i>✓</i><span>Yalnız apartman adı ve sicil kodu paylaşılır. Yönetici, telefon, bakım ücreti, cari ve tahsilat kayıtları gönderilmez.</span></div></section>
+    <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Cihaz oturumu</span><b>Bağlantı bilgisi</b></div></div><div class="abrTeamInfoRows"><div class="abrTeamInfoRow"><span>Ekip</span><b>${abrTeamEscape(team.name)}</b></div><div class="abrTeamInfoRow"><span>Ekip profili</span><b>${abrTeamEscape(profile.name)}</b></div><div class="abrTeamInfoRow"><span>Sunucu bölgesi</span><b>Central EU • Frankfurt</b></div><div class="abrTeamInfoRow"><span>Oturum</span><b>Bu cihazda korunuyor</b></div></div></section>
+    <div class="abrTeamPrivacy"><i>i</i><span>Uygulama silinir veya tarayıcı verisi temizlenirse anonim ekip kimliği de silinebilir. Aynı ekibe kodla yeniden katılıp onay alabilirsin.</span></div>`;
+}
+function abrTeamRender(){
+  if(!abrTeamState.open)return;
+  if(abrTeamState.loading){abrTeamRenderLoading();return}
+  if(abrTeamState.error){abrTeamRenderError();return}
+  if(!abrTeamState.user || !abrTeamState.teamId){abrTeamRenderSetup();return}
+  if(abrTeamState.view === "compose")abrTeamRenderCompose();
+  else if(abrTeamState.view === "detail")abrTeamRenderDetail();
+  else if(abrTeamState.view === "team")abrTeamRenderTeam();
+  else if(abrTeamState.view === "settings")abrTeamRenderSettings();
+  else abrTeamRenderHome();
+}
+
+window.ekipArizaMerkeziAc = async function(){
+  try{if(typeof window.exHybridMenuClose === "function")window.exHybridMenuClose()}catch(e){}
+  const modal = abrTeamEl("abrTeamCenter");
+  if(!modal)return;
+  abrTeamState.open = true;
+  abrTeamState.loading = true;
+  abrTeamState.error = null;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("abrTeamOpen");
+  abrTeamHaptic("light");
+  abrTeamRender();
+  await abrTeamInit(true);
+  abrTeamState.loading = false;
+  if(abrTeamState.teamId && !["detail","compose","team","settings"].includes(abrTeamState.view))abrTeamState.view="home";
+  abrTeamRender();
+};
+window.ekipArizaMerkeziKapat = function(){
+  const modal = abrTeamEl("abrTeamCenter");
+  abrTeamState.open = false;
+  if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
+  document.body.classList.remove("abrTeamOpen");
+  abrTeamHaptic("light");
+};
+window.ekipArizaGeri = function(){
+  if(["compose","detail","team","settings"].includes(abrTeamState.view) && abrTeamState.teamId){
+    abrTeamState.view="home";
+    abrTeamState.reportId=null;
+    abrTeamState.messages=[];
+    abrTeamRender();
+    abrTeamScrollTop();
+  }else window.ekipArizaMerkeziKapat();
+};
+window.ekipArizaTekrarDene = async function(){
+  abrTeamState.loading=true;abrTeamState.error=null;abrTeamRender();
+  await abrTeamInit(true);
+  abrTeamState.loading=false;abrTeamRender();
+};
+window.ekipKurulumSekmesi = function(mode){abrTeamState.setupMode=mode==='join'?'join':'create';abrTeamRender();abrTeamScrollTop()};
+window.ekipArizaGorunum = function(view){
+  if(!abrTeamState.teamId)return;
+  abrTeamState.view=["home","team","settings"].includes(view)?view:"home";
+  abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light");
+};
+window.ekipArizaFiltre = function(filter){abrTeamState.filter=["active","all","resolved"].includes(filter)?filter:"active";abrTeamRenderHome();abrTeamHaptic("light")};
+window.ekipYeniArizaAc = function(){abrTeamState.view="compose";abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light")};
+window.ekipArizaYenile = async function(){
+  if(!abrTeamState.teamId)return;
+  try{await abrTeamContextLoad({sync:false});abrTeamRender();abrTeamToast("Ekip kayıtları güncellendi");abrTeamHaptic("success")}catch(error){abrTeamToast(abrTeamErrorText(error))}
+};
+
+window.ekipTakimOlustur = async function(event){
+  if(event)event.preventDefault();
+  const name = abrTeamTrim(abrTeamEl("abrTeamCreateName") && abrTeamEl("abrTeamCreateName").value,80);
+  const code = abrTeamNormalizeCode(abrTeamEl("abrTeamCreateCode") && abrTeamEl("abrTeamCreateCode").value);
+  if(name.length<2){abrTeamToast("Ekip adı en az 2 karakter olmalı");return}
+  if(code.length<6){abrTeamToast("Ekip kodu en az 6 karakter olmalı");return}
+  const button=abrTeamEl("abrTeamCreateButton");if(button){button.disabled=true;button.textContent="Ekip oluşturuluyor…"}
+  try{
+    await abrTeamProfileSync();
+    const response = await abrTeamState.client.rpc("create_team",{p_team_name:name,p_invite_code:code});
+    if(response.error)throw response.error;
+    const teamId = typeof response.data === "string" ? response.data : response.data && response.data.id;
+    if(teamId){abrTeamSaveCode(teamId,code);abrTeamSettingsPatch({activeTeamId:teamId})}
+    await abrTeamMembershipsLoad();
+    if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
+    abrTeamState.view="home";
+    abrTeamToast("Ekip oluşturuldu");abrTeamHaptic("success");abrTeamRender();
+  }catch(error){abrTeamToast(abrTeamErrorText(error));if(button){button.disabled=false;button.textContent="Ekibi Oluştur"}}
+};
+window.ekipTakimaKatil = async function(event){
+  if(event)event.preventDefault();
+  const code = abrTeamNormalizeCode(abrTeamEl("abrTeamJoinCode") && abrTeamEl("abrTeamJoinCode").value);
+  if(code.length<6){abrTeamToast("Geçerli ekip kodunu yaz");return}
+  const button=abrTeamEl("abrTeamJoinButton");if(button){button.disabled=true;button.textContent="İstek gönderiliyor…"}
+  try{
+    await abrTeamProfileSync();
+    const response = await abrTeamState.client.rpc("request_join_team",{p_invite_code:code});
+    if(response.error)throw response.error;
+    await abrTeamMembershipsLoad();
+    if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
+    abrTeamToast(response.data && response.data.state === "active" ? "Ekibe bağlandın" : "Katılma isteği gönderildi");
+    abrTeamHaptic("success");abrTeamRender();
+  }catch(error){abrTeamToast(abrTeamErrorText(error));if(button){button.disabled=false;button.textContent="Katılma İsteği Gönder"}}
+};
+window.ekipTakimDegistir = async function(teamId){
+  const membership = abrTeamState.activeTeams.find(function(item){return item.team_id===teamId});
+  if(!membership || teamId===abrTeamState.teamId)return;
+  abrTeamState.teamId=teamId;abrTeamState.activeMembership=membership;abrTeamSettingsPatch({activeTeamId:teamId});
+  abrTeamState.view="home";abrTeamState.loading=true;abrTeamRender();
+  try{await abrTeamContextLoad({sync:true})}catch(error){abrTeamState.error=abrTeamErrorText(error)}
+  abrTeamState.loading=false;abrTeamRender();
+};
+window.ekipArizaKaydet = async function(event){
+  if(event)event.preventDefault();
+  const apartmentId = abrTeamEl("abrTeamFaultApartment") && abrTeamEl("abrTeamFaultApartment").value;
+  const apartment = abrTeamState.apartments.find(function(item){return item.id===apartmentId});
+  const description = abrTeamTrim(abrTeamEl("abrTeamFaultDescription") && abrTeamEl("abrTeamFaultDescription").value,2000);
+  const assigneeValue = abrTeamEl("abrTeamFaultAssignee") && abrTeamEl("abrTeamFaultAssignee").value;
+  const priorityEl = document.querySelector('input[name="abrTeamPriority"]:checked');
+  const priority = priorityEl ? priorityEl.value : "normal";
+  if(!apartment){abrTeamToast("Apartman seç");return}
+  if(description.length<3){abrTeamToast("Arıza açıklamasını yaz");return}
+  const button=abrTeamEl("abrTeamFaultSaveButton");if(button){button.disabled=true;button.textContent="Ekibe gönderiliyor…"}
+  try{
+    const response = await abrTeamState.client.from("fault_reports").insert({
+      team_id:abrTeamState.teamId,
+      apartment_id:apartment.id,
+      apartment_code:apartment.local_code,
+      apartment_name:apartment.name,
+      description:description,
+      priority:["normal","high","emergency"].includes(priority)?priority:"normal",
+      status:"new",
+      reporter_id:abrTeamState.user.id,
+      assigned_to:assigneeValue || null
+    }).select("id").single();
+    if(response.error)throw response.error;
+    await abrTeamReportsLoad();
+    await abrTeamReadMark(response.data.id);
+    abrTeamToast("Arıza ekibe gönderildi");abrTeamHaptic("success");
+    await window.ekipArizaAc(response.data.id);
+  }catch(error){abrTeamToast(abrTeamErrorText(error));if(button){button.disabled=false;button.textContent="Arızayı Ekibe Gönder"}}
+};
+window.ekipArizaAc = async function(reportId){
+  const report = abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!report)return;
+  abrTeamState.reportId=reportId;abrTeamState.view="detail";abrTeamState.messages=[];
+  abrTeamSetChrome(report.apartment_name,true,null);
+  const body=abrTeamEl("abrTeamBody");if(body)body.innerHTML='<div class="abrTeamLoading"><div class="abrTeamLoader"></div><b>Arıza açılıyor</b><span>Ekip konuşması yükleniyor.</span></div>';
+  try{await abrTeamMessagesLoad(reportId);await abrTeamReadMark(reportId)}catch(error){abrTeamToast(abrTeamErrorText(error))}
+  abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light");
+};
+window.ekipArizaDurum = async function(reportId,status){
+  if(!["new","seen","en_route","resolved"].includes(status))return;
+  try{
+    const response = await abrTeamState.client.rpc("set_fault_status",{p_report_id:reportId,p_status:status});
+    if(response.error)throw response.error;
+    await abrTeamReportsLoad();await abrTeamReadMark(reportId);
+    abrTeamToast(status==="resolved"?"Arıza çözüldü":"Durum güncellendi");abrTeamHaptic("success");abrTeamRenderDetail();
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+};
+window.ekipArizaMesajGonder = async function(event,reportId){
+  if(event)event.preventDefault();
+  const input=abrTeamEl("abrTeamMessageInput");const text=abrTeamTrim(input&&input.value,2000);
+  if(!text)return;
+  const button=abrTeamEl("abrTeamMessageButton");if(button){button.disabled=true;button.textContent="Gönderiliyor…"}
+  try{
+    const response=await abrTeamState.client.from("fault_messages").insert({report_id:reportId,sender_id:abrTeamState.user.id,body:text});
+    if(response.error)throw response.error;
+    if(input)input.value="";
+    await Promise.all([abrTeamMessagesLoad(reportId),abrTeamReportsLoad()]);await abrTeamReadMark(reportId);
+    abrTeamHaptic("success");abrTeamRenderDetail();
+    const body=abrTeamEl("abrTeamBody");if(body)body.scrollTop=body.scrollHeight;
+  }catch(error){abrTeamToast(abrTeamErrorText(error));if(button){button.disabled=false;button.textContent="İletiyi Gönder"}}
+};
+window.ekipArizaApartmaniAc = function(reportId){
+  const report=abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!report)return;
+  const index=abrTeamLocalIndex(report);
+  if(index<0){abrTeamToast("Bu apartman yerel portföyde bulunamadı");return}
+  window.ekipArizaMerkeziKapat();
+  setTimeout(function(){try{if(typeof detayAc==="function")detayAc(index)}catch(e){abrTeamToast("Apartman kartı açılamadı")}},120);
+};
+window.ekipUyeOnayla = async function(userId){
+  try{
+    const response=await abrTeamState.client.rpc("approve_team_member",{p_team_id:abrTeamState.teamId,p_user_id:userId});
+    if(response.error)throw response.error;
+    await abrTeamMembersLoad();abrTeamRenderTeam();abrTeamToast("Ekip üyesi onaylandı");abrTeamHaptic("success");
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+};
+window.ekipUyeReddet = async function(userId){
+  try{
+    const response=await abrTeamState.client.rpc("reject_team_member",{p_team_id:abrTeamState.teamId,p_user_id:userId});
+    if(response.error)throw response.error;
+    await abrTeamMembersLoad();abrTeamRenderTeam();abrTeamToast("Katılma isteği reddedildi");
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+};
+window.ekipKodUret = function(){const input=abrTeamEl("abrTeamNewCode");if(input){input.value=abrTeamGenerateCode();input.focus()}abrTeamHaptic("light")};
+window.ekipKoduYenile = async function(){
+  const input=abrTeamEl("abrTeamNewCode");const code=abrTeamNormalizeCode(input&&input.value);
+  if(code.length<6){abrTeamToast("Yeni kod en az 6 karakter olmalı");return}
+  try{
+    const response=await abrTeamState.client.rpc("rotate_team_code",{p_team_id:abrTeamState.teamId,p_new_code:code});
+    if(response.error)throw response.error;
+    abrTeamSaveCode(abrTeamState.teamId,code);abrTeamToast("Yeni ekip kodu etkinleştirildi");abrTeamHaptic("success");abrTeamRenderTeam();
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+};
+async function abrTeamCopy(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){await navigator.clipboard.writeText(text);return}
+  const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();
+}
+window.ekipKoduPaylas = async function(){
+  const code=abrTeamKnownCode(abrTeamState.teamId);
+  if(!code){abrTeamToast("Önce yeni bir ekip kodu etkinleştir");return}
+  const team=abrTeamActiveTeam();const text=team.name+" ekibine katılma kodu: "+code;
+  try{
+    if(navigator.share){await navigator.share({title:"Asansör Bakım & Revizyon",text:text})}
+    else{await abrTeamCopy(text);abrTeamToast("Ekip kodu kopyalandı")}
+  }catch(error){if(error && error.name!=="AbortError")abrTeamToast("Ekip kodu paylaşılamadı")}
+};
+window.ekipApartmanlariEsitle = async function(){
+  const button=abrTeamEl("abrTeamSyncButton");if(button){button.disabled=true;button.textContent="Eşitleniyor…"}
+  try{
+    const count=await abrTeamApartmentsSync(true);await abrTeamApartmentsLoad();
+    abrTeamToast(count+" yerel apartman ekip alanıyla eşitlendi");abrTeamHaptic("success");abrTeamRender();
+  }catch(error){abrTeamToast(abrTeamErrorText(error));if(button){button.disabled=false;button.textContent="Şimdi Eşitle"}}
+};
+
+document.addEventListener("keydown",function(event){
+  if(event.key === "Escape" && abrTeamState.open){event.preventDefault();window.ekipArizaGeri()}
+});
+window.addEventListener("offline",function(){abrTeamSetConnection("offline")});
+window.addEventListener("online",function(){
+  abrTeamSetConnection("connecting");
+  if(abrTeamState.user){abrTeamInit(false).then(function(){if(abrTeamState.open)abrTeamRender()})}
+});
+document.addEventListener("visibilitychange",function(){
+  if(document.visibilityState === "visible" && abrTeamState.user && abrTeamState.teamId)abrTeamRealtimeSchedule();
+});
+document.addEventListener("DOMContentLoaded",function(){
+  setTimeout(function(){
+    let hasSession=false;
+    try{hasSession=!!localStorage.getItem(ABR_TEAM_AUTH_KEY)}catch(e){}
+    if(!hasSession)return;
+    abrTeamInit(false).then(function(){abrTeamBadgeUpdate()});
+  },3200);
+});
+
+window.__abrTeamCenterVersion = "2.1.00";
+})();
 </script>
 
 
