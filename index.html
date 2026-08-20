@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.00_TEAM_FAULT_CENTER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.01_LOCK_SCREEN_PUSH -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,74 +10276,59 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<script>
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal) {
-  try {
-    await OneSignal.init({
-      appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "/OneSignalSDKWorker.js",
-      serviceWorkerParam: {
-        scope: "/"
-      },
-      autoResubscribe: true,
-      notifyButton: {
-        enable: false
-      }
-    });
-    window.elevatorXOneSignalReady = true;
-  } catch (err) {
-    console.warn("Asansör Bakım & Revizyon OneSignal init error:", err);
-  }
-});
-</script>
-
-
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v77 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.01 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
+<script id="abrPushBootstrap2101">
+(function(){
+"use strict";
+
 window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal) {
-  try {
-    await OneSignal.init({
-      appId: "c74b3f5c-2712-42ff-aa88-3e7543685428",
-      serviceWorkerPath: "/OneSignalSDKWorker.js",
-      serviceWorkerParam: {
-        scope: "/"
-      },
-      autoResubscribe: true,
-      notifyButton: {
-        enable: false
-      },
-      promptOptions: {
-        slidedown: {
-          prompts: [
-            {
-              type: "push",
-              autoPrompt: true,
-              delay: {
-                pageViews: 1,
-                timeDelay: 10
-              },
-              text: {
-                actionMessage: "Asansör Bakım & Revizyon güncellemeleri ve duyuruları için bildirimleri açabilirsin.",
-                acceptButton: "Bildirim Aç",
-                cancelButton: "Daha Sonra"
-              }
-            }
-          ]
-        }
-      },
-      welcomeNotification: {
-        title: "Asansör Bakım & Revizyon bildirimleri aktif",
-        message: "Güncelleme ve önemli duyuruları buradan alacaksın."
-      }
-    });
-    window.elevatorXOneSignalReady = true;
-  } catch (err) {
-    console.warn("Asansör Bakım & Revizyon OneSignal init error:", err);
-  }
+
+function abrPushWorkerConfig(){
+  let scope = "/";
+  try{
+    scope = new URL(".",window.location.href).pathname || "/";
+    if(!scope.endsWith("/"))scope += "/";
+  }catch(error){}
+  return {
+    path:scope.replace(/^\/+/,"") + "OneSignalSDKWorker.js",
+    scope:scope
+  };
+}
+
+window.__abrOneSignalReadyPromise = new Promise(function(resolve){
+  window.OneSignalDeferred.push(async function(OneSignal){
+    try{
+      const worker = abrPushWorkerConfig();
+      await OneSignal.init({
+        appId:"c74b3f5c-2712-42ff-aa88-3e7543685428",
+        serviceWorkerPath:worker.path,
+        serviceWorkerParam:{scope:worker.scope},
+        autoResubscribe:true,
+        notifyButton:{enable:false}
+      });
+      window.__abrOneSignal = OneSignal;
+      window.elevatorXOneSignalReady = true;
+      try{
+        OneSignal.Notifications.addEventListener("click",function(event){
+          const notification = event && event.notification || {};
+          const payload = notification.additionalData || notification.data || {};
+          const reportId = String(payload.abr_fault_id || "").trim();
+          if(reportId)window.__abrPendingFaultId = reportId;
+          window.dispatchEvent(new CustomEvent("abr-push-click",{detail:{reportId:reportId}}));
+        });
+      }catch(error){}
+      window.dispatchEvent(new CustomEvent("abr-push-ready"));
+      resolve(OneSignal);
+    }catch(error){
+      window.__abrOneSignalError = error;
+      console.warn("Asansör Bakım & Revizyon bildirim başlatma uyarısı:",error);
+      window.dispatchEvent(new CustomEvent("abr-push-error"));
+      resolve(null);
+    }
+  });
 });
+})();
 </script>
 
 
@@ -20482,7 +20467,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.00</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.01</div>
     </div>
   </div>
 </div>
@@ -20494,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.00";
+  const SPLASH_VERSION = "v2.1.01";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21284,7 +21269,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.00";
+const APP_VERSION = "v2.1.01";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21299,6 +21284,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 /* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
+/* v2.1.01 — Ekip Arıza Merkezi için kilit ekranı Web Push bildirimleri */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -21803,7 +21789,11 @@ async function elevatorXAcilCacheTemizle(){
 try{
 if("serviceWorker" in navigator){
 let regs = await navigator.serviceWorker.getRegistrations();
-await Promise.all(regs.map(function(reg){ return reg.unregister(); }));
+await Promise.all(regs.filter(function(reg){
+let worker = reg.active || reg.waiting || reg.installing;
+let scriptUrl = worker && worker.scriptURL || "";
+return !/OneSignalSDKWorker|OneSignalSDK\.sw/i.test(scriptUrl);
+}).map(function(reg){ return reg.unregister(); }));
 }
 }catch(e){}
 
@@ -22155,7 +22145,11 @@ localStorage.setItem("elevatorxUpdateStartedAt", String(Date.now()));
 try{
 if("serviceWorker" in navigator){
 let regs = await navigator.serviceWorker.getRegistrations();
-await Promise.all(regs.map(function(reg){
+await Promise.all(regs.filter(function(reg){
+let worker = reg.active || reg.waiting || reg.installing;
+let scriptUrl = worker && worker.scriptURL || "";
+return !/OneSignalSDKWorker|OneSignalSDK\.sw/i.test(scriptUrl);
+}).map(function(reg){
 return reg.unregister();
 }));
 }
@@ -37547,7 +37541,7 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 </script>
 
 <style id="abrTeamFaultCenter2100">
-/* v2.1.00 — Ekip Arıza Merkezi; mevcut yerel verilerden tamamen bağımsız bulut katmanı */
+/* v2.1.01 — Ekip Arıza Merkezi + kilit ekranı bildirimi; yerel verilerden bağımsız bulut katmanı */
 .abrTeamDrawerItem{position:relative!important}
 .abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
 .abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
@@ -38012,6 +38006,20 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamInfoRow:last-child{border-bottom:0}
 .abrTeamInfoRow span{color:#778499;font-size:10px;font-weight:800}
 .abrTeamInfoRow b{max-width:62%;overflow:hidden;text-overflow:ellipsis;color:var(--abr-team-ink);font-size:11px;font-weight:900;text-align:right;white-space:nowrap}
+.abrPushCard{overflow:hidden}
+.abrPushCard .abrTeamPrimary{color:#fff;background:linear-gradient(145deg,#132746,#176dcc);box-shadow:0 10px 24px rgba(21,86,166,.21)}
+.abrPushLiveDot{width:11px;height:11px;border:3px solid rgba(133,149,173,.16);border-radius:50%;background:#aab5c5;box-shadow:0 0 0 5px rgba(148,163,184,.08)}
+.abrPushLiveDot.is-on{border-color:rgba(35,190,105,.18);background:#21bd69;box-shadow:0 0 0 5px rgba(33,189,105,.10),0 0 18px rgba(33,189,105,.25)}
+.abrPushStatus{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1px solid rgba(72,131,207,.14);border-radius:18px;background:linear-gradient(145deg,#f4f8ff,#edf4ff)}
+.abrPushStatusIcon{flex:0 0 39px;width:39px;height:39px;display:flex;align-items:center;justify-content:center;border-radius:14px;color:#1d6dcb;background:#fff;box-shadow:0 8px 18px rgba(35,92,161,.10);font-size:16px;font-weight:950}
+.abrPushStatus b{display:block;margin-top:1px;color:#142238;font-size:12px;line-height:1.25;font-weight:950}
+.abrPushStatus span{display:block;margin-top:4px;color:#708097;font-size:10px;line-height:1.43;font-weight:700}
+.abrPushStatus.is-success{border-color:rgba(35,181,102,.17);background:linear-gradient(145deg,#eefcf4,#e8f9f0)}
+.abrPushStatus.is-success .abrPushStatusIcon{color:#15904d;background:#fff}
+.abrPushStatus.is-warn{border-color:rgba(218,155,29,.18);background:linear-gradient(145deg,#fffaf0,#fff5d9)}
+.abrPushStatus.is-warn .abrPushStatusIcon{color:#a56b00;background:#fff}
+.abrPushStatus.is-danger{border-color:rgba(215,60,89,.16);background:linear-gradient(145deg,#fff4f6,#ffedf1)}
+.abrPushStatus.is-danger .abrPushStatusIcon{color:#c42f50;background:#fff}
 
 body.darkMode #abrTeamCenter,
 html.darkRoot #abrTeamCenter{
@@ -38057,6 +38065,20 @@ body.darkMode #abrTeamCenter .abrTeamPending b,
 html.darkRoot #abrTeamCenter .abrTeamPending b{color:#f4d77b}
 body.darkMode #abrTeamCenter .abrTeamPending span,
 html.darkRoot #abrTeamCenter .abrTeamPending span{color:#c9b56e}
+body.darkMode #abrTeamCenter .abrPushStatus,
+html.darkRoot #abrTeamCenter .abrPushStatus{border-color:rgba(100,155,228,.15);background:linear-gradient(145deg,#10213a,#112842)}
+body.darkMode #abrTeamCenter .abrPushStatus b,
+html.darkRoot #abrTeamCenter .abrPushStatus b{color:#edf4ff}
+body.darkMode #abrTeamCenter .abrPushStatus span,
+html.darkRoot #abrTeamCenter .abrPushStatus span{color:#a8b7cc}
+body.darkMode #abrTeamCenter .abrPushStatusIcon,
+html.darkRoot #abrTeamCenter .abrPushStatusIcon{background:#172d49;box-shadow:none}
+body.darkMode #abrTeamCenter .abrPushStatus.is-success,
+html.darkRoot #abrTeamCenter .abrPushStatus.is-success{background:linear-gradient(145deg,#0e2b25,#12362b)}
+body.darkMode #abrTeamCenter .abrPushStatus.is-warn,
+html.darkRoot #abrTeamCenter .abrPushStatus.is-warn{background:linear-gradient(145deg,#2a250f,#332b0f)}
+body.darkMode #abrTeamCenter .abrPushStatus.is-danger,
+html.darkRoot #abrTeamCenter .abrPushStatus.is-danger{background:linear-gradient(145deg,#321623,#391726)}
 
 @keyframes abrTeamCenterIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @keyframes abrTeamSpin{to{transform:rotate(360deg)}}
@@ -38150,7 +38172,16 @@ const abrTeamState = {
   refreshing:false,
   syncedTeams:Object.create(null),
   lastBadge:-1,
-  connection:"idle"
+  connection:"idle",
+  pushReady:false,
+  pushSupported:false,
+  pushPermission:"default",
+  pushOptedIn:false,
+  pushWorking:false,
+  pushError:null,
+  pushBoundUserId:null,
+  pushListenersBound:false,
+  pushOpenBusy:false
 };
 
 function abrTeamEl(id){return document.getElementById(id)}
@@ -38234,6 +38265,188 @@ function abrTeamErrorText(error){
   map.some(function(item){if(item[0].test(text)){text=item[1];return true}return false});
   return text || "İşlem tamamlanamadı.";
 }
+
+function abrPushEnvironment(){
+  const userAgent = String(navigator.userAgent || "");
+  const ios = /iPad|iPhone|iPod/i.test(userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const standalone = navigator.standalone === true || !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+  return {ios:ios,standalone:standalone,secure:window.isSecureContext === true};
+}
+function abrPushAppUrl(){
+  try{
+    const url = new URL(window.location.href);
+    url.hash = "";
+    url.search = "";
+    return url.href;
+  }catch(error){return ""}
+}
+function abrPushTimeout(promise,wait){
+  return Promise.race([
+    promise,
+    new Promise(function(resolve){setTimeout(function(){resolve(null)},wait || 12000)})
+  ]);
+}
+async function abrPushOneSignal(){
+  if(window.__abrOneSignal)return window.__abrOneSignal;
+  const ready = window.__abrOneSignalReadyPromise;
+  if(!ready)throw new Error("Bildirim bileşeni bulunamadı.");
+  const OneSignal = await abrPushTimeout(ready,15000);
+  if(!OneSignal)throw window.__abrOneSignalError || new Error("Bildirim bileşeni başlatılamadı.");
+  return OneSignal;
+}
+async function abrPushRefresh(){
+  try{
+    const OneSignal = await abrPushOneSignal();
+    let supported = false;
+    try{supported = !!(await Promise.resolve(OneSignal.Notifications.isPushSupported()))}catch(error){}
+    let permission = "default";
+    try{
+      if(typeof Notification !== "undefined" && Notification.permission)permission = Notification.permission;
+      else if(OneSignal.Notifications.permission === true)permission = "granted";
+      else if(OneSignal.Notifications.permission === false)permission = "default";
+    }catch(error){}
+    let optedIn = false;
+    try{optedIn = !!OneSignal.User.PushSubscription.optedIn}catch(error){}
+    abrTeamState.pushReady = true;
+    abrTeamState.pushSupported = supported;
+    abrTeamState.pushPermission = permission;
+    abrTeamState.pushOptedIn = optedIn;
+    abrTeamState.pushError = null;
+  }catch(error){
+    abrTeamState.pushReady = false;
+    abrTeamState.pushSupported = false;
+    abrTeamState.pushOptedIn = false;
+    abrTeamState.pushError = abrTeamErrorText(error);
+  }
+  return abrTeamState.pushOptedIn;
+}
+async function abrPushBindUser(){
+  if(!abrTeamState.user)return false;
+  try{
+    const OneSignal = await abrPushOneSignal();
+    if(abrTeamState.pushBoundUserId !== abrTeamState.user.id){
+      await OneSignal.login(abrTeamState.user.id);
+      abrTeamState.pushBoundUserId = abrTeamState.user.id;
+    }
+    if(!abrTeamState.pushListenersBound){
+      const changed = function(){
+        abrPushRefresh().then(function(){
+          if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+        });
+      };
+      try{OneSignal.User.PushSubscription.addEventListener("change",changed)}catch(error){}
+      try{OneSignal.Notifications.addEventListener("permissionChange",changed)}catch(error){}
+      abrTeamState.pushListenersBound = true;
+    }
+    await abrPushRefresh();
+    return true;
+  }catch(error){
+    abrTeamState.pushError = abrTeamErrorText(error);
+    return false;
+  }
+}
+function abrPushUi(){
+  const environment = abrPushEnvironment();
+  if(!environment.secure)return {tone:"warn",title:"Güvenli bağlantı gerekli",detail:"Kilit ekranı bildirimi için uygulamayı HTTPS adresinden aç.",button:"Durumu Yenile",enable:false};
+  if(environment.ios && !environment.standalone)return {tone:"warn",title:"Önce ana ekrana ekle",detail:"Safari paylaş menüsünden Ana Ekrana Ekle; ardından uygulama simgesinden aç.",button:"Nasıl Açılır?",enable:false};
+  if(abrTeamState.pushPermission === "denied")return {tone:"danger",title:"Bildirim izni kapalı",detail:"iPhone Ayarlar > Bildirimler bölümünden uygulamanın iznini aç.",button:"Durumu Yenile",enable:false};
+  if(abrTeamState.pushOptedIn)return {tone:"success",title:"Kilit ekranı bildirimleri açık",detail:"Yeni arıza ve ekip iletileri telefon kilitliyken de ulaşır.",button:"Durumu Yenile",enable:false};
+  if(abrTeamState.pushError)return {tone:"danger",title:"Bildirim bağlantısı hazır değil",detail:abrTeamState.pushError,button:"Tekrar Dene",enable:true};
+  if(abrTeamState.pushReady && !abrTeamState.pushSupported)return {tone:"warn",title:"Bu açılış biçimi desteklenmiyor",detail:"Uygulamayı Safari'den ana ekrana ekleyip uygulama simgesinden aç.",button:"Durumu Yenile",enable:false};
+  return {tone:"info",title:"Bildirim izni bekleniyor",detail:"Bir kez izin ver; arıza ve ekip mesajları kilit ekranına gelsin.",button:"Bildirimleri Aç",enable:true};
+}
+async function abrPushNotify(eventName,reportId,messageId,strict){
+  if(!abrTeamState.client || !abrTeamState.user)return null;
+  try{
+    const response = await abrTeamState.client.functions.invoke("notify-team",{
+      body:{
+        event:eventName,
+        report_id:reportId || null,
+        message_id:messageId || null,
+        app_url:abrPushAppUrl()
+      }
+    });
+    if(response.error)throw response.error;
+    return response.data || {ok:true};
+  }catch(error){
+    console.warn("Ekip kilit ekranı bildirimi gönderilemedi",error);
+    if(strict)throw error;
+    return null;
+  }
+}
+async function abrPushOpenReport(reportId){
+  const id = abrTeamTrim(reportId,80);
+  if(!id || abrTeamState.pushOpenBusy)return;
+  abrTeamState.pushOpenBusy = true;
+  try{
+    if(typeof window.ekipArizaMerkeziAc !== "function")return;
+    await window.ekipArizaMerkeziAc();
+    if(!abrTeamState.reports.some(function(item){return item.id === id}) && abrTeamState.teamId){
+      await abrTeamReportsLoad();
+    }
+    if(abrTeamState.reports.some(function(item){return item.id === id}))await window.ekipArizaAc(id);
+    else abrTeamToast("Bildirimdeki arıza bu ekip hesabında bulunamadı");
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+  finally{abrTeamState.pushOpenBusy = false;window.__abrPendingFaultId = ""}
+}
+function abrPushDeepLinkRead(){
+  let id = abrTeamTrim(window.__abrPendingFaultId || "",80);
+  try{
+    const url = new URL(window.location.href);
+    if(!id)id = abrTeamTrim(url.searchParams.get("abrFault") || "",80);
+    if(url.searchParams.has("abrFault")){
+      url.searchParams.delete("abrFault");
+      history.replaceState(history.state,"",url.pathname + (url.search ? url.search : "") + url.hash);
+    }
+  }catch(error){}
+  return id;
+}
+
+window.ekipBildirimleriAc = async function(){
+  if(abrTeamState.pushWorking)return;
+  const environment = abrPushEnvironment();
+  if(environment.ios && !environment.standalone){
+    abrTeamToast("Önce Safari paylaş menüsünden Ana Ekrana Ekle");
+    return;
+  }
+  abrTeamState.pushWorking = true;
+  if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+  try{
+    const OneSignal = await abrPushOneSignal();
+    if(abrTeamState.user)await OneSignal.login(abrTeamState.user.id);
+    const accepted = await OneSignal.Notifications.requestPermission();
+    if(accepted !== false && OneSignal.User.PushSubscription && typeof OneSignal.User.PushSubscription.optIn === "function"){
+      await OneSignal.User.PushSubscription.optIn();
+    }
+    await abrPushRefresh();
+    if(abrTeamState.pushOptedIn){abrTeamToast("Kilit ekranı bildirimleri açıldı");abrTeamHaptic("success")}
+    else abrTeamToast("Bildirim izni verilmedi");
+  }catch(error){abrTeamState.pushError=abrTeamErrorText(error);abrTeamToast(abrTeamState.pushError)}
+  finally{
+    abrTeamState.pushWorking = false;
+    if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+  }
+};
+window.ekipBildirimDurumunuYenile = async function(){
+  abrTeamState.pushWorking = true;
+  if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+  await abrPushBindUser();
+  abrTeamState.pushWorking = false;
+  if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+  abrTeamToast(abrTeamState.pushOptedIn ? "Bildirim bağlantısı aktif" : "Bildirim henüz aktif değil");
+};
+window.ekipBildirimTesti = async function(){
+  if(!abrTeamState.pushOptedIn){abrTeamToast("Önce bildirimleri aç");return}
+  try{
+    await abrPushNotify("test",null,null,true);
+    abrTeamToast("Test bildirimi 10 saniye sonra gelecek; telefonu kilitle");
+  }catch(error){abrTeamToast("Bildirim sunucusu henüz etkin değil")}
+};
+
+window.addEventListener("abr-push-click",function(event){
+  const reportId = event && event.detail && event.detail.reportId || abrPushDeepLinkRead();
+  if(reportId)setTimeout(function(){abrPushOpenReport(reportId)},180);
+});
 
 function abrTeamSetConnection(state){
   abrTeamState.connection = state;
@@ -38640,6 +38853,9 @@ async function abrTeamInit(createSession){
       await abrTeamProfileSync();
       await abrTeamMembershipsLoad();
       abrTeamMembershipSubscribe();
+      abrPushBindUser().then(function(){
+        if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
+      });
       if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
       if(!abrTeamState.channel)abrTeamSetConnection(navigator.onLine === false ? "offline" : "online");
     }catch(error){
@@ -38851,9 +39067,13 @@ function abrTeamRenderSettings(){
   const team = abrTeamActiveTeam();
   const localCount = abrTeamLocalApartments().length;
   const profile = abrTeamLocalProfile();
+  const push = abrPushUi();
+  const pushAction = push.enable ? "ekipBildirimleriAc()" : "ekipBildirimDurumunuYenile()";
+  const pushButtonText = abrTeamState.pushWorking ? "Kontrol ediliyor…" : push.button;
   body.innerHTML = `
     <div class="abrTeamPageHead"><span>Bağlantı ve gizlilik</span><h3>Ekip merkezi ayarları</h3><p>Paylaşılan alanı yenile ve bağlantı durumunu kontrol et.</p></div>
     <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Portföy bağlantısı</span><b>Apartman adlarını eşitle</b></div></div><div class="abrTeamInfoRows"><div class="abrTeamInfoRow"><span>Yerel portföy</span><b>${localCount} apartman</b></div><div class="abrTeamInfoRow"><span>Ekip alanı</span><b>${abrTeamState.apartments.length} apartman</b></div><div class="abrTeamInfoRow"><span>Son durum</span><b>${navigator.onLine===false?'Çevrimdışı':'Bağlı'}</b></div></div><button id="abrTeamSyncButton" class="abrTeamSoft" style="width:100%;margin-top:12px" type="button" onclick="ekipApartmanlariEsitle()">Şimdi Eşitle</button><div class="abrTeamPrivacy"><i>✓</i><span>Yalnız apartman adı ve sicil kodu paylaşılır. Yönetici, telefon, bakım ücreti, cari ve tahsilat kayıtları gönderilmez.</span></div></section>
+    <section class="abrTeamCard abrPushCard"><div class="abrTeamCardTitle"><div><span>Kilit ekranı</span><b>Ekip bildirimleri</b></div><div class="abrPushLiveDot ${abrTeamState.pushOptedIn?'is-on':''}" aria-hidden="true"></div></div><div class="abrPushStatus is-${abrTeamEscape(push.tone)}"><div class="abrPushStatusIcon">${abrTeamState.pushOptedIn?'✓':'◉'}</div><div><b>${abrTeamEscape(push.title)}</b><span>${abrTeamEscape(push.detail)}</span></div></div><button id="abrPushEnableButton" class="abrTeamPrimary" style="width:100%;margin-top:12px" type="button" onclick="${pushAction}" ${abrTeamState.pushWorking?'disabled':''}>${abrTeamEscape(pushButtonText)}</button>${abrTeamState.pushOptedIn?'<button class="abrTeamSoft" style="width:100%;margin-top:9px" type="button" onclick="ekipBildirimTesti()">10 Saniye Sonra Test Gönder</button>':''}<div class="abrTeamPrivacy"><i>i</i><span>Yeni arıza ve ekip iletileri için çalışır. Bildirime dokununca doğrudan ilgili arıza açılır.</span></div></section>
     <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Cihaz oturumu</span><b>Bağlantı bilgisi</b></div></div><div class="abrTeamInfoRows"><div class="abrTeamInfoRow"><span>Ekip</span><b>${abrTeamEscape(team.name)}</b></div><div class="abrTeamInfoRow"><span>Ekip profili</span><b>${abrTeamEscape(profile.name)}</b></div><div class="abrTeamInfoRow"><span>Sunucu bölgesi</span><b>Central EU • Frankfurt</b></div><div class="abrTeamInfoRow"><span>Oturum</span><b>Bu cihazda korunuyor</b></div></div></section>
     <div class="abrTeamPrivacy"><i>i</i><span>Uygulama silinir veya tarayıcı verisi temizlenirse anonim ekip kimliği de silinebilir. Aynı ekibe kodla yeniden katılıp onay alabilirsin.</span></div>`;
 }
@@ -38986,6 +39206,7 @@ window.ekipArizaKaydet = async function(event){
       assigned_to:assigneeValue || null
     }).select("id").single();
     if(response.error)throw response.error;
+    abrPushNotify("fault_created",response.data.id,null,false);
     await abrTeamReportsLoad();
     await abrTeamReadMark(response.data.id);
     abrTeamToast("Arıza ekibe gönderildi");abrTeamHaptic("success");
@@ -39016,8 +39237,9 @@ window.ekipArizaMesajGonder = async function(event,reportId){
   if(!text)return;
   const button=abrTeamEl("abrTeamMessageButton");if(button){button.disabled=true;button.textContent="Gönderiliyor…"}
   try{
-    const response=await abrTeamState.client.from("fault_messages").insert({report_id:reportId,sender_id:abrTeamState.user.id,body:text});
+    const response=await abrTeamState.client.from("fault_messages").insert({report_id:reportId,sender_id:abrTeamState.user.id,body:text}).select("id").single();
     if(response.error)throw response.error;
+    abrPushNotify("message_created",reportId,response.data && response.data.id,false);
     if(input)input.value="";
     await Promise.all([abrTeamMessagesLoad(reportId),abrTeamReportsLoad()]);await abrTeamReadMark(reportId);
     abrTeamHaptic("success");abrTeamRenderDetail();
@@ -39089,6 +39311,11 @@ document.addEventListener("visibilitychange",function(){
   if(document.visibilityState === "visible" && abrTeamState.user && abrTeamState.teamId)abrTeamRealtimeSchedule();
 });
 document.addEventListener("DOMContentLoaded",function(){
+  const pendingFaultId = abrPushDeepLinkRead();
+  if(pendingFaultId){
+    window.__abrPendingFaultId = pendingFaultId;
+    setTimeout(function(){abrPushOpenReport(pendingFaultId)},3600);
+  }
   setTimeout(function(){
     let hasSession=false;
     try{hasSession=!!localStorage.getItem(ABR_TEAM_AUTH_KEY)}catch(e){}
@@ -39097,7 +39324,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.00";
+window.__abrTeamCenterVersion = "2.1.01";
 })();
 </script>
 
