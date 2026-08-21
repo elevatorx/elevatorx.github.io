@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.04_SWIPE_DELETE_RLS_FALLBACK -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.05_MANUAL_FAULT_AND_LIVE_HANDOFF -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.04 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.05 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20467,7 +20467,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.04</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.05</div>
     </div>
   </div>
 </div>
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.04";
+  const SPLASH_VERSION = "v2.1.05";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21269,7 +21269,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.04";
+const APP_VERSION = "v2.1.05";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21285,6 +21285,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 /* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
 /* v2.1.04 — Ekip Arıza Merkezi: sağa kaydırmalı RPC + RLS yedekli güvenli silme */
+/* v2.1.05 — Portföy dışı elle arıza, üstlenme ve canlı durum hareketleri */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -37541,7 +37542,7 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 </script>
 
 <style id="abrTeamFaultCenter2100">
-/* v2.1.04 — Ekip Arıza Merkezi + sağa kaydırmalı RPC/RLS yedekli silme */
+/* v2.1.05 — Ekip Arıza Merkezi + elle apartman, üstlenme ve canlı hareket akışı */
 .abrTeamDrawerItem{position:relative!important}
 .abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
 .abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
@@ -37918,6 +37919,15 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamFormGrid .abrTeamField{min-width:0}
 .abrTeamFormActions{display:grid;grid-template-columns:1fr 1.35fr;gap:9px;margin-top:4px}
 .abrTeamFormActions .abrTeamPrimary{color:#fff;background:linear-gradient(145deg,#152743,#176ec9);box-shadow:0 10px 22px rgba(25,83,151,.20)}
+.abrTeamFaultSource{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:13px;padding:5px;border:1px solid var(--abr-team-line);border-radius:19px;background:rgba(237,243,251,.78)}
+.abrTeamFaultSource button{min-width:0;min-height:53px;padding:7px 10px;border:0;border-radius:15px;color:#77849a;background:transparent;text-align:left}
+.abrTeamFaultSource button b{display:block;font-size:11px;font-weight:950}
+.abrTeamFaultSource button span{display:block;margin-top:3px;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:750;white-space:nowrap}
+.abrTeamFaultSource button.is-active{color:#fff;background:linear-gradient(145deg,#172a48,#176fcf);box-shadow:0 8px 18px rgba(25,86,160,.20)}
+.abrTeamFaultSource button:disabled{opacity:.42;pointer-events:none}
+.abrTeamFaultSourcePanel[hidden]{display:none!important}
+.abrTeamManualNote{display:flex;align-items:flex-start;gap:9px;margin:-2px 0 13px;padding:11px 12px;border-radius:15px;color:#5e6d83;background:#f1f6fd;font-size:9px;line-height:1.45;font-weight:750}
+.abrTeamManualNote i{flex:0 0 20px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#277be0;font-style:normal;font-weight:950}
 .abrTeamPrivacy{display:flex;align-items:flex-start;gap:10px;margin:12px 0 0;padding:12px;border-radius:16px;color:#5e6c81;background:#f1f6fd;font-size:10px;line-height:1.45;font-weight:700}
 .abrTeamPrivacy i{flex:0 0 21px;width:21px;height:21px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#267be1;font-style:normal;font-size:11px;font-weight:950}
 
@@ -37949,9 +37959,20 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamMetaBox{min-width:0;padding:14px;border:1px solid var(--abr-team-line);border-radius:18px;background:var(--abr-team-surface)}
 .abrTeamMetaBox span{display:block;color:#8792a5;font-size:8px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
 .abrTeamMetaBox b{display:block;margin-top:5px;overflow:hidden;text-overflow:ellipsis;color:var(--abr-team-ink);font-size:12px;font-weight:900;white-space:nowrap}
+.abrTeamExternalNote{display:flex;align-items:center;gap:9px;margin:0 0 12px;padding:11px 13px;border:1px solid rgba(48,123,217,.14);border-radius:16px;color:#55708f;background:#f0f6ff;font-size:9px;line-height:1.4;font-weight:800}
+.abrTeamExternalNote i{flex:0 0 22px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#fff;background:#2a7cdf;font-style:normal;font-size:11px;font-weight:950}
+.abrTeamAssignment{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding:12px 14px;border:1px solid rgba(43,121,218,.14);border-radius:17px;color:#416384;background:#f0f6ff}
+.abrTeamAssignment div{min-width:0}
+.abrTeamAssignment span{display:block;color:#7e91a9;font-size:8px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+.abrTeamAssignment b{display:block;margin-top:4px;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:950;white-space:nowrap}
+.abrTeamAssignment i{flex:0 0 auto;padding:7px 9px;border-radius:999px;color:#1767c3;background:#fff;font-style:normal;font-size:8px;font-weight:950}
+.abrTeamClaimAction{width:100%;min-height:52px;margin-bottom:12px;border:1px solid rgba(31,115,219,.18);border-radius:18px;color:#165da9;background:linear-gradient(145deg,#eef6ff,#e1efff);box-shadow:0 9px 21px rgba(37,102,179,.10);font-size:13px;font-weight:950}
+.abrTeamClaimAction:active{transform:scale(.985)}
+.abrTeamClaimAction:disabled{opacity:.55;pointer-events:none}
 .abrTeamStatusAction{width:100%;min-height:52px;margin-bottom:12px;border:0;border-radius:18px;color:#fff;background:linear-gradient(145deg,#172b4a,#1a70cd);box-shadow:0 11px 24px rgba(28,91,165,.21);font-size:13px;font-weight:950}
 .abrTeamStatusAction.resolve{background:linear-gradient(145deg,#0c784e,#18aa68)}
 .abrTeamStatusAction.reopen{color:#215488;background:#eef5ff;border:1px solid rgba(47,120,213,.18);box-shadow:none}
+.abrTeamStatusAction:disabled{opacity:.55;pointer-events:none}
 
 .abrTeamThreadTitle{margin:18px 2px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .abrTeamThreadTitle b{font-size:15px;font-weight:950}
@@ -37962,6 +37983,10 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamMessageHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:5px;color:#6d7b90;font-size:8px;font-weight:900}
 .abrTeamMessage.is-me .abrTeamMessageHead{color:rgba(228,240,255,.72)}
 .abrTeamMessageText{font-size:12px;line-height:1.45;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
+.abrTeamActivity{justify-self:center;width:min(100%,390px);padding:9px 12px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(78,128,191,.12);border-radius:999px;color:#65758b;background:rgba(237,244,253,.88);font-size:9px;line-height:1.35;font-weight:800;text-align:center}
+.abrTeamActivity i{flex:0 0 20px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#2a7cdf;font-style:normal;font-size:10px;font-weight:950}
+.abrTeamActivity b{color:#40546f;font-weight:950}
+.abrTeamActivity time{color:#8b99ac;font-size:8px;font-weight:800;white-space:nowrap}
 .abrTeamComposer{padding:10px;border:1px solid var(--abr-team-line);border-radius:20px;background:var(--abr-team-surface);box-shadow:0 10px 24px rgba(46,68,101,.07)}
 .abrTeamComposer textarea{width:100%;min-height:67px;padding:8px 9px;border:0;outline:0;resize:none;color:var(--abr-team-ink);background:transparent;font:700 13px/1.4 inherit;box-sizing:border-box}
 .abrTeamComposer button{width:100%;min-height:44px;border:0;border-radius:14px;color:#fff;background:#176dcc;font-size:12px;font-weight:950}
@@ -38093,6 +38118,22 @@ body.darkMode #abrTeamCenter .abrTeamReportText,
 html.darkRoot #abrTeamCenter .abrTeamReportText{color:#b6c2d4}
 body.darkMode #abrTeamCenter .abrTeamPrivacy,
 html.darkRoot #abrTeamCenter .abrTeamPrivacy{color:#aab9cd;background:#10223a}
+body.darkMode #abrTeamCenter .abrTeamFaultSource,
+html.darkRoot #abrTeamCenter .abrTeamFaultSource{background:rgba(14,28,47,.88)}
+body.darkMode #abrTeamCenter .abrTeamManualNote,
+html.darkRoot #abrTeamCenter .abrTeamManualNote,
+body.darkMode #abrTeamCenter .abrTeamExternalNote,
+html.darkRoot #abrTeamCenter .abrTeamExternalNote,
+body.darkMode #abrTeamCenter .abrTeamAssignment,
+html.darkRoot #abrTeamCenter .abrTeamAssignment{color:#aab9cd;background:#10223a;border-color:rgba(109,156,218,.16)}
+body.darkMode #abrTeamCenter .abrTeamAssignment i,
+html.darkRoot #abrTeamCenter .abrTeamAssignment i{background:#172d49}
+body.darkMode #abrTeamCenter .abrTeamClaimAction,
+html.darkRoot #abrTeamCenter .abrTeamClaimAction{color:#8fc4ff;background:linear-gradient(145deg,#10223a,#133056);border-color:rgba(89,151,231,.20)}
+body.darkMode #abrTeamCenter .abrTeamActivity,
+html.darkRoot #abrTeamCenter .abrTeamActivity{color:#a7b6ca;background:rgba(16,34,58,.90);border-color:rgba(104,151,214,.15)}
+body.darkMode #abrTeamCenter .abrTeamActivity b,
+html.darkRoot #abrTeamCenter .abrTeamActivity b{color:#d9e5f5}
 body.darkMode #abrTeamCenter .abrTeamMember,
 html.darkRoot #abrTeamCenter .abrTeamMember{background:rgba(19,34,55,.76)}
 body.darkMode #abrTeamCenter .abrTeamPriority span,
@@ -38237,8 +38278,10 @@ const abrTeamState = {
   messages:[],
   view:"home",
   filter:"active",
+  composeMode:"portfolio",
   setupMode:"create",
   reportId:null,
+  actionWorking:false,
   deleteReportId:null,
   deleteWorking:false,
   open:false,
@@ -38631,7 +38674,7 @@ async function abrTeamEnsureClient(){
   abrTeamState.client = sdk.createClient(ABR_TEAM_CONFIG.url,ABR_TEAM_CONFIG.key,{
     auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false},
     realtime:{params:{eventsPerSecond:5}},
-    global:{headers:{"x-client-info":"asansor-bakim-revizyon-team/2.1.2"}}
+    global:{headers:{"x-client-info":"asansor-bakim-revizyon-team/2.1.5"}}
   });
   return abrTeamState.client;
 }
@@ -39002,6 +39045,10 @@ function abrTeamActiveTeam(){return abrTeamState.activeMembership && abrTeamStat
 function abrTeamStatusLabel(status){return ({new:"Yeni",seen:"Görüldü",en_route:"Yolda",resolved:"Çözüldü"})[status] || "Yeni"}
 function abrTeamPriorityLabel(priority){return ({normal:"Normal",high:"Önemli",emergency:"Acil"})[priority] || "Normal"}
 function abrTeamStatusIndex(status){return Math.max(0,["new","seen","en_route","resolved"].indexOf(status))}
+function abrTeamMessageActivity(body){
+  const text=abrTeamTrim(body,220);
+  return /^(Arızayı üstlendi\.|Durumu “(?:Yeni|Görüldü|Yolda|Çözüldü)” olarak güncelledi\.)$/.test(text)?text:"";
+}
 function abrTeamLocalIndex(report){
   try{
     if(typeof data === "undefined" || !Array.isArray(data))return -1;
@@ -39112,18 +39159,31 @@ function abrTeamRenderCompose(){
   const body = abrTeamEl("abrTeamBody");
   if(!body)return;
   const activeMembers = abrTeamState.members.filter(function(item){return item.state === "active"});
+  const hasPortfolio = abrTeamState.apartments.length > 0;
+  const mode = abrTeamState.composeMode === "manual" || !hasPortfolio ? "manual" : "portfolio";
+  abrTeamState.composeMode = mode;
   const apartmentOptions = abrTeamState.apartments.map(function(apartment){return '<option value="'+abrTeamEscape(apartment.id)+'">'+abrTeamEscape(apartment.name)+' • '+abrTeamEscape(apartment.local_code)+'</option>'}).join("");
   const memberOptions = activeMembers.map(function(member){return '<option value="'+abrTeamEscape(member.user_id)+'">'+abrTeamEscape(abrTeamProfileName(member.user_id))+(member.user_id===abrTeamState.user.id?' (Ben)':'')+'</option>'}).join("");
   body.innerHTML = `
-    <div class="abrTeamPageHead"><span>Saha bildirimi</span><h3>Arızayı ekibe ilet</h3><p>Apartmanı ve önceliği seç. Ekip, durumu anlık olarak güncelleyebilir.</p></div>
-    ${abrTeamState.apartments.length?`<form class="abrTeamCard" onsubmit="ekipArizaKaydet(event)">
-      <label class="abrTeamField"><span>Apartman / site</span><select id="abrTeamFaultApartment" required><option value="">Apartman seç</option>${apartmentOptions}</select></label>
+    <div class="abrTeamPageHead"><span>Saha bildirimi</span><h3>Arızayı ekibe ilet</h3><p>Kendi portföyünden seçebilir veya diğer ekip üyesinin binasını elle yazabilirsin.</p></div>
+    <form class="abrTeamCard" onsubmit="ekipArizaKaydet(event)">
+      <div class="abrTeamFaultSource" role="tablist" aria-label="Apartman giriş biçimi">
+        <button class="${mode==='portfolio'?'is-active':''}" type="button" onclick="ekipArizaKaynak('portfolio')" ${hasPortfolio?'':'disabled'}><b>Portföyden Seç</b><span>${hasPortfolio?abrTeamState.apartments.length+' ekip kaydı':'Kayıt bulunamadı'}</span></button>
+        <button class="${mode==='manual'?'is-active':''}" type="button" onclick="ekipArizaKaynak('manual')"><b>Elle Yaz</b><span>Portföy dışı apartman</span></button>
+      </div>
+      <div id="abrTeamPortfolioPanel" class="abrTeamFaultSourcePanel" ${mode==='portfolio'?'':'hidden'}>
+        <label class="abrTeamField"><span>Apartman / site</span><select id="abrTeamFaultApartment" ${mode==='portfolio'?'required':''}><option value="">Apartman seç</option>${apartmentOptions}</select></label>
+      </div>
+      <div id="abrTeamManualPanel" class="abrTeamFaultSourcePanel" ${mode==='manual'?'':'hidden'}>
+        <label class="abrTeamField"><span>Apartman / site adı</span><input id="abrTeamFaultManualName" maxlength="120" autocomplete="off" placeholder="Örn. Çınar Apartmanı" ${mode==='manual'?'required':''}></label>
+        <div class="abrTeamManualNote"><i>i</i><span>Elle yazılan bina yalnız bu arıza kaydında görünür; senin veya karşı tarafın portföyüne eklenmez.</span></div>
+      </div>
       <label class="abrTeamField"><span>Kime iletilecek</span><select id="abrTeamFaultAssignee"><option value="">Tüm ekip / atanmamış</option>${memberOptions}</select></label>
       <div class="abrTeamField"><span>Öncelik</span><div class="abrTeamPriority"><label><input type="radio" name="abrTeamPriority" value="normal" checked><span>Normal</span></label><label><input type="radio" name="abrTeamPriority" value="high"><span>Önemli</span></label><label><input type="radio" name="abrTeamPriority" value="emergency"><span>Acil</span></label></div></div>
       <label class="abrTeamField"><span>Arıza açıklaması</span><textarea id="abrTeamFaultDescription" maxlength="2000" placeholder="Örn. 3. katta kaldı, kapı açılmıyor…" required></textarea></label>
       <button id="abrTeamFaultSaveButton" class="abrTeamPrimary" style="width:100%;color:#fff;background:linear-gradient(145deg,#172a48,#176fcf)" type="submit">Arızayı Ekibe Gönder</button>
-      <div class="abrTeamPrivacy"><i>i</i><span>Bu kayıtta müşteri telefonu veya cari bilgi paylaşılmaz.</span></div>
-    </form>`:`<div class="abrTeamEmpty"><div class="abrTeamEmptyIcon" aria-hidden="true">↻</div><b>Paylaşılan apartman yok</b><p>Yerel portföyündeki ad ve sicil kodlarını ekip alanına eşitle.</p><button class="abrTeamSoft" type="button" onclick="ekipApartmanlariEsitle()">Portföyü Eşitle</button></div>`}`;
+      <div class="abrTeamPrivacy"><i>i</i><span>Karşı taraf apartman adı, arıza açıklaması, atanan kişi ve canlı durum hareketlerini görür. Cari ve müşteri telefonu paylaşılmaz.</span></div>
+    </form>`;
 }
 function abrTeamStatusSteps(report){
   const index = abrTeamStatusIndex(report.status);
@@ -39141,10 +39201,13 @@ function abrTeamRenderDetail(){
   const next = abrTeamNextStatus(report);
   const reporter = abrTeamProfileName(report.reporter_id);
   const assigned = report.assigned_to ? abrTeamProfileName(report.assigned_to) : "Tüm ekip";
+  const assignedToMe = !!(abrTeamState.user && report.assigned_to === abrTeamState.user.id);
   const localIndex = abrTeamLocalIndex(report);
   const canDelete = abrTeamCanDelete(report);
   const messages = abrTeamState.messages.map(function(message){
     const mine = abrTeamState.user && message.sender_id === abrTeamState.user.id;
+    const activity = abrTeamMessageActivity(message.body);
+    if(activity)return '<div class="abrTeamActivity"><i>↻</i><span><b>'+abrTeamEscape(mine?'Ben':abrTeamProfileName(message.sender_id))+'</b> '+abrTeamEscape(activity)+'</span><time>'+abrTeamEscape(abrTeamDate(message.created_at))+'</time></div>';
     return '<div class="abrTeamMessage '+(mine?'is-me':'')+'"><div class="abrTeamMessageHead"><b>'+abrTeamEscape(mine?'Ben':abrTeamProfileName(message.sender_id))+'</b><span>'+abrTeamEscape(abrTeamDate(message.created_at))+'</span></div><div class="abrTeamMessageText">'+abrTeamEscape(message.body)+'</div></div>';
   }).join("");
   body.innerHTML = `
@@ -39152,8 +39215,10 @@ function abrTeamRenderDetail(){
       <div class="abrTeamStatusHeroTop"><div><span>${abrTeamEscape(report.apartment_code)}</span><h3>${abrTeamEscape(report.apartment_name)}</h3></div><span class="abrTeamPriorityPill">${abrTeamEscape(abrTeamPriorityLabel(report.priority))}</span></div>
       <p>${abrTeamEscape(report.description)}</p><div class="abrTeamStepper">${abrTeamStatusSteps(report)}</div>
     </section>
+    ${report.apartment_id?'':'<div class="abrTeamExternalNote"><i>↗</i><span>Portföy dışı bildirim • Bu apartman hiçbir kullanıcının yerel portföyüne eklenmedi.</span></div>'}
     <div class="abrTeamDetailMeta"><div class="abrTeamMetaBox"><span>Bildiren</span><b>${abrTeamEscape(reporter)}</b></div><div class="abrTeamMetaBox"><span>Atanan</span><b>${abrTeamEscape(assigned)}</b></div><div class="abrTeamMetaBox"><span>Bildirim</span><b>${abrTeamEscape(abrTeamDate(report.created_at))}</b></div><div class="abrTeamMetaBox"><span>Durum</span><b>${abrTeamEscape(abrTeamStatusLabel(report.status))}</b></div></div>
-    <button class="abrTeamStatusAction ${next.className}" type="button" onclick="ekipArizaDurum('${abrTeamEscape(report.id)}','${abrTeamEscape(next.status)}')">${abrTeamEscape(next.label)}</button>
+    ${report.assigned_to?`<div class="abrTeamAssignment"><div><span>Görev durumu</span><b>${abrTeamEscape(assignedToMe?'Bu arıza sende':assigned+' ilgileniyor')}</b></div><i>${assignedToMe?'SENDE':'ATANDI'}</i></div>`:`<button class="abrTeamClaimAction" type="button" onclick="ekipArizaUstlen('${abrTeamEscape(report.id)}')" ${abrTeamState.actionWorking?'disabled':''}>${abrTeamState.actionWorking?'Üstleniliyor…':'Arızayı Üstlen'}</button>`}
+    <button class="abrTeamStatusAction ${next.className}" type="button" onclick="ekipArizaDurum('${abrTeamEscape(report.id)}','${abrTeamEscape(next.status)}')" ${abrTeamState.actionWorking?'disabled':''}>${abrTeamState.actionWorking?'Güncelleniyor…':abrTeamEscape(next.label)}</button>
     ${localIndex>=0?'<button class="abrTeamSoft" style="width:100%;margin-bottom:12px" type="button" onclick="ekipArizaApartmaniAc(\''+abrTeamEscape(report.id)+'\')">Yerel Apartman Kartını Aç</button>':''}
     <div class="abrTeamThreadTitle"><b>Ekip konuşması</b><span>${abrTeamState.messages.length} ileti</span></div>
     <div class="abrTeamMessages">${messages || '<div class="abrTeamEmpty" style="min-height:130px;padding:20px"><b>Henüz ileti yok</b><p style="margin-bottom:0">İlk saha notunu aşağıdan yazabilirsin.</p></div>'}</div>
@@ -39258,7 +39323,23 @@ window.ekipArizaGorunum = function(view){
   abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light");
 };
 window.ekipArizaFiltre = function(filter){abrTeamState.filter=["active","all","resolved"].includes(filter)?filter:"active";abrTeamRenderHome();abrTeamHaptic("light")};
-window.ekipYeniArizaAc = function(){abrTeamState.view="compose";abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light")};
+window.ekipYeniArizaAc = function(){abrTeamState.composeMode=abrTeamState.apartments.length?"portfolio":"manual";abrTeamState.view="compose";abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light")};
+window.ekipArizaKaynak = function(mode){
+  if(mode==="portfolio" && !abrTeamState.apartments.length){abrTeamToast("Ekip alanında seçilecek apartman bulunmuyor");return}
+  abrTeamState.composeMode=mode==="manual"?"manual":"portfolio";
+  const portfolio=abrTeamEl("abrTeamPortfolioPanel");
+  const manual=abrTeamEl("abrTeamManualPanel");
+  const apartment=abrTeamEl("abrTeamFaultApartment");
+  const manualName=abrTeamEl("abrTeamFaultManualName");
+  if(portfolio)portfolio.hidden=abrTeamState.composeMode!=="portfolio";
+  if(manual)manual.hidden=abrTeamState.composeMode!=="manual";
+  if(apartment)apartment.required=abrTeamState.composeMode==="portfolio";
+  if(manualName)manualName.required=abrTeamState.composeMode==="manual";
+  const source=portfolio && portfolio.parentElement && portfolio.parentElement.querySelector(".abrTeamFaultSource");
+  if(source)source.querySelectorAll("button").forEach(function(button,index){button.classList.toggle("is-active",index===(abrTeamState.composeMode==="portfolio"?0:1))});
+  if(abrTeamState.composeMode==="manual" && manualName)setTimeout(function(){manualName.focus()},30);
+  abrTeamHaptic("light");
+};
 window.ekipArizaYenile = async function(){
   if(!abrTeamState.teamId)return;
   try{await abrTeamContextLoad({sync:false});abrTeamRender();abrTeamToast("Ekip kayıtları güncellendi");abrTeamHaptic("success")}catch(error){abrTeamToast(abrTeamErrorText(error))}
@@ -39308,21 +39389,24 @@ window.ekipTakimDegistir = async function(teamId){
 };
 window.ekipArizaKaydet = async function(event){
   if(event)event.preventDefault();
+  const manualMode = abrTeamState.composeMode === "manual";
   const apartmentId = abrTeamEl("abrTeamFaultApartment") && abrTeamEl("abrTeamFaultApartment").value;
   const apartment = abrTeamState.apartments.find(function(item){return item.id===apartmentId});
+  const manualName = abrTeamTrim(abrTeamEl("abrTeamFaultManualName") && abrTeamEl("abrTeamFaultManualName").value,120);
   const description = abrTeamTrim(abrTeamEl("abrTeamFaultDescription") && abrTeamEl("abrTeamFaultDescription").value,2000);
   const assigneeValue = abrTeamEl("abrTeamFaultAssignee") && abrTeamEl("abrTeamFaultAssignee").value;
   const priorityEl = document.querySelector('input[name="abrTeamPriority"]:checked');
   const priority = priorityEl ? priorityEl.value : "normal";
-  if(!apartment){abrTeamToast("Apartman seç");return}
+  if(manualMode && manualName.length<2){abrTeamToast("Apartman veya site adını yaz");return}
+  if(!manualMode && !apartment){abrTeamToast("Apartman seç");return}
   if(description.length<3){abrTeamToast("Arıza açıklamasını yaz");return}
   const button=abrTeamEl("abrTeamFaultSaveButton");if(button){button.disabled=true;button.textContent="Ekibe gönderiliyor…"}
   try{
     const response = await abrTeamState.client.from("fault_reports").insert({
       team_id:abrTeamState.teamId,
-      apartment_id:apartment.id,
-      apartment_code:apartment.local_code,
-      apartment_name:apartment.name,
+      apartment_id:manualMode?null:apartment.id,
+      apartment_code:manualMode?"PORTFÖY DIŞI":apartment.local_code,
+      apartment_name:manualMode?manualName:apartment.name,
       description:description,
       priority:["normal","high","emergency"].includes(priority)?priority:"normal",
       status:"new",
@@ -39346,14 +39430,74 @@ window.ekipArizaAc = async function(reportId){
   try{await abrTeamMessagesLoad(reportId);await abrTeamReadMark(reportId)}catch(error){abrTeamToast(abrTeamErrorText(error))}
   abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light");
 };
-window.ekipArizaDurum = async function(reportId,status){
-  if(!["new","seen","en_route","resolved"].includes(status))return;
+async function abrTeamActivityLog(reportId,text){
+  const response=await abrTeamState.client.from("fault_messages").insert({report_id:reportId,sender_id:abrTeamState.user.id,body:text}).select("id").single();
+  if(response.error)throw response.error;
+  abrPushNotify("message_created",reportId,response.data && response.data.id,false);
+  return response.data && response.data.id;
+}
+window.ekipArizaUstlen = async function(reportId){
+  if(abrTeamState.actionWorking)return;
+  const report=abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!report || !abrTeamState.user)return;
+  if(report.assigned_to===abrTeamState.user.id){abrTeamToast("Bu arıza zaten sende");return}
+  if(report.assigned_to){abrTeamToast(abrTeamProfileName(report.assigned_to)+" bu arızayla ilgileniyor");return}
+  abrTeamState.actionWorking=true;abrTeamRenderDetail();
   try{
+    const claim=await abrTeamState.client.from("fault_reports")
+      .update({assigned_to:abrTeamState.user.id})
+      .eq("id",reportId)
+      .eq("team_id",abrTeamState.teamId)
+      .is("assigned_to",null)
+      .select("id")
+      .maybeSingle();
+    if(claim.error)throw claim.error;
+    if(!claim.data){
+      await abrTeamReportsLoad();
+      const current=abrTeamState.reports.find(function(item){return item.id===reportId});
+      abrTeamToast(current && current.assigned_to ? abrTeamProfileName(current.assigned_to)+" arızayı senden önce üstlendi" : "Arıza üstlenilemedi");
+      return;
+    }
+    if(report.status==="new"){
+      const seen=await abrTeamState.client.rpc("set_fault_status",{p_report_id:reportId,p_status:"seen"});
+      if(seen.error)console.warn("Üstlenme sonrası görüldü durumu yazılamadı",seen.error);
+    }
+    try{await abrTeamActivityLog(reportId,"Arızayı üstlendi.")}catch(error){console.warn("Üstlenme hareketi kaydedilemedi",error)}
+    await Promise.all([abrTeamReportsLoad(),abrTeamMessagesLoad(reportId)]);await abrTeamReadMark(reportId);
+    abrTeamToast("Arıza sana atandı");abrTeamHaptic("success");
+  }catch(error){abrTeamToast(abrTeamErrorText(error))}
+  finally{
+    abrTeamState.actionWorking=false;
+    if(abrTeamState.open && abrTeamState.view==="detail" && abrTeamState.reportId===reportId)abrTeamRenderDetail();
+  }
+};
+window.ekipArizaDurum = async function(reportId,status){
+  if(abrTeamState.actionWorking || !["new","seen","en_route","resolved"].includes(status))return;
+  const report=abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!report)return;
+  abrTeamState.actionWorking=true;abrTeamRenderDetail();
+  try{
+    if(status==="en_route" && !report.assigned_to){
+      const claim=await abrTeamState.client.from("fault_reports")
+        .update({assigned_to:abrTeamState.user.id})
+        .eq("id",reportId)
+        .eq("team_id",abrTeamState.teamId)
+        .is("assigned_to",null)
+        .select("id")
+        .maybeSingle();
+      if(claim.error)throw claim.error;
+      if(claim.data){try{await abrTeamActivityLog(reportId,"Arızayı üstlendi.")}catch(error){console.warn("Otomatik üstlenme hareketi kaydedilemedi",error)}}
+    }
     const response = await abrTeamState.client.rpc("set_fault_status",{p_report_id:reportId,p_status:status});
     if(response.error)throw response.error;
-    await abrTeamReportsLoad();await abrTeamReadMark(reportId);
-    abrTeamToast(status==="resolved"?"Arıza çözüldü":"Durum güncellendi");abrTeamHaptic("success");abrTeamRenderDetail();
+    try{await abrTeamActivityLog(reportId,"Durumu “"+abrTeamStatusLabel(status)+"” olarak güncelledi.")}catch(error){console.warn("Durum hareketi kaydedilemedi",error)}
+    await Promise.all([abrTeamReportsLoad(),abrTeamMessagesLoad(reportId)]);await abrTeamReadMark(reportId);
+    abrTeamToast(status==="resolved"?"Arıza çözüldü":"Durum güncellendi");abrTeamHaptic("success");
   }catch(error){abrTeamToast(abrTeamErrorText(error))}
+  finally{
+    abrTeamState.actionWorking=false;
+    if(abrTeamState.open && abrTeamState.view==="detail" && abrTeamState.reportId===reportId)abrTeamRenderDetail();
+  }
 };
 function abrTeamDeleteFinish(reportId,deletedName,message){
   abrTeamState.deleteWorking=false;
@@ -39638,7 +39782,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.04";
+window.__abrTeamCenterVersion = "2.1.05";
 })();
 </script>
 
