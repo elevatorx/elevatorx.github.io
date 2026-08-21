@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.06_TEAM_CHAT_AND_MEMBER_CONTROL -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.07_IOS_KEYBOARD_VIEWPORT_FIX -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.06 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.07 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20469,7 +20469,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.06</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.07</div>
     </div>
   </div>
 </div>
@@ -20481,7 +20481,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.06";
+  const SPLASH_VERSION = "v2.1.07";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21271,7 +21271,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.06";
+const APP_VERSION = "v2.1.07";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -37573,7 +37573,10 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 .abrTeamMenuBadge[hidden]{display:none!important}
 .abrTeamMenuBadge.abrTeamBadgePulse{animation:abrTeamBadgePulse .58s ease-out both}
 
-body.abrTeamOpen{overflow:hidden!important;touch-action:none}
+html.abrTeamOpenRoot,
+html.abrTeamOpenRoot body,
+body.abrTeamOpen{overflow:hidden!important;overscroll-behavior:none!important}
+body.abrTeamOpen{touch-action:none}
 body.abrTeamOpen .tabbar,
 body.abrTeamOpen #exHybridMenuBtn{
   opacity:0!important;
@@ -37595,7 +37598,16 @@ body.abrTeamOpen #exHybridMenuBtn{
   --abr-team-amber:#e7a019;
   position:fixed;
   z-index:2147482700;
-  inset:0;
+  top:var(--abr-team-viewport-top,0px);
+  right:0;
+  bottom:auto;
+  left:0;
+  width:100%;
+  height:var(--abr-team-viewport-height,100dvh);
+  min-height:0;
+  box-sizing:border-box;
+  overflow:hidden;
+  isolation:isolate;
   display:none;
   color:var(--abr-team-ink);
   background:
@@ -37609,8 +37621,8 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamShell{
   position:relative;
   width:min(100%,760px);
-  height:100dvh;
-  min-height:100%;
+  height:100%;
+  min-height:0;
   margin:0 auto;
   display:flex;
   flex-direction:column;
@@ -38147,6 +38159,13 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamMemberRemoveCancel{color:#526078;background:#eef3f9}.abrTeamMemberRemoveConfirm{color:#fff;background:linear-gradient(145deg,#bb2341,#df3555);box-shadow:0 9px 20px rgba(193,35,67,.18)}
 .abrTeamMemberRemoveConfirm:disabled{opacity:.55;pointer-events:none}
 
+/* v2.1.07 — iOS klavyesinde ekip merkezini gercek gorunur alana sabitle */
+body.abrTeamKeyboardOpen .abrTeamNav{bottom:8px}
+body.abrTeamKeyboardOpen .abrTeamBody.abrTeamChatView{padding-bottom:91px}
+@media(max-width:760px){
+  .abrTeamChatComposer textarea{font-size:16px;line-height:1.28}
+}
+
 body.darkMode #abrTeamCenter .abrTeamChatDay,
 html.darkRoot #abrTeamCenter .abrTeamChatDay{color:#9eabc0;background:#122039}
 body.darkMode #abrTeamCenter .abrTeamChatFile,
@@ -38277,7 +38296,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteSliderLabel{color:#c4cede}
 }
 @media(min-width:761px){
   #abrTeamCenter{padding:12px}
-  .abrTeamShell{height:calc(100dvh - 24px);border-radius:32px;border:1px solid rgba(255,255,255,.72)}
+  .abrTeamShell{height:100%;border-radius:32px;border:1px solid rgba(255,255,255,.72)}
   .abrTeamDeleteModal{align-items:center}
 }
 @media(prefers-reduced-motion:reduce){
@@ -38415,8 +38434,92 @@ const abrTeamState = {
   pushOpenBusy:false
 };
 const abrTeamDeleteGesture = {bound:false,active:false,startX:0};
+const abrTeamViewportState = {bound:false,frame:0,timers:[],focusTimer:0};
 
 function abrTeamEl(id){return document.getElementById(id)}
+function abrTeamViewportTimersClear(){
+  if(abrTeamViewportState.frame){
+    cancelAnimationFrame(abrTeamViewportState.frame);
+    abrTeamViewportState.frame=0;
+  }
+  while(abrTeamViewportState.timers.length)clearTimeout(abrTeamViewportState.timers.pop());
+}
+function abrTeamViewportApply(){
+  if(!abrTeamState.open)return;
+  const modal=abrTeamEl("abrTeamCenter");
+  if(!modal)return;
+  const viewport=window.visualViewport;
+  let height=viewport&&Number.isFinite(viewport.height)?viewport.height:window.innerHeight;
+  let top=viewport&&Number.isFinite(viewport.offsetTop)?viewport.offsetTop:0;
+  if(!Number.isFinite(height)||height<120)height=document.documentElement.clientHeight||window.innerHeight||640;
+  if(!Number.isFinite(top)||top<0)top=0;
+  modal.style.setProperty("--abr-team-viewport-height",Math.round(height)+"px");
+  modal.style.setProperty("--abr-team-viewport-top",Math.round(top)+"px");
+}
+function abrTeamViewportSchedule(){
+  abrTeamViewportTimersClear();
+  abrTeamViewportState.frame=requestAnimationFrame(function(){
+    abrTeamViewportApply();
+    abrTeamViewportState.frame=requestAnimationFrame(function(){
+      abrTeamViewportState.frame=0;
+      abrTeamViewportApply();
+    });
+  });
+  [90,280,520].forEach(function(delay){
+    abrTeamViewportState.timers.push(setTimeout(abrTeamViewportApply,delay));
+  });
+}
+function abrTeamKeyboardTarget(target){
+  if(!target||!target.tagName)return false;
+  const tag=String(target.tagName).toUpperCase();
+  if(tag!=="INPUT"&&tag!=="TEXTAREA")return false;
+  return target.type!=="file";
+}
+function abrTeamKeyboardStateRefresh(target){
+  const modal=abrTeamEl("abrTeamCenter");
+  const active=!!(abrTeamState.open&&modal&&target&&modal.contains(target)&&abrTeamKeyboardTarget(target));
+  document.body.classList.toggle("abrTeamKeyboardOpen",active);
+}
+function abrTeamViewportBind(){
+  if(abrTeamViewportState.bound)return;
+  abrTeamViewportState.bound=true;
+  window.addEventListener("resize",abrTeamViewportSchedule,{passive:true});
+  window.addEventListener("orientationchange",abrTeamViewportSchedule,{passive:true});
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize",abrTeamViewportSchedule,{passive:true});
+    window.visualViewport.addEventListener("scroll",abrTeamViewportSchedule,{passive:true});
+  }
+  document.addEventListener("focusin",function(event){
+    if(abrTeamViewportState.focusTimer){
+      clearTimeout(abrTeamViewportState.focusTimer);
+      abrTeamViewportState.focusTimer=0;
+    }
+    abrTeamKeyboardStateRefresh(event.target);
+    if(abrTeamState.open)abrTeamViewportSchedule();
+  },true);
+  document.addEventListener("focusout",function(){
+    if(abrTeamViewportState.focusTimer)clearTimeout(abrTeamViewportState.focusTimer);
+    abrTeamViewportState.focusTimer=setTimeout(function(){
+      abrTeamViewportState.focusTimer=0;
+      abrTeamKeyboardStateRefresh(document.activeElement);
+      if(abrTeamState.open)abrTeamViewportSchedule();
+    },60);
+  },true);
+}
+function abrTeamViewportReset(){
+  abrTeamViewportTimersClear();
+  if(abrTeamViewportState.focusTimer){
+    clearTimeout(abrTeamViewportState.focusTimer);
+    abrTeamViewportState.focusTimer=0;
+  }
+  const modal=abrTeamEl("abrTeamCenter");
+  if(modal){
+    modal.style.removeProperty("--abr-team-viewport-height");
+    modal.style.removeProperty("--abr-team-viewport-top");
+  }
+  document.documentElement.classList.remove("abrTeamOpenRoot");
+  document.body.classList.remove("abrTeamKeyboardOpen");
+}
 function abrTeamEscape(value){
   return String(value == null ? "" : value)
     .replace(/&/g,"&amp;")
@@ -39559,7 +39662,10 @@ window.ekipArizaMerkeziAc = async function(){
   abrTeamState.error = null;
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden","false");
+  document.documentElement.classList.add("abrTeamOpenRoot");
   document.body.classList.add("abrTeamOpen");
+  abrTeamViewportBind();
+  abrTeamViewportSchedule();
   abrTeamHaptic("light");
   abrTeamRender();
   await abrTeamInit(true);
@@ -39574,6 +39680,7 @@ window.ekipArizaMerkeziKapat = function(){
   abrTeamState.open = false;
   if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
   document.body.classList.remove("abrTeamOpen");
+  abrTeamViewportReset();
   abrTeamHaptic("light");
 };
 window.ekipArizaGeri = function(){
@@ -40222,7 +40329,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.06";
+window.__abrTeamCenterVersion = "2.1.07";
 })();
 </script>
 
