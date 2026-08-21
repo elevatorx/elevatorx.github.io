@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.08_IOS_KEYBOARD_BACKDROP_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.09_VOICE_STATUS_REPLY -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.08 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.09 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20469,7 +20469,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.08</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.09</div>
     </div>
   </div>
 </div>
@@ -20481,7 +20481,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.08";
+  const SPLASH_VERSION = "v2.1.09";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21271,7 +21271,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.08";
+const APP_VERSION = "v2.1.09";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -38178,6 +38178,58 @@ body.abrTeamKeyboardOpen .abrTeamBody.abrTeamChatView{padding-bottom:91px}
   .abrTeamChatComposer textarea{font-size:16px;line-height:1.28}
 }
 
+/* v2.1.09 — sesli mesaj, mesaja yanit ve ekip durum panosu */
+.abrTeamChatMessage{touch-action:pan-y;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;transition:transform .16s ease,box-shadow .16s ease}
+.abrTeamChatMessage.is-longpress{transform:scale(.985);box-shadow:0 0 0 3px rgba(35,121,222,.18),0 9px 22px rgba(29,80,145,.14)}
+.abrTeamChatReplyQuote{margin:0 0 7px;padding:7px 8px;border-left:3px solid #2b78d5;border-radius:8px;color:#315477;background:rgba(230,241,255,.86)}
+.abrTeamChatReplyQuote b,.abrTeamChatReplyQuote span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.abrTeamChatReplyQuote b{font-size:8px;font-weight:950}.abrTeamChatReplyQuote span{margin-top:2px;font-size:8px;font-weight:760;opacity:.82}
+.abrTeamChatMessage.is-me .abrTeamChatReplyQuote{color:#fff;border-left-color:#9fd0ff;background:rgba(255,255,255,.12)}
+.abrTeamChatReplySelected{display:flex;align-items:center;gap:8px;margin-bottom:7px;padding:8px;border-left:3px solid #2b78d5;border-radius:11px;color:#315476;background:#edf5ff}
+.abrTeamChatReplySelected i{flex:0 0 29px;width:29px;height:29px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:#fff;background:#2779df;font-size:14px;font-style:normal;font-weight:950}
+.abrTeamChatReplySelected div{min-width:0;flex:1}.abrTeamChatReplySelected b,.abrTeamChatReplySelected span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.abrTeamChatReplySelected b{font-size:9px;font-weight:950}.abrTeamChatReplySelected span{margin-top:2px;color:#74869c;font-size:8px;font-weight:800}
+.abrTeamChatReplySelected button{width:29px;height:29px;border:0;border-radius:9px;color:#b42642;background:#fff;font-size:16px;font-weight:900}
+.abrTeamChatComposerRow{grid-template-columns:42px minmax(0,1fr) 42px 46px}
+.abrTeamChatMic{height:42px;border:0;border-radius:13px;color:#176dc8;background:#eaf3ff;font-size:18px;font-family:inherit;font-weight:950}
+.abrTeamChatMic svg{width:20px;height:20px;display:block;margin:auto}
+.abrTeamChatMic:disabled{opacity:.48;pointer-events:none}
+.abrTeamChatRecording{display:grid;grid-template-columns:36px minmax(0,1fr) 45px;gap:7px;align-items:center;min-height:45px}
+.abrTeamChatRecordCancel,.abrTeamChatRecordSend{height:40px;border:0;border-radius:12px;font-family:inherit;font-weight:950}
+.abrTeamChatRecordCancel{color:#bb2a46;background:#fff0f3;font-size:18px}.abrTeamChatRecordSend{color:#fff;background:linear-gradient(145deg,#173d70,#1975d2);font-size:16px}
+.abrTeamChatRecordBody{min-width:0;display:flex;align-items:center;gap:8px;padding:0 6px}
+.abrTeamChatRecordDot{flex:0 0 10px;width:10px;height:10px;border-radius:50%;background:#e22d4e;box-shadow:0 0 0 5px rgba(226,45,78,.10);animation:abrTeamRecordPulse 1.15s ease-in-out infinite}
+.abrTeamChatRecordBody div{min-width:0}.abrTeamChatRecordBody b,.abrTeamChatRecordBody span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.abrTeamChatRecordBody b{font-size:10px;font-weight:950}.abrTeamChatRecordBody span{margin-top:2px;color:#7c899d;font-size:8px;font-weight:800}
+@keyframes abrTeamRecordPulse{50%{transform:scale(.72);opacity:.55}}
+.abrTeamVoiceMessage{--abr-voice-progress:0%;width:100%;margin-top:7px;padding:9px;display:flex;align-items:center;gap:9px;border:1px solid rgba(69,126,199,.16);border-radius:14px;color:#245581;background:linear-gradient(90deg,rgba(43,125,222,.14) var(--abr-voice-progress),rgba(236,245,255,.91) var(--abr-voice-progress));font-family:inherit;text-align:left}
+.abrTeamChatMessage.is-me .abrTeamVoiceMessage{color:#fff;border-color:rgba(255,255,255,.17);background:linear-gradient(90deg,rgba(255,255,255,.23) var(--abr-voice-progress),rgba(255,255,255,.11) var(--abr-voice-progress))}
+.abrTeamVoicePlay{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#2679dd;font-size:12px;font-style:normal;font-weight:950}
+.abrTeamChatMessage.is-me .abrTeamVoicePlay{color:#1666ba;background:#fff}
+.abrTeamVoiceWave{min-width:0;flex:1;height:27px;display:flex;align-items:center;gap:3px;overflow:hidden}
+.abrTeamVoiceWave i{flex:1;min-width:2px;max-width:4px;border-radius:99px;background:currentColor;opacity:.62}
+.abrTeamVoiceWave i:nth-child(4n+1){height:8px}.abrTeamVoiceWave i:nth-child(4n+2){height:17px}.abrTeamVoiceWave i:nth-child(4n+3){height:24px}.abrTeamVoiceWave i:nth-child(4n){height:13px}
+.abrTeamVoiceTime{flex:0 0 auto;font-size:8px;font-weight:900;opacity:.82}
+.abrTeamStatusBoard{overflow:hidden}
+.abrTeamStatusChoices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:12px}
+.abrTeamStatusChoice{min-width:0;min-height:52px;padding:7px 3px;border:1px solid rgba(126,151,184,.16);border-radius:13px;color:#68778d;background:#f4f7fb;font-family:inherit;text-align:center}
+.abrTeamStatusChoice i{width:9px;height:9px;margin:0 auto 6px;display:block;border-radius:50%;background:#9ca9bb;box-shadow:0 0 0 4px rgba(140,155,177,.09)}
+.abrTeamStatusChoice b{display:block;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:950;white-space:nowrap}
+.abrTeamStatusChoice:disabled{opacity:.55}.abrTeamStatusChoice.is-active{color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(30,83,145,.16);transform:translateY(-1px)}
+.abrTeamStatusChoice.status-available.is-active{background:#14945a}.abrTeamStatusChoice.status-maintenance.is-active{background:#1f70c8}.abrTeamStatusChoice.status-fault.is-active{background:#ce334f}.abrTeamStatusChoice.status-en_route.is-active{background:#d18410}.abrTeamStatusChoice.status-leave.is-active{background:#747f91}
+.abrTeamStatusChoice.status-available i{background:#1bad68}.abrTeamStatusChoice.status-maintenance i{background:#2c7ed5}.abrTeamStatusChoice.status-fault i{background:#dc3b58}.abrTeamStatusChoice.status-en_route i{background:#e1951e}.abrTeamStatusChoice.status-leave i{background:#7e899a}.abrTeamStatusChoice.is-active i{background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.15)}
+.abrTeamStatusHint{display:block;margin-top:9px;color:var(--abr-team-muted);font-size:8px;line-height:1.4;font-weight:750}
+.abrTeamMemberInfoMeta{display:flex;align-items:center;gap:6px;margin-top:5px;overflow:hidden}
+.abrTeamMemberInfoMeta .abrTeamMemberStatus{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;margin:0;padding:4px 6px;border-radius:999px;color:#536176;background:#eef2f7;font-size:7px;font-weight:950;line-height:1}
+.abrTeamMemberStatus i{width:6px;height:6px;border-radius:50%;background:#9ca9bb}
+.abrTeamMemberStatus.status-available{color:#147044;background:#e8f8ef}.abrTeamMemberStatus.status-available i{background:#1bad68}
+.abrTeamMemberStatus.status-maintenance{color:#1e65aa;background:#eaf3ff}.abrTeamMemberStatus.status-maintenance i{background:#2c7ed5}
+.abrTeamMemberStatus.status-fault{color:#ae2942;background:#fff0f3}.abrTeamMemberStatus.status-fault i{background:#dc3b58}
+.abrTeamMemberStatus.status-en_route{color:#966108;background:#fff6df}.abrTeamMemberStatus.status-en_route i{background:#e1951e}
+.abrTeamMemberStatus.status-leave{color:#596577;background:#eef1f5}.abrTeamMemberStatus.status-leave i{background:#7e899a}
+.abrTeamMemberInfoMeta .abrTeamMemberStatusTime{min-width:0;display:block;margin:0;overflow:hidden;text-overflow:ellipsis;color:#8894a6;font-size:7px;font-weight:760;white-space:nowrap}
+@media(max-width:370px){.abrTeamStatusChoices{gap:3px}.abrTeamStatusChoice b{font-size:7px}.abrTeamChatComposerRow{grid-template-columns:39px minmax(0,1fr) 39px 43px}}
+
 body.darkMode #abrTeamCenter .abrTeamChatDay,
 html.darkRoot #abrTeamCenter .abrTeamChatDay{color:#9eabc0;background:#122039}
 body.darkMode #abrTeamCenter .abrTeamChatFile,
@@ -38188,6 +38240,20 @@ body.darkMode #abrTeamCenter .abrTeamChatComposer textarea,
 html.darkRoot #abrTeamCenter .abrTeamChatComposer textarea{color:#eff5fc;background:#0b1728}
 body.darkMode #abrTeamCenter .abrTeamChatSelected,
 html.darkRoot #abrTeamCenter .abrTeamChatSelected{color:#cce2ff;background:#112742}
+body.darkMode #abrTeamCenter .abrTeamChatReplySelected,
+html.darkRoot #abrTeamCenter .abrTeamChatReplySelected{color:#cce2ff;background:#112742}
+body.darkMode #abrTeamCenter .abrTeamChatReplyQuote,
+html.darkRoot #abrTeamCenter .abrTeamChatReplyQuote{color:#cce2ff;background:rgba(32,76,125,.42)}
+body.darkMode #abrTeamCenter .abrTeamChatMic,
+html.darkRoot #abrTeamCenter .abrTeamChatMic{color:#8cc3ff;background:#142946}
+body.darkMode #abrTeamCenter .abrTeamChatMessage:not(.is-me) .abrTeamVoiceMessage,
+html.darkRoot #abrTeamCenter .abrTeamChatMessage:not(.is-me) .abrTeamVoiceMessage{color:#a9d1ff;border-color:rgba(119,164,220,.16);background:linear-gradient(90deg,rgba(42,112,194,.30) var(--abr-voice-progress),rgba(18,39,66,.92) var(--abr-voice-progress))}
+body.darkMode #abrTeamCenter .abrTeamChatRecordCancel,
+html.darkRoot #abrTeamCenter .abrTeamChatRecordCancel{color:#ff8da2;background:#301724}
+body.darkMode #abrTeamCenter .abrTeamStatusChoice,
+html.darkRoot #abrTeamCenter .abrTeamStatusChoice{color:#aab7c9;border-color:rgba(135,159,192,.16);background:#122039}
+body.darkMode #abrTeamCenter .abrTeamMemberStatusTime,
+html.darkRoot #abrTeamCenter .abrTeamMemberStatusTime{color:#8e9db2}
 body.darkMode #abrTeamCenter .abrTeamChatSetup,
 html.darkRoot #abrTeamCenter .abrTeamChatSetup{background:rgba(15,29,48,.52)}
 body.darkMode #abrTeamCenter .abrTeamMemberRemove,
@@ -38408,8 +38474,15 @@ const abrTeamState = {
   chatReady:false,
   chatError:null,
   chatFile:null,
+  chatAudioDurationMs:null,
+  chatReplyId:null,
   chatDraft:"",
   chatWorking:false,
+  voiceRecording:false,
+  voiceWorking:false,
+  voiceStartedAt:0,
+  voiceElapsedMs:0,
+  statusWorking:false,
   memberRemoveId:null,
   memberRemoveWorking:false,
   view:"home",
@@ -38447,6 +38520,9 @@ const abrTeamState = {
 };
 const abrTeamDeleteGesture = {bound:false,active:false,startX:0};
 const abrTeamViewportState = {bound:false,frame:0,timers:[],focusTimer:0,layoutHeight:0};
+const abrTeamChatPressState = {timer:0,id:null,startX:0,startY:0,triggered:false,element:null};
+const abrTeamVoiceState = {recorder:null,stream:null,chunks:[],timer:0,cancelled:false,autoSend:false,mime:"",finalizing:false};
+const abrTeamVoicePlayback = {audio:null,messageId:null,url:""};
 
 function abrTeamEl(id){return document.getElementById(id)}
 function abrTeamViewportTimersClear(){
@@ -38623,8 +38699,12 @@ function abrTeamErrorText(error){
     [/canceling statement due to lock timeout|lock timeout/i,"Kayıt şu an başka bir işlem tarafından kullanılıyor. Birkaç saniye sonra tekrar dene."],
     [/ABR_TEAM_TIMEOUT|zaman aşımına uğradı|AbortError|aborted|signal is aborted/i,"Sunucudan zamanında cevap alınamadı. Bağlantını kontrol edip tekrar dene."],
     [/ABR_TEAM_DELETE_SETUP|PGRST202|Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i,"Arıza silme kurulumu henüz etkin değil."],
+    [/set_team_member_status|availability_status|availability_updated_at|ABR_TEAM_STATUS_/i,"Ekip durum panosu için v2.1.09 Supabase yükseltmesi gerekiyor."],
+    [/reply_to_id|audio_duration_ms|ABR_TEAM_REPLY_|ABR_TEAM_V2109_SETUP/i,"Sohbet özellikleri için v2.1.09 Supabase yükseltmesi gerekiyor."],
     [/ABR_TEAM_CHAT_SETUP|team_chat_messages|team_chat_reads|team-files|PGRST205|42P01/i,"Ekip sohbeti kurulumu henüz etkin değil."],
     [/remove_team_member|ABR_TEAM_MEMBER_SETUP/i,"Üye çıkarma kurulumu henüz etkin değil."],
+    [/NotAllowedError|Permission denied|Requested device not found|NotFoundError/i,"Sesli mesaj için mikrofon izni gerekiyor."],
+    [/NotSupportedError|MediaRecorder/i,"Bu cihazda ses kaydı desteklenmiyor."],
     [/Ekip sahibi kendisini ekipten cikaramaz/i,"Ekip sahibi kendisini ekipten çıkaramaz."],
     [/Aktif ekip uyesi bulunamadi/i,"Bu kişi artık aktif ekip üyesi değil."],
     [/Anonymous sign-ins are disabled/i,"Supabase Anonymous Sign-Ins ayarı kapalı görünüyor."],
@@ -38998,7 +39078,7 @@ async function abrTeamProfileSync(){
 async function abrTeamMembershipsLoad(){
   const response = await abrTeamState.client
     .from("team_members")
-    .select("team_id,user_id,role,state,joined_at")
+    .select("team_id,user_id,role,state,joined_at,availability_status,availability_updated_at")
     .eq("user_id",abrTeamState.user.id)
     .order("joined_at",{ascending:true});
   if(response.error)throw response.error;
@@ -39058,6 +39138,8 @@ async function abrTeamMembershipRefresh(){
       abrTeamState.chatMessages=[];
       abrTeamState.chatReady=false;
       abrTeamState.chatReadAt=null;
+      abrTeamState.chatReplyId=null;
+      abrTeamState.chatAudioDurationMs=null;
       abrTeamState.members=[];
       abrTeamState.apartments=[];
       if(abrTeamState.channel){try{abrTeamState.client.removeChannel(abrTeamState.channel)}catch(e){}abrTeamState.channel=null}
@@ -39128,7 +39210,7 @@ async function abrTeamApartmentsSync(force){
 async function abrTeamMembersLoad(){
   const response = await abrTeamState.client
     .from("team_members")
-    .select("team_id,user_id,role,state,joined_at")
+    .select("team_id,user_id,role,state,joined_at,availability_status,availability_updated_at")
     .eq("team_id",abrTeamState.teamId)
     .order("joined_at",{ascending:true});
   if(response.error)throw response.error;
@@ -39181,14 +39263,14 @@ async function abrTeamMessagesLoad(reportId){
 }
 function abrTeamChatSetupMissing(error){
   const raw=[error&&error.code,error&&error.message,error&&error.details,error&&error.hint,error].filter(Boolean).join(" ");
-  return /PGRST205|42P01|team_chat_messages|team_chat_reads|team-files|relation .* does not exist|schema cache/i.test(raw);
+  return /PGRST205|42P01|team_chat_messages|team_chat_reads|team-files|reply_to_id|audio_duration_ms|relation .* does not exist|schema cache/i.test(raw);
 }
 async function abrTeamChatLoad(){
   if(!abrTeamState.teamId || !abrTeamState.user)return;
   try{
     const response = await abrTeamState.client
       .from("team_chat_messages")
-      .select("id,team_id,sender_id,sender_name,body,file_path,file_name,file_type,file_size,created_at")
+      .select("id,team_id,sender_id,sender_name,body,file_path,file_name,file_type,file_size,reply_to_id,audio_duration_ms,created_at")
       .eq("team_id",abrTeamState.teamId)
       .order("created_at",{ascending:true})
       .limit(250);
@@ -39208,7 +39290,7 @@ async function abrTeamChatLoad(){
     abrTeamState.chatMessages=[];
     abrTeamState.chatReadAt=null;
     abrTeamState.chatReady=false;
-    abrTeamState.chatError=abrTeamChatSetupMissing(error)?"Ekip sohbeti için v2.1.06 Supabase kurulumu gerekiyor.":abrTeamErrorText(error);
+    abrTeamState.chatError=abrTeamChatSetupMissing(error)?"Yeni sohbet özellikleri için v2.1.09 Supabase yükseltmesi gerekiyor.":abrTeamErrorText(error);
     console.warn("Ekip sohbeti yüklenemedi",error);
   }
   abrTeamBadgeUpdate();
@@ -39377,6 +39459,28 @@ function abrTeamProfileName(userId){
 function abrTeamInitials(name){
   const pieces = abrTeamTrim(name,60).split(/\s+/).filter(Boolean);
   return (pieces.slice(0,2).map(function(piece){return piece.charAt(0)}).join("") || "E").toLocaleUpperCase("tr-TR");
+}
+function abrTeamMemberStatusInfo(status){
+  const map={
+    available:{key:"available",label:"Müsait"},
+    maintenance:{key:"maintenance",label:"Bakımda"},
+    fault:{key:"fault",label:"Arızada"},
+    en_route:{key:"en_route",label:"Yolda"},
+    leave:{key:"leave",label:"İzinli"}
+  };
+  return map[status] || map.available;
+}
+function abrTeamMemberStatusRelative(value){
+  const time=new Date(value || 0).getTime();
+  if(!Number.isFinite(time) || time<1)return "";
+  const minutes=Math.max(0,Math.floor((Date.now()-time)/60000));
+  if(minutes<1)return "şimdi";
+  if(minutes<60)return minutes+" dk önce";
+  if(minutes<1440)return Math.floor(minutes/60)+" sa önce";
+  return abrTeamDate(value,false);
+}
+function abrTeamOwnMember(){
+  return abrTeamState.members.find(function(member){return abrTeamState.user && member.user_id===abrTeamState.user.id && member.state==="active"}) || null;
 }
 function abrTeamMembershipOwner(){return !!(abrTeamState.activeMembership && abrTeamState.activeMembership.role === "owner")}
 function abrTeamCanDelete(report){
@@ -39577,6 +39681,34 @@ function abrTeamChatFileExt(name){
   const match=abrTeamTrim(name,180).toLocaleLowerCase("tr-TR").match(/\.([a-z0-9]{1,5})$/i);
   return match?match[1].toLocaleUpperCase("tr-TR").slice(0,4):"DOS";
 }
+function abrTeamChatDuration(value){
+  const seconds=Math.max(0,Math.round((Number(value)||0)/1000));
+  return Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
+}
+function abrTeamChatVoiceMessage(message){
+  return !!(message && message.file_path && Number(message.audio_duration_ms)>0);
+}
+function abrTeamChatMessageById(messageId){
+  return abrTeamState.chatMessages.find(function(message){return message.id===messageId}) || null;
+}
+function abrTeamChatMessageSummary(message){
+  if(!message)return "Yanıtlanan ileti artık görünmüyor";
+  const text=abrTeamTrim(String(message.body || "").replace(/\s+/g," "),110);
+  if(text)return text;
+  if(abrTeamChatVoiceMessage(message))return "🎤 Sesli mesaj • "+abrTeamChatDuration(message.audio_duration_ms);
+  if(message.file_path)return "📎 "+abrTeamTrim(message.file_name || "Ekip dosyası",100);
+  return "Ekip iletisi";
+}
+function abrTeamChatReplyQuoteHtml(message){
+  if(!message.reply_to_id)return "";
+  const parent=abrTeamChatMessageById(message.reply_to_id);
+  const mine=!!(parent && abrTeamState.user && parent.sender_id===abrTeamState.user.id);
+  const sender=parent?(mine?"Ben":(abrTeamTrim(parent.sender_name,60)||abrTeamProfileName(parent.sender_id))):"Yanıtlanan ileti";
+  return `<div class="abrTeamChatReplyQuote"><b>${abrTeamEscape(sender)}</b><span>${abrTeamEscape(abrTeamChatMessageSummary(parent))}</span></div>`;
+}
+function abrTeamChatWaveHtml(){
+  return Array.from({length:20},function(){return "<i></i>"}).join("");
+}
 function abrTeamChatDayLabel(value){
   const date=new Date(value || 0);
   if(Number.isNaN(date.getTime()))return "";
@@ -39590,8 +39722,46 @@ function abrTeamChatDayLabel(value){
 function abrTeamChatMessageHtml(message){
   const mine=!!(abrTeamState.user && message.sender_id===abrTeamState.user.id);
   const sender=abrTeamTrim(message.sender_name,60) || abrTeamProfileName(message.sender_id);
-  const file=message.file_path?`<button class="abrTeamChatFile" type="button" onclick="ekipSohbetDosyaAc('${abrTeamEscape(message.id)}')"><i class="abrTeamChatFileIcon">${abrTeamEscape(abrTeamChatFileExt(message.file_name))}</i><span class="abrTeamChatFileText"><b>${abrTeamEscape(message.file_name || "Ekip dosyası")}</b><span>${abrTeamEscape(abrTeamChatFileSize(message.file_size))} • Dokun ve aç</span></span><i class="abrTeamChatFileArrow">›</i></button>`:"";
-  return `<article class="abrTeamChatMessage ${mine?'is-me':''}"><div class="abrTeamChatMessageHead"><b>${abrTeamEscape(mine?'Ben':sender)}</b><span>${abrTeamEscape(abrTeamDate(message.created_at))}</span></div>${message.body?`<div class="abrTeamChatText">${abrTeamEscape(message.body)}</div>`:""}${file}</article>`;
+  const voice=abrTeamChatVoiceMessage(message);
+  const file=message.file_path&&!voice?`<button class="abrTeamChatFile" type="button" onclick="ekipSohbetDosyaAc('${abrTeamEscape(message.id)}')"><i class="abrTeamChatFileIcon">${abrTeamEscape(abrTeamChatFileExt(message.file_name))}</i><span class="abrTeamChatFileText"><b>${abrTeamEscape(message.file_name || "Ekip dosyası")}</b><span>${abrTeamEscape(abrTeamChatFileSize(message.file_size))} • Dokun ve aç</span></span><i class="abrTeamChatFileArrow">›</i></button>`:"";
+  const audio=voice?`<button class="abrTeamVoiceMessage" data-voice-id="${abrTeamEscape(message.id)}" type="button" onclick="ekipSohbetSesliMesajAc('${abrTeamEscape(message.id)}')" aria-label="Sesli mesajı oynat"><i class="abrTeamVoicePlay">▶</i><span class="abrTeamVoiceWave" aria-hidden="true">${abrTeamChatWaveHtml()}</span><span class="abrTeamVoiceTime" data-voice-time>${abrTeamEscape(abrTeamChatDuration(message.audio_duration_ms))}</span></button>`:"";
+  return `<article class="abrTeamChatMessage ${mine?'is-me':''}" data-message-id="${abrTeamEscape(message.id)}" aria-label="Yanıtlamak için mesaja basılı tut"><div class="abrTeamChatMessageHead"><b>${abrTeamEscape(mine?'Ben':sender)}</b><span>${abrTeamEscape(abrTeamDate(message.created_at))}</span></div>${abrTeamChatReplyQuoteHtml(message)}${message.body?`<div class="abrTeamChatText">${abrTeamEscape(message.body)}</div>`:""}${audio}${file}</article>`;
+}
+function abrTeamChatPressClear(){
+  clearTimeout(abrTeamChatPressState.timer);
+  abrTeamChatPressState.timer=0;
+  if(abrTeamChatPressState.element)abrTeamChatPressState.element.classList.remove("is-longpress");
+  abrTeamChatPressState.id=null;
+  abrTeamChatPressState.element=null;
+}
+function abrTeamChatGesturesBind(){
+  const root=abrTeamEl("abrTeamChatScroll");
+  if(!root)return;
+  root.querySelectorAll(".abrTeamChatMessage[data-message-id]").forEach(function(element){
+    element.addEventListener("pointerdown",function(event){
+      if(event.isPrimary===false || (typeof event.button==="number" && event.button!==0))return;
+      if(event.target && event.target.closest && event.target.closest("button,a,input,textarea,audio"))return;
+      abrTeamChatPressClear();
+      abrTeamChatPressState.id=element.getAttribute("data-message-id");
+      abrTeamChatPressState.startX=Number(event.clientX)||0;
+      abrTeamChatPressState.startY=Number(event.clientY)||0;
+      abrTeamChatPressState.element=element;
+      abrTeamChatPressState.timer=setTimeout(function(){
+        const messageId=abrTeamChatPressState.id;
+        element.classList.add("is-longpress");
+        abrTeamHaptic("light");
+        setTimeout(function(){if(messageId)window.ekipSohbetYanitiSec(messageId)},90);
+      },520);
+    });
+    element.addEventListener("pointermove",function(event){
+      if(!abrTeamChatPressState.timer || abrTeamChatPressState.element!==element)return;
+      if(Math.abs((Number(event.clientX)||0)-abrTeamChatPressState.startX)>10 || Math.abs((Number(event.clientY)||0)-abrTeamChatPressState.startY)>10)abrTeamChatPressClear();
+    });
+    ["pointerup","pointercancel","pointerleave"].forEach(function(type){element.addEventListener(type,abrTeamChatPressClear)});
+    element.addEventListener("contextmenu",function(event){
+      if(!(event.target && event.target.closest && event.target.closest("button,a")))event.preventDefault();
+    });
+  });
 }
 function abrTeamRenderChat(){
   abrTeamSetChrome("Ekip sohbeti",false,"chat");
@@ -39599,7 +39769,7 @@ function abrTeamRenderChat(){
   if(!body)return;
   const team=abrTeamActiveTeam();
   if(!abrTeamState.chatReady){
-    body.innerHTML=`<div class="abrTeamChatLayout">${abrTeamSwitchHtml()}<section class="abrTeamChatMiniHero"><div><div><span>${abrTeamEscape(team.name)}</span><b>Genel ekip sohbeti</b></div><i>Özel alan</i></div></section><div class="abrTeamChatScroll"><div class="abrTeamChatSetup"><b>Sohbet bağlantısı hazırlanmadı</b><p>${abrTeamEscape(abrTeamState.chatError || "v2.1.06 Supabase kurulumunu çalıştırdıktan sonra yeniden kontrol et.")}</p><button class="abrTeamSoft" type="button" onclick="ekipSohbetYenile()">Tekrar Kontrol Et</button></div></div></div>`;
+    body.innerHTML=`<div class="abrTeamChatLayout">${abrTeamSwitchHtml()}<section class="abrTeamChatMiniHero"><div><div><span>${abrTeamEscape(team.name)}</span><b>Genel ekip sohbeti</b></div><i>Özel alan</i></div></section><div class="abrTeamChatScroll"><div class="abrTeamChatSetup"><b>Sohbet bağlantısı hazırlanmadı</b><p>${abrTeamEscape(abrTeamState.chatError || "v2.1.09 Supabase yükseltmesini çalıştırdıktan sonra yeniden kontrol et.")}</p><button class="abrTeamSoft" type="button" onclick="ekipSohbetYenile()">Tekrar Kontrol Et</button></div></div></div>`;
     return;
   }
   let previousDay="";
@@ -39611,18 +39781,21 @@ function abrTeamRenderChat(){
   }).join("");
   const file=abrTeamState.chatFile;
   const selected=file?`<div class="abrTeamChatSelected"><i>${abrTeamEscape(abrTeamChatFileExt(file.name))}</i><div><b>${abrTeamEscape(file.name)}</b><span>${abrTeamEscape(abrTeamChatFileSize(file.size))}</span></div><button type="button" onclick="ekipSohbetDosyaKaldir()" aria-label="Dosyayı kaldır">×</button></div>`:"";
+  const reply=abrTeamChatMessageById(abrTeamState.chatReplyId);
+  const replySelected=reply?`<div class="abrTeamChatReplySelected"><i>↩</i><div><b>${abrTeamEscape(reply.sender_id===(abrTeamState.user&&abrTeamState.user.id)?"Ben":(abrTeamTrim(reply.sender_name,60)||abrTeamProfileName(reply.sender_id)))}</b><span>${abrTeamEscape(abrTeamChatMessageSummary(reply))}</span></div><button type="button" onclick="ekipSohbetYanitiKaldir()" aria-label="Yanıtı kaldır">×</button></div>`:"";
+  const composer=abrTeamState.voiceRecording
+    ? `<div class="abrTeamChatRecording"><button class="abrTeamChatRecordCancel" type="button" onclick="ekipSohbetSesIptal()" aria-label="Ses kaydını iptal et">×</button><div class="abrTeamChatRecordBody"><i class="abrTeamChatRecordDot"></i><div><b>Ses kaydediliyor</b><span id="abrTeamVoiceTimer">${abrTeamEscape(abrTeamChatDuration(abrTeamState.voiceElapsedMs))} • En fazla 2 dakika</span></div></div><button class="abrTeamChatRecordSend" type="button" onclick="ekipSohbetSesKaydi()" aria-label="Kaydı bitir ve gönder">➤</button></div>`
+    : `<input id="abrTeamChatFileInput" type="file" hidden accept="image/*,audio/*,.m4a,.aac,.mp3,.wav,.ogg,.webm,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.json,.zip" onchange="ekipSohbetDosyaSec(event)"><div class="abrTeamChatComposerRow"><button class="abrTeamChatAttach" type="button" onclick="document.getElementById('abrTeamChatFileInput').click()" aria-label="Dosya ekle" ${abrTeamState.chatWorking?'disabled':''}>+</button><textarea id="abrTeamChatInput" maxlength="2000" placeholder="Ekibe mesaj yaz…" oninput="ekipSohbetTaslak(event)" ${abrTeamState.chatWorking?'disabled':''}>${abrTeamEscape(abrTeamState.chatDraft)}</textarea><button class="abrTeamChatMic" type="button" onclick="ekipSohbetSesKaydi()" aria-label="Sesli mesaj kaydet" ${abrTeamState.chatWorking||abrTeamState.voiceWorking?'disabled':''}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8.5" y="3" width="7" height="12" rx="3.5" stroke="currentColor" stroke-width="2"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M8.5 21h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button id="abrTeamChatSend" class="abrTeamChatSend" type="submit" aria-label="Gönder" ${abrTeamState.chatWorking?'disabled':''}>${abrTeamState.chatWorking?'…':'➤'}</button></div>`;
   body.innerHTML=`<div class="abrTeamChatLayout">
     ${abrTeamSwitchHtml()}
     <section class="abrTeamChatMiniHero"><div><div><span>${abrTeamEscape(team.name)}</span><b>Genel ekip sohbeti</b></div><i>${abrTeamState.members.filter(function(item){return item.state==='active'}).length} üye</i></div></section>
-    <div id="abrTeamChatScroll" class="abrTeamChatScroll"><div class="abrTeamChatMessages">${messages || '<div class="abrTeamChatEmpty"><i>✦</i><b>Sohbet hazır</b><span>İlk mesajı yazabilir veya PDF, Word, Excel ve fotoğraf gönderebilirsin.</span></div>'}</div></div>
+    <div id="abrTeamChatScroll" class="abrTeamChatScroll"><div class="abrTeamChatMessages">${messages || '<div class="abrTeamChatEmpty"><i>✦</i><b>Sohbet hazır</b><span>İlk mesajı yazabilir; ses, fotoğraf, PDF ve ofis dosyası gönderebilirsin.</span></div>'}</div></div>
     <form class="abrTeamChatComposer" onsubmit="ekipSohbetGonder(event)">
-      ${selected}
-      <input id="abrTeamChatFileInput" type="file" hidden accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.json,.zip" onchange="ekipSohbetDosyaSec(event)">
-      <div class="abrTeamChatComposerRow"><button class="abrTeamChatAttach" type="button" onclick="document.getElementById('abrTeamChatFileInput').click()" aria-label="Dosya ekle" ${abrTeamState.chatWorking?'disabled':''}>+</button><textarea id="abrTeamChatInput" maxlength="2000" placeholder="Ekibe mesaj yaz…" oninput="ekipSohbetTaslak(event)" ${abrTeamState.chatWorking?'disabled':''}>${abrTeamEscape(abrTeamState.chatDraft)}</textarea><button id="abrTeamChatSend" class="abrTeamChatSend" type="submit" aria-label="Gönder" ${abrTeamState.chatWorking?'disabled':''}>${abrTeamState.chatWorking?'…':'➤'}</button></div>
-      <span class="abrTeamChatHint">Dosyalar özel ekip alanında tutulur • En fazla 10 MB</span>
+      ${replySelected}${selected}${composer}
+      <span class="abrTeamChatHint">Mesaja basılı tut: yanıtla • Mikrofona dokun: kaydet • En fazla 10 MB</span>
     </form>
   </div>`;
-  setTimeout(function(){const scroll=abrTeamEl("abrTeamChatScroll");if(scroll)scroll.scrollTop=scroll.scrollHeight},30);
+  setTimeout(function(){const scroll=abrTeamEl("abrTeamChatScroll");if(scroll)scroll.scrollTop=scroll.scrollHeight;abrTeamChatGesturesBind();abrTeamVoicePlaybackPaint()},30);
 }
 function abrTeamMemberHtml(member,pending){
   const name = abrTeamProfileName(member.user_id);
@@ -39630,7 +39803,16 @@ function abrTeamMemberHtml(member,pending){
   const me = abrTeamState.user && member.user_id === abrTeamState.user.id;
   const canRemove=!pending && abrTeamMembershipOwner() && member.role==='member' && !me;
   const actions = pending && abrTeamMembershipOwner() ? '<div class="abrTeamMemberActions"><button class="approve" type="button" onclick="ekipUyeOnayla(\''+abrTeamEscape(member.user_id)+'\')">Onayla</button><button class="reject" type="button" onclick="ekipUyeReddet(\''+abrTeamEscape(member.user_id)+'\')">Reddet</button></div>' : '<div class="abrTeamMemberManage"><span class="abrTeamMemberRole">'+(member.role==='owner'?'SAHİP':(me?'SEN':'ÜYE'))+'</span>'+(canRemove?'<button class="abrTeamMemberRemove" type="button" onclick="ekipUyeCikarmaAc(\''+abrTeamEscape(member.user_id)+'\')" aria-label="'+abrTeamEscape(name)+' adlı üyeyi ekipten çıkar">−</button>':'')+'</div>';
-  return '<div class="abrTeamMember"><div class="abrTeamAvatar">'+abrTeamEscape(abrTeamInitials(name))+'</div><div class="abrTeamMemberInfo"><b>'+abrTeamEscape(name)+(me?' • Sen':'')+'</b><span>'+abrTeamEscape(profile.phone || (pending?'Onay bekliyor':'Telefon eklenmedi'))+'</span></div>'+actions+'</div>';
+  const status=abrTeamMemberStatusInfo(member.availability_status);
+  const statusMeta=pending?'':'<div class="abrTeamMemberInfoMeta"><span class="abrTeamMemberStatus status-'+abrTeamEscape(status.key)+'"><i></i>'+abrTeamEscape(status.label)+'</span><span class="abrTeamMemberStatusTime">'+abrTeamEscape(abrTeamMemberStatusRelative(member.availability_updated_at))+'</span></div>';
+  return '<div class="abrTeamMember"><div class="abrTeamAvatar">'+abrTeamEscape(abrTeamInitials(name))+'</div><div class="abrTeamMemberInfo"><b>'+abrTeamEscape(name)+(me?' • Sen':'')+'</b><span>'+abrTeamEscape(profile.phone || (pending?'Onay bekliyor':'Telefon eklenmedi'))+'</span>'+statusMeta+'</div>'+actions+'</div>';
+}
+function abrTeamStatusChoicesHtml(current){
+  return ["available","maintenance","fault","en_route","leave"].map(function(key){
+    const status=abrTeamMemberStatusInfo(key);
+    const active=status.key===current;
+    return '<button class="abrTeamStatusChoice status-'+abrTeamEscape(status.key)+(active?' is-active':'')+'" type="button" onclick="ekipDurumAyarla(\''+abrTeamEscape(status.key)+'\')" aria-pressed="'+(active?'true':'false')+'" '+(abrTeamState.statusWorking?'disabled':'')+'><i></i><b>'+abrTeamEscape(status.label)+'</b></button>';
+  }).join("");
 }
 function abrTeamRenderTeam(){
   abrTeamSetChrome("Ekip yönetimi",true,"team");
@@ -39640,9 +39822,12 @@ function abrTeamRenderTeam(){
   const pending = abrTeamState.members.filter(function(item){return item.state === "pending"});
   const team = abrTeamActiveTeam();
   const knownCode = abrTeamKnownCode(abrTeamState.teamId);
+  const ownMember=abrTeamOwnMember();
+  const ownStatus=abrTeamMemberStatusInfo(ownMember&&ownMember.availability_status);
   body.innerHTML = `
     ${abrTeamSwitchHtml()}
-    <div class="abrTeamPageHead"><span>${abrTeamEscape(team.name)}</span><h3>Kim nerede, kim yolda?</h3><p>Aktif üyeleri gör; yeni katılma isteklerini onayla.</p></div>
+    <div class="abrTeamPageHead"><span>${abrTeamEscape(team.name)}</span><h3>Kim nerede, kim yolda?</h3><p>Durumunu paylaş; ekipte kimin müsait veya sahada olduğunu gör.</p></div>
+    <section class="abrTeamCard abrTeamStatusBoard"><div class="abrTeamCardTitle"><div><span>Benim durumum</span><b>${abrTeamState.statusWorking?'Güncelleniyor…':abrTeamEscape(ownStatus.label)}</b></div><div class="abrTeamCountPill">CANLI</div></div><div class="abrTeamStatusChoices">${abrTeamStatusChoicesHtml(ownStatus.key)}</div><span class="abrTeamStatusHint">Seçtiğin durum ekipteki tüm aktif üyelerde anlık görünür.</span></section>
     ${pending.length?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Onay bekliyor</span><b>Katılma istekleri</b></div><div class="abrTeamCountPill">${pending.length}</div></div><div class="abrTeamMemberList">${pending.map(function(item){return abrTeamMemberHtml(item,true)}).join("")}</div></section>`:''}
     <section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Aktif ekip</span><b>Üyeler</b></div><div class="abrTeamCountPill">${active.length}</div></div><div class="abrTeamMemberList">${active.map(function(item){return abrTeamMemberHtml(item,false)}).join("")}</div></section>
     ${abrTeamMembershipOwner()?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Davet güvenliği</span><b>Ekip paylaşım kodu</b></div></div>${knownCode?'<div class="abrTeamCodeKnown">'+abrTeamEscape(knownCode)+'</div>':'<div class="abrTeamPrivacy" style="margin:0 0 11px"><i>i</i><span>Mevcut kod bu cihazda kayıtlı değil. Yeni bir kod belirleyebilirsin.</span></div>'}<div class="abrTeamCodeBox"><label class="abrTeamField"><span>Yeni kod</span><input id="abrTeamNewCode" maxlength="32" autocapitalize="characters" placeholder="En az 6 karakter"></label><div class="abrTeamCodeActions"><button type="button" onclick="ekipKodUret()" aria-label="Kod üret">↻</button><button type="button" onclick="ekipKoduPaylas()" aria-label="Kodu paylaş">↗</button></div></div><button class="abrTeamSoft" style="width:100%;margin-top:10px" type="button" onclick="ekipKoduYenile()">Yeni Kodu Etkinleştir</button><div class="abrTeamPrivacy"><i>!</i><span>Kodu değiştirirsen eski kod hemen geçersiz olur. Aktif üyeler ekipte kalır.</span></div></section>`:''}`;
@@ -39699,6 +39884,10 @@ window.ekipArizaMerkeziAc = async function(){
 };
 window.ekipArizaMerkeziKapat = function(){
   const modal = abrTeamEl("abrTeamCenter");
+  abrTeamChatPressClear();
+  abrTeamVoiceState.cancelled=true;
+  if(abrTeamState.voiceRecording)abrTeamVoiceStop(true,false);
+  if(abrTeamVoicePlayback.audio){try{abrTeamVoicePlayback.audio.pause()}catch(e){}}
   if(typeof window.ekipArizaSilmeKapat === "function")window.ekipArizaSilmeKapat(true);
   if(typeof window.ekipUyeCikarmaKapat === "function")window.ekipUyeCikarmaKapat(true);
   abrTeamState.open = false;
@@ -39711,6 +39900,10 @@ window.ekipArizaGeri = function(){
   if(abrTeamState.deleteReportId){window.ekipArizaSilmeKapat();return}
   if(abrTeamState.memberRemoveId){window.ekipUyeCikarmaKapat();return}
   if(["compose","detail","chat","team","settings"].includes(abrTeamState.view) && abrTeamState.teamId){
+    abrTeamChatPressClear();
+    if(abrTeamState.view==="chat")abrTeamVoiceState.cancelled=true;
+    if(abrTeamState.view==="chat"&&abrTeamState.voiceRecording)abrTeamVoiceStop(true,false);
+    if(abrTeamState.view==="chat"&&abrTeamVoicePlayback.audio){try{abrTeamVoicePlayback.audio.pause()}catch(e){}}
     abrTeamState.view="home";
     abrTeamState.reportId=null;
     abrTeamState.messages=[];
@@ -39726,7 +39919,12 @@ window.ekipArizaTekrarDene = async function(){
 window.ekipKurulumSekmesi = function(mode){abrTeamState.setupMode=mode==='join'?'join':'create';abrTeamRender();abrTeamScrollTop()};
 window.ekipArizaGorunum = function(view){
   if(!abrTeamState.teamId)return;
-  abrTeamState.view=["home","chat","team","settings"].includes(view)?view:"home";
+  const nextView=["home","chat","team","settings"].includes(view)?view:"home";
+  if(nextView!=="chat")abrTeamChatPressClear();
+  if(abrTeamState.view==="chat"&&nextView!=="chat")abrTeamVoiceState.cancelled=true;
+  if(abrTeamState.view==="chat"&&nextView!=="chat"&&abrTeamState.voiceRecording)abrTeamVoiceStop(true,false);
+  if(abrTeamState.view==="chat"&&nextView!=="chat"&&abrTeamVoicePlayback.audio){try{abrTeamVoicePlayback.audio.pause()}catch(e){}}
+  abrTeamState.view=nextView;
   abrTeamRender();abrTeamScrollTop();abrTeamHaptic("light");
   if(abrTeamState.view==="chat")abrTeamChatReadMark();
 };
@@ -39790,6 +39988,9 @@ window.ekipTakimaKatil = async function(event){
 window.ekipTakimDegistir = async function(teamId){
   const membership = abrTeamState.activeTeams.find(function(item){return item.team_id===teamId});
   if(!membership || teamId===abrTeamState.teamId)return;
+  abrTeamVoiceState.cancelled=true;
+  if(abrTeamState.voiceRecording)abrTeamVoiceStop(true,false);
+  abrTeamState.chatReplyId=null;
   abrTeamState.teamId=teamId;abrTeamState.activeMembership=membership;abrTeamSettingsPatch({activeTeamId:teamId});
   abrTeamState.view="home";abrTeamState.loading=true;abrTeamRender();
   try{await abrTeamContextLoad({sync:true})}catch(error){abrTeamState.error=abrTeamErrorText(error)}
@@ -40116,15 +40317,56 @@ window.ekipArizaApartmaniAc = function(reportId){
   window.ekipArizaMerkeziKapat();
   setTimeout(function(){try{if(typeof detayAc==="function")detayAc(index)}catch(e){abrTeamToast("Apartman kartı açılamadı")}},120);
 };
+window.ekipDurumAyarla = async function(status){
+  const info=abrTeamMemberStatusInfo(status);
+  if(info.key!==status || abrTeamState.statusWorking || !abrTeamState.teamId || !abrTeamState.user)return;
+  const member=abrTeamOwnMember();
+  if(!member){abrTeamToast("Aktif ekip üyeliği bulunamadı");return}
+  if(member.availability_status===status){abrTeamToast("Durumun zaten "+info.label.toLocaleLowerCase("tr-TR"));return}
+  const previousStatus=member.availability_status || "available";
+  const previousUpdated=member.availability_updated_at || null;
+  abrTeamState.statusWorking=true;
+  member.availability_status=status;
+  member.availability_updated_at=new Date().toISOString();
+  abrTeamRenderTeam();
+  try{
+    const response=await abrTeamRpcWithTimeout("set_team_member_status",{p_team_id:abrTeamState.teamId,p_status:status},12000);
+    if(response.error)throw response.error;
+    abrTeamToast("Durumun "+info.label+" olarak güncellendi");
+    abrTeamHaptic("success");
+  }catch(error){
+    member.availability_status=previousStatus;
+    member.availability_updated_at=previousUpdated;
+    abrTeamToast(abrTeamErrorText(error));
+    abrTeamHaptic("error");
+  }finally{
+    abrTeamState.statusWorking=false;
+    if(abrTeamState.open&&abrTeamState.view==="team")abrTeamRenderTeam();
+  }
+};
 window.ekipSohbetTaslak = function(event){
   abrTeamState.chatDraft=abrTeamTrim(event&&event.currentTarget&&event.currentTarget.value,2000);
+};
+window.ekipSohbetYanitiSec = function(messageId){
+  if(!abrTeamState.open || abrTeamState.view!=="chat" || abrTeamState.chatWorking || abrTeamState.voiceRecording)return;
+  const message=abrTeamChatMessageById(messageId);
+  if(!message){abrTeamToast("Yanıtlanacak ileti artık görünmüyor");return}
+  abrTeamState.chatReplyId=message.id;
+  abrTeamRenderChat();
+  setTimeout(function(){const input=abrTeamEl("abrTeamChatInput");if(input)input.focus()},80);
+};
+window.ekipSohbetYanitiKaldir = function(){
+  abrTeamState.chatReplyId=null;
+  abrTeamRenderChat();
+  setTimeout(function(){const input=abrTeamEl("abrTeamChatInput");if(input)input.focus()},50);
 };
 function abrTeamChatAllowedFile(file){
   if(!file || !file.name || !file.size)return "Boş veya geçersiz dosya seçildi.";
   if(file.size>10485760)return "Dosya en fazla 10 MB olabilir.";
   const extension=(file.name.split(".").pop()||"").toLocaleLowerCase("tr-TR");
-  const allowed=["jpg","jpeg","png","webp","gif","heic","heif","pdf","doc","docx","xls","xlsx","ppt","pptx","txt","csv","json","zip"];
-  if(!allowed.includes(extension) && !String(file.type||"").startsWith("image/"))return "Bu dosya türü desteklenmiyor.";
+  const allowed=["jpg","jpeg","png","webp","gif","heic","heif","m4a","aac","mp3","wav","ogg","webm","pdf","doc","docx","xls","xlsx","ppt","pptx","txt","csv","json","zip"];
+  const mime=String(file.type||"");
+  if(!allowed.includes(extension) && !mime.startsWith("image/") && !mime.startsWith("audio/"))return "Bu dosya türü desteklenmiyor.";
   return "";
 }
 window.ekipSohbetDosyaSec = function(event){
@@ -40133,11 +40375,13 @@ window.ekipSohbetDosyaSec = function(event){
   const error=abrTeamChatAllowedFile(file);
   if(error){abrTeamToast(error);if(input)input.value="";return}
   abrTeamState.chatFile=file;
+  abrTeamState.chatAudioDurationMs=null;
   abrTeamRenderChat();
   abrTeamHaptic("light");
 };
 window.ekipSohbetDosyaKaldir = function(){
   abrTeamState.chatFile=null;
+  abrTeamState.chatAudioDurationMs=null;
   abrTeamRenderChat();
 };
 function abrTeamChatObjectId(){
@@ -40150,12 +40394,162 @@ function abrTeamChatObjectExtension(file){
   const mime=String(file&&file.type||"").split("/")[1]||"bin";
   return mime.replace(/[^a-z0-9]/gi,"").slice(0,5)||"bin";
 }
+function abrTeamVoiceMimeType(){
+  if(typeof window.MediaRecorder!=="function")return "";
+  const types=["audio/mp4;codecs=mp4a.40.2","audio/mp4","audio/webm;codecs=opus","audio/webm","audio/ogg;codecs=opus","audio/ogg"];
+  if(typeof window.MediaRecorder.isTypeSupported!=="function")return "";
+  return types.find(function(type){try{return window.MediaRecorder.isTypeSupported(type)}catch(e){return false}}) || "";
+}
+function abrTeamVoiceExtension(mime){
+  const type=String(mime||"").toLocaleLowerCase("tr-TR");
+  if(type.includes("mp4"))return "m4a";
+  if(type.includes("webm"))return "webm";
+  if(type.includes("ogg"))return "ogg";
+  if(type.includes("wav"))return "wav";
+  if(type.includes("mpeg"))return "mp3";
+  if(type.includes("aac"))return "aac";
+  return "m4a";
+}
+function abrTeamVoiceTracksStop(stream){
+  try{(stream&&stream.getTracks?stream.getTracks():[]).forEach(function(track){track.stop()})}catch(e){}
+}
+function abrTeamVoiceTimerUpdate(){
+  if(!abrTeamState.voiceRecording)return;
+  abrTeamState.voiceElapsedMs=Math.max(0,Date.now()-abrTeamState.voiceStartedAt);
+  const timer=abrTeamEl("abrTeamVoiceTimer");
+  if(timer)timer.textContent=abrTeamChatDuration(abrTeamState.voiceElapsedMs)+" • En fazla 2 dakika";
+  if(abrTeamState.voiceElapsedMs>=120000)abrTeamVoiceStop(false,true);
+}
+async function abrTeamVoiceFinalize(){
+  if(abrTeamVoiceState.finalizing || (!abrTeamVoiceState.recorder && !abrTeamVoiceState.chunks.length))return;
+  abrTeamVoiceState.finalizing=true;
+  const recorder=abrTeamVoiceState.recorder;
+  const chunks=abrTeamVoiceState.chunks.slice();
+  const cancelled=abrTeamVoiceState.cancelled;
+  const autoSend=abrTeamVoiceState.autoSend;
+  const duration=Math.max(0,abrTeamState.voiceElapsedMs || (abrTeamState.voiceStartedAt?Date.now()-abrTeamState.voiceStartedAt:0));
+  const chunkType=chunks.find(function(chunk){return chunk&&chunk.type}) || null;
+  const mime=String((recorder&&recorder.mimeType)||abrTeamVoiceState.mime||(chunkType&&chunkType.type)||"audio/mp4");
+  clearInterval(abrTeamVoiceState.timer);
+  abrTeamVoiceState.timer=0;
+  abrTeamVoiceTracksStop(abrTeamVoiceState.stream);
+  abrTeamVoiceState.recorder=null;
+  abrTeamVoiceState.stream=null;
+  abrTeamVoiceState.chunks=[];
+  abrTeamVoiceState.mime="";
+  abrTeamVoiceState.cancelled=false;
+  abrTeamVoiceState.autoSend=false;
+  abrTeamState.voiceRecording=false;
+  abrTeamState.voiceWorking=false;
+  abrTeamState.voiceStartedAt=0;
+  abrTeamState.voiceElapsedMs=0;
+  try{
+    if(cancelled){if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();return}
+    const blob=new Blob(chunks,{type:mime});
+    if(duration<700 || !blob.size){abrTeamToast("Ses kaydı çok kısa; biraz daha uzun kaydet");abrTeamHaptic("error");if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();return}
+    if(blob.size>10485760){abrTeamToast("Sesli mesaj 10 MB sınırını aştı");abrTeamHaptic("error");if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();return}
+    const now=new Date();
+    const stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,"0")+String(now.getDate()).padStart(2,"0")+"-"+String(now.getHours()).padStart(2,"0")+String(now.getMinutes()).padStart(2,"0");
+    const name="sesli-mesaj-"+stamp+"."+abrTeamVoiceExtension(mime);
+    let file;
+    try{file=new File([blob],name,{type:mime,lastModified:Date.now()})}
+    catch(e){file=blob;try{Object.defineProperty(file,"name",{value:name})}catch(ignore){file.name=name}}
+    abrTeamState.chatFile=file;
+    abrTeamState.chatAudioDurationMs=Math.max(1,Math.round(duration));
+    if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();
+    if(autoSend)await window.ekipSohbetGonder();
+  }finally{
+    abrTeamVoiceState.finalizing=false;
+  }
+}
+function abrTeamVoiceStop(cancelled,autoSend){
+  const recorder=abrTeamVoiceState.recorder;
+  if(!recorder){
+    abrTeamVoiceTracksStop(abrTeamVoiceState.stream);
+    abrTeamState.voiceRecording=false;
+    abrTeamState.voiceWorking=false;
+    return;
+  }
+  abrTeamState.voiceElapsedMs=Math.max(0,Date.now()-abrTeamState.voiceStartedAt);
+  abrTeamState.voiceRecording=false;
+  abrTeamState.voiceWorking=true;
+  abrTeamVoiceState.cancelled=!!cancelled;
+  abrTeamVoiceState.autoSend=!!autoSend;
+  clearInterval(abrTeamVoiceState.timer);
+  abrTeamVoiceState.timer=0;
+  if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();
+  try{
+    if(recorder.state!=="inactive")recorder.stop();
+    else abrTeamVoiceFinalize();
+  }catch(error){abrTeamVoiceFinalize()}
+}
+window.ekipSohbetSesKaydi = async function(){
+  if(abrTeamState.chatWorking)return;
+  if(abrTeamState.voiceRecording){abrTeamVoiceStop(false,true);return}
+  if(abrTeamState.voiceWorking)return;
+  if(abrTeamState.chatFile){abrTeamToast("Ses kaydından önce ekli dosyayı kaldır");return}
+  if(abrTeamTrim(abrTeamState.chatDraft,2000)){abrTeamToast("Ses kaydından önce yazılı taslağı gönder veya temizle");return}
+  if(!window.isSecureContext || !navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia!=="function" || typeof window.MediaRecorder!=="function"){
+    abrTeamToast("Bu cihazda güvenli ses kaydı desteklenmiyor");return;
+  }
+  abrTeamState.voiceWorking=true;
+  abrTeamVoiceState.cancelled=false;
+  if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
+    if(abrTeamVoiceState.cancelled || !abrTeamState.open || abrTeamState.view!=="chat"){
+      abrTeamVoiceTracksStop(stream);abrTeamState.voiceWorking=false;return;
+    }
+    const mime=abrTeamVoiceMimeType();
+    let recorder;
+    try{recorder=new MediaRecorder(stream,mime?{mimeType:mime,audioBitsPerSecond:64000}:{audioBitsPerSecond:64000})}
+    catch(firstError){recorder=new MediaRecorder(stream)}
+    abrTeamVoiceState.stream=stream;
+    abrTeamVoiceState.recorder=recorder;
+    abrTeamVoiceState.chunks=[];
+    abrTeamVoiceState.mime=mime;
+    abrTeamVoiceState.cancelled=false;
+    abrTeamVoiceState.autoSend=false;
+    recorder.ondataavailable=function(event){if(event.data&&event.data.size)abrTeamVoiceState.chunks.push(event.data)};
+    recorder.onstop=function(){abrTeamVoiceFinalize()};
+    recorder.onerror=function(event){
+      console.warn("Ses kaydı hatası",event&&event.error||event);
+      abrTeamToast("Ses kaydı tamamlanamadı");
+      abrTeamVoiceStop(true,false);
+    };
+    recorder.start(1000);
+    abrTeamState.voiceStartedAt=Date.now();
+    abrTeamState.voiceElapsedMs=0;
+    abrTeamState.voiceRecording=true;
+    abrTeamState.voiceWorking=false;
+    abrTeamVoiceState.timer=setInterval(abrTeamVoiceTimerUpdate,250);
+    abrTeamRenderChat();
+    abrTeamHaptic("light");
+  }catch(error){
+    abrTeamVoiceTracksStop(abrTeamVoiceState.stream);
+    abrTeamVoiceState.stream=null;
+    abrTeamVoiceState.recorder=null;
+    abrTeamVoiceState.chunks=[];
+    abrTeamState.voiceRecording=false;
+    abrTeamState.voiceWorking=false;
+    const errorName=String(error&&error.name||"");
+    abrTeamToast(/NotAllowedError|SecurityError|NotFoundError/i.test(errorName)?"Sesli mesaj için mikrofon izni gerekiyor.":abrTeamErrorText(error));
+    abrTeamHaptic("error");
+    if(abrTeamState.open&&abrTeamState.view==="chat")abrTeamRenderChat();
+  }
+};
+window.ekipSohbetSesIptal = function(){abrTeamVoiceStop(true,false);abrTeamToast("Ses kaydı iptal edildi")};
 window.ekipSohbetGonder = async function(event){
   if(event)event.preventDefault();
   if(abrTeamState.chatWorking || !abrTeamState.chatReady || !abrTeamState.user || !abrTeamState.teamId)return;
   const input=abrTeamEl("abrTeamChatInput");
   const text=abrTeamTrim(input&&input.value||abrTeamState.chatDraft,2000);
   const file=abrTeamState.chatFile;
+  const fileMime=file?abrTeamTrim(String(file.type||"application/octet-stream").split(";")[0],120):null;
+  const audioDuration=file?Math.max(0,Math.round(Number(abrTeamState.chatAudioDurationMs)||0)):0;
+  const reply=abrTeamState.chatReplyId?abrTeamChatMessageById(abrTeamState.chatReplyId):null;
+  if(abrTeamState.chatReplyId&&!reply){abrTeamState.chatReplyId=null;abrTeamToast("Yanıtlanan ileti artık görünmüyor");abrTeamRenderChat();return}
+  const replyId=reply&&reply.team_id===abrTeamState.teamId?reply.id:null;
   if(!text && !file){abrTeamToast("Mesaj yaz veya dosya ekle");return}
   const fileError=file?abrTeamChatAllowedFile(file):"";
   if(fileError){abrTeamToast(fileError);return}
@@ -40170,7 +40564,7 @@ window.ekipSohbetGonder = async function(event){
       const upload=await abrTeamState.client.storage.from("team-files").upload(filePath,file,{
         cacheControl:"3600",
         upsert:false,
-        contentType:file.type||"application/octet-stream"
+        contentType:fileMime||"application/octet-stream"
       });
       if(upload.error)throw upload.error;
     }
@@ -40181,14 +40575,18 @@ window.ekipSohbetGonder = async function(event){
       sender_name:senderName,
       body:text||null,
       file_path:filePath,
-      file_name:file?abrTeamTrim(file.name,180):null,
-      file_type:file?abrTeamTrim(file.type||"application/octet-stream",120):null,
-      file_size:file?file.size:null
+      file_name:file?abrTeamTrim(file.name||"ekip-dosyasi",180):null,
+      file_type:file?fileMime:null,
+      file_size:file?file.size:null,
+      reply_to_id:replyId,
+      audio_duration_ms:audioDuration||null
     }).select("id").single();
     if(response.error)throw response.error;
     messageSaved=true;
     abrTeamState.chatDraft="";
     abrTeamState.chatFile=null;
+    abrTeamState.chatAudioDurationMs=null;
+    abrTeamState.chatReplyId=null;
     abrPushNotify("team_message_created",null,null,false,response.data&&response.data.id);
     try{
       await abrTeamChatLoad();
@@ -40219,6 +40617,51 @@ window.ekipSohbetDosyaAc = async function(messageId){
     const url=response.data&&response.data.signedUrl;
     if(!url)throw new Error("Dosya bağlantısı oluşturulamadı.");
     const link=document.createElement("a");link.href=url;link.target="_blank";link.rel="noopener";document.body.appendChild(link);link.click();link.remove();
+  }catch(error){abrTeamToast(abrTeamErrorText(error));abrTeamHaptic("error")}
+};
+function abrTeamVoicePlaybackPaint(){
+  const audio=abrTeamVoicePlayback.audio;
+  const messageId=abrTeamVoicePlayback.messageId;
+  if(!audio||!messageId)return;
+  const button=Array.from(document.querySelectorAll(".abrTeamVoiceMessage[data-voice-id]")).find(function(item){return item.getAttribute("data-voice-id")===String(messageId)}) || null;
+  if(!button)return;
+  const message=abrTeamChatMessageById(messageId);
+  const total=Number.isFinite(audio.duration)&&audio.duration>0?audio.duration*1000:Number(message&&message.audio_duration_ms)||0;
+  const current=Number.isFinite(audio.currentTime)?audio.currentTime*1000:0;
+  const progress=total>0?Math.max(0,Math.min(100,(current/total)*100)):0;
+  button.style.setProperty("--abr-voice-progress",progress.toFixed(2)+"%");
+  button.classList.toggle("is-playing",!audio.paused&&!audio.ended);
+  const icon=button.querySelector(".abrTeamVoicePlay");if(icon)icon.textContent=!audio.paused&&!audio.ended?"Ⅱ":"▶";
+  const time=button.querySelector("[data-voice-time]");if(time)time.textContent=current>0&&!audio.ended?abrTeamChatDuration(current):abrTeamChatDuration(total);
+}
+window.ekipSohbetSesliMesajAc = async function(messageId){
+  const message=abrTeamChatMessageById(messageId);
+  if(!message||!message.file_path){abrTeamToast("Sesli mesaj artık bulunmuyor");return}
+  if(abrTeamVoicePlayback.audio&&abrTeamVoicePlayback.messageId===messageId){
+    try{
+      if(abrTeamVoicePlayback.audio.paused)await abrTeamVoicePlayback.audio.play();
+      else abrTeamVoicePlayback.audio.pause();
+      abrTeamVoicePlaybackPaint();
+    }catch(error){abrTeamToast("Ses hazır; oynatmak için tekrar dokun")}
+    return;
+  }
+  if(abrTeamVoicePlayback.audio){try{abrTeamVoicePlayback.audio.pause()}catch(e){}}
+  abrTeamToast("Sesli mesaj hazırlanıyor…");
+  try{
+    const response=await abrTeamState.client.storage.from("team-files").createSignedUrl(message.file_path,300);
+    if(response.error)throw response.error;
+    const url=response.data&&response.data.signedUrl;
+    if(!url)throw new Error("Ses bağlantısı oluşturulamadı.");
+    const audio=new Audio(url);
+    audio.preload="metadata";
+    abrTeamVoicePlayback.audio=audio;
+    abrTeamVoicePlayback.messageId=messageId;
+    abrTeamVoicePlayback.url=url;
+    ["timeupdate","loadedmetadata","play","pause"].forEach(function(type){audio.addEventListener(type,abrTeamVoicePlaybackPaint)});
+    audio.addEventListener("ended",function(){try{audio.currentTime=0}catch(e){}abrTeamVoicePlaybackPaint()});
+    audio.addEventListener("error",function(){abrTeamToast("Sesli mesaj oynatılamadı")},{once:true});
+    try{await audio.play()}catch(playError){abrTeamToast("Ses hazır; oynatmak için tekrar dokun")}
+    abrTeamVoicePlaybackPaint();
   }catch(error){abrTeamToast(abrTeamErrorText(error));abrTeamHaptic("error")}
 };
 window.ekipSohbetYenile = async function(){
@@ -40353,7 +40796,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.08";
+window.__abrTeamCenterVersion = "2.1.09";
 })();
 </script>
 
