@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.02_FAULT_DELETE -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.03_FAULT_DELETE_TIMEOUT_FIX -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.02 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.03 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20467,7 +20467,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.02</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.03</div>
     </div>
   </div>
 </div>
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.02";
+  const SPLASH_VERSION = "v2.1.03";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21269,7 +21269,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.02";
+const APP_VERSION = "v2.1.03";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21284,7 +21284,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 /* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
-/* v2.1.02 — Ekip Arıza Merkezi: güvenli kayıt silme + kilit ekranı Web Push */
+/* v2.1.03 — Ekip Arıza Merkezi: takılmayan güvenli kayıt silme + kilit ekranı Web Push */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -37541,7 +37541,7 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 </script>
 
 <style id="abrTeamFaultCenter2100">
-/* v2.1.02 — Ekip Arıza Merkezi + yetkili kayıt silme + kilit ekranı bildirimi */
+/* v2.1.03 — Ekip Arıza Merkezi + zaman aşımlı yetkili kayıt silme + kilit ekranı bildirimi */
 .abrTeamDrawerItem{position:relative!important}
 .abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
 .abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
@@ -37987,6 +37987,8 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamDeleteName{display:block;margin:14px 0;padding:12px 14px;border:1px solid rgba(218,52,82,.13);border-radius:16px;color:#b5223e;background:#fff4f6;font-size:13px;font-weight:950;overflow-wrap:anywhere}
 .abrTeamDeleteNote{display:flex;align-items:flex-start;gap:9px;margin:0 0 16px;padding:11px 12px;border-radius:15px;color:#7c5962;background:#fff7f8;font-size:10px;line-height:1.42;font-weight:750}
 .abrTeamDeleteNote i{flex:0 0 20px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#d43b58;font-style:normal;font-size:11px;font-weight:950}
+.abrTeamDeleteError{display:block;margin:-4px 0 14px;padding:10px 12px;border:1px solid rgba(218,52,82,.16);border-radius:14px;color:#a72540;background:#fff0f3;font-size:10px;line-height:1.42;font-weight:850}
+.abrTeamDeleteError[hidden]{display:none}
 .abrTeamDeleteButtons{display:grid;grid-template-columns:.85fr 1.35fr;gap:8px}
 .abrTeamDeleteButtons button{min-height:50px;border:0;border-radius:17px;font:900 12px/1 inherit}
 .abrTeamDeleteCancel{color:#526078;background:#eef3f9}
@@ -38118,6 +38120,8 @@ body.darkMode #abrTeamCenter .abrTeamDeleteName,
 html.darkRoot #abrTeamCenter .abrTeamDeleteName{color:#ff9bad;border-color:rgba(226,73,101,.18);background:#321724}
 body.darkMode #abrTeamCenter .abrTeamDeleteNote,
 html.darkRoot #abrTeamCenter .abrTeamDeleteNote{color:#d2aab3;background:#291722}
+body.darkMode #abrTeamCenter .abrTeamDeleteError,
+html.darkRoot #abrTeamCenter .abrTeamDeleteError{color:#ffadbc;border-color:rgba(226,73,101,.20);background:#321724}
 body.darkMode #abrTeamCenter .abrTeamDeleteCancel,
 html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a40}
 
@@ -38179,6 +38183,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a
         <p id="abrTeamDeleteDescription">Bu kayıt ekip listesinden kalıcı olarak kaldırılacak.</p>
         <strong id="abrTeamDeleteName" class="abrTeamDeleteName">Arıza kaydı</strong>
         <div class="abrTeamDeleteNote"><i>!</i><span>Bu arızaya ait ekip iletileri ve okundu bilgileri de silinir. Bu işlem geri alınamaz.</span></div>
+        <span id="abrTeamDeleteError" class="abrTeamDeleteError" role="status" hidden></span>
         <div class="abrTeamDeleteButtons"><button class="abrTeamDeleteCancel" type="button" onclick="ekipArizaSilmeKapat()">Vazgeç</button><button id="abrTeamDeleteConfirm" class="abrTeamDeleteConfirm" type="button" onclick="ekipArizaSil()">Kalıcı Olarak Sil</button></div>
       </section>
     </div>
@@ -38319,12 +38324,31 @@ function abrTeamErrorText(error){
     [/Bu islem icin ekip sahibi olmalisiniz/i,"Bu işlem yalnız ekip sahibi tarafından yapılabilir."],
     [/Arizayi yalniz bildiren veya ekip sahibi silebilir/i,"Bu kaydı yalnız arızayı bildiren kişi veya ekip sahibi silebilir."],
     [/Ariza kaydi bulunamadi/i,"Arıza kaydı artık bulunmuyor."],
+    [/canceling statement due to lock timeout|lock timeout/i,"Kayıt şu an başka bir işlem tarafından kullanılıyor. Birkaç saniye sonra tekrar dene."],
+    [/ABR_TEAM_TIMEOUT|zaman aşımına uğradı|AbortError|aborted|signal is aborted/i,"Sunucudan zamanında cevap alınamadı. Bağlantını kontrol edip tekrar dene."],
     [/Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i,"Arıza silme kurulumu henüz etkin değil."],
     [/Anonymous sign-ins are disabled/i,"Supabase Anonymous Sign-Ins ayarı kapalı görünüyor."],
     [/JWT expired/i,"Ekip oturumunun süresi doldu. Yeniden dene."]
   ];
   map.some(function(item){if(item[0].test(text)){text=item[1];return true}return false});
   return text || "İşlem tamamlanamadı.";
+}
+async function abrTeamRpcWithTimeout(name,args,timeoutMs){
+  const wait = Math.max(4000,Number(timeoutMs) || 12000);
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  let request = abrTeamState.client.rpc(name,args);
+  if(controller && request && typeof request.abortSignal === "function")request=request.abortSignal(controller.signal);
+  let timer = 0;
+  const timeout = new Promise(function(resolve,reject){
+    timer=setTimeout(function(){
+      if(controller){try{controller.abort()}catch(e){}}
+      const error=new Error("ABR_TEAM_TIMEOUT: Sunucu isteği zaman aşımına uğradı.");
+      error.code="ABR_TEAM_TIMEOUT";
+      reject(error);
+    },wait);
+  });
+  try{return await Promise.race([Promise.resolve(request),timeout])}
+  finally{clearTimeout(timer)}
 }
 
 function abrPushEnvironment(){
@@ -39308,6 +39332,20 @@ window.ekipArizaDurum = async function(reportId,status){
     abrTeamToast(status==="resolved"?"Arıza çözüldü":"Durum güncellendi");abrTeamHaptic("success");abrTeamRenderDetail();
   }catch(error){abrTeamToast(abrTeamErrorText(error))}
 };
+function abrTeamDeleteFinish(reportId,deletedName,message){
+  abrTeamState.deleteWorking=false;
+  window.ekipArizaSilmeKapat(true);
+  abrTeamState.reportId=null;
+  abrTeamState.messages=[];
+  abrTeamState.view="home";
+  abrTeamState.reports=abrTeamState.reports.filter(function(item){return item.id!==reportId});
+  delete abrTeamState.reads[reportId];
+  abrTeamRender();
+  abrTeamScrollTop();
+  abrTeamToast(message || (deletedName+" arıza kaydı silindi"));
+  abrTeamHaptic("success");
+  abrTeamReportsLoad().then(function(){if(abrTeamState.open && abrTeamState.view==="home")abrTeamRender()}).catch(function(error){console.warn("Silme sonrası arıza listesi yenilenemedi",error)});
+}
 window.ekipArizaSilmeAc = function(reportId){
   const report = abrTeamState.reports.find(function(item){return item.id===reportId});
   if(!report){abrTeamToast("Arıza kaydı artık bulunmuyor");return}
@@ -39315,11 +39353,13 @@ window.ekipArizaSilmeAc = function(reportId){
   const modal = abrTeamEl("abrTeamDeleteModal");
   const name = abrTeamEl("abrTeamDeleteName");
   const button = abrTeamEl("abrTeamDeleteConfirm");
+  const errorBox = abrTeamEl("abrTeamDeleteError");
   if(!modal)return;
   abrTeamState.deleteReportId=report.id;
   abrTeamState.deleteWorking=false;
   if(name)name.textContent=(report.apartment_name || "Arıza kaydı")+" • "+abrTeamPriorityLabel(report.priority);
   if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden","false");
   abrTeamHaptic("light");
@@ -39329,38 +39369,41 @@ window.ekipArizaSilmeKapat = function(force){
   if(abrTeamState.deleteWorking && force !== true)return;
   const modal = abrTeamEl("abrTeamDeleteModal");
   const button = abrTeamEl("abrTeamDeleteConfirm");
+  const errorBox = abrTeamEl("abrTeamDeleteError");
   if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
   if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   abrTeamState.deleteReportId=null;
   abrTeamState.deleteWorking=false;
 };
 window.ekipArizaSil = async function(){
+  if(abrTeamState.deleteWorking)return;
   const reportId=abrTeamState.deleteReportId;
   const report=abrTeamState.reports.find(function(item){return item.id===reportId});
   if(!reportId || !report){window.ekipArizaSilmeKapat(true);abrTeamToast("Arıza kaydı artık bulunmuyor");return}
   if(!abrTeamCanDelete(report)){window.ekipArizaSilmeKapat(true);abrTeamToast("Bu kaydı yalnız bildiren kişi veya ekip sahibi silebilir");return}
   const button=abrTeamEl("abrTeamDeleteConfirm");
+  const errorBox=abrTeamEl("abrTeamDeleteError");
   abrTeamState.deleteWorking=true;
   if(button){button.disabled=true;button.textContent="Siliniyor…"}
+  if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   try{
-    const response=await abrTeamState.client.rpc("delete_fault_report",{p_report_id:reportId});
+    const response=await abrTeamRpcWithTimeout("delete_fault_report",{p_report_id:reportId},12000);
     if(response.error)throw response.error;
     if(response.data !== true)throw new Error("Arıza kaydı silinemedi.");
     const deletedName=report.apartment_name || "Arıza";
-    abrTeamState.deleteWorking=false;
-    window.ekipArizaSilmeKapat(true);
-    abrTeamState.reportId=null;
-    abrTeamState.messages=[];
-    abrTeamState.view="home";
-    await abrTeamReportsLoad();
-    abrTeamRender();
-    abrTeamScrollTop();
-    abrTeamToast(deletedName+" arıza kaydı silindi");
-    abrTeamHaptic("success");
+    abrTeamDeleteFinish(reportId,deletedName);
   }catch(error){
     abrTeamState.deleteWorking=false;
-    if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
-    abrTeamToast(abrTeamErrorText(error));
+    const raw=String(error && (error.message || error.error_description || error.details) || error || "");
+    if(/Ariza kaydi bulunamadi/i.test(raw)){
+      abrTeamDeleteFinish(reportId,report.apartment_name || "Arıza","Arıza kaydı zaten kaldırılmış");
+      return;
+    }
+    const message=abrTeamErrorText(error);
+    if(button){button.disabled=false;button.textContent="Tekrar Dene"}
+    if(errorBox){errorBox.hidden=false;errorBox.textContent=message}
+    abrTeamToast(message);
     abrTeamHaptic("error");
   }
 };
@@ -39461,7 +39504,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.02";
+window.__abrTeamCenterVersion = "2.1.03";
 })();
 </script>
 
