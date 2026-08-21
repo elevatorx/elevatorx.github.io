@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.01_LOCK_SCREEN_PUSH -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.02_FAULT_DELETE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.01 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.02 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20467,7 +20467,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.01</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.02</div>
     </div>
   </div>
 </div>
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.01";
+  const SPLASH_VERSION = "v2.1.02";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21269,7 +21269,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.01";
+const APP_VERSION = "v2.1.02";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21284,7 +21284,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 /* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
-/* v2.1.01 — Ekip Arıza Merkezi için kilit ekranı Web Push bildirimleri */
+/* v2.1.02 — Ekip Arıza Merkezi: güvenli kayıt silme + kilit ekranı Web Push */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -37541,7 +37541,7 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 </script>
 
 <style id="abrTeamFaultCenter2100">
-/* v2.1.01 — Ekip Arıza Merkezi + kilit ekranı bildirimi; yerel verilerden bağımsız bulut katmanı */
+/* v2.1.02 — Ekip Arıza Merkezi + yetkili kayıt silme + kilit ekranı bildirimi */
 .abrTeamDrawerItem{position:relative!important}
 .abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
 .abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
@@ -37965,6 +37965,33 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamComposer{padding:10px;border:1px solid var(--abr-team-line);border-radius:20px;background:var(--abr-team-surface);box-shadow:0 10px 24px rgba(46,68,101,.07)}
 .abrTeamComposer textarea{width:100%;min-height:67px;padding:8px 9px;border:0;outline:0;resize:none;color:var(--abr-team-ink);background:transparent;font:700 13px/1.4 inherit;box-sizing:border-box}
 .abrTeamComposer button{width:100%;min-height:44px;border:0;border-radius:14px;color:#fff;background:#176dcc;font-size:12px;font-weight:950}
+.abrTeamRecordActions{margin-top:14px;padding:14px;border:1px solid rgba(220,53,84,.14);border-radius:20px;background:rgba(255,247,249,.74)}
+.abrTeamRecordActionsHead{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.abrTeamRecordActionsIcon{flex:0 0 36px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:13px;color:#c52d4b;background:#fff0f3}
+.abrTeamRecordActionsIcon svg{width:18px;height:18px;display:block}
+.abrTeamRecordActionsHead div{min-width:0}
+.abrTeamRecordActionsHead span{display:block;color:#c53b55;font-size:8px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+.abrTeamRecordActionsHead b{display:block;margin-top:3px;font-size:12px;font-weight:950}
+.abrTeamRecordDelete{width:100%;min-height:47px;border:1px solid rgba(211,45,76,.16);border-radius:16px;color:#bd2845;background:#fff;font:900 12px/1 inherit;box-shadow:0 7px 18px rgba(175,38,64,.06)}
+.abrTeamRecordDelete:active{transform:scale(.985)}
+
+.abrTeamDeleteModal{position:fixed;z-index:18;inset:0;display:none;align-items:flex-end;justify-content:center;padding:18px 17px calc(18px + env(safe-area-inset-bottom))}
+.abrTeamDeleteModal.is-open{display:flex;animation:abrTeamDeleteFade .18s ease both}
+.abrTeamDeleteBackdrop{position:absolute;inset:0;background:rgba(7,16,30,.56);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.abrTeamDeleteDialog{position:relative;width:min(100%,510px);padding:22px;border:1px solid rgba(255,255,255,.85);border-radius:28px;color:var(--abr-team-ink);background:rgba(255,255,255,.97);box-shadow:0 28px 70px rgba(10,25,49,.30),inset 0 1px 0 #fff;animation:abrTeamDeleteUp .24s cubic-bezier(.2,.78,.2,1) both}
+.abrTeamDeleteIcon{width:54px;height:54px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;border-radius:19px;color:#ce2949;background:linear-gradient(145deg,#fff3f5,#ffe5eb);box-shadow:inset 0 1px 0 #fff}
+.abrTeamDeleteIcon svg{width:25px;height:25px;display:block}
+.abrTeamDeleteKicker{color:#d43a57;font-size:9px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}
+.abrTeamDeleteDialog h3{margin:6px 0 8px;font-size:23px;line-height:1.06;font-weight:950;letter-spacing:-.035em}
+.abrTeamDeleteDialog p{margin:0;color:#68768b;font-size:12px;line-height:1.5;font-weight:680}
+.abrTeamDeleteName{display:block;margin:14px 0;padding:12px 14px;border:1px solid rgba(218,52,82,.13);border-radius:16px;color:#b5223e;background:#fff4f6;font-size:13px;font-weight:950;overflow-wrap:anywhere}
+.abrTeamDeleteNote{display:flex;align-items:flex-start;gap:9px;margin:0 0 16px;padding:11px 12px;border-radius:15px;color:#7c5962;background:#fff7f8;font-size:10px;line-height:1.42;font-weight:750}
+.abrTeamDeleteNote i{flex:0 0 20px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#d43b58;font-style:normal;font-size:11px;font-weight:950}
+.abrTeamDeleteButtons{display:grid;grid-template-columns:.85fr 1.35fr;gap:8px}
+.abrTeamDeleteButtons button{min-height:50px;border:0;border-radius:17px;font:900 12px/1 inherit}
+.abrTeamDeleteCancel{color:#526078;background:#eef3f9}
+.abrTeamDeleteConfirm{color:#fff;background:linear-gradient(145deg,#b91e3b,#e34360);box-shadow:0 10px 23px rgba(193,31,63,.23)}
+.abrTeamDeleteConfirm:disabled{opacity:.55;pointer-events:none}
 
 .abrTeamMemberList{display:grid;gap:8px}
 .abrTeamMember{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid rgba(130,152,185,.15);border-radius:18px;background:rgba(247,250,255,.74)}
@@ -38079,11 +38106,27 @@ body.darkMode #abrTeamCenter .abrPushStatus.is-warn,
 html.darkRoot #abrTeamCenter .abrPushStatus.is-warn{background:linear-gradient(145deg,#2a250f,#332b0f)}
 body.darkMode #abrTeamCenter .abrPushStatus.is-danger,
 html.darkRoot #abrTeamCenter .abrPushStatus.is-danger{background:linear-gradient(145deg,#321623,#391726)}
+body.darkMode #abrTeamCenter .abrTeamRecordActions,
+html.darkRoot #abrTeamCenter .abrTeamRecordActions{border-color:rgba(220,70,97,.18);background:rgba(48,20,31,.48)}
+body.darkMode #abrTeamCenter .abrTeamRecordDelete,
+html.darkRoot #abrTeamCenter .abrTeamRecordDelete{color:#ff91a5;border-color:rgba(232,85,112,.20);background:#251724}
+body.darkMode #abrTeamCenter .abrTeamDeleteDialog,
+html.darkRoot #abrTeamCenter .abrTeamDeleteDialog{border-color:rgba(143,166,199,.16);background:#101d30;box-shadow:0 28px 70px rgba(0,0,0,.48)}
+body.darkMode #abrTeamCenter .abrTeamDeleteDialog p,
+html.darkRoot #abrTeamCenter .abrTeamDeleteDialog p{color:#a6b3c6}
+body.darkMode #abrTeamCenter .abrTeamDeleteName,
+html.darkRoot #abrTeamCenter .abrTeamDeleteName{color:#ff9bad;border-color:rgba(226,73,101,.18);background:#321724}
+body.darkMode #abrTeamCenter .abrTeamDeleteNote,
+html.darkRoot #abrTeamCenter .abrTeamDeleteNote{color:#d2aab3;background:#291722}
+body.darkMode #abrTeamCenter .abrTeamDeleteCancel,
+html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a40}
 
 @keyframes abrTeamCenterIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @keyframes abrTeamSpin{to{transform:rotate(360deg)}}
 @keyframes abrTeamDotPulse{0%,100%{opacity:.55}50%{opacity:1}}
 @keyframes abrTeamBadgePulse{0%{transform:translateY(-50%) scale(.65)}55%{transform:translateY(-50%) scale(1.14)}100%{transform:translateY(-50%) scale(1)}}
+@keyframes abrTeamDeleteFade{from{opacity:0}to{opacity:1}}
+@keyframes abrTeamDeleteUp{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:390px){
   .abrTeamBody{padding-left:13px;padding-right:13px}
   .abrTeamHero{padding:19px}
@@ -38095,9 +38138,10 @@ html.darkRoot #abrTeamCenter .abrPushStatus.is-danger{background:linear-gradient
 @media(min-width:761px){
   #abrTeamCenter{padding:12px}
   .abrTeamShell{height:calc(100dvh - 24px);border-radius:32px;border:1px solid rgba(255,255,255,.72)}
+  .abrTeamDeleteModal{align-items:center}
 }
 @media(prefers-reduced-motion:reduce){
-  #abrTeamCenter.is-open,.abrTeamMenuBadge.abrTeamBadgePulse,.abrTeamOnlineDot.is-connecting,.abrTeamLoader{animation:none!important}
+  #abrTeamCenter.is-open,.abrTeamMenuBadge.abrTeamBadgePulse,.abrTeamOnlineDot.is-connecting,.abrTeamLoader,.abrTeamDeleteModal.is-open,.abrTeamDeleteDialog{animation:none!important}
 }
 </style>
 
@@ -38126,6 +38170,18 @@ html.darkRoot #abrTeamCenter .abrPushStatus.is-danger{background:linear-gradient
         <span>Ayarlar</span>
       </button>
     </nav>
+    <div id="abrTeamDeleteModal" class="abrTeamDeleteModal" aria-hidden="true">
+      <div class="abrTeamDeleteBackdrop" onclick="ekipArizaSilmeKapat()"></div>
+      <section class="abrTeamDeleteDialog" role="alertdialog" aria-modal="true" aria-labelledby="abrTeamDeleteTitle" aria-describedby="abrTeamDeleteDescription">
+        <div class="abrTeamDeleteIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 7h15M9 3.8h6l.8 3.2H8.2L9 3.8Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="m7 7 .7 13h8.6L17 7M10 10.5v5.8M14 10.5v5.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="abrTeamDeleteKicker">Kalıcı işlem</span>
+        <h3 id="abrTeamDeleteTitle">Arıza kaydı silinsin mi?</h3>
+        <p id="abrTeamDeleteDescription">Bu kayıt ekip listesinden kalıcı olarak kaldırılacak.</p>
+        <strong id="abrTeamDeleteName" class="abrTeamDeleteName">Arıza kaydı</strong>
+        <div class="abrTeamDeleteNote"><i>!</i><span>Bu arızaya ait ekip iletileri ve okundu bilgileri de silinir. Bu işlem geri alınamaz.</span></div>
+        <div class="abrTeamDeleteButtons"><button class="abrTeamDeleteCancel" type="button" onclick="ekipArizaSilmeKapat()">Vazgeç</button><button id="abrTeamDeleteConfirm" class="abrTeamDeleteConfirm" type="button" onclick="ekipArizaSil()">Kalıcı Olarak Sil</button></div>
+      </section>
+    </div>
   </div>
 </section>
 
@@ -38158,6 +38214,8 @@ const abrTeamState = {
   filter:"active",
   setupMode:"create",
   reportId:null,
+  deleteReportId:null,
+  deleteWorking:false,
   open:false,
   loading:false,
   error:null,
@@ -38259,6 +38317,9 @@ function abrTeamErrorText(error){
     [/Bu ekip kodu kullanimda/i,"Bu ekip kodu kullanımda. Başka bir kod seç."],
     [/Once profil olusturulmalidir/i,"Önce ekip profilinin hazırlanması gerekiyor."],
     [/Bu islem icin ekip sahibi olmalisiniz/i,"Bu işlem yalnız ekip sahibi tarafından yapılabilir."],
+    [/Arizayi yalniz bildiren veya ekip sahibi silebilir/i,"Bu kaydı yalnız arızayı bildiren kişi veya ekip sahibi silebilir."],
+    [/Ariza kaydi bulunamadi/i,"Arıza kaydı artık bulunmuyor."],
+    [/Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i,"Arıza silme kurulumu henüz etkin değil."],
     [/Anonymous sign-ins are disabled/i,"Supabase Anonymous Sign-Ins ayarı kapalı görünüyor."],
     [/JWT expired/i,"Ekip oturumunun süresi doldu. Yeniden dene."]
   ];
@@ -38523,7 +38584,7 @@ async function abrTeamEnsureClient(){
   abrTeamState.client = sdk.createClient(ABR_TEAM_CONFIG.url,ABR_TEAM_CONFIG.key,{
     auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false},
     realtime:{params:{eventsPerSecond:5}},
-    global:{headers:{"x-client-info":"asansor-bakim-revizyon-team/2.1.0"}}
+    global:{headers:{"x-client-info":"asansor-bakim-revizyon-team/2.1.2"}}
   });
   return abrTeamState.client;
 }
@@ -38830,8 +38891,16 @@ async function abrTeamRealtimeRefresh(){
   try{
     await Promise.all([abrTeamMembersLoad(),abrTeamApartmentsLoad(),abrTeamReportsLoad()]);
     if(abrTeamState.view === "detail" && abrTeamState.reportId){
-      await abrTeamMessagesLoad(abrTeamState.reportId);
-      if(abrTeamState.open)await abrTeamReadMark(abrTeamState.reportId);
+      const reportExists=abrTeamState.reports.some(function(item){return item.id===abrTeamState.reportId});
+      if(reportExists){
+        await abrTeamMessagesLoad(abrTeamState.reportId);
+        if(abrTeamState.open)await abrTeamReadMark(abrTeamState.reportId);
+      }else{
+        abrTeamState.reportId=null;
+        abrTeamState.messages=[];
+        abrTeamState.view="home";
+        if(abrTeamState.deleteReportId)window.ekipArizaSilmeKapat(true);
+      }
     }
     if(abrTeamState.open && abrTeamState.view !== "compose")abrTeamRender();
   }catch(error){console.warn("Canlı ekip güncellemesi alınamadı",error)}
@@ -38878,6 +38947,10 @@ function abrTeamInitials(name){
   return (pieces.slice(0,2).map(function(piece){return piece.charAt(0)}).join("") || "E").toLocaleUpperCase("tr-TR");
 }
 function abrTeamMembershipOwner(){return !!(abrTeamState.activeMembership && abrTeamState.activeMembership.role === "owner")}
+function abrTeamCanDelete(report){
+  if(!report || !abrTeamState.user || !abrTeamState.activeMembership || abrTeamState.activeMembership.state !== "active")return false;
+  return abrTeamMembershipOwner() || report.reporter_id === abrTeamState.user.id;
+}
 function abrTeamActiveTeam(){return abrTeamState.activeMembership && abrTeamState.activeMembership.team || {name:"Ekip"}}
 function abrTeamStatusLabel(status){return ({new:"Yeni",seen:"Görüldü",en_route:"Yolda",resolved:"Çözüldü"})[status] || "Yeni"}
 function abrTeamPriorityLabel(priority){return ({normal:"Normal",high:"Önemli",emergency:"Acil"})[priority] || "Normal"}
@@ -39022,6 +39095,7 @@ function abrTeamRenderDetail(){
   const reporter = abrTeamProfileName(report.reporter_id);
   const assigned = report.assigned_to ? abrTeamProfileName(report.assigned_to) : "Tüm ekip";
   const localIndex = abrTeamLocalIndex(report);
+  const canDelete = abrTeamCanDelete(report);
   const messages = abrTeamState.messages.map(function(message){
     const mine = abrTeamState.user && message.sender_id === abrTeamState.user.id;
     return '<div class="abrTeamMessage '+(mine?'is-me':'')+'"><div class="abrTeamMessageHead"><b>'+abrTeamEscape(mine?'Ben':abrTeamProfileName(message.sender_id))+'</b><span>'+abrTeamEscape(abrTeamDate(message.created_at))+'</span></div><div class="abrTeamMessageText">'+abrTeamEscape(message.body)+'</div></div>';
@@ -39036,7 +39110,8 @@ function abrTeamRenderDetail(){
     ${localIndex>=0?'<button class="abrTeamSoft" style="width:100%;margin-bottom:12px" type="button" onclick="ekipArizaApartmaniAc(\''+abrTeamEscape(report.id)+'\')">Yerel Apartman Kartını Aç</button>':''}
     <div class="abrTeamThreadTitle"><b>Ekip konuşması</b><span>${abrTeamState.messages.length} ileti</span></div>
     <div class="abrTeamMessages">${messages || '<div class="abrTeamEmpty" style="min-height:130px;padding:20px"><b>Henüz ileti yok</b><p style="margin-bottom:0">İlk saha notunu aşağıdan yazabilirsin.</p></div>'}</div>
-    <form class="abrTeamComposer" onsubmit="ekipArizaMesajGonder(event,'${abrTeamEscape(report.id)}')"><textarea id="abrTeamMessageInput" maxlength="2000" placeholder="Ekip notu yaz…" required></textarea><button id="abrTeamMessageButton" type="submit">İletiyi Gönder</button></form>`;
+    <form class="abrTeamComposer" onsubmit="ekipArizaMesajGonder(event,'${abrTeamEscape(report.id)}')"><textarea id="abrTeamMessageInput" maxlength="2000" placeholder="Ekip notu yaz…" required></textarea><button id="abrTeamMessageButton" type="submit">İletiyi Gönder</button></form>
+    ${canDelete?`<section class="abrTeamRecordActions"><div class="abrTeamRecordActionsHead"><div class="abrTeamRecordActionsIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14M9 4h6l.7 3H8.3L9 4Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="m7.2 7 .6 12h8.4l.6-12" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg></div><div><span>Kayıt işlemleri</span><b>Yanlış veya deneme kaydını kaldır</b></div></div><button class="abrTeamRecordDelete" type="button" onclick="ekipArizaSilmeAc('${abrTeamEscape(report.id)}')">Arıza Kaydını Sil</button></section>`:''}`;
 }
 function abrTeamMemberHtml(member,pending){
   const name = abrTeamProfileName(member.user_id);
@@ -39108,12 +39183,14 @@ window.ekipArizaMerkeziAc = async function(){
 };
 window.ekipArizaMerkeziKapat = function(){
   const modal = abrTeamEl("abrTeamCenter");
+  if(typeof window.ekipArizaSilmeKapat === "function")window.ekipArizaSilmeKapat(true);
   abrTeamState.open = false;
   if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
   document.body.classList.remove("abrTeamOpen");
   abrTeamHaptic("light");
 };
 window.ekipArizaGeri = function(){
+  if(abrTeamState.deleteReportId){window.ekipArizaSilmeKapat();return}
   if(["compose","detail","team","settings"].includes(abrTeamState.view) && abrTeamState.teamId){
     abrTeamState.view="home";
     abrTeamState.reportId=null;
@@ -39231,6 +39308,62 @@ window.ekipArizaDurum = async function(reportId,status){
     abrTeamToast(status==="resolved"?"Arıza çözüldü":"Durum güncellendi");abrTeamHaptic("success");abrTeamRenderDetail();
   }catch(error){abrTeamToast(abrTeamErrorText(error))}
 };
+window.ekipArizaSilmeAc = function(reportId){
+  const report = abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!report){abrTeamToast("Arıza kaydı artık bulunmuyor");return}
+  if(!abrTeamCanDelete(report)){abrTeamToast("Bu kaydı yalnız bildiren kişi veya ekip sahibi silebilir");return}
+  const modal = abrTeamEl("abrTeamDeleteModal");
+  const name = abrTeamEl("abrTeamDeleteName");
+  const button = abrTeamEl("abrTeamDeleteConfirm");
+  if(!modal)return;
+  abrTeamState.deleteReportId=report.id;
+  abrTeamState.deleteWorking=false;
+  if(name)name.textContent=(report.apartment_name || "Arıza kaydı")+" • "+abrTeamPriorityLabel(report.priority);
+  if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  abrTeamHaptic("light");
+  setTimeout(function(){if(button)button.focus({preventScroll:true})},80);
+};
+window.ekipArizaSilmeKapat = function(force){
+  if(abrTeamState.deleteWorking && force !== true)return;
+  const modal = abrTeamEl("abrTeamDeleteModal");
+  const button = abrTeamEl("abrTeamDeleteConfirm");
+  if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
+  if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  abrTeamState.deleteReportId=null;
+  abrTeamState.deleteWorking=false;
+};
+window.ekipArizaSil = async function(){
+  const reportId=abrTeamState.deleteReportId;
+  const report=abrTeamState.reports.find(function(item){return item.id===reportId});
+  if(!reportId || !report){window.ekipArizaSilmeKapat(true);abrTeamToast("Arıza kaydı artık bulunmuyor");return}
+  if(!abrTeamCanDelete(report)){window.ekipArizaSilmeKapat(true);abrTeamToast("Bu kaydı yalnız bildiren kişi veya ekip sahibi silebilir");return}
+  const button=abrTeamEl("abrTeamDeleteConfirm");
+  abrTeamState.deleteWorking=true;
+  if(button){button.disabled=true;button.textContent="Siliniyor…"}
+  try{
+    const response=await abrTeamState.client.rpc("delete_fault_report",{p_report_id:reportId});
+    if(response.error)throw response.error;
+    if(response.data !== true)throw new Error("Arıza kaydı silinemedi.");
+    const deletedName=report.apartment_name || "Arıza";
+    abrTeamState.deleteWorking=false;
+    window.ekipArizaSilmeKapat(true);
+    abrTeamState.reportId=null;
+    abrTeamState.messages=[];
+    abrTeamState.view="home";
+    await abrTeamReportsLoad();
+    abrTeamRender();
+    abrTeamScrollTop();
+    abrTeamToast(deletedName+" arıza kaydı silindi");
+    abrTeamHaptic("success");
+  }catch(error){
+    abrTeamState.deleteWorking=false;
+    if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+    abrTeamToast(abrTeamErrorText(error));
+    abrTeamHaptic("error");
+  }
+};
 window.ekipArizaMesajGonder = async function(event,reportId){
   if(event)event.preventDefault();
   const input=abrTeamEl("abrTeamMessageInput");const text=abrTeamTrim(input&&input.value,2000);
@@ -39300,7 +39433,11 @@ window.ekipApartmanlariEsitle = async function(){
 };
 
 document.addEventListener("keydown",function(event){
-  if(event.key === "Escape" && abrTeamState.open){event.preventDefault();window.ekipArizaGeri()}
+  if(event.key === "Escape" && abrTeamState.open){
+    event.preventDefault();
+    if(abrTeamState.deleteReportId)window.ekipArizaSilmeKapat();
+    else window.ekipArizaGeri();
+  }
 });
 window.addEventListener("offline",function(){abrTeamSetConnection("offline")});
 window.addEventListener("online",function(){
@@ -39324,7 +39461,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.01";
+window.__abrTeamCenterVersion = "2.1.02";
 })();
 </script>
 
