@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.03_FAULT_DELETE_TIMEOUT_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.04_SWIPE_DELETE_RLS_FALLBACK -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.03 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.04 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20467,7 +20467,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.03</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.04</div>
     </div>
   </div>
 </div>
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.03";
+  const SPLASH_VERSION = "v2.1.04";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21269,7 +21269,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.03";
+const APP_VERSION = "v2.1.04";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21284,7 +21284,7 @@ window.APP_VERSION = APP_VERSION;
 /* v2.0.49 — apartman kartı ve detay başlığı arasında çift yönlü geçiş ekle */
 /* v2.0.50 — ortak kart geçişindeki iOS boş ara karesini kaldır */
 /* v2.1.00 — güvenli Supabase altyapılı Ekip Arıza Merkezi ekle */
-/* v2.1.03 — Ekip Arıza Merkezi: takılmayan güvenli kayıt silme + kilit ekranı Web Push */
+/* v2.1.04 — Ekip Arıza Merkezi: sağa kaydırmalı RPC + RLS yedekli güvenli silme */
 (function abrErkenTahsilatKayitlariniDuzelt(){
 let degisti = false;
 
@@ -37541,7 +37541,7 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 </script>
 
 <style id="abrTeamFaultCenter2100">
-/* v2.1.03 — Ekip Arıza Merkezi + zaman aşımlı yetkili kayıt silme + kilit ekranı bildirimi */
+/* v2.1.04 — Ekip Arıza Merkezi + sağa kaydırmalı RPC/RLS yedekli silme */
 .abrTeamDrawerItem{position:relative!important}
 .abrTeamProfileCard .profileActionIcon{color:#176fe8!important;background:linear-gradient(145deg,#eaf4ff,#d8eaff)!important}
 .abrTeamProfileCard .profileActionIcon svg{width:22px;height:22px;display:block}
@@ -37989,11 +37989,22 @@ body.abrTeamOpen #exHybridMenuBtn{
 .abrTeamDeleteNote i{flex:0 0 20px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#d43b58;font-style:normal;font-size:11px;font-weight:950}
 .abrTeamDeleteError{display:block;margin:-4px 0 14px;padding:10px 12px;border:1px solid rgba(218,52,82,.16);border-radius:14px;color:#a72540;background:#fff0f3;font-size:10px;line-height:1.42;font-weight:850}
 .abrTeamDeleteError[hidden]{display:none}
-.abrTeamDeleteButtons{display:grid;grid-template-columns:.85fr 1.35fr;gap:8px}
-.abrTeamDeleteButtons button{min-height:50px;border:0;border-radius:17px;font:900 12px/1 inherit}
-.abrTeamDeleteCancel{color:#526078;background:#eef3f9}
-.abrTeamDeleteConfirm{color:#fff;background:linear-gradient(145deg,#b91e3b,#e34360);box-shadow:0 10px 23px rgba(193,31,63,.23)}
-.abrTeamDeleteConfirm:disabled{opacity:.55;pointer-events:none}
+.abrTeamDeleteSlider{--abr-delete-progress:0%;position:relative;height:60px;margin-top:2px;overflow:hidden;border:1px solid rgba(210,43,74,.16);border-radius:19px;background:linear-gradient(90deg,rgba(216,43,76,.18) 0 var(--abr-delete-progress),#edf2f8 var(--abr-delete-progress) 100%);box-shadow:inset 0 1px 2px rgba(42,62,91,.06);transition:border-color .2s ease,box-shadow .2s ease,background .12s linear}
+.abrTeamDeleteSlider::after{content:"";position:absolute;inset:1px;border-radius:18px;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.48) 43%,transparent 64%);transform:translateX(-115%);pointer-events:none}
+.abrTeamDeleteSlider.is-working::after{animation:abrTeamDeleteShine 1.05s linear infinite}
+.abrTeamDeleteSlider.is-ready{border-color:rgba(210,35,70,.42);box-shadow:0 9px 22px rgba(193,31,63,.13),inset 0 1px 0 rgba(255,255,255,.65)}
+.abrTeamDeleteSliderLabel{position:absolute;z-index:1;inset:0;display:flex;align-items:center;justify-content:center;padding:0 18px 0 64px;color:#59677d;font-size:11px;font-weight:950;letter-spacing:-.01em;pointer-events:none;transition:opacity .12s ease,color .18s ease}
+.abrTeamDeleteSlider.is-ready .abrTeamDeleteSliderLabel{color:#a92441}
+.abrTeamDeleteSlider.is-working .abrTeamDeleteSliderLabel{color:#fff}
+.abrTeamDeleteRange{-webkit-appearance:none;appearance:none;position:absolute;z-index:2;inset:0;width:100%;height:60px;margin:0;border:0;outline:0;background:transparent;cursor:grab;touch-action:pan-y}
+.abrTeamDeleteRange:active{cursor:grabbing}
+.abrTeamDeleteRange::-webkit-slider-runnable-track{height:60px;border:0;background:transparent}
+.abrTeamDeleteRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:50px;height:50px;margin-top:5px;border:2px solid rgba(255,255,255,.92);border-radius:15px;background:#d72b4c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h13M14 7l5 5-5 5'/%3E%3C/svg%3E") center/22px 22px no-repeat;box-shadow:0 7px 16px rgba(183,27,58,.28)}
+.abrTeamDeleteRange::-moz-range-track{height:60px;border:0;background:transparent}
+.abrTeamDeleteRange::-moz-range-thumb{width:48px;height:48px;border:2px solid rgba(255,255,255,.92);border-radius:15px;background:#d72b4c;box-shadow:0 7px 16px rgba(183,27,58,.28)}
+.abrTeamDeleteRange:disabled{cursor:wait}
+.abrTeamDeleteRange:disabled::-webkit-slider-thumb{background-color:#af2943}
+.abrTeamDeleteCancel{width:100%;min-height:47px;margin-top:9px;border:0;border-radius:16px;color:#526078;background:#eef3f9;font:900 11px/1 inherit}
 
 .abrTeamMemberList{display:grid;gap:8px}
 .abrTeamMember{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid rgba(130,152,185,.15);border-radius:18px;background:rgba(247,250,255,.74)}
@@ -38124,6 +38135,10 @@ body.darkMode #abrTeamCenter .abrTeamDeleteError,
 html.darkRoot #abrTeamCenter .abrTeamDeleteError{color:#ffadbc;border-color:rgba(226,73,101,.20);background:#321724}
 body.darkMode #abrTeamCenter .abrTeamDeleteCancel,
 html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a40}
+body.darkMode #abrTeamCenter .abrTeamDeleteSlider,
+html.darkRoot #abrTeamCenter .abrTeamDeleteSlider{border-color:rgba(226,73,101,.20);background:linear-gradient(90deg,rgba(213,43,76,.30) 0 var(--abr-delete-progress),#1a2a40 var(--abr-delete-progress) 100%)}
+body.darkMode #abrTeamCenter .abrTeamDeleteSliderLabel,
+html.darkRoot #abrTeamCenter .abrTeamDeleteSliderLabel{color:#c4cede}
 
 @keyframes abrTeamCenterIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @keyframes abrTeamSpin{to{transform:rotate(360deg)}}
@@ -38131,6 +38146,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a
 @keyframes abrTeamBadgePulse{0%{transform:translateY(-50%) scale(.65)}55%{transform:translateY(-50%) scale(1.14)}100%{transform:translateY(-50%) scale(1)}}
 @keyframes abrTeamDeleteFade{from{opacity:0}to{opacity:1}}
 @keyframes abrTeamDeleteUp{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes abrTeamDeleteShine{to{transform:translateX(115%)}}
 @media(max-width:390px){
   .abrTeamBody{padding-left:13px;padding-right:13px}
   .abrTeamHero{padding:19px}
@@ -38145,7 +38161,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a
   .abrTeamDeleteModal{align-items:center}
 }
 @media(prefers-reduced-motion:reduce){
-  #abrTeamCenter.is-open,.abrTeamMenuBadge.abrTeamBadgePulse,.abrTeamOnlineDot.is-connecting,.abrTeamLoader,.abrTeamDeleteModal.is-open,.abrTeamDeleteDialog{animation:none!important}
+  #abrTeamCenter.is-open,.abrTeamMenuBadge.abrTeamBadgePulse,.abrTeamOnlineDot.is-connecting,.abrTeamLoader,.abrTeamDeleteModal.is-open,.abrTeamDeleteDialog,.abrTeamDeleteSlider.is-working::after{animation:none!important}
 }
 </style>
 
@@ -38184,7 +38200,11 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteCancel{color:#c5d0df;background:#1b2a
         <strong id="abrTeamDeleteName" class="abrTeamDeleteName">Arıza kaydı</strong>
         <div class="abrTeamDeleteNote"><i>!</i><span>Bu arızaya ait ekip iletileri ve okundu bilgileri de silinir. Bu işlem geri alınamaz.</span></div>
         <span id="abrTeamDeleteError" class="abrTeamDeleteError" role="status" hidden></span>
-        <div class="abrTeamDeleteButtons"><button class="abrTeamDeleteCancel" type="button" onclick="ekipArizaSilmeKapat()">Vazgeç</button><button id="abrTeamDeleteConfirm" class="abrTeamDeleteConfirm" type="button" onclick="ekipArizaSil()">Kalıcı Olarak Sil</button></div>
+        <div id="abrTeamDeleteSlider" class="abrTeamDeleteSlider">
+          <span id="abrTeamDeleteSliderLabel" class="abrTeamDeleteSliderLabel">Silmek için sağa kaydır</span>
+          <input id="abrTeamDeleteRange" class="abrTeamDeleteRange" type="range" min="0" max="100" step="1" value="0" aria-label="Arıza kaydını silmek için sağa kaydır" oninput="ekipArizaKaydir(event)">
+        </div>
+        <button class="abrTeamDeleteCancel" type="button" onclick="ekipArizaSilmeKapat()">Vazgeç</button>
       </section>
     </div>
   </div>
@@ -38246,6 +38266,7 @@ const abrTeamState = {
   pushListenersBound:false,
   pushOpenBusy:false
 };
+const abrTeamDeleteGesture = {bound:false,active:false,startX:0};
 
 function abrTeamEl(id){return document.getElementById(id)}
 function abrTeamEscape(value){
@@ -38326,17 +38347,16 @@ function abrTeamErrorText(error){
     [/Ariza kaydi bulunamadi/i,"Arıza kaydı artık bulunmuyor."],
     [/canceling statement due to lock timeout|lock timeout/i,"Kayıt şu an başka bir işlem tarafından kullanılıyor. Birkaç saniye sonra tekrar dene."],
     [/ABR_TEAM_TIMEOUT|zaman aşımına uğradı|AbortError|aborted|signal is aborted/i,"Sunucudan zamanında cevap alınamadı. Bağlantını kontrol edip tekrar dene."],
-    [/Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i,"Arıza silme kurulumu henüz etkin değil."],
+    [/ABR_TEAM_DELETE_SETUP|PGRST202|Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i,"Arıza silme kurulumu henüz etkin değil."],
     [/Anonymous sign-ins are disabled/i,"Supabase Anonymous Sign-Ins ayarı kapalı görünüyor."],
     [/JWT expired/i,"Ekip oturumunun süresi doldu. Yeniden dene."]
   ];
   map.some(function(item){if(item[0].test(text)){text=item[1];return true}return false});
   return text || "İşlem tamamlanamadı.";
 }
-async function abrTeamRpcWithTimeout(name,args,timeoutMs){
+async function abrTeamRequestWithTimeout(request,timeoutMs){
   const wait = Math.max(4000,Number(timeoutMs) || 12000);
   const controller = typeof AbortController === "function" ? new AbortController() : null;
-  let request = abrTeamState.client.rpc(name,args);
   if(controller && request && typeof request.abortSignal === "function")request=request.abortSignal(controller.signal);
   let timer = 0;
   const timeout = new Promise(function(resolve,reject){
@@ -38349,6 +38369,9 @@ async function abrTeamRpcWithTimeout(name,args,timeoutMs){
   });
   try{return await Promise.race([Promise.resolve(request),timeout])}
   finally{clearTimeout(timer)}
+}
+async function abrTeamRpcWithTimeout(name,args,timeoutMs){
+  return abrTeamRequestWithTimeout(abrTeamState.client.rpc(name,args),timeoutMs);
 }
 
 function abrPushEnvironment(){
@@ -39346,32 +39369,146 @@ function abrTeamDeleteFinish(reportId,deletedName,message){
   abrTeamHaptic("success");
   abrTeamReportsLoad().then(function(){if(abrTeamState.open && abrTeamState.view==="home")abrTeamRender()}).catch(function(error){console.warn("Silme sonrası arıza listesi yenilenemedi",error)});
 }
+function abrTeamDeleteRaw(error){
+  return [error && error.code,error && error.message,error && error.details,error && error.hint,error].filter(Boolean).join(" ");
+}
+function abrTeamDeleteRpcMissing(error){
+  return /PGRST202|Could not find the function.*delete_fault_report|delete_fault_report.*schema cache/i.test(abrTeamDeleteRaw(error));
+}
+async function abrTeamDeleteRequest(reportId){
+  const rpc=await abrTeamRpcWithTimeout("delete_fault_report",{p_report_id:reportId},12000);
+  if(!rpc.error){
+    if(rpc.data !== true)throw new Error("Arıza kaydı silinemedi.");
+    return true;
+  }
+  if(!abrTeamDeleteRpcMissing(rpc.error))throw rpc.error;
+
+  const direct=await abrTeamRequestWithTimeout(
+    abrTeamState.client.from("fault_reports").delete().eq("id",reportId).select("id"),
+    12000
+  );
+  if(direct.error){
+    if(/42501|permission denied|row-level security/i.test(abrTeamDeleteRaw(direct.error))){
+      throw new Error("ABR_TEAM_DELETE_SETUP: Arıza silme SQL kurulumu eksik.");
+    }
+    throw direct.error;
+  }
+  if(Array.isArray(direct.data) && direct.data.some(function(item){return item && item.id===reportId}))return true;
+
+  const check=await abrTeamRequestWithTimeout(
+    abrTeamState.client.from("fault_reports").select("id").eq("id",reportId).maybeSingle(),
+    8000
+  );
+  if(check.error)throw check.error;
+  if(!check.data)return true;
+  throw new Error("ABR_TEAM_DELETE_SETUP: Arıza silme SQL kurulumu eksik.");
+}
+function abrTeamDeleteSwipePaint(value,text){
+  const range=abrTeamEl("abrTeamDeleteRange");
+  const slider=abrTeamEl("abrTeamDeleteSlider");
+  const label=abrTeamEl("abrTeamDeleteSliderLabel");
+  const progress=Math.max(0,Math.min(100,Number(value) || 0));
+  if(range){range.value=String(progress);range.setAttribute("aria-valuenow",String(Math.round(progress)))}
+  if(slider){
+    const wasReady=slider.classList.contains("is-ready");
+    slider.style.setProperty("--abr-delete-progress",progress+"%");
+    slider.classList.toggle("is-ready",progress>=92);
+    if(progress>=92 && !wasReady)abrTeamHaptic("light");
+  }
+  if(label)label.textContent=text || (progress>=92?"Bırakınca kalıcı sil":progress>=62?"Biraz daha kaydır":"Silmek için sağa kaydır");
+}
+function abrTeamDeleteSwipeReset(text){
+  const range=abrTeamEl("abrTeamDeleteRange");
+  const slider=abrTeamEl("abrTeamDeleteSlider");
+  abrTeamDeleteGesture.active=false;
+  if(range)range.disabled=false;
+  if(slider)slider.classList.remove("is-working","is-ready");
+  abrTeamDeleteSwipePaint(0,text || "Silmek için sağa kaydır");
+}
+function abrTeamDeleteSwipeWorking(){
+  const range=abrTeamEl("abrTeamDeleteRange");
+  const slider=abrTeamEl("abrTeamDeleteSlider");
+  abrTeamDeleteGesture.active=false;
+  if(range)range.disabled=true;
+  if(slider)slider.classList.add("is-working","is-ready");
+  abrTeamDeleteSwipePaint(100,"Arıza siliniyor…");
+}
+function abrTeamDeleteSwipeRelease(endX){
+  if(!abrTeamDeleteGesture.active || abrTeamState.deleteWorking)return;
+  const range=abrTeamEl("abrTeamDeleteRange");
+  const travelled=Number(endX)-abrTeamDeleteGesture.startX;
+  const minimum=range?Math.min(74,Math.max(38,range.clientWidth*.2)):45;
+  const progress=range?Number(range.value):0;
+  abrTeamDeleteGesture.active=false;
+  if(progress>=92 && travelled>=minimum){
+    abrTeamDeleteSwipeWorking();
+    window.ekipArizaSil();
+  }else{
+    abrTeamDeleteSwipeReset();
+  }
+}
+function abrTeamDeleteSwipeBind(){
+  if(abrTeamDeleteGesture.bound)return;
+  const range=abrTeamEl("abrTeamDeleteRange");
+  if(!range)return;
+  abrTeamDeleteGesture.bound=true;
+  if(window.PointerEvent){
+    range.addEventListener("pointerdown",function(event){
+      if(abrTeamState.deleteWorking)return;
+      abrTeamDeleteGesture.active=true;
+      abrTeamDeleteGesture.startX=event.clientX;
+    });
+    document.addEventListener("pointerup",function(event){abrTeamDeleteSwipeRelease(event.clientX)});
+    document.addEventListener("pointercancel",function(){if(abrTeamDeleteGesture.active)abrTeamDeleteSwipeReset()});
+  }else{
+    range.addEventListener("touchstart",function(event){
+      if(abrTeamState.deleteWorking || !event.touches[0])return;
+      abrTeamDeleteGesture.active=true;
+      abrTeamDeleteGesture.startX=event.touches[0].clientX;
+    },{passive:true});
+    range.addEventListener("touchend",function(event){
+      const touch=event.changedTouches && event.changedTouches[0];
+      abrTeamDeleteSwipeRelease(touch?touch.clientX:abrTeamDeleteGesture.startX);
+    },{passive:true});
+  }
+  range.addEventListener("keydown",function(event){
+    if((event.key==="Enter" || event.key===" ") && Number(range.value)>=92 && !abrTeamState.deleteWorking){
+      event.preventDefault();
+      abrTeamDeleteSwipeWorking();
+      window.ekipArizaSil();
+    }
+  });
+}
+window.ekipArizaKaydir = function(event){
+  if(abrTeamState.deleteWorking)return;
+  abrTeamDeleteSwipePaint(event && event.currentTarget ? event.currentTarget.value : 0);
+};
 window.ekipArizaSilmeAc = function(reportId){
   const report = abrTeamState.reports.find(function(item){return item.id===reportId});
   if(!report){abrTeamToast("Arıza kaydı artık bulunmuyor");return}
   if(!abrTeamCanDelete(report)){abrTeamToast("Bu kaydı yalnız bildiren kişi veya ekip sahibi silebilir");return}
   const modal = abrTeamEl("abrTeamDeleteModal");
   const name = abrTeamEl("abrTeamDeleteName");
-  const button = abrTeamEl("abrTeamDeleteConfirm");
+  const range = abrTeamEl("abrTeamDeleteRange");
   const errorBox = abrTeamEl("abrTeamDeleteError");
   if(!modal)return;
   abrTeamState.deleteReportId=report.id;
   abrTeamState.deleteWorking=false;
   if(name)name.textContent=(report.apartment_name || "Arıza kaydı")+" • "+abrTeamPriorityLabel(report.priority);
-  if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  abrTeamDeleteSwipeBind();
+  abrTeamDeleteSwipeReset();
   if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden","false");
   abrTeamHaptic("light");
-  setTimeout(function(){if(button)button.focus({preventScroll:true})},80);
+  setTimeout(function(){if(range)range.focus({preventScroll:true})},80);
 };
 window.ekipArizaSilmeKapat = function(force){
   if(abrTeamState.deleteWorking && force !== true)return;
   const modal = abrTeamEl("abrTeamDeleteModal");
-  const button = abrTeamEl("abrTeamDeleteConfirm");
   const errorBox = abrTeamEl("abrTeamDeleteError");
   if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true")}
-  if(button){button.disabled=false;button.textContent="Kalıcı Olarak Sil"}
+  abrTeamDeleteSwipeReset();
   if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   abrTeamState.deleteReportId=null;
   abrTeamState.deleteWorking=false;
@@ -39382,15 +39519,12 @@ window.ekipArizaSil = async function(){
   const report=abrTeamState.reports.find(function(item){return item.id===reportId});
   if(!reportId || !report){window.ekipArizaSilmeKapat(true);abrTeamToast("Arıza kaydı artık bulunmuyor");return}
   if(!abrTeamCanDelete(report)){window.ekipArizaSilmeKapat(true);abrTeamToast("Bu kaydı yalnız bildiren kişi veya ekip sahibi silebilir");return}
-  const button=abrTeamEl("abrTeamDeleteConfirm");
   const errorBox=abrTeamEl("abrTeamDeleteError");
   abrTeamState.deleteWorking=true;
-  if(button){button.disabled=true;button.textContent="Siliniyor…"}
+  abrTeamDeleteSwipeWorking();
   if(errorBox){errorBox.hidden=true;errorBox.textContent=""}
   try{
-    const response=await abrTeamRpcWithTimeout("delete_fault_report",{p_report_id:reportId},12000);
-    if(response.error)throw response.error;
-    if(response.data !== true)throw new Error("Arıza kaydı silinemedi.");
+    await abrTeamDeleteRequest(reportId);
     const deletedName=report.apartment_name || "Arıza";
     abrTeamDeleteFinish(reportId,deletedName);
   }catch(error){
@@ -39401,7 +39535,7 @@ window.ekipArizaSil = async function(){
       return;
     }
     const message=abrTeamErrorText(error);
-    if(button){button.disabled=false;button.textContent="Tekrar Dene"}
+    abrTeamDeleteSwipeReset("Tekrar denemek için sağa kaydır");
     if(errorBox){errorBox.hidden=false;errorBox.textContent=message}
     abrTeamToast(message);
     abrTeamHaptic("error");
@@ -39504,7 +39638,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.03";
+window.__abrTeamCenterVersion = "2.1.04";
 })();
 </script>
 
