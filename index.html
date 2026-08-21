@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.07_IOS_KEYBOARD_VIEWPORT_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.1.08_IOS_KEYBOARD_BACKDROP_FIX -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.07 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.1.08 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20469,7 +20469,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.1.07</div>
+      <div class="exLaunchVersion" data-splash-version>v2.1.08</div>
     </div>
   </div>
 </div>
@@ -20481,7 +20481,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.1.07";
+  const SPLASH_VERSION = "v2.1.08";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21271,7 +21271,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.1.07";
+const APP_VERSION = "v2.1.08";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -37576,13 +37576,22 @@ document.addEventListener("DOMContentLoaded",function(){let input=document.getEl
 html.abrTeamOpenRoot,
 html.abrTeamOpenRoot body,
 body.abrTeamOpen{overflow:hidden!important;overscroll-behavior:none!important}
-body.abrTeamOpen{touch-action:none}
+body.abrTeamOpen{touch-action:none;background:#eef3fb!important}
+body.darkMode.abrTeamOpen,
+html.darkRoot body.abrTeamOpen{background:#08111f!important}
 body.abrTeamOpen .tabbar,
 body.abrTeamOpen #exHybridMenuBtn{
   opacity:0!important;
   visibility:hidden!important;
   pointer-events:none!important;
 }
+body.abrTeamOpen>.header,
+body.abrTeamOpen>.container,
+body.abrTeamOpen>#teknikPanel{
+  visibility:hidden!important;
+}
+
+/* v2.1.08 — klavye saydamliginin altinda ana uygulamayi gostermeyen tam ekran perde */
 
 #abrTeamCenter{
   --abr-team-bg:#eef3fb;
@@ -37598,13 +37607,14 @@ body.abrTeamOpen #exHybridMenuBtn{
   --abr-team-amber:#e7a019;
   position:fixed;
   z-index:2147482700;
-  top:var(--abr-team-viewport-top,0px);
+  top:0;
   right:0;
   bottom:auto;
   left:0;
   width:100%;
-  height:var(--abr-team-viewport-height,100dvh);
-  min-height:0;
+  height:100vh;
+  height:var(--abr-team-layout-height,100lvh);
+  min-height:100vh;
   box-sizing:border-box;
   overflow:hidden;
   isolation:isolate;
@@ -37614,14 +37624,16 @@ body.abrTeamOpen #exHybridMenuBtn{
     radial-gradient(circle at 12% 8%,rgba(77,145,255,.15),transparent 32%),
     radial-gradient(circle at 92% 78%,rgba(122,92,255,.10),transparent 34%),
     linear-gradient(180deg,#f4f7fc 0%,var(--abr-team-bg) 100%);
+  background-color:var(--abr-team-bg);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
   overscroll-behavior:none;
 }
 #abrTeamCenter.is-open{display:block;animation:abrTeamCenterIn .24s ease both}
 .abrTeamShell{
   position:relative;
+  top:var(--abr-team-viewport-top,0px);
   width:min(100%,760px);
-  height:100%;
+  height:var(--abr-team-viewport-height,100dvh);
   min-height:0;
   margin:0 auto;
   display:flex;
@@ -38296,7 +38308,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteSliderLabel{color:#c4cede}
 }
 @media(min-width:761px){
   #abrTeamCenter{padding:12px}
-  .abrTeamShell{height:100%;border-radius:32px;border:1px solid rgba(255,255,255,.72)}
+  .abrTeamShell{height:calc(var(--abr-team-viewport-height,100dvh) - 24px);border-radius:32px;border:1px solid rgba(255,255,255,.72)}
   .abrTeamDeleteModal{align-items:center}
 }
 @media(prefers-reduced-motion:reduce){
@@ -38434,7 +38446,7 @@ const abrTeamState = {
   pushOpenBusy:false
 };
 const abrTeamDeleteGesture = {bound:false,active:false,startX:0};
-const abrTeamViewportState = {bound:false,frame:0,timers:[],focusTimer:0};
+const abrTeamViewportState = {bound:false,frame:0,timers:[],focusTimer:0,layoutHeight:0};
 
 function abrTeamEl(id){return document.getElementById(id)}
 function abrTeamViewportTimersClear(){
@@ -38453,6 +38465,16 @@ function abrTeamViewportApply(){
   let top=viewport&&Number.isFinite(viewport.offsetTop)?viewport.offsetTop:0;
   if(!Number.isFinite(height)||height<120)height=document.documentElement.clientHeight||window.innerHeight||640;
   if(!Number.isFinite(top)||top<0)top=0;
+  const screenHeight=window.screen&&Number.isFinite(window.screen.height)?window.screen.height:0;
+  const layoutHeight=Math.max(
+    abrTeamViewportState.layoutHeight||0,
+    screenHeight,
+    document.documentElement.clientHeight||0,
+    window.innerHeight||0,
+    Math.ceil(height+top)
+  );
+  abrTeamViewportState.layoutHeight=layoutHeight;
+  modal.style.setProperty("--abr-team-layout-height",Math.round(layoutHeight)+"px");
   modal.style.setProperty("--abr-team-viewport-height",Math.round(height)+"px");
   modal.style.setProperty("--abr-team-viewport-top",Math.round(top)+"px");
 }
@@ -38514,9 +38536,11 @@ function abrTeamViewportReset(){
   }
   const modal=abrTeamEl("abrTeamCenter");
   if(modal){
+    modal.style.removeProperty("--abr-team-layout-height");
     modal.style.removeProperty("--abr-team-viewport-height");
     modal.style.removeProperty("--abr-team-viewport-top");
   }
+  abrTeamViewportState.layoutHeight=0;
   document.documentElement.classList.remove("abrTeamOpenRoot");
   document.body.classList.remove("abrTeamKeyboardOpen");
 }
@@ -40329,7 +40353,7 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.__abrTeamCenterVersion = "2.1.07";
+window.__abrTeamCenterVersion = "2.1.08";
 })();
 </script>
 
