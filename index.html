@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.03_FULL_PAGE_ACCOUNT_ENTRY -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.04_SECURITY_HARDENING -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -472,6 +472,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
     window[cb]=function(data){ if(done) return; done=true; cleanup(); if(ok) ok(data||{}); };
     sc=document.createElement('script');
     sc.src=url;
+    sc.referrerPolicy='no-referrer';
     sc.onerror=function(){ if(done) return; done=true; cleanup(); if(fail) fail(new Error('Lisans sunucusuna ulaşılamadı.')); };
     document.head.appendChild(sc);
   }
@@ -489,6 +490,14 @@ html.darkRoot .tabbar .tabItem.activeTab{
     if(!el) return;
     el.textContent = txt || '';
     el.className = 'exLicMsg' + (type ? ' ' + type : '');
+  }
+  function licenseHtml(value){
+    return String(value == null ? '' : value)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#039;');
   }
   function renderGate(initialMsg){
     var existing=document.getElementById('exLicenseGate');
@@ -513,7 +522,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
         '<input class="exLicInput" id="exActivationCode" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="K7Q9-M2A4">'+
         '<button class="exLicBtn" id="exActivateBtn" type="button">Uygulamayı Etkinleştir</button>'+
         '<button class="exResetBtn" id="exResetDevice" type="button">Cihaz kodunu yenile</button>'+
-        '<div class="exLicMsg" id="exLicMsg">'+(initialMsg||'')+'</div>'+
+        '<div class="exLicMsg" id="exLicMsg">'+licenseHtml(initialMsg||'')+'</div>'+
       '</div>';
     document.body.appendChild(gate);
     var copy=document.getElementById('exCopyDevice');
@@ -613,6 +622,8 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <link rel="manifest" href="/manifest.webmanifest?v=2000">
 
 <meta name="theme-color" content="#020817">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Asansör Bakım &amp; Revizyon">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10276,7 +10287,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.03 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.04 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20479,7 +20490,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.03</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.04</div>
     </div>
   </div>
 </div>
@@ -20491,7 +20502,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.2.03";
+  const SPLASH_VERSION = "v2.2.04";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21281,7 +21292,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.03";
+const APP_VERSION = "v2.2.04";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21463,6 +21474,10 @@ function abrStbDiziHazirla(nesne, alan){
   return false;
 }
 
+function abrStbGuvenliIdMi(deger){
+  return /^[A-Za-z0-9_-]{1,128}$/.test(String(deger || ""));
+}
+
 function abrStbApartmanNormalizeEt(a, sira){
   if(!a || typeof a !== "object" || Array.isArray(a)){
     return {kayit:null,degisti:false};
@@ -21470,7 +21485,7 @@ function abrStbApartmanNormalizeEt(a, sira){
 
   let degisti = false;
 
-  if(!a.id){
+  if(!abrStbGuvenliIdMi(a.id)){
     a.id = abrStbIdOlustur("apt");
     degisti = true;
   }
@@ -21502,7 +21517,7 @@ function abrStbApartmanNormalizeEt(a, sira){
   let odemeIdleri = Object.create(null);
   a.odemeler.forEach(function(o){
     if(!o || typeof o !== "object") return;
-    if(!o.id || odemeIdleri[o.id]){
+    if(!abrStbGuvenliIdMi(o.id) || odemeIdleri[o.id]){
       o.id = abrStbIdOlustur("odm");
       degisti = true;
     }
@@ -21520,7 +21535,7 @@ function abrStbApartmanNormalizeEt(a, sira){
   let bakimIdleri = Object.create(null);
   a.bakimKayitlari.forEach(function(k){
     if(!k || typeof k !== "object") return;
-    if(!k.id || bakimIdleri[k.id]){
+    if(!abrStbGuvenliIdMi(k.id) || bakimIdleri[k.id]){
       k.id = abrStbIdOlustur("bkm");
       degisti = true;
     }
@@ -21534,7 +21549,7 @@ function abrStbApartmanNormalizeEt(a, sira){
   let checklistIdleri = Object.create(null);
   a.bakimChecklist.forEach(function(k){
     if(!k || typeof k !== "object") return;
-    if(!k.id || checklistIdleri[k.id]){
+    if(!abrStbGuvenliIdMi(k.id) || checklistIdleri[k.id]){
       k.id = abrStbIdOlustur("chk");
       degisti = true;
     }
@@ -22101,6 +22116,9 @@ function updateBannerGoster(yeniSurum){
 let el = document.getElementById("updateBanner");
 if(!el) return;
 
+yeniSurum = String(yeniSurum || "").trim();
+if(!/^v?\d{1,3}(?:\.\d{1,3}){1,3}$/.test(yeniSurum)) return;
+
 el.innerHTML = `
 <div class="updateBannerInner">
   <div class="updateBannerText">
@@ -22499,7 +22517,7 @@ if(!a){
 return "EX-ASN-000";
 }
 
-if(!a.sicilKod){
+if(!/^[A-Za-z0-9._-]{1,48}$/.test(String(a.sicilKod || ""))){
 a.sicilKod =
 "EX-" +
 kodParcasi(a.ad) +
@@ -24337,8 +24355,8 @@ return `
 <div class="lastActionIcon">✓</div>
 <div class="lastActionText">
 <div class="lastActionLabel">Son İşlem</div>
-<div class="lastActionValue">${son.ad} • ${son.islem.replace(/\s*\(.*?\)/,"")}</div>
-<div class="lastActionDate">${son.tarih || "Tarih yok"}</div>
+<div class="lastActionValue">${ayHtml(son.ad)} • ${ayHtml(son.islem.replace(/\s*\(.*?\)/,""))}</div>
+<div class="lastActionDate">${ayHtml(son.tarih || "Tarih yok")}</div>
 </div>
 </div>
 `;
@@ -25611,8 +25629,9 @@ const EX_PROFESSIONAL_DOC_FILE_PREFIX = "professionalDocumentFile:";
 let exProfessionalDocPendingFile = null;
 
 function meslekiBelgeIdOlustur(){return "belge_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);}
-function meslekiBelgelerGet(){try{let liste=JSON.parse(localStorage.getItem(EX_PROFESSIONAL_DOCS_KEY)||"[]");return Array.isArray(liste)?liste:[];}catch(e){return [];}}
-function meslekiBelgelerSet(liste,yedekAl){localStorage.setItem(EX_PROFESSIONAL_DOCS_KEY,JSON.stringify(Array.isArray(liste)?liste:[]));if(yedekAl!==false){try{autoYedekAl(true);}catch(e){}}meslekiBelgeProfilOzetiGuncelle();}
+function meslekiBelgelerNormalize(liste){let gorulen=Object.create(null);return(Array.isArray(liste)?liste:[]).filter(function(b){return b&&typeof b==="object"&&!Array.isArray(b)}).map(function(b){if(!abrStbGuvenliIdMi(b.id)||gorulen[b.id])b.id=abrStbIdOlustur("blg");gorulen[b.id]=true;return b})}
+function meslekiBelgelerGet(){try{let liste=JSON.parse(localStorage.getItem(EX_PROFESSIONAL_DOCS_KEY)||"[]");return meslekiBelgelerNormalize(liste)}catch(e){return []}}
+function meslekiBelgelerSet(liste,yedekAl){let temiz=meslekiBelgelerNormalize(liste);localStorage.setItem(EX_PROFESSIONAL_DOCS_KEY,JSON.stringify(temiz));if(yedekAl!==false){try{autoYedekAl(true);}catch(e){}}meslekiBelgeProfilOzetiGuncelle();}
 async function meslekiBelgeDbSil(key){const db=await ayDbAc();return new Promise(function(resolve,reject){const tx=db.transaction(AY_DB_STORE,"readwrite");tx.objectStore(AY_DB_STORE).delete(key);tx.oncomplete=function(){resolve();};tx.onerror=function(){reject(tx.error);};});}
 function meslekiBelgeGunFarki(tarih){let iso=muayeneTarihISO(tarih);if(!iso)return null;let hedef=new Date(iso+"T12:00:00");let bugunTarih=new Date(bugunISO()+"T12:00:00");return Math.ceil((hedef.getTime()-bugunTarih.getTime())/86400000);}
 function meslekiBelgeDurumu(belge){let fark=meslekiBelgeGunFarki(belge&&belge.gecerlilikTarihi);if(fark===null)return{key:"forever",text:"Süresiz / Tarih Yok",cls:"forever",rank:2};if(fark<0)return{key:"expired",text:"Süresi Doldu",cls:"expired",rank:0};if(fark<=60)return{key:"soon",text:fark===0?"Bugün Sona Eriyor":fark+" Gün Kaldı",cls:"soon",rank:1};return{key:"active",text:"Geçerli",cls:"active",rank:3};}
@@ -27583,22 +27602,22 @@ h += `
 <div class="aptIcon ${colorClass}"></div>
 
 <div class="aptMain">
-<div class="aptName">${a.ad || "-"}</div>
-<div class="aptCode">${apartmanKodu(i)}</div>
+<div class="aptName">${ayHtml(a.ad || "-")}</div>
+<div class="aptCode">${ayHtml(apartmanKodu(i))}</div>
 <div class="aptMeta">
-<span class="metaLine"><span class="miniMetaIcon person"></span>${a.yonetici || "-"}</span>
-<span class="metaLine metaPhone" onclick="apartmanRehberGuncelle(event,${i})"><span class="miniMetaIcon phone"></span>${a.tel || "Rehberden seç"}</span>
+<span class="metaLine"><span class="miniMetaIcon person"></span>${ayHtml(a.yonetici || "-")}</span>
+<span class="metaLine metaPhone" onclick="apartmanRehberGuncelle(event,${i})"><span class="miniMetaIcon phone"></span>${ayHtml(a.tel || "Rehberden seç")}</span>
 </div>
 </div>
 
 <div class="aptRight aptRightPremium">
 <div class="aptStatusStack">
-<span class="badge ${d.badgeClass}">${d.durum}</span>
+<span class="badge ${d.badgeClass}">${ayHtml(d.durum)}</span>
 ${muayeneEtiketRozeti(a)}
 ${sozlesmeKartRozeti(a)}
 ${odemeBadge(a)}
 </div>
-<div class="aptPlanDate">Plan <b>${bakimPlanTarih(a)}</b></div>
+<div class="aptPlanDate">Plan <b>${ayHtml(bakimPlanTarih(a))}</b></div>
 <div class="aptMoneyLine">${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}</div>
 <div class="aptBalanceLine ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">Kalan ${tutarFormat(cari.kalanPozitif)}</div>
 </div>
@@ -28212,6 +28231,28 @@ return String(v ?? "")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
+}
+
+function ayTelefonDegeri(v){
+let deger = String(v ?? "").trim();
+let arti = deger.startsWith("+") ? "+" : "";
+let rakamlar = deger.replace(/\D/g,"").slice(0,18);
+return rakamlar ? arti + rakamlar : "";
+}
+
+function ayTelefonHref(v){
+let telefon = ayTelefonDegeri(v);
+return telefon ? "tel:" + telefon : "#";
+}
+
+function ayTelefonAra(i){
+let a = data[Number(i)];
+let telefon = ayTelefonDegeri(a && a.tel);
+if(!telefon){
+toast("Geçerli telefon numarası bulunamadı");
+return;
+}
+window.location.href = "tel:" + telefon;
 }
 
 function parcaTutarFormat(v){
@@ -30439,7 +30480,7 @@ detayPanel.innerHTML = `
     ${ayHtml(a.ad || "-")}
     </div>
     <div class="detailSubLine">
-    Kod: ${apartmanKodu(i)} • ${ayHtml(cari.durum)}
+    Kod: ${ayHtml(apartmanKodu(i))} • ${ayHtml(cari.durum)}
     </div>
   </div>
 
@@ -30480,7 +30521,7 @@ detayPanel.innerHTML = `
     </div>
     <div>
       <span>Bakım Günü</span>
-      <b>${a.bakimGunu || "-"}</b>
+      <b>${ayHtml(a.bakimGunu || "-")}</b>
     </div>
     <div>
       <span>Son Parça</span>
@@ -30499,7 +30540,7 @@ detayPanel.innerHTML = `
     <div class="infoCard">
       <span class="infoLabel">Telefon</span>
       <span class="infoValue small">
-        <a class="infoPhone" href="tel:${telTemiz}">${ayHtml(a.tel || "-")}</a>
+        <a class="infoPhone" href="${ayHtml(ayTelefonHref(a.tel))}">${ayHtml(a.tel || "-")}</a>
       </span>
     </div>
   </div>
@@ -33382,14 +33423,34 @@ function stokIdOlustur(){
 function stokEnvanteriGet(){
   try{
     let kayit = JSON.parse(localStorage.getItem(EX_STOCK_KEY) || "[]");
-    return Array.isArray(kayit) ? kayit : [];
+    return stokEnvanteriNormalize(kayit);
   }catch(e){
     return [];
   }
 }
 
+function stokEnvanteriNormalize(liste){
+  let gorulen = Object.create(null);
+  let temiz = (Array.isArray(liste) ? liste : []).filter(function(k){
+    return k && typeof k === "object" && !Array.isArray(k);
+  }).map(function(k){
+    if(!abrStbGuvenliIdMi(k.id) || gorulen[k.id]) k.id = stokIdOlustur();
+    gorulen[k.id] = true;
+    if(Array.isArray(k.hareketler)){
+      let hareketIdleri = Object.create(null);
+      k.hareketler.forEach(function(h){
+        if(!h || typeof h !== "object") return;
+        if(!abrStbGuvenliIdMi(h.id) || hareketIdleri[h.id]) h.id = abrStbIdOlustur("stkhr");
+        hareketIdleri[h.id] = true;
+      });
+    }
+    return k;
+  });
+  return temiz;
+}
+
 function stokEnvanteriSet(liste, yedekAl){
-  let temiz = Array.isArray(liste) ? liste : [];
+  let temiz = stokEnvanteriNormalize(liste);
   localStorage.setItem(EX_STOCK_KEY, JSON.stringify(temiz));
   if(yedekAl !== false){
     try{ autoYedekAl(true); }catch(e){}
@@ -33857,6 +33918,20 @@ function yedektenYukle(event){
 let file = event.target.files[0];
 
 if(!file){
+return;
+}
+
+const ABR_BACKUP_MAX_BYTES = 80 * 1024 * 1024;
+if(file.size > ABR_BACKUP_MAX_BYTES){
+toast("Yedek dosyası en fazla 80 MB olabilir");
+event.target.value = "";
+return;
+}
+
+let dosyaAdi = String(file.name || "").toLocaleLowerCase("tr-TR");
+if(dosyaAdi && !dosyaAdi.endsWith(".json")){
+toast("Yalnız JSON yedek dosyası seçebilirsin");
+event.target.value = "";
 return;
 }
 
@@ -36840,18 +36915,18 @@ let i = bulunan.i;
 let d = durumBilgisi(a);
 
 html = `
-<div class="aiResultTitle">${a.ad || "-"}</div>
-Yönetici: <b>${a.yonetici || "-"}</b><br>
-Telefon: <b>${a.tel || "-"}</b><br>
-Ücret: <b>${a.ucret || 0} ₺</b><br>
-Bakım Günü: <b>${a.bakimGunu || "-"}</b><br>
-Ödeme: <b>${a.odemeTarihi || "Bekliyor"}</b><br>
-Son Bakım: <b>${a.bakimTarihi || "-"}</b><br>
-Durum: <b>${d.durum}</b>
+<div class="aiResultTitle">${ayHtml(a.ad || "-")}</div>
+Yönetici: <b>${ayHtml(a.yonetici || "-")}</b><br>
+Telefon: <b>${ayHtml(a.tel || "-")}</b><br>
+Ücret: <b>${ayHtml(a.ucret || 0)} ₺</b><br>
+Bakım Günü: <b>${ayHtml(a.bakimGunu || "-")}</b><br>
+Ödeme: <b>${ayHtml(a.odemeTarihi || "Bekliyor")}</b><br>
+Son Bakım: <b>${ayHtml(a.bakimTarihi || "-")}</b><br>
+Durum: <b>${ayHtml(d.durum)}</b>
 
 <div class="aiActionRow">
 <button class="aiMiniBtn aiBlueMini" onclick="ayAsistanKapat(); detayAc(${i})">Detaya Git</button>
-<button class="aiMiniBtn aiGrayMini" onclick="window.location.href='tel:${(a.tel || "").replace(/\s/g,"")}'">Ara</button>
+<button class="aiMiniBtn aiGrayMini" onclick="ayTelefonAra(${i})">Ara</button>
 </div>
 `;
 
@@ -36876,7 +36951,7 @@ html = `
 html = `
 <div class="aiResultTitle">Ödeme Bekleyenler</div>
 ${liste.map(x=>`
-• <b>${x.a.ad || "-"}</b> — ${x.a.ucret || 0} ₺
+• <b>${ayHtml(x.a.ad || "-")}</b> — ${ayHtml(x.a.ucret || 0)} ₺
 `).join("<br>")}
 
 <div class="aiResultSmall">
@@ -36908,7 +36983,7 @@ html = `
 html = `
 <div class="aiResultTitle">Geciken Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${bakimPlanTarih(a)}
+• <b>${ayHtml(a.ad || "-")}</b> — ${ayHtml(bakimPlanTarih(a))}
 `).join("<br>")}
 `;
 
@@ -36936,7 +37011,7 @@ Bugün için planlanan bakım görünmüyor.
 html = `
 <div class="aiResultTitle">Bugünkü Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${a.yonetici || "-"}
+• <b>${ayHtml(a.ad || "-")}</b> — ${ayHtml(a.yonetici || "-")}
 `).join("<br>")}
 `;
 
@@ -36965,7 +37040,7 @@ html = `
 html = `
 <div class="aiResultTitle">Ayın 20’sindeki Bakımlar</div>
 ${liste.map(a=>`
-• <b>${a.ad || "-"}</b> — ${bakimPlanTarih(a)}
+• <b>${ayHtml(a.ad || "-")}</b> — ${ayHtml(bakimPlanTarih(a))}
 `).join("<br>")}
 `;
 
@@ -36981,9 +37056,9 @@ let a = bulunan.a;
 let i = bulunan.i;
 
 html = `
-<div class="aiResultTitle">${a.ad || "-"} PDF</div>
+<div class="aiResultTitle">${ayHtml(a.ad || "-")} PDF</div>
 Bu apartman için PDF oluşturabilirsin.<br>
-Son kayıt: <b>${aySonKayit(a)}</b>
+Son kayıt: <b>${ayHtml(aySonKayit(a))}</b>
 
 <div class="aiActionRow">
 <button class="aiMiniBtn aiBlueMini" onclick="pdf(${i})">Bakım PDF</button>
@@ -37029,9 +37104,9 @@ Henüz işlem kaydı bulunmuyor.
 
 html = `
 <div class="aiResultTitle">Son İşlem</div>
-<b>${son.ad}</b><br>
-${son.islem.replace(/\s*\(.*?\)/,"")}<br>
-<span class="aiResultSmall">${son.tarih || "Tarih yok"}</span>
+<b>${ayHtml(son.ad)}</b><br>
+${ayHtml(son.islem.replace(/\s*\(.*?\)/,""))}<br>
+<span class="aiResultSmall">${ayHtml(son.tarih || "Tarih yok")}</span>
 `;
 
 }
@@ -37287,8 +37362,9 @@ let exSurveyObjectUrls = [];
 
 function montajKesifId(){return "ksf_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
 function montajKesifBugun(){let d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function montajKesifGet(){try{let x=JSON.parse(localStorage.getItem(EX_SURVEY_KEY)||"[]");return Array.isArray(x)?x:[]}catch(e){return []}}
-function montajKesifSet(list,yedek){localStorage.setItem(EX_SURVEY_KEY,JSON.stringify(Array.isArray(list)?list:[]));if(yedek!==false){try{autoYedekAl(true)}catch(e){}}}
+function montajKesifNormalize(list){let gorulen=Object.create(null);return(Array.isArray(list)?list:[]).filter(function(k){return k&&typeof k==="object"&&!Array.isArray(k)}).map(function(k){if(!abrStbGuvenliIdMi(k.id)||gorulen[k.id])k.id=montajKesifId();gorulen[k.id]=true;let katGorulen=Object.create(null);(Array.isArray(k.katlar)?k.katlar:[]).forEach(function(f){if(!f||typeof f!=="object")return;if(!abrStbGuvenliIdMi(f.id)||katGorulen[f.id])f.id=montajKesifId();katGorulen[f.id]=true});let fotoGorulen=Object.create(null);(Array.isArray(k.photos)?k.photos:[]).forEach(function(p){if(!p||typeof p!=="object")return;if(!abrStbGuvenliIdMi(p.id)||fotoGorulen[p.id])p.id=montajKesifId();fotoGorulen[p.id]=true});return k})}
+function montajKesifGet(){try{let x=JSON.parse(localStorage.getItem(EX_SURVEY_KEY)||"[]");return montajKesifNormalize(x)}catch(e){return []}}
+function montajKesifSet(list,yedek){localStorage.setItem(EX_SURVEY_KEY,JSON.stringify(montajKesifNormalize(list)));if(yedek!==false){try{autoYedekAl(true)}catch(e){}}}
 function montajKesifSayi(v){let n=Number(String(v==null?"":v).replace(",","."));return Number.isFinite(n)?n:0}
 function montajKesifMm(v){let n=montajKesifSayi(v);return n?n.toLocaleString("tr-TR")+" mm":"-"}
 function montajKesifTemiz(v){return String(v==null?"":v).trim()}
@@ -38517,7 +38593,7 @@ html.darkRoot #abrTeamCenter .abrTeamDeleteSliderLabel{color:#c4cede}
 const ABR_TEAM_CONFIG = Object.freeze({
   url:"https://vfadlxuujqcpkckvwjbl.supabase.co",
   key:"sb_publishable_QvEWbZy98j_kUKd7rPp0ew_e4J2GqKQ",
-  sdk:"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  sdk:"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"
 });
 const ABR_TEAM_LOCAL_KEY = "abrTeamCenterV2100";
 const ABR_TEAM_AUTH_KEY = "sb-vfadlxuujqcpkckvwjbl-auth-token";
@@ -40581,9 +40657,13 @@ function abrTeamChatAllowedFile(file){
   if(file.size>10485760)return "Dosya en fazla 10 MB olabilir.";
   const extension=(file.name.split(".").pop()||"").toLocaleLowerCase("tr-TR");
   const allowed=["jpg","jpeg","png","webp","gif","heic","heif","m4a","aac","mp3","wav","ogg","webm","pdf","doc","docx","xls","xlsx","ppt","pptx","txt","csv","json","zip"];
-  const mime=String(file.type||"");
-  if(!allowed.includes(extension) && !mime.startsWith("image/") && !mime.startsWith("audio/"))return "Bu dosya türü desteklenmiyor.";
+  if(!allowed.includes(extension))return "Bu dosya türü desteklenmiyor.";
   return "";
+}
+function abrTeamChatMimeType(file){
+  const extension=(file&&file.name&&file.name.split(".").pop()||"").toLocaleLowerCase("tr-TR");
+  const types={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",webp:"image/webp",gif:"image/gif",heic:"image/heic",heif:"image/heif",m4a:"audio/mp4",aac:"audio/aac",mp3:"audio/mpeg",wav:"audio/wav",ogg:"audio/ogg",webm:"audio/webm",pdf:"application/pdf",doc:"application/msword",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",xls:"application/vnd.ms-excel",xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",ppt:"application/vnd.ms-powerpoint",pptx:"application/vnd.openxmlformats-officedocument.presentationml.presentation",txt:"text/plain",csv:"text/csv",json:"application/json",zip:"application/zip"};
+  return types[extension]||"";
 }
 window.ekipSohbetDosyaSec = function(event){
   const input=event&&event.currentTarget;
@@ -40761,7 +40841,7 @@ window.ekipSohbetGonder = async function(event){
   const input=abrTeamEl("abrTeamChatInput");
   const text=abrTeamTrim(input&&input.value||abrTeamState.chatDraft,2000);
   const file=abrTeamState.chatFile;
-  const fileMime=file?abrTeamTrim(String(file.type||"application/octet-stream").split(";")[0],120):null;
+  const fileMime=file?abrTeamChatMimeType(file):null;
   const audioDuration=file?Math.max(0,Math.round(Number(abrTeamState.chatAudioDurationMs)||0)):0;
   const reply=abrTeamState.chatReplyId?abrTeamChatMessageById(abrTeamState.chatReplyId):null;
   if(abrTeamState.chatReplyId&&!reply){abrTeamState.chatReplyId=null;abrTeamToast("Yanıtlanan ileti artık görünmüyor");abrTeamRenderChat();return}
@@ -40780,7 +40860,7 @@ window.ekipSohbetGonder = async function(event){
       const upload=await abrTeamState.client.storage.from("team-files").upload(filePath,file,{
         cacheControl:"3600",
         upsert:false,
-        contentType:fileMime||"application/octet-stream"
+        contentType:fileMime
       });
       if(upload.error)throw upload.error;
     }
@@ -41172,7 +41252,7 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.03";
+window.__abrTeamCenterVersion = "2.2.04";
 })();
 </script>
 
@@ -41219,7 +41299,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.03";
+const ABR_ROLE_VERSION="2.2.04";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41374,7 +41454,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.03";
+const ABR_ROLE_VERSION="2.2.04";
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41397,7 +41477,10 @@ async function abrPinHash(pin,salt,userId){
 }
 function abrPinRecord(userId){const pin=abrRoleStoreGet().devicePin;return pin&&pin.userId===userId&&typeof pin.hash==="string"&&typeof pin.salt==="string"?pin:null}
 function abrPinSafeEqual(left,right){left=String(left||"");right=String(right||"");if(left.length!==right.length)return false;let difference=0;for(let i=0;i<left.length;i++)difference|=left.charCodeAt(i)^right.charCodeAt(i);return difference===0}
-function abrPinClear(){const store=abrRoleStoreGet();delete store.devicePin;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
+function abrPinClear(){const store=abrRoleStoreGet();delete store.devicePin;delete store.pinSecurity;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
+function abrPinSecurityLoad(userId){const store=abrRoleStoreGet();const security=store.pinSecurity;const valid=security&&security.userId===userId?security:null;abrRoleState.wrongPinCount=Math.max(0,Number(valid&&valid.failedCount)||0);abrRoleState.pinLockedUntil=Math.max(0,Number(valid&&valid.lockedUntil)||0);return valid}
+function abrPinSecurityFail(userId){const store=abrRoleStoreGet();const previous=store.pinSecurity&&store.pinSecurity.userId===userId?store.pinSecurity:{};const failedCount=Math.max(0,Number(previous.failedCount)||0)+1;let lockedUntil=0;if(failedCount>=10)lockedUntil=Date.now()+300000;else if(failedCount>=5)lockedUntil=Date.now()+30000;store.pinSecurity={userId:userId,failedCount:failedCount,lockedUntil:lockedUntil,lastFailedAt:new Date().toISOString()};abrRoleStoreSave(store);abrRoleState.wrongPinCount=failedCount;abrRoleState.pinLockedUntil=lockedUntil;return {failedCount:failedCount,lockedUntil:lockedUntil}}
+function abrPinSecurityClear(userId){const store=abrRoleStoreGet();if(!userId||!store.pinSecurity||store.pinSecurity.userId===userId)delete store.pinSecurity;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
 function abrRoleCachedAccess(userId){const cached=abrRoleStoreGet().lastAccess;if(!cached||cached.userId!==userId)return null;return Object.assign({},cached,{userId:userId,membershipState:cached.membershipState||(cached.hasMembership?"active":null),error:null,offline:true})}
 let abrRoleBrandLogoCache="";
 function abrRoleBrandLogoSrc(){
@@ -41426,7 +41509,7 @@ function abrRoleRender(){
   if(abrRoleState.view==="pin"){
     const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">PIN’ini gir</h1><p>E-posta şifresi yerine bu cihaz için belirlediğin 4 haneli PIN ile devam et.</p></div><form class="abrAccountForm" onsubmit="abrPinDogrula(event)">'+abrPinIdentityHtml()+abrPinFieldHtml("abrDevicePin","4 haneli PIN","off")+(wait?'<p class="abrPinNote abrPinCooldown">Yeni deneme için '+wait+' saniye bekle.</p>':'')+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit" '+(wait?'disabled':'')+'>Uygulamayı Aç</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">PIN’i unuttum / hesapla giriş</button></div></form>'+abrRoleFooter();
-    if(!wait)setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
+    if(wait)setTimeout(function(){if(abrRoleState.view==="pin")abrRoleRender()},1000);else setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
   }
   if(abrRoleState.view==="pin-setup"){
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">4 haneli PIN oluştur</h1><p>Bundan sonra uygulamayı e-posta şifresi yerine bu PIN ile açabilirsin.</p></div><form class="abrAccountForm" onsubmit="abrPinOlustur(event)">'+abrPinIdentityHtml()+'<div class="abrPinSetupGrid">'+abrPinFieldHtml("abrNewPin","Yeni PIN","new-password")+abrPinFieldHtml("abrNewPinAgain","PIN tekrar","new-password")+'</div><p class="abrPinNote"><b>İpucu:</b> Kolay tahmin edilen 0000 veya 1234 gibi bir PIN kullanma. PIN yalnız bu cihazda geçerlidir.</p>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">PIN’i Kaydet</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">Farklı hesapla giriş yap</button></div></form>'+abrRoleFooter();
@@ -41487,7 +41570,11 @@ async function abrRoleBoot(){
     abrRoleState.session=session||null;abrRoleState.busy=false;
     if(session&&session.userId&&!session.userIsAnonymous){
       abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
-      abrRoleState.view=abrPinRecord(session.userId)?"pin":"pin-setup";abrRoleRender();return;
+      if(!abrPinRecord(session.userId)){
+        try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
+        abrRoleState.session=null;abrRoleState.access=null;abrRoleState.view="login";abrRoleState.error="Bu cihazın PIN kaydı bulunamadı. Güvenlik için e-posta ve şifrenle yeniden giriş yap.";abrRoleRender();return;
+      }
+      abrPinSecurityLoad(session.userId);abrRoleState.view="pin";abrRoleRender();return;
     }
     abrRoleState.view="login";abrRoleRender();
   }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
@@ -41504,7 +41591,7 @@ window.abrPinOlustur=async function(event){
   const pin=String(abrRoleEl("abrNewPin")&&abrRoleEl("abrNewPin").value||"");const again=String(abrRoleEl("abrNewPinAgain")&&abrRoleEl("abrNewPinAgain").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
   if(!/^\d{4}$/.test(pin)){abrRoleState.error="PIN tam olarak 4 rakam olmalı.";abrRoleRender();return}if(pin!==again){abrRoleState.error="Yazdığın PIN’ler birbiriyle aynı değil.";abrRoleRender();return}if(!userId){abrRoleState.error="Hesap oturumu bulunamadı. E-posta ve şifreyle yeniden giriş yap.";abrRoleRender();return}
   abrRoleState.busy=true;abrRoleState.busyTitle="PIN kaydediliyor";abrRoleState.busyDetail="PIN bu cihaza ve hesabına güvenle bağlanıyor.";abrRoleState.error="";abrRoleRender();
-  try{const salt=abrPinSalt();const hash=await abrPinHash(pin,salt,userId);const store=abrRoleStoreGet();store.devicePin={userId:userId,salt:salt,hash:hash,algorithm:"PBKDF2-SHA256-120000",createdAt:new Date().toISOString()};abrRoleStoreSave(store);const access=abrRoleState.access&&abrRoleState.access.userId===userId&&!abrRoleState.access._sessionOnly?abrRoleState.access:await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin-setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+  try{const salt=abrPinSalt();const hash=await abrPinHash(pin,salt,userId);const store=abrRoleStoreGet();store.devicePin={userId:userId,salt:salt,hash:hash,algorithm:"PBKDF2-SHA256-120000",createdAt:new Date().toISOString()};delete store.pinSecurity;abrRoleStoreSave(store);abrPinSecurityClear(userId);const access=abrRoleState.access&&abrRoleState.access.userId===userId&&!abrRoleState.access._sessionOnly?abrRoleState.access:await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin-setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
 window.abrPinDogrula=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
@@ -41514,8 +41601,8 @@ window.abrPinDogrula=async function(event){
   abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap yetkisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
   try{
     const digest=await abrPinHash(pin,record.salt,userId);
-    if(!abrPinSafeEqual(digest,record.hash)){abrRoleState.wrongPinCount++;if(abrRoleState.wrongPinCount>=5){abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=Date.now()+30000;throw new Error("Çok fazla yanlış PIN girildi. 30 saniye bekle.")}throw new Error("PIN yanlış.")}
-    abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;const access=await abrRoleSessionAccess();abrRoleSuccess(access);
+    if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);if(failure.lockedUntil>Date.now())throw new Error(failure.failedCount>=10?"Çok fazla yanlış PIN girildi. 5 dakika bekle veya hesap şifrenle giriş yap.":"Çok fazla yanlış PIN girildi. 30 saniye bekle.");throw new Error("PIN yanlış.")}
+    abrPinSecurityClear(userId);const access=await abrRoleSessionAccess();abrRoleSuccess(access);
   }catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender();if(abrRoleState.pinLockedUntil>Date.now())setTimeout(function(){if(abrRoleState.view==="pin"){abrRoleState.error="";abrRoleRender()}},30500)}
 };
 window.abrPinHesapGirisineDon=async function(){
