@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.00_ROLE_BASED_ENTRY -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.01_ACCOUNT_BASED_ENTRY -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.00 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.01 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -19272,7 +19272,7 @@ html.darkRoot .abrSharedTransitionVeil{
           <path d="m17.5 5.8.2 3.4-3.4.2M6.5 18.2l-.2-3.4 3.4-.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="exHybridItemText"><b>Rol Değiştir</b><small id="abrRoleSwitchSubtitle">Admin veya personel girişine dön</small></span>
+      <span class="exHybridItemText"><b>Hesaptan Çık</b><small id="abrRoleSwitchSubtitle">Güvenli giriş ekranına dön</small></span>
     </button>
   </nav>
 </aside>
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.00</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.01</div>
     </div>
   </div>
 </div>
@@ -20491,7 +20491,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.2.00";
+  const SPLASH_VERSION = "v2.2.01";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21281,7 +21281,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.00";
+const APP_VERSION = "v2.2.01";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -41013,23 +41013,153 @@ document.addEventListener("DOMContentLoaded",function(){
   },3200);
 });
 
-window.abrTeamAccessInfo = async function(createSession){
-  await abrTeamInit(!!createSession);
-  const membership = abrTeamState.activeMembership || null;
-  const profile = abrTeamLocalProfile();
+async function abrTeamAccountPushLogout(){
+  if(!abrTeamState.pushBoundUserId)return;
+  try{
+    const OneSignal=await abrPushTimeout(abrPushOneSignal(),5000);
+    if(OneSignal&&typeof OneSignal.logout==="function")await OneSignal.logout();
+  }catch(error){}
+  abrTeamState.pushBoundUserId=null;
+}
+async function abrTeamAccountContextReset(logoutPush){
+  clearTimeout(abrTeamState.refreshTimer);
+  clearTimeout(abrTeamState.membershipRefreshTimer);
+  abrTeamState.refreshTimer=null;
+  abrTeamState.membershipRefreshTimer=null;
+  if(abrTeamState.channel){try{abrTeamState.client.removeChannel(abrTeamState.channel)}catch(error){}}
+  if(abrTeamState.membershipChannel){try{abrTeamState.client.removeChannel(abrTeamState.membershipChannel)}catch(error){}}
+  if(logoutPush)await abrTeamAccountPushLogout();
+  abrTeamInAppReset();
+  abrTeamState.user=null;
+  abrTeamState.memberships=[];
+  abrTeamState.activeTeams=[];
+  abrTeamState.teamId=null;
+  abrTeamState.activeMembership=null;
+  abrTeamState.members=[];
+  abrTeamState.profiles=Object.create(null);
+  abrTeamState.apartments=[];
+  abrTeamState.reports=[];
+  abrTeamState.reads=Object.create(null);
+  abrTeamState.messages=[];
+  abrTeamState.chatMessages=[];
+  abrTeamState.chatReadAt=null;
+  abrTeamState.chatReady=false;
+  abrTeamState.chatError=null;
+  abrTeamState.chatFile=null;
+  abrTeamState.chatReplyId=null;
+  abrTeamState.chatDraft="";
+  abrTeamState.open=false;
+  abrTeamState.view="home";
+  abrTeamState.error=null;
+  abrTeamState.initPromise=null;
+  abrTeamState.channel=null;
+  abrTeamState.subscribedTeamId=null;
+  abrTeamState.membershipChannel=null;
+  abrTeamState.membershipUserId=null;
+  abrTeamState.refreshing=false;
+  abrTeamState.lastBadge=-1;
+  abrTeamState.connection="idle";
+  abrTeamState.pushBoundUserId=null;
+  abrTeamBadgeUpdate();
+}
+function abrTeamAccountAccessSnapshot(){
+  const membership=abrTeamState.activeMembership || abrTeamState.memberships.find(function(item){return item.state==="pending"}) || abrTeamState.memberships[0] || null;
+  const profile=abrTeamLocalProfile();
+  const user=abrTeamState.user;
   return {
-    userId:abrTeamState.user && abrTeamState.user.id || null,
+    userId:user&&user.id||null,
+    userEmail:user&&user.email||null,
+    userIsAnonymous:!!(user&&(user.is_anonymous===true||(user.app_metadata&&user.app_metadata.provider==="anonymous"))),
     profileName:profile.name,
     hasMembership:!!membership,
-    membershipState:membership && membership.state || null,
-    teamRole:membership && membership.role || null,
-    teamId:membership && membership.team_id || null,
-    teamName:membership && membership.team && membership.team.name || null,
-    error:abrTeamState.error || null
+    membershipState:membership&&membership.state||null,
+    teamRole:membership&&membership.role||null,
+    teamId:membership&&membership.team_id||null,
+    teamName:membership&&membership.team&&membership.team.name||null,
+    error:abrTeamState.error||null
   };
+}
+async function abrTeamAccountFunctionError(error,fallback){
+  let message="";
+  try{
+    const context=error&&error.context;
+    if(context&&typeof context.clone==="function"){
+      const payload=await context.clone().json();
+      message=payload&&(payload.message||payload.error)||"";
+    }
+  }catch(parseError){}
+  message=abrTeamTrim(message||error&&error.message||fallback||"Hesap işlemi tamamlanamadı.",240);
+  if(/Failed to send a request|Failed to fetch|NetworkError/i.test(message))return "İnternet bağlantısı kurulamadı.";
+  if(/FunctionsHttpError|non-2xx status code|404/i.test(message))return "Hesap kurulum servisi hazır değil. account-access Edge Function’ını yayınla.";
+  return message;
+}
+async function abrTeamAccountProfileHydrate(userId){
+  if(!userId||!abrTeamState.client)return;
+  try{
+    const result=await abrTeamState.client.from("profiles").select("display_name,phone").eq("user_id",userId).maybeSingle();
+    if(result.error||!result.data)return;
+    const name=abrTeamTrim(result.data.display_name,60);
+    const phone=abrTeamTrim(result.data.phone,40);
+    if(name.length>=2)localStorage.setItem("profilAd",name);
+    localStorage.setItem("profilTelefon",phone);
+  }catch(error){}
+}
+window.abrTeamCredentialSignIn=async function(credentials){
+  if(navigator.onLine===false)throw new Error("Giriş yapmak için internet bağlantısı gerekli.");
+  const email=abrTeamTrim(credentials&&credentials.email,180).toLocaleLowerCase("tr-TR");
+  const password=String(credentials&&credentials.password||"");
+  if(!/^\S+@\S+\.\S+$/.test(email))throw new Error("Geçerli bir e-posta adresi yaz.");
+  if(password.length<8)throw new Error("Şifre en az 8 karakter olmalı.");
+  const client=await abrTeamEnsureClient();
+  const signed=await client.auth.signInWithPassword({email:email,password:password});
+  if(signed.error)throw signed.error;
+  await abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id);
+  await abrTeamAccountContextReset(false);
+  await abrTeamInit(false);
+  if(abrTeamState.error)throw new Error(abrTeamState.error);
+  return abrTeamAccountAccessSnapshot();
+};
+window.abrTeamCredentialSetup=async function(details){
+  if(navigator.onLine===false)throw new Error("İlk hesap kurulumu için internet bağlantısı gerekli.");
+  const name=abrTeamTrim(details&&details.name,60);
+  const phone=abrTeamTrim(details&&details.phone,40);
+  const email=abrTeamTrim(details&&details.email,180).toLocaleLowerCase("tr-TR");
+  const password=String(details&&details.password||"");
+  if(name.length<2)throw new Error("Ad soyad en az 2 karakter olmalı.");
+  if(!/^\S+@\S+\.\S+$/.test(email))throw new Error("Geçerli bir e-posta adresi yaz.");
+  if(password.length<8)throw new Error("Şifre en az 8 karakter olmalı.");
+  const client=await abrTeamEnsureClient();
+  const user=await abrTeamEnsureSession(true);
+  if(!user)throw new Error("Cihaz hesabı hazırlanamadı.");
+  try{
+    localStorage.setItem("profilAd",name);
+    localStorage.setItem("profilTelefon",phone);
+  }catch(error){}
+  await abrTeamProfileSync();
+  const invoked=await client.functions.invoke("account-access",{body:{email:email,password:password,display_name:name,phone:phone}});
+  if(invoked.error)throw new Error(await abrTeamAccountFunctionError(invoked.error,"Hesap kurulamadı."));
+  if(!invoked.data||invoked.data.ok!==true)throw new Error(abrTeamTrim(invoked.data&&(invoked.data.message||invoked.data.error)||"Hesap kurulamadı.",240));
+  const signed=await client.auth.signInWithPassword({email:email,password:password});
+  if(signed.error)throw signed.error;
+  await abrTeamAccountContextReset(false);
+  await abrTeamInit(false);
+  if(abrTeamState.error)throw new Error(abrTeamState.error);
+  return abrTeamAccountAccessSnapshot();
+};
+window.abrTeamCredentialSignOut=async function(){
+  const client=await abrTeamEnsureClient();
+  await abrTeamAccountPushLogout();
+  const signed=await client.auth.signOut({scope:"local"});
+  if(signed&&signed.error){try{localStorage.removeItem(ABR_TEAM_AUTH_KEY)}catch(error){}}
+  await abrTeamAccountContextReset(false);
+  return true;
+};
+window.abrTeamAccessInfo=async function(createSession){
+  await abrTeamInit(!!createSession);
+  return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.00";
+window.__abrTeamCenterVersion = "2.2.01";
 })();
 </script>
 
@@ -41072,11 +41202,11 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
   <div class="abrRoleScroll"><div id="abrRoleCard" class="abrRoleCard"></div></div>
 </section>
 
-<script id="abrRoleEntryScript2200">
+<script id="abrRoleEntryScript2200" type="application/x-abr-disabled">
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.00";
+const ABR_ROLE_VERSION="2.2.01";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41192,6 +41322,133 @@ document.addEventListener("DOMContentLoaded",function(){
   }
 },{once:true});
 window.addEventListener("pageshow",function(event){if(event.persisted&&window.__abrAppRole===null){document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
+window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
+})();
+</script>
+
+<style id="abrAccountEntryStyle2201">
+#abrRoleGate,#abrRoleGate *{box-sizing:border-box}
+#abrRoleGate{max-width:100vw;overflow:hidden}
+.abrRoleScroll{width:100%;max-width:100vw;min-width:0;overflow-x:hidden;align-items:flex-start;padding:max(24px,env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom))}
+.abrRoleCard{width:100%;max-width:440px;min-width:0;margin:auto 0;flex:0 0 auto}
+.abrRoleBrand{min-width:0}.abrRoleBrandText{overflow:hidden}.abrRoleBrandText b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.abrAccountForm{display:grid;gap:12px}
+.abrAccountField{display:block;min-width:0}.abrAccountField>span{display:block;margin:0 0 7px 3px;color:#65748b;font-size:9px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.abrAccountInputWrap{position:relative;min-width:0}
+.abrAccountField input{display:block;width:100%;min-width:0;height:56px;padding:0 16px;border:1px solid rgba(114,143,183,.24);border-radius:17px;outline:0;color:#152137;background:#f8faff;font:750 16px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0;text-align:left;-webkit-appearance:none;appearance:none}
+.abrAccountField input.has-toggle{padding-right:57px}.abrAccountField input:focus{border-color:rgba(31,117,224,.62);box-shadow:0 0 0 4px rgba(31,117,224,.10)}
+.abrAccountPasswordToggle{position:absolute;right:7px;top:7px;width:42px;height:42px;border:0;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#5d718d;background:#eaf1fa}
+.abrAccountPasswordToggle svg{width:20px;height:20px}.abrAccountPasswordToggle .abrEyeOff{display:none}.abrAccountPasswordToggle.is-visible .abrEyeOn{display:none}.abrAccountPasswordToggle.is-visible .abrEyeOff{display:block}
+.abrAccountActions{display:grid;gap:9px;margin-top:2px}.abrAccountPrimary,.abrAccountSecondary{width:100%;min-height:54px;border:0;border-radius:17px;font:900 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.abrAccountPrimary{color:#fff;background:linear-gradient(145deg,#132844,#176fcf);box-shadow:0 11px 23px rgba(25,88,163,.20)}.abrAccountSecondary{color:#52627a;background:#edf2f8}.abrAccountPrimary:disabled,.abrAccountSecondary:disabled{opacity:.55;pointer-events:none}
+.abrAccountTextButton{justify-self:center;padding:7px 10px;border:0;color:#2474d5;background:transparent;font:850 10px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.abrAccountHint{display:flex;gap:10px;margin:0 0 3px;padding:12px 13px;border:1px solid rgba(52,126,217,.12);border-radius:16px;color:#60738d;background:#edf5ff;font-size:10px;line-height:1.45;font-weight:700}.abrAccountHint i{flex:0 0 19px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:#2b7cdc;font:900 11px/1 sans-serif}
+.abrAccountSetupGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.abrAccountSetupGrid .is-wide{grid-column:1/-1}
+.abrAccountSuccess{min-height:245px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.abrAccountSuccessIcon{width:66px;height:66px;border-radius:23px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(145deg,#19bd78,#0b9d62);box-shadow:0 16px 32px rgba(12,157,98,.22)}.abrAccountSuccessIcon svg{width:33px;height:33px}.abrAccountSuccess h2{margin:17px 0 5px;font-size:21px;line-height:1.1;font-weight:950}.abrAccountSuccess p{margin:0;color:#78869a;font-size:11px;font-weight:700}.abrAccountRoleChip{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:8px 11px;border-radius:999px;color:#1767c1;background:#e9f3ff;font-size:9px;font-weight:950;letter-spacing:.06em}.abrAccountRoleChip:before{content:"";width:7px;height:7px;border-radius:50%;background:#1e78dd}
+.abrRoleBusy{min-height:245px}
+body.darkMode .abrAccountField input,html.darkRoot .abrAccountField input{color:#eef5ff;border-color:rgba(116,149,192,.18);background:#102138}body.darkMode .abrAccountPasswordToggle,html.darkRoot .abrAccountPasswordToggle{color:#a9bad0;background:#172b44}body.darkMode .abrAccountHint,html.darkRoot .abrAccountHint{color:#a7b7cb;border-color:rgba(74,142,224,.16);background:#10243d}body.darkMode .abrAccountSecondary,html.darkRoot .abrAccountSecondary{color:#c4d0df;background:#182a41}
+@media(max-height:720px){.abrRoleCard{margin:0}.abrRoleBrand{margin-bottom:18px}.abrRoleHead{padding-bottom:13px}.abrRoleHead h1{font-size:25px}.abrRoleFoot{margin-top:11px}}
+@media(max-width:360px){.abrRoleScroll{padding-left:12px;padding-right:12px}.abrRoleCard{max-width:calc(100vw - 24px)}.abrRoleBrand{gap:10px}.abrRoleBrandIcon{flex-basis:46px;width:46px;height:46px}.abrRoleBrandText b{font-size:16px}.abrRoleHead h1{font-size:25px}.abrAccountSetupGrid{grid-template-columns:1fr}.abrAccountSetupGrid .is-wide{grid-column:auto}}
+</style>
+
+<script id="abrAccountEntryScript2201">
+(function(){
+"use strict";
+const ABR_ROLE_KEY="abrRoleAccessV2200";
+const ABR_ROLE_VERSION="2.2.01";
+const abrRoleState={view:"login",busy:false,busyTitle:"",busyDetail:"",error:"",access:null,successRole:null};
+window.__abrAppRole=null;
+document.documentElement.classList.add("abr-role-locked");
+
+function abrRoleEl(id){return document.getElementById(id)}
+function abrRoleEscape(value){return String(value==null?"":value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function abrRoleStoreGet(){try{const value=JSON.parse(localStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
+function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(error){}return value}
+function abrRoleProfile(){let name="Uygulama kullanıcısı",phone="";try{name=String(localStorage.getItem("profilAd")||name).trim()||name;phone=String(localStorage.getItem("profilTelefon")||"").trim()}catch(error){}return {name:name,phone:phone}}
+function abrRoleHeader(){return '<div class="abrRoleBrand"><div class="abrRoleBrandIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4.5h10v15H7z" stroke="currentColor" stroke-width="1.8"/><path d="m9.2 7.3 2.8-2.8 2.8 2.8M9.2 16.7l2.8 2.8 2.8-2.8M15.2 9.5h.01M15.2 12h.01M15.2 14.5h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="abrRoleBrandText"><span>ASANSÖR</span><b>Bakım &amp; Revizyon</b></div><div class="abrRoleVersion">v'+ABR_ROLE_VERSION+'</div></div>'}
+function abrRoleFooter(){return '<div class="abrRoleFoot"><i></i>Lisans doğrulandı • Güvenli hesap girişi</div>'}
+function abrRolePasswordIcon(){return '<svg class="abrEyeOn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.8 12s3.3-5.2 9.2-5.2 9.2 5.2 9.2 5.2-3.3 5.2-9.2 5.2S2.8 12 2.8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><svg class="abrEyeOff" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 4 16 16M9.6 7.1A9.8 9.8 0 0 1 12 6.8c5.9 0 9.2 5.2 9.2 5.2a14 14 0 0 1-2.2 2.8M6.2 8.4A14 14 0 0 0 2.8 12s3.3 5.2 9.2 5.2c1 0 1.9-.1 2.7-.4M10.3 10.3a2.5 2.5 0 0 0 3.4 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
+function abrRolePasswordField(id,label,autocomplete){return '<label class="abrAccountField"><span>'+label+'</span><div class="abrAccountInputWrap"><input id="'+id+'" class="has-toggle" type="password" minlength="8" maxlength="72" autocomplete="'+autocomplete+'" required><button class="abrAccountPasswordToggle" type="button" aria-label="Şifreyi göster" onclick="abrSifreGoster(\''+id+'\',this)">'+abrRolePasswordIcon()+'</button></div></label>'}
+function abrRoleErrorHtml(){return abrRoleState.error?'<p class="abrRoleError" role="alert">'+abrRoleEscape(abrRoleState.error)+'</p>':''}
+function abrRoleRender(){
+  const card=abrRoleEl("abrRoleCard");if(!card)return;
+  if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrRoleSpinner"></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip yetkisi doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
+  if(abrRoleState.view==="success"){
+    const access=abrRoleState.access||{};const roleLabel=abrRoleState.successRole==="admin"?"Yönetici hesabı":"Personel hesabı";
+    card.innerHTML=abrRoleHeader()+'<div class="abrAccountSuccess"><div class="abrAccountSuccessIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 12.3 3.5 3.5 7.7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Giriş başarılı</h2><p>'+abrRoleEscape(access.profileName||abrRoleProfile().name)+'</p><div class="abrAccountRoleChip">'+abrRoleEscape(roleLabel)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</div></div>'+abrRoleFooter();return
+  }
+  if(abrRoleState.view==="setup"){
+    const profile=abrRoleProfile();const store=abrRoleStoreGet();
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">İlk kullanım</div><h1 id="abrRoleTitle">Hesabını oluştur</h1><p>Bir kez e-posta ve şifre belirle; sonraki açılışlarda normal giriş yap.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Bu cihazdaki ekip üyeliğin, sohbetlerin ve mevcut yetkin aynı kullanıcıda korunur.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField"><span>Ad soyad</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
+  }
+  const store=abrRoleStoreGet();
+  card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Kurumsal saha yönetimi</div><h1 id="abrRoleTitle">Hesabına giriş yap</h1><p>E-posta ve şifrenle devam et. Yetkin ekip kaydından otomatik belirlenir.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button></div></form>'+abrRoleFooter();
+}
+function abrRoleErrorText(error){
+  const raw=String(error&&error.message||error||"Giriş tamamlanamadı.");
+  if(/Invalid login credentials/i.test(raw))return "E-posta veya şifre yanlış.";
+  if(/Email not confirmed/i.test(raw))return "Bu e-posta henüz doğrulanmamış.";
+  if(/User already registered|already been registered|already exists|unique/i.test(raw))return "Bu e-posta başka bir hesapta kullanılıyor.";
+  if(/rate limit|too many requests/i.test(raw))return "Çok fazla deneme yapıldı. Biraz bekleyip tekrar dene.";
+  if(/Failed to fetch|NetworkError|İnternet bağlantısı/i.test(raw))return "İnternet bağlantısı kurulamadı.";
+  return raw.length>240?raw.slice(0,240):raw;
+}
+function abrRoleFromAccess(access){return access&&access.membershipState==="active"&&access.teamRole==="owner"?"admin":"personnel"}
+function abrRoleAccessCache(access,email){if(!access||access.error)return;abrRoleStorePatch({lastEmail:email||access.userEmail||abrRoleStoreGet().lastEmail||"",lastAccess:{userId:access.userId||null,teamRole:access.teamRole||null,teamId:access.teamId||null,teamName:access.teamName||null,profileName:access.profileName||abrRoleProfile().name,hasMembership:!!access.hasMembership,verifiedAt:new Date().toISOString()}})}
+function abrRoleEnter(role,access){
+  window.__abrAppRole=role;
+  document.documentElement.classList.remove("abr-role-locked","abr-role-admin","abr-role-personnel");
+  document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
+  const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
+  abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
+  try{if(typeof haptic==="function")haptic("success")}catch(error){}
+  if(role==="personnel"&&access&&(!access.hasMembership||access.membershipState!=="active")){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(error){}},450)}
+}
+function abrRoleFinish(access,email){
+  const role=abrRoleFromAccess(access);abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="success";abrRoleRender();
+  setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},850);
+}
+window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
+window.abrHesapGiris=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const email=String(abrRoleEl("abrLoginEmail")&&abrRoleEl("abrLoginEmail").value||"").trim().toLocaleLowerCase("tr-TR");const password=String(abrRoleEl("abrLoginPassword")&&abrRoleEl("abrLoginPassword").value||"");
+  abrRoleStorePatch({lastEmail:email});
+  abrRoleState.busy=true;abrRoleState.busyTitle="Giriş yapılıyor";abrRoleState.busyDetail="Hesap ve ekip yetkisi doğrulanıyor.";abrRoleState.error="";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSignIn!=="function")throw new Error("Güvenli hesap bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSignIn({email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrIlkKurulumAc=function(){abrRoleState.view="setup";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrNormalGiriseDon=function(){abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrIlkHesapKur=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const name=String(abrRoleEl("abrSetupName")&&abrRoleEl("abrSetupName").value||"").trim();const phone=String(abrRoleEl("abrSetupPhone")&&abrRoleEl("abrSetupPhone").value||"").trim();const email=String(abrRoleEl("abrSetupEmail")&&abrRoleEl("abrSetupEmail").value||"").trim().toLocaleLowerCase("tr-TR");const password=String(abrRoleEl("abrSetupPassword")&&abrRoleEl("abrSetupPassword").value||"");const again=String(abrRoleEl("abrSetupPasswordAgain")&&abrRoleEl("abrSetupPasswordAgain").value||"");
+  if(password!==again){abrRoleState.error="Yazdığın şifreler birbiriyle aynı değil.";abrRoleRender();return}
+  abrRoleStorePatch({lastEmail:email});
+  abrRoleState.busy=true;abrRoleState.busyTitle="Hesap oluşturuluyor";abrRoleState.busyDetail="Mevcut ekip kaydın güvenli giriş hesabına bağlanıyor.";abrRoleState.error="";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSetup!=="function")throw new Error("Hesap kurulum bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSetup({name:name,phone:phone,email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrAppRoleGet=function(){return window.__abrAppRole||null};
+window.abrRolDegistir=async function(){
+  try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose()}catch(error){}
+  try{if(typeof window.ekipArizaMerkeziKapat==="function")window.ekipArizaMerkeziKapat()}catch(error){}
+  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
+  abrRoleState.view="login";abrRoleState.error="";abrRoleState.access=null;abrRoleState.busy=true;abrRoleState.busyTitle="Çıkış yapılıyor";abrRoleState.busyDetail="Güvenli oturum kapatılıyor.";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){abrRoleState.error=abrRoleErrorText(error)}
+  abrRoleState.busy=false;abrRoleRender();
+};
+function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
+function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odeme","tahsilatModalAc","tahsilatKaydet","odemeDuzenle","odemeSil","odemeMakbuzuPdf","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
+function abrRoleMarkPermissions(){
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|tahsilatModalAc|tahsilatKaydet|odemeDuzenle|odemeSil|odemeMakbuzuPdf|cariHesapPdf|odeme\(|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
+  ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".dashboardFollowRow").forEach(function(row){if(/Sözleşme/i.test(row.textContent||""))row.setAttribute("data-abr-admin-only","1")});
+  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge,.detailBalanceCard,.exDetailCariPane").forEach(function(element){element.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll('.exDetailTabButton[data-detail-tab="cari"]').forEach(function(element){element.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Cari Durumu|Ödeme Makbuzu|Cari Özeti|Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
+}
+function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=(role==="admin"?"Yönetici hesabı":"Personel hesabı")+" • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent=role==="admin"?"Yönetici":"Personel"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
+document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleRender();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
+window.addEventListener("pageshow",function(event){if(event.persisted&&window.__abrAppRole===null){document.documentElement.classList.add("abr-role-locked");abrRoleState.view="login";abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
