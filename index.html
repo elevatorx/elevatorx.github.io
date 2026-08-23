@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.01_ACCOUNT_BASED_ENTRY -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.02_DEVICE_PIN_ENTRY -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10276,7 +10276,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.01 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.02 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20479,7 +20479,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.01</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.02</div>
     </div>
   </div>
 </div>
@@ -20491,7 +20491,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.2.01";
+  const SPLASH_VERSION = "v2.2.02";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21281,7 +21281,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.01";
+const APP_VERSION = "v2.2.02";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -41146,6 +41146,19 @@ window.abrTeamCredentialSetup=async function(details){
   if(abrTeamState.error)throw new Error(abrTeamState.error);
   return abrTeamAccountAccessSnapshot();
 };
+window.abrTeamCredentialSessionInfo=async function(){
+  const client=await abrTeamEnsureClient();
+  const result=await client.auth.getSession();
+  if(result.error)throw result.error;
+  const session=result.data&&result.data.session;
+  const user=session&&session.user||null;
+  return {
+    userId:user&&user.id||null,
+    userEmail:user&&user.email||null,
+    userIsAnonymous:!!(user&&(user.is_anonymous===true||(user.app_metadata&&user.app_metadata.provider==="anonymous"))),
+    expiresAt:session&&session.expires_at||null
+  };
+};
 window.abrTeamCredentialSignOut=async function(){
   const client=await abrTeamEnsureClient();
   await abrTeamAccountPushLogout();
@@ -41159,7 +41172,7 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.01";
+window.__abrTeamCenterVersion = "2.2.02";
 })();
 </script>
 
@@ -41206,7 +41219,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.01";
+const ABR_ROLE_VERSION="2.2.02";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41344,18 +41357,21 @@ window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 .abrAccountHint{display:flex;gap:10px;margin:0 0 3px;padding:12px 13px;border:1px solid rgba(52,126,217,.12);border-radius:16px;color:#60738d;background:#edf5ff;font-size:10px;line-height:1.45;font-weight:700}.abrAccountHint i{flex:0 0 19px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:#2b7cdc;font:900 11px/1 sans-serif}
 .abrAccountSetupGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.abrAccountSetupGrid .is-wide{grid-column:1/-1}
 .abrAccountSuccess{min-height:245px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.abrAccountSuccessIcon{width:66px;height:66px;border-radius:23px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(145deg,#19bd78,#0b9d62);box-shadow:0 16px 32px rgba(12,157,98,.22)}.abrAccountSuccessIcon svg{width:33px;height:33px}.abrAccountSuccess h2{margin:17px 0 5px;font-size:21px;line-height:1.1;font-weight:950}.abrAccountSuccess p{margin:0;color:#78869a;font-size:11px;font-weight:700}.abrAccountRoleChip{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:8px 11px;border-radius:999px;color:#1767c1;background:#e9f3ff;font-size:9px;font-weight:950;letter-spacing:.06em}.abrAccountRoleChip:before{content:"";width:7px;height:7px;border-radius:50%;background:#1e78dd}
+.abrPinIdentity{display:flex;align-items:center;gap:11px;margin:0 0 2px;padding:12px 13px;border:1px solid rgba(52,126,217,.11);border-radius:17px;background:#edf5ff}.abrPinAvatar{flex:0 0 40px;width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(145deg,#1f7be6,#155db5);font-size:13px;font-weight:950}.abrPinIdentityText{min-width:0;flex:1}.abrPinIdentityText b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:950}.abrPinIdentityText span{display:block;margin-top:4px;color:#5f7da3;font-size:9px;font-weight:800}.abrPinShield{flex:0 0 30px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#2376d6}.abrPinShield svg{width:23px;height:23px}
+.abrPinField{display:block}.abrPinField>span{display:block;margin:0 0 7px 3px;color:#65748b;font-size:9px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.abrPinField input{display:block;width:100%;height:62px;padding:0 14px;border:1px solid rgba(114,143,183,.24);border-radius:18px;outline:0;color:#152137;background:#f8faff;font:950 29px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.55em;text-indent:.55em;text-align:center;-webkit-appearance:none;appearance:none}.abrPinField input:focus{border-color:rgba(31,117,224,.62);box-shadow:0 0 0 4px rgba(31,117,224,.10)}
+.abrPinSetupGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.abrPinNote{margin:0;padding:11px 13px;border-radius:15px;color:#687a91;background:#f2f6fb;font-size:9px;line-height:1.45;font-weight:750}.abrPinNote b{color:#263a55}.abrPinCooldown{color:#b52e47;background:#fff0f3}
 .abrRoleBusy{min-height:245px}
-body.darkMode .abrAccountField input,html.darkRoot .abrAccountField input{color:#eef5ff;border-color:rgba(116,149,192,.18);background:#102138}body.darkMode .abrAccountPasswordToggle,html.darkRoot .abrAccountPasswordToggle{color:#a9bad0;background:#172b44}body.darkMode .abrAccountHint,html.darkRoot .abrAccountHint{color:#a7b7cb;border-color:rgba(74,142,224,.16);background:#10243d}body.darkMode .abrAccountSecondary,html.darkRoot .abrAccountSecondary{color:#c4d0df;background:#182a41}
+body.darkMode .abrAccountField input,html.darkRoot .abrAccountField input,body.darkMode .abrPinField input,html.darkRoot .abrPinField input{color:#eef5ff;border-color:rgba(116,149,192,.18);background:#102138}body.darkMode .abrAccountPasswordToggle,html.darkRoot .abrAccountPasswordToggle{color:#a9bad0;background:#172b44}body.darkMode .abrAccountHint,html.darkRoot .abrAccountHint,body.darkMode .abrPinIdentity,html.darkRoot .abrPinIdentity{color:#a7b7cb;border-color:rgba(74,142,224,.16);background:#10243d}body.darkMode .abrPinIdentityText span,html.darkRoot .abrPinIdentityText span{color:#91aad0}body.darkMode .abrPinNote,html.darkRoot .abrPinNote{color:#a9b8ca;background:#12243a}body.darkMode .abrAccountSecondary,html.darkRoot .abrAccountSecondary{color:#c4d0df;background:#182a41}
 @media(max-height:720px){.abrRoleCard{margin:0}.abrRoleBrand{margin-bottom:18px}.abrRoleHead{padding-bottom:13px}.abrRoleHead h1{font-size:25px}.abrRoleFoot{margin-top:11px}}
-@media(max-width:360px){.abrRoleScroll{padding-left:12px;padding-right:12px}.abrRoleCard{max-width:calc(100vw - 24px)}.abrRoleBrand{gap:10px}.abrRoleBrandIcon{flex-basis:46px;width:46px;height:46px}.abrRoleBrandText b{font-size:16px}.abrRoleHead h1{font-size:25px}.abrAccountSetupGrid{grid-template-columns:1fr}.abrAccountSetupGrid .is-wide{grid-column:auto}}
+@media(max-width:360px){.abrRoleScroll{padding-left:12px;padding-right:12px}.abrRoleCard{max-width:calc(100vw - 24px)}.abrRoleBrand{gap:10px}.abrRoleBrandIcon{flex-basis:46px;width:46px;height:46px}.abrRoleBrandText b{font-size:16px}.abrRoleHead h1{font-size:25px}.abrAccountSetupGrid,.abrPinSetupGrid{grid-template-columns:1fr}.abrAccountSetupGrid .is-wide{grid-column:auto}}
 </style>
 
 <script id="abrAccountEntryScript2201">
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.01";
-const abrRoleState={view:"login",busy:false,busyTitle:"",busyDetail:"",error:"",access:null,successRole:null};
+const ABR_ROLE_VERSION="2.2.02";
+const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -41363,11 +41379,28 @@ function abrRoleEl(id){return document.getElementById(id)}
 function abrRoleEscape(value){return String(value==null?"":value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
 function abrRoleStoreGet(){try{const value=JSON.parse(localStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
 function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(error){}return value}
+function abrRoleStoreSave(value){try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
 function abrRoleProfile(){let name="Uygulama kullanıcısı",phone="";try{name=String(localStorage.getItem("profilAd")||name).trim()||name;phone=String(localStorage.getItem("profilTelefon")||"").trim()}catch(error){}return {name:name,phone:phone}}
+function abrRoleInitials(name){return (String(name||"").trim().split(/\s+/).slice(0,2).map(function(part){return part.charAt(0)}).join("")||"U").toLocaleUpperCase("tr-TR")}
+function abrPinDeviceCode(){try{return String(localStorage.getItem("elevatorx_device_code_v1476")||"ABR-DEVICE")}catch(error){return "ABR-DEVICE"}}
+function abrPinSalt(){const bytes=new Uint8Array(16);if(window.crypto&&typeof window.crypto.getRandomValues==="function")window.crypto.getRandomValues(bytes);else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);return Array.from(bytes).map(function(value){return value.toString(16).padStart(2,"0")}).join("")}
+async function abrPinHash(pin,salt,userId){
+  const secret=String(pin||"");const context=String(userId||"")+":"+abrPinDeviceCode()+":"+String(salt||"")+":ABR-PIN-V2202";
+  if(window.crypto&&window.crypto.subtle&&window.TextEncoder){
+    const encoder=new window.TextEncoder();const key=await window.crypto.subtle.importKey("raw",encoder.encode(secret),"PBKDF2",false,["deriveBits"]);const bits=await window.crypto.subtle.deriveBits({name:"PBKDF2",salt:encoder.encode(context),iterations:120000,hash:"SHA-256"},key,256);return Array.from(new Uint8Array(bits)).map(function(value){return value.toString(16).padStart(2,"0")}).join("");
+  }
+  let hash=2166136261;const source=secret+":"+context;for(let round=0;round<12000;round++)for(let i=0;i<source.length;i++){hash^=source.charCodeAt(i)+round;hash=Math.imul(hash,16777619)}return "fallback-"+(hash>>>0).toString(16);
+}
+function abrPinRecord(userId){const pin=abrRoleStoreGet().devicePin;return pin&&pin.userId===userId&&typeof pin.hash==="string"&&typeof pin.salt==="string"?pin:null}
+function abrPinSafeEqual(left,right){left=String(left||"");right=String(right||"");if(left.length!==right.length)return false;let difference=0;for(let i=0;i<left.length;i++)difference|=left.charCodeAt(i)^right.charCodeAt(i);return difference===0}
+function abrPinClear(){const store=abrRoleStoreGet();delete store.devicePin;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
+function abrRoleCachedAccess(userId){const cached=abrRoleStoreGet().lastAccess;if(!cached||cached.userId!==userId)return null;return Object.assign({},cached,{userId:userId,membershipState:cached.membershipState||(cached.hasMembership?"active":null),error:null,offline:true})}
 function abrRoleHeader(){return '<div class="abrRoleBrand"><div class="abrRoleBrandIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4.5h10v15H7z" stroke="currentColor" stroke-width="1.8"/><path d="m9.2 7.3 2.8-2.8 2.8 2.8M9.2 16.7l2.8 2.8 2.8-2.8M15.2 9.5h.01M15.2 12h.01M15.2 14.5h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="abrRoleBrandText"><span>ASANSÖR</span><b>Bakım &amp; Revizyon</b></div><div class="abrRoleVersion">v'+ABR_ROLE_VERSION+'</div></div>'}
 function abrRoleFooter(){return '<div class="abrRoleFoot"><i></i>Lisans doğrulandı • Güvenli hesap girişi</div>'}
 function abrRolePasswordIcon(){return '<svg class="abrEyeOn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.8 12s3.3-5.2 9.2-5.2 9.2 5.2 9.2 5.2-3.3 5.2-9.2 5.2S2.8 12 2.8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><svg class="abrEyeOff" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 4 16 16M9.6 7.1A9.8 9.8 0 0 1 12 6.8c5.9 0 9.2 5.2 9.2 5.2a14 14 0 0 1-2.2 2.8M6.2 8.4A14 14 0 0 0 2.8 12s3.3 5.2 9.2 5.2c1 0 1.9-.1 2.7-.4M10.3 10.3a2.5 2.5 0 0 0 3.4 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function abrRolePasswordField(id,label,autocomplete){return '<label class="abrAccountField"><span>'+label+'</span><div class="abrAccountInputWrap"><input id="'+id+'" class="has-toggle" type="password" minlength="8" maxlength="72" autocomplete="'+autocomplete+'" required><button class="abrAccountPasswordToggle" type="button" aria-label="Şifreyi göster" onclick="abrSifreGoster(\''+id+'\',this)">'+abrRolePasswordIcon()+'</button></div></label>'}
+function abrPinIdentityHtml(){const access=abrRoleState.access||{};const profile=abrRoleProfile();const name=access.profileName||profile.name;let label="Hesap oturumu";if(access.teamRole==="owner"&&access.membershipState==="active")label="Yönetici hesabı";else if(access.hasMembership)label="Personel hesabı";return '<div class="abrPinIdentity"><span class="abrPinAvatar">'+abrRoleEscape(abrRoleInitials(name))+'</span><span class="abrPinIdentityText"><b>'+abrRoleEscape(name)+'</b><span>'+abrRoleEscape(label)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</span></span><span class="abrPinShield"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'}
+function abrPinFieldHtml(id,label,autocomplete){return '<label class="abrPinField"><span>'+label+'</span><input id="'+id+'" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="'+autocomplete+'" enterkeyhint="go" oninput="abrPinRakam(this)" required></label>'}
 function abrRoleErrorHtml(){return abrRoleState.error?'<p class="abrRoleError" role="alert">'+abrRoleEscape(abrRoleState.error)+'</p>':''}
 function abrRoleRender(){
   const card=abrRoleEl("abrRoleCard");if(!card)return;
@@ -41375,6 +41408,15 @@ function abrRoleRender(){
   if(abrRoleState.view==="success"){
     const access=abrRoleState.access||{};const roleLabel=abrRoleState.successRole==="admin"?"Yönetici hesabı":"Personel hesabı";
     card.innerHTML=abrRoleHeader()+'<div class="abrAccountSuccess"><div class="abrAccountSuccessIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 12.3 3.5 3.5 7.7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Giriş başarılı</h2><p>'+abrRoleEscape(access.profileName||abrRoleProfile().name)+'</p><div class="abrAccountRoleChip">'+abrRoleEscape(roleLabel)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</div></div>'+abrRoleFooter();return
+  }
+  if(abrRoleState.view==="pin"){
+    const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">PIN’ini gir</h1><p>E-posta şifresi yerine bu cihaz için belirlediğin 4 haneli PIN ile devam et.</p></div><form class="abrAccountForm" onsubmit="abrPinDogrula(event)">'+abrPinIdentityHtml()+abrPinFieldHtml("abrDevicePin","4 haneli PIN","off")+(wait?'<p class="abrPinNote abrPinCooldown">Yeni deneme için '+wait+' saniye bekle.</p>':'')+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit" '+(wait?'disabled':'')+'>Uygulamayı Aç</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">PIN’i unuttum / hesapla giriş</button></div></form>'+abrRoleFooter();
+    if(!wait)setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
+  }
+  if(abrRoleState.view==="pin-setup"){
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">4 haneli PIN oluştur</h1><p>Bundan sonra uygulamayı e-posta şifresi yerine bu PIN ile açabilirsin.</p></div><form class="abrAccountForm" onsubmit="abrPinOlustur(event)">'+abrPinIdentityHtml()+'<div class="abrPinSetupGrid">'+abrPinFieldHtml("abrNewPin","Yeni PIN","new-password")+abrPinFieldHtml("abrNewPinAgain","PIN tekrar","new-password")+'</div><p class="abrPinNote"><b>İpucu:</b> Kolay tahmin edilen 0000 veya 1234 gibi bir PIN kullanma. PIN yalnız bu cihazda geçerlidir.</p>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">PIN’i Kaydet</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">Farklı hesapla giriş yap</button></div></form>'+abrRoleFooter();
+    setTimeout(function(){const input=abrRoleEl("abrNewPin");if(input)input.focus()},80);return
   }
   if(abrRoleState.view==="setup"){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
@@ -41393,7 +41435,7 @@ function abrRoleErrorText(error){
   return raw.length>240?raw.slice(0,240):raw;
 }
 function abrRoleFromAccess(access){return access&&access.membershipState==="active"&&access.teamRole==="owner"?"admin":"personnel"}
-function abrRoleAccessCache(access,email){if(!access||access.error)return;abrRoleStorePatch({lastEmail:email||access.userEmail||abrRoleStoreGet().lastEmail||"",lastAccess:{userId:access.userId||null,teamRole:access.teamRole||null,teamId:access.teamId||null,teamName:access.teamName||null,profileName:access.profileName||abrRoleProfile().name,hasMembership:!!access.hasMembership,verifiedAt:new Date().toISOString()}})}
+function abrRoleAccessCache(access,email){if(!access||access.error)return;abrRoleStorePatch({lastEmail:email||access.userEmail||abrRoleStoreGet().lastEmail||"",lastAccess:{userId:access.userId||null,userEmail:access.userEmail||email||null,teamRole:access.teamRole||null,membershipState:access.membershipState||null,teamId:access.teamId||null,teamName:access.teamName||null,profileName:access.profileName||abrRoleProfile().name,hasMembership:!!access.hasMembership,verifiedAt:new Date().toISOString()}})}
 function abrRoleEnter(role,access){
   window.__abrAppRole=role;
   document.documentElement.classList.remove("abr-role-locked","abr-role-admin","abr-role-personnel");
@@ -41403,11 +41445,70 @@ function abrRoleEnter(role,access){
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
   if(role==="personnel"&&access&&(!access.hasMembership||access.membershipState!=="active")){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(error){}},450)}
 }
+function abrRoleSuccess(access){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
 function abrRoleFinish(access,email){
-  const role=abrRoleFromAccess(access);abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="success";abrRoleRender();
-  setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},850);
+  abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.session={userId:access&&access.userId||null,userEmail:access&&access.userEmail||email||null,userIsAnonymous:false};abrRoleState.busy=false;abrRoleState.error="";
+  if(!access||!access.userId){abrRoleState.view="login";abrRoleState.error="Hesap oturumu doğrulanamadı.";abrRoleRender();return}
+  if(!abrPinRecord(access.userId)){abrRoleState.view="pin-setup";abrRoleRender();return}
+  abrRoleSuccess(access);
+}
+async function abrRoleSessionAccess(){
+  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
+  const cached=abrRoleCachedAccess(userId);
+  try{
+    if(typeof window.abrTeamAccessInfo!=="function")throw new Error("Ekip yetkisi okunamadı.");
+    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Yetki kontrolü zaman aşımına uğradı."))},14000)});
+    const access=await Promise.race([window.abrTeamAccessInfo(false),timeout]);
+    if(!access||access.error)throw new Error(access&&access.error||"Yetki bilgisi alınamadı.");
+    if(userId&&access.userId!==userId)throw new Error("Cihazdaki hesap oturumu değişmiş. E-posta ve şifreyle yeniden giriş yap.");
+    abrRoleAccessCache(access,access.userEmail||"");return access;
+  }catch(error){if(cached)return cached;throw error}
+}
+async function abrRoleBoot(){
+  abrRoleState.busy=true;abrRoleState.busyTitle="Oturum kontrol ediliyor";abrRoleState.busyDetail="Bu cihazdaki güvenli giriş hazırlanıyor.";abrRoleState.error="";abrRoleRender();
+  try{
+    if(typeof window.abrTeamCredentialSessionInfo!=="function")throw new Error("Güvenli oturum bileşeni bulunamadı.");
+    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Oturum kontrolü zaman aşımına uğradı."))},14000)});
+    const session=await Promise.race([window.abrTeamCredentialSessionInfo(),timeout]);
+    abrRoleState.session=session||null;abrRoleState.busy=false;
+    if(session&&session.userId&&!session.userIsAnonymous){
+      abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
+      abrRoleState.view=abrPinRecord(session.userId)?"pin":"pin-setup";abrRoleRender();return;
+    }
+    abrRoleState.view="login";abrRoleRender();
+  }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+}
+function abrRoleRelock(){
+  if(window.__abrAppRole===null)return;
+  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId))return;
+  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
 }
 window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
+window.abrPinRakam=function(input){if(!input)return;input.value=String(input.value||"").replace(/\D/g,"").slice(0,4)};
+window.abrPinOlustur=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const pin=String(abrRoleEl("abrNewPin")&&abrRoleEl("abrNewPin").value||"");const again=String(abrRoleEl("abrNewPinAgain")&&abrRoleEl("abrNewPinAgain").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
+  if(!/^\d{4}$/.test(pin)){abrRoleState.error="PIN tam olarak 4 rakam olmalı.";abrRoleRender();return}if(pin!==again){abrRoleState.error="Yazdığın PIN’ler birbiriyle aynı değil.";abrRoleRender();return}if(!userId){abrRoleState.error="Hesap oturumu bulunamadı. E-posta ve şifreyle yeniden giriş yap.";abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN kaydediliyor";abrRoleState.busyDetail="PIN bu cihaza ve hesabına güvenle bağlanıyor.";abrRoleState.error="";abrRoleRender();
+  try{const salt=abrPinSalt();const hash=await abrPinHash(pin,salt,userId);const store=abrRoleStoreGet();store.devicePin={userId:userId,salt:salt,hash:hash,algorithm:"PBKDF2-SHA256-120000",createdAt:new Date().toISOString()};abrRoleStoreSave(store);const access=abrRoleState.access&&abrRoleState.access.userId===userId&&!abrRoleState.access._sessionOnly?abrRoleState.access:await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin-setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrPinDogrula=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}
+  const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
+  if(!/^\d{4}$/.test(pin)){abrRoleState.error="4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.view="pin-setup";abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap yetkisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
+  try{
+    const digest=await abrPinHash(pin,record.salt,userId);
+    if(!abrPinSafeEqual(digest,record.hash)){abrRoleState.wrongPinCount++;if(abrRoleState.wrongPinCount>=5){abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=Date.now()+30000;throw new Error("Çok fazla yanlış PIN girildi. 30 saniye bekle.")}throw new Error("PIN yanlış.")}
+    abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;const access=await abrRoleSessionAccess();abrRoleSuccess(access);
+  }catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender();if(abrRoleState.pinLockedUntil>Date.now())setTimeout(function(){if(abrRoleState.view==="pin"){abrRoleState.error="";abrRoleRender()}},30500)}
+};
+window.abrPinHesapGirisineDon=async function(){
+  if(abrRoleState.busy)return;abrPinClear();abrRoleState.busy=true;abrRoleState.busyTitle="Hesap girişi hazırlanıyor";abrRoleState.busyDetail="Cihaz PIN’i kaldırılıyor.";abrRoleState.error="";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
+  abrRoleState.session=null;abrRoleState.access=null;abrRoleState.busy=false;abrRoleState.view="login";abrRoleRender();
+};
 window.abrHesapGiris=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
   const email=String(abrRoleEl("abrLoginEmail")&&abrRoleEl("abrLoginEmail").value||"").trim().toLocaleLowerCase("tr-TR");const password=String(abrRoleEl("abrLoginPassword")&&abrRoleEl("abrLoginPassword").value||"");
@@ -41429,10 +41530,10 @@ window.abrAppRoleGet=function(){return window.__abrAppRole||null};
 window.abrRolDegistir=async function(){
   try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose()}catch(error){}
   try{if(typeof window.ekipArizaMerkeziKapat==="function")window.ekipArizaMerkeziKapat()}catch(error){}
-  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
+  abrPinClear();window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
   abrRoleState.view="login";abrRoleState.error="";abrRoleState.access=null;abrRoleState.busy=true;abrRoleState.busyTitle="Çıkış yapılıyor";abrRoleState.busyDetail="Güvenli oturum kapatılıyor.";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){abrRoleState.error=abrRoleErrorText(error)}
-  abrRoleState.busy=false;abrRoleRender();
+  abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
 function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odeme","tahsilatModalAc","tahsilatKaydet","odemeDuzenle","odemeSil","odemeMakbuzuPdf","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
@@ -41447,8 +41548,10 @@ function abrRoleMarkPermissions(){
   document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Cari Durumu|Ödeme Makbuzu|Cari Özeti|Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
 }
 function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=(role==="admin"?"Yönetici hesabı":"Personel hesabı")+" • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent=role==="admin"?"Yönetici":"Personel"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
-document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleRender();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
-window.addEventListener("pageshow",function(event){if(event.persisted&&window.__abrAppRole===null){document.documentElement.classList.add("abr-role-locked");abrRoleState.view="login";abrRoleRender()}});
+document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000)abrRoleRelock();abrRoleState.hiddenAt=0});
+window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
+window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(window.__abrAppRole!==null)abrRoleRelock();else{document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
