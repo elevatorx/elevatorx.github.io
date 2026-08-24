@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.08_AUTOMATIC_FACE_ID_UNLOCK -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.09_FACE_ID_12H_TRUST -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10287,7 +10287,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.08 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.09 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20530,7 +20530,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.08</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.09</div>
     </div>
   </div>
 </div>
@@ -20545,7 +20545,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = "v2.2.08";
+  const SPLASH_VERSION = "v2.2.09";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21373,7 +21373,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.08";
+const APP_VERSION = "v2.2.09";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -41338,7 +41338,7 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.08";
+window.__abrTeamCenterVersion = "2.2.09";
 })();
 </script>
 
@@ -41387,7 +41387,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.08";
+const ABR_ROLE_VERSION="2.2.09";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41542,7 +41542,8 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.08";
+const ABR_ROLE_VERSION="2.2.09";
+const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41565,9 +41566,12 @@ async function abrPinHash(pin,salt,userId){
 }
 function abrPinRecord(userId){const pin=abrRoleStoreGet().devicePin;return pin&&pin.userId===userId&&typeof pin.hash==="string"&&typeof pin.salt==="string"?pin:null}
 function abrPinSafeEqual(left,right){left=String(left||"");right=String(right||"");if(left.length!==right.length)return false;let difference=0;for(let i=0;i<left.length;i++)difference|=left.charCodeAt(i)^right.charCodeAt(i);return difference===0}
-function abrPinClear(){const store=abrRoleStoreGet();delete store.devicePin;delete store.deviceBiometric;delete store.pinSecurity;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
+function abrPinClear(){const store=abrRoleStoreGet();delete store.devicePin;delete store.deviceBiometric;delete store.deviceTrust;delete store.pinSecurity;abrRoleStoreSave(store);abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0}
 function abrBioApiAvailable(){return !!(window.isSecureContext&&window.PublicKeyCredential&&navigator.credentials&&typeof navigator.credentials.create==="function"&&typeof navigator.credentials.get==="function")}
 function abrBioRecord(userId){const bio=abrRoleStoreGet().deviceBiometric;return bio&&bio.userId===userId&&typeof bio.credentialId==="string"&&bio.credentialId?bio:null}
+function abrBioTrustValid(userId){const trust=abrRoleStoreGet().deviceTrust;const until=Number(trust&&trust.until)||0;return !!(userId&&abrBioRecord(userId)&&trust&&trust.userId===userId&&trust.method==="face-id"&&until>Date.now()&&until<=Date.now()+ABR_BIO_TRUST_MS+300000)}
+function abrBioTrustSet(userId){if(!userId||!abrBioRecord(userId))return false;const now=Date.now();const store=abrRoleStoreGet();store.deviceTrust={userId:userId,method:"face-id",verifiedAt:new Date(now).toISOString(),until:now+ABR_BIO_TRUST_MS};abrRoleStoreSave(store);return true}
+function abrBioTrustClear(){const store=abrRoleStoreGet();delete store.deviceTrust;abrRoleStoreSave(store)}
 function abrBioRandomBytes(length){const bytes=new Uint8Array(length||32);if(window.crypto&&typeof window.crypto.getRandomValues==="function")window.crypto.getRandomValues(bytes);else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);return bytes}
 function abrBioBase64Url(buffer){const bytes=new Uint8Array(buffer);let binary="";for(let i=0;i<bytes.length;i++)binary+=String.fromCharCode(bytes[i]);return btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"")}
 function abrBioFromBase64Url(value){let source=String(value||"").replace(/-/g,"+").replace(/_/g,"/");while(source.length%4)source+="=";const binary=atob(source);const bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return bytes}
@@ -41694,14 +41698,19 @@ async function abrRoleBoot(){
         try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
         abrRoleState.session=null;abrRoleState.access=null;abrRoleState.view="login";abrRoleState.error="Bu cihazın PIN kaydı bulunamadı. Güvenlik için e-posta ve şifrenle yeniden giriş yap.";abrRoleRender();return;
       }
-      abrPinSecurityLoad(session.userId);abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
+      abrPinSecurityLoad(session.userId);
+      if(abrBioTrustValid(session.userId)){
+        const cachedAccess=abrRoleCachedAccess(session.userId);if(cachedAccess){abrRoleSuccess(cachedAccess,true);abrRoleRefreshAfterBiometric(session.userId);return}
+        try{const trustedAccess=await abrRoleSessionAccess();abrRoleSuccess(trustedAccess,true);return}catch(trustError){abrBioTrustClear()}
+      }
+      abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
     }
     abrRoleState.view="login";abrRoleRender();
   }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 }
 function abrRoleRelock(){
   if(window.__abrAppRole===null)return;
-  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId))return;
+  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId)||abrBioTrustValid(userId))return;
   window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
 }
 window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
@@ -41711,6 +41720,7 @@ window.abrFaceIdIleAc=async function(automatic){
   let request;try{request=abrBioCredentialGet(record)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
   abrRoleState.busy=true;abrRoleState.busyTitle="Face ID bekleniyor";abrRoleState.busyDetail="iPhone güvenli kimlik doğrulama ekranını açıyor.";abrRoleState.error="";abrRoleRender();
   try{await request}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=isAutomatic&&String(error&&error.name||"")==="NotAllowedError"?"":abrBioErrorText(error);abrRoleRender();return}
+  abrBioTrustSet(userId);
   const cached=abrRoleCachedAccess(userId);if(cached){abrRoleSuccess(cached,true);abrRoleRefreshAfterBiometric(userId);return}
   try{const access=await abrRoleSessionAccess();abrRoleSuccess(access,true)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
@@ -41724,7 +41734,7 @@ window.abrFaceIdKaydet=async function(){
   if(abrRoleState.busy)return;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const access=abrRoleState.access||abrRoleCachedAccess(userId)||{};let creation;
   try{creation=abrBioCredentialCreate(access,userId)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
   abrRoleState.busy=true;abrRoleState.busyTitle="Face ID tanımlanıyor";abrRoleState.busyDetail="iPhone güvenli biyometrik kaydı oluşturuyor.";abrRoleState.error="";abrRoleRender();
-  try{await creation}catch(error){abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
+  try{await creation;abrBioTrustSet(userId)}catch(error){abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
   try{const verifiedAccess=await abrRoleSessionAccess();abrRoleSuccess(verifiedAccess)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
 window.abrFaceIdKurulumIptal=function(){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error="";abrRoleRender()};
@@ -41744,7 +41754,7 @@ window.abrPinDogrula=async function(event){
   try{
     const digest=await abrPinHash(pin,record.salt,userId);
     if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);if(failure.lockedUntil>Date.now())throw new Error(failure.failedCount>=10?"Çok fazla yanlış PIN girildi. 5 dakika bekle veya hesap şifrenle giriş yap.":"Çok fazla yanlış PIN girildi. 30 saniye bekle.");throw new Error("PIN yanlış.")}
-    abrPinSecurityClear(userId);const access=await abrRoleSessionAccess();abrRoleSuccess(access);
+    abrPinSecurityClear(userId);if(abrBioRecord(userId))abrBioTrustSet(userId);const access=await abrRoleSessionAccess();abrRoleSuccess(access);
   }catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender();if(abrRoleState.pinLockedUntil>Date.now())setTimeout(function(){if(abrRoleState.view==="pin"){abrRoleState.error="";abrRoleRender()}},30500)}
 };
 window.abrPinHesapGirisineDon=async function(){
