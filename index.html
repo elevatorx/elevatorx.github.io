@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.07_FACE_ID_DEVICE_UNLOCK -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.08_AUTOMATIC_FACE_ID_UNLOCK -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10287,7 +10287,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.07 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.08 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20530,7 +20530,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.07</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.08</div>
     </div>
   </div>
 </div>
@@ -20545,7 +20545,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = "v2.2.07";
+  const SPLASH_VERSION = "v2.2.08";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21373,7 +21373,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.07";
+const APP_VERSION = "v2.2.08";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -41338,7 +41338,7 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.07";
+window.__abrTeamCenterVersion = "2.2.08";
 })();
 </script>
 
@@ -41387,7 +41387,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.07";
+const ABR_ROLE_VERSION="2.2.08";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41542,8 +41542,8 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.07";
-const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0};
+const ABR_ROLE_VERSION="2.2.08";
+const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -41583,7 +41583,7 @@ async function abrBioCredentialCreate(access,userId){
 }
 async function abrBioCredentialGet(record){
   if(!abrBioApiAvailable())throw new DOMException("WebAuthn unavailable","NotSupportedError");
-  const assertion=await navigator.credentials.get({publicKey:{challenge:abrBioRandomBytes(32),allowCredentials:[{type:"public-key",id:abrBioFromBase64Url(record.credentialId),transports:["internal"]}],timeout:60000,userVerification:"required"}});
+  const assertion=await navigator.credentials.get({publicKey:{challenge:abrBioRandomBytes(32),allowCredentials:[{type:"public-key",id:abrBioFromBase64Url(record.credentialId),transports:["internal"]}],timeout:60000,userVerification:"required"},mediation:"optional"});
   if(!assertion||!assertion.rawId||abrBioBase64Url(assertion.rawId)!==record.credentialId)throw new Error("Face ID credential mismatch");
   const authenticatorData=assertion.response&&assertion.response.authenticatorData?new Uint8Array(assertion.response.authenticatorData):null;if(!authenticatorData||authenticatorData.length<33||(authenticatorData[32]&4)!==4)throw new Error("Face ID user verification missing");
   return assertion;
@@ -41622,6 +41622,7 @@ function abrRoleRender(){
     const bioBlock=bio&&canOfferBio?'<div class="abrBioBlock"><button class="abrBioPrimary" type="button" onclick="abrFaceIdIleAc()">'+abrBioIconHtml()+'<span>Face ID ile Aç</span></button><div class="abrBioDivider"><span>veya PIN kullan</span></div></div>':'';
     const bioSetup=!bio&&canOfferBio?'<button class="abrBioSetup" type="button" onclick="abrFaceIdKur()" '+(wait?'disabled':'')+'>Face ID’yi Bu Cihazda Etkinleştir</button>':'';
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">'+(bio?'Face ID ile aç':'PIN’ini gir')+'</h1><p>'+(bio?'Face ID ile tek dokunuşta aç veya 4 haneli PIN’inle devam et.':'4 haneli PIN’inle devam et; istersen bu cihaz için Face ID’yi etkinleştir.')+'</p></div>'+abrPinIdentityHtml()+bioBlock+'<form class="abrAccountForm" onsubmit="abrPinDogrula(event)">'+abrPinFieldHtml("abrDevicePin","4 haneli PIN","off")+(wait?'<p class="abrPinNote abrPinCooldown">Yeni deneme için '+wait+' saniye bekle.</p>':'')+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit" '+(wait?'disabled':'')+'>PIN ile Aç</button>'+bioSetup+'<button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">PIN’i unuttum / hesapla giriş</button></div></form>'+abrRoleFooter();
+    if(bio&&!abrRoleState.bioAutoTried){clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTimer=setTimeout(function(){if(abrRoleState.view==="pin"&&!abrRoleState.busy&&!abrRoleState.bioAutoTried&&typeof window.abrFaceIdIleAc==="function")window.abrFaceIdIleAc(true)},360)}
     if(wait)setTimeout(function(){if(abrRoleState.view==="pin")abrRoleRender()},1000);else if(!bio)setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
   }
   if(abrRoleState.view==="bio-setup"){
@@ -41658,7 +41659,10 @@ function abrRoleEnter(role,access){
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
   if(role==="personnel"&&access&&(!access.hasMembership||access.membershipState!=="active")){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(error){}},450)}
 }
-function abrRoleSuccess(access){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
+function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";if(immediate===true){abrRoleEnter(role,access);return}abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
+function abrRoleRefreshAfterBiometric(userId){
+  Promise.resolve().then(function(){return abrRoleSessionAccess()}).then(function(access){if(!access||access.userId!==userId||window.__abrAppRole===null)return;const refreshedRole=abrRoleFromAccess(access);if(refreshedRole!==window.__abrAppRole)abrRoleEnter(refreshedRole,access);else{abrRoleState.access=access;abrRoleIdentityPaint(refreshedRole,access)}}).catch(function(){})
+}
 function abrRoleFinish(access,email){
   abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.session={userId:access&&access.userId||null,userEmail:access&&access.userEmail||email||null,userIsAnonymous:false};abrRoleState.busy=false;abrRoleState.error="";
   if(!access||!access.userId){abrRoleState.view="login";abrRoleState.error="Hesap oturumu doğrulanamadı.";abrRoleRender();return}
@@ -41690,7 +41694,7 @@ async function abrRoleBoot(){
         try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
         abrRoleState.session=null;abrRoleState.access=null;abrRoleState.view="login";abrRoleState.error="Bu cihazın PIN kaydı bulunamadı. Güvenlik için e-posta ve şifrenle yeniden giriş yap.";abrRoleRender();return;
       }
-      abrPinSecurityLoad(session.userId);abrRoleState.view="pin";abrRoleRender();return;
+      abrPinSecurityLoad(session.userId);abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
     }
     abrRoleState.view="login";abrRoleRender();
   }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
@@ -41698,16 +41702,17 @@ async function abrRoleBoot(){
 function abrRoleRelock(){
   if(window.__abrAppRole===null)return;
   const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId))return;
-  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
+  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
 }
 window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
 window.abrPinRakam=function(input){if(!input)return;input.value=String(input.value||"").replace(/\D/g,"").slice(0,4)};
-window.abrFaceIdIleAc=async function(){
-  if(abrRoleState.busy)return;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrBioRecord(userId);if(!record){abrRoleState.error="Bu hesap için Face ID kaydı bulunamadı.";abrRoleRender();return}
+window.abrFaceIdIleAc=async function(automatic){
+  if(abrRoleState.busy)return;const isAutomatic=automatic===true;if(isAutomatic&&abrRoleState.bioAutoTried)return;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrBioRecord(userId);if(!record){abrRoleState.error="Bu hesap için Face ID kaydı bulunamadı.";abrRoleRender();return}if(isAutomatic)abrRoleState.bioAutoTried=true;
   let request;try{request=abrBioCredentialGet(record)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
   abrRoleState.busy=true;abrRoleState.busyTitle="Face ID bekleniyor";abrRoleState.busyDetail="iPhone güvenli kimlik doğrulama ekranını açıyor.";abrRoleState.error="";abrRoleRender();
-  try{await request}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
-  try{const access=await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+  try{await request}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=isAutomatic&&String(error&&error.name||"")==="NotAllowedError"?"":abrBioErrorText(error);abrRoleRender();return}
+  const cached=abrRoleCachedAccess(userId);if(cached){abrRoleSuccess(cached,true);abrRoleRefreshAfterBiometric(userId);return}
+  try{const access=await abrRoleSessionAccess();abrRoleSuccess(access,true)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
 window.abrFaceIdKur=async function(){
   if(abrRoleState.busy)return;const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
@@ -41788,7 +41793,7 @@ function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwit
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000)abrRoleRelock();abrRoleState.hiddenAt=0});
 window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
-window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(window.__abrAppRole!==null)abrRoleRelock();else{document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
+window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
