@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.04_SECURITY_HARDENING -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.05_FIELD_COLLECTION_ACCESS -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10287,7 +10287,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.04 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.05 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -14021,6 +14021,46 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
   @media(max-width:430px){
     #detayPanel .detailPremiumHero{
       padding-bottom:calc(132px + env(safe-area-inset-bottom))!important;
+    }
+  }
+</style>
+
+
+<style id="abrFieldPhoneDetailLayout2205">
+  /* Büyük ekranlı telefonlarda da apartman detay kartları aynı mobil düzende kalsın. */
+  @media(max-width:520px){
+    .exDetailStatusGrid{
+      grid-template-columns:1fr!important;
+    }
+
+    .exDetailStatusCard{
+      min-height:0!important;
+      display:grid!important;
+      grid-template-columns:18px minmax(0,1fr)!important;
+      grid-template-rows:auto auto auto!important;
+      column-gap:8px!important;
+      align-items:start!important;
+      padding:11px 12px!important;
+    }
+
+    .exDetailStatusCard i{
+      grid-row:1/4!important;
+      margin:4px 0 0!important;
+    }
+
+    .exDetailStatusCard span,
+    .exDetailStatusCard b,
+    .exDetailStatusCard em{
+      grid-column:2!important;
+    }
+
+    .exDetailStatusCard b{
+      margin-top:4px!important;
+      -webkit-line-clamp:1!important;
+    }
+
+    .exDetailStatusCard em{
+      margin-top:4px!important;
     }
   }
 </style>
@@ -20490,7 +20530,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.04</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.05</div>
     </div>
   </div>
 </div>
@@ -20502,7 +20542,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.2.04";
+  const SPLASH_VERSION = "v2.2.05";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -21292,7 +21332,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.04";
+const APP_VERSION = "v2.2.05";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -41252,7 +41292,7 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.04";
+window.__abrTeamCenterVersion = "2.2.05";
 })();
 </script>
 
@@ -41299,7 +41339,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.04";
+const ABR_ROLE_VERSION="2.2.05";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41385,21 +41425,20 @@ window.abrRolDegistir=function(){
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız admin tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(e){}return false}
 function abrRoleWrapAdminFunctions(){
-  ["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odeme","tahsilatModalAc","tahsilatKaydet","odemeDuzenle","odemeSil","odemeMakbuzuPdf","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){
+  ["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){
     const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;
     const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};
     wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped;
   });
 }
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|tahsilatModalAc|tahsilatKaydet|odemeDuzenle|odemeSil|odemeMakbuzuPdf|cariHesapPdf|odeme\(|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
   ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".dashboardFollowRow").forEach(function(row){if(/Sözleşme/i.test(row.textContent||""))row.setAttribute("data-abr-admin-only","1")});
-  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge,.detailBalanceCard,.exDetailCariPane").forEach(function(element){element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll('.exDetailTabButton[data-detail-tab="cari"]').forEach(function(element){element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Cari Durumu|Ödeme Makbuzu|Cari Özeti|Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge").forEach(function(element){element.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
 }
 function abrRoleIdentityPaint(role,access){
   const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=(role==="admin"?"Admin oturumu":"Personel oturumu")+" • Giriş ekranına dön";
@@ -41454,7 +41493,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.04";
+const ABR_ROLE_VERSION="2.2.05";
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41637,16 +41676,15 @@ window.abrRolDegistir=async function(){
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
-function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odeme","tahsilatModalAc","tahsilatKaydet","odemeDuzenle","odemeSil","odemeMakbuzuPdf","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
+function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|tahsilatModalAc|tahsilatKaydet|odemeDuzenle|odemeSil|odemeMakbuzuPdf|cariHesapPdf|odeme\(|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
   ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".dashboardFollowRow").forEach(function(row){if(/Sözleşme/i.test(row.textContent||""))row.setAttribute("data-abr-admin-only","1")});
-  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge,.detailBalanceCard,.exDetailCariPane").forEach(function(element){element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll('.exDetailTabButton[data-detail-tab="cari"]').forEach(function(element){element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Cari Durumu|Ödeme Makbuzu|Cari Özeti|Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge").forEach(function(element){element.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
 }
 function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=(role==="admin"?"Yönetici hesabı":"Personel hesabı")+" • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent=role==="admin"?"Yönetici":"Personel"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
