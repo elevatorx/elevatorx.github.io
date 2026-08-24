@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.05_FIELD_COLLECTION_ACCESS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.06_SPLASH_PIN_HANDOFF -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10287,7 +10287,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.05 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.06 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20530,7 +20530,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.05</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.06</div>
     </div>
   </div>
 </div>
@@ -20542,17 +20542,38 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
    Kapı açılma geçişi: 0.58 sn
    Takılırsa zorla açma: 3.0 sn */
 (function(){
-  const SPLASH_VERSION = "v2.2.05";
+  document.documentElement.classList.remove("appBooted");
+  document.documentElement.classList.add("abr-splash-active");
+  if(document.body){ document.body.classList.remove("appBooted"); }
+  const SPLASH_VERSION = "v2.2.06";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
   const EXIT_MS = 580;
   const FAILSAFE_MS = 3000;
+  let hasOpenedOnce = false;
+
+  function showSplashSmart(){
+    try{
+      if(!hasOpenedOnce) return;
+      const splash = document.getElementById("splash");
+      if(!splash) return;
+      splash.dataset.hidden = "0";
+      splash.style.display = "flex";
+      splash.style.opacity = "1";
+      splash.style.pointerEvents = "auto";
+      splash.classList.remove("hide","launchOpening","launchRemoved");
+      document.documentElement.classList.remove("appBooted");
+      document.documentElement.classList.add("abr-splash-active");
+      if(document.body){ document.body.classList.remove("appBooted"); }
+    }catch(e){}
+  }
 
   function hideSplashSmart(){
     try{
       const splash = document.getElementById("splash");
       if(!splash || splash.dataset.hidden === "1") return;
+      hasOpenedOnce = true;
       splash.dataset.hidden = "1";
       splash.classList.add("hide","launchOpening");
       splash.style.pointerEvents = "none";
@@ -20562,12 +20583,14 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
 
       setTimeout(function(){
         splash.classList.add("launchRemoved");
-        if(splash && splash.parentNode){ splash.parentNode.removeChild(splash); }
+        splash.style.display = "none";
+        document.documentElement.classList.remove("abr-splash-active");
       }, EXIT_MS);
     }catch(e){}
   }
 
   window.elevatorXHideSplashSmart = hideSplashSmart;
+  window.elevatorXShowSplashSmart = showSplashSmart;
 
   document.addEventListener("DOMContentLoaded", function(){
     try{
@@ -20585,6 +20608,24 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       setTimeout(hideSplashSmart, FAILSAFE_MS);
     }catch(e){
       setTimeout(hideSplashSmart, NORMAL_MS);
+    }
+  });
+
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "hidden"){
+      showSplashSmart();
+      return;
+    }
+    const splash = document.getElementById("splash");
+    if(hasOpenedOnce && splash && splash.dataset.hidden !== "1"){
+      setTimeout(hideSplashSmart, 650);
+    }
+  });
+  window.addEventListener("pagehide", showSplashSmart);
+  window.addEventListener("pageshow", function(){
+    const splash = document.getElementById("splash");
+    if(hasOpenedOnce && splash && splash.dataset.hidden !== "1"){
+      setTimeout(hideSplashSmart, 650);
     }
   });
 })();
@@ -21332,7 +21373,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.05";
+const APP_VERSION = "v2.2.06";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -21812,6 +21853,11 @@ el.textContent = APP_VERSION;
 function hideSplash(){
 
 try{
+
+if(window.elevatorXHideSplashSmart){
+window.elevatorXHideSplashSmart();
+return;
+}
 
 const splash = document.getElementById("splash");
 
@@ -41292,13 +41338,15 @@ window.abrTeamAccessInfo=async function(createSession){
   return abrTeamAccountAccessSnapshot();
 };
 
-window.__abrTeamCenterVersion = "2.2.05";
+window.__abrTeamCenterVersion = "2.2.06";
 })();
 </script>
 
 <style id="abrRoleEntryStyle2200">
 html.abr-role-locked,html.abr-role-locked body{overflow:hidden!important;overscroll-behavior:none!important}
-html.abr-role-locked:not(.ex-license-locked) body>*:not(#abrRoleGate){visibility:hidden!important}
+html.abr-role-locked:not(.ex-license-locked) body>*:not(#abrRoleGate):not(#splash){visibility:hidden!important}
+html.abr-splash-active #splash{display:flex!important;visibility:visible!important;z-index:1000005!important}
+html.abr-splash-active #abrRoleGate{visibility:hidden!important}
 html.ex-license-locked #abrRoleGate{display:none!important}
 #abrRoleGate{--rg-blue:#176fe8;--rg-navy:#10233f;--rg-muted:#7d899b;position:fixed;inset:0;z-index:1000002;display:none;overflow:hidden;color:#111b2d;background:linear-gradient(155deg,#f8faff 0%,#eef4ff 48%,#f9fbff 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 html.abr-role-locked:not(.ex-license-locked) #abrRoleGate{display:block;visibility:visible!important}
@@ -41339,7 +41387,7 @@ body.darkMode .abrRoleChoice:not(.admin),html.darkRoot .abrRoleChoice:not(.admin
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.05";
+const ABR_ROLE_VERSION="2.2.06";
 const abrRoleState={view:"choose",busy:false,error:"",access:null};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
@@ -41493,7 +41541,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.05";
+const ABR_ROLE_VERSION="2.2.06";
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
