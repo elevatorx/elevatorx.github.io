@@ -21551,7 +21551,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.12";
+const APP_VERSION = "v2.2.13";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -31120,13 +31120,6 @@ apartmanSilinecekIndex = null;
 }
 
 function apartmanSilOnayla(){
-
-if(window.__abrAppRole === "personnel"){
-apartmanSilModalKapat();
-if(typeof abrRoleDenied === "function") return abrRoleDenied();
-toast("Bu işlem yalnız yönetici tarafından yapılabilir");
-return;
-}
 
 let i = Number(apartmanSilinecekIndex);
 
@@ -41767,14 +41760,14 @@ window.abrRolDegistir=function(){
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız admin tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(e){}return false}
 function abrRoleWrapAdminFunctions(){
-  ["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){
+  ["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){
     const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;
     const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};
     wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped;
   });
 }
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
   ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
@@ -42083,9 +42076,9 @@ window.abrRolDegistir=async function(){
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
-function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","sil","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
+function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\bsil\(|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
   ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
