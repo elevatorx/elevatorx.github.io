@@ -13921,6 +13921,35 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     max-width:none!important;
   }
 
+  .exDetailTopManage{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:7px!important;
+    min-width:0!important;
+  }
+
+  .exDetailTopDelete{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:42px!important;
+    height:42px!important;
+    min-width:42px!important;
+    padding:0!important;
+    border:1px solid rgba(239,68,68,.15)!important;
+    border-radius:999px!important;
+    background:linear-gradient(145deg,#fff1f2,#ffffff)!important;
+    color:#dc2626!important;
+    box-shadow:0 8px 20px rgba(220,38,38,.10)!important;
+    font-size:17px!important;
+    font-weight:900!important;
+  }
+
+  .exDetailTopDelete:active{
+    transform:scale(.96);
+  }
+
   .exDetailTopEdit{
     display:inline-flex!important;
     align-items:center!important;
@@ -13978,6 +14007,14 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     box-shadow:0 8px 20px rgba(0,0,0,.22)!important;
   }
 
+  body.darkMode .exDetailTopDelete,
+  html.darkRoot .exDetailTopDelete{
+    border-color:rgba(248,113,113,.18)!important;
+    background:#321d25!important;
+    color:#ff9a9a!important;
+    box-shadow:0 8px 20px rgba(0,0,0,.22)!important;
+  }
+
   @media(max-width:430px){
     .exDetailTopActions{
       margin-bottom:12px!important;
@@ -13990,7 +14027,128 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
       padding:9px 12px!important;
       font-size:11px!important;
     }
+
+    .exDetailTopDelete{
+      width:40px!important;
+      height:40px!important;
+      min-width:40px!important;
+    }
   }
+</style>
+
+<style id="exApartmentDeleteModal2212">
+  #exApartmentDeleteModal{
+    position:fixed;
+    inset:0;
+    z-index:10080;
+    display:none;
+  }
+
+  #exApartmentDeleteModal.is-open{display:block}
+
+  .exApartmentDeleteBackdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(8,15,28,.52);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+
+  .exApartmentDeleteWrap{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+    pointer-events:none;
+  }
+
+  .exApartmentDeleteCard{
+    width:min(100%,430px);
+    padding:22px;
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:28px;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 28px 70px rgba(8,15,28,.28);
+    pointer-events:auto;
+  }
+
+  .exApartmentDeleteIcon{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:#fff0f1;
+    color:#dc2626;
+    font-size:23px;
+  }
+
+  .exApartmentDeleteCard h2{
+    margin:15px 0 7px;
+    color:#172033;
+    font-size:21px;
+    font-weight:950;
+  }
+
+  .exApartmentDeleteCard p{
+    margin:0;
+    color:#6f7c90;
+    font-size:12px;
+    line-height:1.55;
+    font-weight:700;
+  }
+
+  .exApartmentDeleteName{
+    display:block;
+    margin:14px 0;
+    padding:12px 14px;
+    border-radius:16px;
+    background:#f4f7fb;
+    color:#1d2b43;
+    font-size:14px;
+    font-weight:950;
+  }
+
+  .exApartmentDeleteActions{
+    display:grid;
+    grid-template-columns:1fr 1.25fr;
+    gap:9px;
+    margin-top:17px;
+  }
+
+  .exApartmentDeleteActions button{
+    min-height:50px;
+    border:0;
+    border-radius:17px;
+    font-size:12px;
+    font-weight:950;
+  }
+
+  .exApartmentDeleteCancel{background:#edf1f6;color:#526177}
+  .exApartmentDeleteConfirm{background:#dc2626;color:#fff;box-shadow:0 12px 24px rgba(220,38,38,.22)}
+
+  body.darkMode .exApartmentDeleteCard,
+  html.darkRoot .exApartmentDeleteCard{
+    border-color:rgba(255,255,255,.08);
+    background:#111b2a;
+  }
+
+  body.darkMode .exApartmentDeleteCard h2,
+  html.darkRoot .exApartmentDeleteCard h2,
+  body.darkMode .exApartmentDeleteName,
+  html.darkRoot .exApartmentDeleteName{color:#f5f8ff}
+
+  body.darkMode .exApartmentDeleteCard p,
+  html.darkRoot .exApartmentDeleteCard p{color:#9ba9bd}
+
+  body.darkMode .exApartmentDeleteName,
+  html.darkRoot .exApartmentDeleteName{background:#1b2a3e}
+
+  body.darkMode .exApartmentDeleteCancel,
+  html.darkRoot .exApartmentDeleteCancel{background:#243349;color:#d9e5f6}
 </style>
 
 
@@ -19453,6 +19611,10 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.addEventListener("keydown",function(e){
     if(e.key === "Escape"){
       try{
+        var adm = document.getElementById("exApartmentDeleteModal");
+        if(adm && adm.classList.contains("is-open")) return window.apartmanSilModalKapat();
+      }catch(_){}
+      try{
         var mp = document.getElementById("exMapPickerModal");
         if(mp && mp.classList.contains("is-open")) return window.haritaKonumSeciciKapat();
       }catch(_){}
@@ -19566,6 +19728,22 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
 </div>
 
 
+
+<div id="exApartmentDeleteModal" aria-hidden="true">
+  <div class="exApartmentDeleteBackdrop" onclick="apartmanSilModalKapat()"></div>
+  <div class="exApartmentDeleteWrap">
+    <section class="exApartmentDeleteCard" role="alertdialog" aria-modal="true" aria-labelledby="exApartmentDeleteTitle" aria-describedby="exApartmentDeleteDescription">
+      <div class="exApartmentDeleteIcon" aria-hidden="true">⌫</div>
+      <h2 id="exApartmentDeleteTitle">Apartmanı silmek istiyor musun?</h2>
+      <p id="exApartmentDeleteDescription">Bakım, tahsilat, parça ve teknik kayıtlar bu apartmanla birlikte kaldırılacak. Son silinen kayıt güvenli geri alma için cihazda saklanır.</p>
+      <b id="exApartmentDeleteName" class="exApartmentDeleteName">-</b>
+      <div class="exApartmentDeleteActions">
+        <button class="exApartmentDeleteCancel" type="button" onclick="apartmanSilModalKapat()">Vazgeç</button>
+        <button id="exApartmentDeleteConfirm" class="exApartmentDeleteConfirm" type="button" onclick="apartmanSilOnayla()">Evet, Apartmanı Sil</button>
+      </div>
+    </section>
+  </div>
+</div>
 
 <div id="exPaymentModal" aria-hidden="true">
   <div class="exPaymentBackdrop" onclick="tahsilatModalKapat()"></div>
@@ -21373,7 +21551,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.11";
+const APP_VERSION = "v2.2.12";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -30597,10 +30775,15 @@ detayPanel.innerHTML = `
     ← Geri
   </button>
 
-  <button class="exDetailTopEdit" type="button" onclick="duzenle(${i})">
-    <span aria-hidden="true">✎</span>
-    Düzenle
-  </button>
+  <div class="exDetailTopManage">
+    <button class="exDetailTopDelete" type="button" onclick="sil(${i})" aria-label="Apartmanı sil" title="Apartmanı sil">
+      <span aria-hidden="true">⌫</span>
+    </button>
+    <button class="exDetailTopEdit" type="button" onclick="duzenle(${i})">
+      <span aria-hidden="true">✎</span>
+      Düzenle
+    </button>
+  </div>
 </div>
 
 <div class="detailHeroTop">
@@ -30832,7 +31015,7 @@ detayPanel.innerHTML = `
 
   <div class="detailDangerZone">
     <button class="detailDeleteBtn" onclick="sil(${i})">
-      Kaydı Sil
+      Apartmanı Sil
     </button>
   </div>
 </section>
@@ -30887,6 +31070,8 @@ behavior:"smooth"
 
 }
 
+let apartmanSilinecekIndex = null;
+
 function sil(i){
 
 haptic("warning");
@@ -30896,11 +31081,58 @@ toast("Apartman bulunamadı");
 return;
 }
 
-let onay =
-confirm("Bu apartman silinsin mi?");
+apartmanSilinecekIndex = Number(i);
 
-if(!onay){
-toast("Silme iptal edildi");
+let modal = document.getElementById("exApartmentDeleteModal");
+let adEl = document.getElementById("exApartmentDeleteName");
+
+if(!modal){
+toast("Silme ekranı açılamadı");
+return;
+}
+
+if(adEl){
+adEl.textContent = data[i].ad || "İsimsiz apartman";
+}
+
+modal.style.display = "block";
+modal.classList.add("is-open");
+modal.setAttribute("aria-hidden","false");
+
+setTimeout(function(){
+let vazgec = modal.querySelector(".exApartmentDeleteCancel");
+if(vazgec) vazgec.focus();
+},80);
+
+}
+
+function apartmanSilModalKapat(){
+
+let modal = document.getElementById("exApartmentDeleteModal");
+if(modal){
+modal.classList.remove("is-open");
+modal.setAttribute("aria-hidden","true");
+modal.style.display = "none";
+}
+
+apartmanSilinecekIndex = null;
+
+}
+
+function apartmanSilOnayla(){
+
+if(window.__abrAppRole === "personnel"){
+apartmanSilModalKapat();
+if(typeof abrRoleDenied === "function") return abrRoleDenied();
+toast("Bu işlem yalnız yönetici tarafından yapılabilir");
+return;
+}
+
+let i = Number(apartmanSilinecekIndex);
+
+if(!Number.isInteger(i) || !data[i]){
+apartmanSilModalKapat();
+toast("Apartman bulunamadı");
 return;
 }
 
@@ -30913,6 +31145,10 @@ return;
 
 try{
 
+let modal = document.getElementById("exApartmentDeleteModal");
+let confirmButton = document.getElementById("exApartmentDeleteConfirm");
+if(confirmButton) confirmButton.disabled = true;
+
 let silinen = abrStbDerinKopya(data[i]);
 
 try{
@@ -30923,6 +31159,8 @@ apartman:silinen
 }catch(e){}
 
 data.splice(i,1);
+
+apartmanSilModalKapat();
 
 aktifDetay = null;
 detayPanel.style.display="none";
@@ -30936,6 +31174,8 @@ animateIn(liste,"screenInLeft");
 toast("Apartman silindi");
 
 }finally{
+let confirmButton = document.getElementById("exApartmentDeleteConfirm");
+if(confirmButton) confirmButton.disabled = false;
 abrStbIslemKilidiniAc(kilit);
 }
 
