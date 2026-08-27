@@ -21373,7 +21373,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.10";
+const APP_VERSION = "v2.2.11";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -22881,11 +22881,20 @@ return parca[2] + "." + parca[1] + "." + parca[0];
 
 }
 
-function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak){
+function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak,tutar){
 
 let key = bakimTarihKey(tarih);
+let kayitTutari = Number(tutar || 0);
 
-if(!key || gorulen[key]){
+if(!key){
+return;
+}
+
+if(gorulen[key]){
+let mevcut = liste.find(function(k){ return k && k.key === key; });
+if(mevcut && Number(mevcut.tutar || 0) <= 0 && kayitTutari > 0){
+mevcut.tutar = kayitTutari;
+}
 return;
 }
 
@@ -22894,7 +22903,8 @@ gorulen[key] = true;
 liste.push({
 key:key,
 tarih:bakimTarihGoster(key),
-kaynak:kaynak || ""
+kaynak:kaynak || "",
+tutar:kayitTutari > 0 ? kayitTutari : 0
 });
 
 }
@@ -22909,11 +22919,11 @@ return liste;
 }
 
 if(a.bakimTarihi){
-bakimKayitTarihiEkle(liste,gorulen,a.bakimTarihi,"sonBakim");
+bakimKayitTarihiEkle(liste,gorulen,a.bakimTarihi,"sonBakim",0);
 }
 
 if(a.sonBakimTarihi){
-bakimKayitTarihiEkle(liste,gorulen,a.sonBakimTarihi,"sonBakim");
+bakimKayitTarihiEkle(liste,gorulen,a.sonBakimTarihi,"sonBakim",0);
 }
 
 if(Array.isArray(a.bakimKayitlari)){
@@ -22923,7 +22933,8 @@ bakimKayitTarihiEkle(
 liste,
 gorulen,
 k.tarih || k.bakimTarihi || k.date || k.createdAt,
-"bakimKayitlari"
+"bakimKayitlari",
+k.tutar || k.ucret || k.bakimUcreti || 0
 );
 });
 }
@@ -22931,7 +22942,7 @@ k.tarih || k.bakimTarihi || k.date || k.createdAt,
 if(Array.isArray(a.bakimChecklist)){
 a.bakimChecklist.forEach(function(k){
 if(!k) return;
-bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist");
+bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist",k.tutar || 0);
 });
 }
 
@@ -22947,7 +22958,7 @@ return;
 let eslesme = metin.match(/\(([^)]+)\)\s*$/);
 
 if(eslesme && eslesme[1]){
-bakimKayitTarihiEkle(liste,gorulen,eslesme[1],"gecmis");
+bakimKayitTarihiEkle(liste,gorulen,eslesme[1],"gecmis",0);
 }
 });
 }
@@ -23025,14 +23036,45 @@ a.bakimDurumu = "yapildi";
 
 }
 
+function bakimAylikUcret(a,kayitlar){
+
+let alanlar = [
+a && a.ucret,
+a && a.bakimUcreti,
+a && a.aylikBakimUcreti,
+a && a.aylikUcret
+];
+
+for(let i = 0; i < alanlar.length; i++){
+let deger = Number(alanlar[i] || 0);
+if(deger > 0) return deger;
+}
+
+let kayitliUcret = (kayitlar || []).reduce(function(son,k){
+let deger = Number(k && k.tutar ? k.tutar : 0);
+return deger > 0 ? deger : son;
+},0);
+
+if(kayitliUcret > 0) return kayitliUcret;
+
+let eskiBakimAvansi = odemeListesi(a).find(function(o){
+return !!(o && o.erkenTahsilat) &&
+odemeTipNormalize(o.tip) === "bakim" &&
+Number(o.tutar || 0) > 0;
+});
+
+return eskiBakimAvansi ? Number(eskiBakimAvansi.tutar || 0) : 0;
+
+}
+
 function bakimBorcKalemleri(a){
 
-let ucret = Number(a && a.ucret ? a.ucret : 0);
 let kayitlar = bakimKayitlari(a);
+let varsayilanUcret = bakimAylikUcret(a,kayitlar);
 let aylar = {};
 let kalemler = [];
 
-if(ucret <= 0){
+if(varsayilanUcret <= 0){
 return kalemler;
 }
 
@@ -23044,6 +23086,8 @@ return;
 }
 
 aylar[ayKey] = true;
+
+let ucret = Number(k && k.tutar ? k.tutar : 0) || varsayilanUcret;
 
 kalemler.push({
 tip:"Bakım",
@@ -30512,7 +30556,7 @@ detayPanel.style.display="block";
 quickAddGuncelle();
 
 let odemeText =
-cari.kalanPozitif > 0 ? "Ödeme Al" : "Erken Tahsilat";
+cari.kalanPozitif > 0 ? "Tahsilat Yap" : "Erken Ödeme Al";
 
 let bakimText =
 bakimBuAyYapildi(a) ? "Bakım Yapıldı" : "Bakım Yapıldı";
@@ -30968,7 +31012,7 @@ function tahsilatModalAc(i){
   if(indexEl) indexEl.value = String(i);
   if(tipEl) tipEl.value = tip;
   if(adEl) adEl.textContent = a.ad || "-";
-  if(titleEl) titleEl.textContent = erkenTahsilat ? "Erken Tahsilat" : "Tahsilat Al";
+  if(titleEl) titleEl.textContent = erkenTahsilat ? "Erken Ödeme Al" : "Tahsilat Yap";
   if(debtLabelEl) debtLabelEl.textContent = erkenTahsilat ? "Mevcut Borç" : "Kalan Borç";
   if(kalanEl) kalanEl.textContent = tutarFormat(cari.kalanPozitif || 0);
   if(tutarEl) tutarEl.value = varsayilan > 0 ? String(varsayilan) : "";
