@@ -19435,6 +19435,17 @@ body.darkMode #exLuxModal,html.darkRoot #exLuxModal{background:#0c1420;color:#ef
       <span class="exHybridItemText"><b>Yeni Apartman</b><small>Hızlı kayıt formunu aç</small></span>
     </button>
 
+    <button class="exHybridItem abrBulkImportDrawerItem" type="button" onclick="topluListeAktarAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 4.5h14v15H5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M8 8h8M8 11.5h8M8 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M15.5 14.5v5M13 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Toplu Liste Aktar</b><small>Bakım listesini fotoğraftan ekle</small></span>
+    </button>
+
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">İş yönetimi</div>
 
     <button class="exHybridItem abrTeamDrawerItem" type="button" onclick="ekipArizaMerkeziAc()">
@@ -21887,7 +21898,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.18";
+const APP_VERSION = "v2.2.19";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -43342,6 +43353,921 @@ document.addEventListener("visibilitychange",function(){if(document.hidden&&came
 })();
 </script>
 
+
+<style id="abrBulkImportStyleV2219">
+#abrBulkImportModal,#abrBulkImportModal *{box-sizing:border-box}
+#abrBulkImportModal{position:fixed;inset:0;z-index:2147483030;display:none;overflow:hidden;color:#15213a;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif}
+#abrBulkImportModal.is-open{display:block}
+.abrBulkImportBackdrop{position:absolute;inset:0;background:rgba(4,12,28,.58);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.abrBulkImportShell{position:absolute;inset:0;margin:auto;width:min(760px,100vw);height:100%;height:100dvh;overflow:hidden;background:radial-gradient(circle at 92% 0,rgba(47,125,255,.15),transparent 32%),linear-gradient(180deg,#f7faff 0%,#eef3fb 100%);display:flex;flex-direction:column}
+.abrBulkImportTop{position:relative;z-index:2;padding:max(18px,env(safe-area-inset-top)) 18px 13px;background:rgba(248,251,255,.90);border-bottom:1px solid rgba(116,139,180,.15);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.abrBulkImportClose{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:43px;height:43px;border:0;border-radius:50%;display:grid;place-items:center;background:#fff;color:#172238;box-shadow:0 10px 28px rgba(24,47,89,.12);font-size:27px;line-height:1}
+.abrBulkImportKicker{color:#1774e9;font-size:10px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}
+.abrBulkImportTop h2{margin:6px 52px 0 0;font-size:27px;line-height:1.05;letter-spacing:-.65px}
+.abrBulkImportTop p{margin:7px 54px 0 0;color:#738197;font-size:11px;line-height:1.45;font-weight:700}
+.abrBulkImportSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:13px}
+.abrBulkImportStep{min-height:37px;border:1px solid #dce5f1;border-radius:13px;background:rgba(255,255,255,.6);color:#8190a6;font-size:9px;font-weight:900}
+.abrBulkImportStep.is-active{border-color:#bdd5ff;background:#fff;color:#176fe8;box-shadow:0 8px 18px rgba(27,105,225,.08)}
+.abrBulkImportBody{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:15px 15px calc(28px + env(safe-area-inset-bottom));overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.abrBulkPane{display:none;min-width:0}.abrBulkPane.is-active{display:block}
+.abrBulkHero{padding:19px;border-radius:25px;background:linear-gradient(135deg,#102b55,#1268cf 60%,#2e8cff);color:#fff;box-shadow:0 18px 42px rgba(16,70,139,.22)}
+.abrBulkHero span{display:block;color:#91c6ff;font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+.abrBulkHero h3{margin:7px 0 0;font-size:24px;line-height:1.08;letter-spacing:-.5px}
+.abrBulkHero p{margin:8px 0 0;color:#dbeaff;font-size:10px;line-height:1.55;font-weight:700}
+.abrBulkCard{margin-top:12px;padding:16px;border-radius:23px;background:rgba(255,255,255,.94);border:1px solid rgba(131,153,190,.14);box-shadow:0 13px 32px rgba(32,55,93,.08)}
+.abrBulkCardTitle{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.abrBulkCardTitle b{font-size:16px}.abrBulkCardTitle span{display:block;margin-top:4px;color:#7d899b;font-size:9px;line-height:1.45;font-weight:700}
+.abrBulkPickGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.abrBulkPickButton{min-height:54px;border:0;border-radius:17px;padding:10px 12px;color:#fff;font-size:11px;font-weight:900}
+.abrBulkPickButton.camera{background:linear-gradient(135deg,#176fe8,#338eff)}.abrBulkPickButton.gallery{background:#162139}
+.abrBulkTips{display:grid;gap:7px;margin-top:12px}.abrBulkTip{display:grid;grid-template-columns:23px minmax(0,1fr);gap:8px;align-items:center;color:#65758b;font-size:9px;line-height:1.4;font-weight:750}
+.abrBulkTip i{width:23px;height:23px;border-radius:9px;background:#eaf3ff;color:#176fe8;display:grid;place-items:center;font-style:normal;font-weight:950}
+.abrBulkPreview{display:none;margin-top:12px;border-radius:18px;overflow:hidden;border:1px solid #dce5f1;background:#eef3f8}.abrBulkPreview.is-visible{display:block}.abrBulkPreview img{display:block;width:100%;max-height:280px;object-fit:contain;background:#0e1728}
+.abrBulkProgress{display:none;margin-top:12px;padding:13px;border-radius:17px;background:#edf4ff;color:#52637c}.abrBulkProgress.is-visible{display:block}.abrBulkProgressTop{display:flex;justify-content:space-between;gap:10px;font-size:9px;font-weight:900}.abrBulkProgressTrack{height:7px;margin-top:9px;border-radius:999px;background:#d9e6fa;overflow:hidden}.abrBulkProgressTrack i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#176fe8,#54a2ff);transition:width .25s ease}
+.abrBulkPaste{margin-top:12px}.abrBulkPaste summary{cursor:pointer;color:#4d5f78;font-size:10px;font-weight:900}.abrBulkPaste textarea{width:100%;min-height:120px;margin-top:10px;padding:12px;border:1px solid #dce5ef;border-radius:16px;background:#f7f9fc;color:#172238;font:inherit;font-size:10px;line-height:1.45;resize:vertical}.abrBulkPaste button{width:100%;min-height:45px;margin-top:8px;border:0;border-radius:14px;background:#eaf2ff;color:#176fe8;font-size:10px;font-weight:900}
+.abrBulkUndo{display:none;margin-top:12px;padding:13px;border-radius:18px;background:#fff7df;border:1px solid #f4dfaa;color:#70551f}.abrBulkUndo.is-visible{display:flex;align-items:center;justify-content:space-between;gap:10px}.abrBulkUndo b{display:block;font-size:10px}.abrBulkUndo span{display:block;margin-top:3px;font-size:8px;font-weight:700}.abrBulkUndo button{flex:0 0 auto;border:0;border-radius:12px;padding:9px 10px;background:#fff;color:#b16d00;font-size:9px;font-weight:900}
+.abrBulkReviewHead{padding:17px;border-radius:22px;background:#fff;border:1px solid rgba(131,153,190,.14)}.abrBulkReviewHead h3{margin:0;font-size:20px}.abrBulkReviewHead p{margin:6px 0 0;color:#758298;font-size:10px;line-height:1.45;font-weight:700}
+.abrBulkStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}.abrBulkStat{padding:11px 7px;border-radius:15px;background:#f3f6fa;text-align:center}.abrBulkStat b{display:block;font-size:18px}.abrBulkStat span{display:block;margin-top:4px;color:#8491a3;font-size:7.5px;font-weight:950;text-transform:uppercase}
+.abrBulkToolbar{display:flex;gap:7px;margin:11px 0}.abrBulkToolbar button{flex:1;min-height:39px;border:0;border-radius:13px;background:#fff;color:#50617a;font-size:9px;font-weight:900;box-shadow:0 7px 18px rgba(38,62,100,.06)}
+.abrBulkRows{display:grid;gap:8px}.abrBulkRow{padding:12px;border-radius:19px;background:#fff;border:1px solid #e4eaf2;box-shadow:0 8px 21px rgba(35,58,94,.05)}.abrBulkRow.is-duplicate{border-color:#f2d59a;background:#fffaf0}.abrBulkRow.is-warning{border-color:#f1c1c1}
+.abrBulkRowTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}.abrBulkRowSelect{display:flex;align-items:center;gap:8px;min-width:0}.abrBulkRowSelect input{width:19px;height:19px;accent-color:#176fe8}.abrBulkRowNo{color:#7c899c;font-size:9px;font-weight:950}.abrBulkBadge{padding:6px 8px;border-radius:999px;background:#eaf8ef;color:#16874b;font-size:7.5px;font-weight:950;white-space:nowrap}.abrBulkBadge.duplicate{background:#fff0cf;color:#9e6500}.abrBulkBadge.warning{background:#fff0f0;color:#c13f46}
+.abrBulkRowDelete{width:29px;height:29px;border:0;border-radius:10px;background:#f2f5f9;color:#8b97a8;font-size:18px}
+.abrBulkRowGrid{display:grid;grid-template-columns:minmax(0,1fr) 102px;gap:7px}.abrBulkField{display:grid;gap:5px}.abrBulkField label{color:#7f8c9f;font-size:7.5px;font-weight:950;text-transform:uppercase}.abrBulkField input{width:100%;height:43px;border:1px solid #dce4ee;border-radius:13px;background:#f8fafc;color:#172238;padding:0 10px;font:inherit;font-size:10px;font-weight:800;outline:none}.abrBulkField input:focus{border-color:#77aaf1;background:#fff}.abrBulkRowMeta{margin-top:8px;color:#8290a4;font-size:8px;line-height:1.4;font-weight:700}
+.abrBulkImportActions{position:sticky;bottom:-1px;z-index:3;margin-top:12px;padding:10px;border-radius:20px;background:rgba(242,246,252,.92);border:1px solid rgba(126,149,185,.15);-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px)}.abrBulkImportButton{width:100%;min-height:51px;border:0;border-radius:16px;background:linear-gradient(135deg,#176fe8,#2f8dff);color:#fff;font-size:12px;font-weight:950;box-shadow:0 12px 26px rgba(23,111,232,.22)}.abrBulkImportButton:disabled{opacity:.52}
+.abrBulkResult{text-align:center;padding:30px 18px;border-radius:25px;background:#fff;border:1px solid rgba(131,153,190,.14)}.abrBulkResultIcon{width:76px;height:76px;margin:auto;border-radius:25px;background:#e9f8ef;color:#159353;display:grid;place-items:center;font-size:37px;font-weight:950}.abrBulkResult h3{margin:16px 0 0;font-size:24px}.abrBulkResult p{margin:8px auto 0;max-width:430px;color:#748298;font-size:10px;line-height:1.55;font-weight:700}.abrBulkResultGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}.abrBulkResultGrid button{min-height:48px;border:0;border-radius:15px;font-size:10px;font-weight:900}.abrBulkResultGrid .primary{background:#176fe8;color:#fff}.abrBulkResultGrid .secondary{background:#eef3fa;color:#435570}
+body.abrBulkImportOpen{overflow:hidden}
+body.darkMode .abrBulkImportShell,html.darkRoot .abrBulkImportShell{background:radial-gradient(circle at 92% 0,rgba(47,125,255,.12),transparent 32%),linear-gradient(180deg,#111a29,#0b1320);color:#edf4ff}
+body.darkMode .abrBulkImportTop,html.darkRoot .abrBulkImportTop{background:rgba(13,22,35,.9);border-color:rgba(255,255,255,.07)}
+body.darkMode .abrBulkImportClose,body.darkMode .abrBulkCard,body.darkMode .abrBulkReviewHead,body.darkMode .abrBulkRow,body.darkMode .abrBulkResult,html.darkRoot .abrBulkImportClose,html.darkRoot .abrBulkCard,html.darkRoot .abrBulkReviewHead,html.darkRoot .abrBulkRow,html.darkRoot .abrBulkResult{background:#172438;border-color:rgba(255,255,255,.08);color:#edf4ff}
+body.darkMode .abrBulkField input,body.darkMode .abrBulkPaste textarea,html.darkRoot .abrBulkField input,html.darkRoot .abrBulkPaste textarea{background:#101c2d;border-color:rgba(255,255,255,.1);color:#edf4ff}
+body.darkMode .abrBulkStat,body.darkMode .abrBulkToolbar button,html.darkRoot .abrBulkStat,html.darkRoot .abrBulkToolbar button{background:#101c2d;color:#dce7f7}
+@media(max-width:480px){.abrBulkImportTop h2{font-size:24px}.abrBulkImportBody{padding-left:11px;padding-right:11px}.abrBulkPickGrid{grid-template-columns:1fr}.abrBulkRowGrid{grid-template-columns:minmax(0,1fr) 92px}.abrBulkResultGrid{grid-template-columns:1fr}.abrBulkHero h3{font-size:21px}}
+</style>
+
+<section id="abrBulkImportModal" aria-hidden="true" aria-labelledby="abrBulkImportTitle">
+  <div class="abrBulkImportBackdrop" onclick="topluListeAktarKapat()"></div>
+  <div class="abrBulkImportShell">
+    <header class="abrBulkImportTop">
+      <button class="abrBulkImportClose" type="button" onclick="topluListeAktarKapat()" aria-label="Kapat">×</button>
+      <div class="abrBulkImportKicker">Hızlı işlemler</div>
+      <h2 id="abrBulkImportTitle">Toplu Liste Aktar</h2>
+      <p>Kağıt bakım listesindeki apartmanları tek tek yazmadan cihazına ekle.</p>
+      <div class="abrBulkImportSteps" aria-label="Aktarım adımları">
+        <button class="abrBulkImportStep is-active" type="button" data-bulk-step="input">1 · Fotoğraf</button>
+        <button class="abrBulkImportStep" type="button" data-bulk-step="review">2 · Kontrol</button>
+        <button class="abrBulkImportStep" type="button" data-bulk-step="result">3 · Sonuç</button>
+      </div>
+    </header>
+
+    <main class="abrBulkImportBody">
+      <section class="abrBulkPane is-active" data-bulk-pane="input">
+        <div class="abrBulkHero">
+          <span>Cihaz içi akıllı aktarım</span>
+          <h3>Listeyi çek, satırları birlikte ekle.</h3>
+          <p>Basılı apartman adı ve fiyat okunur. El yazılı bakım veya tahsilat işaretleri yanlış cari oluşturmaması için içe aktarılmaz.</p>
+        </div>
+
+        <div class="abrBulkCard">
+          <div class="abrBulkCardTitle">
+            <div><b>Liste fotoğrafını seç</b><span>Tablonun tamamı kadrajda ve mümkün olduğunca düz olsun.</span></div>
+          </div>
+          <div class="abrBulkPickGrid">
+            <button class="abrBulkPickButton camera" type="button" onclick="document.getElementById('abrBulkCameraInput').click()">Kamerayla Çek</button>
+            <button class="abrBulkPickButton gallery" type="button" onclick="document.getElementById('abrBulkGalleryInput').click()">Fotoğraf / PDF Seç</button>
+          </div>
+          <input id="abrBulkCameraInput" type="file" accept="image/*" capture="environment" hidden onchange="topluListeDosyaSec(this.files)">
+          <input id="abrBulkGalleryInput" type="file" accept="image/*,application/pdf,text/plain,.txt,.csv" hidden onchange="topluListeDosyaSec(this.files)">
+          <div class="abrBulkTips">
+            <div class="abrBulkTip"><i>1</i><span>Kağıdı gölgesiz ve aydınlık bir yerde çek.</span></div>
+            <div class="abrBulkTip"><i>2</i><span>Telefonu tabloya paralel tut; yazılar bulanık olmasın.</span></div>
+            <div class="abrBulkTip"><i>3</i><span>Eklenmeden önce isim ve ücretleri mutlaka kontrol et.</span></div>
+          </div>
+          <div id="abrBulkPreview" class="abrBulkPreview"><img id="abrBulkPreviewImage" alt="Seçilen bakım listesi"></div>
+          <div id="abrBulkProgress" class="abrBulkProgress" aria-live="polite">
+            <div class="abrBulkProgressTop"><b id="abrBulkProgressText">Liste hazırlanıyor</b><span id="abrBulkProgressPercent">0%</span></div>
+            <div class="abrBulkProgressTrack"><i id="abrBulkProgressBar"></i></div>
+          </div>
+          <details class="abrBulkPaste">
+            <summary>iPhone Canlı Metin ile kopyaladığın listeyi yapıştır</summary>
+            <textarea id="abrBulkPasteText" placeholder="Fotoğraflar uygulamasında metni kopyalayıp buraya yapıştırabilirsin…"></textarea>
+            <button type="button" onclick="topluListeMetniniCozumle()">Yapıştırılan Metni Çözümle</button>
+          </details>
+        </div>
+        <div id="abrBulkUndo" class="abrBulkUndo">
+          <div><b id="abrBulkUndoTitle">Son toplu aktarım</b><span id="abrBulkUndoMeta"></span></div>
+          <button id="abrBulkUndoButton" type="button" onclick="topluListeSonAktarimiGeriAl()">Geri Al</button>
+        </div>
+      </section>
+
+      <section class="abrBulkPane" data-bulk-pane="review">
+        <div class="abrBulkReviewHead">
+          <h3>Okunan satırları kontrol et</h3>
+          <p>OCR hatalı okuyabilir. Sarı ve kırmızı işaretli kayıtları eklemeden önce düzelt.</p>
+          <div class="abrBulkStats">
+            <div class="abrBulkStat"><b id="abrBulkStatTotal">0</b><span>Okunan</span></div>
+            <div class="abrBulkStat"><b id="abrBulkStatSelected">0</b><span>Seçili</span></div>
+            <div class="abrBulkStat"><b id="abrBulkStatDuplicate">0</b><span>Zaten Var</span></div>
+          </div>
+        </div>
+        <div class="abrBulkToolbar">
+          <button type="button" onclick="topluListeTumunuSec(true)">Uygunları Seç</button>
+          <button type="button" onclick="topluListeTumunuSec(false)">Seçimi Kaldır</button>
+          <button type="button" onclick="topluListeSatirEkle()">+ Satır</button>
+        </div>
+        <div id="abrBulkRows" class="abrBulkRows"></div>
+        <div class="abrBulkImportActions">
+          <button id="abrBulkImportButton" class="abrBulkImportButton" type="button" onclick="topluListeyiKaydet()">Seçilenleri Apartmanlara Ekle</button>
+        </div>
+      </section>
+
+      <section class="abrBulkPane" data-bulk-pane="result">
+        <div class="abrBulkResult">
+          <div class="abrBulkResultIcon">✓</div>
+          <h3 id="abrBulkResultTitle">Aktarım tamamlandı</h3>
+          <p id="abrBulkResultText">Apartmanlar bu cihazdaki bakım listesine eklendi.</p>
+          <div class="abrBulkResultGrid">
+            <button class="primary" type="button" onclick="topluListeAktarimiBitir()">Apartmanları Gör</button>
+            <button class="secondary" type="button" onclick="topluListeYeniAktarim()">Başka Liste Aktar</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>
+
+<script id="abrBulkImportScriptV2219">
+(function(){
+"use strict";
+
+var ABR_BULK_UNDO_KEY = "abrLastBulkApartmentImportV2219";
+var ABR_BULK_MAX_FILE = 22 * 1024 * 1024;
+var abrBulkState = {
+  busy:false,
+  rows:[],
+  sourceName:"",
+  rawText:"",
+  previewUrl:"",
+  undoArmedUntil:0
+};
+
+function abrBulkEl(id){ return document.getElementById(id); }
+function abrBulkHtml(value){
+  return String(value == null ? "" : value).replace(/[&<>"']/g,function(char){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
+  });
+}
+function abrBulkFold(value){
+  return String(value || "").toLocaleUpperCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Z0-9]/g,"");
+}
+function abrBulkNameKey(value){
+  return abrBulkFold(value).replace(/APARTMANI$/,"APT").replace(/APARTMAN$/,"APT").replace(/SITESI$/,"SITE");
+}
+function abrBulkId(prefix){
+  if(typeof abrStbIdOlustur === "function") return abrStbIdOlustur(prefix || "bulk");
+  return String(prefix || "bulk") + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,8);
+}
+function abrBulkToast(text){
+  try{ if(typeof toast === "function") toast(text); }catch(error){}
+}
+function abrBulkHaptic(type){
+  try{ if(typeof haptic === "function") haptic(type || "light"); }catch(error){}
+}
+function abrBulkPane(name){
+  document.querySelectorAll("#abrBulkImportModal [data-bulk-pane]").forEach(function(pane){
+    pane.classList.toggle("is-active",pane.getAttribute("data-bulk-pane") === name);
+  });
+  document.querySelectorAll("#abrBulkImportModal [data-bulk-step]").forEach(function(step){
+    step.classList.toggle("is-active",step.getAttribute("data-bulk-step") === name);
+  });
+  var body = document.querySelector("#abrBulkImportModal .abrBulkImportBody");
+  if(body){ body.scrollLeft = 0;body.scrollTop = 0; }
+}
+function abrBulkProgress(textValue,percent,visible){
+  var box = abrBulkEl("abrBulkProgress");
+  var textEl = abrBulkEl("abrBulkProgressText");
+  var percentEl = abrBulkEl("abrBulkProgressPercent");
+  var bar = abrBulkEl("abrBulkProgressBar");
+  var value = Math.max(0,Math.min(100,Number(percent) || 0));
+  if(box) box.classList.toggle("is-visible",visible !== false);
+  if(textEl) textEl.textContent = textValue || "Liste okunuyor";
+  if(percentEl) percentEl.textContent = Math.round(value) + "%";
+  if(bar) bar.style.width = value + "%";
+}
+function abrBulkPreviewClear(){
+  if(abrBulkState.previewUrl){
+    try{ URL.revokeObjectURL(abrBulkState.previewUrl); }catch(error){}
+  }
+  abrBulkState.previewUrl = "";
+  var preview = abrBulkEl("abrBulkPreview");
+  var image = abrBulkEl("abrBulkPreviewImage");
+  if(preview) preview.classList.remove("is-visible");
+  if(image) image.removeAttribute("src");
+}
+function abrBulkPreviewFile(file){
+  abrBulkPreviewClear();
+  if(!file || !String(file.type || "").startsWith("image/")) return;
+  abrBulkState.previewUrl = URL.createObjectURL(file);
+  var preview = abrBulkEl("abrBulkPreview");
+  var image = abrBulkEl("abrBulkPreviewImage");
+  if(image) image.src = abrBulkState.previewUrl;
+  if(preview) preview.classList.add("is-visible");
+}
+function abrBulkReset(keepUndo){
+  abrBulkState.busy = false;
+  abrBulkState.rows = [];
+  abrBulkState.sourceName = "";
+  abrBulkState.rawText = "";
+  abrBulkState.undoArmedUntil = 0;
+  abrBulkPreviewClear();
+  var camera = abrBulkEl("abrBulkCameraInput");
+  var gallery = abrBulkEl("abrBulkGalleryInput");
+  var paste = abrBulkEl("abrBulkPasteText");
+  if(camera) camera.value = "";
+  if(gallery) gallery.value = "";
+  if(paste) paste.value = "";
+  abrBulkProgress("",0,false);
+  abrBulkPane("input");
+  if(keepUndo !== false) abrBulkUndoRender();
+}
+function abrBulkUndoGet(){
+  try{
+    var parsed = JSON.parse(localStorage.getItem(ABR_BULK_UNDO_KEY) || "null");
+    return parsed && Array.isArray(parsed.ids) && parsed.ids.length ? parsed : null;
+  }catch(error){ return null; }
+}
+function abrBulkDateLabel(value){
+  try{ return new Date(value).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}); }catch(error){ return ""; }
+}
+function abrBulkUndoRender(){
+  var box = abrBulkEl("abrBulkUndo");
+  var title = abrBulkEl("abrBulkUndoTitle");
+  var meta = abrBulkEl("abrBulkUndoMeta");
+  var button = abrBulkEl("abrBulkUndoButton");
+  var undo = abrBulkUndoGet();
+  if(!box) return;
+  box.classList.toggle("is-visible",!!undo);
+  if(!undo) return;
+  if(title) title.textContent = undo.ids.length + " apartmanlık son aktarım";
+  if(meta) meta.textContent = abrBulkDateLabel(undo.createdAt) + " · yalnız bu cihaz";
+  if(button) button.textContent = "Geri Al";
+}
+
+window.topluListeAktarAc = function(){
+  try{ if(typeof window.exHybridMenuClose === "function") window.exHybridMenuClose(); }catch(error){}
+  abrBulkReset(true);
+  var modal = abrBulkEl("abrBulkImportModal");
+  if(!modal) return;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("abrBulkImportOpen");
+  abrBulkHaptic("light");
+};
+window.topluListeAktarKapat = function(){
+  if(abrBulkState.busy){
+    abrBulkToast("Liste okunurken ekran kapatılamaz");
+    return;
+  }
+  var modal = abrBulkEl("abrBulkImportModal");
+  if(modal){ modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true"); }
+  document.body.classList.remove("abrBulkImportOpen");
+  abrBulkPreviewClear();
+};
+window.topluListeYeniAktarim = function(){ abrBulkReset(true); };
+window.topluListeAktarimiBitir = function(){
+  window.topluListeAktarKapat();
+  try{ if(typeof goster === "function") goster();window.scrollTo({top:0,left:0,behavior:"smooth"}); }catch(error){}
+};
+
+function abrBulkImageLoad(file){
+  return new Promise(function(resolve,reject){
+    var url = URL.createObjectURL(file);
+    var image = new Image();
+    image.onload = function(){ try{URL.revokeObjectURL(url);}catch(error){}resolve(image); };
+    image.onerror = function(){ try{URL.revokeObjectURL(url);}catch(error){}reject(new Error("Fotoğraf açılamadı")); };
+    image.src = url;
+  });
+}
+async function abrBulkImageCanvas(file){
+  var image = await abrBulkImageLoad(file);
+  var width = image.naturalWidth || image.width;
+  var height = image.naturalHeight || image.height;
+  var scale = Math.min(1,2800 / Math.max(width,height));
+  var canvas = document.createElement("canvas");
+  canvas.width = Math.max(1,Math.round(width * scale));
+  canvas.height = Math.max(1,Math.round(height * scale));
+  var context = canvas.getContext("2d",{willReadFrequently:true});
+  context.fillStyle = "#fff";
+  context.fillRect(0,0,canvas.width,canvas.height);
+  context.drawImage(image,0,0,canvas.width,canvas.height);
+  return canvas;
+}
+async function abrBulkPdfSource(file){
+  if(typeof meslekiBelgePdfJsYukle !== "function") throw new Error("PDF okuyucu bulunamadı");
+  var pdfjs = await meslekiBelgePdfJsYukle();
+  var bytes = new Uint8Array(await file.arrayBuffer());
+  var documentTask = pdfjs.getDocument({data:bytes});
+  var pdf = await documentTask.promise;
+  var page = await pdf.getPage(1);
+  var textContent = await page.getTextContent();
+  var text = (textContent.items || []).map(function(item){ return String(item.str || "").trim(); }).filter(Boolean).join("\n");
+  if(text.replace(/\s/g,"").length > 80){
+    try{ await pdf.destroy(); }catch(error){}
+    return {text:text,canvas:null};
+  }
+  var baseViewport = page.getViewport({scale:1});
+  var scale = Math.min(3,2800 / Math.max(baseViewport.width,1));
+  var viewport = page.getViewport({scale:scale});
+  var canvas = document.createElement("canvas");
+  canvas.width = Math.max(1,Math.round(viewport.width));
+  canvas.height = Math.max(1,Math.round(viewport.height));
+  var context = canvas.getContext("2d",{willReadFrequently:true});
+  context.fillStyle = "#fff";
+  context.fillRect(0,0,canvas.width,canvas.height);
+  await page.render({canvasContext:context,viewport:viewport}).promise;
+  try{ await pdf.destroy(); }catch(error){}
+  return {text:"",canvas:canvas};
+}
+function abrBulkTableBounds(canvas){
+  var width = canvas.width;
+  var height = canvas.height;
+  if(width < 300 || height < 400) return {x:0,y:0,w:width,h:height};
+  var context = canvas.getContext("2d",{willReadFrequently:true});
+  var pixels = context.getImageData(0,0,width,height).data;
+  var startY = Math.round(height * .13);
+  var endY = Math.round(height * .96);
+  var startX = Math.round(width * .035);
+  var endX = Math.round(width * .965);
+  var candidates = [];
+  var stepX = width > 1500 ? 3 : 2;
+  for(var y = startY;y < endY;y++){
+    var dark = 0;
+    var total = 0;
+    for(var x = startX;x < endX;x += stepX){
+      var index = (y * width + x) * 4;
+      var light = pixels[index] * .2126 + pixels[index + 1] * .7152 + pixels[index + 2] * .0722;
+      if(light < 118) dark++;
+      total++;
+    }
+    var ratio = total ? dark / total : 0;
+    if(ratio > .27 && ratio < .87) candidates.push(y);
+  }
+  if(candidates.length < 8) return {x:0,y:0,w:width,h:height};
+  var lineGroups = [];
+  candidates.forEach(function(yValue){
+    var last = lineGroups[lineGroups.length - 1];
+    if(last && yValue - last.end <= 3){ last.end = yValue;last.center = (last.start + last.end) / 2; }
+    else lineGroups.push({start:yValue,end:yValue,center:yValue});
+  });
+  var clusters = [];
+  lineGroups.forEach(function(group){
+    var last = clusters[clusters.length - 1];
+    if(last && group.center - last.last.center < height * .075){ last.groups.push(group);last.last = group; }
+    else clusters.push({groups:[group],last:group});
+  });
+  clusters.sort(function(a,b){
+    var spanA = a.last.center - a.groups[0].center;
+    var spanB = b.last.center - b.groups[0].center;
+    return (b.groups.length * 1000 + spanB) - (a.groups.length * 1000 + spanA);
+  });
+  var chosen = clusters[0];
+  if(!chosen || chosen.groups.length < 5) return {x:0,y:0,w:width,h:height};
+  var top = Math.max(0,Math.round(chosen.groups[0].start - height * .018));
+  var bottom = Math.min(height,Math.round(chosen.last.end + height * .022));
+  if(bottom - top < height * .32) return {x:0,y:0,w:width,h:height};
+  var minX = width;
+  var maxX = 0;
+  chosen.groups.forEach(function(group){
+    for(var yy = group.start;yy <= group.end;yy++){
+      for(var xx = startX;xx < endX;xx += 2){
+        var idx = (yy * width + xx) * 4;
+        var value = pixels[idx] * .2126 + pixels[idx + 1] * .7152 + pixels[idx + 2] * .0722;
+        if(value < 118){ if(xx < minX) minX = xx;if(xx > maxX) maxX = xx; }
+      }
+    }
+  });
+  if(maxX <= minX || maxX - minX < width * .48){ minX = 0;maxX = width; }
+  var padX = Math.round(width * .025);
+  return {x:Math.max(0,minX - padX),y:top,w:Math.min(width,maxX + padX) - Math.max(0,minX - padX),h:bottom - top};
+}
+function abrBulkEnhanceCanvas(source){
+  var bounds = abrBulkTableBounds(source);
+  var targetWidth = Math.min(2200,Math.max(1200,bounds.w * 2.25));
+  var scale = targetWidth / Math.max(1,bounds.w);
+  var targetHeight = Math.min(3300,Math.max(1,Math.round(bounds.h * scale)));
+  if(targetHeight >= 3300){ scale = 3300 / Math.max(1,bounds.h);targetWidth = Math.max(1,Math.round(bounds.w * scale)); }
+  var canvas = document.createElement("canvas");
+  canvas.width = Math.max(1,Math.round(targetWidth));
+  canvas.height = Math.max(1,Math.round(targetHeight));
+  var context = canvas.getContext("2d",{willReadFrequently:true});
+  context.fillStyle = "#fff";
+  context.fillRect(0,0,canvas.width,canvas.height);
+  context.drawImage(source,bounds.x,bounds.y,bounds.w,bounds.h,0,0,canvas.width,canvas.height);
+  var image = context.getImageData(0,0,canvas.width,canvas.height);
+  var pixels = image.data;
+  for(var i = 0;i < pixels.length;i += 4){
+    var gray = pixels[i] * .2126 + pixels[i + 1] * .7152 + pixels[i + 2] * .0722;
+    var adjusted = Math.max(0,Math.min(255,(gray - 128) * 1.38 + 128));
+    var out = adjusted < 181 ? 0 : 255;
+    pixels[i] = out;pixels[i + 1] = out;pixels[i + 2] = out;pixels[i + 3] = 255;
+  }
+  var width = canvas.width;
+  var height = canvas.height;
+  var horizontal = new Uint8Array(height);
+  var vertical = new Uint8Array(width);
+  for(var y = 0;y < height;y++){
+    var run = 0,maxRun = 0;
+    for(var x = 0;x < width;x++){
+      var p = (y * width + x) * 4;
+      if(pixels[p] === 0){ run++;if(run > maxRun) maxRun = run; }else run = 0;
+    }
+    if(maxRun > width * .34) horizontal[y] = 1;
+  }
+  for(var x2 = 0;x2 < width;x2++){
+    var runY = 0,maxRunY = 0;
+    for(var y2 = 0;y2 < height;y2++){
+      var p2 = (y2 * width + x2) * 4;
+      if(pixels[p2] === 0){ runY++;if(runY > maxRunY) maxRunY = runY; }else runY = 0;
+    }
+    if(maxRunY > height * .24) vertical[x2] = 1;
+  }
+  for(var y3 = 0;y3 < height;y3++){
+    for(var x3 = 0;x3 < width;x3++){
+      var erase = horizontal[y3] || vertical[x3] ||
+        (y3 > 0 && horizontal[y3 - 1]) || (y3 + 1 < height && horizontal[y3 + 1]) ||
+        (x3 > 0 && vertical[x3 - 1]) || (x3 + 1 < width && vertical[x3 + 1]);
+      if(erase){
+        var p3 = (y3 * width + x3) * 4;
+        pixels[p3] = 255;pixels[p3 + 1] = 255;pixels[p3 + 2] = 255;
+      }
+    }
+  }
+  context.putImageData(image,0,0);
+  return canvas;
+}
+async function abrBulkOcr(canvas){
+  if(typeof meslekiBelgeTesseractYukle !== "function") throw new Error("OCR motoru bulunamadı");
+  var TesseractLib = await meslekiBelgeTesseractYukle();
+  var worker = null;
+  try{
+    worker = await TesseractLib.createWorker(["tur","eng"],1,{
+      logger:function(message){
+        var progress = Number(message && message.progress);
+        var value = Number.isFinite(progress) ? 28 + progress * 66 : 28;
+        var status = String(message && message.status || "").toLowerCase();
+        var label = "Tablodaki satırlar okunuyor";
+        if(status.indexOf("loading") >= 0) label = "OCR motoru yükleniyor";
+        if(status.indexOf("initializing") >= 0) label = "OCR motoru hazırlanıyor";
+        if(status.indexOf("recognizing") >= 0) label = "Apartman adları ve fiyatlar okunuyor";
+        abrBulkProgress(label,value,true);
+      }
+    });
+    try{
+      await worker.setParameters({tessedit_pageseg_mode:"6",preserve_interword_spaces:"1",user_defined_dpi:"300"});
+    }catch(error){}
+    var result = await worker.recognize(canvas,{}, {tsv:true,blocks:true});
+    return {
+      text:String(result && result.data && result.data.text || ""),
+      tsv:String(result && result.data && result.data.tsv || ""),
+      width:canvas.width,
+      height:canvas.height
+    };
+  }finally{
+    if(worker){ try{ await worker.terminate(); }catch(error){} }
+  }
+}
+
+function abrBulkNumericFix(value){
+  return String(value || "").replace(/\|/g,"").replace(/[OoQqD]/g,"0").replace(/[Ss]/g,"5").replace(/[Il!]/g,"1").replace(/[B]/g,"8");
+}
+function abrBulkPriceInfo(value){
+  var raw = String(value || "").trim();
+  var fixed = abrBulkNumericFix(raw).replace(/\s+/g,"").replace(/[×X]/g,"x").replace(/[“”"']/g,"*").replace(/#/g,"x");
+  fixed = fixed.replace(/[^0-9x*+=,.-]/g,"");
+  var match = fixed.match(/(\d{2,4})[x*](\d{1,2})(?:[=,.:](\d{3,6}))?/);
+  if(match){
+    var unit = Number(match[1]);
+    var count = Number(match[2]);
+    var explicitTotal = Number(match[3] || 0);
+    var total = explicitTotal || unit * count;
+    if(unit >= 100 && count >= 1 && count <= 30 && total > 0) return {fee:total,count:count,unit:unit,raw:raw,matched:match[0]};
+  }
+  var plus = fixed.match(/(\d{2,5})\+(\d{2,5})/);
+  if(plus){
+    var first = Number(plus[1]);
+    var second = Number(plus[2]);
+    if(first >= 100 && second >= 100) return {fee:first + second,count:2,unit:first,raw:raw,matched:plus[0]};
+  }
+  var numbers = fixed.match(/\d{3,6}/g) || [];
+  for(var i = 0;i < numbers.length;i++){
+    var amount = Number(numbers[i]);
+    if(amount >= 250 && amount <= 999999) return {fee:amount,count:1,unit:amount,raw:raw,matched:numbers[i]};
+  }
+  return {fee:0,count:1,unit:0,raw:raw,matched:""};
+}
+function abrBulkPriceCandidate(text){
+  var source = String(text || "");
+  var expression = /[0-9SsOoQqDIl!B]{3,5}(?:\s*[xX×*#"'“”]\s*[0-9SsOoQqDIl!B]{1,2}(?:\s*[=,.:]\s*[0-9SsOoQqDIl!B]{3,6})?|\s*\+\s*[0-9SsOoQqDIl!B]{3,5})?/g;
+  var matches = [];
+  var match;
+  while((match = expression.exec(source))){
+    var info = abrBulkPriceInfo(match[0]);
+    if(info.fee >= 100) matches.push({index:match.index,text:match[0],info:info});
+  }
+  return matches.length ? matches[0] : null;
+}
+function abrBulkCleanName(value){
+  var name = String(value || "").replace(/^[\s|_[({-]*\d{1,3}[\s|_.)\]-]+/," ");
+  var price = abrBulkPriceCandidate(name);
+  if(price && price.index > 1) name = name.slice(0,price.index);
+  name = name.replace(/[|_[\]{}<>]+/g," ").replace(/[_~]+/g," ").replace(/\s+/g," ").trim();
+  name = name.replace(/^[^A-Za-zÇĞİÖŞÜçğıöşü0-9]+|[^A-Za-zÇĞİÖŞÜçğıöşü0-9.)/-]+$/g,"").trim();
+  if(!name) return "";
+  return name.toLocaleUpperCase("tr-TR");
+}
+function abrBulkRowScore(row){
+  var name = String(row && row.name || "");
+  var letters = (name.match(/[A-Za-zÇĞİÖŞÜçğıöşü]/g) || []).length;
+  var cue = /(APT|APART|SİTE|SITE|BLOK|VAKFI|BETON)/i.test(name) ? 12 : 0;
+  var price = Number(row && row.fee) > 0 ? 22 : 0;
+  var confidence = Math.max(0,Number(row && row.confidence) || 0) / 5;
+  return letters + cue + price + confidence;
+}
+function abrBulkRowFinalize(row){
+  var name = abrBulkCleanName(row && row.name);
+  if(!name || name.length < 3) return null;
+  if((name.match(/[A-Za-zÇĞİÖŞÜçğıöşü]/g) || []).length < 4) return null;
+  var folded = abrBulkFold(name);
+  if(/SNOAPARTMANADI|APARTMANADIFIYAT|TAHSILAT|BAKIMNOTTARIH/.test(folded)) return null;
+  var fee = Math.max(0,Math.round(Number(row && row.fee) || 0));
+  return {
+    id:row.id || abrBulkId("bulkrow"),
+    no:String(row.no || "").replace(/\D/g,"").slice(0,3),
+    name:name,
+    fee:fee,
+    count:Math.max(1,Math.round(Number(row.count) || 1)),
+    unit:Math.max(0,Math.round(Number(row.unit) || 0)),
+    rawPrice:String(row.rawPrice || ""),
+    confidence:Math.max(0,Math.min(100,Math.round(Number(row.confidence) || 0))),
+    selected:row.selected !== false,
+    source:row.source || "OCR"
+  };
+}
+function abrBulkRowsMerge(rows){
+  var map = {};
+  (rows || []).forEach(function(raw){
+    var row = abrBulkRowFinalize(raw);
+    if(!row) return;
+    var key = "name:" + abrBulkNameKey(row.name);
+    if(!key || key === "name:") return;
+    var current = map[key];
+    if(!current || abrBulkRowScore(row) > abrBulkRowScore(current)) map[key] = row;
+    else if(current && !current.fee && row.fee){ current.fee = row.fee;current.count = row.count;current.unit = row.unit;current.rawPrice = row.rawPrice; }
+  });
+  return Object.keys(map).map(function(key){ return map[key]; }).sort(function(a,b){
+    var noA = Number(a.no),noB = Number(b.no);
+    if(noA && noB) return noA - noB;
+    if(noA) return -1;if(noB) return 1;
+    return a.name.localeCompare(b.name,"tr");
+  });
+}
+function abrBulkRowsFromText(text){
+  var rows = [];
+  String(text || "").replace(/\r/g,"\n").split(/\n+/).forEach(function(line){
+    var raw = String(line || "").replace(/\t/g," ").replace(/\s+/g," ").trim();
+    if(!raw) return;
+    var folded = abrBulkFold(raw);
+    if(folded.indexOf("APARTMANADI") >= 0 || folded.indexOf("TAHSILAT") >= 0 || folded === "FIYAT") return;
+    var noMatch = raw.match(/^[\s|_[({-]*([0-9]{1,3})[\s|_.)\]-]+/);
+    var no = noMatch ? noMatch[1] : "";
+    var body = noMatch ? raw.slice(noMatch[0].length) : raw;
+    var priceCandidate = abrBulkPriceCandidate(body);
+    var namePart = priceCandidate ? body.slice(0,priceCandidate.index) : body;
+    var name = abrBulkCleanName(namePart);
+    var hasCue = /(APT|APART|SİTE|SITE|BLOK|VAKFI|BETON)/i.test(name);
+    if(!no && !hasCue) return;
+    var info = priceCandidate ? priceCandidate.info : abrBulkPriceInfo("");
+    rows.push({no:no,name:name,fee:info.fee,count:info.count,unit:info.unit,rawPrice:priceCandidate ? priceCandidate.text : "",confidence:40,source:"Metin"});
+  });
+  return rows;
+}
+function abrBulkRowsFromTsv(tsv,text,width){
+  var words = [];
+  String(tsv || "").split(/\n+/).slice(1).forEach(function(line){
+    var fields = line.split("\t");
+    if(fields.length < 12 || Number(fields[0]) !== 5) return;
+    var wordText = fields.slice(11).join("\t").trim();
+    if(!wordText) return;
+    words.push({
+      key:[fields[1],fields[2],fields[3],fields[4]].join("_"),
+      left:Number(fields[6]) || 0,
+      top:Number(fields[7]) || 0,
+      width:Number(fields[8]) || 0,
+      height:Number(fields[9]) || 0,
+      confidence:Number(fields[10]) || 0,
+      text:wordText
+    });
+  });
+  if(!words.length) return abrBulkRowsFromText(text);
+  var lines = {};
+  words.forEach(function(word){ if(!lines[word.key]) lines[word.key] = [];lines[word.key].push(word); });
+  var grouped = Object.keys(lines).map(function(key){
+    var list = lines[key].sort(function(a,b){return a.left - b.left;});
+    return {words:list,top:Math.min.apply(null,list.map(function(item){return item.top;})),text:list.map(function(item){return item.text;}).join(" ")};
+  }).sort(function(a,b){return a.top - b.top;});
+  var header = null;
+  grouped.forEach(function(line){
+    if(header) return;
+    var folded = abrBulkFold(line.text);
+    if(folded.indexOf("APARTMAN") >= 0 && (folded.indexOf("FIYAT") >= 0 || folded.indexOf("FIVAT") >= 0)) header = line;
+  });
+  var imageWidth = Number(width) || Math.max.apply(null,words.map(function(word){return word.left + word.width;}));
+  var nameStart = imageWidth * .065;
+  var priceStart = imageWidth * .385;
+  var priceEnd = imageWidth * .515;
+  var headerBottom = 0;
+  if(header){
+    headerBottom = Math.max.apply(null,header.words.map(function(word){return word.top + word.height;}));
+    var priceWord = header.words.find(function(word){ var folded = abrBulkFold(word.text);return folded.indexOf("FIYAT") >= 0 || folded.indexOf("FIVAT") >= 0; });
+    var nextWord = header.words.find(function(word){ var folded = abrBulkFold(word.text);return folded === "NOT" || folded.indexOf("TARIH") >= 0; });
+    if(priceWord) priceStart = Math.max(imageWidth * .30,priceWord.left - imageWidth * .025);
+    if(nextWord && nextWord.left > priceStart) priceEnd = nextWord.left - imageWidth * .012;
+  }
+  var resultRows = [];
+  grouped.forEach(function(line){
+    if(header && line.top < headerBottom - 3) return;
+    var foldedLine = abrBulkFold(line.text);
+    if(foldedLine.indexOf("APARTMANADI") >= 0 || foldedLine.indexOf("TAHSILAT") >= 0) return;
+    var serialWords = line.words.filter(function(word){return word.left + word.width / 2 < nameStart;});
+    var noMatch = serialWords.map(function(word){return word.text;}).join(" ").match(/\d{1,3}/);
+    if(!noMatch) noMatch = line.text.match(/^[\s|_[({-]*([0-9]{1,3})/);
+    var no = noMatch ? (noMatch[1] || noMatch[0]).replace(/\D/g,"") : "";
+    var nameWords = line.words.filter(function(word){return word.left < priceStart && word.left + word.width > nameStart;});
+    var priceWords = line.words.filter(function(word){return word.left < priceEnd && word.left + word.width > priceStart;});
+    var nameRaw = nameWords.map(function(word){return word.text;}).join(" ");
+    var priceRaw = priceWords.map(function(word){return word.text;}).join(" ");
+    var joinedCandidate = abrBulkPriceCandidate(nameRaw + " " + priceRaw);
+    var info = joinedCandidate ? joinedCandidate.info : abrBulkPriceInfo(priceRaw);
+    if(joinedCandidate){
+      var candidateInName = abrBulkPriceCandidate(nameRaw);
+      if(candidateInName) nameRaw = nameRaw.slice(0,candidateInName.index);
+    }
+    var name = abrBulkCleanName(nameRaw);
+    var confidenceWords = nameWords.filter(function(word){return /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(word.text);});
+    var confidence = confidenceWords.length ? confidenceWords.reduce(function(total,word){return total + Math.max(0,word.confidence);},0) / confidenceWords.length : 0;
+    var hasCue = /(APT|APART|SİTE|SITE|BLOK|VAKFI|BETON)/i.test(name);
+    if(!no && !hasCue) return;
+    resultRows.push({no:no,name:name,fee:info.fee,count:info.count,unit:info.unit,rawPrice:joinedCandidate ? joinedCandidate.text : priceRaw,confidence:confidence,source:"Fotoğraf"});
+  });
+  return abrBulkRowsMerge(resultRows.concat(abrBulkRowsFromText(text)));
+}
+function abrBulkExistingNames(){
+  var set = {};
+  var list = typeof data !== "undefined" && Array.isArray(data) ? data : [];
+  list.forEach(function(apartment){
+    var key = abrBulkNameKey(apartment && apartment.ad);
+    if(key) set[key] = true;
+  });
+  return set;
+}
+function abrBulkReviewRender(){
+  var host = abrBulkEl("abrBulkRows");
+  if(!host) return;
+  var existing = abrBulkExistingNames();
+  var duplicates = 0;
+  var selected = 0;
+  abrBulkState.rows.forEach(function(row){
+    row.duplicate = !!existing[abrBulkNameKey(row.name)];
+    if(row.duplicate){ row.selected = false;duplicates++; }
+    if(row.selected && !row.duplicate) selected++;
+  });
+  host.innerHTML = abrBulkState.rows.map(function(row,index){
+    var warning = !row.fee || row.confidence < 42;
+    var badgeClass = row.duplicate ? "duplicate" : (warning ? "warning" : "");
+    var badgeText = row.duplicate ? "Zaten var" : (!row.fee ? "Fiyat eksik" : (row.confidence < 42 ? "İsmi kontrol et" : "Hazır"));
+    var meta = row.count > 1 ? row.count + " asansör · " + (row.unit || 0).toLocaleString("tr-TR") + " × " + row.count : (row.rawPrice ? "Okunan fiyat: " + row.rawPrice : "Tek asansör");
+    return '<article class="abrBulkRow ' + (row.duplicate ? "is-duplicate" : (warning ? "is-warning" : "")) + '">' +
+      '<div class="abrBulkRowTop"><label class="abrBulkRowSelect"><input type="checkbox" ' + (row.selected && !row.duplicate ? "checked" : "") + (row.duplicate ? " disabled" : "") + ' onchange="topluListeSatirSec(' + index + ',this.checked)"><span class="abrBulkRowNo">' + abrBulkHtml(row.no ? "Sıra " + row.no : "Yeni satır") + '</span><span class="abrBulkBadge ' + badgeClass + '">' + abrBulkHtml(badgeText) + '</span></label><button class="abrBulkRowDelete" type="button" onclick="topluListeSatirSil(' + index + ')" aria-label="Satırı kaldır">×</button></div>' +
+      '<div class="abrBulkRowGrid"><div class="abrBulkField"><label>Apartman adı</label><input value="' + abrBulkHtml(row.name) + '" oninput="topluListeSatirGuncelle(' + index + ',\'name\',this.value)" onblur="topluListeKontroluYenile()"></div><div class="abrBulkField"><label>Aylık ücret</label><input inputmode="numeric" value="' + abrBulkHtml(row.fee || "") + '" oninput="topluListeSatirGuncelle(' + index + ',\'fee\',this.value)" onblur="topluListeKontroluYenile()"></div></div>' +
+      '<div class="abrBulkRowMeta">' + abrBulkHtml(meta) + '</div></article>';
+  }).join("");
+  if(!abrBulkState.rows.length) host.innerHTML = '<div class="abrBulkCard"><b>Okunabilir satır bulunamadı.</b><div style="margin-top:6px;color:#7d899b;font-size:9px;line-height:1.45">Daha yakın ve düz bir fotoğraf çekebilir veya iPhone Canlı Metin sonucunu yapıştırabilirsin.</div></div>';
+  var totalEl = abrBulkEl("abrBulkStatTotal");
+  var selectedEl = abrBulkEl("abrBulkStatSelected");
+  var duplicateEl = abrBulkEl("abrBulkStatDuplicate");
+  var importButton = abrBulkEl("abrBulkImportButton");
+  if(totalEl) totalEl.textContent = String(abrBulkState.rows.length);
+  if(selectedEl) selectedEl.textContent = String(selected);
+  if(duplicateEl) duplicateEl.textContent = String(duplicates);
+  if(importButton){ importButton.disabled = !selected;importButton.textContent = selected ? selected + " Apartmanı Ekle" : "Eklenecek Satır Seç"; }
+}
+function abrBulkOpenReview(rows,sourceName){
+  abrBulkState.rows = abrBulkRowsMerge(rows);
+  abrBulkState.sourceName = sourceName || "Bakım listesi";
+  abrBulkState.rows.forEach(function(row){ row.selected = !!row.fee && row.confidence >= 42; });
+  abrBulkReviewRender();
+  abrBulkPane("review");
+  abrBulkProgress("Okuma tamamlandı",100,true);
+  setTimeout(function(){ abrBulkProgress("",0,false); },450);
+  abrBulkHaptic("success");
+}
+
+window.topluListeDosyaSec = async function(files){
+  var file = files && files[0];
+  if(!file || abrBulkState.busy) return;
+  if(file.size > ABR_BULK_MAX_FILE){ abrBulkToast("Dosya en fazla 22 MB olabilir");return; }
+  var isImage = String(file.type || "").startsWith("image/");
+  var isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name || "");
+  var isText = String(file.type || "").startsWith("text/") || /\.(txt|csv)$/i.test(file.name || "");
+  if(!isImage && !isPdf && !isText){ abrBulkToast("Fotoğraf, PDF veya metin dosyası seç");return; }
+  abrBulkState.busy = true;
+  abrBulkPreviewFile(file);
+  abrBulkProgress("Dosya hazırlanıyor",6,true);
+  try{
+    if(isText){
+      var plain = await file.text();
+      abrBulkState.rawText = plain;
+      var textRows = abrBulkRowsFromText(plain);
+      textRows.forEach(function(row){ row.confidence = 82; });
+      if(!textRows.length) throw new Error("Metinde apartman satırı bulunamadı");
+      abrBulkOpenReview(textRows,file.name || "Metin listesi");
+      return;
+    }
+    var source = isPdf ? await abrBulkPdfSource(file) : {text:"",canvas:await abrBulkImageCanvas(file)};
+    if(source.text){
+      abrBulkState.rawText = source.text;
+      var pdfRows = abrBulkRowsFromText(source.text);
+      pdfRows.forEach(function(row){ row.confidence = 82; });
+      if(!pdfRows.length) throw new Error("PDF metninde apartman satırı bulunamadı");
+      abrBulkOpenReview(pdfRows,file.name || "PDF listesi");
+      return;
+    }
+    abrBulkProgress("Tablo alanı bulunuyor",17,true);
+    var enhanced = abrBulkEnhanceCanvas(source.canvas);
+    abrBulkProgress("OCR hazırlanıyor",25,true);
+    var ocr = await abrBulkOcr(enhanced);
+    abrBulkState.rawText = ocr.text;
+    var rows = abrBulkRowsFromTsv(ocr.tsv,ocr.text,ocr.width);
+    if(!rows.length) throw new Error("Fotoğrafta okunabilir apartman satırı bulunamadı");
+    abrBulkOpenReview(rows,file.name || "Fotoğraf listesi");
+  }catch(error){
+    console.warn("Toplu liste aktarma hatası",error);
+    abrBulkProgress("",0,false);
+    abrBulkToast(error && error.message ? error.message : "Liste okunamadı");
+    var paste = abrBulkEl("abrBulkPasteText");
+    if(paste && abrBulkState.rawText) paste.value = abrBulkState.rawText;
+  }finally{
+    abrBulkState.busy = false;
+    var camera = abrBulkEl("abrBulkCameraInput");
+    var gallery = abrBulkEl("abrBulkGalleryInput");
+    if(camera) camera.value = "";
+    if(gallery) gallery.value = "";
+  }
+};
+window.topluListeMetniniCozumle = function(){
+  var input = abrBulkEl("abrBulkPasteText");
+  var text = String(input && input.value || "").trim();
+  if(!text){ abrBulkToast("Önce liste metnini yapıştır");return; }
+  var rows = abrBulkRowsFromText(text);
+  rows.forEach(function(row){ row.confidence = 82; });
+  if(!rows.length){ abrBulkToast("Apartman satırları ayıklanamadı");return; }
+  abrBulkState.rawText = text;
+  abrBulkOpenReview(rows,"Yapıştırılan metin");
+};
+window.topluListeSatirSec = function(index,checked){
+  var row = abrBulkState.rows[Number(index)];
+  if(!row || row.duplicate) return;
+  row.selected = !!checked;
+  abrBulkReviewRender();
+};
+window.topluListeSatirGuncelle = function(index,field,value){
+  var row = abrBulkState.rows[Number(index)];
+  if(!row) return;
+  if(field === "name") row.name = String(value || "").toLocaleUpperCase("tr-TR");
+  if(field === "fee") row.fee = Math.max(0,Math.round(Number(String(value || "").replace(/[^\d]/g,"")) || 0));
+  row.confidence = 100;
+  row.selected = true;
+};
+window.topluListeKontroluYenile = function(){ abrBulkReviewRender(); };
+window.topluListeSatirSil = function(index){
+  abrBulkState.rows.splice(Number(index),1);
+  abrBulkReviewRender();
+};
+window.topluListeSatirEkle = function(){
+  abrBulkState.rows.push({id:abrBulkId("bulkrow"),no:"",name:"",fee:0,count:1,unit:0,rawPrice:"",confidence:100,selected:true,source:"Elle"});
+  abrBulkReviewRender();
+  setTimeout(function(){
+    var inputs = document.querySelectorAll("#abrBulkRows .abrBulkField input");
+    if(inputs.length > 1) inputs[inputs.length - 2].focus();
+  },40);
+};
+window.topluListeTumunuSec = function(selected){
+  abrBulkState.rows.forEach(function(row){ row.selected = !!selected && !row.duplicate && !!row.fee && row.confidence >= 42; });
+  abrBulkReviewRender();
+};
+function abrBulkApartment(row,batchId){
+  var now = new Date();
+  var priceNote = row.count > 1 ? row.count + " asansör · " + (row.unit || Math.round(row.fee / row.count)) + " × " + row.count + " = " + row.fee + " ₺" : "";
+  return {
+    id:abrBulkId("apt"),
+    ad:String(row.name || "").trim(),
+    yonetici:"",
+    tel:"",
+    ucret:Number(row.fee) || 0,
+    bakimGunu:"",
+    not:"",
+    konum:null,
+    odemeTarihi:"",
+    sonOdemeTarihi:"",
+    odemeler:[],
+    bakimTarihi:"",
+    bakimKayitlari:[],
+    bakimChecklist:[],
+    parcalar:[],
+    eskiBakiyeler:[],
+    muayene:{},
+    muayeneGecmisi:[],
+    revizyonTeklifleri:[],
+    kayitlar:["Toplu bakım listesinden aktarıldı (" + now.toLocaleDateString("tr-TR") + ")"],
+    topluAktarim:{batchId:batchId,kaynak:abrBulkState.sourceName,hamFiyat:row.rawPrice || "",asansorAdedi:row.count || 1,fiyatNotu:priceNote,createdAt:now.toISOString()},
+    veriSurumu:"2.0.17"
+  };
+}
+window.topluListeyiKaydet = function(){
+  if(abrBulkState.busy) return;
+  var existing = abrBulkExistingNames();
+  var batchNames = {};
+  var selected = abrBulkState.rows.filter(function(row){
+    var key = abrBulkNameKey(row.name);
+    if(!row.selected || !String(row.name || "").trim() || !key || existing[key] || batchNames[key]) return false;
+    batchNames[key] = true;
+    return true;
+  });
+  if(!selected.length){ abrBulkToast("Eklenecek uygun satır seçilmedi");return; }
+  abrBulkState.busy = true;
+  var button = abrBulkEl("abrBulkImportButton");
+  if(button){ button.disabled = true;button.textContent = "Apartmanlar ekleniyor…"; }
+  var batchId = abrBulkId("bulkimport");
+  var records = selected.map(function(row){return abrBulkApartment(row,batchId);});
+  var ids = records.map(function(record){return record.id;});
+  try{
+    records.forEach(function(record){ data.push(record); });
+    if(typeof kaydet !== "function" || !kaydet()) throw new Error("Apartman kayıtları yazılamadı");
+    try{
+      localStorage.setItem(ABR_BULK_UNDO_KEY,JSON.stringify({batchId:batchId,ids:ids,names:records.map(function(record){return record.ad;}),createdAt:new Date().toISOString()}));
+    }catch(error){}
+    var resultTitle = abrBulkEl("abrBulkResultTitle");
+    var resultText = abrBulkEl("abrBulkResultText");
+    if(resultTitle) resultTitle.textContent = records.length + " apartman eklendi";
+    if(resultText) resultText.textContent = "Kayıtlar yalnızca bu cihazdaki bakım listesine eklendi. Supabase veya diğer cihazlara veri gönderilmedi.";
+    abrBulkPane("result");
+    abrBulkUndoRender();
+    abrBulkHaptic("success");
+    abrBulkToast(records.length + " apartman topluca eklendi");
+  }catch(error){
+    console.warn(error);
+    for(var i = data.length - 1;i >= 0;i--){ if(ids.indexOf(data[i] && data[i].id) >= 0) data.splice(i,1); }
+    try{ if(typeof kaydet === "function") kaydet(); }catch(saveError){}
+    abrBulkToast("Toplu aktarım tamamlanamadı");
+    if(button){ button.disabled = false;button.textContent = "Tekrar Dene"; }
+  }finally{
+    abrBulkState.busy = false;
+  }
+};
+window.topluListeSonAktarimiGeriAl = function(){
+  var undo = abrBulkUndoGet();
+  if(!undo){ abrBulkUndoRender();return; }
+  var button = abrBulkEl("abrBulkUndoButton");
+  if(Date.now() > abrBulkState.undoArmedUntil){
+    abrBulkState.undoArmedUntil = Date.now() + 5000;
+    if(button) button.textContent = "Silmek için tekrar dokun";
+    abrBulkToast("Son aktarılan " + undo.ids.length + " apartman silinecek");
+    return;
+  }
+  var removed = 0;
+  for(var i = data.length - 1;i >= 0;i--){
+    if(undo.ids.indexOf(data[i] && data[i].id) >= 0){ data.splice(i,1);removed++; }
+  }
+  if(removed && typeof kaydet === "function" && !kaydet()){ abrBulkToast("Geri alma kaydedilemedi");return; }
+  try{ localStorage.removeItem(ABR_BULK_UNDO_KEY); }catch(error){}
+  abrBulkState.undoArmedUntil = 0;
+  abrBulkUndoRender();
+  abrBulkHaptic("warning");
+  abrBulkToast(removed + " toplu kayıt geri alındı");
+};
+
+window.__abrBulkImportTest = {
+  priceInfo:abrBulkPriceInfo,
+  parseText:abrBulkRowsFromText,
+  parseTsv:abrBulkRowsFromTsv,
+  cleanName:abrBulkCleanName,
+  merge:abrBulkRowsMerge
+};
+
+document.addEventListener("visibilitychange",function(){
+  if(document.hidden && abrBulkState.previewUrl && !abrBulkState.busy) abrBulkPreviewClear();
+});
+})();
+</script>
 
 </body>
 </html>
