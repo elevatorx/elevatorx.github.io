@@ -13656,7 +13656,7 @@ body.darkMode .exDocCard,html.darkRoot .exDocCard{background:linear-gradient(180
     margin-bottom:11px!important;
   }
 
-  .exDetailHistoryPane .detailReportSection{
+  .exDetailTechnicalPane .detailReportSection{
     margin-top:11px;
   }
 
@@ -21551,7 +21551,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.13";
+const APP_VERSION = "v2.2.14";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -30806,9 +30806,9 @@ detayPanel.innerHTML = `
 
 <div id="exDetailTabs" class="exDetailTabs" role="tablist" aria-label="Apartman detay bölümleri" onkeydown="apartmanDetaySekmeKlavye(event)">
   <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="ozet" onclick="apartmanDetaySekmeAc('ozet',true)">Özet</button>
-  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="cari" onclick="apartmanDetaySekmeAc('cari',true)">Bakım / Cari</button>
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="cari" onclick="apartmanDetaySekmeAc('cari',true)">İşlemler</button>
   <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="teknik" onclick="apartmanDetaySekmeAc('teknik',true)">Teknik</button>
-  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="gecmis" onclick="apartmanDetaySekmeAc('gecmis',true)">Geçmiş / PDF</button>
+  <button class="exDetailTabButton" type="button" role="tab" data-detail-tab="gecmis" onclick="apartmanDetaySekmeAc('gecmis',true)">Geçmiş</button>
 </div>
 
 <section class="exDetailTabPane" data-detail-pane="ozet" role="tabpanel">
@@ -30858,27 +30858,11 @@ detayPanel.innerHTML = `
     </div>
   </div>
 
-  <div class="exDetailQuickGrid">
-    <button class="exDetailQuickButton pay" type="button" onclick="odeme(${i})">
-      <span class="exIcon exMoney" aria-hidden="true"></span>
-      <b>${odemeText}</b>
-    </button>
-
-    <button class="exDetailQuickButton" type="button" onclick="bakim(${i})">
-      <span class="exIcon exCheck" aria-hidden="true"></span>
-      <b>${bakimText}</b>
-    </button>
-
-    <button class="exDetailQuickButton edit" type="button" onclick="duzenle(${i})">
-      <span class="exIcon exEdit" aria-hidden="true"></span>
-      <b>Düzenle</b>
-    </button>
-  </div>
 </section>
 
 <section class="exDetailTabPane exDetailCariPane" data-detail-pane="cari" role="tabpanel">
   <div class="exDetailPaneHint">
-    Bakım, ödeme ve cari hesap işlemleri bu bölümde toplandı.
+    Bakım kaydı, tahsilat, cari hesap ve ödeme belgeleri burada.
   </div>
 
   <div class="exDetailTabSection">
@@ -30953,42 +30937,22 @@ detayPanel.innerHTML = `
   ${muayeneDetayHtml(a,i)}
   ${sozlesmeDetayHtml(a,i)}
   ${parcaGecmisiHtml(i)}
-</section>
 
-<section class="exDetailTabPane exDetailHistoryPane" data-detail-pane="gecmis" role="tabpanel">
-  <div class="exDetailPaneHint">
-    İşlem geçmişi ve yöneticiye gönderilecek bütün belgeler burada.
-  </div>
-
-  ${asansorGecmisiHtml(i)}
-
-  ${tahsilatMakbuzGecmisiHtml(i)}
-
-  <div class="detailReportSection">
+  <div class="detailReportSection exDetailTechnicalDocs">
     <div class="detailSectionHead">
       <div>
-        <span>PDF Merkezi</span>
-        <b>Yöneticiye gönderilecek belgeler</b>
+        <span>Teknik işlemler</span>
+        <b>Revizyon ve teknik belgeler</b>
       </div>
     </div>
 
     <div class="detailReportGrid">
-      <button class="detailReportCard" onclick="pdf(${i})">
-        <span class="exIcon exDoc" aria-hidden="true"></span>
-        <b>Bakım Raporu</b>
-        <em>Servis / bakım PDF</em>
-      </button>
-
-      <button class="detailReportCard" onclick="odemeMakbuzuPdf(${i})">
-        <span class="exIcon exMoney" aria-hidden="true"></span>
-        <b>Ödeme Makbuzu</b>
-        <em>Son tahsilat belgesi</em>
-      </button>
-
-      <button class="detailReportCard" onclick="cariHesapPdf(${i})">
-        <span class="exIcon exChart" aria-hidden="true"></span>
-        <b>Cari Özeti</b>
-        <em>Borç ve tahsilat</em>
+      <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
+        <span class="exIcon exReport" aria-hidden="true"></span>
+        <div>
+          <b>Revizyon Maddelerini Ayıkla</b>
+          <em>Kontrol raporundan sarı/kırmızı maddeleri çıkar ve teklif hazırla</em>
+        </div>
       </button>
 
       <button class="detailReportCard" onclick="sicilKartiPdf(${i})">
@@ -31000,18 +30964,20 @@ detayPanel.innerHTML = `
       <button class="detailReportCard" onclick="parcaGecmisiPdf(${i})">
         <span class="exIcon exPart" aria-hidden="true"></span>
         <b>Parça Geçmişi</b>
-        <em>Değişen parçalar</em>
-      </button>
-
-      <button class="detailReportCard detailReportCardWide detailReportCardFlow" onclick="kontrolRaporuForm(${i})">
-        <span class="exIcon exReport" aria-hidden="true"></span>
-        <div>
-          <b>Kontrol Raporu & Revizyon Teklifi</b>
-          <em>Önce sarı/kırmızı ayıkla, sonra teklif hazırla</em>
-        </div>
+        <em>Değişen parçaların PDF'i</em>
       </button>
     </div>
   </div>
+</section>
+
+<section class="exDetailTabPane exDetailHistoryPane" data-detail-pane="gecmis" role="tabpanel">
+  <div class="exDetailPaneHint">
+    Bakım, ödeme, parça hareketleri, notlar ve eski makbuzlar burada.
+  </div>
+
+  ${asansorGecmisiHtml(i)}
+
+  ${tahsilatMakbuzGecmisiHtml(i)}
 
   <div class="detailDangerZone">
     <button class="detailDeleteBtn" onclick="sil(${i})">
