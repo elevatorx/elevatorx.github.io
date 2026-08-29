@@ -19322,40 +19322,42 @@ html.darkRoot .abrSharedTransitionVeil{
   }
 }
 </style>
-<style id="exRideAnalysisV2215">
+<style id="exRideAnalysisV2216">
 .exRideNewBadge{flex:0 0 auto;margin-left:auto;padding:5px 7px;border-radius:999px;background:#e9f8ef;color:#168443;font-size:8px;font-weight:950;letter-spacing:.08em}
-#exRideModal{position:fixed;inset:0;z-index:10040;display:none;background:#eef4fb;color:#152238}
+#exRideModal{position:fixed;inset:0;width:100%;max-width:100vw;z-index:10040;display:none;overflow:hidden;overscroll-behavior-x:none;touch-action:pan-y;background:#eef4fb;color:#152238}
 #exRideModal.is-open{display:block}
-body.exRideOpen{overflow:hidden!important;overscroll-behavior:none}
+body.exRideOpen{width:100%!important;max-width:100vw!important;overflow:hidden!important;overflow-x:hidden!important;overscroll-behavior:none;touch-action:pan-y}
 body.exRideOpen #exHybridMenuBtn{display:none!important}
-.exRideScreen{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;background:radial-gradient(circle at 20% 0,rgba(67,143,255,.16),transparent 32%),linear-gradient(180deg,#f4f8fd 0%,#edf3fa 100%)}
+.exRideScreen{width:100%;max-width:100vw;height:100%;overflow-x:hidden!important;overflow-y:auto;overscroll-behavior-x:none;touch-action:pan-y;-webkit-overflow-scrolling:touch;background:radial-gradient(circle at 20% 0,rgba(67,143,255,.16),transparent 32%),linear-gradient(180deg,#f4f8fd 0%,#edf3fa 100%)}
 .exRideTopbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(13px + env(safe-area-inset-top)) 18px 13px;background:rgba(244,248,253,.88);border-bottom:1px solid rgba(205,217,232,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .exRideTopText span{display:block;color:#1672df;font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}.exRideTopText b{display:block;margin-top:4px;font-size:19px;font-weight:950}
 .exRideClose{width:42px;height:42px;border:0;border-radius:15px;background:#fff;color:#26364e;font-size:23px;font-weight:800;box-shadow:0 9px 22px rgba(24,49,85,.09)}
-.exRideBody{width:min(100%,760px);margin:0 auto;padding:18px 16px calc(42px + env(safe-area-inset-bottom))}
+.exRideBody{box-sizing:border-box;width:100%;max-width:760px;min-width:0;margin:0 auto;padding:18px 16px calc(42px + env(safe-area-inset-bottom));overflow-x:hidden}
+.exRideBody,.exRideBody *{min-width:0;box-sizing:border-box}
+.exRideBody h1,.exRideBody h2,.exRideBody h3,.exRideBody b,.exRideBody span,.exRideBody p,.exRideBody em{overflow-wrap:anywhere}
 .exRideHero{position:relative;overflow:hidden;padding:19px;border-radius:28px;color:#fff;background:linear-gradient(145deg,#102540,#176fd0 68%,#4c9dff);box-shadow:0 20px 46px rgba(24,87,165,.24)}
 .exRideHero:after{content:"";position:absolute;width:190px;height:190px;right:-70px;top:-80px;border-radius:50%;background:rgba(255,255,255,.12)}
 .exRideHeroKicker{font-size:9px;font-weight:950;letter-spacing:.15em;text-transform:uppercase;color:#bcd8ff}.exRideHero h2{position:relative;z-index:1;margin:7px 0 6px;font-size:24px;line-height:1.05}.exRideHero p{position:relative;z-index:1;margin:0;max-width:520px;color:rgba(237,246,255,.82);font-size:11px;line-height:1.55;font-weight:700}
-.exRideSteps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}.exRideStep{padding:10px 6px;border-radius:14px;background:rgba(255,255,255,.68);border:1px solid rgba(216,226,239,.9);color:#7a8799;text-align:center;font-size:9px;font-weight:900}.exRideStep.is-active{background:#fff;color:#176fe8;box-shadow:0 8px 20px rgba(25,82,151,.10)}
+.exRideSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:100%;gap:7px;margin:14px 0}.exRideStep{min-width:0;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.68);border:1px solid rgba(216,226,239,.9);color:#7a8799;text-align:center;font-size:9px;font-weight:900;white-space:normal}.exRideStep.is-active{background:#fff;color:#176fe8;box-shadow:0 8px 20px rgba(25,82,151,.10)}
 .exRidePane{display:none}.exRidePane.is-active{display:block;animation:exRideFade .25s ease both}@keyframes exRideFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .exRideCard{margin-top:12px;padding:16px;border:1px solid rgba(216,226,239,.92);border-radius:25px;background:rgba(255,255,255,.86);box-shadow:0 13px 32px rgba(26,49,80,.055);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .exRideCardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:13px}.exRideCardHead span{display:block;color:#1672df;font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.exRideCardHead b{display:block;margin-top:4px;font-size:16px;font-weight:950}.exRideBeta{padding:6px 8px;border-radius:999px;background:#edf4ff;color:#176fe8;font-size:8px;font-weight:950}
 .exRideNotice{display:flex;gap:10px;padding:12px 13px;border-radius:17px;background:#fff7df;color:#765517;font-size:10px;line-height:1.5;font-weight:750}.exRideNotice i{flex:0 0 25px;width:25px;height:25px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#ffdf84;font-style:normal;font-weight:950}
-.exRideFormGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.exRideField{display:block}.exRideField.wide{grid-column:1/-1}.exRideField>span{display:block;margin:0 0 6px 2px;color:#718097;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.exRideField input,.exRideField select,.exRideField textarea{width:100%;min-height:48px;border:1px solid #dce5ef;border-radius:15px;padding:11px 12px;background:#f8fbff;color:#172238;font:800 12px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:0}.exRideField textarea{min-height:76px;resize:vertical}.exRideField input:focus,.exRideField select:focus,.exRideField textarea:focus{border-color:#68a9f4;box-shadow:0 0 0 4px rgba(23,111,232,.09)}
-.exRidePlacement{display:grid;grid-template-columns:52px 1fr;gap:11px;align-items:center;margin-top:12px;padding:13px;border-radius:18px;background:#eef5ff}.exRidePlacementIcon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:#fff;color:#176fe8;font-size:23px;box-shadow:0 8px 18px rgba(26,80,151,.08)}.exRidePlacement b{display:block;font-size:12px}.exRidePlacement span{display:block;margin-top:4px;color:#64748b;font-size:9.5px;line-height:1.45;font-weight:700}
+.exRideFormGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.exRideField{display:block;min-width:0}.exRideField.wide{grid-column:1/-1}.exRideField>span{display:block;margin:0 0 6px 2px;color:#718097;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.exRideField input,.exRideField select,.exRideField textarea{display:block;width:100%;max-width:100%;min-width:0;min-height:48px;border:1px solid #dce5ef;border-radius:15px;padding:11px 12px;background:#f8fbff;color:#172238;font:800 12px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:0}.exRideField textarea{min-height:76px;resize:vertical}.exRideField input:focus,.exRideField select:focus,.exRideField textarea:focus{border-color:#68a9f4;box-shadow:0 0 0 4px rgba(23,111,232,.09)}
+.exRidePlacement{display:grid;grid-template-columns:52px minmax(0,1fr);gap:11px;align-items:center;margin-top:12px;padding:13px;border-radius:18px;background:#eef5ff}.exRidePlacementIcon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:#fff;color:#176fe8;font-size:23px;box-shadow:0 8px 18px rgba(26,80,151,.08)}.exRidePlacement b{display:block;font-size:12px}.exRidePlacement span{display:block;margin-top:4px;color:#64748b;font-size:9.5px;line-height:1.45;font-weight:700}
 .exRidePrimary,.exRideSecondary,.exRideDanger{width:100%;min-height:52px;margin-top:12px;border:0;border-radius:17px;font-size:12px;font-weight:950}.exRidePrimary{background:linear-gradient(135deg,#142b49,#176fe8);color:#fff;box-shadow:0 13px 26px rgba(23,102,206,.22)}.exRideSecondary{background:#edf2f8;color:#42536b}.exRideDanger{background:#e23e4f;color:#fff}.exRidePrimary:disabled,.exRideSecondary:disabled{opacity:.48}
 .exRideSensorStatus{display:flex;align-items:center;gap:9px;margin-top:11px;padding:10px 12px;border-radius:15px;background:#f2f5f9;color:#65758d;font-size:10px;font-weight:850}.exRideSensorStatus i{width:9px;height:9px;border-radius:50%;background:#94a3b8}.exRideSensorStatus.is-ready{background:#eaf8ef;color:#187b3a}.exRideSensorStatus.is-ready i{background:#22b45c;box-shadow:0 0 0 5px rgba(34,180,92,.12)}.exRideSensorStatus.is-error{background:#fff0f1;color:#b42331}.exRideSensorStatus.is-error i{background:#e23e4f}
 .exRideTestStatus{text-align:center}.exRideCountdown{width:104px;height:104px;margin:6px auto 12px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:radial-gradient(circle,#fff 55%,#eaf3ff 57%);border:8px solid #d8e8fb;color:#176fe8;font-size:38px;font-weight:950;box-shadow:0 14px 34px rgba(25,93,177,.14)}.exRideCountdown.is-live{border-color:#35b96a;color:#168a47;animation:exRidePulse 1.3s infinite}@keyframes exRidePulse{50%{box-shadow:0 0 0 12px rgba(53,185,106,.08),0 14px 34px rgba(25,93,177,.14)}}
 .exRideTestStatus h3{margin:0;font-size:18px}.exRideTestStatus p{margin:6px auto 0;max-width:440px;color:#718097;font-size:10px;line-height:1.5;font-weight:700}
-.exRideLiveGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.exRideLiveMetric{padding:11px 8px;border-radius:16px;background:#f4f7fb;text-align:center}.exRideLiveMetric span{display:block;color:#8390a3;font-size:8px;font-weight:900;text-transform:uppercase}.exRideLiveMetric b{display:block;margin-top:5px;font-size:15px;font-weight:950}
-.exRideChartWrap{margin-top:12px;padding:10px;border-radius:18px;background:#0f1d31}.exRideChartHead{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;color:#a9bad1;font-size:8px;font-weight:850}.exRideChartHead b{color:#eaf3ff}.exRideChart{display:block;width:100%;height:170px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:100% 34px,42px 100%}
-.exRideScoreArea{display:grid;grid-template-columns:132px 1fr;gap:15px;align-items:center}.exRideScoreRing{--score:0;width:128px;height:128px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#176fe8 calc(var(--score)*1%),#e7edf5 0);position:relative}.exRideScoreRing:before{content:"";position:absolute;inset:11px;border-radius:50%;background:#fff}.exRideScoreRing strong{position:relative;font-size:34px;font-weight:950}.exRideScoreRing small{position:absolute;z-index:1;margin-top:47px;color:#8491a4;font-size:8px;font-weight:900}.exRideScoreText b{display:block;font-size:20px}.exRideScoreText span{display:block;margin-top:6px;color:#6d7b90;font-size:10px;line-height:1.5;font-weight:700}
-.exRideMetrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}.exRideMetric{padding:12px;border-radius:17px;background:#f4f7fb}.exRideMetric span{display:block;color:#8491a4;font-size:8px;font-weight:900;text-transform:uppercase}.exRideMetric b{display:block;margin-top:5px;font-size:15px;font-weight:950}.exRideMetric em{display:block;margin-top:3px;color:#718097;font-size:8px;font-style:normal;font-weight:700}
+.exRideLiveGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}.exRideLiveMetric{padding:11px 8px;border-radius:16px;background:#f4f7fb;text-align:center}.exRideLiveMetric span{display:block;color:#8390a3;font-size:8px;font-weight:900;text-transform:uppercase}.exRideLiveMetric b{display:block;margin-top:5px;font-size:15px;font-weight:950}
+.exRideChartWrap{width:100%;max-width:100%;min-width:0;margin-top:12px;padding:10px;border-radius:18px;background:#0f1d31;overflow:hidden}.exRideChartHead{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;color:#a9bad1;font-size:8px;font-weight:850}.exRideChartHead b{color:#eaf3ff}.exRideChart{display:block;width:100%;max-width:100%;height:170px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:100% 34px,42px 100%}
+.exRideScoreArea{display:grid;grid-template-columns:132px minmax(0,1fr);gap:15px;align-items:center}.exRideScoreRing{--score:0;width:128px;height:128px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#176fe8 calc(var(--score)*1%),#e7edf5 0);position:relative}.exRideScoreRing:before{content:"";position:absolute;inset:11px;border-radius:50%;background:#fff}.exRideScoreRing strong{position:relative;font-size:34px;font-weight:950}.exRideScoreRing small{position:absolute;z-index:1;margin-top:47px;color:#8491a4;font-size:8px;font-weight:900}.exRideScoreText b{display:block;font-size:20px}.exRideScoreText span{display:block;margin-top:6px;color:#6d7b90;font-size:10px;line-height:1.5;font-weight:700}
+.exRideMetrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:13px}.exRideMetric{padding:12px;border-radius:17px;background:#f4f7fb}.exRideMetric span{display:block;color:#8491a4;font-size:8px;font-weight:900;text-transform:uppercase}.exRideMetric b{display:block;margin-top:5px;font-size:15px;font-weight:950}.exRideMetric em{display:block;margin-top:3px;color:#718097;font-size:8px;font-style:normal;font-weight:700}
 .exRideCompare{margin-top:11px;padding:12px 13px;border-radius:17px;background:#eaf8ef;color:#1b7340;font-size:10px;line-height:1.5;font-weight:800}.exRideCompare.is-worse{background:#fff0e7;color:#a34b12}
-.exRideRecommendations{display:grid;gap:8px}.exRideRecommendation{display:grid;grid-template-columns:10px 1fr;gap:9px;padding:11px 12px;border-radius:16px;background:#f5f7fa}.exRideRecommendation i{width:10px;height:10px;margin-top:3px;border-radius:50%;background:#f5a524}.exRideRecommendation b{display:block;font-size:11px}.exRideRecommendation span{display:block;margin-top:3px;color:#718097;font-size:9px;line-height:1.45;font-weight:700}
-.exRideResultActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.exRideHistoryList{display:grid;gap:8px}.exRideHistoryItem{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 12px;border:0;border-radius:17px;background:#f4f7fb;text-align:left;color:#172238}.exRideHistoryItem b{display:block;font-size:11px}.exRideHistoryItem span{display:block;margin-top:4px;color:#78869a;font-size:8.5px;font-weight:750}.exRideHistoryScore{flex:0 0 auto;min-width:48px;padding:8px;border-radius:13px;background:#fff;color:#176fe8;text-align:center;font-size:14px;font-weight:950}.exRideEmpty{padding:16px;border-radius:17px;background:#f4f7fb;color:#7d8999;text-align:center;font-size:10px;font-weight:750}
+.exRideRecommendations{display:grid;gap:8px}.exRideRecommendation{display:grid;grid-template-columns:10px minmax(0,1fr);gap:9px;padding:11px 12px;border-radius:16px;background:#f5f7fa}.exRideRecommendation i{width:10px;height:10px;margin-top:3px;border-radius:50%;background:#f5a524}.exRideRecommendation b{display:block;font-size:11px}.exRideRecommendation span{display:block;margin-top:3px;color:#718097;font-size:9px;line-height:1.45;font-weight:700}
+.exRideResultActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.exRideHistoryList{display:grid;gap:8px}.exRideHistoryItem{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:100%;padding:11px 12px;border:0;border-radius:17px;background:#f4f7fb;text-align:left;color:#172238}.exRideHistoryItem b{display:block;font-size:11px}.exRideHistoryItem span{display:block;margin-top:4px;color:#78869a;font-size:8.5px;font-weight:750}.exRideHistoryScore{flex:0 0 auto;min-width:48px;padding:8px;border-radius:13px;background:#fff;color:#176fe8;text-align:center;font-size:14px;font-weight:950}.exRideEmpty{padding:16px;border-radius:17px;background:#f4f7fb;color:#7d8999;text-align:center;font-size:10px;font-weight:750}
 body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#eff5ff}body.darkMode .exRideScreen,html.darkRoot .exRideScreen{background:radial-gradient(circle at 20% 0,rgba(43,111,205,.18),transparent 32%),linear-gradient(180deg,#101a29,#0c1420)}body.darkMode .exRideTopbar,html.darkRoot .exRideTopbar{background:rgba(14,23,36,.9);border-color:rgba(255,255,255,.08)}body.darkMode .exRideClose,html.darkRoot .exRideClose,body.darkMode .exRideCard,html.darkRoot .exRideCard{background:rgba(18,30,47,.92);border-color:rgba(255,255,255,.08);color:#eff5ff}body.darkMode .exRideField input,body.darkMode .exRideField select,body.darkMode .exRideField textarea,html.darkRoot .exRideField input,html.darkRoot .exRideField select,html.darkRoot .exRideField textarea{background:#16253a;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exRidePlacement,body.darkMode .exRideLiveMetric,body.darkMode .exRideMetric,body.darkMode .exRideRecommendation,body.darkMode .exRideHistoryItem,body.darkMode .exRideEmpty,html.darkRoot .exRidePlacement,html.darkRoot .exRideLiveMetric,html.darkRoot .exRideMetric,html.darkRoot .exRideRecommendation,html.darkRoot .exRideHistoryItem,html.darkRoot .exRideEmpty{background:#16253a;color:#eff5ff}body.darkMode .exRideScoreRing:before,html.darkRoot .exRideScoreRing:before{background:#122036}body.darkMode .exRideStep,html.darkRoot .exRideStep{background:#152337;border-color:rgba(255,255,255,.08)}body.darkMode .exRideStep.is-active,html.darkRoot .exRideStep.is-active{background:#21324a}
-@media(max-width:480px){.exRideBody{padding-left:13px;padding-right:13px}.exRideFormGrid{grid-template-columns:1fr}.exRideField.wide{grid-column:auto}.exRideScoreArea{grid-template-columns:110px 1fr}.exRideScoreRing{width:106px;height:106px}.exRideLiveGrid{grid-template-columns:1fr 1fr}.exRideLiveMetric:last-child{grid-column:1/-1}.exRideResultActions{grid-template-columns:1fr}}
+@media(max-width:480px){.exRideBody{padding-left:13px;padding-right:13px}.exRideFormGrid{grid-template-columns:minmax(0,1fr)}.exRideField.wide{grid-column:auto}.exRideScoreArea{grid-template-columns:110px minmax(0,1fr)}.exRideScoreRing{width:106px;height:106px}.exRideLiveGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.exRideLiveMetric:last-child{grid-column:1/-1}.exRideResultActions{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 
@@ -19398,16 +19400,6 @@ body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#
       <span class="exHybridItemText"><b>Yeni Apartman</b><small>Hızlı kayıt formunu aç</small></span>
     </button>
 
-    <button class="exHybridItem" type="button" onclick="exHybridCall('teknikKutuphaneAc')">
-      <span class="exHybridItemIcon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M5 4.5h11.5A2.5 2.5 0 0 1 19 7v12.5H7.5A2.5 2.5 0 0 1 5 17V4.5Z" stroke="currentColor" stroke-width="1.9"/>
-          <path d="M8 8h8M8 11.5h8M8 15h5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span class="exHybridItemText"><b>Teknik Kütüphane</b><small>Kart, sürücü ve teknik notlar</small></span>
-    </button>
-
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">İş yönetimi</div>
 
     <button class="exHybridItem abrTeamDrawerItem" type="button" onclick="ekipArizaMerkeziAc()">
@@ -19419,28 +19411,6 @@ body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#
       </span>
       <span class="exHybridItemText"><b>Ekip Arıza Merkezi</b><small>Arızayı ekibe ilet ve canlı takip et</small></span>
       <span id="abrTeamMenuBadge" class="abrTeamMenuBadge" aria-label="Okunmamış arıza" hidden>0</span>
-    </button>
-
-
-    <button class="exHybridItem" type="button" onclick="haritaMerkeziAc()">
-      <span class="exHybridItemIcon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 21s6.5-5.75 6.5-11.1A6.5 6.5 0 1 0 5.5 9.9C5.5 15.25 12 21 12 21Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
-          <circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-      </span>
-      <span class="exHybridItemText"><b>Harita & Yakındakiler</b><small>Apartmanları haritada gör ve yol tarifi al</small></span>
-    </button>
-
-    <button class="exHybridItem" type="button" onclick="montajKesifAc()">
-      <span class="exHybridItemIcon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M5 19V5.5A1.5 1.5 0 0 1 6.5 4H18a1.5 1.5 0 0 1 1.5 1.5V19" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
-          <path d="M8 19V8h8v11M3.5 19.5h17M9.5 11h5M9.5 14h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="m6 7 2-2M16 17l2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span class="exHybridItemText"><b>Montaj &amp; Keşif</b><small>Ölçü al, kapı yönünü kaydet ve çizim oluştur</small></span>
     </button>
 
     <button class="exHybridItem" type="button" onclick="stokEnvanteriAc()">
@@ -19475,6 +19445,37 @@ body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#
       </span>
       <span class="exHybridItemText"><b>Sürüş Analizi</b><small>Kalkış, titreşim ve duruş kalitesini ölç</small></span>
       <span class="exRideNewBadge">YENİ</span>
+    </button>
+
+    <button class="exHybridItem" type="button" onclick="exHybridCall('teknikKutuphaneAc')">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 4.5h11.5A2.5 2.5 0 0 1 19 7v12.5H7.5A2.5 2.5 0 0 1 5 17V4.5Z" stroke="currentColor" stroke-width="1.9"/>
+          <path d="M8 8h8M8 11.5h8M8 15h5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Teknik Kütüphane</b><small>Kart, sürücü ve teknik notlar</small></span>
+    </button>
+
+    <button class="exHybridItem" type="button" onclick="montajKesifAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 19V5.5A1.5 1.5 0 0 1 6.5 4H18a1.5 1.5 0 0 1 1.5 1.5V19" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M8 19V8h8v11M3.5 19.5h17M9.5 11h5M9.5 14h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="m6 7 2-2M16 17l2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Montaj &amp; Keşif</b><small>Ölçü al, kapı yönünü kaydet ve çizim oluştur</small></span>
+    </button>
+
+    <button class="exHybridItem" type="button" onclick="haritaMerkeziAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 21s6.5-5.75 6.5-11.1A6.5 6.5 0 1 0 5.5 9.9C5.5 15.25 12 21 12 21Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Harita & Yakındakiler</b><small>Apartmanları haritada gör ve yol tarifi al</small></span>
     </button>
 
     <div class="exHybridMenuLabel exHybridMenuLabelSecondary">Raporlar</div>
@@ -21702,7 +21703,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.15";
+const APP_VERSION = "v2.2.16";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -42246,6 +42247,16 @@ function exRideFormat(value,digits){ return exRideNumber(value).toLocaleString("
 function exRideEscape(value){ return String(value==null?"":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]}); }
 function exRideId(){ return "ride_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8); }
 
+function exRideHorizontalLock(){
+  let screen=document.querySelector("#exRideModal .exRideScreen");
+  if(!screen) return;
+  if(screen.dataset.rideXLock!=="1"){
+    screen.dataset.rideXLock="1";
+    screen.addEventListener("scroll",function(){if(screen.scrollLeft!==0)screen.scrollLeft=0;},{passive:true});
+  }
+  screen.scrollLeft=0;
+}
+
 function exRideRecordsGet(){
   try{
     let parsed=JSON.parse(localStorage.getItem(EX_RIDE_KEY)||"[]");
@@ -42283,7 +42294,7 @@ function exRidePaneShow(name){
   document.querySelectorAll("#exRideModal [data-ride-pane]").forEach(function(pane){pane.classList.toggle("is-active",pane.getAttribute("data-ride-pane")===name);});
   document.querySelectorAll("#exRideModal [data-ride-step]").forEach(function(step){step.classList.toggle("is-active",step.getAttribute("data-ride-step")===name);});
   let screen=document.querySelector("#exRideModal .exRideScreen");
-  if(screen) screen.scrollTo({top:0,behavior:"smooth"});
+  if(screen){screen.scrollLeft=0;screen.scrollTo({top:0,left:0,behavior:"auto"});}
 }
 
 function exRideSensorStatus(type,text){
@@ -42316,6 +42327,9 @@ window.surusAnaliziAc=function(){
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden","false");
   document.body.classList.add("exRideOpen");
+  exRideHorizontalLock();
+  try{window.scrollTo({top:window.scrollY,left:0,behavior:"auto"});}catch(error){}
+  requestAnimationFrame(function(){exRideHorizontalLock();});
   try{if(typeof haptic==="function")haptic("light");}catch(error){}
 };
 
