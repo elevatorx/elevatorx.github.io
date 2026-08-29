@@ -19322,7 +19322,7 @@ html.darkRoot .abrSharedTransitionVeil{
   }
 }
 </style>
-<style id="exRideAnalysisV2216">
+<style id="exRideAnalysisV2220">
 .exRideNewBadge{flex:0 0 auto;margin-left:auto;padding:5px 7px;border-radius:999px;background:#e9f8ef;color:#168443;font-size:8px;font-weight:950;letter-spacing:.08em}
 #exRideModal{position:fixed;inset:0;width:100%;max-width:100vw;z-index:10040;display:none;overflow:hidden;overscroll-behavior-x:none;touch-action:pan-y;background:#eef4fb;color:#152238}
 #exRideModal.is-open{display:block}
@@ -19358,6 +19358,19 @@ body.exRideOpen #exHybridMenuBtn{display:none!important}
 .exRideResultActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.exRideHistoryList{display:grid;gap:8px}.exRideHistoryItem{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:100%;padding:11px 12px;border:0;border-radius:17px;background:#f4f7fb;text-align:left;color:#172238}.exRideHistoryItem b{display:block;font-size:11px}.exRideHistoryItem span{display:block;margin-top:4px;color:#78869a;font-size:8.5px;font-weight:750}.exRideHistoryScore{flex:0 0 auto;min-width:48px;padding:8px;border-radius:13px;background:#fff;color:#176fe8;text-align:center;font-size:14px;font-weight:950}.exRideEmpty{padding:16px;border-radius:17px;background:#f4f7fb;color:#7d8999;text-align:center;font-size:10px;font-weight:750}
 body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#eff5ff}body.darkMode .exRideScreen,html.darkRoot .exRideScreen{background:radial-gradient(circle at 20% 0,rgba(43,111,205,.18),transparent 32%),linear-gradient(180deg,#101a29,#0c1420)}body.darkMode .exRideTopbar,html.darkRoot .exRideTopbar{background:rgba(14,23,36,.9);border-color:rgba(255,255,255,.08)}body.darkMode .exRideClose,html.darkRoot .exRideClose,body.darkMode .exRideCard,html.darkRoot .exRideCard{background:rgba(18,30,47,.92);border-color:rgba(255,255,255,.08);color:#eff5ff}body.darkMode .exRideField input,body.darkMode .exRideField select,body.darkMode .exRideField textarea,html.darkRoot .exRideField input,html.darkRoot .exRideField select,html.darkRoot .exRideField textarea{background:#16253a;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exRidePlacement,body.darkMode .exRideLiveMetric,body.darkMode .exRideMetric,body.darkMode .exRideRecommendation,body.darkMode .exRideHistoryItem,body.darkMode .exRideEmpty,html.darkRoot .exRidePlacement,html.darkRoot .exRideLiveMetric,html.darkRoot .exRideMetric,html.darkRoot .exRideRecommendation,html.darkRoot .exRideHistoryItem,html.darkRoot .exRideEmpty{background:#16253a;color:#eff5ff}body.darkMode .exRideScoreRing:before,html.darkRoot .exRideScoreRing:before{background:#122036}body.darkMode .exRideStep,html.darkRoot .exRideStep{background:#152337;border-color:rgba(255,255,255,.08)}body.darkMode .exRideStep.is-active,html.darkRoot .exRideStep.is-active{background:#21324a}
 @media(max-width:480px){.exRideBody{padding-left:13px;padding-right:13px}.exRideFormGrid{grid-template-columns:minmax(0,1fr)}.exRideField.wide{grid-column:auto}.exRideScoreArea{grid-template-columns:110px minmax(0,1fr)}.exRideScoreRing{width:106px;height:106px}.exRideLiveGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.exRideLiveMetric:last-child{grid-column:1/-1}.exRideResultActions{grid-template-columns:minmax(0,1fr)}}
+</style>
+<style id="exRideSpeedV2220">
+.exRideSpeedSetup{margin-top:12px;padding:14px;border:1px solid #d8e5f6;border-radius:20px;background:linear-gradient(145deg,#eef6ff,#f8fbff)}
+.exRideSpeedToggle{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.exRideSpeedToggleText b{display:block;font-size:13px;font-weight:950}.exRideSpeedToggleText span{display:block;margin-top:4px;color:#6f7f95;font-size:9px;line-height:1.45;font-weight:750}
+.exRideSpeedSwitch{position:relative;flex:0 0 auto;width:48px;height:29px}.exRideSpeedSwitch input{position:absolute;opacity:0;pointer-events:none}.exRideSpeedSwitch i{position:absolute;inset:0;border-radius:999px;background:#cbd5e2;box-shadow:inset 0 0 0 1px rgba(37,57,84,.07);transition:.2s}.exRideSpeedSwitch i:after{content:"";position:absolute;left:3px;top:3px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 3px 9px rgba(29,48,77,.2);transition:.2s}.exRideSpeedSwitch input:checked+i{background:#176fe8}.exRideSpeedSwitch input:checked+i:after{transform:translateX(19px)}
+.exRideSpeedFields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.exRideSpeedFields.is-hidden{display:none}.exRideSpeedField{display:block}.exRideSpeedField>span{display:block;margin:0 0 6px 2px;color:#718097;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.exRideSpeedField input{width:100%;min-width:0;height:47px;border:1px solid #d8e3f0;border-radius:14px;padding:0 10px;background:#fff;color:#172238;font:900 12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:0}.exRideSpeedField input:focus{border-color:#67a5ee;box-shadow:0 0 0 4px rgba(23,111,232,.08)}
+.exRideSpeedDistance{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px;padding:10px 11px;border-radius:14px;background:#fff;color:#66768c;font-size:9px;line-height:1.4;font-weight:750}.exRideSpeedDistance b{flex:0 0 auto;color:#176fe8;font-size:15px;font-weight:950}.exRideSpeedDistance.is-error{background:#fff0f1;color:#a72b39}.exRideSpeedDistance.is-error b{color:#c93243}
+.exRideSpeedLiveHint{margin-top:10px;padding:10px 11px;border-radius:15px;background:#eaf3ff;color:#47617f;font-size:9px;line-height:1.5;font-weight:750}.exRideSpeedLiveHint b{color:#176fe8}
+.exRideSpeedResult{display:none;margin-top:13px;padding:14px;border:1px solid #d4e4f9;border-radius:21px;background:linear-gradient(145deg,#eaf3ff,#f8fbff)}.exRideSpeedResult.is-visible{display:block}.exRideSpeedResultHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.exRideSpeedResultHead span{display:block;color:#176fe8;font-size:8px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.exRideSpeedResultHead b{display:block;margin-top:4px;font-size:15px}.exRideSpeedConfidence{flex:0 0 auto;padding:6px 8px;border-radius:999px;background:#fff0cf;color:#926000;font-size:8px;font-weight:950}.exRideSpeedConfidence.is-high{background:#e7f8ed;color:#147e41}.exRideSpeedConfidence.is-low{background:#fff0f1;color:#b52c3b}
+.exRideSpeedGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:11px}.exRideSpeedMetric{padding:11px;border-radius:16px;background:#fff}.exRideSpeedMetric span{display:block;color:#8491a4;font-size:8px;font-weight:900;text-transform:uppercase}.exRideSpeedMetric b{display:block;margin-top:5px;font-size:18px;font-weight:950}.exRideSpeedMetric em{display:block;margin-top:3px;color:#748399;font-size:8px;font-style:normal;font-weight:700}.exRideSpeedDisclosure{margin-top:9px;color:#6d7b90;font-size:8.5px;line-height:1.5;font-weight:700}
+body.darkMode .exRideSpeedSetup,html.darkRoot .exRideSpeedSetup,body.darkMode .exRideSpeedResult,html.darkRoot .exRideSpeedResult{background:linear-gradient(145deg,#15263d,#122036);border-color:rgba(255,255,255,.09)}body.darkMode .exRideSpeedField input,html.darkRoot .exRideSpeedField input,body.darkMode .exRideSpeedDistance,html.darkRoot .exRideSpeedDistance,body.darkMode .exRideSpeedMetric,html.darkRoot .exRideSpeedMetric{background:#0f1b2c;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exRideSpeedLiveHint,html.darkRoot .exRideSpeedLiveHint{background:#182b45;color:#c7d7eb}
+@media(max-width:520px){.exRideSpeedFields{grid-template-columns:repeat(2,minmax(0,1fr))}.exRideSpeedField:last-child{grid-column:1/-1}.exRideSpeedGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <style id="exLuxControlV2218">
 .exLuxNewBadge{flex:0 0 auto;margin-left:auto;padding:5px 7px;border-radius:999px;background:#fff4cf;color:#9a6700;font-size:8px;font-weight:950;letter-spacing:.08em}
@@ -19489,7 +19502,7 @@ body.darkMode #exLuxModal,html.darkRoot #exLuxModal{background:#0c1420;color:#ef
           <path d="M6 4.5h12A2.5 2.5 0 0 1 20.5 7v10A2.5 2.5 0 0 1 18 19.5H6A2.5 2.5 0 0 1 3.5 17V7A2.5 2.5 0 0 1 6 4.5Z" stroke="currentColor" stroke-width="1.6" opacity=".48"/>
         </svg>
       </span>
-      <span class="exHybridItemText"><b>Sürüş Analizi</b><small>Kalkış, titreşim ve duruş kalitesini ölç</small></span>
+      <span class="exHybridItemText"><b>Sürüş &amp; Hız Analizi</b><small>Kalkış, titreşim, duruş ve yaklaşık hızı ölç</small></span>
       <span class="exRideNewBadge">YENİ</span>
     </button>
 
@@ -19781,15 +19794,15 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
 <div id="exRideModal" aria-hidden="true">
   <div class="exRideScreen">
     <header class="exRideTopbar">
-      <div class="exRideTopText"><span>Saha araçları</span><b>Sürüş Analizi</b></div>
+      <div class="exRideTopText"><span>Saha araçları</span><b>Sürüş &amp; Hız Analizi</b></div>
       <button class="exRideClose" type="button" onclick="surusAnaliziKapat()" aria-label="Kapat">×</button>
     </header>
 
     <main class="exRideBody">
       <section class="exRideHero">
-        <div class="exRideHeroKicker">Telefon sensörleriyle saha karşılaştırması</div>
-        <h2>Kalkıştan duruşa kadar ölç.</h2>
-        <p>Kabindeki dikey ivmeyi, yatay titreşimi ve ani hareket değişimlerini kaydet; önceki testlerle karşılaştır.</p>
+        <div class="exRideHeroKicker">Telefon sensörleriyle kabin ön ölçümü</div>
+        <h2>Sürüşü ve yaklaşık hızı birlikte ölç.</h2>
+        <p>Dikey ivme, yatay titreşim ve ani hareket değişimlerini kaydet; kat mesafesiyle ortalama ve yaklaşık maksimum hızı hesapla.</p>
       </section>
 
       <div class="exRideSteps" aria-label="Test adımları">
@@ -19809,6 +19822,18 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
             <label class="exRideField"><span>Yön</span><select id="exRideDirection"><option value="Yukarı">Yukarı</option><option value="Aşağı">Aşağı</option></select></label>
             <label class="exRideField"><span>Kabin durumu</span><select id="exRideLoad"><option value="Boş kabin">Boş kabin</option><option value="Teknisyen ile">Teknisyen ile</option><option value="Yüklü kabin">Yüklü kabin</option></select></label>
             <label class="exRideField wide"><span>Saha notu (isteğe bağlı)</span><textarea id="exRideNote" placeholder="Örn. Paten ayarı öncesi test"></textarea></label>
+          </div>
+          <div class="exRideSpeedSetup">
+            <label class="exRideSpeedToggle">
+              <span class="exRideSpeedToggleText"><b>Kabinden Hız Ölçümü</b><span>Bilinen kat mesafesi ve sensör kaydından yaklaşık seyir hızını hesaplar.</span></span>
+              <span class="exRideSpeedSwitch"><input id="exRideSpeedEnabled" type="checkbox" checked onchange="surusHizModuGuncelle()"><i></i></span>
+            </label>
+            <div id="exRideSpeedFields" class="exRideSpeedFields">
+              <label class="exRideSpeedField"><span>Geçilen kat</span><input id="exRideFloorCount" type="number" inputmode="numeric" min="1" max="100" step="1" value="5" oninput="surusHizMesafesiGuncelle()"></label>
+              <label class="exRideSpeedField"><span>Kat yüksekliği</span><input id="exRideFloorHeight" type="number" inputmode="decimal" min="2" max="8" step="0.01" value="3.00" oninput="surusHizMesafesiGuncelle()"></label>
+              <label class="exRideSpeedField"><span>Etiket hızı · isteğe bağlı</span><input id="exRideRatedSpeed" type="number" inputmode="decimal" min="0.1" max="15" step="0.05" placeholder="Örn. 1.00"></label>
+            </div>
+            <div id="exRideSpeedDistance" class="exRideSpeedDistance"><span>Hesaplanacak seyir mesafesi</span><b>15,00 m</b></div>
           </div>
           <div class="exRidePlacement"><div class="exRidePlacementIcon">⌁</div><div><b>Telefon düz ve sabit olmalı</b><span>Eğim veya elde tutma, yatay titreşim sonucunu bozabilir. Bu ölçüm resmî uygunluk testi değildir.</span></div></div>
           <div id="exRideSensorStatus" class="exRideSensorStatus"><i></i><span>Sensör izni bekleniyor</span></div>
@@ -19833,6 +19858,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
             <div class="exRideLiveMetric"><span>Dikey ivme</span><b id="exRideLiveVertical">0,00</b></div>
             <div class="exRideLiveMetric"><span>Yatay titreşim</span><b id="exRideLiveLateral">0,00</b></div>
           </div>
+          <div id="exRideSpeedLiveHint" class="exRideSpeedLiveHint"><b>Hız hesabı açık.</b> Asansör tam durduktan sonra iki saniye bekle; hareket başlangıcı ve bitişi sensör kaydından ayıklanacak.</div>
           <div class="exRideChartWrap">
             <div class="exRideChartHead"><b>Canlı sensör grafiği</b><span>Mavi: dikey · Yeşil: yatay</span></div>
             <canvas id="exRideChart" class="exRideChart" width="680" height="170"></canvas>
@@ -19855,6 +19881,16 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
             <div class="exRideMetric"><span>Yatay titreşim RMS</span><b id="exRideMetricLateral">0,00 m/s²</b><em>Seyir boyunca</em></div>
             <div class="exRideMetric"><span>Tepe jerk</span><b id="exRideMetricJerk">0,00 m/s³</b><em>Ani hareket değişimi</em></div>
             <div class="exRideMetric"><span>Test süresi</span><b id="exRideMetricDuration">0,0 sn</b><em>Kaydedilen sefer</em></div>
+          </div>
+          <div id="exRideSpeedResult" class="exRideSpeedResult">
+            <div class="exRideSpeedResultHead"><div><span>Kabinden hız ön ölçümü</span><b>Mesafe ve hareket süresi hesabı</b></div><i id="exRideSpeedConfidence" class="exRideSpeedConfidence">ORTA GÜVEN</i></div>
+            <div class="exRideSpeedGrid">
+              <div class="exRideSpeedMetric"><span>Ortalama hız</span><b id="exRideAverageSpeed">0,00 m/s</b><em>Mesafe ÷ hareket süresi</em></div>
+              <div class="exRideSpeedMetric"><span>Yaklaşık maksimum</span><b id="exRideMaxSpeed">0,00 m/s</b><em>İvme eğrisiyle ölçeklendi</em></div>
+              <div class="exRideSpeedMetric"><span>Seyir mesafesi</span><b id="exRideTravelDistance">0,00 m</b><em id="exRideFloorMeta">Kat bilgisi</em></div>
+              <div class="exRideSpeedMetric"><span>Hareket süresi</span><b id="exRideMotionDuration">0,0 sn</b><em>Başlangıç–duruş algısı</em></div>
+            </div>
+            <div id="exRideRatedCompare" class="exRideSpeedDisclosure"></div>
           </div>
           <div id="exRideCompare" class="exRideCompare" style="display:none"></div>
         </div>
@@ -21898,7 +21934,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.19";
+const APP_VERSION = "v2.2.20";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -42408,7 +42444,7 @@ window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
 
-<script id="exRideAnalysisScriptV2215">
+<script id="exRideAnalysisScriptV2220">
 (function(){
 "use strict";
 
@@ -42436,7 +42472,7 @@ let exRideState = {
 };
 
 function exRideEl(id){ return document.getElementById(id); }
-function exRideNumber(value,fallback){ let n=Number(value);return Number.isFinite(n)?n:(fallback||0); }
+function exRideNumber(value,fallback){ let normalized=typeof value==="string"?value.replace(",","."):value;let n=Number(normalized);return Number.isFinite(n)?n:(fallback||0); }
 function exRideRound(value,digits){ let p=Math.pow(10,digits||0);return Math.round(exRideNumber(value)*p)/p; }
 function exRideFormat(value,digits){ return exRideNumber(value).toLocaleString("tr-TR",{minimumFractionDigits:digits,maximumFractionDigits:digits}); }
 function exRideEscape(value){ return String(value==null?"":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]}); }
@@ -42485,6 +42521,49 @@ function exRideSelectedApartment(){
   return {index:index,apartment:apartment};
 }
 
+function exRideFloorNumber(value){
+  let text=String(value||"").trim().toLocaleLowerCase("tr-TR");
+  if(!text)return null;
+  if(/zemin|giriş|giris|lobi/.test(text))return 0;
+  let basement=text.match(/(?:b|bodrum)\s*[-.]?\s*(\d{1,2})/i)||text.match(/(\d{1,2})\s*\.? ?bodrum/i);
+  if(basement)return-Math.abs(Number(basement[1])||1);
+  let number=text.match(/-?\d{1,3}/);
+  return number?Number(number[0]):null;
+}
+
+function exRideSpeedConfig(){
+  let enabled=!!(exRideEl("exRideSpeedEnabled")&&exRideEl("exRideSpeedEnabled").checked);
+  let floorCount=Math.round(exRideNumber(exRideEl("exRideFloorCount")&&exRideEl("exRideFloorCount").value));
+  let floorHeight=exRideNumber(exRideEl("exRideFloorHeight")&&exRideEl("exRideFloorHeight").value);
+  let ratedSpeed=exRideNumber(exRideEl("exRideRatedSpeed")&&exRideEl("exRideRatedSpeed").value);
+  let distance=floorCount*floorHeight;
+  let valid=!enabled||(floorCount>=1&&floorCount<=100&&floorHeight>=2&&floorHeight<=8&&distance>=2&&distance<=800);
+  return {enabled:enabled,valid:valid,floorCount:floorCount,floorHeight:floorHeight,distance:distance,ratedSpeed:ratedSpeed>0?ratedSpeed:0};
+}
+
+function exRideInferFloorCount(){
+  let start=exRideFloorNumber(exRideEl("exRideStartFloor")&&exRideEl("exRideStartFloor").value);
+  let end=exRideFloorNumber(exRideEl("exRideEndFloor")&&exRideEl("exRideEndFloor").value);
+  if(start===null||end===null||start===end)return;
+  let input=exRideEl("exRideFloorCount");if(input)input.value=String(Math.abs(end-start));
+  window.surusHizMesafesiGuncelle();
+}
+
+window.surusHizMesafesiGuncelle=function(){
+  let config=exRideSpeedConfig(),box=exRideEl("exRideSpeedDistance");if(!box)return;
+  box.classList.toggle("is-error",config.enabled&&!config.valid);
+  let text=box.querySelector("span"),value=box.querySelector("b");
+  if(text)text.textContent=config.enabled?(config.valid?"Hesaplanacak seyir mesafesi":"Kat sayısı veya yüksekliği kontrol et"):"Hız hesabı kapalı";
+  if(value)value.textContent=config.enabled&&config.valid?exRideFormat(config.distance,2)+" m":"—";
+};
+
+window.surusHizModuGuncelle=function(){
+  let config=exRideSpeedConfig(),fields=exRideEl("exRideSpeedFields"),hint=exRideEl("exRideSpeedLiveHint");
+  if(fields)fields.classList.toggle("is-hidden",!config.enabled);
+  if(hint)hint.innerHTML=config.enabled?'<b>Hız hesabı açık.</b> Asansör tam durduktan sonra iki saniye bekle; hareket başlangıcı ve bitişi sensör kaydından ayıklanacak.':'<b>Yalnız sürüş analizi.</b> Bu testte hız hesabı yapılmayacak.';
+  window.surusHizMesafesiGuncelle();
+};
+
 function exRidePaneShow(name){
   document.querySelectorAll("#exRideModal [data-ride-pane]").forEach(function(pane){pane.classList.toggle("is-active",pane.getAttribute("data-ride-pane")===name);});
   document.querySelectorAll("#exRideModal [data-ride-step]").forEach(function(step){step.classList.toggle("is-active",step.getAttribute("data-ride-step")===name);});
@@ -42507,7 +42586,8 @@ function exRideHistoryRender(){
   let records=exRideRecordsGet().slice(0,8);
   if(!records.length){host.innerHTML='<div class="exRideEmpty">Henüz sürüş testi kaydedilmedi.</div>';return;}
   host.innerHTML=records.map(function(record){
-    return '<button class="exRideHistoryItem" type="button" onclick="surusGecmisSonucAc(\''+exRideEscape(record.id)+'\')"><span><b>'+exRideEscape(record.apartmentName||"Apartman")+'</b><span>'+exRideEscape(record.dateLabel||record.date||"")+' · '+exRideEscape(record.direction||"-")+' · '+exRideEscape(record.startFloor||"-")+' → '+exRideEscape(record.endFloor||"-")+'</span></span><i class="exRideHistoryScore">'+Math.round(exRideNumber(record.score))+'</i></button>';
+    let speed=record.speed&&record.speed.enabled?' · Ort. '+exRideFormat(record.speed.averageSpeed,2)+' m/s':'';
+    return '<button class="exRideHistoryItem" type="button" onclick="surusGecmisSonucAc(\''+exRideEscape(record.id)+'\')"><span><b>'+exRideEscape(record.apartmentName||"Apartman")+'</b><span>'+exRideEscape(record.dateLabel||record.date||"")+' · '+exRideEscape(record.direction||"-")+' · '+exRideEscape(record.startFloor||"-")+' → '+exRideEscape(record.endFloor||"-")+exRideEscape(speed)+'</span></span><i class="exRideHistoryScore">'+Math.round(exRideNumber(record.score))+'</i></button>';
   }).join("");
 }
 
@@ -42515,6 +42595,7 @@ window.surusAnaliziAc=function(){
   try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose();}catch(error){}
   exRideApartmentOptions();
   exRideHistoryRender();
+  window.surusHizModuGuncelle();
   exRidePaneShow("setup");
   exRideSensorStatus(exRideState.permission?"is-ready":"",exRideState.permission?"Sensör hazır · yeni test başlatılabilir":"Sensör izni bekleniyor");
   let modal=exRideEl("exRideModal");
@@ -42554,6 +42635,8 @@ function exRideSensorStop(){
 window.surusSensorleriniHazirla=async function(){
   let picked=exRideSelectedApartment();
   if(!picked.apartment){try{if(typeof toast==="function")toast("Önce bir apartman seç");}catch(error){}return;}
+  let speedConfig=exRideSpeedConfig();
+  if(speedConfig.enabled&&!speedConfig.valid){try{if(typeof toast==="function")toast("Hız ölçümü için geçilen kat ve kat yüksekliğini kontrol et");}catch(error){}return;}
   if(!exRideSensorSupported()){
     exRideSensorStatus("is-error","Bu cihaz veya tarayıcı hareket sensörünü desteklemiyor");
     return;
@@ -42588,6 +42671,7 @@ function exRidePrepareTestScreen(){
   let start=exRideEl("exRideStartButton");if(start){start.style.display="block";start.disabled=false;start.textContent="5 Saniye Sonra Başlat";}
   let stop=exRideEl("exRideStopButton");if(stop)stop.style.display="none";
   let cancel=exRideEl("exRideCancelButton");if(cancel)cancel.style.display="block";
+  window.surusHizModuGuncelle();
   exRideLivePaint(0,0,0);exRideChartDraw();
 }
 
@@ -42650,6 +42734,8 @@ function exRideChartDraw(){
 window.surusOlcumunuBaslat=function(){
   if(exRideState.recording||exRideState.countdown)return;
   if(!exRideState.permission){try{if(typeof toast==="function")toast("Önce sensörleri hazırla");}catch(error){}return;}
+  let speedConfig=exRideSpeedConfig();
+  if(speedConfig.enabled&&!speedConfig.valid){try{if(typeof toast==="function")toast("Hız ölçümü için kat mesafesini kontrol et");}catch(error){}return;}
   exRideState.countdown=true;exRideState.baseline={x:0,y:0,z:0,count:0};exRideState.samples=[];exRideState.graph=[];
   let value=5;let count=exRideEl("exRideCountdown");let start=exRideEl("exRideStartButton");let cancel=exRideEl("exRideCancelButton");
   if(start)start.disabled=true;if(cancel)cancel.style.display="none";
@@ -42688,6 +42774,92 @@ function exRideMetricsCalculate(samples){
   return {duration:exRideRound(duration,1),peakVertical:exRideRound(peakVertical,3),lateralRms:exRideRound(lateralRms,3),verticalRms:exRideRound(verticalRms,3),peakJerk:exRideRound(peakJerk,3),score:score,sampleCount:list.length};
 }
 
+function exRideMedian(values){
+  let list=(values||[]).filter(Number.isFinite).sort(function(a,b){return a-b;});
+  if(!list.length)return 0;let middle=Math.floor(list.length/2);
+  return list.length%2?list[middle]:(list[middle-1]+list[middle])/2;
+}
+
+function exRideSpeedActivity(sample){
+  return Math.abs(exRideNumber(sample&&sample.v))+(Math.abs(exRideNumber(sample&&sample.l))*.34)+(Math.min(12,Math.abs(exRideNumber(sample&&sample.j)))*.018);
+}
+
+function exRideSpeedWindow(samples){
+  let list=(samples||[]).filter(function(p){return p&&Number.isFinite(p.t)&&Number.isFinite(p.v)&&Number.isFinite(p.l);});
+  if(list.length<20)return {list:list,startIndex:0,endIndex:Math.max(0,list.length-1),detected:false,threshold:.1};
+  let quiet=list.filter(function(p){return p.t<=900;}).map(exRideSpeedActivity);
+  let threshold=Math.max(.085,Math.min(.24,(exRideMedian(quiet)*3.2)+.035));
+  let active=list.map(function(p){return exRideSpeedActivity(p)>=threshold;});
+  function supported(index){
+    let start=list[index].t,end=start+460,count=0;
+    for(let i=index;i<list.length&&list[i].t<=end;i++)if(active[i])count++;
+    return count>=3;
+  }
+  let first=-1,last=-1;
+  for(let i=0;i<list.length;i++){if(active[i]&&supported(i)){first=i;break;}}
+  for(let i=list.length-1;i>=0;i--){
+    if(!active[i])continue;let begin=list[i].t-460,count=0;
+    for(let j=i;j>=0&&list[j].t>=begin;j--)if(active[j])count++;
+    if(count>=3){last=i;break;}
+  }
+  let detected=first>=0&&last>first&&(list[last].t-list[first].t)>=1200;
+  if(!detected){first=Math.max(0,first);last=list.length-1;}
+  let startTarget=Math.max(0,list[first].t-160),endTarget=Math.min(list[list.length-1].t,list[last].t+220);
+  let startIndex=0,endIndex=list.length-1;
+  for(let i=0;i<list.length;i++){if(list[i].t>=startTarget){startIndex=i;break;}}
+  for(let i=list.length-1;i>=0;i--){if(list[i].t<=endTarget){endIndex=i;break;}}
+  if(endIndex<=startIndex){startIndex=0;endIndex=list.length-1;detected=false;}
+  return {list:list,startIndex:startIndex,endIndex:endIndex,detected:detected,threshold:threshold};
+}
+
+function exRideSpeedFromAcceleration(windowInfo,distance){
+  let list=windowInfo.list.slice(windowInfo.startIndex,windowInfo.endIndex+1);
+  if(list.length<8)return 0;
+  let velocities=[0],times=[0],velocity=0;
+  for(let i=1;i<list.length;i++){
+    let dt=Math.max(.006,Math.min(.12,(list[i].t-list[i-1].t)/1000));
+    velocity+=((exRideNumber(list[i-1].v)+exRideNumber(list[i].v))/2)*dt;
+    velocities.push(velocity);times.push((list[i].t-list[0].t)/1000);
+  }
+  let totalTime=times[times.length-1]||0,finalVelocity=velocities[velocities.length-1]||0;
+  if(totalTime<=0)return 0;
+  let corrected=velocities.map(function(value,index){return value-(finalVelocity*(times[index]/totalTime));});
+  let positive=0,negative=0;
+  for(let i=1;i<corrected.length;i++){
+    let dt=times[i]-times[i-1],middle=(corrected[i]+corrected[i-1])/2;
+    if(middle>=0)positive+=middle*dt;else negative+=Math.abs(middle)*dt;
+  }
+  let sign=positive>=negative?1:-1;
+  let shape=corrected.map(function(value){return Math.max(0,value*sign);});
+  let smooth=shape.map(function(_,index){let total=0,count=0;for(let j=Math.max(0,index-2);j<=Math.min(shape.length-1,index+2);j++){total+=shape[j];count++;}return count?total/count:0;});
+  let area=0;for(let i=1;i<smooth.length;i++){area+=((smooth[i]+smooth[i-1])/2)*(times[i]-times[i-1]);}
+  if(area<.015)return 0;
+  let scale=distance/area,maxShape=Math.max.apply(null,smooth);
+  return maxShape*scale;
+}
+
+function exRideSpeedCalculate(samples,config){
+  if(!config||!config.enabled)return {enabled:false};
+  let windowInfo=exRideSpeedWindow(samples),list=windowInfo.list;
+  let start=list[windowInfo.startIndex],end=list[windowInfo.endIndex];
+  let travelTime=start&&end?Math.max(.1,(end.t-start.t)/1000):0;
+  let totalDuration=list.length?list[list.length-1].t/1000:0;
+  if(!windowInfo.detected&&totalDuration>2.2)travelTime=Math.max(1,totalDuration-1.5);
+  let average=config.distance/Math.max(.1,travelTime);
+  let calculatedMax=exRideSpeedFromAcceleration(windowInfo,config.distance);
+  if(!calculatedMax||calculatedMax<average||calculatedMax>average*2.6)calculatedMax=average*(travelTime>=5?1.28:1.18);
+  let maxSpeed=Math.max(average*1.02,Math.min(average*2.25,calculatedMax));
+  let sampleRate=travelTime>0?(windowInfo.endIndex-windowInfo.startIndex+1)/travelTime:0;
+  let confidence="low";
+  if(windowInfo.detected&&config.distance>=6&&travelTime>=4&&sampleRate>=22)confidence="high";
+  else if(config.distance>=3&&travelTime>=2.5&&sampleRate>=12)confidence="medium";
+  return {
+    enabled:true,distance:exRideRound(config.distance,2),floorCount:config.floorCount,floorHeight:exRideRound(config.floorHeight,2),ratedSpeed:exRideRound(config.ratedSpeed,2),
+    motionStart:exRideRound(start?start.t/1000:0,2),motionEnd:exRideRound(end?end.t/1000:totalDuration,2),travelTime:exRideRound(travelTime,2),
+    averageSpeed:exRideRound(average,3),maxSpeed:exRideRound(maxSpeed,3),confidence:confidence,activityDetected:windowInfo.detected,sampleRate:exRideRound(sampleRate,1),method:"distance_motion_fusion_v1"
+  };
+}
+
 function exRideRecommendations(metrics){
   let items=[];
   if(metrics.peakJerk>2.5)items.push({title:"Ani hareket değişimi belirgin",text:"Kalkış/yavaşlama rampası, fren açma zamanı, enkoder geri bildirimi ve yük bilgisini kontrol et."});
@@ -42709,12 +42881,14 @@ window.surusOlcumunuBitir=function(){
   if(elapsed<2||exRideState.samples.length<20){try{if(typeof toast==="function")toast("En az 2 saniyelik ölçüm gerekli");}catch(error){}return;}
   exRideState.recording=false;clearTimeout(exRideState.autoStopTimer);exRideState.autoStopTimer=null;
   let count=exRideEl("exRideCountdown");if(count)count.classList.remove("is-live");
-  let picked=exRideSelectedApartment();let apartment=picked.apartment||{};let metrics=exRideMetricsCalculate(exRideState.samples);
+  let picked=exRideSelectedApartment();let apartment=picked.apartment||{};let metrics=exRideMetricsCalculate(exRideState.samples);let speed=exRideSpeedCalculate(exRideState.samples,exRideSpeedConfig());let recommendations=exRideRecommendations(metrics);
+  if(speed.enabled&&speed.confidence==="low")recommendations.unshift({title:"Hız ölçümünü aynı seferde tekrarla",text:"Hareket başlangıcı veya duruş sınırı düşük güvenle bulundu. Telefonu düz sabitle, tam duruştan sonra iki saniye bekle ve sonucu ikinci testle karşılaştır."});
+  if(speed.enabled&&speed.ratedSpeed>0&&Math.abs(speed.maxSpeed-speed.ratedSpeed)/speed.ratedSpeed>.2)recommendations.push({title:"Etiket hızını profesyonel cihazla doğrula",text:"Yaklaşık maksimum hız ile girilen etiket hızı arasında belirgin fark var. Sonucu yalnızca ön kontrol kabul et; kesin karar için kalibreli hız ölçümü kullan."});
   let now=new Date();let result={
     id:exRideId(),apartmentId:apartment.id||"",apartmentName:apartment.ad||"Apartman",apartmentIndex:picked.index,
     startFloor:(exRideEl("exRideStartFloor")&&exRideEl("exRideStartFloor").value.trim())||"-",endFloor:(exRideEl("exRideEndFloor")&&exRideEl("exRideEndFloor").value.trim())||"-",
     direction:(exRideEl("exRideDirection")&&exRideEl("exRideDirection").value)||"Yukarı",load:(exRideEl("exRideLoad")&&exRideEl("exRideLoad").value)||"Boş kabin",note:(exRideEl("exRideNote")&&exRideEl("exRideNote").value.trim())||"",
-    createdAt:now.toISOString(),dateLabel:now.toLocaleString("tr-TR"),metrics:metrics,score:metrics.score,recommendations:exRideRecommendations(metrics),samples:exRideSamplesCompact(exRideState.samples),saved:false
+    createdAt:now.toISOString(),dateLabel:now.toLocaleString("tr-TR"),metrics:metrics,speed:speed,score:metrics.score,recommendations:recommendations,samples:exRideSamplesCompact(exRideState.samples),saved:false
   };
   exRideState.current=result;exRideResultRender(result);exRidePaneShow("result");
   try{if(typeof haptic==="function")haptic("success");}catch(error){}
@@ -42739,9 +42913,22 @@ function exRideResultRender(result){
   let description=exRideEl("exRideScoreDescription");if(description)description.textContent=(result.startFloor||"-")+" → "+(result.endFloor||"-")+" · "+(result.load||"")+" · "+(result.dateLabel||"");
   let fields={exRideMetricVertical:exRideFormat(m.peakVertical,2)+" m/s²",exRideMetricLateral:exRideFormat(m.lateralRms,2)+" m/s²",exRideMetricJerk:exRideFormat(m.peakJerk,2)+" m/s³",exRideMetricDuration:exRideFormat(m.duration,1)+" sn"};
   Object.keys(fields).forEach(function(id){let el=exRideEl(id);if(el)el.textContent=fields[id];});
+  let speed=result.speed||{enabled:false},speedBox=exRideEl("exRideSpeedResult");
+  if(speedBox)speedBox.classList.toggle("is-visible",!!speed.enabled);
+  if(speed.enabled){
+    let speedFields={exRideAverageSpeed:exRideFormat(speed.averageSpeed,2)+" m/s",exRideMaxSpeed:exRideFormat(speed.maxSpeed,2)+" m/s",exRideTravelDistance:exRideFormat(speed.distance,2)+" m",exRideMotionDuration:exRideFormat(speed.travelTime,1)+" sn"};
+    Object.keys(speedFields).forEach(function(id){let el=exRideEl(id);if(el)el.textContent=speedFields[id];});
+    let floorMeta=exRideEl("exRideFloorMeta");if(floorMeta)floorMeta.textContent=(speed.floorCount||0)+" kat × "+exRideFormat(speed.floorHeight,2)+" m";
+    let confidence=exRideEl("exRideSpeedConfidence");if(confidence){confidence.classList.remove("is-high","is-low");confidence.classList.add(speed.confidence==="high"?"is-high":(speed.confidence==="low"?"is-low":""));confidence.textContent=speed.confidence==="high"?"YÜKSEK GÜVEN":(speed.confidence==="low"?"DÜŞÜK GÜVEN":"ORTA GÜVEN");}
+    let rated=exRideEl("exRideRatedCompare");
+    if(rated){
+      if(speed.ratedSpeed>0){let diff=((speed.maxSpeed-speed.ratedSpeed)/speed.ratedSpeed)*100;rated.textContent="Etiket hızı "+exRideFormat(speed.ratedSpeed,2)+" m/s · "+(Math.abs(diff)<1?"yaklaşık maksimum değerle aynı seviyede.":"yaklaşık maksimum değer "+Math.abs(Math.round(diff))+"% "+(diff>0?"yüksek":"düşük")+" görünüyor.");}
+      else rated.textContent=(speed.activityDetected?"Kalkış ve duruş sensör kaydından otomatik ayıklandı.":"Hareket sınırları düşük güvenle tahmin edildi; aynı seferi tekrar ölçerek karşılaştır.")+" Yaklaşık maksimum hız resmî ölçüm değildir.";
+    }
+  }
   let recommendations=result.recommendations||exRideRecommendations(m);let recHost=exRideEl("exRideRecommendations");if(recHost)recHost.innerHTML=recommendations.map(function(item){return '<div class="exRideRecommendation"><i></i><div><b>'+exRideEscape(item.title)+'</b><span>'+exRideEscape(item.text)+'</span></div></div>';}).join("");
   let previous=exRidePreviousRecord(result),compare=exRideEl("exRideCompare");
-  if(compare&&previous){let diff=Math.round(score-exRideNumber(previous.score));compare.style.display="block";compare.classList.toggle("is-worse",diff<0);compare.textContent=diff===0?"Önceki aynı yön testine göre puan değişmedi.":"Önceki aynı yön testine göre sürüş puanı "+Math.abs(diff)+" puan "+(diff>0?"iyileşti.":"düştü.");}else if(compare){compare.style.display="none";}
+  if(compare&&previous){let diff=Math.round(score-exRideNumber(previous.score));let comparison=diff===0?"Önceki aynı yön testine göre puan değişmedi.":"Önceki aynı yön testine göre sürüş puanı "+Math.abs(diff)+" puan "+(diff>0?"iyileşti.":"düştü.");if(speed.enabled&&previous.speed&&previous.speed.enabled){let speedDiff=speed.averageSpeed-exRideNumber(previous.speed.averageSpeed);comparison+=" Ortalama hız "+(Math.abs(speedDiff)<.01?"değişmedi.":exRideFormat(Math.abs(speedDiff),2)+" m/s "+(speedDiff>0?"arttı.":"azaldı."));}compare.style.display="block";compare.classList.toggle("is-worse",diff<0);compare.textContent=comparison;}else if(compare){compare.style.display="none";}
   let save=exRideEl("exRideSaveButton");if(save){save.disabled=!!result.saved;save.textContent=result.saved?"Apartmana Kaydedildi":"Apartmana Kaydet";}
 }
 
@@ -42752,14 +42939,14 @@ window.surusSonucunuKaydet=function(){
   let index=-1;if(typeof data!=="undefined"&&Array.isArray(data)){index=data.findIndex(function(a){return a&&result.apartmentId&&a.id===result.apartmentId;});if(index<0&&data[result.apartmentIndex])index=result.apartmentIndex;}
   if(index>=0&&data[index]){
     if(!Array.isArray(data[index].surusTestleri))data[index].surusTestleri=[];
-    data[index].surusTestleri.unshift({id:result.id,tarih:result.dateLabel,yon:result.direction,baslangic:result.startFloor,hedef:result.endFloor,puan:result.score,metrikler:result.metrics});
+    data[index].surusTestleri.unshift({id:result.id,tarih:result.dateLabel,yon:result.direction,baslangic:result.startFloor,hedef:result.endFloor,puan:result.score,metrikler:result.metrics,hiz:result.speed&&result.speed.enabled?result.speed:null});
     if(data[index].surusTestleri.length>30)data[index].surusTestleri.length=30;
     if(!Array.isArray(data[index].kayitlar))data[index].kayitlar=[];
-    data[index].kayitlar.push("Sürüş analizi yapıldı: "+result.score+"/100 · "+result.direction+" ("+new Date(result.createdAt).toLocaleDateString("tr-TR")+")");
+    data[index].kayitlar.push("Sürüş analizi yapıldı: "+result.score+"/100 · "+result.direction+(result.speed&&result.speed.enabled?" · Ort. "+exRideFormat(result.speed.averageSpeed,2)+" m/s":"")+" ("+new Date(result.createdAt).toLocaleDateString("tr-TR")+")");
     try{if(typeof kaydet==="function")kaydet();}catch(error){}
   }
   exRideResultRender(result);exRideHistoryRender();
-  try{if(typeof toast==="function")toast("Sürüş analizi apartmana kaydedildi");}catch(error){}
+  try{if(typeof toast==="function")toast(result.speed&&result.speed.enabled?"Sürüş ve hız analizi apartmana kaydedildi":"Sürüş analizi apartmana kaydedildi");}catch(error){}
 };
 
 window.surusGecmisSonucAc=function(id){
@@ -42780,9 +42967,13 @@ function exRideSvgChart(samples){
 window.surusSonucPdf=function(){
   let result=exRideState.current;if(!result){try{if(typeof toast==="function")toast("Önce bir test sonucu oluştur");}catch(error){}return;}
   let report=typeof elevatorXOpenReportWindow==="function"?elevatorXOpenReportWindow():window.open("","_blank");if(!report){try{if(typeof toast==="function")toast("PDF penceresi açılamadı");}catch(error){}return;}
-  let m=result.metrics||{},recommendations=result.recommendations||[],profile=typeof profilBilgileri==="function"?profilBilgileri():{};
-  report.document.open();report.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sürüş Analizi - ${exRideEscape(result.apartmentName)}</title><style>@page{size:A4;margin:12mm}*{box-sizing:border-box}body{margin:0;background:#eef3f8;color:#172238;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial}.page{width:210mm;min-height:285mm;margin:auto;background:#fff;padding:15mm}.head{display:flex;justify-content:space-between;gap:20px;border-bottom:4px solid #176fe8;padding-bottom:13px}.brand{font-size:23px;font-weight:900}.brand b{color:#176fe8}.sub{margin-top:5px;color:#7a8799;font-size:9px}.score{width:70px;height:70px;border-radius:22px;background:#eaf2ff;color:#176fe8;display:grid;place-items:center;font-size:28px;font-weight:900}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}.box{border:1px solid #dfe6ef;border-radius:11px;padding:9px}.box span{display:block;color:#8592a5;font-size:8px;font-weight:800;text-transform:uppercase}.box b{display:block;margin-top:5px;font-size:11px}h2{font-size:15px;margin:18px 0 8px}.chart svg{width:100%;height:auto}.rec{padding:9px 10px;margin-top:7px;border-radius:10px;background:#f3f6fa;font-size:9px;line-height:1.5}.note{margin-top:14px;padding:10px;border-radius:10px;background:#fff5d9;color:#73551b;font-size:8.5px;line-height:1.5}.foot{display:flex;justify-content:space-between;margin-top:18px;padding-top:8px;border-top:1px solid #dfe6ef;color:#8c98a9;font-size:8px}.actions{position:fixed;right:14px;bottom:14px}.actions button{border:0;border-radius:12px;padding:11px 15px;background:#176fe8;color:#fff;font-weight:800}@media print{body{background:#fff}.page{padding:5mm;min-height:auto}.actions{display:none}}</style></head><body><section class="page"><div class="head"><div><div class="brand">Asansör <b>Bakım & Revizyon</b></div><div class="sub">Telefon Sensörleriyle Sürüş Analizi Saha Raporu</div></div><div class="score">${Math.round(exRideNumber(result.score))}</div></div><div class="grid"><div class="box"><span>Apartman</span><b>${exRideEscape(result.apartmentName)}</b></div><div class="box"><span>Tarih</span><b>${exRideEscape(result.dateLabel)}</b></div><div class="box"><span>Sefer</span><b>${exRideEscape(result.startFloor)} → ${exRideEscape(result.endFloor)} · ${exRideEscape(result.direction)}</b></div><div class="box"><span>Kabin durumu</span><b>${exRideEscape(result.load)}</b></div><div class="box"><span>Tepe dikey ivme</span><b>${exRideFormat(m.peakVertical,2)} m/s²</b></div><div class="box"><span>Yatay titreşim RMS</span><b>${exRideFormat(m.lateralRms,2)} m/s²</b></div><div class="box"><span>Tepe jerk</span><b>${exRideFormat(m.peakJerk,2)} m/s³</b></div><div class="box"><span>Test süresi</span><b>${exRideFormat(m.duration,1)} sn</b></div></div><h2>Sensör Grafiği</h2><div class="chart">${exRideSvgChart(result.samples)}</div><h2>Ön Kontrol Önerileri</h2>${recommendations.map(function(item){return'<div class="rec"><b>'+exRideEscape(item.title)+'</b><br>'+exRideEscape(item.text)+'</div>';}).join("")}${result.note?'<h2>Saha Notu</h2><div class="rec">'+exRideEscape(result.note)+'</div>':''}<div class="note"><b>Bilgilendirme:</b> Bu rapor telefon sensörleriyle hazırlanmış saha karşılaştırmasıdır. Kalibre edilmiş profesyonel ölçüm cihazı, resmî uygunluk değerlendirmesi veya sertifikalı test raporu yerine geçmez.</div><div class="foot"><span>${exRideEscape(profile.firma||"Asansör Bakım & Revizyon")}</span><span>${exRideEscape(typeof APP_VERSION!=="undefined"?APP_VERSION:"")}</span></div></section><div class="actions"><button onclick="window.print()">PDF Oluştur / Paylaş</button></div></body></html>`);report.document.close();
+  let m=result.metrics||{},speed=result.speed||{enabled:false},recommendations=result.recommendations||[],profile=typeof profilBilgileri==="function"?profilBilgileri():{};
+  let speedBoxes=speed.enabled?`<div class="box"><span>Ortalama hız</span><b>${exRideFormat(speed.averageSpeed,2)} m/s</b></div><div class="box"><span>Yaklaşık maksimum hız</span><b>${exRideFormat(speed.maxSpeed,2)} m/s</b></div><div class="box"><span>Seyir mesafesi</span><b>${exRideFormat(speed.distance,2)} m · ${exRideEscape(speed.floorCount)} kat</b></div><div class="box"><span>Hareket süresi</span><b>${exRideFormat(speed.travelTime,1)} sn · ${speed.confidence==="high"?"Yüksek":(speed.confidence==="low"?"Düşük":"Orta")} güven</b></div>`:"";
+  report.document.open();report.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sürüş ve Hız Analizi - ${exRideEscape(result.apartmentName)}</title><style>@page{size:A4;margin:12mm}*{box-sizing:border-box}body{margin:0;background:#eef3f8;color:#172238;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial}.page{width:210mm;min-height:285mm;margin:auto;background:#fff;padding:15mm}.head{display:flex;justify-content:space-between;gap:20px;border-bottom:4px solid #176fe8;padding-bottom:13px}.brand{font-size:23px;font-weight:900}.brand b{color:#176fe8}.sub{margin-top:5px;color:#7a8799;font-size:9px}.score{width:70px;height:70px;border-radius:22px;background:#eaf2ff;color:#176fe8;display:grid;place-items:center;font-size:28px;font-weight:900}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}.box{border:1px solid #dfe6ef;border-radius:11px;padding:9px}.box span{display:block;color:#8592a5;font-size:8px;font-weight:800;text-transform:uppercase}.box b{display:block;margin-top:5px;font-size:11px}h2{font-size:15px;margin:18px 0 8px}.chart svg{width:100%;height:auto}.rec{padding:9px 10px;margin-top:7px;border-radius:10px;background:#f3f6fa;font-size:9px;line-height:1.5}.note{margin-top:14px;padding:10px;border-radius:10px;background:#fff5d9;color:#73551b;font-size:8.5px;line-height:1.5}.foot{display:flex;justify-content:space-between;margin-top:18px;padding-top:8px;border-top:1px solid #dfe6ef;color:#8c98a9;font-size:8px}.actions{position:fixed;right:14px;bottom:14px}.actions button{border:0;border-radius:12px;padding:11px 15px;background:#176fe8;color:#fff;font-weight:800}@media print{body{background:#fff}.page{padding:5mm;min-height:auto}.actions{display:none}}</style></head><body><section class="page"><div class="head"><div><div class="brand">Asansör <b>Bakım & Revizyon</b></div><div class="sub">Telefon Sensörleriyle Sürüş ve Yaklaşık Hız Saha Raporu</div></div><div class="score">${Math.round(exRideNumber(result.score))}</div></div><div class="grid"><div class="box"><span>Apartman</span><b>${exRideEscape(result.apartmentName)}</b></div><div class="box"><span>Tarih</span><b>${exRideEscape(result.dateLabel)}</b></div><div class="box"><span>Sefer</span><b>${exRideEscape(result.startFloor)} → ${exRideEscape(result.endFloor)} · ${exRideEscape(result.direction)}</b></div><div class="box"><span>Kabin durumu</span><b>${exRideEscape(result.load)}</b></div><div class="box"><span>Tepe dikey ivme</span><b>${exRideFormat(m.peakVertical,2)} m/s²</b></div><div class="box"><span>Yatay titreşim RMS</span><b>${exRideFormat(m.lateralRms,2)} m/s²</b></div><div class="box"><span>Tepe jerk</span><b>${exRideFormat(m.peakJerk,2)} m/s³</b></div><div class="box"><span>Test süresi</span><b>${exRideFormat(m.duration,1)} sn</b></div>${speedBoxes}</div><h2>Sensör Grafiği</h2><div class="chart">${exRideSvgChart(result.samples)}</div><h2>Ön Kontrol Önerileri</h2>${recommendations.map(function(item){return'<div class="rec"><b>'+exRideEscape(item.title)+'</b><br>'+exRideEscape(item.text)+'</div>';}).join("")}${result.note?'<h2>Saha Notu</h2><div class="rec">'+exRideEscape(result.note)+'</div>':''}<div class="note"><b>Bilgilendirme:</b> Bu rapor telefon sensörleri ve kullanıcı tarafından girilen kat mesafesiyle hazırlanmış saha ön ölçümüdür. Ortalama ve maksimum hız değerleri yaklaşık sonuçtur; kalibre edilmiş profesyonel ölçüm cihazı, resmî uygunluk değerlendirmesi veya sertifikalı test raporu yerine geçmez.</div><div class="foot"><span>${exRideEscape(profile.firma||"Asansör Bakım & Revizyon")}</span><span>${exRideEscape(typeof APP_VERSION!=="undefined"?APP_VERSION:"")}</span></div></section><div class="actions"><button onclick="window.print()">PDF Oluştur / Paylaş</button></div></body></html>`);report.document.close();
 };
+
+["exRideStartFloor","exRideEndFloor"].forEach(function(id){let input=exRideEl(id);if(input)input.addEventListener("change",exRideInferFloorCount);});
+window.surusHizModuGuncelle();
 
 document.addEventListener("visibilitychange",function(){
   if(document.visibilityState==="hidden"&&(exRideState.recording||exRideState.countdown)){
