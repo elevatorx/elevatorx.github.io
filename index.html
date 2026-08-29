@@ -19359,6 +19359,40 @@ body.exRideOpen #exHybridMenuBtn{display:none!important}
 body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#eff5ff}body.darkMode .exRideScreen,html.darkRoot .exRideScreen{background:radial-gradient(circle at 20% 0,rgba(43,111,205,.18),transparent 32%),linear-gradient(180deg,#101a29,#0c1420)}body.darkMode .exRideTopbar,html.darkRoot .exRideTopbar{background:rgba(14,23,36,.9);border-color:rgba(255,255,255,.08)}body.darkMode .exRideClose,html.darkRoot .exRideClose,body.darkMode .exRideCard,html.darkRoot .exRideCard{background:rgba(18,30,47,.92);border-color:rgba(255,255,255,.08);color:#eff5ff}body.darkMode .exRideField input,body.darkMode .exRideField select,body.darkMode .exRideField textarea,html.darkRoot .exRideField input,html.darkRoot .exRideField select,html.darkRoot .exRideField textarea{background:#16253a;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exRidePlacement,body.darkMode .exRideLiveMetric,body.darkMode .exRideMetric,body.darkMode .exRideRecommendation,body.darkMode .exRideHistoryItem,body.darkMode .exRideEmpty,html.darkRoot .exRidePlacement,html.darkRoot .exRideLiveMetric,html.darkRoot .exRideMetric,html.darkRoot .exRideRecommendation,html.darkRoot .exRideHistoryItem,html.darkRoot .exRideEmpty{background:#16253a;color:#eff5ff}body.darkMode .exRideScoreRing:before,html.darkRoot .exRideScoreRing:before{background:#122036}body.darkMode .exRideStep,html.darkRoot .exRideStep{background:#152337;border-color:rgba(255,255,255,.08)}body.darkMode .exRideStep.is-active,html.darkRoot .exRideStep.is-active{background:#21324a}
 @media(max-width:480px){.exRideBody{padding-left:13px;padding-right:13px}.exRideFormGrid{grid-template-columns:minmax(0,1fr)}.exRideField.wide{grid-column:auto}.exRideScoreArea{grid-template-columns:110px minmax(0,1fr)}.exRideScoreRing{width:106px;height:106px}.exRideLiveGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.exRideLiveMetric:last-child{grid-column:1/-1}.exRideResultActions{grid-template-columns:minmax(0,1fr)}}
 </style>
+<style id="exLuxControlV2217">
+.exLuxNewBadge{flex:0 0 auto;margin-left:auto;padding:5px 7px;border-radius:999px;background:#fff4cf;color:#9a6700;font-size:8px;font-weight:950;letter-spacing:.08em}
+#exLuxModal{position:fixed;inset:0;width:100%;max-width:100vw;z-index:10042;display:none;overflow:hidden;overscroll-behavior-x:none;touch-action:pan-y;background:#eef4fb;color:#172238}
+#exLuxModal.is-open{display:block}
+body.exLuxOpen{width:100%!important;max-width:100vw!important;overflow:hidden!important;overflow-x:hidden!important;overscroll-behavior:none;touch-action:pan-y}
+body.exLuxOpen #exHybridMenuBtn{display:none!important}
+.exLuxScreen{width:100%;max-width:100vw;height:100%;overflow-x:hidden!important;overflow-y:auto;overscroll-behavior-x:none;touch-action:pan-y;-webkit-overflow-scrolling:touch;background:radial-gradient(circle at 90% 0,rgba(255,194,48,.18),transparent 31%),linear-gradient(180deg,#f5f8fd,#edf3fa)}
+.exLuxTopbar{position:sticky;top:0;z-index:7;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(13px + env(safe-area-inset-top)) 18px 13px;background:rgba(246,249,253,.9);border-bottom:1px solid rgba(205,217,232,.74);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.exLuxTopText span{display:block;color:#c98200;font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}.exLuxTopText b{display:block;margin-top:4px;font-size:19px;font-weight:950}
+.exLuxClose{width:42px;height:42px;border:0;border-radius:15px;background:#fff;color:#26364e;font-size:23px;font-weight:850;box-shadow:0 9px 22px rgba(24,49,85,.09)}
+.exLuxBody{box-sizing:border-box;width:100%;max-width:760px;min-width:0;margin:0 auto;padding:18px 16px calc(42px + env(safe-area-inset-bottom));overflow-x:hidden}
+.exLuxBody,.exLuxBody *{box-sizing:border-box;min-width:0}.exLuxBody h1,.exLuxBody h2,.exLuxBody h3,.exLuxBody b,.exLuxBody span,.exLuxBody p,.exLuxBody em{overflow-wrap:anywhere}
+.exLuxHero{position:relative;overflow:hidden;padding:20px;border-radius:29px;color:#fff;background:linear-gradient(145deg,#17253c,#1d5e9d 67%,#efaa17);box-shadow:0 20px 46px rgba(31,82,137,.22)}
+.exLuxHero:after{content:"";position:absolute;width:190px;height:190px;right:-62px;top:-78px;border-radius:50%;background:rgba(255,211,92,.20)}
+.exLuxHeroKicker{position:relative;z-index:1;color:#ffe7a7;font-size:9px;font-weight:950;letter-spacing:.15em;text-transform:uppercase}.exLuxHero h2{position:relative;z-index:1;margin:7px 0 6px;font-size:25px;line-height:1.06}.exLuxHero p{position:relative;z-index:1;margin:0;max-width:540px;color:rgba(242,248,255,.84);font-size:11px;line-height:1.55;font-weight:700}
+.exLuxCard{margin-top:13px;padding:16px;border:1px solid rgba(216,226,239,.94);border-radius:25px;background:rgba(255,255,255,.88);box-shadow:0 13px 32px rgba(26,49,80,.055);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.exLuxCardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:13px}.exLuxCardHead span{display:block;color:#c98200;font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.exLuxCardHead b{display:block;margin-top:4px;font-size:16px;font-weight:950}.exLuxCardBadge{padding:6px 8px;border-radius:999px;background:#fff4d5;color:#996600;font-size:8px;font-weight:950}
+.exLuxNotice{display:grid;grid-template-columns:27px minmax(0,1fr);gap:10px;padding:12px 13px;border-radius:17px;background:#fff7df;color:#765517;font-size:10px;line-height:1.5;font-weight:750}.exLuxNotice i{width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:#ffdf84;font-style:normal;font-weight:950}
+.exLuxGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.exLuxField{display:block}.exLuxField.wide{grid-column:1/-1}.exLuxField>span{display:block;margin:0 0 6px 2px;color:#718097;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.exLuxField input,.exLuxField select,.exLuxField textarea{display:block;width:100%;max-width:100%;min-width:0;min-height:48px;border:1px solid #dce5ef;border-radius:15px;padding:11px 12px;background:#f8fbff;color:#172238;font:800 12px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:0}.exLuxField textarea{min-height:76px;resize:vertical}.exLuxField input:focus,.exLuxField select:focus,.exLuxField textarea:focus{border-color:#e9aa27;box-shadow:0 0 0 4px rgba(233,170,39,.11)}
+.exLuxThreshold{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:11px;padding:12px 13px;border-radius:17px;background:#edf4ff;color:#42536b}.exLuxThreshold span{font-size:9.5px;line-height:1.45;font-weight:750}.exLuxThreshold b{flex:0 0 auto;color:#176fe8;font-size:19px;font-weight:950}
+.exLuxReadings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.exLuxReading{padding:10px;border:1px solid #dce5ef;border-radius:17px;background:#f8fbff}.exLuxReading span{display:block;color:#7b889b;font-size:8px;font-weight:900;text-transform:uppercase}.exLuxReadingBox{display:flex;align-items:center;gap:5px;margin-top:6px}.exLuxReading input{width:100%;min-width:0;border:0;background:transparent;color:#172238;font-size:19px;font-weight:950;outline:0}.exLuxReading em{flex:0 0 auto;color:#8a96a8;font-size:9px;font-style:normal;font-weight:850}
+.exLuxPrimary,.exLuxSecondary,.exLuxDanger{width:100%;min-height:51px;margin-top:12px;border:0;border-radius:17px;font-size:12px;font-weight:950}.exLuxPrimary{background:linear-gradient(135deg,#182b47,#176fe8);color:#fff;box-shadow:0 13px 26px rgba(23,102,206,.20)}.exLuxSecondary{background:#edf2f8;color:#42536b}.exLuxDanger{background:#fff0f1;color:#bd2839}.exLuxButtonRow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.exLuxPhotoPicker{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:10px;margin-top:12px;padding:11px;border:1px dashed #cbd8e7;border-radius:18px;background:#f8fbff}.exLuxPhotoIcon{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:#edf4ff;color:#176fe8;font-size:20px}.exLuxPhotoPicker b{display:block;font-size:11px}.exLuxPhotoPicker span{display:block;margin-top:3px;color:#7a8799;font-size:8.5px;font-weight:750}.exLuxPhotoPicker button{border:0;border-radius:13px;padding:9px 10px;background:#172a45;color:#fff;font-size:9px;font-weight:900}
+.exLuxPhotoPreview{position:relative;display:none;margin-top:10px;overflow:hidden;border-radius:18px;background:#e7edf5}.exLuxPhotoPreview.is-visible{display:block}.exLuxPhotoPreview img{display:block;width:100%;height:190px;object-fit:cover}.exLuxPhotoPreview button{position:absolute;right:9px;top:9px;width:34px;height:34px;border:0;border-radius:12px;background:rgba(15,27,44,.82);color:#fff;font-size:18px;font-weight:900}
+.exLuxResult{display:none}.exLuxResult.is-visible{display:block}.exLuxResultHero{display:grid;grid-template-columns:126px minmax(0,1fr);gap:15px;align-items:center}.exLuxGauge{width:122px;height:122px;display:grid;place-items:center;border-radius:38px;background:#edf4ff;border:1px solid #d5e4f7;color:#176fe8;box-shadow:inset 0 1px 0 #fff}.exLuxGauge b{font-size:31px;font-weight:950}.exLuxGauge span{display:block;margin-top:-27px;font-size:9px;font-weight:900;text-transform:uppercase}.exLuxResultText b{display:block;font-size:20px}.exLuxResultText span{display:block;margin-top:6px;color:#6d7b90;font-size:10px;line-height:1.5;font-weight:750}
+.exLuxResult.is-good .exLuxGauge{background:#eaf8ef;border-color:#c4ead2;color:#159553}.exLuxResult.is-border .exLuxGauge{background:#fff5d9;border-color:#f0d99e;color:#d08b00}.exLuxResult.is-bad .exLuxGauge{background:#fff0f1;border-color:#f0c7cd;color:#d63548}
+.exLuxStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}.exLuxStat{padding:11px;border-radius:16px;background:#f4f7fb;text-align:center}.exLuxStat span{display:block;color:#8491a4;font-size:8px;font-weight:900;text-transform:uppercase}.exLuxStat b{display:block;margin-top:5px;font-size:15px;font-weight:950}
+.exLuxRecommendations{display:grid;gap:8px;margin-top:11px}.exLuxRecommendation{display:grid;grid-template-columns:10px minmax(0,1fr);gap:9px;padding:11px 12px;border-radius:16px;background:#f5f7fa}.exLuxRecommendation i{width:10px;height:10px;margin-top:3px;border-radius:50%;background:#f5a524}.exLuxRecommendation b{display:block;font-size:11px}.exLuxRecommendation span{display:block;margin-top:3px;color:#718097;font-size:9px;line-height:1.45;font-weight:700}
+.exLuxCalcResult{display:none;margin-top:11px;padding:13px;border-radius:18px;background:#edf4ff;color:#42536b;font-size:10px;line-height:1.55;font-weight:750}.exLuxCalcResult.is-visible{display:block}.exLuxCalcResult b{display:block;color:#176fe8;font-size:20px;margin-bottom:3px}
+.exLuxHistoryList{display:grid;gap:8px}.exLuxHistoryItem{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:100%;padding:11px 12px;border:0;border-radius:17px;background:#f4f7fb;text-align:left;color:#172238}.exLuxHistoryItem b{display:block;font-size:11px}.exLuxHistoryItem span{display:block;margin-top:4px;color:#78869a;font-size:8.5px;font-weight:750}.exLuxHistoryValue{flex:0 0 auto;min-width:62px;padding:8px;border-radius:13px;background:#fff;text-align:center;font-size:13px;font-weight:950}.exLuxHistoryValue.good{color:#159553}.exLuxHistoryValue.border{color:#c17d00}.exLuxHistoryValue.bad{color:#d63548}.exLuxEmpty{padding:16px;border-radius:17px;background:#f4f7fb;color:#7d8999;text-align:center;font-size:10px;font-weight:750}
+.exLuxDisclaimer{margin-top:12px;padding:11px 12px;border-radius:16px;background:#fff7df;color:#72551c;font-size:9px;line-height:1.5;font-weight:750}
+body.darkMode #exLuxModal,html.darkRoot #exLuxModal{background:#0c1420;color:#eff5ff}body.darkMode .exLuxScreen,html.darkRoot .exLuxScreen{background:radial-gradient(circle at 90% 0,rgba(239,170,23,.12),transparent 31%),linear-gradient(180deg,#101a29,#0c1420)}body.darkMode .exLuxTopbar,html.darkRoot .exLuxTopbar{background:rgba(14,23,36,.91);border-color:rgba(255,255,255,.08)}body.darkMode .exLuxClose,body.darkMode .exLuxCard,html.darkRoot .exLuxClose,html.darkRoot .exLuxCard{background:rgba(18,30,47,.94);border-color:rgba(255,255,255,.08);color:#eff5ff}body.darkMode .exLuxField input,body.darkMode .exLuxField select,body.darkMode .exLuxField textarea,body.darkMode .exLuxReading,body.darkMode .exLuxPhotoPicker,html.darkRoot .exLuxField input,html.darkRoot .exLuxField select,html.darkRoot .exLuxField textarea,html.darkRoot .exLuxReading,html.darkRoot .exLuxPhotoPicker{background:#16253a;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exLuxReading input,html.darkRoot .exLuxReading input{color:#eff5ff}body.darkMode .exLuxThreshold,body.darkMode .exLuxStat,body.darkMode .exLuxRecommendation,body.darkMode .exLuxHistoryItem,body.darkMode .exLuxEmpty,body.darkMode .exLuxCalcResult,html.darkRoot .exLuxThreshold,html.darkRoot .exLuxStat,html.darkRoot .exLuxRecommendation,html.darkRoot .exLuxHistoryItem,html.darkRoot .exLuxEmpty,html.darkRoot .exLuxCalcResult{background:#16253a;color:#eff5ff}body.darkMode .exLuxGauge,html.darkRoot .exLuxGauge{background:#16253a;border-color:rgba(255,255,255,.12)}
+@media(max-width:480px){.exLuxBody{padding-left:13px;padding-right:13px}.exLuxGrid{grid-template-columns:minmax(0,1fr)}.exLuxField.wide{grid-column:auto}.exLuxReadings{grid-template-columns:minmax(0,1fr)}.exLuxResultHero{grid-template-columns:104px minmax(0,1fr)}.exLuxGauge{width:100px;height:100px;border-radius:31px}.exLuxGauge b{font-size:26px}.exLuxGauge span{margin-top:-22px}.exLuxStats{grid-template-columns:repeat(3,minmax(0,1fr))}.exLuxButtonRow{grid-template-columns:minmax(0,1fr)}.exLuxPhotoPicker{grid-template-columns:42px minmax(0,1fr)}.exLuxPhotoPicker button{grid-column:1/-1;width:100%}}
+</style>
 </head>
 
 <body>
@@ -19445,6 +19479,17 @@ body.darkMode #exRideModal,html.darkRoot #exRideModal{background:#0c1420;color:#
       </span>
       <span class="exHybridItemText"><b>Sürüş Analizi</b><small>Kalkış, titreşim ve duruş kalitesini ölç</small></span>
       <span class="exRideNewBadge">YENİ</span>
+    </button>
+
+    <button class="exHybridItem exLuxDrawerItem" type="button" onclick="luxKontroluAc()">
+      <span class="exHybridItemIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.9"/>
+          <path d="M12 2.8v2.3M12 18.9v2.3M2.8 12h2.3M18.9 12h2.3M5.5 5.5l1.6 1.6M16.9 16.9l1.6 1.6M18.5 5.5l-1.6 1.6M7.1 16.9l-1.6 1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="exHybridItemText"><b>Lux Kontrolü</b><small>Aydınlatmayı ölç, değerlendir ve raporla</small></span>
+      <span class="exLuxNewBadge">YENİ</span>
     </button>
 
     <button class="exHybridItem" type="button" onclick="exHybridCall('teknikKutuphaneAc')">
@@ -19816,6 +19861,113 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
           <button class="exRideSecondary" type="button" onclick="surusYeniTest()">Yeni Test Başlat</button>
         </div>
       </section>
+    </main>
+  </div>
+</div>
+
+<div id="exLuxModal" aria-hidden="true">
+  <div class="exLuxScreen">
+    <header class="exLuxTopbar">
+      <div class="exLuxTopText"><span>Saha araçları</span><b>Lux Kontrolü</b></div>
+      <button class="exLuxClose" type="button" onclick="luxKontroluKapat()" aria-label="Kapat">×</button>
+    </header>
+
+    <main class="exLuxBody">
+      <section class="exLuxHero">
+        <div class="exLuxHeroKicker">Kalibreli luxmetre ile saha ön kontrolü</div>
+        <h2>Işığı ölç, eşiği anında gör.</h2>
+        <p>Çalışma alanında üç ölçüm kaydet; en düşük değere göre sonucu değerlendir, apartmana işle ve PDF raporu oluştur.</p>
+      </section>
+
+      <section class="exLuxCard">
+        <div class="exLuxCardHead"><div><span>Ölçüm bilgileri</span><b>Noktayı ve cihazı kaydet</b></div><i class="exLuxCardBadge">TS EN 81-20 ÖN KONTROL</i></div>
+        <div class="exLuxNotice"><i>!</i><span>Telefon luxmetre olarak kullanılmaz. Değerleri kalibreli ölçüm cihazından gir; çalışma alanlarında 200 lux, çalışma alanları arasındaki geçişlerde 50 lux eşiği uygulanır.</span></div>
+
+        <div class="exLuxGrid">
+          <label class="exLuxField wide"><span>Apartman / Site</span><select id="exLuxApartment"></select></label>
+          <label class="exLuxField wide"><span>Ölçüm noktası</span>
+            <select id="exLuxPoint" onchange="luxOlcumNoktasiDegisti()">
+              <option value="machine_floor">Makine / makara alanı döşeme seviyesi</option>
+              <option value="panel_front">Kumanda panosu önü</option>
+              <option value="machine_front">Makine / motor önü</option>
+              <option value="regulator_front">Regülatör / çalışma alanı</option>
+              <option value="transition_path">Çalışma alanları arası geçiş</option>
+              <option value="custom">Özel ölçüm noktası</option>
+            </select>
+          </label>
+          <label id="exLuxCustomPointWrap" class="exLuxField wide" style="display:none"><span>Özel nokta adı</span><input id="exLuxCustomPoint" type="text" placeholder="Örn. pano içi çalışma bölgesi"></label>
+          <label id="exLuxCustomThresholdWrap" class="exLuxField" style="display:none"><span>Özel eşik</span><input id="exLuxCustomThreshold" type="text" inputmode="decimal" value="200" oninput="luxCanliHesap()" placeholder="200"></label>
+          <label class="exLuxField"><span>Ölçüm tarihi</span><input id="exLuxDate" type="date"></label>
+          <label class="exLuxField"><span>Ölçümü alan</span><input id="exLuxTechnician" type="text" placeholder="Teknisyen adı"></label>
+          <label class="exLuxField"><span>Luxmetre / Seri No</span><input id="exLuxDevice" type="text" placeholder="Örn. UNI-T UT383 / 01234"></label>
+          <label class="exLuxField"><span>Kalibrasyon tarihi</span><input id="exLuxCalibrationDate" type="date"></label>
+        </div>
+
+        <div class="exLuxThreshold"><span id="exLuxThresholdText">Bu noktada aranacak en düşük aydınlık şiddeti</span><b id="exLuxThresholdValue">200 lux</b></div>
+
+        <div class="exLuxReadings" aria-label="Lux ölçüm değerleri">
+          <label class="exLuxReading"><span>1. ölçüm</span><div class="exLuxReadingBox"><input id="exLuxReading1" type="text" inputmode="decimal" placeholder="0" oninput="luxCanliHesap()"><em>lux</em></div></label>
+          <label class="exLuxReading"><span>2. ölçüm</span><div class="exLuxReadingBox"><input id="exLuxReading2" type="text" inputmode="decimal" placeholder="0" oninput="luxCanliHesap()"><em>lux</em></div></label>
+          <label class="exLuxReading"><span>3. ölçüm</span><div class="exLuxReadingBox"><input id="exLuxReading3" type="text" inputmode="decimal" placeholder="0" oninput="luxCanliHesap()"><em>lux</em></div></label>
+        </div>
+
+        <div class="exLuxGrid">
+          <label class="exLuxField wide"><span>Saha notu (isteğe bağlı)</span><textarea id="exLuxNote" placeholder="Armatür konumu, gölge yapan ekipman, temizlik veya besleme notu..."></textarea></label>
+        </div>
+
+        <div class="exLuxPhotoPicker">
+          <div class="exLuxPhotoIcon">⌑</div>
+          <div><b>Ölçüm fotoğrafı</b><span>Luxmetre ekranı ve ölçüm noktasını tek karede göster.</span></div>
+          <button type="button" onclick="document.getElementById('exLuxPhotoInput').click()">Fotoğraf Çek / Seç</button>
+          <input id="exLuxPhotoInput" type="file" accept="image/*" capture="environment" hidden onchange="luxFotografSec(this.files)">
+        </div>
+        <div id="exLuxPhotoPreview" class="exLuxPhotoPreview"><img id="exLuxPhotoImage" alt="Lux ölçüm fotoğrafı"><button type="button" onclick="luxFotografKaldir()" aria-label="Fotoğrafı kaldır">×</button></div>
+
+        <button class="exLuxPrimary" type="button" onclick="luxOlcumunuDegerlendir()">Ölçümü Değerlendir</button>
+      </section>
+
+      <section id="exLuxResult" class="exLuxResult">
+        <div class="exLuxCard">
+          <div class="exLuxCardHead"><div><span>Ön kontrol sonucu</span><b id="exLuxResultPoint">Aydınlatma ölçümü</b></div><i id="exLuxResultBadge" class="exLuxCardBadge">SONUÇ</i></div>
+          <div class="exLuxResultHero">
+            <div class="exLuxGauge"><b id="exLuxResultMin">0</b><span>en düşük lux</span></div>
+            <div class="exLuxResultText"><b id="exLuxResultTitle">Değerler bekleniyor</b><span id="exLuxResultDescription">Üç ölçümün en düşük değeri karar kriteridir.</span></div>
+          </div>
+          <div class="exLuxStats">
+            <div class="exLuxStat"><span>Ortalama</span><b id="exLuxResultAverage">0 lux</b></div>
+            <div class="exLuxStat"><span>En yüksek</span><b id="exLuxResultMax">0 lux</b></div>
+            <div class="exLuxStat"><span>Gerekli eşik</span><b id="exLuxResultThreshold">200 lux</b></div>
+          </div>
+          <div id="exLuxRecommendations" class="exLuxRecommendations"></div>
+          <div class="exLuxButtonRow">
+            <button class="exLuxSecondary" type="button" onclick="luxSonucPdf()">PDF Raporu</button>
+            <button id="exLuxSaveButton" class="exLuxPrimary" type="button" onclick="luxSonucunuKaydet()">Apartmana Kaydet</button>
+          </div>
+          <button id="exLuxRevisionButton" class="exLuxDanger" type="button" style="display:none" onclick="luxRevizyonTeklifineAktar()">Aydınlatma Revizyon Teklifi Hazırla</button>
+          <button class="exLuxSecondary" type="button" onclick="luxYeniOlcum()">Yeni Ölçüm Başlat</button>
+        </div>
+      </section>
+
+      <section class="exLuxCard">
+        <div class="exLuxCardHead"><div><span>Armatür hesabı</span><b>Yaklaşık LED ihtiyacını hesapla</b></div><i class="exLuxCardBadge">PLANLAMA</i></div>
+        <div class="exLuxGrid">
+          <label class="exLuxField"><span>Alan uzunluğu (m)</span><input id="exLuxRoomLength" type="text" inputmode="decimal" placeholder="Örn. 4,2"></label>
+          <label class="exLuxField"><span>Alan genişliği (m)</span><input id="exLuxRoomWidth" type="text" inputmode="decimal" placeholder="Örn. 2,4"></label>
+          <label class="exLuxField"><span>Bir armatür ışık akısı</span><input id="exLuxFixtureLumens" type="text" inputmode="decimal" placeholder="Örn. 2000"></label>
+          <label class="exLuxField"><span>Tasarım hedefi</span><input id="exLuxDesignTarget" type="text" inputmode="decimal" value="250"></label>
+          <label class="exLuxField"><span>Yararlanma katsayısı</span><select id="exLuxUtilization"><option value="0.45">0,45 · Koyu / zor alan</option><option value="0.55">0,55 · Normal alan</option><option value="0.60" selected>0,60 · Açık renk yüzey</option><option value="0.70">0,70 · Çok verimli yerleşim</option></select></label>
+          <label class="exLuxField"><span>Bakım katsayısı</span><select id="exLuxMaintenance"><option value="0.70">0,70 · Kirli ortam</option><option value="0.80" selected>0,80 · Normal ortam</option><option value="0.90">0,90 · Temiz ortam</option></select></label>
+        </div>
+        <button class="exLuxSecondary" type="button" onclick="luxArmaturHesapla()">Armatür Sayısını Hesapla</button>
+        <div id="exLuxCalcResult" class="exLuxCalcResult"></div>
+      </section>
+
+      <section class="exLuxCard">
+        <div class="exLuxCardHead"><div><span>Kayıtlar</span><b>Son lux kontrolleri</b></div></div>
+        <div id="exLuxHistoryList" class="exLuxHistoryList"></div>
+      </section>
+
+      <div class="exLuxDisclaimer"><b>Önemli:</b> Uygulama bir ölçüm cihazı değildir. Sonuç, kullanıcı tarafından girilen kalibreli luxmetre değerlerini düzenleyen saha ön kontrolüdür; resmî periyodik kontrol veya uygunluk raporu yerine geçmez.</div>
     </main>
   </div>
 </div>
@@ -21703,7 +21855,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.16";
+const APP_VERSION = "v2.2.17";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -42595,6 +42747,396 @@ document.addEventListener("visibilitychange",function(){
     try{if(typeof toast==="function")toast("Uygulama arka plana geçtiği için ölçüm iptal edildi");}catch(error){}
   }
 });
+
+})();
+</script>
+
+<script id="exLuxControlScriptV2217">
+(function(){
+"use strict";
+
+const EX_LUX_KEY="elevatorXLuxTestsV1";
+const EX_LUX_DEVICE_KEY="elevatorXLuxLastDeviceV1";
+const EX_LUX_PHOTO_PREFIX="lux_photo_";
+const EX_LUX_MAX_RECORDS=100;
+const EX_LUX_POINTS={
+  machine_floor:{label:"Makine / makara alanı döşeme seviyesi",threshold:200,criterion:"Çalışma alanı"},
+  panel_front:{label:"Kumanda panosu önü",threshold:200,criterion:"Ekipman önü çalışma alanı"},
+  machine_front:{label:"Makine / motor önü",threshold:200,criterion:"Ekipman önü çalışma alanı"},
+  regulator_front:{label:"Regülatör / çalışma alanı",threshold:200,criterion:"Çalışma alanı"},
+  transition_path:{label:"Çalışma alanları arası geçiş",threshold:50,criterion:"Geçiş alanı"},
+  custom:{label:"Özel ölçüm noktası",threshold:200,criterion:"Özel eşik"}
+};
+
+let exLuxState={current:null,photoBlob:null,photoUrl:"",fixturePlan:null,loading:false};
+
+function exLuxEl(id){return document.getElementById(id);}
+function exLuxHtml(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function exLuxDecimal(value){let raw=String(value==null?"":value).trim().replace(/\s+/g,"").replace(",",".");let n=Number(raw);return Number.isFinite(n)?n:0;}
+function exLuxDecimalOrNull(value){let raw=String(value==null?"":value).trim();if(raw==="")return null;let n=exLuxDecimal(raw);return Number.isFinite(n)&&n>=0?n:null;}
+function exLuxRound(value,digits){let p=Math.pow(10,digits||0);return Math.round(exLuxDecimal(value)*p)/p;}
+function exLuxFormat(value,digits){return exLuxDecimal(value).toLocaleString("tr-TR",{minimumFractionDigits:digits,maximumFractionDigits:digits});}
+function exLuxId(){return"lux_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);}
+function exLuxToday(){let d=new Date(Date.now()-new Date().getTimezoneOffset()*60000);return d.toISOString().slice(0,10);}
+function exLuxDateLabel(value){if(!value)return"-";let d=new Date(value+"T12:00:00");return Number.isNaN(d.getTime())?String(value):d.toLocaleDateString("tr-TR");}
+
+function exLuxRecordsGet(){
+  try{let parsed=JSON.parse(localStorage.getItem(EX_LUX_KEY)||"[]");return Array.isArray(parsed)?parsed:[];}catch(error){return[];}
+}
+
+function exLuxRecordsSet(records){
+  try{localStorage.setItem(EX_LUX_KEY,JSON.stringify((records||[]).slice(0,EX_LUX_MAX_RECORDS)));return true;}
+  catch(error){try{if(typeof toast==="function")toast("Lux kayıt alanı dolu; eski kayıtları yedekleyip temizle");}catch(_){}return false;}
+}
+
+function exLuxLastDeviceGet(){try{let p=JSON.parse(localStorage.getItem(EX_LUX_DEVICE_KEY)||"{}");return p&&typeof p==="object"?p:{};}catch(error){return{};}}
+function exLuxLastDeviceSet(result){try{localStorage.setItem(EX_LUX_DEVICE_KEY,JSON.stringify({device:result.device||"",calibrationDate:result.calibrationDate||""}));}catch(error){}}
+
+function exLuxApartmentOptions(){
+  let select=exLuxEl("exLuxApartment");if(!select)return;
+  let current=select.value,list=typeof data!=="undefined"&&Array.isArray(data)?data:[];
+  select.innerHTML=list.length?list.map(function(a,i){return'<option value="'+i+'">'+exLuxHtml(a&&a.ad||("Apartman "+(i+1)))+'</option>';}).join(""):'<option value="">Kayıtlı apartman bulunmuyor</option>';
+  if(current!==""&&list[Number(current)])select.value=current;
+}
+
+function exLuxSelectedApartment(){
+  let select=exLuxEl("exLuxApartment"),index=select&&select.value!==""?Number(select.value):-1;
+  let apartment=typeof data!=="undefined"&&Array.isArray(data)&&index>=0?data[index]:null;
+  return{index:index,apartment:apartment};
+}
+
+function exLuxPoint(){
+  let id=(exLuxEl("exLuxPoint")&&exLuxEl("exLuxPoint").value)||"machine_floor";
+  let base=EX_LUX_POINTS[id]||EX_LUX_POINTS.custom;
+  let label=base.label,threshold=base.threshold;
+  if(id==="custom"){
+    label=(exLuxEl("exLuxCustomPoint")&&exLuxEl("exLuxCustomPoint").value.trim())||base.label;
+    threshold=Math.max(1,exLuxDecimal(exLuxEl("exLuxCustomThreshold")&&exLuxEl("exLuxCustomThreshold").value)||200);
+  }
+  return{id:id,label:label,threshold:exLuxRound(threshold,1),criterion:base.criterion};
+}
+
+function exLuxThresholdRender(){
+  let point=exLuxPoint(),value=exLuxEl("exLuxThresholdValue"),text=exLuxEl("exLuxThresholdText");
+  if(value)value.textContent=exLuxFormat(point.threshold,point.threshold%1?1:0)+" lux";
+  if(text)text.textContent=point.criterion+" için aranacak en düşük aydınlık şiddeti";
+}
+
+function exLuxResultHide(){
+  let result=exLuxEl("exLuxResult");if(result){result.classList.remove("is-visible","is-good","is-border","is-bad");}
+  let save=exLuxEl("exLuxSaveButton");if(save){save.disabled=false;save.textContent="Apartmana Kaydet";}
+}
+
+window.luxCanliHesap=function(){
+  exLuxThresholdRender();
+  if(exLuxState.loading)return;
+  exLuxState.current=null;
+  exLuxResultHide();
+};
+
+window.luxOlcumNoktasiDegisti=function(){
+  let custom=exLuxEl("exLuxPoint")&&exLuxEl("exLuxPoint").value==="custom";
+  let pointWrap=exLuxEl("exLuxCustomPointWrap"),thresholdWrap=exLuxEl("exLuxCustomThresholdWrap");
+  if(pointWrap)pointWrap.style.display=custom?"block":"none";
+  if(thresholdWrap)thresholdWrap.style.display=custom?"block":"none";
+  let point=exLuxPoint(),target=exLuxEl("exLuxDesignTarget");
+  if(target&&!exLuxState.loading)target.value=point.threshold>=200?"250":"60";
+  exLuxThresholdRender();
+  if(!exLuxState.loading){exLuxState.current=null;exLuxResultHide();}
+};
+
+function exLuxHorizontalLock(){
+  let screen=document.querySelector("#exLuxModal .exLuxScreen");if(!screen)return;
+  if(screen.dataset.luxXLock!=="1"){
+    screen.dataset.luxXLock="1";
+    screen.addEventListener("scroll",function(){if(screen.scrollLeft!==0)screen.scrollLeft=0;},{passive:true});
+  }
+  screen.scrollLeft=0;
+}
+
+function exLuxPhotoPreviewClear(){
+  if(exLuxState.photoUrl){try{URL.revokeObjectURL(exLuxState.photoUrl);}catch(error){}exLuxState.photoUrl="";}
+  let preview=exLuxEl("exLuxPhotoPreview"),img=exLuxEl("exLuxPhotoImage");
+  if(preview)preview.classList.remove("is-visible");if(img)img.removeAttribute("src");
+}
+
+function exLuxPhotoPreviewBlob(blob){
+  exLuxPhotoPreviewClear();if(!blob)return;
+  let url=URL.createObjectURL(blob),preview=exLuxEl("exLuxPhotoPreview"),img=exLuxEl("exLuxPhotoImage");
+  exLuxState.photoUrl=url;if(img)img.src=url;if(preview)preview.classList.add("is-visible");
+}
+
+function exLuxPhotoCompress(file){
+  if(typeof montajKesifDosyaBlob==="function")return montajKesifDosyaBlob(file);
+  return new Promise(function(resolve,reject){
+    if(typeof imageDosyasiniBlobYap!=="function"){reject(new Error("Görsel işleme kullanılamıyor"));return;}
+    imageDosyasiniBlobYap(file,1400,1100,.72,function(blob){blob?resolve(blob):reject(new Error("Fotoğraf işlenemedi"));});
+  });
+}
+
+window.luxFotografSec=async function(files){
+  if(exLuxState.current&&exLuxState.current.saved){try{if(typeof toast==="function")toast("Kayıtlı ölçüm yerine yeni ölçüm başlat");}catch(_){}return;}
+  let file=files&&files[0];if(!file)return;
+  if(!String(file.type||"").startsWith("image/")){try{if(typeof toast==="function")toast("Bir fotoğraf dosyası seç");}catch(_){}return;}
+  try{
+    if(typeof toast==="function")toast("Fotoğraf hazırlanıyor...");
+    let blob=await exLuxPhotoCompress(file);exLuxState.photoBlob=blob;exLuxPhotoPreviewBlob(blob);
+    if(typeof toast==="function")toast("Ölçüm fotoğrafı hazır");
+  }catch(error){try{if(typeof toast==="function")toast("Fotoğraf hazırlanamadı");}catch(_){} }
+  let input=exLuxEl("exLuxPhotoInput");if(input)input.value="";
+};
+
+window.luxFotografKaldir=function(){
+  if(exLuxState.current&&exLuxState.current.saved){try{if(typeof toast==="function")toast("Kayıtlı fotoğraf bu ekrandan silinemez");}catch(_){}return;}
+  exLuxState.photoBlob=null;exLuxPhotoPreviewClear();let input=exLuxEl("exLuxPhotoInput");if(input)input.value="";
+};
+
+function exLuxRecommendations(result){
+  let items=[],difference=exLuxRound(result.threshold-result.min,1);
+  if(result.status.key==="bad"){
+    items.push({title:"Aydınlatma eşiğin altında",text:"En düşük ölçüm "+exLuxFormat(result.min,result.min%1?1:0)+" lux; gerekli değerden "+exLuxFormat(Math.max(0,difference),difference%1?1:0)+" lux düşük."});
+    items.push({title:"Sabit ve titreşimsiz armatür ekle",text:"Flicker oluşturmayan LED armatürleri çalışma alanına gölge düşürmeyecek şekilde dağıt; tek noktadan sert ışık kullanma."});
+    items.push({title:"Besleme ve tekrar ölçüm",text:"Aydınlatma beslemesini makine ana devresinden bağımsız olacak şekilde kontrol et; düzenleme sonrası aynı üç noktayı yeniden ölç."});
+  }else if(result.status.key==="border"){
+    items.push({title:"Kriter sağlanıyor, pay düşük",text:"En düşük değer eşiğin üzerinde ancak kirlenme ve LED yaşlanmasıyla sınır altına inebilir."});
+    items.push({title:"Bakım payı oluştur",text:"Armatürleri temizle, karanlık köşeyi kontrol et ve gerekirse ilave armatürle tasarım değerini yükselt."});
+    items.push({title:"Aynı noktalarda doğrula",text:"Luxmetreyi aynı düzlem ve yönelimde tutarak üç ölçümü tekrarla; en düşük değeri esas al."});
+  }else{
+    items.push({title:"Aydınlatma güvenli payla uygun",text:"Üç ölçüm de gerekli eşiğin üzerinde; armatür yerleşimi mevcut çalışma alanını yeterli aydınlatıyor."});
+    items.push({title:"Kayıt düzenini koru",text:"Luxmetre seri numarası, kalibrasyon tarihi ve ölçüm fotoğrafını raporla birlikte sakla."});
+    items.push({title:"Periyodik tekrar",text:"Armatür değişimi, yoğun kirlenme veya çalışma alanı düzeni değişirse ölçümü yenile."});
+  }
+  if(!result.device)items.push({title:"Cihaz bilgisini tamamla",text:"İzlenebilirlik için luxmetre marka/model ve seri numarasını kayda ekle."});
+  return items;
+}
+
+function exLuxStatus(min,threshold){
+  let reserve=threshold>=200?threshold+20:threshold+10;
+  if(min<threshold)return{key:"bad",label:"Uygunsuz",short:"Eşik Altı"};
+  if(min<reserve)return{key:"border",label:"Uygun • Düşük Pay",short:"Düşük Pay"};
+  return{key:"good",label:"Uygun • Güvenli Pay",short:"Uygun"};
+}
+
+function exLuxResultRender(result){
+  if(!result)return;
+  let host=exLuxEl("exLuxResult");if(!host)return;
+  host.classList.remove("is-good","is-border","is-bad");host.classList.add("is-visible","is-"+result.status.key);
+  let fields={
+    exLuxResultPoint:result.pointLabel,
+    exLuxResultMin:exLuxFormat(result.min,result.min%1?1:0),
+    exLuxResultTitle:result.status.label,
+    exLuxResultAverage:exLuxFormat(result.average,result.average%1?1:0)+" lux",
+    exLuxResultMax:exLuxFormat(result.max,result.max%1?1:0)+" lux",
+    exLuxResultThreshold:exLuxFormat(result.threshold,result.threshold%1?1:0)+" lux"
+  };
+  Object.keys(fields).forEach(function(id){let el=exLuxEl(id);if(el)el.textContent=fields[id];});
+  let description=exLuxEl("exLuxResultDescription");
+  if(description){
+    if(result.status.key==="bad")description.textContent="En düşük değer gerekli eşiğin altında. Aydınlatma revizyonu ve tekrar ölçüm gerekli.";
+    else if(result.status.key==="border")description.textContent="Kriter karşılanıyor ancak bakım ve kirlenme için yeterli güvenlik payı az.";
+    else description.textContent="En düşük ölçüm gerekli eşiğin üzerinde ve çalışma alanında güvenli pay bulunuyor.";
+  }
+  let badge=exLuxEl("exLuxResultBadge");if(badge)badge.textContent=result.status.short;
+  let rec=exLuxEl("exLuxRecommendations"),items=result.recommendations||exLuxRecommendations(result);
+  if(rec)rec.innerHTML=items.map(function(item){return'<div class="exLuxRecommendation"><i></i><div><b>'+exLuxHtml(item.title)+'</b><span>'+exLuxHtml(item.text)+'</span></div></div>';}).join("");
+  let save=exLuxEl("exLuxSaveButton");if(save){save.disabled=!!result.saved;save.textContent=result.saved?"Apartmana Kaydedildi":"Apartmana Kaydet";}
+  let revision=exLuxEl("exLuxRevisionButton");if(revision)revision.style.display=result.status.key==="bad"?"block":"none";
+}
+
+function exLuxResultScroll(){
+  let screen=document.querySelector("#exLuxModal .exLuxScreen"),result=exLuxEl("exLuxResult");if(!screen||!result)return;
+  requestAnimationFrame(function(){screen.scrollTo({top:Math.max(0,result.offsetTop-76),left:0,behavior:"smooth"});exLuxHorizontalLock();});
+}
+
+window.luxOlcumunuDegerlendir=function(){
+  let picked=exLuxSelectedApartment();
+  if(!picked.apartment){try{if(typeof toast==="function")toast("Önce bir apartman seç");}catch(_){}return;}
+  let point=exLuxPoint();
+  if(point.id==="custom"&&(!exLuxEl("exLuxCustomPoint")||!exLuxEl("exLuxCustomPoint").value.trim())){try{if(typeof toast==="function")toast("Özel ölçüm noktasının adını yaz");}catch(_){}return;}
+  let readings=[1,2,3].map(function(i){return exLuxDecimalOrNull(exLuxEl("exLuxReading"+i)&&exLuxEl("exLuxReading"+i).value);});
+  if(readings.some(function(v){return v===null;})){try{if(typeof toast==="function")toast("Üç lux ölçümünü de gir");}catch(_){}return;}
+  let min=Math.min.apply(Math,readings),max=Math.max.apply(Math,readings),average=readings.reduce(function(t,v){return t+v;},0)/readings.length;
+  let date=(exLuxEl("exLuxDate")&&exLuxEl("exLuxDate").value)||exLuxToday(),now=new Date(),status=exLuxStatus(min,point.threshold);
+  let result={
+    id:exLuxId(),apartmentId:picked.apartment.id||"",apartmentName:picked.apartment.ad||"Apartman",apartmentIndex:picked.index,
+    pointType:point.id,pointLabel:point.label,criterion:point.criterion,threshold:point.threshold,readings:readings.map(function(v){return exLuxRound(v,1);}),
+    min:exLuxRound(min,1),average:exLuxRound(average,1),max:exLuxRound(max,1),status:status,
+    measurementDate:date,dateLabel:exLuxDateLabel(date),createdAt:now.toISOString(),
+    technician:(exLuxEl("exLuxTechnician")&&exLuxEl("exLuxTechnician").value.trim())||"",
+    device:(exLuxEl("exLuxDevice")&&exLuxEl("exLuxDevice").value.trim())||"",
+    calibrationDate:(exLuxEl("exLuxCalibrationDate")&&exLuxEl("exLuxCalibrationDate").value)||"",
+    note:(exLuxEl("exLuxNote")&&exLuxEl("exLuxNote").value.trim())||"",
+    fixturePlan:exLuxState.fixturePlan||null,photoKey:"",photoName:exLuxState.photoBlob?"Lux ölçüm fotoğrafı":"",saved:false
+  };
+  result.recommendations=exLuxRecommendations(result);exLuxState.current=result;exLuxResultRender(result);exLuxResultScroll();
+  try{if(typeof haptic==="function")haptic(status.key==="bad"?"warning":"success");}catch(error){}
+};
+
+function exLuxRecordCopy(result){
+  return JSON.parse(JSON.stringify(result));
+}
+
+window.luxSonucunuKaydet=async function(){
+  let result=exLuxState.current;if(!result||result.saved)return;
+  let photoWarning=false;
+  if(exLuxState.photoBlob){
+    try{result.photoKey=EX_LUX_PHOTO_PREFIX+result.id;await ayDbKaydet(result.photoKey,exLuxState.photoBlob);result.photoName="Lux ölçüm fotoğrafı";}
+    catch(error){result.photoKey="";result.photoName="";photoWarning=true;}
+  }
+  result.saved=true;
+  let records=exLuxRecordsGet().filter(function(item){return item&&item.id!==result.id;});records.unshift(exLuxRecordCopy(result));
+  if(!exLuxRecordsSet(records)){result.saved=false;return;}
+  let index=-1;
+  if(typeof data!=="undefined"&&Array.isArray(data)){
+    index=data.findIndex(function(a){return a&&result.apartmentId&&a.id===result.apartmentId;});
+    if(index<0&&data[result.apartmentIndex])index=result.apartmentIndex;
+  }
+  if(index>=0&&data[index]){
+    if(!Array.isArray(data[index].luxOlcumleri))data[index].luxOlcumleri=[];
+    data[index].luxOlcumleri.unshift({id:result.id,tarih:result.measurementDate,nokta:result.pointLabel,esik:result.threshold,olcumler:result.readings,min:result.min,ortalama:result.average,max:result.max,durum:result.status.label,cihaz:result.device,kalibrasyon:result.calibrationDate,fotograf:!!result.photoKey});
+    if(data[index].luxOlcumleri.length>30)data[index].luxOlcumleri.length=30;
+    if(!Array.isArray(data[index].kayitlar))data[index].kayitlar=[];
+    data[index].kayitlar.push("Lux kontrolü: "+result.pointLabel+" · "+exLuxFormat(result.min,result.min%1?1:0)+" lux / "+exLuxFormat(result.threshold,result.threshold%1?1:0)+" lux · "+result.status.label+" ("+result.dateLabel+")");
+    if(result.status.key==="bad"){
+      if(!Array.isArray(data[index].revizyonOnerileri))data[index].revizyonOnerileri=[];
+      data[index].revizyonOnerileri.unshift({id:result.id,kaynak:"lux",konu:"Aydınlatma revizyonu",aciklama:result.pointLabel+" ölçümünde "+exLuxFormat(result.min,result.min%1?1:0)+" lux ölçüldü; gerekli eşik "+exLuxFormat(result.threshold,result.threshold%1?1:0)+" lux.",durum:"Bekliyor",tarih:result.measurementDate,createdAt:result.createdAt});
+      if(data[index].revizyonOnerileri.length>30)data[index].revizyonOnerileri.length=30;
+      data[index].kayitlar.push("Aydınlatma revizyonu gerekli: "+result.pointLabel+" · "+exLuxFormat(result.min,result.min%1?1:0)+" lux ("+result.dateLabel+")");
+    }
+    try{if(typeof kaydet==="function")kaydet();}catch(error){}
+  }
+  exLuxLastDeviceSet(result);exLuxResultRender(result);exLuxHistoryRender();
+  try{if(typeof toast==="function")toast(photoWarning?"Ölçüm kaydedildi; fotoğraf saklanamadı":"Lux kontrolü apartmana kaydedildi");}catch(_){}
+};
+
+window.luxRevizyonTeklifineAktar=function(){
+  let result=exLuxState.current;if(!result||result.status.key!=="bad")return;
+  let index=-1;
+  if(typeof data!=="undefined"&&Array.isArray(data)){
+    index=data.findIndex(function(a){return a&&result.apartmentId&&a.id===result.apartmentId;});
+    if(index<0&&data[result.apartmentIndex])index=result.apartmentIndex;
+  }
+  if(index<0||typeof revizyonTeklifiForm!=="function"){try{if(typeof toast==="function")toast("Revizyon teklif ekranı açılamadı");}catch(_){}return;}
+  window.__kontrolRaporuAktarim={
+    i:index,
+    konu:"Aydınlatma revizyonu",
+    aciklama:result.pointLabel+" bölgesinde yapılan lux kontrolünde en düşük "+exLuxFormat(result.min,result.min%1?1:0)+" lux ölçülmüştür. Gerekli "+exLuxFormat(result.threshold,result.threshold%1?1:0)+" lux seviyesinin sağlanması için sabit, flicker oluşturmayan LED armatür düzenlemesi ve uygulama sonrası tekrar ölçüm önerilmektedir."
+  };
+  window.luxKontroluKapat();revizyonTeklifiForm(index);
+};
+
+function exLuxHistoryRender(){
+  let host=exLuxEl("exLuxHistoryList");if(!host)return;
+  let records=exLuxRecordsGet().slice(0,10);
+  if(!records.length){host.innerHTML='<div class="exLuxEmpty">Henüz lux kontrolü kaydedilmedi.</div>';return;}
+  host.innerHTML=records.map(function(record){
+    let status=record.status&&record.status.key||"bad";
+    return'<button class="exLuxHistoryItem" type="button" onclick="luxGecmisSonucAc(\''+exLuxHtml(record.id)+'\')"><span><b>'+exLuxHtml(record.apartmentName||"Apartman")+' · '+exLuxHtml(record.pointLabel||"Ölçüm")+'</b><span>'+exLuxHtml(record.dateLabel||exLuxDateLabel(record.measurementDate))+' · Eşik '+exLuxHtml(exLuxFormat(record.threshold,record.threshold%1?1:0))+' lux</span></span><i class="exLuxHistoryValue '+exLuxHtml(status)+'">'+exLuxHtml(exLuxFormat(record.min,record.min%1?1:0))+' lux</i></button>';
+  }).join("");
+}
+
+async function exLuxSavedPhotoShow(result){
+  exLuxPhotoPreviewClear();exLuxState.photoBlob=null;if(!result||!result.photoKey)return;
+  try{let blob=await ayDbOku(result.photoKey);if(blob&&exLuxState.current&&exLuxState.current.id===result.id)exLuxPhotoPreviewBlob(blob);}catch(error){}
+}
+
+window.luxGecmisSonucAc=async function(id){
+  let record=exLuxRecordsGet().find(function(item){return item&&item.id===id;});if(!record)return;
+  exLuxState.loading=true;
+  let apartment=exLuxEl("exLuxApartment"),list=typeof data!=="undefined"&&Array.isArray(data)?data:[],index=list.findIndex(function(a){return a&&record.apartmentId&&a.id===record.apartmentId;});
+  if(index<0&&list[record.apartmentIndex])index=record.apartmentIndex;if(apartment&&index>=0)apartment.value=String(index);
+  let point=exLuxEl("exLuxPoint");if(point)point.value=EX_LUX_POINTS[record.pointType]?record.pointType:"custom";
+  if(exLuxEl("exLuxCustomPoint"))exLuxEl("exLuxCustomPoint").value=record.pointType==="custom"?record.pointLabel:"";
+  if(exLuxEl("exLuxCustomThreshold"))exLuxEl("exLuxCustomThreshold").value=String(record.threshold||200);
+  window.luxOlcumNoktasiDegisti();
+  (record.readings||[]).slice(0,3).forEach(function(value,i){let input=exLuxEl("exLuxReading"+(i+1));if(input)input.value=String(value).replace(".",",");});
+  if(exLuxEl("exLuxDate"))exLuxEl("exLuxDate").value=record.measurementDate||exLuxToday();
+  if(exLuxEl("exLuxTechnician"))exLuxEl("exLuxTechnician").value=record.technician||"";
+  if(exLuxEl("exLuxDevice"))exLuxEl("exLuxDevice").value=record.device||"";
+  if(exLuxEl("exLuxCalibrationDate"))exLuxEl("exLuxCalibrationDate").value=record.calibrationDate||"";
+  if(exLuxEl("exLuxNote"))exLuxEl("exLuxNote").value=record.note||"";
+  exLuxState.current=record;exLuxState.current.saved=true;exLuxState.fixturePlan=record.fixturePlan||null;exLuxState.loading=false;
+  exLuxResultRender(exLuxState.current);exLuxCalcRender(exLuxState.fixturePlan);await exLuxSavedPhotoShow(exLuxState.current);exLuxResultScroll();
+};
+
+function exLuxProfileName(){
+  try{let p=typeof profilBilgileri==="function"?profilBilgileri():{};return p.ad||p.isim||"";}catch(error){return"";}
+}
+
+function exLuxFormReset(){
+  exLuxState.loading=true;exLuxState.current=null;exLuxState.fixturePlan=null;exLuxState.photoBlob=null;exLuxPhotoPreviewClear();
+  let picked=exLuxEl("exLuxApartment");if(picked&&picked.options.length)picked.selectedIndex=0;
+  let point=exLuxEl("exLuxPoint");if(point)point.value="machine_floor";
+  if(exLuxEl("exLuxCustomPoint"))exLuxEl("exLuxCustomPoint").value="";
+  if(exLuxEl("exLuxCustomThreshold"))exLuxEl("exLuxCustomThreshold").value="200";
+  if(exLuxEl("exLuxDate"))exLuxEl("exLuxDate").value=exLuxToday();
+  if(exLuxEl("exLuxTechnician"))exLuxEl("exLuxTechnician").value=exLuxProfileName();
+  let last=exLuxLastDeviceGet();
+  if(exLuxEl("exLuxDevice"))exLuxEl("exLuxDevice").value=last.device||"";
+  if(exLuxEl("exLuxCalibrationDate"))exLuxEl("exLuxCalibrationDate").value=last.calibrationDate||"";
+  [1,2,3].forEach(function(i){let input=exLuxEl("exLuxReading"+i);if(input)input.value="";});
+  if(exLuxEl("exLuxNote"))exLuxEl("exLuxNote").value="";
+  if(exLuxEl("exLuxPhotoInput"))exLuxEl("exLuxPhotoInput").value="";
+  exLuxResultHide();exLuxCalcRender(null);exLuxState.loading=false;window.luxOlcumNoktasiDegisti();
+}
+
+window.luxYeniOlcum=function(scroll){
+  exLuxApartmentOptions();exLuxFormReset();
+  let screen=document.querySelector("#exLuxModal .exLuxScreen");if(screen&&scroll!==false)screen.scrollTo({top:0,left:0,behavior:"smooth"});
+};
+
+window.luxKontroluAc=function(){
+  try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose();}catch(error){}
+  exLuxApartmentOptions();exLuxFormReset();exLuxHistoryRender();
+  let modal=exLuxEl("exLuxModal");if(!modal)return;
+  modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");document.body.classList.add("exLuxOpen");exLuxHorizontalLock();
+  try{window.scrollTo({top:window.scrollY,left:0,behavior:"auto"});}catch(error){}
+  requestAnimationFrame(function(){exLuxHorizontalLock();});
+  try{if(typeof haptic==="function")haptic("light");}catch(error){}
+};
+
+window.luxKontroluKapat=function(){
+  let modal=exLuxEl("exLuxModal");if(modal){modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");}
+  document.body.classList.remove("exLuxOpen");exLuxPhotoPreviewClear();exLuxState.photoBlob=null;
+};
+
+function exLuxCalcRender(plan){
+  let host=exLuxEl("exLuxCalcResult");if(!host)return;
+  if(!plan){host.classList.remove("is-visible");host.innerHTML="";return;}
+  host.classList.add("is-visible");
+  host.innerHTML='<b>Yaklaşık '+exLuxHtml(plan.count)+' adet armatür</b>'+exLuxHtml(exLuxFormat(plan.area,1))+' m² alan, '+exLuxHtml(exLuxFormat(plan.target,0))+' lux tasarım hedefi ve armatür başına '+exLuxHtml(exLuxFormat(plan.fixtureLumens,0))+' lm için hesaplandı. Tahmini sonuç '+exLuxHtml(exLuxFormat(plan.expectedLux,0))+' lux.<br><small>Yerleşim, montaj yüksekliği, yüzey rengi ve gölgeler gerçek sonucu değiştirir; uygulama sonrası luxmetreyle doğrula.</small>';
+}
+
+window.luxArmaturHesapla=function(){
+  let length=exLuxDecimal(exLuxEl("exLuxRoomLength")&&exLuxEl("exLuxRoomLength").value),width=exLuxDecimal(exLuxEl("exLuxRoomWidth")&&exLuxEl("exLuxRoomWidth").value),fixtureLumens=exLuxDecimal(exLuxEl("exLuxFixtureLumens")&&exLuxEl("exLuxFixtureLumens").value),target=exLuxDecimal(exLuxEl("exLuxDesignTarget")&&exLuxEl("exLuxDesignTarget").value),utilization=exLuxDecimal(exLuxEl("exLuxUtilization")&&exLuxEl("exLuxUtilization").value),maintenance=exLuxDecimal(exLuxEl("exLuxMaintenance")&&exLuxEl("exLuxMaintenance").value);
+  if(length<=0||width<=0||fixtureLumens<=0||target<=0||utilization<=0||maintenance<=0){try{if(typeof toast==="function")toast("Alan, lümen ve hedef değerlerini eksiksiz gir");}catch(_){}return;}
+  let area=length*width,raw=(target*area)/(fixtureLumens*utilization*maintenance),count=Math.max(1,Math.ceil(raw)),expectedLux=(count*fixtureLumens*utilization*maintenance)/area;
+  exLuxState.fixturePlan={length:exLuxRound(length,2),width:exLuxRound(width,2),area:exLuxRound(area,2),fixtureLumens:exLuxRound(fixtureLumens,0),target:exLuxRound(target,0),utilization:utilization,maintenance:maintenance,count:count,expectedLux:exLuxRound(expectedLux,0)};
+  if(exLuxState.current&&!exLuxState.current.saved)exLuxState.current.fixturePlan=exLuxState.fixturePlan;
+  exLuxCalcRender(exLuxState.fixturePlan);
+};
+
+function exLuxBlobDataUrl(blob){return new Promise(function(resolve,reject){let reader=new FileReader();reader.onload=function(){resolve(reader.result);};reader.onerror=function(){reject(reader.error);};reader.readAsDataURL(blob);});}
+
+async function exLuxPhotoData(result){
+  try{
+    if(exLuxState.photoBlob&&exLuxState.current&&result.id===exLuxState.current.id)return await exLuxBlobDataUrl(exLuxState.photoBlob);
+    if(result.photoKey){let blob=await ayDbOku(result.photoKey);if(blob)return await exLuxBlobDataUrl(blob);}
+  }catch(error){}
+  return"";
+}
+
+window.luxSonucPdf=async function(){
+  let result=exLuxState.current;if(!result){try{if(typeof toast==="function")toast("Önce ölçümü değerlendir");}catch(_){}return;}
+  let report=typeof elevatorXOpenReportWindow==="function"?elevatorXOpenReportWindow():window.open("","_blank");if(!report){try{if(typeof toast==="function")toast("PDF penceresi açılamadı");}catch(_){}return;}
+  report.document.write('<!doctype html><title>Lux raporu hazırlanıyor</title><body style="font-family:Arial;padding:30px">Lux kontrol raporu hazırlanıyor...</body>');
+  let photo=await exLuxPhotoData(result),profile=typeof profilBilgileri==="function"?profilBilgileri():{},statusColor=result.status.key==="bad"?"#d63548":(result.status.key==="border"?"#c98200":"#159553"),plan=result.fixturePlan||null;
+  let photoHtml=photo?'<h2>Ölçüm Fotoğrafı</h2><div class="photo"><img src="'+photo+'" alt="Lux ölçüm fotoğrafı"></div>':"";
+  let planHtml=plan?'<h2>Yaklaşık Armatür Planı</h2><div class="grid"><div class="box"><span>Alan</span><b>'+exLuxHtml(exLuxFormat(plan.area,1))+' m²</b></div><div class="box"><span>Tasarım hedefi</span><b>'+exLuxHtml(exLuxFormat(plan.target,0))+' lux</b></div><div class="box"><span>Armatür ışık akısı</span><b>'+exLuxHtml(exLuxFormat(plan.fixtureLumens,0))+' lm</b></div><div class="box"><span>Yaklaşık ihtiyaç</span><b>'+exLuxHtml(plan.count)+' adet · '+exLuxHtml(exLuxFormat(plan.expectedLux,0))+' lux</b></div></div>':"";
+  report.document.open();report.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lux Kontrolü - ${exLuxHtml(result.apartmentName)}</title><style>@page{size:A4;margin:12mm}*{box-sizing:border-box}body{margin:0;background:#eef3f8;color:#172238;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial}.page{width:210mm;min-height:285mm;margin:auto;background:#fff;padding:15mm}.head{display:flex;justify-content:space-between;gap:20px;border-bottom:4px solid #e4a321;padding-bottom:13px}.brand{font-size:23px;font-weight:900}.brand b{color:#176fe8}.sub{margin-top:5px;color:#7a8799;font-size:9px}.status{height:max-content;padding:9px 12px;border-radius:999px;background:${statusColor}18;color:${statusColor};font-size:10px;font-weight:900}.hero{display:grid;grid-template-columns:95px 1fr;gap:14px;align-items:center;margin:15px 0}.value{height:88px;border-radius:24px;background:${statusColor}12;color:${statusColor};display:grid;place-items:center;font-size:27px;font-weight:900}.value small{display:block;margin-top:-25px;font-size:8px}.hero h1{margin:0;font-size:19px}.hero p{margin:6px 0 0;color:#6f7d91;font-size:9px;line-height:1.5}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:13px 0}.box{border:1px solid #dfe6ef;border-radius:11px;padding:9px}.box span{display:block;color:#8592a5;font-size:8px;font-weight:800;text-transform:uppercase}.box b{display:block;margin-top:5px;font-size:11px}h2{font-size:15px;margin:18px 0 8px}.readings{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.reading{padding:12px;border-radius:11px;background:#f3f6fa;text-align:center}.reading span{display:block;color:#8491a4;font-size:8px}.reading b{display:block;margin-top:5px;font-size:18px}.rec{padding:9px 10px;margin-top:7px;border-radius:10px;background:#f3f6fa;font-size:9px;line-height:1.5}.note{margin-top:10px;padding:10px;border:1px solid #dfe6ef;border-radius:10px;white-space:pre-wrap;font-size:9px;line-height:1.5}.warn{margin-top:14px;padding:10px;border-radius:10px;background:#fff5d9;color:#73551b;font-size:8.5px;line-height:1.5}.photo{border:1px solid #dfe6ef;border-radius:12px;overflow:hidden}.photo img{display:block;width:100%;max-height:280px;object-fit:contain;background:#f4f7fb}.foot{display:flex;justify-content:space-between;margin-top:18px;padding-top:8px;border-top:1px solid #dfe6ef;color:#8c98a9;font-size:8px}.actions{position:fixed;right:14px;bottom:14px}.actions button{border:0;border-radius:12px;padding:11px 15px;background:#176fe8;color:#fff;font-weight:800}@media print{body{background:#fff}.page{padding:5mm;min-height:auto}.actions{display:none}}</style></head><body><section class="page"><div class="head"><div><div class="brand">Asansör <b>Bakım &amp; Revizyon</b></div><div class="sub">Kalibreli Luxmetre ile Aydınlatma Saha Ön Kontrolü</div></div><div class="status">${exLuxHtml(result.status.label)}</div></div><div class="hero"><div class="value">${exLuxHtml(exLuxFormat(result.min,result.min%1?1:0))}<small>EN DÜŞÜK LUX</small></div><div><h1>${exLuxHtml(result.apartmentName)} · ${exLuxHtml(result.pointLabel)}</h1><p>Karar, üç ölçümün en düşük değeri ile ${exLuxHtml(exLuxFormat(result.threshold,result.threshold%1?1:0))} lux eşiğinin karşılaştırılmasına göre oluşturulmuştur.</p></div></div><div class="grid"><div class="box"><span>Ölçüm tarihi</span><b>${exLuxHtml(result.dateLabel)}</b></div><div class="box"><span>Ölçümü alan</span><b>${exLuxHtml(result.technician||"-")}</b></div><div class="box"><span>Ölçüm noktası</span><b>${exLuxHtml(result.pointLabel)}</b></div><div class="box"><span>Gerekli eşik</span><b>${exLuxHtml(exLuxFormat(result.threshold,result.threshold%1?1:0))} lux</b></div><div class="box"><span>Luxmetre / Seri No</span><b>${exLuxHtml(result.device||"-")}</b></div><div class="box"><span>Kalibrasyon tarihi</span><b>${exLuxHtml(exLuxDateLabel(result.calibrationDate))}</b></div></div><h2>Ölçüm Değerleri</h2><div class="readings">${(result.readings||[]).map(function(value,i){return'<div class="reading"><span>'+(i+1)+'. ÖLÇÜM</span><b>'+exLuxHtml(exLuxFormat(value,value%1?1:0))+' lux</b></div>';}).join("")}</div><div class="grid"><div class="box"><span>En düşük</span><b>${exLuxHtml(exLuxFormat(result.min,result.min%1?1:0))} lux</b></div><div class="box"><span>Ortalama</span><b>${exLuxHtml(exLuxFormat(result.average,result.average%1?1:0))} lux</b></div></div><h2>Teknik Değerlendirme</h2>${(result.recommendations||[]).map(function(item){return'<div class="rec"><b>'+exLuxHtml(item.title)+'</b><br>'+exLuxHtml(item.text)+'</div>';}).join("")}${result.note?'<h2>Saha Notu</h2><div class="note">'+exLuxHtml(result.note)+'</div>':""}${planHtml}${photoHtml}<div class="warn"><b>Bilgilendirme:</b> Bu belge, kullanıcı tarafından girilen kalibreli luxmetre ölçümlerini düzenleyen saha ön kontrolüdür. Uygulama ölçüm cihazı değildir; resmî periyodik kontrol veya uygunluk raporu yerine geçmez.</div><div class="foot"><span>${exLuxHtml(profile.firma||"Asansör Bakım & Revizyon")}${profile.telefon?" • "+exLuxHtml(profile.telefon):""}</span><span>${exLuxHtml(typeof APP_VERSION!=="undefined"?APP_VERSION:"")}</span></div></section><div class="actions"><button onclick="window.print()">PDF Oluştur / Paylaş</button></div></body></html>`);report.document.close();
+};
+
+document.addEventListener("keydown",function(event){if(event.key==="Escape"){let modal=exLuxEl("exLuxModal");if(modal&&modal.classList.contains("is-open"))window.luxKontroluKapat();}});
 
 })();
 </script>
