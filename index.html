@@ -21529,8 +21529,16 @@ placeholder="Bilgi yaz..."></textarea>
 <button class="profileActionCard" onclick="document.getElementById('yedekInput').click()">
   <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
   <span class="profileActionText">
-    <b>Yedekten Geri Yükle</b>
+    <b>Dosyadan Geri Yükle</b>
     <em>Daha önce dışarı aktardığın JSON yedek dosyasını seç.</em>
+  </span>
+</button>
+
+<button class="profileActionCard" onclick="abrBulutYedegiGeriYukle()">
+  <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
+  <span class="profileActionText">
+    <b>Bulut Yedeğini Geri Yükle</b>
+    <em>Bu e-posta hesabına bağlı son apartman ve bakım kayıtlarını getir.</em>
   </span>
 </button>
 
@@ -21623,6 +21631,16 @@ placeholder="Bilgi yaz..."></textarea>
       <span class="profileSystemRowMain">
         <small>Son dış yedek</small>
         <b id="externalBackupInfo">Henüz dışarı aktarılmadı</b>
+      </span>
+    </div>
+
+    <div class="profileSystemRow">
+      <span class="profileSystemRowIcon backup" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7.2 18.2h9.4a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.4 3.3 3.3 0 0 0 .8 6.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m9.5 13 2 2 3.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="profileSystemRowMain">
+        <small>Hesaba bağlı bulut yedeği</small>
+        <b id="cloudBackupInfo">Kontrol ediliyor...</b>
       </span>
     </div>
 
@@ -21971,7 +21989,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.23";
+const APP_VERSION = "v2.2.24";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -25446,6 +25464,10 @@ try{
   if(!sessiz){
     toast("Otomatik yedek alındı");
   }
+
+  try{
+    if(typeof window.abrCloudBackupSchedule === "function") window.abrCloudBackupSchedule();
+  }catch(cloudErr){}
 
   return true;
 
@@ -34939,6 +34961,7 @@ if(elDurum) elDurum.innerText = "Güncel";
 profilSurumGuncelle();
 autoYedekBilgiGuncelle();
 disYedekBilgiGuncelle();
+try{if(typeof window.abrCloudStatusRefresh==="function")window.abrCloudStatusRefresh()}catch(error){}
 meslekiBelgeProfilOzetiGuncelle();
 
 }
@@ -41969,6 +41992,7 @@ window.abrTeamCredentialSignIn=async function(credentials){
   await abrTeamAccountContextReset(false);
   await abrTeamInit(false);
   if(abrTeamState.error)throw new Error(abrTeamState.error);
+  if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin();
   return abrTeamAccountAccessSnapshot();
 };
 window.abrTeamCredentialSetup=async function(details){
@@ -41996,6 +42020,7 @@ window.abrTeamCredentialSetup=async function(details){
   await abrTeamAccountContextReset(false);
   await abrTeamInit(false);
   if(abrTeamState.error)throw new Error(abrTeamState.error);
+  if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin();
   return abrTeamAccountAccessSnapshot();
 };
 window.abrTeamCredentialSessionInfo=async function(){
@@ -42022,6 +42047,12 @@ window.abrTeamCredentialSignOut=async function(){
 window.abrTeamAccessInfo=async function(createSession){
   await abrTeamInit(!!createSession);
   return abrTeamAccountAccessSnapshot();
+};
+window.abrTeamCloudClient=async function(){return abrTeamEnsureClient()};
+window.abrTeamRecoveryApartments=function(){
+  const userId=abrTeamState.user&&abrTeamState.user.id;
+  if(!userId)return [];
+  return (abrTeamState.apartments||[]).filter(function(item){return item&&(item.created_by===userId||item.assigned_to===userId)}).map(function(item){return {name:item.name||"",local_code:item.local_code||""}});
 };
 
 window.__abrTeamCenterVersion = "2.2.09";
@@ -42228,7 +42259,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.23";
+const ABR_ROLE_VERSION="2.2.24";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -42380,6 +42411,7 @@ async function abrRoleBoot(){
     const session=await Promise.race([window.abrTeamCredentialSessionInfo(),timeout]);
     abrRoleState.session=session||null;abrRoleState.busy=false;
     if(session&&session.userId&&!session.userIsAnonymous){
+      try{if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin()}catch(cloudError){}
       abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
       if(!abrPinRecord(session.userId)){
         try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
@@ -42497,6 +42529,162 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
 window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
 window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
+})();
+</script>
+
+<script id="abrCloudBackupScript2224">
+(function(){
+"use strict";
+const ABR_CLOUD_TABLE="user_app_backups";
+const ABR_CLOUD_META_KEY="abrCloudBackupMetaV2224";
+const ABR_CLOUD_MAX_BYTES=8*1024*1024;
+let abrCloudTimer=0;
+let abrCloudWorking=false;
+let abrCloudRestoring=false;
+
+function abrCloudMetaGet(){try{const value=JSON.parse(localStorage.getItem(ABR_CLOUD_META_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
+function abrCloudMetaSet(value){try{localStorage.setItem(ABR_CLOUD_META_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
+function abrCloudDate(value){if(!value)return "Henüz alınmadı";try{return new Date(value).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(error){return "Henüz alınmadı"}}
+function abrCloudStatus(text,state){const el=document.getElementById("cloudBackupInfo");if(el){el.textContent=text||"Henüz alınmadı";el.dataset.state=state||""}}
+function abrCloudStatusRefresh(){const meta=abrCloudMetaGet();if(meta.error){abrCloudStatus("Bağlantı bekleniyor","error");return}abrCloudStatus(meta.updatedAt?abrCloudDate(meta.updatedAt):"Henüz alınmadı",meta.updatedAt?"ok":"")}
+window.abrCloudStatusRefresh=abrCloudStatusRefresh;
+async function abrCloudContext(){
+  if(typeof window.abrTeamCloudClient!=="function")throw new Error("Hesap bağlantısı hazır değil.");
+  const client=await window.abrTeamCloudClient();
+  const result=await client.auth.getSession();
+  if(result.error)throw result.error;
+  const session=result.data&&result.data.session;
+  const user=session&&session.user;
+  if(!user||user.is_anonymous===true||(user.app_metadata&&user.app_metadata.provider==="anonymous"))throw new Error("Bulut yedeği için hesapla giriş yap.");
+  return {client:client,user:user};
+}
+function abrCloudPayload(){
+  let backup=typeof yedekVeriOlustur==="function"?yedekVeriOlustur("bulut"):{};
+  if(typeof abrStbYedekHafiflet==="function")backup=abrStbYedekHafiflet(backup);
+  backup.bulutYedegi=true;
+  backup.olusturmaTarihi=new Date().toISOString();
+  return backup;
+}
+function abrCloudRecordCount(payload){return Array.isArray(payload&&payload.apartmanlar)?payload.apartmanlar.length:0}
+async function abrCloudRemote(context){
+  const response=await context.client.from(ABR_CLOUD_TABLE).select("payload,record_count,app_version,updated_at").eq("user_id",context.user.id).maybeSingle();
+  if(response.error)throw response.error;
+  return response.data||null;
+}
+function abrCloudApply(payload){
+  if(!payload||!Array.isArray(payload.apartmanlar))throw new Error("Bulut yedeği geçersiz.");
+  const normalized=abrStbVeriyiNormalizeEt(abrStbDerinKopya(payload.apartmanlar));
+  const oldData=data;
+  data=normalized.data;
+  if(!abrStbAnaVeriyiYaz()){data=oldData;throw new Error("Bulut yedeği cihazda saklanamadı.")}
+  window.__abrStbLastGoodData=abrStbDerinKopya(data);
+  if(Array.isArray(payload.stokEnvanteri)&&typeof stokEnvanteriSet==="function")stokEnvanteriSet(payload.stokEnvanteri,false);
+  if(Array.isArray(payload.meslekiBelgeler)&&typeof meslekiBelgelerSet==="function")meslekiBelgelerSet(payload.meslekiBelgeler,false);
+  if(Array.isArray(payload.montajKesifleri)&&typeof montajKesifSet==="function")montajKesifSet(payload.montajKesifleri,false);
+  if(payload.profil){
+    localStorage.setItem("profilAd",payload.profil.ad||"");
+    localStorage.setItem("profilFirma",payload.profil.firma||"");
+    localStorage.setItem("profilTelefon",payload.profil.telefon||"");
+    localStorage.setItem("profilBio",payload.profil.bio||"");
+  }
+  if(payload.tema)localStorage.setItem("tema",payload.tema);
+  try{if(typeof profilAlanlariniDoldur==="function")profilAlanlariniDoldur()}catch(error){}
+  try{if(typeof temaUygula==="function")temaUygula()}catch(error){}
+  try{if(typeof autoYedekAl==="function")autoYedekAl(true)}catch(error){}
+  try{if(typeof goster==="function")goster()}catch(error){}
+  return normalized.data.length;
+}
+function abrCloudRecoverTeamPortfolio(items){
+  const seen=Object.create(null);const recovered=[];
+  (Array.isArray(items)?items:[]).forEach(function(item){
+    const name=String(item&&item.name||"").trim();const code=String(item&&item.local_code||"").trim();const key=(code||name).toLocaleLowerCase("tr-TR");
+    if(name.length<2||seen[key])return;seen[key]=true;
+    recovered.push({id:typeof abrStbIdOlustur==="function"?abrStbIdOlustur("apt"):"apt_"+Date.now()+"_"+recovered.length,ad:name,sicilKod:code,yonetici:"",tel:"",ucret:0,bakimGunu:"",not:"Ekip portföyünden kurtarıldı",konum:null,odemeTarihi:"",sonOdemeTarihi:"",odemeler:[],bakimTarihi:"",bakimKayitlari:[],bakimChecklist:[],parcalar:[],eskiBakiyeler:[],muayene:{},muayeneGecmisi:[],revizyonTeklifleri:[],kayitlar:[new Date().toLocaleString("tr-TR")+" — Uygulama silindikten sonra ekip portföyünden apartman adı kurtarıldı"],veriSurumu:"2.0.17"});
+  });
+  if(!recovered.length)return 0;
+  const oldData=data;data=recovered;
+  if(!abrStbAnaVeriyiYaz()){data=oldData;throw new Error("Ekip portföyü cihazda saklanamadı.")}
+  window.__abrStbLastGoodData=abrStbDerinKopya(data);
+  try{if(typeof autoYedekAl==="function")autoYedekAl(true)}catch(error){}
+  try{if(typeof goster==="function")goster()}catch(error){}
+  return recovered.length;
+}
+async function abrCloudSave(force){
+  if(abrCloudWorking||abrCloudRestoring||navigator.onLine===false)return false;
+  abrCloudWorking=true;abrCloudStatus("Buluta kaydediliyor…","working");
+  try{
+    const context=await abrCloudContext();
+    const payload=abrCloudPayload();
+    const count=abrCloudRecordCount(payload);
+    if(count===0&&!force){abrCloudStatusRefresh();return false}
+    const json=JSON.stringify(payload);
+    if(json.length>ABR_CLOUD_MAX_BYTES)throw new Error("Bulut yedeği 8 MB sınırını aşıyor. Fotoğraf ve dosyaları dış yedekte sakla.");
+    const now=new Date().toISOString();
+    const response=await context.client.from(ABR_CLOUD_TABLE).upsert({user_id:context.user.id,payload:payload,record_count:count,app_version:String(window.APP_VERSION||""),updated_at:now},{onConflict:"user_id"});
+    if(response.error)throw response.error;
+    abrCloudMetaSet({userId:context.user.id,updatedAt:now,recordCount:count,error:""});
+    abrCloudStatus(abrCloudDate(now),"ok");
+    return true;
+  }catch(error){
+    const meta=abrCloudMetaGet();meta.error=String(error&&error.message||error||"Bulut yedeği alınamadı");abrCloudMetaSet(meta);abrCloudStatus("Bağlantı bekleniyor","error");console.warn("Bulut yedeği alınamadı:",error);return false;
+  }finally{abrCloudWorking=false}
+}
+window.abrCloudBackupSchedule=function(){
+  clearTimeout(abrCloudTimer);
+  abrCloudTimer=setTimeout(function(){abrCloudSave(false)},2500);
+};
+window.abrCloudRestoreAfterLogin=async function(){
+  if(abrCloudRestoring)return false;
+  abrCloudRestoring=true;abrCloudStatus("Bulut kontrol ediliyor…","working");
+  try{
+    const context=await abrCloudContext();
+    const remote=await abrCloudRemote(context);
+    const localCount=Array.isArray(window.data)?window.data.length:(Array.isArray(data)?data.length:0);
+    if(remote&&remote.payload&&abrCloudRecordCount(remote.payload)>0&&localCount===0){
+      const count=abrCloudApply(remote.payload);
+      abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:count,error:""});
+      abrCloudStatus(abrCloudDate(remote.updated_at),"ok");
+      try{if(typeof toast==="function")toast(count+" apartman bulut yedeğinden geri getirildi")}catch(error){}
+      return true;
+    }
+    if(!remote&&localCount>0){abrCloudRestoring=false;return await abrCloudSave(true)}
+    if(!remote&&localCount===0&&typeof window.abrTeamRecoveryApartments==="function"){
+      const recovered=abrCloudRecoverTeamPortfolio(window.abrTeamRecoveryApartments());
+      if(recovered>0){
+        try{if(typeof toast==="function")toast(recovered+" apartman adı ekip portföyünden kurtarıldı")}catch(error){}
+        abrCloudRestoring=false;await abrCloudSave(true);return true;
+      }
+    }
+    if(remote){abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:Number(remote.record_count||0),error:""});abrCloudStatus(abrCloudDate(remote.updated_at),"ok")}
+    else abrCloudStatus("Henüz alınmadı","");
+    return false;
+  }catch(error){
+    try{
+      const localCount=Array.isArray(data)?data.length:0;
+      if(localCount===0&&typeof window.abrTeamRecoveryApartments==="function"){
+        const recovered=abrCloudRecoverTeamPortfolio(window.abrTeamRecoveryApartments());
+        if(recovered>0&&typeof toast==="function")toast(recovered+" apartman adı ekip portföyünden kurtarıldı; bakım ve tahsilat ayrıntıları eski yedek olmadan geri getirilemez");
+      }
+    }catch(recoveryError){}
+    const meta=abrCloudMetaGet();meta.error=String(error&&error.message||error||"Bulut yedeği okunamadı");abrCloudMetaSet(meta);abrCloudStatus("Kurulum / bağlantı gerekli","error");console.warn("Bulut yedeği okunamadı:",error);return false;
+  }finally{abrCloudRestoring=false}
+};
+window.abrBulutYedegiGeriYukle=async function(){
+  if(abrCloudRestoring||abrCloudWorking)return;
+  abrCloudRestoring=true;abrCloudStatus("Bulut yedeği okunuyor…","working");
+  try{
+    const context=await abrCloudContext();const remote=await abrCloudRemote(context);
+    if(!remote||!remote.payload||abrCloudRecordCount(remote.payload)===0){if(typeof toast==="function")toast("Bu hesapta bulut yedeği bulunamadı");abrCloudStatusRefresh();return}
+    const count=abrCloudRecordCount(remote.payload);
+    if(!confirm(abrCloudDate(remote.updated_at)+" tarihli "+count+" apartmanlık bulut yedeği bu cihaza yüklensin mi?")){abrCloudStatusRefresh();return}
+    const restored=abrCloudApply(remote.payload);
+    abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:restored,error:""});abrCloudStatus(abrCloudDate(remote.updated_at),"ok");
+    if(typeof toast==="function")toast(restored+" apartman buluttan geri yüklendi");
+  }catch(error){abrCloudStatus("Geri yüklenemedi","error");if(typeof toast==="function")toast(String(error&&error.message||"Bulut yedeği geri yüklenemedi"))}
+  finally{abrCloudRestoring=false}
+};
+document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
+window.__abrCloudBackupVersion="2.2.24";
 })();
 </script>
 
