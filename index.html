@@ -19523,6 +19523,329 @@ body.exLuxOpen #exHybridMenuBtn{display:none!important}
 body.darkMode #exLuxModal,html.darkRoot #exLuxModal{background:#0c1420;color:#eff5ff}body.darkMode .exLuxScreen,html.darkRoot .exLuxScreen{background:radial-gradient(circle at 90% 0,rgba(239,170,23,.12),transparent 31%),linear-gradient(180deg,#101a29,#0c1420)}body.darkMode .exLuxTopbar,html.darkRoot .exLuxTopbar{background:rgba(14,23,36,.91);border-color:rgba(255,255,255,.08)}body.darkMode .exLuxClose,body.darkMode .exLuxCard,html.darkRoot .exLuxClose,html.darkRoot .exLuxCard{background:rgba(18,30,47,.94);border-color:rgba(255,255,255,.08);color:#eff5ff}body.darkMode .exLuxField input,body.darkMode .exLuxField select,body.darkMode .exLuxField textarea,body.darkMode .exLuxReading,body.darkMode .exLuxPhotoPicker,html.darkRoot .exLuxField input,html.darkRoot .exLuxField select,html.darkRoot .exLuxField textarea,html.darkRoot .exLuxReading,html.darkRoot .exLuxPhotoPicker{background:#16253a;border-color:rgba(255,255,255,.1);color:#eff5ff}body.darkMode .exLuxReading input,html.darkRoot .exLuxReading input{color:#eff5ff}body.darkMode .exLuxThreshold,body.darkMode .exLuxStat,body.darkMode .exLuxRecommendation,body.darkMode .exLuxHistoryItem,body.darkMode .exLuxEmpty,body.darkMode .exLuxCalcResult,html.darkRoot .exLuxThreshold,html.darkRoot .exLuxStat,html.darkRoot .exLuxRecommendation,html.darkRoot .exLuxHistoryItem,html.darkRoot .exLuxEmpty,html.darkRoot .exLuxCalcResult{background:#16253a;color:#eff5ff}body.darkMode .exLuxGauge,html.darkRoot .exLuxGauge{background:#16253a;border-color:rgba(255,255,255,.12)}body.darkMode .exLuxCamera,body.darkMode .exLuxCameraAdvanced,html.darkRoot .exLuxCamera,html.darkRoot .exLuxCameraAdvanced{background:#16253a;border-color:rgba(255,255,255,.1)}body.darkMode .exLuxCameraAdvanced summary,html.darkRoot .exLuxCameraAdvanced summary{color:#c4d0df}
 @media(max-width:480px){.exLuxBody{padding-left:13px;padding-right:13px}.exLuxGrid{grid-template-columns:minmax(0,1fr)}.exLuxField.wide{grid-column:auto}.exLuxReadings{grid-template-columns:minmax(0,1fr)}.exLuxResultHero{grid-template-columns:104px minmax(0,1fr)}.exLuxGauge{width:100px;height:100px;border-radius:31px}.exLuxGauge b{font-size:26px}.exLuxGauge span{margin-top:-22px}.exLuxStats{grid-template-columns:repeat(3,minmax(0,1fr))}.exLuxButtonRow,.exLuxCameraButtons{grid-template-columns:minmax(0,1fr)}.exLuxPhotoPicker{grid-template-columns:42px minmax(0,1fr)}.exLuxPhotoPicker button{grid-column:1/-1;width:100%}}
 </style>
+<style id="abrProfileHeader2230">
+/* v2.2.30 — tek kartta firma kimliği ve kompakt profil özeti */
+body.profileMode #profilPanel .coverArea{
+  height:112px!important;
+  margin:8px 18px 0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(203,213,225,.72)!important;
+  border-radius:24px!important;
+  background:linear-gradient(145deg,#eef4fb,#f8fbff)!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.07),inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+
+body.profileMode #profilPanel .coverPhoto{
+  background-position:center!important;
+}
+
+body.profileMode #profilPanel .coverPhoto[style*="background-image"]{
+  background-size:contain!important;
+  background-color:#f5f8fc!important;
+}
+
+body.profileMode #profilPanel .coverPhoto:after{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(15,23,42,.08))!important;
+}
+
+body.profileMode #profilPanel .coverEdit{
+  right:10px!important;
+  bottom:10px!important;
+  width:36px!important;
+  height:36px!important;
+  border-radius:13px!important;
+  color:#176fe8!important;
+  background:rgba(255,255,255,.91)!important;
+  border:1px solid rgba(255,255,255,.94)!important;
+  box-shadow:0 7px 18px rgba(15,23,42,.12)!important;
+}
+
+body.profileMode #profilPanel .profileContent{
+  margin-top:0!important;
+  padding:10px 18px 18px!important;
+  text-align:left!important;
+}
+
+body.profileMode #profilPanel .profileIdentityCard{
+  position:relative;
+  padding:14px;
+  overflow:hidden;
+  border:1px solid rgba(211,222,235,.86);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(246,249,253,.86));
+  box-shadow:0 14px 30px rgba(15,23,42,.055),inset 0 1px 0 rgba(255,255,255,.92);
+}
+
+body.profileMode #profilPanel .profileIdentityHeader{
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr) auto;
+  gap:11px;
+  align-items:center;
+  min-width:0;
+}
+
+body.profileMode #profilPanel .profileWrap{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  position:relative!important;
+  z-index:1!important;
+}
+
+body.profileMode #profilPanel .profilePhoto{
+  display:block!important;
+  width:76px!important;
+  height:76px!important;
+  border:3px solid rgba(255,255,255,.96)!important;
+  border-radius:24px!important;
+  background:#fff!important;
+  box-shadow:0 10px 22px rgba(15,23,42,.13),0 0 0 1px rgba(148,163,184,.12)!important;
+}
+
+body.profileMode #profilPanel .profileIdentityFields{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+body.profileMode #profilPanel .profileIdentityFields .profileNameInput,
+body.profileMode #profilPanel .profileIdentityFields .profileJobInput{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  position:static!important;
+  z-index:auto!important;
+  transform:none!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+body.profileMode #profilPanel .profileIdentityFields .profileNameInput{
+  min-height:27px!important;
+  color:#101827!important;
+  font-size:21px!important;
+  line-height:1.08!important;
+  font-weight:950!important;
+  letter-spacing:-.5px!important;
+}
+
+body.profileMode #profilPanel .profileIdentityFields .profileJobInput{
+  min-height:17px!important;
+  margin-top:2px!important;
+  color:#66768c!important;
+  font-size:10.5px!important;
+  line-height:1.25!important;
+  font-weight:850!important;
+  letter-spacing:.055em!important;
+}
+
+body.profileMode #profilPanel .profileIdentityFields #profilFirma{
+  text-transform:uppercase!important;
+}
+
+body.profileMode #profilPanel .profileIdentityFields #profilTelefon{
+  color:#176fe8!important;
+  font-size:11.5px!important;
+  letter-spacing:.01em!important;
+}
+
+body.profileMode #profilPanel .profileIdentityEditBtn{
+  align-self:start!important;
+  width:auto!important;
+  min-width:74px!important;
+  min-height:36px!important;
+  margin:0!important;
+  padding:0 11px!important;
+  border:1px solid rgba(73,137,219,.14)!important;
+  border-radius:13px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  color:#1766c2!important;
+  background:#eaf3ff!important;
+  box-shadow:none!important;
+  font-size:9.5px!important;
+  font-weight:950!important;
+  white-space:nowrap!important;
+}
+
+body.profileMode #profilPanel .profileIdentityEditBtn svg{
+  flex:0 0 15px;
+  width:15px;
+  height:15px;
+}
+
+body.profileMode #profilPanel .profileIdentityEditBtn:active{
+  transform:scale(.96);
+  background:#dfeeff!important;
+}
+
+body.profileMode #profilPanel .profileIdentityCard .profileBio{
+  display:block!important;
+  width:100%!important;
+  min-height:44px!important;
+  max-height:62px!important;
+  margin:11px 0 0!important;
+  padding:10px 12px!important;
+  resize:none!important;
+  border:1px solid rgba(214,224,236,.72)!important;
+  border-radius:15px!important;
+  outline:0!important;
+  color:#34445a!important;
+  background:rgba(244,247,251,.92)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+  text-align:left!important;
+  font-size:11px!important;
+  line-height:1.42!important;
+  font-weight:720!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+  margin-top:10px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(211,222,235,.86)!important;
+  border-radius:20px!important;
+  background:rgba(255,255,255,.80)!important;
+  box-shadow:0 12px 25px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.84)!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard{
+  min-width:0!important;
+  min-height:70px!important;
+  padding:10px 4px!important;
+  border:0!important;
+  border-right:1px solid rgba(220,228,238,.92)!important;
+  border-bottom:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour .profileStatCard:last-child{
+  border-right:0!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour b{
+  max-width:100%!important;
+  overflow:hidden!important;
+  color:#111827!important;
+  font-size:14.5px!important;
+  line-height:1.08!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  word-break:normal!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour #profilSonYedek{
+  font-size:12px!important;
+  letter-spacing:-.2px!important;
+}
+
+body.profileMode #profilPanel .profileStatsFour span{
+  margin-top:5px!important;
+  color:#7e8b9d!important;
+  font-size:8.5px!important;
+  line-height:1.15!important;
+  font-weight:850!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+}
+
+body.profileMode #profilPanel .profileSectionTitle{
+  margin:18px 0 10px!important;
+}
+
+body.darkMode.profileMode #profilPanel .coverArea,
+html.darkRoot body.profileMode #profilPanel .coverArea{
+  border-color:rgba(255,255,255,.08)!important;
+  background:linear-gradient(145deg,#19283c,#111d2e)!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+body.darkMode.profileMode #profilPanel .coverPhoto[style*="background-image"],
+html.darkRoot body.profileMode #profilPanel .coverPhoto[style*="background-image"]{
+  background-color:#111d2e!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityCard,
+html.darkRoot body.profileMode #profilPanel .profileIdentityCard,
+body.darkMode.profileMode #profilPanel .profileStatsFour,
+html.darkRoot body.profileMode #profilPanel .profileStatsFour{
+  border-color:rgba(255,255,255,.08)!important;
+  background:linear-gradient(145deg,rgba(25,39,58,.94),rgba(17,28,43,.90))!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityFields .profileNameInput,
+html.darkRoot body.profileMode #profilPanel .profileIdentityFields .profileNameInput,
+body.darkMode.profileMode #profilPanel .profileStatsFour b,
+html.darkRoot body.profileMode #profilPanel .profileStatsFour b{
+  color:#f5f8fd!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityFields .profileJobInput,
+html.darkRoot body.profileMode #profilPanel .profileIdentityFields .profileJobInput{
+  color:#9aabc0!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityFields #profilTelefon,
+html.darkRoot body.profileMode #profilPanel .profileIdentityFields #profilTelefon{
+  color:#76adf5!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityEditBtn,
+html.darkRoot body.profileMode #profilPanel .profileIdentityEditBtn{
+  color:#8ebdff!important;
+  border-color:rgba(96,165,250,.13)!important;
+  background:#193353!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileIdentityCard .profileBio,
+html.darkRoot body.profileMode #profilPanel .profileIdentityCard .profileBio{
+  color:#c4d0df!important;
+  border-color:rgba(255,255,255,.06)!important;
+  background:rgba(11,22,36,.68)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+
+body.darkMode.profileMode #profilPanel .profileStatsFour .profileStatCard,
+html.darkRoot body.profileMode #profilPanel .profileStatsFour .profileStatCard{
+  border-right-color:rgba(255,255,255,.07)!important;
+}
+
+@media(max-width:360px){
+  body.profileMode #profilPanel .coverArea{height:104px!important;margin-left:14px!important;margin-right:14px!important;}
+  body.profileMode #profilPanel .profileContent{padding-left:14px!important;padding-right:14px!important;}
+  body.profileMode #profilPanel .profileIdentityCard{padding:12px!important;}
+  body.profileMode #profilPanel .profileIdentityHeader{grid-template-columns:68px minmax(0,1fr) 40px;gap:9px!important;}
+  body.profileMode #profilPanel .profilePhoto{width:68px!important;height:68px!important;border-radius:21px!important;}
+  body.profileMode #profilPanel .profileIdentityFields .profileNameInput{font-size:18.5px!important;}
+  body.profileMode #profilPanel .profileIdentityEditBtn{width:40px!important;min-width:40px!important;padding:0!important;}
+  body.profileMode #profilPanel .profileIdentityEditBtn span{display:none!important;}
+  body.profileMode #profilPanel .profileStatsFour b{font-size:13px!important;}
+  body.profileMode #profilPanel .profileStatsFour #profilSonYedek{font-size:10.8px!important;}
+}
+
+@media(max-width:330px){
+  body.profileMode #profilPanel .profileStatsFour{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  body.profileMode #profilPanel .profileStatsFour .profileStatCard{min-height:62px!important;border-right:0!important;}
+  body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(odd){border-right:1px solid rgba(220,228,238,.92)!important;}
+  body.profileMode #profilPanel .profileStatsFour .profileStatCard:nth-child(-n+2){border-bottom:1px solid rgba(220,228,238,.92)!important;}
+}
+</style>
 </head>
 
 <body>
@@ -21565,6 +21888,12 @@ height:1px;
 
 </div>
 
+<div class="profileContent">
+
+<section class="profileIdentityCard" aria-label="Profil ve firma bilgileri">
+
+<div class="profileIdentityHeader">
+
 <div class="profileWrap">
 
 <input type="file" id="profileInput" accept="image/*" hidden>
@@ -21577,7 +21906,7 @@ onclick="profileInput.click()">
 
 </div>
 
-<div class="profileContent">
+<div class="profileIdentityFields">
 
 <input
 id="profilAd"
@@ -21600,22 +21929,24 @@ autocomplete="tel"
 placeholder="Telefon"
 onclick="rehberdenTelefonSec(event,'profilTelefon','profilAd')">
 
+</div>
+
+<button class="profileEditBtn profileIdentityEditBtn" type="button" onclick="profilKurulumuAc()" aria-label="Profil bilgilerini düzenle">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4.8 16.8 4 20l3.2-.8L18.4 8a2.1 2.1 0 0 0 0-3l-.4-.4a2.1 2.1 0 0 0-3 0L4.8 16.8Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m13.6 6 4.4 4.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+  </svg>
+  <span>Düzenle</span>
+</button>
+
+</div>
+
 <textarea
 id="profilBio"
 class="profileBio"
 placeholder="Bilgi yaz..."></textarea>
 
-
-<div class="profileControlHero">
-  <div>
-    <div class="profileControlKicker">Firma Merkezi</div>
-    <div class="profileControlTitle">Kimlik ve belge ayarları</div>
-    <div class="profileControlText">
-      Rapor, makbuz ve sicil kartlarında kullanılan firma bilgileri.
-    </div>
-  </div>
-  <button class="profileEditBtn" onclick="profilKurulumuAc()">Profili Düzenle</button>
-</div>
+</section>
 
 <div class="profileStats profileStatsFour">
 
@@ -22135,8 +22466,10 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.29";
+const APP_VERSION = "v2.2.30";
 window.APP_VERSION = APP_VERSION;
+
+/* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
 /* v2.0.41 — parça değişim geçmişi PDF çıktısını Safari/iPhone için düzelt */
@@ -42431,7 +42764,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.29";
+const ABR_ROLE_VERSION="2.2.30";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -43000,7 +43333,7 @@ window.abrYerelYedekKurtar=function(){
   }catch(error){if(typeof toast==="function")toast(String(error&&error.message||"Yerel yedek geri yüklenemedi"))}
 };
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
-window.__abrCloudBackupVersion="2.2.29";
+window.__abrCloudBackupVersion="2.2.30";
 })();
 </script>
 
@@ -45058,7 +45391,7 @@ window.abrVeriMerkeziIslem=function(action){
   if(action==="update"){abrDataHubRun("elevatorXGuncelle",[typeof APP_VERSION!=="undefined"?APP_VERSION:""]);return}
 };
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const modal=abrDataHubEl("abrDataHubModal");if(modal&&modal.classList.contains("is-open"))window.abrVeriMerkeziKapat()}});
-window.__abrDataHubVersion="2.2.29";
+window.__abrDataHubVersion="2.2.30";
 })();
 </script>
 
