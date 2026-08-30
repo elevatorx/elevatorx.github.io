@@ -21542,6 +21542,14 @@ placeholder="Bilgi yaz..."></textarea>
   </span>
 </button>
 
+<button class="profileActionCard" onclick="abrYerelYedekKurtar()">
+  <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
+  <span class="profileActionText">
+    <b>Kayıp Kayıtları Kurtar</b>
+    <em>Otomatik, güncelleme öncesi ve geri yükleme öncesi cihaz yedeklerini tarar.</em>
+  </span>
+</button>
+
 <button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
   <span class="profileActionIcon exIcon exRefresh" aria-hidden="true"></span>
   <span class="profileActionText">
@@ -21986,10 +21994,10 @@ let aktifEkran = "apartman";
 let oncekiEkran = "apartman";
 const AUTO_YEDEK_KEY = "ayAutoBackupLatest";
 const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
-const AUTO_YEDEK_LIMIT = 3;
+const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.24";
+const APP_VERSION = "v2.2.25";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -25402,13 +25410,8 @@ try{
   try{
     localStorage.setItem(AUTO_YEDEK_KEY, tamJson);
   }catch(ilkHata){
-    try{
-      localStorage.removeItem(AUTO_YEDEK_HISTORY_KEY);
-      localStorage.setItem(AUTO_YEDEK_KEY, tamJson);
-    }catch(ikinciHata){
-      if(!sessiz) toast("Otomatik yedek için depolama alanı yetersiz");
-      return false;
-    }
+    if(!sessiz) toast("Yeni yedek için alan yetersiz; eski kurtarma noktaları korundu");
+    return false;
   }
 
   let hafifYedek = abrStbYedekHafiflet(yedek);
@@ -25444,18 +25447,20 @@ try{
 
   if(son && son.imza === imza){
     gecmis[0] = yeniKayit;
-  }else if(son && Number.isFinite(sonZaman) && Date.now() - sonZaman < ABR_STB_HISTORY_MIN_MS){
-    gecmis[0] = yeniKayit;
   }else{
     gecmis.unshift(yeniKayit);
   }
 
   gecmis = gecmis.slice(0,AUTO_YEDEK_LIMIT);
 
-  try{
-    localStorage.setItem(AUTO_YEDEK_HISTORY_KEY, JSON.stringify(gecmis));
-  }catch(historyErr){
-    try{ localStorage.removeItem(AUTO_YEDEK_HISTORY_KEY); }catch(e){}
+  let historySaved = false;
+  while(gecmis.length && !historySaved){
+    try{
+      localStorage.setItem(AUTO_YEDEK_HISTORY_KEY, JSON.stringify(gecmis));
+      historySaved = true;
+    }catch(historyErr){
+      gecmis.pop();
+    }
   }
 
   localStorage.setItem("ayAutoBackupAt", yedek.olusturmaTarihi);
@@ -42259,7 +42264,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.24";
+const ABR_ROLE_VERSION="2.2.25";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -42546,7 +42551,7 @@ function abrCloudMetaGet(){try{const value=JSON.parse(localStorage.getItem(ABR_C
 function abrCloudMetaSet(value){try{localStorage.setItem(ABR_CLOUD_META_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
 function abrCloudDate(value){if(!value)return "Henüz alınmadı";try{return new Date(value).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(error){return "Henüz alınmadı"}}
 function abrCloudStatus(text,state){const el=document.getElementById("cloudBackupInfo");if(el){el.textContent=text||"Henüz alınmadı";el.dataset.state=state||""}}
-function abrCloudStatusRefresh(){const meta=abrCloudMetaGet();if(meta.error){abrCloudStatus("Bağlantı bekleniyor","error");return}abrCloudStatus(meta.updatedAt?abrCloudDate(meta.updatedAt):"Henüz alınmadı",meta.updatedAt?"ok":"")}
+function abrCloudStatusRefresh(){const meta=abrCloudMetaGet();if(meta.error){abrCloudStatus("Bağlantı bekleniyor","error");return}if(meta.warning){abrCloudStatus(meta.warning,"warning");return}abrCloudStatus(meta.updatedAt?abrCloudDate(meta.updatedAt):"Henüz alınmadı",meta.updatedAt?"ok":"")}
 window.abrCloudStatusRefresh=abrCloudStatusRefresh;
 async function abrCloudContext(){
   if(typeof window.abrTeamCloudClient!=="function")throw new Error("Hesap bağlantısı hazır değil.");
@@ -42566,6 +42571,28 @@ function abrCloudPayload(){
   return backup;
 }
 function abrCloudRecordCount(payload){return Array.isArray(payload&&payload.apartmanlar)?payload.apartmanlar.length:0}
+function abrCloudStats(payload){
+  const apartments=Array.isArray(payload&&payload.apartmanlar)?payload.apartmanlar:[];
+  const stats={apartments:apartments.length,fees:0,payments:0,maintenance:0,oldBalances:0,parts:0,activity:0,quality:0};
+  apartments.forEach(function(item){
+    if(!item||typeof item!=="object")return;
+    if(Number(item.ucret||0)>0)stats.fees++;
+    stats.payments+=Array.isArray(item.odemeler)?item.odemeler.length:0;
+    stats.maintenance+=Array.isArray(item.bakimKayitlari)?item.bakimKayitlari.length:0;
+    stats.oldBalances+=Array.isArray(item.eskiBakiyeler)?item.eskiBakiyeler.length:0;
+    stats.parts+=Array.isArray(item.parcalar)?item.parcalar.length:0;
+  });
+  stats.activity=(stats.fees*3)+(stats.payments*14)+(stats.maintenance*12)+(stats.oldBalances*16)+(stats.parts*8);
+  stats.quality=(stats.activity*1000)+stats.apartments;
+  return stats;
+}
+function abrCloudPayloadCopy(payload){try{const copy=JSON.parse(JSON.stringify(payload||{}));delete copy._cloudVersions;return copy}catch(error){return null}}
+function abrCloudPayloadSignature(payload){try{return typeof abrStbImza==="function"?abrStbImza(JSON.stringify(abrCloudPayloadCopy(payload))):JSON.stringify(abrCloudStats(payload))}catch(error){return ""}}
+function abrCloudPayloadCandidates(remote){
+  if(!remote||!remote.payload)return [];
+  return [remote.payload].concat(Array.isArray(remote.payload._cloudVersions)?remote.payload._cloudVersions:[]).filter(function(payload){return payload&&Array.isArray(payload.apartmanlar)});
+}
+function abrCloudBestPayload(remote){return abrCloudPayloadCandidates(remote).sort(function(a,b){const sa=abrCloudStats(a),sb=abrCloudStats(b);return sb.quality-sa.quality||String(b.olusturmaTarihi||"").localeCompare(String(a.olusturmaTarihi||""))})[0]||null}
 async function abrCloudRemote(context){
   const response=await context.client.from(ABR_CLOUD_TABLE).select("payload,record_count,app_version,updated_at").eq("user_id",context.user.id).maybeSingle();
   if(response.error)throw response.error;
@@ -42573,6 +42600,7 @@ async function abrCloudRemote(context){
 }
 function abrCloudApply(payload){
   if(!payload||!Array.isArray(payload.apartmanlar))throw new Error("Bulut yedeği geçersiz.");
+  try{localStorage.setItem(ABR_STB_PRE_RESTORE_KEY,JSON.stringify(yedekVeriOlustur("geri_yukleme_oncesi")))}catch(preError){}
   const normalized=abrStbVeriyiNormalizeEt(abrStbDerinKopya(payload.apartmanlar));
   const oldData=data;
   data=normalized.data;
@@ -42594,6 +42622,7 @@ function abrCloudApply(payload){
   try{if(typeof goster==="function")goster()}catch(error){}
   return normalized.data.length;
 }
+window.abrBackupPayloadApply=abrCloudApply;
 function abrCloudRecoverTeamPortfolio(items){
   const seen=Object.create(null);const recovered=[];
   (Array.isArray(items)?items:[]).forEach(function(item){
@@ -42617,6 +42646,20 @@ async function abrCloudSave(force){
     const payload=abrCloudPayload();
     const count=abrCloudRecordCount(payload);
     if(count===0&&!force){abrCloudStatusRefresh();return false}
+    const remote=await abrCloudRemote(context);
+    const localStats=abrCloudStats(payload);
+    const remoteBest=abrCloudBestPayload(remote);
+    const remoteStats=abrCloudStats(remoteBest);
+    if(remoteBest&&remoteStats.quality>localStats.quality){
+      abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:remoteStats.apartments,error:"",warning:"Bulutta daha dolu yedek korunuyor"});
+      abrCloudStatus("Bulutta daha dolu yedek korunuyor","warning");
+      return false;
+    }
+    if(remoteBest&&abrCloudPayloadSignature(remoteBest)!==abrCloudPayloadSignature(payload)){
+      const versions=[abrCloudPayloadCopy(remoteBest)].concat(Array.isArray(remote.payload&&remote.payload._cloudVersions)?remote.payload._cloudVersions.map(abrCloudPayloadCopy):[]).filter(Boolean);
+      const seen=Object.create(null);
+      payload._cloudVersions=versions.filter(function(item){const signature=abrCloudPayloadSignature(item);if(!signature||seen[signature])return false;seen[signature]=true;return true}).slice(0,4);
+    }
     const json=JSON.stringify(payload);
     if(json.length>ABR_CLOUD_MAX_BYTES)throw new Error("Bulut yedeği 8 MB sınırını aşıyor. Fotoğraf ve dosyaları dış yedekte sakla.");
     const now=new Date().toISOString();
@@ -42639,9 +42682,10 @@ window.abrCloudRestoreAfterLogin=async function(){
   try{
     const context=await abrCloudContext();
     const remote=await abrCloudRemote(context);
+    const bestRemote=abrCloudBestPayload(remote);
     const localCount=Array.isArray(window.data)?window.data.length:(Array.isArray(data)?data.length:0);
-    if(remote&&remote.payload&&abrCloudRecordCount(remote.payload)>0&&localCount===0){
-      const count=abrCloudApply(remote.payload);
+    if(bestRemote&&abrCloudRecordCount(bestRemote)>0&&localCount===0){
+      const count=abrCloudApply(bestRemote);
       abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:count,error:""});
       abrCloudStatus(abrCloudDate(remote.updated_at),"ok");
       try{if(typeof toast==="function")toast(count+" apartman bulut yedeğinden geri getirildi")}catch(error){}
@@ -42655,7 +42699,7 @@ window.abrCloudRestoreAfterLogin=async function(){
         abrCloudRestoring=false;await abrCloudSave(true);return true;
       }
     }
-    if(remote){abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:Number(remote.record_count||0),error:""});abrCloudStatus(abrCloudDate(remote.updated_at),"ok")}
+    if(remote){abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:abrCloudRecordCount(bestRemote),error:""});abrCloudStatus(abrCloudDate(remote.updated_at),"ok")}
     else abrCloudStatus("Henüz alınmadı","");
     return false;
   }catch(error){
@@ -42674,17 +42718,53 @@ window.abrBulutYedegiGeriYukle=async function(){
   abrCloudRestoring=true;abrCloudStatus("Bulut yedeği okunuyor…","working");
   try{
     const context=await abrCloudContext();const remote=await abrCloudRemote(context);
-    if(!remote||!remote.payload||abrCloudRecordCount(remote.payload)===0){if(typeof toast==="function")toast("Bu hesapta bulut yedeği bulunamadı");abrCloudStatusRefresh();return}
-    const count=abrCloudRecordCount(remote.payload);
-    if(!confirm(abrCloudDate(remote.updated_at)+" tarihli "+count+" apartmanlık bulut yedeği bu cihaza yüklensin mi?")){abrCloudStatusRefresh();return}
-    const restored=abrCloudApply(remote.payload);
+    const bestRemote=abrCloudBestPayload(remote);
+    if(!bestRemote||abrCloudRecordCount(bestRemote)===0){if(typeof toast==="function")toast("Bu hesapta bulut yedeği bulunamadı");abrCloudStatusRefresh();return}
+    const remoteStats=abrCloudStats(bestRemote);const localStats=abrCloudStats(abrCloudPayload());
+    if(localStats.quality>remoteStats.quality){
+      if(typeof toast==="function")toast("Yükleme engellendi: bu cihazdaki kayıtlar bulut yedeğinden daha dolu");
+      abrCloudStatus("Cihazdaki dolu kayıtlar korundu","warning");return;
+    }
+    const count=remoteStats.apartments;
+    const detail=remoteStats.payments+" ödeme • "+remoteStats.maintenance+" bakım • "+remoteStats.oldBalances+" eski bakiye";
+    if(!confirm(abrCloudDate(bestRemote.olusturmaTarihi||remote.updated_at)+" tarihli "+count+" apartmanlık yedek yüklensin mi?\n\n"+detail+"\n\nMevcut durum işlemden önce ayrıca korunacak.")){abrCloudStatusRefresh();return}
+    const restored=abrCloudApply(bestRemote);
     abrCloudMetaSet({userId:context.user.id,updatedAt:remote.updated_at,recordCount:restored,error:""});abrCloudStatus(abrCloudDate(remote.updated_at),"ok");
     if(typeof toast==="function")toast(restored+" apartman buluttan geri yüklendi");
   }catch(error){abrCloudStatus("Geri yüklenemedi","error");if(typeof toast==="function")toast(String(error&&error.message||"Bulut yedeği geri yüklenemedi"))}
   finally{abrCloudRestoring=false}
 };
+function abrLocalRecoveryCandidates(){
+  const candidates=[];const seen=Object.create(null);
+  function add(source,value,date){
+    if(!value)return;
+    let payload=value;
+    if(typeof payload==="string"){try{payload=JSON.parse(payload)}catch(error){return}}
+    if(payload&&payload.veri&&Array.isArray(payload.veri.apartmanlar))payload=payload.veri;
+    if(Array.isArray(payload))payload={apartmanlar:payload,olusturmaTarihi:date||""};
+    if(!payload||!Array.isArray(payload.apartmanlar))return;
+    const signature=abrCloudPayloadSignature(payload);if(!signature||seen[signature])return;seen[signature]=true;
+    candidates.push({source:source,payload:payload,date:payload.olusturmaTarihi||date||"",stats:abrCloudStats(payload)});
+  }
+  try{const history=JSON.parse(localStorage.getItem(AUTO_YEDEK_HISTORY_KEY)||"[]");if(Array.isArray(history))history.forEach(function(item,index){add("Otomatik yedek "+(index+1),item&&item.veri,item&&item.olusturmaTarihi)})}catch(error){}
+  [[AUTO_YEDEK_KEY,"Son otomatik yedek"],[ABR_STB_PRE_RESTORE_KEY,"Geri yükleme öncesi"],["elevatorxLastPreUpdateBackupJson","Güncelleme öncesi"],["elevatorxLastAutoBackup","Son güvenli yedek"]].forEach(function(entry){try{add(entry[1],localStorage.getItem(entry[0]),"")}catch(error){}});
+  return candidates.sort(function(a,b){return b.stats.quality-a.stats.quality||String(b.date||"").localeCompare(String(a.date||""))});
+}
+window.abrYerelYedekKurtar=function(){
+  const candidates=abrLocalRecoveryCandidates();const current=abrCloudStats(abrCloudPayload());
+  const best=candidates.find(function(item){return item.stats.fees+item.stats.payments+item.stats.maintenance+item.stats.oldBalances+item.stats.parts>0});
+  if(!best){if(typeof toast==="function")toast("Cihazdaki yedek geçmişinde bakiye veya bakım kaydı bulunamadı");return}
+  if(current.quality>best.stats.quality){if(typeof toast==="function")toast("Mevcut kayıtlar bulunan yerel yedekten daha dolu; işlem yapılmadı");return}
+  const detail=best.stats.apartments+" apartman • "+best.stats.fees+" ücret • "+best.stats.payments+" ödeme • "+best.stats.maintenance+" bakım • "+best.stats.oldBalances+" eski bakiye";
+  if(!confirm(best.source+" bulundu.\n"+abrCloudDate(best.date)+"\n\n"+detail+"\n\nBu kurtarma noktası geri yüklensin mi? Mevcut durum önce ayrıca korunacak."))return;
+  try{
+    abrCloudApply(best.payload);
+    if(typeof window.abrCloudBackupSchedule==="function")window.abrCloudBackupSchedule();
+    if(typeof toast==="function")toast("Yerel yedek geçmişindeki kayıtlar geri getirildi");
+  }catch(error){if(typeof toast==="function")toast(String(error&&error.message||"Yerel yedek geri yüklenemedi"))}
+};
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
-window.__abrCloudBackupVersion="2.2.24";
+window.__abrCloudBackupVersion="2.2.25";
 })();
 </script>
 
