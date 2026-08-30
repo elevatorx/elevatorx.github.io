@@ -21997,7 +21997,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.25";
+const APP_VERSION = "v2.2.27";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -42264,7 +42264,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.25";
+const ABR_ROLE_VERSION="2.2.27";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -42332,14 +42332,14 @@ function abrRoleHeader(){return '<div class="abrRoleBrand"><img class="abrRoleBr
 function abrRoleFooter(){return '<div class="abrRoleFoot"><i></i>Lisans doğrulandı • Güvenli hesap girişi</div>'}
 function abrRolePasswordIcon(){return '<svg class="abrEyeOn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.8 12s3.3-5.2 9.2-5.2 9.2 5.2 9.2 5.2-3.3 5.2-9.2 5.2S2.8 12 2.8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><svg class="abrEyeOff" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 4 16 16M9.6 7.1A9.8 9.8 0 0 1 12 6.8c5.9 0 9.2 5.2 9.2 5.2a14 14 0 0 1-2.2 2.8M6.2 8.4A14 14 0 0 0 2.8 12s3.3 5.2 9.2 5.2c1 0 1.9-.1 2.7-.4M10.3 10.3a2.5 2.5 0 0 0 3.4 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function abrRolePasswordField(id,label,autocomplete){return '<label class="abrAccountField"><span>'+label+'</span><div class="abrAccountInputWrap"><input id="'+id+'" class="has-toggle" type="password" minlength="8" maxlength="72" autocomplete="'+autocomplete+'" required><button class="abrAccountPasswordToggle" type="button" aria-label="Şifreyi göster" onclick="abrSifreGoster(\''+id+'\',this)">'+abrRolePasswordIcon()+'</button></div></label>'}
-function abrPinIdentityHtml(){const access=abrRoleState.access||{};const profile=abrRoleProfile();const name=access.profileName||profile.name;let label="Hesap oturumu";if(access.teamRole==="owner"&&access.membershipState==="active")label="Yönetici hesabı";else if(access.hasMembership)label="Personel hesabı";return '<div class="abrPinIdentity"><span class="abrPinAvatar">'+abrRoleEscape(abrRoleInitials(name))+'</span><span class="abrPinIdentityText"><b>'+abrRoleEscape(name)+'</b><span>'+abrRoleEscape(label)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</span></span><span class="abrPinShield"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'}
+function abrPinIdentityHtml(){const access=abrRoleState.access||{};const profile=abrRoleProfile();const name=access.profileName||profile.name;const label="Tam erişimli hesap";return '<div class="abrPinIdentity"><span class="abrPinAvatar">'+abrRoleEscape(abrRoleInitials(name))+'</span><span class="abrPinIdentityText"><b>'+abrRoleEscape(name)+'</b><span>'+abrRoleEscape(label)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</span></span><span class="abrPinShield"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'}
 function abrPinFieldHtml(id,label,autocomplete){return '<label class="abrPinField"><span>'+label+'</span><input id="'+id+'" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="'+autocomplete+'" enterkeyhint="go" oninput="abrPinRakam(this)" required></label>'}
 function abrRoleErrorHtml(){return abrRoleState.error?'<p class="abrRoleError" role="alert">'+abrRoleEscape(abrRoleState.error)+'</p>':''}
 function abrRoleRender(){
   const card=abrRoleEl("abrRoleCard");if(!card)return;
   if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrRoleSpinner"></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip yetkisi doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
   if(abrRoleState.view==="success"){
-    const access=abrRoleState.access||{};const roleLabel=abrRoleState.successRole==="admin"?"Yönetici hesabı":"Personel hesabı";
+    const access=abrRoleState.access||{};const roleLabel="Tam Erişim";
     card.innerHTML=abrRoleHeader()+'<div class="abrAccountSuccess"><div class="abrAccountSuccessIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 12.3 3.5 3.5 7.7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Giriş başarılı</h2><p>'+abrRoleEscape(access.profileName||abrRoleProfile().name)+'</p><div class="abrAccountRoleChip">'+abrRoleEscape(roleLabel)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</div></div>'+abrRoleFooter();return
   }
   if(abrRoleState.view==="pin"){
@@ -42375,12 +42375,13 @@ function abrRoleErrorText(error){
   if(/Failed to fetch|NetworkError|İnternet bağlantısı/i.test(raw))return "İnternet bağlantısı kurulamadı.";
   return raw.length>240?raw.slice(0,240):raw;
 }
-function abrRoleFromAccess(access){return access&&access.membershipState==="active"&&access.teamRole==="owner"?"admin":"personnel"}
+function abrRoleFromAccess(){return "admin"}
 function abrRoleAccessCache(access,email){if(!access||access.error)return;abrRoleStorePatch({lastEmail:email||access.userEmail||abrRoleStoreGet().lastEmail||"",lastAccess:{userId:access.userId||null,userEmail:access.userEmail||email||null,teamRole:access.teamRole||null,membershipState:access.membershipState||null,teamId:access.teamId||null,teamName:access.teamName||null,profileName:access.profileName||abrRoleProfile().name,hasMembership:!!access.hasMembership,verifiedAt:new Date().toISOString()}})}
 function abrRoleEnter(role,access){
-  window.__abrAppRole=role;
+  role="admin";
+  window.__abrAppRole="admin";
   document.documentElement.classList.remove("abr-role-locked","abr-role-admin","abr-role-personnel");
-  document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
+  document.documentElement.classList.add("abr-role-admin");
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
@@ -42518,17 +42519,11 @@ window.abrRolDegistir=async function(){
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
-function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
+function abrRoleWrapAdminFunctions(){return true}
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
-  document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
-  ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".dashboardFollowRow").forEach(function(row){if(/Sözleşme/i.test(row.textContent||""))row.setAttribute("data-abr-admin-only","1")});
-  document.querySelectorAll(".aptMoneyLine,.aptBalanceLine,.aptRightPremium .payBadge").forEach(function(element){element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".infoCard,.detailReportCard,.profileActionCard").forEach(function(card){if(/Tahsilat özeti|Ay Sonu Raporu/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
+  document.querySelectorAll('[data-abr-admin-only],[data-abr-finance]').forEach(function(element){element.removeAttribute("data-abr-admin-only");element.removeAttribute("data-abr-finance")});
 }
-function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=(role==="admin"?"Yönetici hesabı":"Personel hesabı")+" • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent=role==="admin"?"Yönetici":"Personel"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
+function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent="Tam erişimli hesap • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent="Tam Erişim"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000)abrRoleRelock();abrRoleState.hiddenAt=0});
 window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
@@ -42764,7 +42759,7 @@ window.abrYerelYedekKurtar=function(){
   }catch(error){if(typeof toast==="function")toast(String(error&&error.message||"Yerel yedek geri yüklenemedi"))}
 };
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
-window.__abrCloudBackupVersion="2.2.25";
+window.__abrCloudBackupVersion="2.2.27";
 })();
 </script>
 
