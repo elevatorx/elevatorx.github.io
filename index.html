@@ -18929,6 +18929,98 @@ html.darkRoot body.profileMode #profilPanel .profileActionCard{
 }
 </style>
 
+<style id="abrDataHubStyle2228">
+/* v2.2.28 — sade profil ve tek merkezde veri güvenliği */
+body.profileMode #profilPanel .profileDataHubCard{
+  width:100%;
+  min-height:86px;
+  padding:14px 15px;
+  border:1px solid rgba(147,197,253,.52);
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#0f172a;
+  background:linear-gradient(145deg,rgba(239,247,255,.98),rgba(224,240,255,.86));
+  box-shadow:0 14px 30px rgba(30,111,207,.08),inset 0 1px 0 rgba(255,255,255,.92);
+  text-align:left;
+  -webkit-appearance:none;
+  appearance:none;
+}
+body.profileMode #profilPanel .profileDataHubCard:active{transform:scale(.98)}
+body.profileMode #profilPanel .profileDataHubIcon{
+  flex:0 0 48px;
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#176fd3;
+  background:rgba(255,255,255,.78);
+  box-shadow:inset 0 0 0 1px rgba(37,99,235,.08);
+}
+body.profileMode #profilPanel .profileDataHubIcon svg{width:25px;height:25px}
+body.profileMode #profilPanel .profileDataHubText{min-width:0;flex:1}
+body.profileMode #profilPanel .profileDataHubText b{display:block;font-size:14px;line-height:1.2;font-weight:950;letter-spacing:-.2px}
+body.profileMode #profilPanel .profileDataHubText em{display:block;margin-top:5px;color:#64748b;font-size:10.5px;line-height:1.4;font-style:normal;font-weight:750}
+body.profileMode #profilPanel .profileDataHubArrow{flex:0 0 auto;color:#6d8eb4;font-size:29px;font-weight:500;line-height:1}
+
+body.abr-data-hub-open{overflow:hidden!important}
+#abrDataHubModal{position:fixed;inset:0;z-index:999997;display:none;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#abrDataHubModal.is-open{display:block}
+.abrDataHubBackdrop{position:absolute;inset:0;background:rgba(8,18,33,.42);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity .22s ease}
+#abrDataHubModal.is-open .abrDataHubBackdrop{opacity:1}
+.abrDataHubWrap{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:18px 12px max(12px,env(safe-area-inset-bottom));pointer-events:none}
+.abrDataHubCard{width:min(100%,520px);max-height:min(88dvh,760px);overflow:hidden;border:1px solid rgba(255,255,255,.72);border-radius:30px 30px 22px 22px;color:#111827;background:linear-gradient(180deg,#f9fbff 0%,#f1f5fb 100%);box-shadow:0 30px 80px rgba(8,25,50,.24),inset 0 1px 0 #fff;pointer-events:auto;transform:translateY(28px);opacity:.7;transition:transform .28s cubic-bezier(.22,.8,.2,1),opacity .2s ease}
+#abrDataHubModal.is-open .abrDataHubCard{transform:translateY(0);opacity:1}
+.abrDataHubHead{position:relative;padding:23px 58px 16px 20px;border-bottom:1px solid rgba(148,163,184,.16);background:linear-gradient(145deg,rgba(237,246,255,.96),rgba(249,251,255,.88))}
+.abrDataHubKicker{margin-bottom:6px;color:#2475d3;font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+.abrDataHubHead h2{margin:0;color:#101827;font-size:24px;line-height:1.05;font-weight:950;letter-spacing:-.7px}
+.abrDataHubHead p{margin:8px 0 0;color:#6b7a90;font-size:11px;line-height:1.45;font-weight:700}
+.abrDataHubClose{position:absolute;top:18px;right:17px;width:38px;height:38px;padding:0;border:0;border-radius:14px;color:#27364b;background:rgba(255,255,255,.82);box-shadow:0 5px 16px rgba(15,23,42,.07);font:500 25px/1 sans-serif}
+.abrDataHubBody{max-height:calc(min(88dvh,760px) - 132px);padding:14px 14px 18px;overflow:auto;-webkit-overflow-scrolling:touch}
+.abrDataHubStatus{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+.abrDataHubStatusItem{min-width:0;padding:11px 12px;border:1px solid rgba(148,163,184,.14);border-radius:16px;background:rgba(255,255,255,.72)}
+.abrDataHubStatusItem span{display:block;color:#8290a3;font-size:8px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.abrDataHubStatusItem b{display:block;margin-top:5px;overflow:hidden;color:#1f2d41;font-size:11px;font-weight:950;text-overflow:ellipsis;white-space:nowrap}
+.abrDataHubGroupLabel{margin:14px 3px 7px;color:#8592a4;font-size:8.5px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+.abrDataHubActions{display:grid;gap:7px}
+.abrDataHubAction{width:100%;min-height:68px;padding:10px 11px;border:1px solid rgba(148,163,184,.16);border-radius:18px;display:flex;align-items:center;gap:11px;color:#172033;background:rgba(255,255,255,.82);box-shadow:0 8px 18px rgba(15,23,42,.035);text-align:left;-webkit-appearance:none;appearance:none}
+.abrDataHubAction:active{transform:scale(.985);background:#f8fbff}
+.abrDataHubActionIcon{flex:0 0 42px;width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#246fc7;background:#e9f4ff}
+.abrDataHubActionIcon svg{width:23px;height:23px}
+.abrDataHubActionIcon.file{color:#168759;background:#e9f9f0}
+.abrDataHubActionIcon.cloud{color:#176fe8;background:#e7f2ff}
+.abrDataHubActionIcon.recover{color:#8b5cf6;background:#f1ecff}
+.abrDataHubActionIcon.update{color:#d97706;background:#fff3d7}
+.abrDataHubActionText{min-width:0;flex:1}
+.abrDataHubActionText b{display:block;font-size:12px;line-height:1.2;font-weight:950}
+.abrDataHubActionText span{display:block;margin-top:4px;color:#758398;font-size:9.5px;line-height:1.35;font-weight:700}
+.abrDataHubActionArrow{flex:0 0 auto;color:#9aa8b9;font-size:23px;line-height:1}
+.abrDataHubNote{display:flex;gap:9px;margin-top:12px;padding:11px 12px;border-radius:16px;color:#64758d;background:#eaf2fb;font-size:9px;line-height:1.45;font-weight:750}
+.abrDataHubNote i{flex:0 0 19px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:#2b76cd;font:900 11px/1 sans-serif}
+
+body.darkMode.profileMode #profilPanel .profileDataHubCard,
+html.darkRoot body.profileMode #profilPanel .profileDataHubCard{color:#f8fafc;border-color:rgba(96,165,250,.18);background:linear-gradient(145deg,rgba(22,49,80,.92),rgba(16,37,63,.88));box-shadow:0 15px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04)}
+body.darkMode.profileMode #profilPanel .profileDataHubIcon,
+html.darkRoot body.profileMode #profilPanel .profileDataHubIcon{color:#83baff;background:rgba(30,68,108,.82)}
+body.darkMode.profileMode #profilPanel .profileDataHubText em,
+html.darkRoot body.profileMode #profilPanel .profileDataHubText em{color:#9bacc1}
+body.darkMode .abrDataHubCard,html.darkRoot .abrDataHubCard{color:#edf4ff;border-color:rgba(255,255,255,.08);background:linear-gradient(180deg,#17263a 0%,#101d2e 100%);box-shadow:0 30px 90px rgba(0,0,0,.48)}
+body.darkMode .abrDataHubHead,html.darkRoot .abrDataHubHead{border-bottom-color:rgba(255,255,255,.07);background:linear-gradient(145deg,#1a2c43,#15253a)}
+body.darkMode .abrDataHubHead h2,html.darkRoot .abrDataHubHead h2{color:#f7faff}
+body.darkMode .abrDataHubHead p,html.darkRoot .abrDataHubHead p{color:#99a9bc}
+body.darkMode .abrDataHubClose,html.darkRoot .abrDataHubClose{color:#e8f1fb;background:rgba(255,255,255,.08)}
+body.darkMode .abrDataHubStatusItem,html.darkRoot .abrDataHubStatusItem,body.darkMode .abrDataHubAction,html.darkRoot .abrDataHubAction{color:#edf4ff;border-color:rgba(255,255,255,.07);background:rgba(27,45,68,.82)}
+body.darkMode .abrDataHubStatusItem b,html.darkRoot .abrDataHubStatusItem b{color:#edf4ff}
+body.darkMode .abrDataHubActionText span,html.darkRoot .abrDataHubActionText span{color:#9eafc4}
+body.darkMode .abrDataHubNote,html.darkRoot .abrDataHubNote{color:#abc0d8;background:#172b43}
+@media(min-width:640px){.abrDataHubWrap{align-items:center;padding:22px}.abrDataHubCard{border-radius:30px}}
+@media(max-width:360px){.abrDataHubHead{padding-left:17px}.abrDataHubBody{padding-left:10px;padding-right:10px}.abrDataHubAction{padding-left:9px;padding-right:9px}.abrDataHubActionText span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.abrDataHubBackdrop,.abrDataHubCard{transition:none!important}}
+</style>
+
 <style id="abrPremiumSparkle2046">
 /* v2.0.46 — dikkat dağıtmayan premium ışıltı ve mikro hareket katmanı */
 .exDashHero{
@@ -20847,6 +20939,75 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   </div>
 </div>
 
+<div id="abrDataHubModal" aria-hidden="true">
+  <div class="abrDataHubBackdrop" onclick="abrVeriMerkeziKapat()"></div>
+  <div class="abrDataHubWrap">
+    <section class="abrDataHubCard" role="dialog" aria-modal="true" aria-labelledby="abrDataHubTitle">
+      <header class="abrDataHubHead">
+        <div class="abrDataHubKicker">Veri ve Sistem</div>
+        <h2 id="abrDataHubTitle">Veri Güvenliği</h2>
+        <p>Yedekleme, geri yükleme, kurtarma ve güncelleme işlemleri tek merkezde.</p>
+        <button class="abrDataHubClose" type="button" aria-label="Kapat" onclick="abrVeriMerkeziKapat()">×</button>
+      </header>
+      <div class="abrDataHubBody">
+        <div class="abrDataHubStatus">
+          <div class="abrDataHubStatusItem"><span>Son yedek</span><b id="abrDataHubLastBackup">Henüz yok</b></div>
+          <div class="abrDataHubStatusItem"><span>Uygulama</span><b id="abrDataHubVersion">-</b></div>
+        </div>
+
+        <div class="abrDataHubGroupLabel">Yedekleme</div>
+        <div class="abrDataHubActions">
+          <button class="abrDataHubAction" type="button" onclick="abrVeriMerkeziIslem('export')">
+            <span class="abrDataHubActionIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8.5 7.5 12 4l3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13.5v4A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            </span>
+            <span class="abrDataHubActionText"><b>Yedekle ve Dışarı Aktar</b><span>JSON dosyasını WhatsApp, Drive veya Dosyalar'a gönder.</span></span>
+            <span class="abrDataHubActionArrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <div class="abrDataHubGroupLabel">Geri Yükleme ve Kurtarma</div>
+        <div class="abrDataHubActions">
+          <button class="abrDataHubAction" type="button" onclick="abrVeriMerkeziIslem('file')">
+            <span class="abrDataHubActionIcon file" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6.5 3.5h8l3 3V20a1.5 1.5 0 0 1-1.5 1.5H6.5A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 3.8V7h3.2M8.5 14.5h7M11 11.5l-2.5 3 2.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="abrDataHubActionText"><b>Dosyadan Geri Yükle</b><span>Daha önce dışarı aktardığın JSON yedek dosyasını seç.</span></span>
+            <span class="abrDataHubActionArrow" aria-hidden="true">›</span>
+          </button>
+          <button class="abrDataHubAction" type="button" onclick="abrVeriMerkeziIslem('cloud')">
+            <span class="abrDataHubActionIcon cloud" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7.5 18.5h9.2a4.3 4.3 0 0 0 .7-8.5A5.8 5.8 0 0 0 6.5 8.8a4.9 4.9 0 0 0 1 9.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9.2 13.8 2.8 2.7 2.8-2.7M12 16.2v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="abrDataHubActionText"><b>Bulut Yedeğini Geri Yükle</b><span>Bu e-posta hesabına bağlı son cihaz yedeğini getir.</span></span>
+            <span class="abrDataHubActionArrow" aria-hidden="true">›</span>
+          </button>
+          <button class="abrDataHubAction" type="button" onclick="abrVeriMerkeziIslem('recover')">
+            <span class="abrDataHubActionIcon recover" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5.2 8.2A8 8 0 1 1 4.6 15" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5.2 4.8v3.8H9M12 8v4.2l2.8 1.7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="abrDataHubActionText"><b>Kayıp Kayıtları Kurtar</b><span>Cihazdaki otomatik ve işlem öncesi yedek geçmişini tara.</span></span>
+            <span class="abrDataHubActionArrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <div class="abrDataHubGroupLabel">Uygulama</div>
+        <div class="abrDataHubActions">
+          <button class="abrDataHubAction" type="button" onclick="abrVeriMerkeziIslem('update')">
+            <span class="abrDataHubActionIcon update" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M19 8.2A8 8 0 1 0 19.5 15" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M19 4.8v3.8h-3.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="abrDataHubActionText"><b>Güvenli Yenile</b><span>Önce yedek al, ardından uygulamayı güncel dosyayla yenile.</span></span>
+            <span class="abrDataHubActionArrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <div class="abrDataHubNote"><i>i</i><span>Geri yükleme işlemleri yalnız seçtiğin yedek kaynağını kullanır. Mevcut kayıtların için önce dışarı aktarılan bir dosya tutman en güvenli yöntemdir.</span></div>
+      </div>
+    </section>
+  </div>
+</div>
+
 
 <div id="profileSetupOverlay" class="profileSetupOverlay" style="display:none">
   <div class="profileSetupCard">
@@ -21518,47 +21679,24 @@ placeholder="Bilgi yaz..."></textarea>
   </span>
 </button>
 
-<button class="profileActionCard" onclick="yedekle()">
-  <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Yedekle ve Dışarı Aktar</b>
-    <em>Uygulama silinse de kalsın: WhatsApp, Drive veya Dosyalar'a gönder.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="document.getElementById('yedekInput').click()">
-  <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Dosyadan Geri Yükle</b>
-    <em>Daha önce dışarı aktardığın JSON yedek dosyasını seç.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="abrBulutYedegiGeriYukle()">
-  <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Bulut Yedeğini Geri Yükle</b>
-    <em>Bu e-posta hesabına bağlı son apartman ve bakım kayıtlarını getir.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="abrYerelYedekKurtar()">
-  <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Kayıp Kayıtları Kurtar</b>
-    <em>Otomatik, güncelleme öncesi ve geri yükleme öncesi cihaz yedeklerini tarar.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="elevatorXGuncelle(APP_VERSION)">
-  <span class="profileActionIcon exIcon exRefresh" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Güvenli Yenile</b>
-    <em>Yedek al ve güncelle.</em>
-  </span>
-</button>
-
 </div>
+
+<div class="profileSectionTitle">Veri ve Sistem</div>
+
+<button class="profileDataHubCard" type="button" onclick="abrVeriMerkeziAc()">
+  <span class="profileDataHubIcon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M7 9V7.5A5 5 0 0 1 17 7.5V9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+      <rect x="4.5" y="9" width="15" height="11" rx="3" stroke="currentColor" stroke-width="1.9"/>
+      <path d="M12 13v3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="profileDataHubText">
+    <b>Veri Güvenliği</b>
+    <em>Yedekle, geri yükle, kayıt kurtar ve güvenli yenile.</em>
+  </span>
+  <span class="profileDataHubArrow" aria-hidden="true">›</span>
+</button>
 
 
 <div class="profileSectionTitle">Görünüm</div>
@@ -21997,7 +22135,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.27";
+const APP_VERSION = "v2.2.28";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -42264,7 +42402,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.27";
+const ABR_ROLE_VERSION="2.2.28";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -42332,15 +42470,15 @@ function abrRoleHeader(){return '<div class="abrRoleBrand"><img class="abrRoleBr
 function abrRoleFooter(){return '<div class="abrRoleFoot"><i></i>Lisans doğrulandı • Güvenli hesap girişi</div>'}
 function abrRolePasswordIcon(){return '<svg class="abrEyeOn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.8 12s3.3-5.2 9.2-5.2 9.2 5.2 9.2 5.2-3.3 5.2-9.2 5.2S2.8 12 2.8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><svg class="abrEyeOff" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 4 16 16M9.6 7.1A9.8 9.8 0 0 1 12 6.8c5.9 0 9.2 5.2 9.2 5.2a14 14 0 0 1-2.2 2.8M6.2 8.4A14 14 0 0 0 2.8 12s3.3 5.2 9.2 5.2c1 0 1.9-.1 2.7-.4M10.3 10.3a2.5 2.5 0 0 0 3.4 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function abrRolePasswordField(id,label,autocomplete){return '<label class="abrAccountField"><span>'+label+'</span><div class="abrAccountInputWrap"><input id="'+id+'" class="has-toggle" type="password" minlength="8" maxlength="72" autocomplete="'+autocomplete+'" required><button class="abrAccountPasswordToggle" type="button" aria-label="Şifreyi göster" onclick="abrSifreGoster(\''+id+'\',this)">'+abrRolePasswordIcon()+'</button></div></label>'}
-function abrPinIdentityHtml(){const access=abrRoleState.access||{};const profile=abrRoleProfile();const name=access.profileName||profile.name;const label="Tam erişimli hesap";return '<div class="abrPinIdentity"><span class="abrPinAvatar">'+abrRoleEscape(abrRoleInitials(name))+'</span><span class="abrPinIdentityText"><b>'+abrRoleEscape(name)+'</b><span>'+abrRoleEscape(label)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</span></span><span class="abrPinShield"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'}
+function abrPinIdentityHtml(){const access=abrRoleState.access||{};const profile=abrRoleProfile();const name=access.profileName||profile.name;const label=access.teamName||access.userEmail||"Güvenli hesap";return '<div class="abrPinIdentity"><span class="abrPinAvatar">'+abrRoleEscape(abrRoleInitials(name))+'</span><span class="abrPinIdentityText"><b>'+abrRoleEscape(name)+'</b><span>'+abrRoleEscape(label)+'</span></span><span class="abrPinShield"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'}
 function abrPinFieldHtml(id,label,autocomplete){return '<label class="abrPinField"><span>'+label+'</span><input id="'+id+'" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="'+autocomplete+'" enterkeyhint="go" oninput="abrPinRakam(this)" required></label>'}
 function abrRoleErrorHtml(){return abrRoleState.error?'<p class="abrRoleError" role="alert">'+abrRoleEscape(abrRoleState.error)+'</p>':''}
 function abrRoleRender(){
   const card=abrRoleEl("abrRoleCard");if(!card)return;
-  if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrRoleSpinner"></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip yetkisi doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
+  if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrRoleSpinner"></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip bilgileri doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
   if(abrRoleState.view==="success"){
-    const access=abrRoleState.access||{};const roleLabel="Tam Erişim";
-    card.innerHTML=abrRoleHeader()+'<div class="abrAccountSuccess"><div class="abrAccountSuccessIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 12.3 3.5 3.5 7.7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Giriş başarılı</h2><p>'+abrRoleEscape(access.profileName||abrRoleProfile().name)+'</p><div class="abrAccountRoleChip">'+abrRoleEscape(roleLabel)+(access.teamName?' • '+abrRoleEscape(access.teamName):'')+'</div></div>'+abrRoleFooter();return
+    const access=abrRoleState.access||{};const accountLabel=access.teamName||"Hesap doğrulandı";
+    card.innerHTML=abrRoleHeader()+'<div class="abrAccountSuccess"><div class="abrAccountSuccessIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 12.3 3.5 3.5 7.7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Giriş başarılı</h2><p>'+abrRoleEscape(access.profileName||abrRoleProfile().name)+'</p><div class="abrAccountRoleChip">'+abrRoleEscape(accountLabel)+'</div></div>'+abrRoleFooter();return
   }
   if(abrRoleState.view==="pin"){
     const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
@@ -42360,7 +42498,7 @@ function abrRoleRender(){
   }
   if(abrRoleState.view==="setup"){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">İlk kullanım</div><h1 id="abrRoleTitle">Hesabını oluştur</h1><p>Bir kez e-posta ve şifre belirle; sonraki açılışlarda normal giriş yap.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Bu cihazdaki ekip üyeliğin, sohbetlerin ve mevcut yetkin aynı kullanıcıda korunur.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField"><span>Ad soyad</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">İlk kullanım</div><h1 id="abrRoleTitle">Hesabını oluştur</h1><p>Bir kez e-posta ve şifre belirle; sonraki açılışlarda normal giriş yap.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Bu cihazdaki ekip üyeliğin, sohbetlerin ve mevcut kayıtların aynı kullanıcıda korunur.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField"><span>Ad soyad</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
   }
   const store=abrRoleStoreGet();const accountEntry=window.__exLicenseAccountEntry===true;
   const alternateAction=accountEntry?'<button class="abrAccountTextButton" type="button" onclick="abrAktivasyonaDon()">Yeni hesap / aktivasyon kodu</button>':'<button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button>';
@@ -42385,7 +42523,6 @@ function abrRoleEnter(role,access){
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
-  if(role==="personnel"&&access&&(!access.hasMembership||access.membershipState!=="active")){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(error){}},450)}
 }
 function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";if(immediate===true){abrRoleEnter(role,access);return}abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
 function abrRoleRefreshAfterBiometric(userId){
@@ -42401,10 +42538,10 @@ async function abrRoleSessionAccess(){
   const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
   const cached=abrRoleCachedAccess(userId);
   try{
-    if(typeof window.abrTeamAccessInfo!=="function")throw new Error("Ekip yetkisi okunamadı.");
-    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Yetki kontrolü zaman aşımına uğradı."))},14000)});
+    if(typeof window.abrTeamAccessInfo!=="function")throw new Error("Ekip bilgisi okunamadı.");
+    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Ekip kontrolü zaman aşımına uğradı."))},14000)});
     const access=await Promise.race([window.abrTeamAccessInfo(false),timeout]);
-    if(!access||access.error)throw new Error(access&&access.error||"Yetki bilgisi alınamadı.");
+    if(!access||access.error)throw new Error(access&&access.error||"Ekip bilgisi alınamadı.");
     if(userId&&access.userId!==userId)throw new Error("Cihazdaki hesap oturumu değişmiş. E-posta ve şifreyle yeniden giriş yap.");
     abrRoleAccessCache(access,access.userEmail||"");return access;
   }catch(error){if(cached)return cached;throw error}
@@ -42475,7 +42612,7 @@ window.abrPinDogrula=async function(event){
   const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}
   const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
   if(!/^\d{4}$/.test(pin)){abrRoleState.error="4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.view="pin-setup";abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap yetkisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap bilgisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
   try{
     const digest=await abrPinHash(pin,record.salt,userId);
     if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);if(failure.lockedUntil>Date.now())throw new Error(failure.failedCount>=10?"Çok fazla yanlış PIN girildi. 5 dakika bekle veya hesap şifrenle giriş yap.":"Çok fazla yanlış PIN girildi. 30 saniye bekle.");throw new Error("PIN yanlış.")}
@@ -42491,7 +42628,7 @@ window.abrHesapGiris=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
   const email=String(abrRoleEl("abrLoginEmail")&&abrRoleEl("abrLoginEmail").value||"").trim().toLocaleLowerCase("tr-TR");const password=String(abrRoleEl("abrLoginPassword")&&abrRoleEl("abrLoginPassword").value||"");
   abrRoleStorePatch({lastEmail:email});
-  abrRoleState.busy=true;abrRoleState.busyTitle="Giriş yapılıyor";abrRoleState.busyDetail="Hesap ve ekip yetkisi doğrulanıyor.";abrRoleState.error="";abrRoleRender();
+  abrRoleState.busy=true;abrRoleState.busyTitle="Giriş yapılıyor";abrRoleState.busyDetail="Hesap ve ekip bilgileri doğrulanıyor.";abrRoleState.error="";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignIn!=="function")throw new Error("Güvenli hesap bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSignIn({email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
 window.abrHesapGirisiGoster=function(){abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
@@ -42518,12 +42655,12 @@ window.abrRolDegistir=async function(){
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){abrRoleState.error=abrRoleErrorText(error)}
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
-function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
+function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem şu anda kullanılamıyor");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
 function abrRoleWrapAdminFunctions(){return true}
 function abrRoleMarkPermissions(){
   document.querySelectorAll('[data-abr-admin-only],[data-abr-finance]').forEach(function(element){element.removeAttribute("data-abr-admin-only");element.removeAttribute("data-abr-finance")});
 }
-function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent="Tam erişimli hesap • Hesaptan çık";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent="Tam Erişim"}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
+function abrRoleIdentityPaint(role,access){const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent="Güvenli oturumu kapat";const badge=abrRoleEl("abrRoleActiveBadge");if(badge)badge.remove();if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000)abrRoleRelock();abrRoleState.hiddenAt=0});
 window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
@@ -42759,7 +42896,7 @@ window.abrYerelYedekKurtar=function(){
   }catch(error){if(typeof toast==="function")toast(String(error&&error.message||"Yerel yedek geri yüklenemedi"))}
 };
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
-window.__abrCloudBackupVersion="2.2.27";
+window.__abrCloudBackupVersion="2.2.28";
 })();
 </script>
 
@@ -44776,6 +44913,48 @@ window.__abrBulkImportTest = {
 document.addEventListener("visibilitychange",function(){
   if(document.hidden && abrBulkState.previewUrl && !abrBulkState.busy) abrBulkPreviewClear();
 });
+})();
+</script>
+
+<script id="abrDataHubScript2228">
+(function(){
+"use strict";
+function abrDataHubEl(id){return document.getElementById(id)}
+function abrDataHubHaptic(type){try{if(typeof window.haptic==="function")window.haptic(type||"light")}catch(error){}}
+function abrDataHubToast(message){try{if(typeof window.toast==="function")window.toast(message)}catch(error){}}
+function abrDataHubRun(name,args){
+  const fn=window[name];
+  if(typeof fn!=="function"){abrDataHubToast("Bu işlem şu anda açılamadı");return false}
+  fn.apply(window,args||[]);return true
+}
+window.abrVeriMerkeziAc=function(){
+  try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose()}catch(error){}
+  const modal=abrDataHubEl("abrDataHubModal");if(!modal)return;
+  const profileBackup=abrDataHubEl("profilSonYedek");
+  const backupText=profileBackup&&String(profileBackup.textContent||"").trim();
+  const backup=abrDataHubEl("abrDataHubLastBackup");if(backup)backup.textContent=backupText&&backupText!=="-"?backupText:"Henüz yok";
+  const version=abrDataHubEl("abrDataHubVersion");if(version)version.textContent=typeof APP_VERSION!=="undefined"?APP_VERSION:"Güncel";
+  modal.style.display="block";modal.setAttribute("aria-hidden","false");document.body.classList.add("abr-data-hub-open");
+  requestAnimationFrame(function(){modal.classList.add("is-open")});
+  abrDataHubHaptic("light");
+  setTimeout(function(){const close=modal.querySelector(".abrDataHubClose");if(close)close.focus({preventScroll:true})},120)
+};
+window.abrVeriMerkeziKapat=function(){
+  const modal=abrDataHubEl("abrDataHubModal");if(!modal)return;
+  modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");modal.style.display="none";document.body.classList.remove("abr-data-hub-open")
+};
+window.abrVeriMerkeziIslem=function(action){
+  window.abrVeriMerkeziKapat();abrDataHubHaptic("light");
+  if(action==="file"){
+    const input=abrDataHubEl("yedekInput");if(input){input.click();return}abrDataHubToast("Yedek dosyası seçici açılamadı");return
+  }
+  if(action==="export"){abrDataHubRun("yedekle");return}
+  if(action==="cloud"){abrDataHubRun("abrBulutYedegiGeriYukle");return}
+  if(action==="recover"){abrDataHubRun("abrYerelYedekKurtar");return}
+  if(action==="update"){abrDataHubRun("elevatorXGuncelle",[typeof APP_VERSION!=="undefined"?APP_VERSION:""]);return}
+};
+document.addEventListener("keydown",function(event){if(event.key==="Escape"){const modal=abrDataHubEl("abrDataHubModal");if(modal&&modal.classList.contains("is-open"))window.abrVeriMerkeziKapat()}});
+window.__abrDataHubVersion="2.2.28";
 })();
 </script>
 
