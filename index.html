@@ -19927,6 +19927,51 @@ body.darkMode.profileMode #profilPanel .abrSystemMiniMeta b,html.darkRoot body.p
   body.profileMode #profilPanel .abrUnifiedSettingsCard .hapticSettingText em{max-width:180px}
 }
 </style>
+<style id="abrProfileFooter2232">
+/* v2.2.32 — profil sonundaki çift alt boşluğu kaldır ve kompakt marka kapanışı ekle */
+body.profileMode .container{padding-bottom:0!important}
+body.profileMode #profilPanel .profileContent{padding-bottom:0!important}
+body.profileMode #profilPanel .profileFooter{
+  display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;align-items:center!important;
+  gap:3px 12px!important;margin:14px 0 calc(102px + env(safe-area-inset-bottom))!important;padding:12px 14px!important;
+  border:1px solid rgba(211,222,235,.86)!important;border-radius:20px!important;
+  color:#718097!important;background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(247,250,254,.84))!important;
+  box-shadow:0 10px 22px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.9)!important;text-align:left!important
+}
+body.profileMode #profilPanel .profileFooter .abrProfileFooterLogo{
+  display:block!important;grid-column:1!important;grid-row:1/3!important;width:88px!important;height:48px!important;
+  margin:0!important;object-fit:contain!important;opacity:.94!important;filter:none!important
+}
+body.profileMode #profilPanel .profileFooter .profileFooterSlogan{
+  display:block!important;grid-column:2!important;grid-row:1!important;margin:0!important;max-width:none!important;
+  color:#33445b!important;font-size:10px!important;line-height:1.25!important;font-weight:900!important
+}
+body.profileMode #profilPanel .profileFooter .profileFooterSmall{
+  grid-column:2!important;grid-row:2!important;margin:0!important;color:#8794a6!important;font-size:0!important;line-height:1!important
+}
+body.profileMode #profilPanel .profileFooter .profileFooterSmall:before{content:none!important;display:none!important}
+body.profileMode #profilPanel .profileFooter .profileFooterSmall [data-app-version]{
+  display:inline-flex!important;align-items:center!important;width:auto!important;margin:3px 0 0!important;padding:4px 7px!important;
+  border-radius:999px!important;color:#1766c2!important;background:#e8f2ff!important;font-size:7.8px!important;line-height:1!important;font-weight:900!important
+}
+body.profileMode #profilPanel .profileFooter .legalLinks{
+  grid-column:1/-1!important;grid-row:3!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  flex-wrap:wrap!important;gap:2px 8px!important;margin:9px 0 0!important;padding-top:8px!important;border-top:1px solid rgba(218,227,238,.82)!important
+}
+body.profileMode #profilPanel .profileFooter .legalLinks button{margin:0!important;padding:3px 0!important;font-size:8.8px!important;line-height:1.15!important}
+body.profileMode #profilPanel .profileFooter .legalLinks span{font-size:8px!important}
+body.darkMode.profileMode #profilPanel .profileFooter,html.darkRoot body.profileMode #profilPanel .profileFooter{
+  border-color:rgba(255,255,255,.08)!important;background:linear-gradient(145deg,rgba(25,39,58,.94),rgba(17,28,43,.9))!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.19),inset 0 1px 0 rgba(255,255,255,.035)!important
+}
+body.darkMode.profileMode #profilPanel .profileFooter .profileFooterSlogan,html.darkRoot body.profileMode #profilPanel .profileFooter .profileFooterSlogan{color:#d8e2ef!important}
+body.darkMode.profileMode #profilPanel .profileFooter .profileFooterSmall [data-app-version],html.darkRoot body.profileMode #profilPanel .profileFooter .profileFooterSmall [data-app-version]{color:#8dbfff!important;background:#193353!important}
+body.darkMode.profileMode #profilPanel .profileFooter .legalLinks,html.darkRoot body.profileMode #profilPanel .profileFooter .legalLinks{border-top-color:rgba(255,255,255,.07)!important}
+@media(max-width:350px){
+  body.profileMode #profilPanel .profileFooter{grid-template-columns:72px minmax(0,1fr)!important;gap:3px 9px!important;padding:11px 12px!important}
+  body.profileMode #profilPanel .profileFooter .abrProfileFooterLogo{width:72px!important;height:42px!important}
+}
+</style>
 </head>
 
 <body>
@@ -22504,8 +22549,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-/* v2.2.31 — görünüm, dokunsal ayar ve sistem durumunu kompakt tek düzen halinde sadeleştir */
-const APP_VERSION = "v2.2.31";
+/* v2.2.32 — profil alt boşluğunu toparla ve kompakt marka kapanışı ekle */
+const APP_VERSION = "v2.2.32";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -42803,7 +42848,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.31";
+const ABR_ROLE_VERSION="2.2.32";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -43372,7 +43417,7 @@ window.abrYerelYedekKurtar=function(){
   }catch(error){if(typeof toast==="function")toast(String(error&&error.message||"Yerel yedek geri yüklenemedi"))}
 };
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
-window.__abrCloudBackupVersion="2.2.31";
+window.__abrCloudBackupVersion="2.2.32";
 })();
 </script>
 
@@ -45430,7 +45475,7 @@ window.abrVeriMerkeziIslem=function(action){
   if(action==="update"){abrDataHubRun("elevatorXGuncelle",[typeof APP_VERSION!=="undefined"?APP_VERSION:""]);return}
 };
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const modal=abrDataHubEl("abrDataHubModal");if(modal&&modal.classList.contains("is-open"))window.abrVeriMerkeziKapat()}});
-window.__abrDataHubVersion="2.2.31";
+window.__abrDataHubVersion="2.2.32";
 })();
 </script>
 
