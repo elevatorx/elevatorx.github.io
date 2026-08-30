@@ -521,6 +521,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
         '<label class="exLabel" for="exActivationCode">Aktivasyon Kodu</label>'+
         '<input class="exLicInput" id="exActivationCode" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="K7Q9-M2A4">'+
         '<button class="exLicBtn" id="exActivateBtn" type="button">Uygulamayı Etkinleştir</button>'+
+        '<button class="exResetBtn" id="exAccountLogin" type="button">E-posta ve şifreyle giriş yap</button>'+
         '<button class="exResetBtn" id="exResetDevice" type="button">Cihaz kodunu yenile</button>'+
         '<div class="exLicMsg" id="exLicMsg">'+licenseHtml(initialMsg||'')+'</div>'+
       '</div>';
@@ -545,6 +546,8 @@ html.darkRoot .tabbar .tabItem.activeTab{
         }
       };
     }
+    var account=document.getElementById('exAccountLogin');
+    if(account) account.onclick=openAccountLogin;
     function doActivate(){
       var licEl=document.getElementById('exLicenseNo');
       var codeEl=document.getElementById('exActivationCode');
@@ -573,11 +576,32 @@ html.darkRoot .tabbar .tabItem.activeTab{
     var codeInput=document.getElementById('exActivationCode');
     if(codeInput) codeInput.addEventListener('keydown',function(e){ if(e.key==='Enter') doActivate(); });
   }
+  function openAccountLogin(){
+    window.__exLicenseAccountEntry=true;
+    unlock();
+    try{ document.documentElement.classList.add('abr-role-locked'); }catch(e){}
+    setTimeout(function(){
+      try{ if(typeof window.abrHesapGirisiGoster==='function') window.abrHesapGirisiGoster(); }catch(e){}
+    },0);
+  }
+  function returnToActivation(){
+    window.__exLicenseAccountEntry=false;
+    lockWithGate('Yeni hesap için lisans numarası ve aktivasyon kodunu bir kez doğrula.');
+  }
+  window.exLicenseOpenAccountLogin=openAccountLogin;
+  window.exLicenseReturnToActivation=returnToActivation;
   function startup(){
+    var forceReset=false;
     try{
       var params=new URLSearchParams(location.search);
-      if(params.get('licenseReset') === '1') clearStored();
+      if(params.get('licenseReset') === '1'){ clearStored(); forceReset=true; }
     }catch(e){}
+    if(!forceReset){
+      try{
+        var accountStore=JSON.parse(localStorage.getItem('abrRoleAccessV2200')||'{}');
+        if(accountStore && accountStore.lastEmail){ openAccountLogin(); return; }
+      }catch(e){}
+    }
     var stored=getStored();
     if(stored && stored.lisans && stored.cihaz && stored.cihaz === getDeviceCode() && !localExpired(stored)){
       unlock();
@@ -19579,7 +19603,7 @@ body.darkMode #exLuxModal,html.darkRoot #exLuxModal{background:#0c1420;color:#ef
           <path d="M5 13.5v4A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
         </svg>
       </span>
-      <span class="exHybridItemText"><b>Verileri Yedekle</b><small>Güncel JSON yedeğini oluştur</small></span>
+      <span class="exHybridItemText"><b>Yedekle ve Dışarı Aktar</b><small>WhatsApp, Drive veya Dosyalar'a gönder</small></span>
     </button>
 
     <button class="exHybridItem" type="button" onclick="exHybridLisansDurumu()">
@@ -19703,10 +19727,13 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       var device = localStorage.getItem("elevatorx_device_code_v1476") || "-";
       var stored = null;
       try{ stored = JSON.parse(localStorage.getItem("elevatorx_google_license_v1480") || "null"); }catch(e){}
+      var accountStore = null;
+      try{ accountStore = JSON.parse(localStorage.getItem("abrRoleAccessV2200") || "null"); }catch(e){}
+      var accountEmail = accountStore && accountStore.lastEmail ? accountStore.lastEmail : "";
 
-      var licenseNo = stored && stored.lisans ? stored.lisans : "-";
-      var customer = stored && stored.musteri ? stored.musteri : "Belirtilmedi";
-      var endDate = stored && stored.bitis ? stored.bitis : "Süresiz / belirtilmedi";
+      var licenseNo = stored && stored.lisans ? stored.lisans : (accountEmail || "-");
+      var customer = stored && stored.musteri ? stored.musteri : (accountEmail ? "Hesap lisansı" : "Belirtilmedi");
+      var endDate = stored && stored.bitis ? stored.bitis : (accountEmail ? "Hesap aktif" : "Süresiz / belirtilmedi");
       var modal = document.getElementById("exLicenseModal");
       if(!modal) return;
 
@@ -21494,8 +21521,8 @@ placeholder="Bilgi yaz..."></textarea>
 <button class="profileActionCard" onclick="yedekle()">
   <span class="profileActionIcon exIcon exCloud" aria-hidden="true"></span>
   <span class="profileActionText">
-    <b>Verileri Yedekle</b>
-    <em>JSON dosyası oluştur.</em>
+    <b>Yedekle ve Dışarı Aktar</b>
+    <em>Uygulama silinse de kalsın: WhatsApp, Drive veya Dosyalar'a gönder.</em>
   </span>
 </button>
 
@@ -21503,7 +21530,7 @@ placeholder="Bilgi yaz..."></textarea>
   <span class="profileActionIcon exIcon exRestore" aria-hidden="true"></span>
   <span class="profileActionText">
     <b>Yedekten Geri Yükle</b>
-    <em>Yedek dosyasını içeri aktar.</em>
+    <em>Daha önce dışarı aktardığın JSON yedek dosyasını seç.</em>
   </span>
 </button>
 
@@ -21591,6 +21618,16 @@ placeholder="Bilgi yaz..."></textarea>
 
     <div class="profileSystemRow">
       <span class="profileSystemRowIcon backup" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8.5 7.5 12 4l3.5 3.5M5 13.5v4A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="profileSystemRowMain">
+        <small>Son dış yedek</small>
+        <b id="externalBackupInfo">Henüz dışarı aktarılmadı</b>
+      </span>
+    </div>
+
+    <div class="profileSystemRow">
+      <span class="profileSystemRowIcon backup" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M7.2 18.2h9.4a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.4 3.3 3.3 0 0 0 .8 6.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
       <span class="profileSystemRowMain">
@@ -21603,8 +21640,8 @@ placeholder="Bilgi yaz..."></textarea>
   <div class="profileBackupWarning">
     <span class="profileBackupWarningIcon" aria-hidden="true">!</span>
     <div>
-      <b>Dosya yedeğini unutma</b>
-      <span>Uygulamayı silmeden veya cihaz değiştirmeden önce yedek al.</span>
+      <b>Uygulama içindeki yedek tek başına yetmez</b>
+      <span>Uygulamayı silmeden veya cihaz değiştirmeden önce JSON dosyasını WhatsApp, Drive ya da Dosyalar'a gönder.</span>
     </div>
   </div>
 </div>
@@ -21934,7 +21971,7 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 3;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-const APP_VERSION = "v2.2.20";
+const APP_VERSION = "v2.2.23";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.0.40 — yanlış türü ve çoğalan aynı erken tahsilatları güvenle düzelt */
@@ -25327,6 +25364,15 @@ let son = localStorage.getItem("ayAutoBackupAt");
 el.textContent = son
 ? formatAutoYedekZamani(son)
 : "Henüz oluşmadı";
+}
+
+function disYedekBilgiGuncelle(){
+let el = document.getElementById("externalBackupInfo");
+if(!el) return;
+let son = localStorage.getItem("elevatorxLastManualBackupAt");
+el.textContent = son
+? formatAutoYedekZamani(son)
+: "Henüz dışarı aktarılmadı";
 }
 
 function autoYedekAl(sessiz=true){
@@ -34612,8 +34658,11 @@ paylas:true
 });
 
 localStorage.setItem("elevatorxLastManualBackupAt", yedek.olusturmaTarihi);
+disYedekBilgiGuncelle();
 
-toast(sonuc.paylasildi ? "Yedek paylaşım ekranı açıldı" : "Yedek indirildi");
+toast(sonuc.paylasildi
+? "Yedek dışarı aktarıldı"
+: "Yedek İndirilenler klasörüne kaydedildi");
 
 }catch(err){
 
@@ -34889,6 +34938,7 @@ if(elDurum) elDurum.innerText = "Güncel";
 
 profilSurumGuncelle();
 autoYedekBilgiGuncelle();
+disYedekBilgiGuncelle();
 meslekiBelgeProfilOzetiGuncelle();
 
 }
@@ -42178,7 +42228,7 @@ body.darkMode .abrRoleCard,html.darkRoot .abrRoleCard{border:0;background:transp
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.09";
+const ABR_ROLE_VERSION="2.2.23";
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
@@ -42276,8 +42326,9 @@ function abrRoleRender(){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">İlk kullanım</div><h1 id="abrRoleTitle">Hesabını oluştur</h1><p>Bir kez e-posta ve şifre belirle; sonraki açılışlarda normal giriş yap.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Bu cihazdaki ekip üyeliğin, sohbetlerin ve mevcut yetkin aynı kullanıcıda korunur.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField"><span>Ad soyad</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
   }
-  const store=abrRoleStoreGet();
-  card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Kurumsal saha yönetimi</div><h1 id="abrRoleTitle">Hesabına giriş yap</h1><p>E-posta ve şifrenle devam et. Yetkin ekip kaydından otomatik belirlenir.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button></div></form>'+abrRoleFooter();
+  const store=abrRoleStoreGet();const accountEntry=window.__exLicenseAccountEntry===true;
+  const alternateAction=accountEntry?'<button class="abrAccountTextButton" type="button" onclick="abrAktivasyonaDon()">Yeni hesap / aktivasyon kodu</button>':'<button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button>';
+  card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Kurumsal saha yönetimi</div><h1 id="abrRoleTitle">Hesabına giriş yap</h1><p>E-posta ve şifrenle devam et. Uygulamayı yeniden yüklediğinde aktivasyon kodu gerekmez.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button>'+alternateAction+'</div></form>'+abrRoleFooter();
 }
 function abrRoleErrorText(error){
   const raw=String(error&&error.message||error||"Giriş tamamlanamadı.");
@@ -42405,7 +42456,12 @@ window.abrHesapGiris=async function(event){
   abrRoleState.busy=true;abrRoleState.busyTitle="Giriş yapılıyor";abrRoleState.busyDetail="Hesap ve ekip yetkisi doğrulanıyor.";abrRoleState.error="";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignIn!=="function")throw new Error("Güvenli hesap bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSignIn({email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
-window.abrIlkKurulumAc=function(){abrRoleState.view="setup";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrHesapGirisiGoster=function(){abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrAktivasyonaDon=function(){
+  abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;
+  try{if(typeof window.exLicenseReturnToActivation==="function")window.exLicenseReturnToActivation()}catch(error){}
+};
+window.abrIlkKurulumAc=function(){if(window.__exLicenseAccountEntry===true){window.abrAktivasyonaDon();return}abrRoleState.view="setup";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
 window.abrNormalGiriseDon=function(){abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
 window.abrIlkHesapKur=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
@@ -42425,9 +42481,9 @@ window.abrRolDegistir=async function(){
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
 };
 function abrRoleDenied(){try{if(typeof toast==="function")toast("Bu işlem yalnız yönetici tarafından yapılabilir");if(typeof haptic==="function")haptic("error")}catch(error){}return false}
-function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","yedekle","geriYukle","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
+function abrRoleWrapAdminFunctions(){["exHybridYeniApartmanAc","formAc","kaydetApartman","duzenle","stokEnvanteriAc","sozlesmeTakvimiAc","aySonuRaporu","odemeDuzenle","odemeSil","cariHesapPdf","exHybridLisansDurumu"].forEach(function(name){const original=window[name];if(typeof original!=="function"||original.__abrRoleWrapped)return;const wrapped=function(){if(window.__abrAppRole==="personnel")return abrRoleDenied();return original.apply(this,arguments)};wrapped.__abrRoleWrapped=true;wrapped.__abrRoleOriginal=original;window[name]=wrapped})}
 function abrRoleMarkPermissions(){
-  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|\byedekle\(|yedekInput|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
+  const pattern=/(exHybridYeniApartmanAc|kaydetApartman|\bduzenle\(|stokEnvanteriAc|sozlesmeTakvimiAc|aySonuRaporu|odemeDuzenle|odemeSil|cariHesapPdf|exHybridLisansDurumu|setFilter\(['"](?:unpaid|contract_soon|contract_expired))/;
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(pattern.test(code))element.setAttribute("data-abr-admin-only","1")});
   ["toplamKazanc","profilAcikBakiye"].forEach(function(id){const element=abrRoleEl(id);const card=element&&element.closest(".profileStatCard");if(card)card.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".statCard").forEach(function(card){if(/Tahsilat|Bakiye|Borç|Alacak/i.test(card.textContent||""))card.setAttribute("data-abr-finance","1")});
