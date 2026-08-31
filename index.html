@@ -655,6 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
+<meta name="abr-app-version" content="v2.2.43">
 <meta http-equiv="Expires" content="0">
 
 <style>
@@ -20321,6 +20322,7 @@ body.darkMode .abrBirthdayReplayCard,html.darkRoot body .abrBirthdayReplayCard{b
 body.darkMode .abrProfileSetupSheet,html.darkRoot .abrProfileSetupSheet{background:linear-gradient(180deg,#111b2b,#0c1523);color:#f5f8ff}body.darkMode .abrProfileSetupHead,html.darkRoot .abrProfileSetupHead{background:linear-gradient(180deg,rgba(17,27,43,.98) 76%,rgba(17,27,43,0))}body.darkMode .abrProfileStep,html.darkRoot .abrProfileStep{background:rgba(20,31,48,.9);border-color:#27364c}body.darkMode .abrProfileField input,body.darkMode .abrProfileField textarea,html.darkRoot .abrProfileField input,html.darkRoot .abrProfileField textarea{background:#0d1726;border-color:#2b3a50;color:#f4f7fc}body.darkMode .abrProfileSetupClose,body.darkMode .abrProfileSetupBack,html.darkRoot .abrProfileSetupClose,html.darkRoot .abrProfileSetupBack{background:#182438;color:#f4f7fc;border-color:#2d3c53}
 @keyframes abrProfileStepIn{from{opacity:0;transform:translateX(9px)}to{opacity:1;transform:none}}@media(min-width:700px){.abrProfileSetupOverlay{align-items:center}.abrProfileSetupSheet{max-height:min(850px,calc(100dvh - 40px))}}@media(max-width:380px){.abrProfileTwo,.abrProfileUploadGrid{grid-template-columns:1fr}.abrProfileStoryDot{font-size:8px}.abrProfileSetupSheet{border-radius:25px}.abrProfileSetupOverlay{padding:8px}}
 </style>
+<!-- ABR_v2.2.43_AUTO_UPDATE: foreground + online + 45s periodic remote version check -->
 </head>
 
 <body>
@@ -22893,8 +22895,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-/* v2.2.41 — onaylanan doğum günü görseli tam ekran ilk açılışa bağlandı */
-const APP_VERSION = "v2.2.41";
+/* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
+const APP_VERSION = "v2.2.43";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23873,14 +23875,15 @@ location.reload();
 
 }
 
-async function guncellemeKontrolEt(){
+let abrUpdateCheckBusy = false;
+let abrLastUpdateCheckAt = 0;
+let abrAutoUpdateInProgress = false;
 
-if(location.protocol === "file:") return;
-
-try{
+async function abrUzakSurumOku(){
+if(location.protocol === "file:") return "";
 
 let kontrolUrl = new URL("index.html", location.href);
-kontrolUrl.searchParams.set("updateCheck", Date.now());
+kontrolUrl.searchParams.set("abr_update", Date.now());
 
 let cevap = await fetch(kontrolUrl.href,{
 cache:"no-store",
@@ -23889,15 +23892,59 @@ headers:{
 "Pragma":"no-cache"
 }
 });
+if(!cevap.ok) return "";
 
-if(!cevap.ok) return;
+/* v2.2.43: sürüm etiketi dosyanın başında. Yanıtı tamamen indirmeden
+   ilk parçadan sürümü okuyup ağı daha az kullanır. */
+try{
+if(cevap.body && cevap.body.getReader){
+let reader = cevap.body.getReader();
+let decoder = new TextDecoder();
+let biriken = "";
+let okunan = 0;
+while(okunan < 131072){
+let parca = await reader.read();
+if(parca.done) break;
+okunan += parca.value.byteLength || 0;
+biriken += decoder.decode(parca.value,{stream:true});
+let meta = biriken.match(/<meta\s+name=["']abr-app-version["']\s+content=["']([^"']+)["']/i);
+if(meta && meta[1]){
+try{ await reader.cancel(); }catch(e){}
+return String(meta[1]).trim();
+}
+let klasik = biriken.match(/const\s+APP_VERSION\s*=\s*["']([^"']+)["']/);
+if(klasik && klasik[1]){
+try{ await reader.cancel(); }catch(e){}
+return String(klasik[1]).trim();
+}
+}
+try{ await reader.cancel(); }catch(e){}
+}
+}catch(e){}
 
-let html = await cevap.text();
-let eslesme = html.match(/const\s+APP_VERSION\s*=\s*["']([^"']+)["']/);
+/* Eski bir dağıtımda meta yoksa geriye dönük tam okuma. */
+try{
+let yedekCevap = await fetch(kontrolUrl.href,{cache:"no-store"});
+if(!yedekCevap.ok) return "";
+let html = await yedekCevap.text();
+let eslesme = html.match(/<meta\s+name=["']abr-app-version["']\s+content=["']([^"']+)["']/i) || html.match(/const\s+APP_VERSION\s*=\s*["']([^"']+)["']/);
+return eslesme && eslesme[1] ? String(eslesme[1]).trim() : "";
+}catch(e){
+return "";
+}
+}
 
-if(!eslesme || !eslesme[1]) return;
+async function guncellemeKontrolEt(zorla){
+if(location.protocol === "file:" || abrUpdateCheckBusy || abrAutoUpdateInProgress) return;
 
-let uzakSurum = eslesme[1];
+let simdi = Date.now();
+if(!zorla && simdi - abrLastUpdateCheckAt < 20000) return;
+abrLastUpdateCheckAt = simdi;
+abrUpdateCheckBusy = true;
+
+try{
+let uzakSurum = await abrUzakSurumOku();
+if(!uzakSurum) return;
 
 try{
 let hedef = localStorage.getItem("elevatorxUpdatingTo") || "";
@@ -23914,12 +23961,38 @@ return;
 
 if(versiyonDahaYeniMi(uzakSurum,APP_VERSION)){
 updateBannerGoster(uzakSurum);
+abrAutoUpdateInProgress = true;
+try{ toast("Yeni sürüm bulundu. Otomatik güncelleniyor..."); }catch(e){}
+setTimeout(function(){
+elevatorXGuncelle(uzakSurum).catch(function(err){
+abrAutoUpdateInProgress = false;
+console.warn("Otomatik güncelleme başarısız:",err);
+});
+},650);
 }
 
 }catch(e){
 console.warn("Asansör Bakım & Revizyon sürüm kontrolü başarısız:", e);
+}finally{
+abrUpdateCheckBusy = false;
+}
 }
 
+function abrOtomatikGuncellemeBaslat(){
+if(location.protocol === "file:") return;
+setTimeout(function(){ guncellemeKontrolEt(true); },1400);
+
+/* GitHub Pages dağıtımı ilk kontrolden sonra tamamlanırsa uygulama beklemez. */
+setInterval(function(){
+if(document.visibilityState === "visible" && navigator.onLine !== false){
+guncellemeKontrolEt(false);
+}
+},45000);
+
+document.addEventListener("visibilitychange",function(){
+if(document.visibilityState === "visible") guncellemeKontrolEt(true);
+});
+window.addEventListener("online",function(){ guncellemeKontrolEt(true); });
 }
 
 function temaUygula(){
@@ -38866,7 +38939,7 @@ profilSurumGuncelle();
 setAktifTab("apartman");
 document.body.classList.remove("abrBakimView");
 ustMarkaGorunurlukAyarla(false);
-setTimeout(guncellemeKontrolEt,2400);
+abrOtomatikGuncellemeBaslat();
 
 });
 
@@ -42953,7 +43026,13 @@ window.abrTeamCredentialSetup=async function(details){
     localStorage.setItem("profilTelefon",phone);
   }catch(error){}
   await abrTeamProfileSync();
-  const invoked=await client.functions.invoke("account-access",{body:{email:email,password:password,display_name:name,phone:phone}});
+  let licenseNumber="",deviceCode="";
+  try{
+    const licenseStore=JSON.parse(localStorage.getItem("elevatorx_google_license_v1480")||"null");
+    licenseNumber=abrTeamTrim(licenseStore&&licenseStore.lisans,120);
+    deviceCode=abrTeamTrim(localStorage.getItem("elevatorx_device_code_v1476")||"",80);
+  }catch(error){}
+  const invoked=await client.functions.invoke("account-access",{body:{email:email,password:password,display_name:name,phone:phone,license_number:licenseNumber,device_code:deviceCode}});
   if(invoked.error)throw new Error(await abrTeamAccountFunctionError(invoked.error,"Hesap kurulamadı."));
   if(!invoked.data||invoked.data.ok!==true)throw new Error(abrTeamTrim(invoked.data&&(invoked.data.message||invoked.data.error)||"Hesap kurulamadı.",240));
   const signed=await client.auth.signInWithPassword({email:email,password:password});
@@ -43302,13 +43381,20 @@ function abrRoleRender(){
   const alternateAction=accountEntry?'<button class="abrAccountTextButton" type="button" onclick="abrAktivasyonaDon()">Yeni hesap / aktivasyon kodu</button>':'<button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button>';
   card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Kurumsal saha yönetimi</div><h1 id="abrRoleTitle">Hesabına giriş yap</h1><p>E-posta ve şifrenle devam et. Uygulamayı yeniden yüklediğinde aktivasyon kodu gerekmez.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button>'+alternateAction+'</div></form>'+abrRoleFooter();
 }
+function abrRoleRepairText(value){
+  let text=String(value==null?"":value);
+  const pairs=[["Ã¼","ü"],["Ãœ","Ü"],["Ä±","ı"],["Ä°","İ"],["ÄŸ","ğ"],["Äž","Ğ"],["ÅŸ","ş"],["Åž","Ş"],["Ã§","ç"],["Ã‡","Ç"],["Ã¶","ö"],["Ã–","Ö"]];
+  pairs.forEach(function(pair){text=text.split(pair[0]).join(pair[1])});
+  return text;
+}
 function abrRoleErrorText(error){
-  const raw=String(error&&error.message||error||"Giriş tamamlanamadı.");
+  const raw=abrRoleRepairText(error&&error.message||error||"Giriş tamamlanamadı.");
   if(/Invalid login credentials/i.test(raw))return "E-posta veya şifre yanlış.";
   if(/Email not confirmed/i.test(raw))return "Bu e-posta henüz doğrulanmamış.";
   if(/User already registered|already been registered|already exists|unique/i.test(raw))return "Bu e-posta başka bir hesapta kullanılıyor.";
   if(/rate limit|too many requests/i.test(raw))return "Çok fazla deneme yapıldı. Biraz bekleyip tekrar dene.";
   if(/Failed to fetch|NetworkError|İnternet bağlantısı/i.test(raw))return "İnternet bağlantısı kurulamadı.";
+  if(/Aktif ekip üyeliği bulunmayan kullanıcı için hesap oluşturulamaz/i.test(raw))return "Hesap kurulumu için cihaz lisansı doğrulanamadı. Lisans ekranına dönüp aktivasyonu tekrar kontrol et.";
   return raw.length>240?raw.slice(0,240):raw;
 }
 function abrRoleFromAccess(){return "admin"}
