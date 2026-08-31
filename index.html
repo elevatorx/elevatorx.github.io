@@ -22550,18 +22550,6 @@ placeholder="Bilgi yaz..."></textarea>
   </button>
 </div>
 
-<button id="abrBirthdaySettingCard" class="abrBirthdaySettingCard" type="button" onclick="abrBirthdaySettingsOpen()" aria-label="Doğum günü sürprizi ayarlarını aç">
-  <span class="abrBirthdaySettingIcon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16v10H4V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v10M3 7.5h18V10H3V7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 7.5H8.6a2.3 2.3 0 1 1 2.3-2.3L12 7.5Zm0 0h3.4a2.3 2.3 0 1 0-2.3-2.3L12 7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-  </span>
-  <span class="abrBirthdaySettingText">
-    <b>Doğum Günü Sürprizi</b>
-    <em>Yalnız gün ve ay cihazında saklanır.</em>
-  </span>
-  <span id="abrBirthdaySettingStatus" class="abrBirthdaySettingStatus">Tarih ekle</span>
-  <span class="abrBirthdaySettingArrow" aria-hidden="true">›</span>
-</button>
-
 <button class="abrSystemSummaryCard" type="button" onclick="abrVeriMerkeziAc()" aria-label="Sistem ve yedekleme ayrıntılarını aç">
   <span class="abrSystemSummaryIcon" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none"><path d="M7.2 18.2h9.4a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.4 3.3 3.3 0 0 0 .8 6.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m9.4 13.1 2 2 3.6-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -22909,8 +22897,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-/* v2.2.35 — premium doğum günü deneyimi ve düzeltilmiş önizleme */
-const APP_VERSION = "v2.2.35";
+/* v2.2.36 — özel ana ekran korunarak kutlama görseli geçici olarak kaldırıldı */
+const APP_VERSION = "v2.2.36";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -45909,6 +45897,7 @@ window.__abrDataHubVersion="2.2.33";
 "use strict";
 const BIRTHDAY_KEY="abrBirthdayDayMonthV2234";
 const BIRTHDAY_SEEN_KEY="abrBirthdaySeenV2234";
+const BIRTHDAY_CELEBRATION_ENABLED=false;
 const MONTHS=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 const MAX_DAYS=[31,29,31,30,31,30,31,31,30,31,30,31];
 let previewActive=false;
@@ -46000,6 +45989,10 @@ function confetti(){
 }
 function showCelebration(mode){
   const celebration=el("abrBirthdayCelebration"),greeting=el("abrBirthdayGreeting"),kicker=el("abrBirthdayKicker");if(!celebration)return;
+  if(!BIRTHDAY_CELEBRATION_ENABLED){
+    if(mode!=="preview")localStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
+    paintExperience();pulse("light");return
+  }
   if(greeting)greeting.textContent="İyi ki doğdun, "+nameForGreeting()+"!";
   if(kicker)kicker.textContent=mode==="preview"?"SÜRPRİZ ÖNİZLEMESİ":"BUGÜN SENİN GÜNÜN";
   celebration.classList.add("is-open");celebration.setAttribute("aria-hidden","false");
@@ -46049,7 +46042,7 @@ window.abrBirthdayPreviewEnd=function(){
 document.addEventListener("keydown",function(event){if(event.key!=="Escape")return;const celebration=el("abrBirthdayCelebration"),modal=el("abrBirthdaySettingsModal");if(celebration&&celebration.classList.contains("is-open"))window.abrBirthdayCelebrationClose();else if(modal&&modal.classList.contains("is-open"))window.abrBirthdaySettingsClose()});
 document.addEventListener("DOMContentLoaded",function(){fillSelectors();const month=el("abrBirthdayMonth");if(month)month.addEventListener("change",syncDays);refreshStatus();watchExperience();applyToday(false);paintExperience()});
 document.addEventListener("visibilitychange",function(){if(!document.hidden)applyToday(false)});
-window.__abrBirthdayVersion="2.2.35";
+window.__abrBirthdayVersion="2.2.36";
 })();
 </script>
 
