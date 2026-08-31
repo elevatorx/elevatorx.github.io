@@ -20076,6 +20076,124 @@ body.darkMode .abrMonthSummaryPeriod,html.darkRoot body .abrMonthSummaryPeriod{c
   .abrMonthSummary .exDashFinanceActivity{padding:8px 0 0!important;border-left:0!important;border-top:1px solid rgba(220,228,238,.9)!important}
 }
 </style>
+<style id="abrBirthdayMode2234">
+/* v2.2.34 — cihaz içinde doğum günü sürprizi ve güvenli önizleme */
+.abrBirthdaySettingCard{
+  display:grid;width:100%;grid-template-columns:42px minmax(0,1fr) auto 12px;gap:10px;align-items:center;
+  margin:10px 0 0;padding:12px;border:1px solid rgba(208,219,233,.9);border-radius:21px;
+  color:#142038;text-align:left;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(247,250,255,.9));
+  box-shadow:0 10px 24px rgba(15,23,42,.045),inset 0 1px 0 rgba(255,255,255,.92);cursor:pointer
+}
+.abrBirthdaySettingCard:active{transform:scale(.987)}
+.abrBirthdaySettingIcon{display:grid;width:42px;height:42px;place-items:center;border-radius:14px;color:#9a6800;background:linear-gradient(145deg,#fff8d8,#ffe8a1)}
+.abrBirthdaySettingIcon svg{width:23px;height:23px}
+.abrBirthdaySettingText{min-width:0}
+.abrBirthdaySettingText b{display:block;font-size:11.8px;line-height:1.15;font-weight:950}
+.abrBirthdaySettingText em{display:block;margin-top:4px;color:#7d899b;font-size:8px;line-height:1.32;font-style:normal;font-weight:750}
+.abrBirthdaySettingStatus{max-width:82px;padding:6px 8px;overflow:hidden;border-radius:999px;color:#8a6411;background:#fff5cf;font-size:7.4px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+.abrBirthdaySettingArrow{color:#8ea0b6;font-size:22px;line-height:1;font-weight:500}
+
+.abrBirthdayCrown{
+  position:absolute;z-index:4;display:none;width:36px;height:30px;right:-12px;top:-12px;
+  filter:drop-shadow(0 5px 7px rgba(115,74,0,.24));transform:rotate(9deg);pointer-events:none
+}
+.abrBirthdayCrown svg{display:block;width:100%;height:100%}
+body.abrBirthdayMode .abrBirthdayCrown{display:block;animation:abrBirthdayCrownIn .62s cubic-bezier(.2,.9,.25,1.35) both}
+body.abrBirthdayMode #exHybridMenuBtn{border-color:rgba(231,176,52,.62)!important;box-shadow:0 9px 24px rgba(156,104,5,.18),inset 0 1px 0 rgba(255,255,255,.92)!important}
+body.abrBirthdayMode #exHybridMenuBtn span{background:#9a6b12!important}
+body.abrBirthdayModalOpen{overflow:hidden!important}
+body.abrBirthdayMode .abrDrawerHead{position:relative}
+body.abrBirthdayMode .abrDrawerLogo{filter:drop-shadow(0 7px 12px rgba(204,147,27,.28)) saturate(1.08)}
+body.abrBirthdayMode .abrDrawerHead:after{
+  content:"DOĞUM GÜNÜ";position:absolute;left:50%;bottom:-2px;padding:4px 7px;border:1px solid rgba(213,161,39,.34);border-radius:999px;
+  color:#8a5b05;background:#fff4c8;font-size:5.8px;line-height:1;font-weight:950;letter-spacing:.1em;transform:translateX(-50%);white-space:nowrap
+}
+body.abrBirthdayMode .abrPortfolioHeaderTitle{position:relative;padding-right:92px}
+body.abrBirthdayMode .abrPortfolioHeaderTitle:after{
+  content:"BUGÜN SENİN GÜNÜN";position:absolute;right:0;top:50%;padding:6px 7px;border:1px solid rgba(211,160,38,.34);border-radius:999px;
+  color:#8a5a00;background:#fff5c9;font-size:6px;line-height:1;font-weight:950;letter-spacing:.07em;transform:translateY(-50%);white-space:nowrap
+}
+body.abrBirthdayMode .exDashHero{background:radial-gradient(circle at 86% 8%,rgba(255,213,93,.32),transparent 30%),linear-gradient(135deg,#17213d 0%,#173866 58%,#28569b 100%)!important}
+body.abrBirthdayMode .tabbar{border-color:rgba(221,170,50,.48)!important;box-shadow:0 15px 42px rgba(129,82,0,.17),inset 0 1px 0 rgba(255,255,255,.94)!important}
+body.abrBirthdayMode #profilPanel .profileIdentityCard{border-color:rgba(220,172,54,.45)!important;box-shadow:0 15px 35px rgba(142,91,0,.09),inset 0 1px 0 rgba(255,255,255,.9)!important}
+
+.abrBirthdayModal,.abrBirthdayCelebration{position:fixed;inset:0;display:none;place-items:end center;padding:18px;background:rgba(8,16,31,.46);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.abrBirthdayModal{z-index:2147482700}
+.abrBirthdayModal.is-open,.abrBirthdayCelebration.is-open{display:grid}
+.abrBirthdaySheet{
+  width:min(100%,430px);padding:16px;border:1px solid rgba(255,255,255,.76);border-radius:28px;
+  color:#152036;background:linear-gradient(155deg,rgba(255,255,255,.98),rgba(247,250,255,.96));
+  box-shadow:0 26px 72px rgba(5,13,28,.27),inset 0 1px 0 #fff;animation:abrBirthdaySheetIn .32s cubic-bezier(.2,.8,.2,1) both
+}
+.abrBirthdaySheetHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.abrBirthdaySheetTitle{display:flex;gap:11px;align-items:center;min-width:0}
+.abrBirthdaySheetTitleIcon{display:grid;width:44px;height:44px;min-width:44px;place-items:center;border-radius:15px;color:#9a6800;background:linear-gradient(145deg,#fff7d3,#ffe69a)}
+.abrBirthdaySheetTitleIcon svg{width:24px;height:24px}
+.abrBirthdaySheetTitle b{display:block;font-size:15px;line-height:1.1;font-weight:950;letter-spacing:-.025em}
+.abrBirthdaySheetTitle span{display:block;margin-top:5px;color:#7c899b;font-size:8px;line-height:1.35;font-weight:750}
+.abrBirthdayClose{display:grid;width:36px;height:36px;min-width:36px;place-items:center;border:0;border-radius:13px;color:#26354a;background:#edf2f8;font-size:20px;font-weight:800;cursor:pointer}
+.abrBirthdayDateGrid{display:grid;grid-template-columns:1fr 1.35fr;gap:9px;margin-top:16px}
+.abrBirthdayField{display:block;padding:9px 10px;border:1px solid #dbe4ef;border-radius:16px;background:#f7f9fc}
+.abrBirthdayField span{display:block;margin:0 2px 6px;color:#8591a3;font-size:7px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.abrBirthdayField select{width:100%;height:35px;border:0;outline:0;color:#18243a;background:transparent;font:900 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.abrBirthdayPrivacy{display:flex;gap:8px;align-items:flex-start;margin:11px 1px 0;color:#7b8799;font-size:7.7px;line-height:1.45;font-weight:750}
+.abrBirthdayPrivacy svg{width:14px;height:14px;min-width:14px;color:#1780df}
+.abrBirthdayActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.abrBirthdayAction{min-height:44px;border:0;border-radius:15px;font-size:9px;font-weight:950;cursor:pointer}
+.abrBirthdayAction.preview{color:#174f91;background:#e7f1ff}
+.abrBirthdayAction.save{color:#fff;background:linear-gradient(135deg,#143a70,#176fe8);box-shadow:0 9px 20px rgba(23,111,232,.2)}
+.abrBirthdayRemove{display:none;width:100%;margin-top:8px;padding:9px;border:0;color:#b34141;background:transparent;font-size:8px;font-weight:850;cursor:pointer}
+.abrBirthdayRemove.is-visible{display:block}
+
+.abrBirthdayCelebration{z-index:2147482800;place-items:center;overflow:hidden;padding:20px;background:radial-gradient(circle at 50% 25%,rgba(42,91,164,.4),transparent 38%),rgba(7,14,29,.76)}
+.abrBirthdayConfetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.abrBirthdayConfetti i{position:absolute;top:-10vh;width:7px;height:14px;border-radius:3px;background:var(--c);opacity:.94;animation:abrBirthdayConfettiFall var(--d) linear var(--delay) forwards}
+.abrBirthdayCard{
+  position:relative;z-index:2;width:min(100%,400px);padding:24px 20px 20px;overflow:hidden;border:1px solid rgba(255,255,255,.2);border-radius:32px;
+  color:#f7f9ff;text-align:center;background:radial-gradient(circle at 75% -10%,rgba(255,214,99,.28),transparent 38%),linear-gradient(145deg,#14213c,#102f61 65%,#174d8f);
+  box-shadow:0 32px 90px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.16);animation:abrBirthdayCardIn .58s cubic-bezier(.18,.88,.25,1.16) both
+}
+.abrBirthdayCard:before,.abrBirthdayCard:after{content:"";position:absolute;border:1px solid rgba(255,216,110,.12);border-radius:50%;pointer-events:none}
+.abrBirthdayCard:before{width:190px;height:190px;right:-105px;bottom:-105px}
+.abrBirthdayCard:after{width:120px;height:120px;right:-65px;bottom:-65px}
+.abrBirthdayCake{display:grid;width:76px;height:76px;margin:0 auto 14px;place-items:center;border:1px solid rgba(255,226,151,.34);border-radius:25px;color:#ffe198;background:rgba(255,255,255,.09);box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.abrBirthdayCake svg{width:46px;height:46px;animation:abrBirthdayCakeFloat 2.4s ease-in-out infinite}
+.abrBirthdayKicker{display:block;color:#ffd76e;font-size:7px;line-height:1;font-weight:950;letter-spacing:.18em}
+.abrBirthdayCard h2{margin:10px 0 0;color:#fff;font-size:27px;line-height:1.04;font-weight:950;letter-spacing:-.045em}
+.abrBirthdayCard p{max-width:310px;margin:12px auto 0;color:#d8e5f5;font-size:10px;line-height:1.55;font-weight:700}
+.abrBirthdaySignature{display:block;margin-top:13px;color:#a9c5e8;font-size:7px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.abrBirthdayThanks{width:100%;min-height:46px;margin-top:18px;border:1px solid rgba(255,255,255,.16);border-radius:16px;color:#18345e;background:linear-gradient(135deg,#fff8d7,#ffd36c);font-size:9.5px;font-weight:950;box-shadow:0 10px 24px rgba(0,0,0,.15);cursor:pointer}
+
+.abrBirthdayPreviewBar{
+  position:fixed;z-index:2147482500;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 82px);display:none;width:min(calc(100% - 28px),430px);
+  grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 11px 10px 14px;border:1px solid rgba(224,179,63,.48);border-radius:18px;
+  color:#4f3b0c;background:rgba(255,248,214,.96);box-shadow:0 15px 36px rgba(65,43,0,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+}
+body.abrBirthdayPreviewMode .abrBirthdayPreviewBar{display:grid}
+.abrBirthdayPreviewBar span{font-size:8.2px;line-height:1.25;font-weight:900}
+.abrBirthdayPreviewBar button{min-height:32px;padding:0 12px;border:0;border-radius:11px;color:#fff;background:#173c70;font-size:8px;font-weight:950;cursor:pointer}
+
+body.darkMode .abrBirthdaySettingCard,html.darkRoot body .abrBirthdaySettingCard{border-color:rgba(255,255,255,.08);color:#eef4fc;background:linear-gradient(145deg,rgba(25,39,58,.96),rgba(17,28,43,.93));box-shadow:0 13px 28px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.035)}
+body.darkMode .abrBirthdaySettingStatus,html.darkRoot body .abrBirthdaySettingStatus{color:#f1ca6a;background:#493914}
+body.darkMode .abrBirthdaySheet,html.darkRoot body .abrBirthdaySheet{border-color:rgba(255,255,255,.08);color:#f1f5fb;background:linear-gradient(155deg,#1b2b40,#111d2c)}
+body.darkMode .abrBirthdayClose,html.darkRoot body .abrBirthdayClose{color:#dce6f3;background:#22354d}
+body.darkMode .abrBirthdayField,html.darkRoot body .abrBirthdayField{border-color:rgba(255,255,255,.09);background:#17263a}
+body.darkMode .abrBirthdayField select,html.darkRoot body .abrBirthdayField select{color:#eef4fc}
+body.darkMode.abrBirthdayMode .abrPortfolioHeaderTitle:after,html.darkRoot body.abrBirthdayMode .abrPortfolioHeaderTitle:after{border-color:rgba(242,199,94,.24);color:#f2ce76;background:#463712}
+body.darkMode.abrBirthdayMode .abrDrawerHead:after,html.darkRoot body.abrBirthdayMode .abrDrawerHead:after{border-color:rgba(242,199,94,.2);color:#f2ce76;background:#463712}
+body.darkMode.abrBirthdayMode .tabbar,html.darkRoot body.abrBirthdayMode .tabbar{box-shadow:0 16px 42px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,225,147,.08)!important}
+
+@keyframes abrBirthdaySheetIn{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes abrBirthdayCardIn{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes abrBirthdayCakeFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
+@keyframes abrBirthdayCrownIn{from{opacity:0;transform:translateY(-8px) rotate(-10deg) scale(.65)}to{opacity:1;transform:rotate(9deg) scale(1)}}
+@keyframes abrBirthdayConfettiFall{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}8%{opacity:1}100%{transform:translate3d(var(--x),112vh,0) rotate(var(--r));opacity:.12}}
+@media(max-width:350px){
+  .abrBirthdaySettingCard{grid-template-columns:38px minmax(0,1fr) 11px;padding:10px}.abrBirthdaySettingIcon{width:38px;height:38px}.abrBirthdaySettingStatus{display:none}
+  body.abrBirthdayMode .abrPortfolioHeaderTitle{padding-right:0}body.abrBirthdayMode .abrPortfolioHeaderTitle:after{display:none}.abrBirthdayCard h2{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){.abrBirthdayConfetti{display:none}.abrBirthdayCard,.abrBirthdaySheet,.abrBirthdayCake,.abrBirthdayCrown{animation:none!important}}
+</style>
 </head>
 
 <body>
@@ -22138,6 +22256,10 @@ class="profilePhoto"
 src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20160%20160%22%3E%0A%3Crect%20width%3D%22160%22%20height%3D%22160%22%20rx%3D%2280%22%20fill%3D%22%230f172a%22/%3E%0A%3Ccircle%20cx%3D%2280%22%20cy%3D%2262%22%20r%3D%2228%22%20fill%3D%22%23f8fafc%22/%3E%0A%3Cpath%20d%3D%22M35%20142c7-28%2025-43%2045-43s38%2015%2045%2043%22%20fill%3D%22%23f8fafc%22/%3E%0A%3Ccircle%20cx%3D%2280%22%20cy%3D%2280%22%20r%3D%2274%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%227%22%20opacity%3D%22.55%22/%3E%0A%3C/svg%3E"
 onclick="profileInput.click()">
 
+<span class="abrBirthdayCrown" aria-hidden="true">
+  <svg viewBox="0 0 48 36" fill="none"><path d="m4 9 10 8L23.5 3 34 17l10-8-4 21H8L4 9Z" fill="#FFD76A" stroke="#B67A10" stroke-width="2" stroke-linejoin="round"/><path d="M9 30h31" stroke="#8A5B08" stroke-width="2.4" stroke-linecap="round"/><circle cx="4" cy="8" r="3" fill="#FFE9A7"/><circle cx="24" cy="3" r="3" fill="#FFE9A7"/><circle cx="44" cy="8" r="3" fill="#FFE9A7"/></svg>
+</span>
+
 </div>
 
 <div class="profileIdentityFields">
@@ -22309,6 +22431,18 @@ placeholder="Bilgi yaz..."></textarea>
     <span class="hapticSwitch" aria-hidden="true"><span class="hapticSwitchKnob"></span></span>
   </button>
 </div>
+
+<button id="abrBirthdaySettingCard" class="abrBirthdaySettingCard" type="button" onclick="abrBirthdaySettingsOpen()" aria-label="Doğum günü sürprizi ayarlarını aç">
+  <span class="abrBirthdaySettingIcon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16v10H4V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v10M3 7.5h18V10H3V7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 7.5H8.6a2.3 2.3 0 1 1 2.3-2.3L12 7.5Zm0 0h3.4a2.3 2.3 0 1 0-2.3-2.3L12 7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+  </span>
+  <span class="abrBirthdaySettingText">
+    <b>Doğum Günü Sürprizi</b>
+    <em>Yalnız gün ve ay cihazında saklanır.</em>
+  </span>
+  <span id="abrBirthdaySettingStatus" class="abrBirthdaySettingStatus">Tarih ekle</span>
+  <span class="abrBirthdaySettingArrow" aria-hidden="true">›</span>
+</button>
 
 <button class="abrSystemSummaryCard" type="button" onclick="abrVeriMerkeziAc()" aria-label="Sistem ve yedekleme ayrıntılarını aç">
   <span class="abrSystemSummaryIcon" aria-hidden="true">
@@ -22657,8 +22791,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-/* v2.2.33 — kompakt portföy merkezi ve birleşik aylık özet */
-const APP_VERSION = "v2.2.33";
+/* v2.2.34 — cihaz içi doğum günü sürprizi ve önizleme */
+const APP_VERSION = "v2.2.34";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -45574,6 +45708,178 @@ window.abrVeriMerkeziIslem=function(action){
 };
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const modal=abrDataHubEl("abrDataHubModal");if(modal&&modal.classList.contains("is-open"))window.abrVeriMerkeziKapat()}});
 window.__abrDataHubVersion="2.2.33";
+})();
+</script>
+
+<div id="abrBirthdaySettingsModal" class="abrBirthdayModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="abrBirthdaySettingsTitle" onclick="if(event.target===this)abrBirthdaySettingsClose()">
+  <section class="abrBirthdaySheet">
+    <div class="abrBirthdaySheetHead">
+      <div class="abrBirthdaySheetTitle">
+        <span class="abrBirthdaySheetTitleIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16v10H4V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v10M3 7.5h18V10H3V7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 7.5H8.6a2.3 2.3 0 1 1 2.3-2.3L12 7.5Zm0 0h3.4a2.3 2.3 0 1 0-2.3-2.3L12 7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </span>
+        <span>
+          <b id="abrBirthdaySettingsTitle">Doğum Günü Sürprizi</b>
+          <span>Yıl bilgisi istemez; yalnız seçtiğin gün uygulamayı kutlama görünümüne alır.</span>
+        </span>
+      </div>
+      <button class="abrBirthdayClose" type="button" onclick="abrBirthdaySettingsClose()" aria-label="Kapat">×</button>
+    </div>
+    <div class="abrBirthdayDateGrid">
+      <label class="abrBirthdayField"><span>Gün</span><select id="abrBirthdayDay" aria-label="Doğum günü"></select></label>
+      <label class="abrBirthdayField"><span>Ay</span><select id="abrBirthdayMonth" aria-label="Doğum ayı"></select></label>
+    </div>
+    <div class="abrBirthdayPrivacy">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10V7.5a5 5 0 0 1 10 0V10M6 10h12v10H6V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Bu tarih yalnız bu cihazda tutulur; buluta veya dış yedeğe gönderilmez.</span>
+    </div>
+    <div class="abrBirthdayActions">
+      <button class="abrBirthdayAction preview" type="button" onclick="abrBirthdayPreviewStart()">Sürprizi Önizle</button>
+      <button class="abrBirthdayAction save" type="button" onclick="abrBirthdaySettingsSave()">Tarihi Kaydet</button>
+    </div>
+    <button id="abrBirthdayRemove" class="abrBirthdayRemove" type="button" onclick="abrBirthdaySettingsRemove()">Kayıtlı Tarihi Kaldır</button>
+  </section>
+</div>
+
+<div id="abrBirthdayCelebration" class="abrBirthdayCelebration" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="abrBirthdayGreeting">
+  <div id="abrBirthdayConfetti" class="abrBirthdayConfetti" aria-hidden="true"></div>
+  <section class="abrBirthdayCard">
+    <div class="abrBirthdayCake" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none"><path d="M15 28h34v24H15V28Z" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width="3"/><path d="M15 36c5 0 5 5 10 5s5-5 10-5 5 5 10 5 5-5 5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 17v11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 16c-5-4-1-9 0-10 2 3 5 7 0 10Z" fill="currentColor"/><path d="M11 52h42" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <span id="abrBirthdayKicker" class="abrBirthdayKicker">BUGÜN SENİN GÜNÜN</span>
+    <h2 id="abrBirthdayGreeting">İyi ki doğdun!</h2>
+    <p>Yeni yaşın sağlık, huzur ve bol kazanç getirsin. Nice güvenli ve güzel yıllara.</p>
+    <span class="abrBirthdaySignature">Asansör Bakım &amp; Revizyon</span>
+    <button class="abrBirthdayThanks" type="button" onclick="abrBirthdayCelebrationClose()">Teşekkürler</button>
+  </section>
+</div>
+
+<div class="abrBirthdayPreviewBar" role="status">
+  <span>Doğum günü görünümü önizleniyor.</span>
+  <button type="button" onclick="abrBirthdayPreviewEnd()">Önizlemeyi Bitir</button>
+</div>
+
+<script id="abrBirthdayScript2234">
+(function(){
+"use strict";
+const BIRTHDAY_KEY="abrBirthdayDayMonthV2234";
+const BIRTHDAY_SEEN_KEY="abrBirthdaySeenV2234";
+const MONTHS=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+const MAX_DAYS=[31,29,31,30,31,30,31,31,30,31,30,31];
+let previewActive=false;
+let autoTimer=0;
+
+function el(id){return document.getElementById(id)}
+function pulse(type){try{if(typeof window.haptic==="function")window.haptic(type||"light")}catch(error){}}
+function notify(message){try{if(typeof window.toast==="function")window.toast(message)}catch(error){}}
+function today(){const value=new Date();return{day:value.getDate(),month:value.getMonth()+1,year:value.getFullYear(),key:value.getFullYear()+"-"+String(value.getMonth()+1).padStart(2,"0")+"-"+String(value.getDate()).padStart(2,"0")}}
+function leap(year){return year%4===0&&(year%100!==0||year%400===0)}
+function readBirthday(){
+  try{
+    const value=JSON.parse(localStorage.getItem(BIRTHDAY_KEY)||"null");
+    const day=Number(value&&value.day),month=Number(value&&value.month);
+    if(month>=1&&month<=12&&day>=1&&day<=MAX_DAYS[month-1])return{day:day,month:month}
+  }catch(error){}
+  return null
+}
+function matchesToday(value,current){
+  if(!value)return false;current=current||today();
+  if(value.month===2&&value.day===29&&!leap(current.year))return current.month===2&&current.day===28;
+  return value.month===current.month&&value.day===current.day
+}
+function nameForGreeting(){
+  const input=el("profilAd");
+  const raw=String(input&&input.value||localStorage.getItem("profilAd")||"").trim();
+  return raw?raw.split(/\s+/)[0]:"değerli kullanıcı"
+}
+function refreshStatus(){
+  const value=readBirthday(),status=el("abrBirthdaySettingStatus"),remove=el("abrBirthdayRemove");
+  if(status)status.textContent=value?value.day+" "+MONTHS[value.month-1]:"Tarih ekle";
+  if(remove)remove.classList.toggle("is-visible",!!value)
+}
+function fillSelectors(){
+  const day=el("abrBirthdayDay"),month=el("abrBirthdayMonth");if(!day||!month)return;
+  if(!month.options.length)MONTHS.forEach(function(label,index){const option=document.createElement("option");option.value=String(index+1);option.textContent=label;month.appendChild(option)});
+  if(!day.options.length)for(let value=1;value<=31;value++){const option=document.createElement("option");option.value=String(value);option.textContent=String(value);day.appendChild(option)}
+}
+function syncDays(){
+  const day=el("abrBirthdayDay"),month=el("abrBirthdayMonth");if(!day||!month)return;
+  const max=MAX_DAYS[Math.max(0,Number(month.value)-1)]||31;
+  Array.from(day.options).forEach(function(option){option.disabled=Number(option.value)>max});
+  if(Number(day.value)>max)day.value=String(max)
+}
+function setModal(open){
+  const modal=el("abrBirthdaySettingsModal");if(!modal)return;
+  modal.classList.toggle("is-open",!!open);modal.setAttribute("aria-hidden",open?"false":"true");
+  document.body.classList.toggle("abrBirthdayModalOpen",!!open)
+}
+function confetti(){
+  const host=el("abrBirthdayConfetti");if(!host)return;host.textContent="";
+  const colors=["#FFD76A","#6FB6FF","#FFFFFF","#B995FF","#FF9B6B"];
+  for(let index=0;index<44;index++){
+    const piece=document.createElement("i");
+    piece.style.left=(Math.random()*100).toFixed(2)+"%";
+    piece.style.setProperty("--c",colors[index%colors.length]);
+    piece.style.setProperty("--d",(2.4+Math.random()*1.7).toFixed(2)+"s");
+    piece.style.setProperty("--delay",(Math.random()*.65).toFixed(2)+"s");
+    piece.style.setProperty("--x",((Math.random()-.5)*150).toFixed(0)+"px");
+    piece.style.setProperty("--r",((Math.random()>.5?1:-1)*(420+Math.random()*560)).toFixed(0)+"deg");
+    host.appendChild(piece)
+  }
+  window.setTimeout(function(){if(host)host.textContent=""},4700)
+}
+function showCelebration(mode){
+  const celebration=el("abrBirthdayCelebration"),greeting=el("abrBirthdayGreeting"),kicker=el("abrBirthdayKicker");if(!celebration)return;
+  if(greeting)greeting.textContent="İyi ki doğdun, "+nameForGreeting()+"!";
+  if(kicker)kicker.textContent=mode==="preview"?"SÜRPRİZ ÖNİZLEMESİ":"BUGÜN SENİN GÜNÜN";
+  celebration.classList.add("is-open");celebration.setAttribute("aria-hidden","false");
+  if(mode!=="preview")localStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
+  confetti();pulse("medium");
+  window.setTimeout(function(){const button=celebration.querySelector(".abrBirthdayThanks");if(button)button.focus({preventScroll:true})},120)
+}
+function applyToday(forcePopup){
+  const current=today(),isBirthday=matchesToday(readBirthday(),current);
+  if(!previewActive)document.body.classList.toggle("abrBirthdayMode",isBirthday);
+  if(!isBirthday||(!forcePopup&&localStorage.getItem(BIRTHDAY_SEEN_KEY)===current.key))return;
+  window.clearTimeout(autoTimer);
+  (function waitForApp(){
+    if(!matchesToday(readBirthday(),today()))return;
+    const root=document.documentElement;
+    if(root.classList.contains("abr-role-locked")||root.classList.contains("abr-splash-active")){autoTimer=window.setTimeout(waitForApp,650);return}
+    showCelebration("birthday")
+  })()
+}
+
+window.abrBirthdaySettingsOpen=function(){
+  fillSelectors();const saved=readBirthday(),current=today();
+  el("abrBirthdayDay").value=String(saved?saved.day:current.day);el("abrBirthdayMonth").value=String(saved?saved.month:current.month);syncDays();refreshStatus();setModal(true);pulse("light")
+};
+window.abrBirthdaySettingsClose=function(){setModal(false)};
+window.abrBirthdaySettingsSave=function(){
+  const day=Number(el("abrBirthdayDay")&&el("abrBirthdayDay").value),month=Number(el("abrBirthdayMonth")&&el("abrBirthdayMonth").value);
+  if(!(month>=1&&month<=12&&day>=1&&day<=MAX_DAYS[month-1])){notify("Geçerli bir gün ve ay seç");return}
+  localStorage.setItem(BIRTHDAY_KEY,JSON.stringify({day:day,month:month}));refreshStatus();setModal(false);pulse("success");
+  if(matchesToday({day:day,month:month},today())){localStorage.removeItem(BIRTHDAY_SEEN_KEY);applyToday(true)}else{applyToday(false);notify("Doğum günü sürprizi kaydedildi")}
+};
+window.abrBirthdaySettingsRemove=function(){
+  localStorage.removeItem(BIRTHDAY_KEY);localStorage.removeItem(BIRTHDAY_SEEN_KEY);setModal(false);window.abrBirthdayPreviewEnd();refreshStatus();notify("Doğum günü tarihi kaldırıldı");pulse("light")
+};
+window.abrBirthdayPreviewStart=function(){
+  previewActive=true;document.body.classList.add("abrBirthdayMode","abrBirthdayPreviewMode");setModal(false);showCelebration("preview")
+};
+window.abrBirthdayCelebrationClose=function(){
+  const celebration=el("abrBirthdayCelebration");if(celebration){celebration.classList.remove("is-open");celebration.setAttribute("aria-hidden","true")}
+  pulse("light")
+};
+window.abrBirthdayPreviewEnd=function(){
+  previewActive=false;document.body.classList.remove("abrBirthdayPreviewMode");window.abrBirthdayCelebrationClose();document.body.classList.toggle("abrBirthdayMode",matchesToday(readBirthday(),today()))
+};
+
+document.addEventListener("keydown",function(event){if(event.key!=="Escape")return;const celebration=el("abrBirthdayCelebration"),modal=el("abrBirthdaySettingsModal");if(celebration&&celebration.classList.contains("is-open"))window.abrBirthdayCelebrationClose();else if(modal&&modal.classList.contains("is-open"))window.abrBirthdaySettingsClose()});
+document.addEventListener("DOMContentLoaded",function(){fillSelectors();const month=el("abrBirthdayMonth");if(month)month.addEventListener("change",syncDays);refreshStatus();applyToday(false)});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)applyToday(false)});
+window.__abrBirthdayVersion="2.2.34";
 })();
 </script>
 
