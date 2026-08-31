@@ -22468,46 +22468,6 @@ placeholder="Bilgi yaz..."></textarea>
 
 </div>
 
-<div class="profileSectionTitle">Hızlı İşlemler</div>
-
-<div class="profileActionGrid">
-
-<button class="profileActionCard abrTeamProfileCard" onclick="ekipArizaMerkeziAc()">
-  <span class="profileActionIcon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14v10H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.5 9h7M8.5 12h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-  </span>
-  <span class="profileActionText">
-    <b>Ekip Arıza Merkezi</b>
-    <em>Arızayı ekibe ilet ve canlı takip et.</em>
-  </span>
-</button>
-
-<button class="profileActionCard techLibraryProfileCard" onclick="teknikKutuphaneAc()">
-  <span class="profileActionIcon exIcon exLibrary" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Teknik Kütüphane</b>
-    <em>Kart, sürücü ve arıza notları.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="aySonuRaporu()">
-  <span class="profileActionIcon exIcon exDoc" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Ay Sonu Raporu</b>
-    <em>Bakım ve tahsilat özeti.</em>
-  </span>
-</button>
-
-<button class="profileActionCard" onclick="meslekiBelgelerAc()">
-  <span class="profileActionIcon exIcon exDoc" aria-hidden="true"></span>
-  <span class="profileActionText">
-    <b>Mesleki Belgeler</b>
-    <em id="profilBelgeOzeti">Belge eklenmedi.</em>
-  </span>
-</button>
-
-</div>
-
 <div class="profileSectionTitle">Veri ve Sistem</div>
 
 <button class="profileDataHubCard" type="button" onclick="abrVeriMerkeziAc()">
@@ -22919,8 +22879,8 @@ const AUTO_YEDEK_HISTORY_KEY = "ayAutoBackupHistory";
 const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
-/* v2.2.38 — profil kurulumunda sade açıklama ve kararlı aksiyon düzeni */
-const APP_VERSION = "v2.2.38";
+/* v2.2.39 — profil ekranındaki yinelenen hızlı işlemler kaldırıldı */
+const APP_VERSION = "v2.2.39";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
