@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.45_COMPACT_DASHBOARD -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.46_COMPACT_MAINTENANCE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,8 +655,8 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.45">
-<meta name="abr-ui-foundation" content="v2.2.45">
+<meta name="abr-app-version" content="v2.2.46">
+<meta name="abr-ui-foundation" content="v2.2.46">
 <meta http-equiv="Expires" content="0">
 
 <style>
@@ -10313,7 +10313,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.45 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.46 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20323,7 +20323,7 @@ body.darkMode .abrBirthdayReplayCard,html.darkRoot body .abrBirthdayReplayCard{b
 body.darkMode .abrProfileSetupSheet,html.darkRoot .abrProfileSetupSheet{background:linear-gradient(180deg,#111b2b,#0c1523);color:#f5f8ff}body.darkMode .abrProfileSetupHead,html.darkRoot .abrProfileSetupHead{background:linear-gradient(180deg,rgba(17,27,43,.98) 76%,rgba(17,27,43,0))}body.darkMode .abrProfileStep,html.darkRoot .abrProfileStep{background:rgba(20,31,48,.9);border-color:#27364c}body.darkMode .abrProfileField input,body.darkMode .abrProfileField textarea,html.darkRoot .abrProfileField input,html.darkRoot .abrProfileField textarea{background:#0d1726;border-color:#2b3a50;color:#f4f7fc}body.darkMode .abrProfileSetupClose,body.darkMode .abrProfileSetupBack,html.darkRoot .abrProfileSetupClose,html.darkRoot .abrProfileSetupBack{background:#182438;color:#f4f7fc;border-color:#2d3c53}
 @keyframes abrProfileStepIn{from{opacity:0;transform:translateX(9px)}to{opacity:1;transform:none}}@media(min-width:700px){.abrProfileSetupOverlay{align-items:center}.abrProfileSetupSheet{max-height:min(850px,calc(100dvh - 40px))}}@media(max-width:380px){.abrProfileTwo,.abrProfileUploadGrid{grid-template-columns:1fr}.abrProfileStoryDot{font-size:8px}.abrProfileSetupSheet{border-radius:25px}.abrProfileSetupOverlay{padding:8px}}
 </style>
-<!-- ABR_v2.2.45_AUTO_UPDATE: foreground + online + 45s periodic remote version check -->
+<!-- ABR_v2.2.46_AUTO_UPDATE: foreground + online + 45s periodic remote version check -->
 </head>
 
 <body>
@@ -22091,7 +22091,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.45</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.46</div>
     </div>
   </div>
 </div>
@@ -22106,7 +22106,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.46";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22897,7 +22897,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.46";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23895,7 +23895,7 @@ headers:{
 });
 if(!cevap.ok) return "";
 
-/* v2.2.45: sürüm etiketi dosyanın başında. Yanıtı tamamen indirmeden
+/* v2.2.46: sürüm etiketi dosyanın başında. Yanıtı tamamen indirmeden
    ilk parçadan sürümü okuyup ağı daha az kullanır. */
 try{
 if(cevap.body && cevap.body.getReader){
@@ -29751,34 +29751,19 @@ let h = `
     <div>
             <h2 class="exMaintCenterTitle">Bakım Planı</h2>
       <p class="exMaintCenterSub">
-        Aylık bakım durumunu filtrele, yakındaki apartmanları bul ve işlemi tek ekrandan başlat.
+        ${ayHtml(ayAdi())} • ${bekleyen} bakım bekliyor${geciken > 0 ? ` • ${geciken} geciken` : ""}
       </p>
     </div>
 
-    <div class="exMaintProgressRing" style="--progress:${tamamlanma * 3.6}deg">
+    <div class="exMaintProgressRing" style="--progress:${tamamlanma * 3.6}deg" aria-label="${yapildi}/${data.length} bakım tamamlandı, yüzde ${tamamlanma}">
       <div class="exMaintProgressRingInner">
         <div>
           <b>${yapildi}/${data.length}</b>
-          <span>%${tamamlanma}</span>
+          <span>${tamamlanma}%</span>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="exMaintHeaderActions">
-    <button class="exMaintHeaderButton primary" type="button" onclick="bakimSiralaDegistir('yakin')">
-      Yakınımdakiler
-    </button>
-    <button class="exMaintHeaderButton secondary" type="button" onclick="bakimHaritasiAc()">
-      Haritada Göster
-    </button>
-  </div>
-</div>
-
-<div class="exMaintStats">
-  <div class="exMaintStat"><b>${yapildi}</b><span>Yapıldı</span></div>
-  <div class="exMaintStat"><b>${bekleyen}</b><span>Bekliyor</span></div>
-  <div class="exMaintStat"><b>${geciken}</b><span>Geciken</span></div>
 </div>
 
 <div class="exMaintControls">
@@ -29799,13 +29784,16 @@ let h = `
 
   <div class="exMaintSortBar">
     <button class="exMaintSortButton ${exMaintSort === "plan" ? "is-active" : ""}" type="button" onclick="bakimSiralaDegistir('plan')">
-      Plan Tarihi
+      Bakım Tarihi
     </button>
     <button class="exMaintSortButton ${exMaintSort === "yakin" ? "is-active" : ""}" type="button" onclick="bakimSiralaDegistir('yakin')">
       En Yakın
     </button>
     <button class="exMaintSortButton ${exMaintSort === "ad" ? "is-active" : ""}" type="button" onclick="bakimSiralaDegistir('ad')">
-      Apartman A-Z
+      A-Z
+    </button>
+    <button class="exMaintSortButton" type="button" onclick="bakimHaritasiAc()" aria-label="Bakım planını haritada göster">
+      Harita
     </button>
   </div>
 </div>
@@ -29814,7 +29802,7 @@ let h = `
 if(exMaintSort === "yakin" && !exMaintLocation){
   h += `
     <div class="exMaintLocationNotice">
-      Yakınlık sıralaması için “En Yakın” veya “Yakınımdakiler” düğmesine dokunup konum izni ver.
+      Yakınlık sıralaması için “En Yakın” düğmesine dokunup konum izni ver.
     </div>
   `;
 }
@@ -29881,7 +29869,7 @@ if(!tumSatirlar.length){
 
           <div class="exMaintMain">
             <div class="exMaintName">${ayHtml(a.ad || "-")}</div>
-            <div class="exMaintMeta">Plan: ${ayHtml(plan)} • Son bakım: ${ayHtml(sonBakim)}</div>
+            <div class="exMaintMeta">Bakım: ${ayHtml(plan)} • Son bakım: ${ayHtml(sonBakim)}</div>
             ${mesafeHtml}
           </div>
 
@@ -47562,6 +47550,186 @@ body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea .fil
 }
 </style>
 
+<!-- v2.2.46 — Bakım planında listeyi öne çıkaran kompakt saha görünümü. -->
+<style id="abrMaintenanceCompact2246">
+/* Logo gizliyken hamburger için gereken kadar üst alan bırak. */
+body.abrBakimView.exHideTopBrand > .header.headerClean{
+  min-height:calc(env(safe-area-inset-top,0px) + 56px)!important;
+  height:calc(env(safe-area-inset-top,0px) + 56px)!important;
+}
+
+body.abrBakimView .exHybridMenuBtn{
+  top:calc(7px + env(safe-area-inset-top,0px))!important;
+}
+
+/* Aylık durum başlığı tek bakışlık bir özet kartına dönüşür. */
+body.abrBakimView .exMaintCenterHeader{
+  margin:0 0 8px!important;
+  padding:13px 14px!important;
+  border-radius:20px!important;
+  box-shadow:var(--abr-ui-shadow-s)!important;
+}
+
+body.abrBakimView .exMaintCenterTop{
+  align-items:center!important;
+  gap:12px!important;
+}
+
+body.abrBakimView .exMaintCenterTitle{
+  margin:0!important;
+  font-size:21px!important;
+  line-height:1.04!important;
+  letter-spacing:-.04em!important;
+}
+
+body.abrBakimView .exMaintCenterSub{
+  margin:6px 0 0!important;
+  color:var(--abr-ui-ink-3)!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  font-weight:750!important;
+}
+
+body.abrBakimView .exMaintProgressRing{
+  width:56px!important;
+  min-width:56px!important;
+  height:56px!important;
+  padding:5px!important;
+  box-shadow:0 8px 18px rgba(20,120,242,.13)!important;
+}
+
+body.abrBakimView .exMaintProgressRingInner b{
+  font-size:13px!important;
+}
+
+body.abrBakimView .exMaintProgressRingInner span{
+  margin-top:2px!important;
+  font-size:7px!important;
+}
+
+/* Aynı sayıları tekrar eden üç sayaç ile yinelenen üst butonlar kaldırıldı. */
+body.abrBakimView .exMaintHeaderActions,
+body.abrBakimView .exMaintStats{
+  display:none!important;
+}
+
+/* Filtre ve sıralama korunur fakat daha az dikey alan kullanır. */
+body.abrBakimView .exMaintControls{
+  margin-bottom:9px!important;
+  padding:5px!important;
+  border-radius:17px!important;
+  box-shadow:var(--abr-ui-shadow-s)!important;
+}
+
+body.abrBakimView .exMaintFilterTabs{
+  gap:3px!important;
+}
+
+body.abrBakimView .exMaintFilterButton{
+  min-height:37px!important;
+  padding:5px 3px!important;
+  border-radius:11px!important;
+  font-size:9px!important;
+}
+
+body.abrBakimView .exMaintFilterButton small{
+  min-width:18px!important;
+  height:18px!important;
+  margin-left:2px!important;
+  padding:0 4px!important;
+  font-size:7.5px!important;
+}
+
+body.abrBakimView .exMaintSortBar{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:4px!important;
+  margin-top:4px!important;
+}
+
+body.abrBakimView .exMaintSortButton{
+  min-height:33px!important;
+  padding:5px 3px!important;
+  border-radius:10px!important;
+  font-size:8.3px!important;
+}
+
+/* Gruplar ve bakım kartları saha kullanımında daha hızlı taranır. */
+body.abrBakimView .exMaintGroup{
+  margin:10px 0 7px!important;
+}
+
+body.abrBakimView .exMaintGroup:first-of-type{
+  margin-top:2px!important;
+}
+
+body.abrBakimView .exMaintGroupTitle{
+  padding:0 4px 6px!important;
+  font-size:9px!important;
+}
+
+body.abrBakimView .exMaintGroupTitle b{
+  min-width:22px!important;
+  height:22px!important;
+  font-size:8.5px!important;
+}
+
+body.abrBakimView .exMaintRow{
+  min-height:64px!important;
+  margin-bottom:7px!important;
+  padding:9px 9px 9px 12px!important;
+  border-radius:17px!important;
+  box-shadow:var(--abr-ui-shadow-s)!important;
+}
+
+body.abrBakimView .exMaintRow::before{
+  top:9px!important;
+  bottom:9px!important;
+  width:3px!important;
+}
+
+body.abrBakimView .exMaintName{
+  font-size:13.5px!important;
+}
+
+body.abrBakimView .exMaintMeta{
+  margin-top:4px!important;
+  font-size:9.5px!important;
+}
+
+body.abrBakimView .exMaintSide{
+  min-width:74px!important;
+  gap:6px!important;
+}
+
+body.abrBakimView .exMaintPill{
+  min-height:24px!important;
+  padding:4px 8px!important;
+  font-size:8.5px!important;
+}
+
+body.abrBakimView .exMaintAction{
+  min-width:74px!important;
+  min-height:34px!important;
+  border-radius:10px!important;
+  padding:6px 8px!important;
+  font-size:8.2px!important;
+}
+
+@media(max-width:370px){
+  body.abrBakimView .exMaintCenterTitle{
+    font-size:19px!important;
+  }
+
+  body.abrBakimView .exMaintCenterSub{
+    font-size:9px!important;
+  }
+
+  body.abrBakimView .exMaintSortButton{
+    font-size:7.7px!important;
+  }
+}
+</style>
+
 <script id="abrUiFoundationScript2244">
 (function(){
   "use strict";
@@ -47593,10 +47761,16 @@ body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea .fil
       if(button.classList.contains("activeTab")) button.setAttribute("aria-current","page");
       else button.removeAttribute("aria-current");
     });
+    document.querySelectorAll(".exMaintFilterButton").forEach(function(button){
+      button.setAttribute("aria-pressed",button.classList.contains("is-active") ? "true" : "false");
+    });
+    document.querySelectorAll('.exMaintSortButton[onclick*="bakimSiralaDegistir"]').forEach(function(button){
+      button.setAttribute("aria-pressed",button.classList.contains("is-active") ? "true" : "false");
+    });
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.46";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -47613,7 +47787,10 @@ body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea .fil
     var list = document.getElementById("liste");
     if(list){
       enhanceCards(list);
-      new MutationObserver(function(){ enhanceCards(list); }).observe(list,{childList:true,subtree:true});
+      new MutationObserver(function(){
+        enhanceCards(list);
+        syncControlState();
+      }).observe(list,{childList:true,subtree:true});
     }
 
     syncControlState();
