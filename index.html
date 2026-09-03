@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.44_UI_FOUNDATION -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.45_COMPACT_DASHBOARD -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,8 +655,8 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.44">
-<meta name="abr-ui-foundation" content="v2.2.44">
+<meta name="abr-app-version" content="v2.2.45">
+<meta name="abr-ui-foundation" content="v2.2.45">
 <meta http-equiv="Expires" content="0">
 
 <style>
@@ -10313,7 +10313,7 @@ html.darkRoot .tabbar .middleButton{
 
 </style>
 
-<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.44 -->
+<!-- OneSignal Web Push - Asansör Bakım & Revizyon v2.2.45 -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script id="abrPushBootstrap2101">
 (function(){
@@ -20323,7 +20323,7 @@ body.darkMode .abrBirthdayReplayCard,html.darkRoot body .abrBirthdayReplayCard{b
 body.darkMode .abrProfileSetupSheet,html.darkRoot .abrProfileSetupSheet{background:linear-gradient(180deg,#111b2b,#0c1523);color:#f5f8ff}body.darkMode .abrProfileSetupHead,html.darkRoot .abrProfileSetupHead{background:linear-gradient(180deg,rgba(17,27,43,.98) 76%,rgba(17,27,43,0))}body.darkMode .abrProfileStep,html.darkRoot .abrProfileStep{background:rgba(20,31,48,.9);border-color:#27364c}body.darkMode .abrProfileField input,body.darkMode .abrProfileField textarea,html.darkRoot .abrProfileField input,html.darkRoot .abrProfileField textarea{background:#0d1726;border-color:#2b3a50;color:#f4f7fc}body.darkMode .abrProfileSetupClose,body.darkMode .abrProfileSetupBack,html.darkRoot .abrProfileSetupClose,html.darkRoot .abrProfileSetupBack{background:#182438;color:#f4f7fc;border-color:#2d3c53}
 @keyframes abrProfileStepIn{from{opacity:0;transform:translateX(9px)}to{opacity:1;transform:none}}@media(min-width:700px){.abrProfileSetupOverlay{align-items:center}.abrProfileSetupSheet{max-height:min(850px,calc(100dvh - 40px))}}@media(max-width:380px){.abrProfileTwo,.abrProfileUploadGrid{grid-template-columns:1fr}.abrProfileStoryDot{font-size:8px}.abrProfileSetupSheet{border-radius:25px}.abrProfileSetupOverlay{padding:8px}}
 </style>
-<!-- ABR_v2.2.44_AUTO_UPDATE: foreground + online + 45s periodic remote version check -->
+<!-- ABR_v2.2.45_AUTO_UPDATE: foreground + online + 45s periodic remote version check -->
 </head>
 
 <body>
@@ -22091,7 +22091,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.44</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.45</div>
     </div>
   </div>
 </div>
@@ -22106,7 +22106,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.44";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22897,7 +22897,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.44";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23895,7 +23895,7 @@ headers:{
 });
 if(!cevap.ok) return "";
 
-/* v2.2.44: sürüm etiketi dosyanın başında. Yanıtı tamamen indirmeden
+/* v2.2.45: sürüm etiketi dosyanın başında. Yanıtı tamamen indirmeden
    ilk parçadan sürümü okuyup ağı daha az kullanır. */
 try{
 if(cevap.body && cevap.body.getReader){
@@ -29003,7 +29003,7 @@ let h = `
       <div class="abrBirthdayHeroLabel"><i aria-hidden="true"></i>DOĞUM GÜNÜ ÖZEL</div>
       <h1 class="exDashHeroTitle">${selamBaslik}</h1>
       <p class="exDashHeroSub">
-        ${guvenliData.length} apartman • ${tamamlananCount} bakım tamamlandı • ${bekleyenCount} bakım bekliyor
+        ${tamamlananCount} bakım tamamlandı • ${bekleyenCount} bakım bekliyor${gecikenCount > 0 ? ` • ${gecikenCount} geciken` : ""}
       </p>
     </div>
 
@@ -29030,21 +29030,21 @@ let h = `
 
   <div class="exDashHeroActions">
     <button class="exDashHeroAction primary" type="button" onclick="bakimListesiAc()">
-      Bakım Merkezi
+      Bakım Listesi
     </button>
     <button class="exDashHeroAction secondary" type="button" onclick="haritaMerkeziAc()">
-      Haritayı Aç
+      Harita
     </button>
   </div>
 </div>
 
-<section class="abrMonthSummary" aria-label="Bu ay portföy özeti">
+<section class="abrMonthSummary abrMonthSummary--operational" aria-label="Bu ay iş ve kasa özeti">
   <div class="abrMonthSummaryHead">
     <div class="abrMonthSummaryTitle">
       <span class="abrMonthSummaryIcon" aria-hidden="true">✓</span>
       <div>
         <span>Bu Ay</span>
-        <b>Portföy Özeti</b>
+        <b>İş ve Kasa Özeti</b>
       </div>
     </div>
     <span class="abrMonthSummaryPeriod">${ayHtml(ayAdi())}</span>
@@ -29052,12 +29052,8 @@ let h = `
 
   <div class="abrMonthSummaryStats">
     <div class="abrMonthSummaryStat">
-      <b data-abr-count="${guvenliData.length}" data-abr-count-key="portfoy-adedi">${guvenliData.length}</b>
-      <span>Portföy</span>
-    </div>
-    <div class="abrMonthSummaryStat">
-      <b data-abr-count="${tamamlananCount}" data-abr-count-key="tamamlanan-bakim">${tamamlananCount}</b>
-      <span>Tamam</span>
+      <b data-abr-count="${bugunCount}" data-abr-count-key="bugunku-bakim">${bugunCount}</b>
+      <span>Bugün</span>
     </div>
     <div class="abrMonthSummaryStat${gecikenCount > 0 ? " is-danger" : ""}">
       <b data-abr-count="${gecikenCount}" data-abr-count-key="geciken-bakim">${gecikenCount}</b>
@@ -29067,13 +29063,13 @@ let h = `
       <b class="money" data-abr-count="${toplam}" data-abr-count-format="para" data-abr-count-key="toplam-tahsilat">${ayHtml(tutarFormat(toplam))}</b>
       <span>Tahsilat</span>
     </div>
+    <div class="abrMonthSummaryStat${acikBakiye > 0 ? " is-danger" : ""}">
+      <b class="money" data-abr-count="${acikBakiye}" data-abr-count-format="para" data-abr-count-key="acik-bakiye">${ayHtml(tutarFormat(acikBakiye))}</b>
+      <span>Açık Bakiye</span>
+    </div>
   </div>
 
-  <div class="abrMonthSummaryBottom">
-    <div class="abrMonthBalance">
-      <span>Açık bakiye</span>
-      <b data-abr-count="${acikBakiye}" data-abr-count-format="para" data-abr-count-key="acik-bakiye">${ayHtml(tutarFormat(acikBakiye))}</b>
-    </div>
+  <div class="abrMonthSummaryBottom abrMonthSummaryBottom--activity">
     ${exDashboardSonIslemHtml()}
   </div>
 </section>
@@ -29152,7 +29148,7 @@ if(filtreli.length === 0){
 
         <div class="exPortfolioBottom">
           <div class="exPortfolioBottomItem">
-            <span>Plan</span>
+            <span>Bakım</span>
             <b>${ayHtml(bakimPlanTarih(a))}</b>
           </div>
 
@@ -29162,7 +29158,7 @@ if(filtreli.length === 0){
           </div>
 
           <div class="exPortfolioBottomItem ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">
-            <span>Kalan</span>
+            <span>Bakiye</span>
             <b>${ayHtml(tutarFormat(cari.kalanPozitif))}</b>
           </div>
 
@@ -47353,6 +47349,219 @@ html.darkRoot .exPortfolioCode{
 }
 </style>
 
+<!-- v2.2.45 — Ana ekranı sahada daha hızlı taramak için kompakt görünüm. -->
+<style id="abrDashboardCompact2245">
+/* Üst bölüm daha az yer kaplar; ilk apartman kartı daha erken görünür. */
+body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) > .header.headerClean{
+  min-height:calc(env(safe-area-inset-top,0px) + 62px)!important;
+  height:calc(env(safe-area-inset-top,0px) + 62px)!important;
+  padding:calc(env(safe-area-inset-top,0px) + 7px) 16px 5px 70px!important;
+}
+
+.abrPortfolioHeaderTitle b{
+  font-size:22px!important;
+  line-height:1!important;
+}
+
+.abrPortfolioHeaderTitle span{
+  margin-top:4px!important;
+  font-size:8.5px!important;
+}
+
+.exHybridMenuBtn{
+  top:calc(10px + env(safe-area-inset-top,0px))!important;
+  left:14px!important;
+  width:42px!important;
+  height:42px!important;
+  border-radius:13px!important;
+}
+
+body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea.searchRow{
+  grid-template-columns:minmax(0,1fr) 42px!important;
+  min-height:50px!important;
+  margin-bottom:9px!important;
+  padding:3px!important;
+  border-radius:16px!important;
+}
+
+body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea.searchRow #arama{
+  height:42px!important;
+  min-height:42px!important;
+  padding-left:35px!important;
+  font-size:13.5px!important;
+}
+
+body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea .filterBtn{
+  width:42px!important;
+  min-width:42px!important;
+  height:42px!important;
+  min-height:42px!important;
+  border-radius:12px!important;
+}
+
+/* Karşılama kartında yalnızca karar vermeyi hızlandıran bilgiler kalır. */
+.exDashHero{
+  margin-bottom:9px!important;
+  padding:14px 15px 13px!important;
+  border-radius:21px!important;
+  box-shadow:0 13px 28px rgba(15,42,82,.17)!important;
+}
+
+.exDashHeroTop{
+  align-items:center!important;
+  gap:12px!important;
+}
+
+.exDashHeroTitle{
+  font-size:21px!important;
+  line-height:1.04!important;
+}
+
+.exDashHeroSub{
+  max-width:260px!important;
+  margin-top:5px!important;
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+
+.exDashHeroScore{
+  width:56px!important;
+  min-width:56px!important;
+  height:56px!important;
+  border-radius:17px!important;
+}
+
+.exDashHeroScore b{
+  font-size:17px!important;
+}
+
+.exDashHeroScore span{
+  max-width:48px!important;
+  font-size:6.5px!important;
+}
+
+.exDashProgress{
+  margin-top:11px!important;
+}
+
+.exDashProgressTrack{
+  height:4px!important;
+}
+
+/* Bakım alt sekmede, harita ise menüde zaten var; tekrar eden iki buton kaldırıldı. */
+.exDashHeroActions{
+  display:none!important;
+}
+
+/* Tekrarlanan portföy sayıları yerine bugün, geciken ve mali durum gösterilir. */
+.abrMonthSummary--operational{
+  margin-bottom:10px!important;
+  padding:12px 13px!important;
+  border-radius:18px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryHead{
+  padding-bottom:9px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryIcon{
+  width:29px!important;
+  height:29px!important;
+  border-radius:9px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryTitle b{
+  font-size:12.5px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryStat{
+  padding:10px 4px 9px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryStat b{
+  font-size:16px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryStat b.money{
+  font-size:11.5px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryStat span{
+  margin-top:4px!important;
+  font-size:7px!important;
+}
+
+.abrMonthSummaryBottom--activity{
+  display:block!important;
+  padding-top:8px!important;
+}
+
+.abrMonthSummary--operational .abrMonthSummaryBottom--activity .exDashFinanceActivity{
+  min-height:28px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+
+.abrMonthSummary--operational .exDashFinanceActivityMain small{
+  font-size:7px!important;
+}
+
+.abrMonthSummary--operational .exDashFinanceActivityMain b{
+  margin-top:2px!important;
+  font-size:9px!important;
+}
+
+.abrMonthSummary--operational .exDashFinanceActivity time{
+  font-size:7.5px!important;
+}
+
+.exPortfolioHeader{
+  margin:12px 2px 8px!important;
+}
+
+.exPortfolioHeader h2{
+  font-size:20px!important;
+}
+
+.exPortfolioCard{
+  margin-bottom:9px!important;
+}
+
+@media(min-width:720px){
+  .exHybridMenuBtn{
+    left:calc(50% - 340px + 14px)!important;
+  }
+}
+
+@media(max-width:430px){
+  .exDashHero{
+    padding:13px 14px 12px!important;
+  }
+
+  .exDashHeroTitle{
+    font-size:20px!important;
+  }
+
+  .exDashHeroScore{
+    width:54px!important;
+    min-width:54px!important;
+    height:54px!important;
+  }
+}
+
+@media(max-width:370px){
+  .exDashHeroSub{
+    max-width:210px!important;
+    font-size:9.5px!important;
+  }
+
+  .abrMonthSummary--operational .abrMonthSummaryStats{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+</style>
+
 <script id="abrUiFoundationScript2244">
 (function(){
   "use strict";
@@ -47387,7 +47596,7 @@ html.darkRoot .exPortfolioCode{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.44";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.45";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
