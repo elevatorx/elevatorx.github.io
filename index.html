@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.51">
+<meta name="abr-app-version" content="v2.2.52">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -31840,7 +31840,10 @@ function apartmanDetaySekmeAc(tab,kaydirmali){
     pane.hidden = !aktif;
   });
 
-  if(kaydirmali){
+  if(kaydirmali && panel.querySelector('.abrNativeDetail2251')){
+    let pane = panel.querySelector('.exDetailTabPane.is-active');
+    if(pane) pane.scrollTop = 0;
+  }else if(kaydirmali){
     let tabs = document.getElementById("exDetailTabs");
     if(tabs){
       let hedef = window.scrollY + tabs.getBoundingClientRect().top - 8;
@@ -32338,7 +32341,7 @@ detayPanel.innerHTML = `
   <button class="detailTopBtn detailBackBtn" type="button" onclick="geriDon()">
     ← Geri
   </button>
-
+  <span class="abrDetailNavTitle2252">${ayHtml(a.ad || "Apartman")}</span>
   <div class="exDetailTopManage">
     <button class="exDetailTopDelete" type="button" onclick="sil(${i})" aria-label="Apartmanı sil" title="Apartmanı sil">
       <span aria-hidden="true">⌫</span>
@@ -47961,6 +47964,53 @@ body.abrBakimView .exMaintAction{
 </script>
 
 <!-- Motion-only enhancement: existing layout, storage and actions stay intact. -->
+<style id="abrFullscreenDetail2252">
+@media screen{
+  body.abrDetailFullscreen2252{overflow:hidden!important}
+  body.abrDetailFullscreen2252 #exHybridMenuBtn,
+  body.abrDetailFullscreen2252 .exHybridMenuBtn,
+  body.abrDetailFullscreen2252 .tabbar{display:none!important}
+  body.abrDetailFullscreen2252 #detayPanel{
+    position:fixed!important;inset:0!important;width:100%!important;max-width:none!important;
+    height:100vh;height:100dvh;margin:0!important;padding:0!important;z-index:9000;
+    overflow:hidden!important;transform:none!important;translate:none!important;filter:none!important;animation:none!important;
+  }
+  body.abrDetailFullscreen2252 #detayPanel>.abrNativeDetail2251{
+    display:flex!important;flex-direction:column;box-sizing:border-box!important;
+    height:100%!important;min-height:0!important;width:100%!important;margin:0!important;
+    border-radius:0!important;padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))!important;
+    overflow:hidden!important;
+  }
+  body.abrDetailFullscreen2252 .exDetailTopActions{flex:0 0 auto;gap:6px!important;margin-bottom:10px!important;min-height:52px}
+  .abrDetailNavTitle2252{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;font-weight:650;text-align:center;color:var(--nd-ink)}
+  body.abrDetailFullscreen2252 .exDetailTopDelete{display:none!important}
+  body.abrDetailFullscreen2252 .exDetailTopEdit{min-width:0!important;padding:8px!important;font-size:13px!important}
+  body.abrDetailFullscreen2252 .detailBackBtn{padding:8px!important;font-size:14px!important}
+  body.abrDetailFullscreen2252 .detailHeroTop{flex:0 0 auto;margin-bottom:10px!important}
+  body.abrDetailFullscreen2252 .detailKicker{display:none}
+  body.abrDetailFullscreen2252 .detailTitle{display:none}
+  body.abrDetailFullscreen2252 .detailSubLine{margin-top:0;font-size:12px}
+  body.abrDetailFullscreen2252 .inspectionHeroBadgeStack{margin-top:8px}
+  body.abrDetailFullscreen2252 .exDetailTabs{position:relative!important;top:auto!important;flex:0 0 auto;margin-bottom:0!important;z-index:1}
+  body.abrDetailFullscreen2252 .exDetailTabPane.is-active{
+    flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;
+    -webkit-overflow-scrolling:touch;padding:16px 0 calc(24px + env(safe-area-inset-bottom,0px));
+    scroll-padding-top:16px;box-sizing:border-box;
+  }
+}
+</style>
+<script id="abrFullscreenDetail2252Script">
+(function(){
+  var panel=document.getElementById('detayPanel');
+  if(!panel)return;
+  function sync(){
+    var active=panel.style.display!=='none' && !!panel.querySelector('.abrNativeDetail2251');
+    document.body.classList.toggle('abrDetailFullscreen2252',active);
+  }
+  new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['style'],childList:true});
+  sync();
+})();
+</script>
 <style id="abrNativeDetail2251">
 /* Scoped to the apartment view; reports and other detail screens are untouched. */
 #detayPanel .abrNativeDetail2251{
