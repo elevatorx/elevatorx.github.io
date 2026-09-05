@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.51_NATIVE_DETAIL -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.53_FULLSCREEN_PROFILE -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.52">
+<meta name="abr-app-version" content="v2.2.53">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.51</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.53</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.51";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.53";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22372,6 +22372,12 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
 <div id="detayPanel" style="display:none"></div>
 
 <div id="profilPanel" style="display:none">
+
+<header class="abrProfileNativeNav2253">
+  <button type="button" onclick="anaSayfa()" aria-label="Ana sayfaya dön">‹ <span>Geri</span></button>
+  <strong>Profil</strong>
+  <button type="button" onclick="abrProfileSetupOpen()">Düzenle</button>
+</header>
 
 <div class="coverArea">
 
@@ -22908,7 +22914,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.51";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.53";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -47908,7 +47914,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.51";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.53";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -47964,6 +47970,52 @@ body.abrBakimView .exMaintAction{
 </script>
 
 <!-- Motion-only enhancement: existing layout, storage and actions stay intact. -->
+<style id="abrFullscreenProfile2253">
+@media screen{
+  body.profileMode{overflow:hidden!important;background:#f1f4f8!important}
+  body.profileMode>.header,
+  body.profileMode #exHybridMenuBtn,
+  body.profileMode .exHybridMenuBtn,
+  body.profileMode .tabbar{display:none!important}
+  body.profileMode .container{padding:0!important;margin:0!important;width:100%!important;max-width:none!important}
+  body.profileMode #profilPanel{
+    position:fixed!important;inset:0!important;z-index:9000!important;
+    width:100%!important;max-width:none!important;height:100vh!important;height:100dvh!important;
+    margin:0!important;padding:0 0 calc(24px + env(safe-area-inset-bottom,0px))!important;
+    overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior-y:contain;
+    -webkit-overflow-scrolling:touch;background:#f1f4f8!important;box-sizing:border-box!important;
+  }
+  body.profileMode #profilPanel .abrProfileNativeNav2253{
+    position:sticky;top:0;z-index:90;display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;min-height:calc(54px + env(safe-area-inset-top,0px));
+    padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));
+    border-bottom:1px solid rgba(203,213,225,.72);background:rgba(241,244,248,.88);
+    -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-sizing:border-box;
+  }
+  .abrProfileNativeNav2253 button{min-height:44px;padding:0;border:0;background:transparent;color:#176fe8;font-size:14px;font-weight:650}
+  .abrProfileNativeNav2253 button:first-child{justify-self:start;font-size:25px;display:flex;align-items:center;gap:3px}
+  .abrProfileNativeNav2253 button:first-child span{font-size:14px}
+  .abrProfileNativeNav2253 button:last-child{justify-self:end}
+  .abrProfileNativeNav2253 strong{font-size:16px;font-weight:700;color:#17263d}
+  body.profileMode #profilPanel>.coverArea{height:150px!important;margin:16px 16px 0!important;border-radius:20px!important}
+  body.profileMode #profilPanel>.profileContent{width:100%!important;max-width:680px!important;margin:0 auto!important;padding:12px 16px 24px!important;box-sizing:border-box}
+  body.profileMode #profilPanel .profileIdentityCard{border-radius:18px!important;box-shadow:none!important;background:#fff!important;border-color:#e1e7ef!important}
+  body.profileMode #profilPanel .profileIdentityEditBtn{display:none!important}
+  body.profileMode #profilPanel .profileStatsFour{border-radius:16px!important;box-shadow:none!important;background:#fff!important}
+  body.profileMode #profilPanel .profileDataHubCard,
+  body.profileMode #profilPanel .appearanceCard,
+  body.profileMode #profilPanel .abrSystemSummaryCard{box-shadow:none!important;border-radius:16px!important}
+  body.profileMode #profilPanel .profileSectionTitle{margin:22px 2px 10px!important;font-size:15px!important}
+  body.profileMode #profilPanel .profileFooter{margin-bottom:0!important}
+  body.darkMode.profileMode,html.darkRoot body.profileMode,
+  body.darkMode.profileMode #profilPanel,html.darkRoot body.profileMode #profilPanel{background:#101b2a!important}
+  body.darkMode.profileMode #profilPanel .abrProfileNativeNav2253,html.darkRoot body.profileMode #profilPanel .abrProfileNativeNav2253{border-color:#2a394d;background:rgba(16,27,42,.88)}
+  body.darkMode.profileMode .abrProfileNativeNav2253 strong,html.darkRoot body.profileMode .abrProfileNativeNav2253 strong{color:#edf2fa}
+  body.darkMode.profileMode #profilPanel .profileIdentityCard,html.darkRoot body.profileMode #profilPanel .profileIdentityCard,
+  body.darkMode.profileMode #profilPanel .profileStatsFour,html.darkRoot body.profileMode #profilPanel .profileStatsFour{background:#182537!important;border-color:#2a394d!important}
+  @media(min-width:700px){body.profileMode #profilPanel>.coverArea{max-width:648px;margin-left:auto!important;margin-right:auto!important}}
+}
+</style>
 <style id="abrFullscreenDetail2252">
 @media screen{
   body.abrDetailFullscreen2252{overflow:hidden!important}
