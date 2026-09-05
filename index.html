@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.54_PROFILE_FINISH -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.55_CAPSULE_TABBAR -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.54">
+<meta name="abr-app-version" content="v2.2.55">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.54</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.55</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.54";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22918,7 +22918,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.54";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -47918,7 +47918,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.54";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -47973,6 +47973,51 @@ body.abrBakimView .exMaintAction{
 })();
 </script>
 
+<style id="abrCapsuleTabbar2255">
+/* Two-destination native capsule: Bakım left, Apartmanlar right. */
+@media screen{
+  .tabbar,
+  body.exShowYeniTab .tabbar,
+  body:not(.exShowYeniTab) .tabbar{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    left:50%!important;right:auto!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+    width:min(390px,calc(100vw - 28px))!important;max-width:390px!important;
+    height:78px!important;min-height:78px!important;margin:0!important;padding:7px!important;gap:0!important;
+    border:1px solid rgba(218,224,233,.9)!important;border-radius:999px!important;
+    background:rgba(255,255,255,.92)!important;
+    box-shadow:0 16px 34px rgba(21,36,58,.16),inset 0 1px 0 rgba(255,255,255,.98)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(145%)!important;backdrop-filter:blur(22px) saturate(145%)!important;
+    overflow:hidden!important;transform:translateX(-50%)!important;
+  }
+  .tabbar::after{
+    content:""!important;position:absolute!important;top:7px!important;left:7px!important;
+    width:calc((100% - 14px)/2)!important;height:62px!important;border-radius:999px!important;
+    background:linear-gradient(145deg,#17243a,#0b1322)!important;
+    box-shadow:0 10px 22px rgba(9,18,32,.28),inset 0 1px 0 rgba(255,255,255,.14)!important;
+    transition:transform .34s cubic-bezier(.2,.82,.2,1)!important;z-index:0!important;pointer-events:none!important;
+  }
+  .tabbar[data-active-tab="bakim"]::after{transform:translate3d(0,0,0)!important}
+  .tabbar[data-active-tab="apartman"]::after{transform:translate3d(100%,0,0)!important}
+  .tabbar .tabItem{
+    position:relative!important;z-index:1!important;display:flex!important;align-items:center!important;justify-content:center!important;
+    width:100%!important;height:62px!important;min-height:62px!important;margin:0!important;padding:0 12px!important;gap:10px!important;
+    border:0!important;border-radius:999px!important;background:transparent!important;box-shadow:none!important;
+    color:#38475d!important;transform:none!important;transition:color .22s ease,scale .13s ease!important;
+  }
+  .tabbar .tabItem:active{scale:.97}
+  .tabbar .tabItem.activeTab{color:#fff!important;background:transparent!important;box-shadow:none!important}
+  .tabbar .tabItem::before{display:none!important}
+  .tabbar .tabIcon{display:grid!important;place-items:center!important;width:25px!important;min-width:25px!important;height:25px!important;margin:0!important;color:currentColor!important;transform:none!important}
+  .tabbar .tabSvg{display:block!important;width:25px!important;height:25px!important;stroke:currentColor!important}
+  .tabbar .tabText{display:inline!important;color:currentColor!important;font-size:15px!important;line-height:1!important;font-weight:750!important;letter-spacing:-.25px!important}
+  body.darkMode .tabbar,html.darkRoot .tabbar{border-color:rgba(255,255,255,.1)!important;background:rgba(24,37,55,.94)!important;box-shadow:0 18px 38px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.07)!important}
+  body.darkMode .tabbar::after,html.darkRoot .tabbar::after{background:linear-gradient(145deg,#2478ee,#1454b8)!important;box-shadow:0 10px 24px rgba(15,91,196,.32)!important}
+  body.darkMode .tabbar .tabItem,html.darkRoot .tabbar .tabItem{color:#aab7c8!important}
+  body.darkMode .tabbar .tabItem.activeTab,html.darkRoot .tabbar .tabItem.activeTab{color:#fff!important}
+}
+@media(max-width:350px){.tabbar .tabText{font-size:13px!important}.tabbar .tabItem{gap:7px!important}.tabbar .tabIcon,.tabbar .tabSvg{width:22px!important;height:22px!important;min-width:22px!important}}
+@media(prefers-reduced-motion:reduce){.tabbar::after{transition:none!important}}
+</style>
 <!-- Motion-only enhancement: existing layout, storage and actions stay intact. -->
 <style id="abrFullscreenProfile2253">
 @media screen{
