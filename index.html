@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.56_DEPTH_TABBAR -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.57_SMART_TABBAR -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.56">
+<meta name="abr-app-version" content="v2.2.57">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.56</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.57</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22674,7 +22674,8 @@ Destek: Yeni domain ile eklenecek
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.7 5.3a4.1 4.1 0 0 0-5.1-4.9l2.2 2.2-2.9 2.9-2.2-2.2a4.1 4.1 0 0 0 4.9 5.1l-7 7a2.3 2.3 0 1 0 3.2 3.2l7-7a4.1 4.1 0 0 0 4.9-5.1l-2.2 2.2-2.9-2.9 2.1-2.2Z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="5" y="4" width="14" height="17" rx="3" stroke="currentColor" stroke-width="1.8"/>
+<path d="M9 4V2.8h6V4M8.5 10l1.3 1.3 2.4-2.6M14.5 10h1.5M8.5 15l1.3 1.3 2.4-2.6M14.5 15h1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </span>
 <span class="tabText">Bakım</span>
@@ -22917,7 +22918,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -47917,7 +47918,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -47986,7 +47987,9 @@ body.abrBakimView .exMaintAction{
     background:linear-gradient(180deg,#f8f9fb,#edf0f4)!important;
     box-shadow:0 2px 2px rgba(255,255,255,.9),0 13px 28px rgba(21,36,58,.18),inset 0 2px 5px rgba(23,36,56,.08)!important;
     -webkit-backdrop-filter:blur(22px) saturate(145%)!important;backdrop-filter:blur(22px) saturate(145%)!important;
-    overflow:hidden!important;transform:translateX(-50%)!important;
+    overflow:hidden!important;transform:translateX(-50%)!important;opacity:1!important;
+    transition:transform .34s cubic-bezier(.2,.82,.2,1),opacity .2s ease,filter .2s ease!important;
+    will-change:transform,opacity;
   }
   .tabbar::after{
     content:""!important;position:absolute!important;top:5px!important;left:5px!important;
@@ -48015,10 +48018,45 @@ body.abrBakimView .exMaintAction{
   body.darkMode .tabbar .tabItem.activeTab,html.darkRoot .tabbar .tabItem.activeTab{color:#fff!important}
   body:not(.profileMode):not(.abrDetailFullscreen2252) .container{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))!important}
   body:not(.profileMode):not(.abrDetailFullscreen2252) .emptyBox{margin-bottom:calc(70px + env(safe-area-inset-bottom,0px))!important}
+  body.abrTabbarIdle2257 .tabbar{
+    transform:translate(-50%,calc(100% + 34px))!important;opacity:0!important;filter:blur(1px)!important;pointer-events:none!important;
+  }
 }
 @media(max-width:350px){.tabbar .tabText{font-size:13px!important}.tabbar .tabItem{gap:7px!important}.tabbar .tabIcon,.tabbar .tabSvg{width:22px!important;height:22px!important;min-width:22px!important}}
-@media(prefers-reduced-motion:reduce){.tabbar::after{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.tabbar,.tabbar::after{transition:none!important}}
 </style>
+<script id="abrSmartTabbar2257Script">
+(function(){
+  var bar=document.querySelector('.tabbar');
+  if(!bar)return;
+  var timer=0;
+  function available(){
+    return !document.body.classList.contains('profileMode') && !document.body.classList.contains('abrDetailFullscreen2252');
+  }
+  function sleep(){
+    if(!available() || bar.contains(document.activeElement))return;
+    document.body.classList.add('abrTabbarIdle2257');
+    bar.setAttribute('aria-hidden','true');
+    try{bar.inert=true}catch(e){}
+  }
+  function wake(){
+    window.clearTimeout(timer);
+    document.body.classList.remove('abrTabbarIdle2257');
+    bar.setAttribute('aria-hidden','false');
+    try{bar.inert=false}catch(e){}
+    if(available())timer=window.setTimeout(sleep,2500);
+  }
+  window.addEventListener('scroll',wake,{passive:true});
+  document.addEventListener('scroll',wake,{passive:true,capture:true});
+  document.addEventListener('touchstart',wake,{passive:true});
+  document.addEventListener('touchmove',wake,{passive:true});
+  document.addEventListener('pointerdown',wake,{passive:true});
+  document.addEventListener('keydown',wake);
+  bar.addEventListener('focusin',wake);
+  new MutationObserver(wake).observe(bar,{attributes:true,attributeFilter:['class','data-active-tab']});
+  wake();
+})();
+</script>
 <!-- Motion-only enhancement: existing layout, storage and actions stay intact. -->
 <style id="abrFullscreenProfile2253">
 @media screen{
