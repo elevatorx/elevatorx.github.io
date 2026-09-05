@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.49_DOCUMENT_CENTER_REFINEMENT -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.50_MOTION_ONLY -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.49">
+<meta name="abr-app-version" content="v2.2.50">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -23495,6 +23495,9 @@ el.classList.remove(
 "screenSoft"
 );
 
+// Respect the device accessibility preference without changing navigation.
+if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
 void el.offsetWidth;
 
 el.classList.add(cls);
@@ -32134,7 +32137,7 @@ opacity:.06,
 boxShadow:"0 20px 48px rgba(20,42,78,.13)"
 }
 ],{
-duration:440,
+duration:340,
 easing:"cubic-bezier(.22,.82,.24,1)",
 fill:"forwards"
 });
@@ -32240,7 +32243,7 @@ opacity:1,
 boxShadow:"0 10px 28px rgba(15,23,42,.08)"
 }
 ],{
-duration:420,
+duration:300,
 easing:"cubic-bezier(.22,.82,.24,1)",
 fill:"forwards"
 });
@@ -47957,5 +47960,35 @@ body.abrBakimView .exMaintAction{
 })();
 </script>
 
+<!-- Motion-only enhancement: existing layout, storage and actions stay intact. -->
+<style id="abrMotionRefinement2250">
+@media screen and (prefers-reduced-motion:no-preference){
+  .screenInRight{animation:abrMotionRight .34s cubic-bezier(.2,.8,.2,1) backwards!important}
+  .screenInLeft{animation:abrMotionLeft .30s cubic-bezier(.2,.8,.2,1) backwards!important}
+  .screenFadeUp{animation:abrMotionUp .28s cubic-bezier(.2,.8,.2,1) backwards!important}
+  .screenSoft{animation:abrMotionSoft .22s ease backwards!important}
+  .aiSheet,.checklistSheet,.legalSheet{
+    animation:abrMotionSheet .32s cubic-bezier(.2,.85,.2,1) backwards!important;
+  }
+  /* Independent scale preserves translated/positioned button transforms. */
+  button:not(:disabled):not([aria-disabled="true"]){transition:scale .13s ease}
+  button:not(:disabled):not([aria-disabled="true"]):active{scale:.97}
+  body.abrSharedTransitionBusy #liste,
+  body.abrSharedTransitionBusy #searchArea{animation:none!important}
+}
+@keyframes abrMotionRight{from{opacity:.3;translate:24px 0}to{opacity:1;translate:0 0}}
+@keyframes abrMotionLeft{from{opacity:.4;translate:-18px 0}to{opacity:1;translate:0 0}}
+@keyframes abrMotionUp{from{opacity:.4;translate:0 12px}to{opacity:1;translate:0 0}}
+@keyframes abrMotionSoft{from{opacity:.55}to{opacity:1}}
+@keyframes abrMotionSheet{from{opacity:.4;translate:0 100%}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:reduce){
+  .screenInRight,.screenInLeft,.screenFadeUp,.screenSoft,
+  .aiSheet,.checklistSheet,.legalSheet{animation:none!important}
+}
+@media print{
+  .screenInRight,.screenInLeft,.screenFadeUp,.screenSoft,
+  .aiSheet,.checklistSheet,.legalSheet{animation:none!important;translate:none!important}
+}
+</style>
 </body>
 </html>
