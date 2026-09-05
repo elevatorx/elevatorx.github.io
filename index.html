@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.55_CAPSULE_TABBAR -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.56_DEPTH_TABBAR -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.55">
+<meta name="abr-app-version" content="v2.2.56">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.55</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.56</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22674,8 +22674,7 @@ Destek: Yeni domain ile eklenecek
 <button type="button" class="tabItem" data-tab="bakim" onclick="bakimListesiAc()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="4.5" y="3.5" width="15" height="17" rx="4.2" stroke="currentColor" stroke-width="1.9"/>
-<path d="M8 12.4L10.6 15L16.4 9.2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.7 5.3a4.1 4.1 0 0 0-5.1-4.9l2.2 2.2-2.9 2.9-2.2-2.2a4.1 4.1 0 0 0 4.9 5.1l-7 7a2.3 2.3 0 1 0 3.2 3.2l7-7a4.1 4.1 0 0 0 4.9-5.1l-2.2 2.2-2.9-2.9 2.1-2.2Z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </span>
 <span class="tabText">Bakım</span>
@@ -22684,8 +22683,8 @@ Destek: Yeni domain ile eklenecek
 <button type="button" class="tabItem activeTab" data-tab="apartman" onclick="anaSayfa()">
 <span class="tabIcon" aria-hidden="true">
 <svg class="tabSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="5" y="4" width="14" height="16" rx="3.6" stroke="currentColor" stroke-width="1.9"/>
-<path d="M9 8.5H9.01M15 8.5H15.01M9 12.5H9.01M15 12.5H15.01M9 16.5H9.01M15 16.5H15.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M5 21V5.3c0-.7.4-1.3 1.1-1.5L12 2l5.9 1.8c.7.2 1.1.8 1.1 1.5V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 21h18M9 21v-5h6v5M8.5 7.5h.01M12 7.5h.01M15.5 7.5h.01M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
 </svg>
 </span>
 <span class="tabText">Apartmanlar</span>
@@ -22918,7 +22917,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -47918,7 +47917,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.55";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.56";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -47980,40 +47979,42 @@ body.abrBakimView .exMaintAction{
   body.exShowYeniTab .tabbar,
   body:not(.exShowYeniTab) .tabbar{
     display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    left:50%!important;right:auto!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
-    width:min(390px,calc(100vw - 28px))!important;max-width:390px!important;
-    height:78px!important;min-height:78px!important;margin:0!important;padding:7px!important;gap:0!important;
-    border:1px solid rgba(218,224,233,.9)!important;border-radius:999px!important;
-    background:rgba(255,255,255,.92)!important;
-    box-shadow:0 16px 34px rgba(21,36,58,.16),inset 0 1px 0 rgba(255,255,255,.98)!important;
+    left:50%!important;right:auto!important;bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+    width:min(350px,calc(100vw - 42px))!important;max-width:350px!important;
+    height:68px!important;min-height:68px!important;margin:0!important;padding:5px!important;gap:0!important;
+    border:5px solid rgba(255,255,255,.94)!important;border-radius:999px!important;
+    background:linear-gradient(180deg,#f8f9fb,#edf0f4)!important;
+    box-shadow:0 2px 2px rgba(255,255,255,.9),0 13px 28px rgba(21,36,58,.18),inset 0 2px 5px rgba(23,36,56,.08)!important;
     -webkit-backdrop-filter:blur(22px) saturate(145%)!important;backdrop-filter:blur(22px) saturate(145%)!important;
     overflow:hidden!important;transform:translateX(-50%)!important;
   }
   .tabbar::after{
-    content:""!important;position:absolute!important;top:7px!important;left:7px!important;
-    width:calc((100% - 14px)/2)!important;height:62px!important;border-radius:999px!important;
-    background:linear-gradient(145deg,#17243a,#0b1322)!important;
-    box-shadow:0 10px 22px rgba(9,18,32,.28),inset 0 1px 0 rgba(255,255,255,.14)!important;
+    content:""!important;position:absolute!important;top:5px!important;left:5px!important;
+    width:calc((100% - 10px)/2)!important;height:58px!important;border-radius:999px!important;
+    background:linear-gradient(155deg,#26344a 0%,#111b2c 54%,#080e19 100%)!important;
+    box-shadow:0 2px 2px rgba(255,255,255,.16) inset,0 -2px 4px rgba(0,0,0,.28) inset,0 9px 17px rgba(9,18,32,.32)!important;
     transition:transform .34s cubic-bezier(.2,.82,.2,1)!important;z-index:0!important;pointer-events:none!important;
   }
   .tabbar[data-active-tab="bakim"]::after{transform:translate3d(0,0,0)!important}
   .tabbar[data-active-tab="apartman"]::after{transform:translate3d(100%,0,0)!important}
   .tabbar .tabItem{
     position:relative!important;z-index:1!important;display:flex!important;align-items:center!important;justify-content:center!important;
-    width:100%!important;height:62px!important;min-height:62px!important;margin:0!important;padding:0 12px!important;gap:10px!important;
+    width:100%!important;height:58px!important;min-height:58px!important;margin:0!important;padding:0 10px!important;gap:8px!important;
     border:0!important;border-radius:999px!important;background:transparent!important;box-shadow:none!important;
     color:#38475d!important;transform:none!important;transition:color .22s ease,scale .13s ease!important;
   }
   .tabbar .tabItem:active{scale:.97}
   .tabbar .tabItem.activeTab{color:#fff!important;background:transparent!important;box-shadow:none!important}
   .tabbar .tabItem::before{display:none!important}
-  .tabbar .tabIcon{display:grid!important;place-items:center!important;width:25px!important;min-width:25px!important;height:25px!important;margin:0!important;color:currentColor!important;transform:none!important}
-  .tabbar .tabSvg{display:block!important;width:25px!important;height:25px!important;stroke:currentColor!important}
-  .tabbar .tabText{display:inline!important;color:currentColor!important;font-size:15px!important;line-height:1!important;font-weight:750!important;letter-spacing:-.25px!important}
+  .tabbar .tabIcon{display:grid!important;place-items:center!important;width:22px!important;min-width:22px!important;height:22px!important;margin:0!important;color:currentColor!important;transform:none!important}
+  .tabbar .tabSvg{display:block!important;width:22px!important;height:22px!important;stroke:currentColor!important}
+  .tabbar .tabText{display:inline!important;color:currentColor!important;font-size:13.5px!important;line-height:1!important;font-weight:750!important;letter-spacing:-.2px!important}
   body.darkMode .tabbar,html.darkRoot .tabbar{border-color:rgba(255,255,255,.1)!important;background:rgba(24,37,55,.94)!important;box-shadow:0 18px 38px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.07)!important}
   body.darkMode .tabbar::after,html.darkRoot .tabbar::after{background:linear-gradient(145deg,#2478ee,#1454b8)!important;box-shadow:0 10px 24px rgba(15,91,196,.32)!important}
   body.darkMode .tabbar .tabItem,html.darkRoot .tabbar .tabItem{color:#aab7c8!important}
   body.darkMode .tabbar .tabItem.activeTab,html.darkRoot .tabbar .tabItem.activeTab{color:#fff!important}
+  body:not(.profileMode):not(.abrDetailFullscreen2252) .container{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))!important}
+  body:not(.profileMode):not(.abrDetailFullscreen2252) .emptyBox{margin-bottom:calc(70px + env(safe-area-inset-bottom,0px))!important}
 }
 @media(max-width:350px){.tabbar .tabText{font-size:13px!important}.tabbar .tabItem{gap:7px!important}.tabbar .tabIcon,.tabbar .tabSvg{width:22px!important;height:22px!important;min-width:22px!important}}
 @media(prefers-reduced-motion:reduce){.tabbar::after{transition:none!important}}
