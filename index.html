@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.57_SMART_TABBAR -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.58_NATIVE_CARI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.57">
+<meta name="abr-app-version" content="v2.2.58">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -21153,9 +21153,9 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <button class="exPaymentClose" type="button" aria-label="Kapat" onclick="eskiBakiyeModalKapat()">×</button>
 
       <div class="exPaymentHead">
-        <div class="exPaymentKicker">Cari başlangıç kaydı</div>
-        <h2 id="exOldBalanceTitle" class="exPaymentTitle">Eski Bakiye Ekle</h2>
-        <p class="exPaymentSub">Daha önce oluşmuş borcu cari hesaba tek seferde ve açıklamasıyla ekle.</p>
+        <div class="exPaymentKicker">Devreden bakiye</div>
+        <h2 id="exOldBalanceTitle" class="exPaymentTitle">Eski bakiye ekle</h2>
+        <p class="exPaymentSub">Önceki dönemden kalan borcu tarih ve açıklamasıyla cari hesaba işle.</p>
       </div>
 
       <div class="exPaymentSummary">
@@ -21225,9 +21225,9 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <button class="exPaymentClose" type="button" aria-label="Kapat" onclick="cariYonetimModalKapat()">×</button>
 
       <div class="exPaymentHead">
-        <div class="exPaymentKicker">Cari hareket merkezi</div>
-        <h2 id="exCariManagerTitle" class="exPaymentTitle">Cariyi Düzenle</h2>
-        <p id="exCariManagerSubtitle" class="exPaymentSub">Eski bakiye ve tahsilat kayıtlarını tek ekrandan yönet.</p>
+        <div class="exPaymentKicker">Cari kayıtları</div>
+        <h2 id="exCariManagerTitle" class="exPaymentTitle">Cari hareketleri</h2>
+        <p id="exCariManagerSubtitle" class="exPaymentSub">Devreden bakiye ve tahsilat kayıtlarını görüntüle veya düzenle.</p>
       </div>
 
       <div class="exCariSummary">
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.57</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.58</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.58";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22918,7 +22918,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.58";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -24912,45 +24912,73 @@ tumOdemeler:odemeler
 function cariOzetHtml(a,i){
 
 let c = cariOzet(a);
-let kalanText = c.erkenTahsilat
-? "Avans: " + tutarFormat(c.alacak)
-: (c.alacak > 0 ? "Alacak: " + tutarFormat(c.alacak) : "Kalan: " + tutarFormat(c.kalanPozitif));
 let kalanClass = c.kalanPozitif > 0 ? "debt" : "ok";
+let bakiyeLabel = c.erkenTahsilat
+? "Kullanılabilir avans"
+: (c.alacak > 0 ? "Firma alacağı" : "Güncel kalan");
+let bakiyeTutar = c.alacak > 0 ? c.alacak : c.kalanPozitif;
+let durumNotu = c.erkenTahsilat
+? "Fazla tahsilat sonraki bakım borcundan otomatik düşülür."
+: (c.kalanPozitif > 0
+  ? "Toplam borçtan kayıtlı tahsilatlar düşülerek hesaplandı."
+  : "Bu hesapta ödenmemiş cari bakiye bulunmuyor.");
 
 return `
-<div class="cariBox">
-  <div class="cariHead">
-    <div class="cariTitle">Cari Hesap Özeti</div>
+<div class="cariBox cariNative2258">
+  <div class="cariHead cariNativeHead2258">
+    <div>
+      <span class="cariNativeKicker2258">CARİ DURUMU</span>
+      <div class="cariTitle">Hesap Özeti</div>
+    </div>
     <div class="cariStatus ${c.durumClass}">${c.durum}</div>
   </div>
-  <div class="cariGrid cariGridFour">
-    <div class="cariMini">
-      <div class="cariMiniLabel">Bakım</div>
-      <div class="cariMiniValue">${tutarFormat(c.bakimUcreti)}</div>
+
+  <div class="cariBalanceHero2258 ${kalanClass}">
+    <div>
+      <span>${bakiyeLabel}</span>
+      <strong>${tutarFormat(bakiyeTutar)}</strong>
     </div>
-    <div class="cariMini">
-      <div class="cariMiniLabel">Parça</div>
-      <div class="cariMiniValue debt">${tutarFormat(c.parcaToplam)}</div>
+    <span class="cariBalanceIcon2258" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h14.5A1.5 1.5 0 0 1 20 9v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12"/><path d="M16 12h4v4h-4a2 2 0 0 1 0-4Z"/><path d="M16.5 14h.01"/></svg>
+    </span>
+  </div>
+
+  <div class="cariLedger2258" role="list" aria-label="Cari kalemleri">
+    <div class="cariLedgerRow2258" role="listitem">
+      <span><i class="maintenance" aria-hidden="true"></i>Bakım borcu</span>
+      <b>${tutarFormat(c.bakimUcreti)}</b>
     </div>
-    <div class="cariMini">
-      <div class="cariMiniLabel">Eski Bakiye</div>
-      <div class="cariMiniValue debt">${tutarFormat(c.eskiBakiyeToplami || 0)}</div>
+    <div class="cariLedgerRow2258" role="listitem">
+      <span><i class="part" aria-hidden="true"></i>Parça borcu</span>
+      <b>${tutarFormat(c.parcaToplam)}</b>
     </div>
-    <div class="cariMini">
-      <div class="cariMiniLabel">Ödenen</div>
-      <div class="cariMiniValue info">${tutarFormat(c.toplam)}</div>
+    <div class="cariLedgerRow2258" role="listitem">
+      <span><i class="old" aria-hidden="true"></i>Devreden bakiye</span>
+      <b>${tutarFormat(c.eskiBakiyeToplami || 0)}</b>
     </div>
-    <div class="cariMini">
-      <div class="cariMiniLabel">${c.erkenTahsilat ? "Avans" : (c.alacak > 0 ? "Alacak" : "Kalan")}</div>
-      <div class="cariMiniValue ${kalanClass}">${c.alacak > 0 ? tutarFormat(c.alacak) : tutarFormat(c.kalanPozitif)}</div>
+    <div class="cariLedgerRow2258 paid" role="listitem">
+      <span><i aria-hidden="true"></i>Tahsil edilen</span>
+      <b>− ${tutarFormat(c.toplam)}</b>
     </div>
   </div>
-  <div class="cariHint">Toplam borç: ${tutarFormat(c.beklenen)}. Bakım ücreti, yalnızca Bakım Yapıldı denince cariye eklenir.</div>
-  <div class="cariHint">${kalanText}. Yönetici borç sorduğunda bu ekran veya Cari Hesap Özeti PDF'i kullanılabilir.</div>
+
+  <div class="cariNativeNote2258">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+    <span>${durumNotu} Bakım ücreti yalnızca “Bakım Yapıldı” kaydından sonra cariye eklenir.</span>
+  </div>
+
   ${Number.isInteger(i) ? `
-  <div class="cariEditActions">
-    <button type="button" class="cariEditBtn oldBalance" onclick="eskiBakiyeEkle(${i})">+ Eski Bakiye</button>
-    <button type="button" class="cariEditBtn" onclick="cariIslemleriDuzenle(${i})">Cariyi Düzenle</button>
+  <div class="cariNativeActions2258">
+    <button type="button" class="oldBalance" onclick="eskiBakiyeEkle(${i})">
+      <span class="cariActionIcon2258" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span><b>Eski bakiye</b><small>Yeni kayıt ekle</small></span>
+      <svg class="cariActionChevron2258" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+    <button type="button" onclick="cariIslemleriDuzenle(${i})">
+      <span class="cariActionIcon2258 manage" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="11" cy="17" r="2"/></svg></span>
+      <span><b>Cari hareketleri</b><small>Kayıtları yönet</small></span>
+      <svg class="cariActionChevron2258" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
   </div>
   ` : ``}
 </div>
@@ -47918,7 +47946,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.57";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.58";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48205,6 +48233,95 @@ body.abrBakimView .exMaintAction{
 .abrNativeDetail2251 button:focus-visible{outline:2px solid #176fe8!important;outline-offset:3px}
 body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNativeDetail2251{--nd-surface:#182537;--nd-ink:#edf2fa;--nd-muted:#a2b0c3;--nd-line:#2a394d;--nd-soft:#101b2a}
 @media(max-width:360px){.abrNativeDetail2251 .exDetailActionPair{grid-template-columns:1fr!important}.abrNativeDetail2251 .detailTitle{font-size:24px!important}}
+</style>
+<style id="abrNativeCariAndTablet2258">
+/* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
+.abrNativeDetail2251 .cariBox.cariNative2258{
+  margin:0!important;padding:16px!important;border:1px solid var(--nd-line)!important;
+  border-radius:18px!important;background:var(--nd-surface)!important;box-shadow:none!important;
+  color:var(--nd-ink)!important;overflow:hidden;
+}
+.cariNativeHead2258{margin:0 0 13px!important;align-items:center!important}
+.cariNativeKicker2258{display:block;margin-bottom:4px;color:#176fe8;font-size:8px;font-weight:850;letter-spacing:.13em}
+.cariNative2258 .cariTitle{color:var(--nd-ink,#17263d)!important;font-size:18px!important;font-weight:750!important;letter-spacing:-.35px!important}
+.cariNative2258 .cariStatus{min-height:28px;padding:6px 10px;border-radius:999px;font-size:9px;font-weight:750}
+.cariBalanceHero2258{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:104px;padding:17px 18px;border-radius:16px;background:linear-gradient(145deg,#16365e,#102642);color:#fff}
+.cariBalanceHero2258.ok{background:linear-gradient(145deg,#103d35,#0b2d28)}
+.cariBalanceHero2258>div{min-width:0}
+.cariBalanceHero2258>div>span{display:block;color:rgba(255,255,255,.7);font-size:11px;font-weight:550}
+.cariBalanceHero2258 strong{display:block;margin-top:5px;color:#fff;font-size:30px;line-height:1.08;font-weight:760;letter-spacing:-.8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.cariBalanceIcon2258{display:grid;width:47px;height:47px;flex:0 0 47px;place-items:center;border:1px solid rgba(255,255,255,.15);border-radius:15px;background:rgba(255,255,255,.09)}
+.cariBalanceIcon2258 svg{width:25px;height:25px;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.cariLedger2258{margin-top:8px;border:1px solid var(--nd-line,#e5eaf1);border-radius:15px;overflow:hidden;background:var(--nd-surface,#fff)}
+.cariLedgerRow2258{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:45px;padding:10px 12px;border-bottom:1px solid var(--nd-line,#e5eaf1)}
+.cariLedgerRow2258:last-child{border-bottom:0}
+.cariLedgerRow2258 span{display:flex;align-items:center;gap:9px;min-width:0;color:var(--nd-muted,#65758b);font-size:12px;font-weight:550}
+.cariLedgerRow2258 i{display:block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#176fe8;box-shadow:0 0 0 4px rgba(23,111,232,.09)}
+.cariLedgerRow2258 i.part{background:#ef8a21;box-shadow:0 0 0 4px rgba(239,138,33,.1)}
+.cariLedgerRow2258 i.old{background:#8a64d6;box-shadow:0 0 0 4px rgba(138,100,214,.1)}
+.cariLedgerRow2258.paid i{background:#25a861;box-shadow:0 0 0 4px rgba(37,168,97,.1)}
+.cariLedgerRow2258 b{color:var(--nd-ink,#17263d);font-size:12.5px;font-weight:680;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cariLedgerRow2258.paid b{color:#168a4b}
+.cariNativeNote2258{display:flex;align-items:flex-start;gap:8px;margin:10px 1px 0;color:var(--nd-muted,#65758b);font-size:10.5px;line-height:1.5;font-weight:480}
+.cariNativeNote2258 svg{width:16px;height:16px;flex:0 0 16px;margin-top:1px;stroke:#176fe8;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cariNativeActions2258{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:13px}
+.cariNativeActions2258>button{display:grid;grid-template-columns:34px minmax(0,1fr) 14px;align-items:center;gap:9px;min-width:0;min-height:60px;margin:0;padding:9px 10px;border:1px solid var(--nd-line,#e5eaf1);border-radius:14px;background:var(--nd-soft,#f1f4f8);color:var(--nd-ink,#17263d);box-shadow:none;text-align:left}
+.cariNativeActions2258>button>span:nth-child(2){min-width:0}
+.cariNativeActions2258>button b,.cariNativeActions2258>button small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cariNativeActions2258>button b{font-size:11.5px;font-weight:680}
+.cariNativeActions2258>button small{margin-top:3px;color:var(--nd-muted,#65758b);font-size:8.5px;font-weight:500}
+.cariActionIcon2258{display:grid;width:34px;height:34px;place-items:center;border-radius:11px;background:#fff3df;color:#c56b0a}
+.cariActionIcon2258.manage{background:#eaf3ff;color:#176fe8}
+.cariActionIcon2258 svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cariActionChevron2258{width:14px;height:14px;stroke:#8c9aae;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+body.darkMode .cariActionIcon2258,html.darkRoot .cariActionIcon2258{background:#3e2e1e;color:#f3ad5d}
+body.darkMode .cariActionIcon2258.manage,html.darkRoot .cariActionIcon2258.manage{background:#17365a;color:#78afff}
+
+/* Eski bakiye ve hareket yönetimi telefonda yerel alt sayfa gibi açılır. */
+@media(max-width:520px){
+  #exOldBalanceModal .exPaymentCard,#exCariManagerModal .exPaymentCard{border-radius:24px 24px 0 0!important;background:#f5f7fa!important;box-shadow:0 -14px 48px rgba(8,20,38,.22)!important}
+  #exOldBalanceModal .exPaymentCard:before,#exCariManagerModal .exPaymentCard:before{content:"";display:block;width:38px;height:4px;margin:8px auto 0;border-radius:99px;background:#c8d0dc}
+  #exOldBalanceModal .exPaymentHead,#exCariManagerModal .exPaymentHead{padding:16px 17px 9px!important}
+  #exOldBalanceModal .exPaymentTitle,#exCariManagerModal .exPaymentTitle{font-size:23px!important;letter-spacing:-.55px!important}
+  #exOldBalanceModal .exPaymentSub,#exCariManagerModal .exPaymentSub{font-size:12px!important;line-height:1.45!important}
+  #exOldBalanceModal .exPaymentClose,#exCariManagerModal .exPaymentClose{top:15px!important;right:15px!important;width:36px!important;height:36px!important;background:#e7ecf3!important;font-size:23px!important}
+  #exOldBalanceModal .exPaymentSummary,#exCariManagerModal .exCariSummary{margin:3px 13px 11px!important;border-radius:16px!important}
+  #exOldBalanceModal .exPaymentBody,#exCariManagerModal .exCariManagerBody{padding-right:13px!important;padding-left:13px!important}
+  #exOldBalanceModal .exPaymentField input,#exOldBalanceModal .exPaymentField select{height:48px!important;border-radius:13px!important}
+  #exOldBalanceModal .exPaymentField textarea{min-height:70px!important;border-radius:13px!important}
+  #exOldBalanceModal .exPaymentButton,#exCariManagerModal .exCariManagerClose{min-height:48px!important;border-radius:14px!important}
+  body.darkMode #exOldBalanceModal .exPaymentCard,body.darkMode #exCariManagerModal .exPaymentCard,html.darkRoot #exOldBalanceModal .exPaymentCard,html.darkRoot #exCariManagerModal .exPaymentCard{background:#101b2a!important}
+}
+
+/* Yatay tablet: telefon şeridi yerine gerçek iki sütunlu çalışma alanı. */
+@media(min-width:900px){
+  body:not(.profileMode):not(.abrDetailFullscreen2252)>.container{
+    width:min(calc(100% - 48px),1180px)!important;padding-right:0!important;padding-left:0!important;
+  }
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden)>.header.headerClean{
+    width:min(calc(100% - 48px),1180px)!important;margin-right:auto!important;margin-left:auto!important;
+    padding-left:64px!important;padding-right:0!important;
+  }
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden)>.header.headerClean .headerBrand{justify-content:flex-start!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) .exHybridMenuBtn{
+    left:max(24px,calc(50% - 590px))!important;
+  }
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea.searchRow{margin-bottom:13px!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #liste{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;align-items:stretch;
+  }
+  #liste>.exDashHero{grid-column:1;margin:0!important;height:100%;box-sizing:border-box}
+  #liste>.abrMonthSummary{grid-column:2;margin:0!important;height:100%;box-sizing:border-box}
+  #liste>.exPortfolioHeader,#liste>.exDashEmpty{grid-column:1/-1;margin-top:8px!important;margin-bottom:0!important}
+  #liste>.exPortfolioCard{margin-bottom:0!important;height:100%;box-sizing:border-box}
+  .tabbar,body.exShowYeniTab .tabbar,body:not(.exShowYeniTab) .tabbar{bottom:18px!important}
+}
+@media(min-width:900px) and (max-width:1080px){
+  body:not(.profileMode):not(.abrDetailFullscreen2252)>.container,
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden)>.header.headerClean{width:calc(100% - 36px)!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) .exHybridMenuBtn{left:18px!important}
+}
+@media(max-width:390px){.cariNativeActions2258{grid-template-columns:1fr}.cariNativeActions2258>button{min-height:56px}}
 </style>
 <style id="abrMotionRefinement2250">
 @media screen and (prefers-reduced-motion:no-preference){
