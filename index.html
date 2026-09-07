@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.60_PERSONEL_GIRIS_AKISI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.61_PROFIL_PERSONEL_QR_PAKET_LIMITI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.60">
+<meta name="abr-app-version" content="v2.2.61">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -20396,7 +20396,7 @@ body.darkMode .abrProfileSetupSheet,html.darkRoot .abrProfileSetupSheet{backgrou
           <path d="M8.2 10.3h7.6M8.2 13.7h4.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
         </svg>
       </span>
-      <span class="exHybridItemText"><b>Personel ve Ekip</b><small>Personel daveti, sohbet ve arıza yönetimi</small></span>
+      <span class="exHybridItemText"><b>Personel ve Ekip</b><small>Ekip durumu, sohbet ve arıza yönetimi</small></span>
       <span id="abrTeamMenuBadge" class="abrTeamMenuBadge" aria-label="Okunmamış arıza" hidden>0</span>
     </button>
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.60</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.61</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.60";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.61";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22505,6 +22505,20 @@ placeholder="Bilgi yaz..."></textarea>
 </div>
 
 </div>
+
+<div class="profileSectionTitle abrProfilePersonnelTitle" data-abr-admin-only="1">Firma Yönetimi</div>
+
+<button class="abrProfilePersonnelCard" type="button" onclick="abrPersonelDavetMerkeziAc()" data-abr-admin-only="1">
+  <span class="abrProfilePersonnelIcon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 11.2a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4ZM3.5 19.5a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15 10.5h5.5M17.8 7.7v5.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+  </span>
+  <span class="abrProfilePersonnelText">
+    <b>Personel Yönetimi</b>
+    <em>Davet kodu ve QR oluştur, katılma isteklerini onayla.</em>
+  </span>
+  <span id="abrProfilePersonnelCount" class="abrProfilePersonnelCount">— / 7</span>
+  <span class="profileDataHubArrow" aria-hidden="true">›</span>
+</button>
 
 <div class="profileSectionTitle">Veri ve Sistem</div>
 
@@ -22918,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.60";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.61";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -36133,6 +36147,7 @@ profilSurumGuncelle();
 autoYedekBilgiGuncelle();
 disYedekBilgiGuncelle();
 try{if(typeof window.abrCloudStatusRefresh==="function")window.abrCloudStatusRefresh()}catch(error){}
+try{if(typeof window.abrProfilePersonnelCountRefresh==="function")window.abrProfilePersonnelCountRefresh()}catch(error){}
 meslekiBelgeProfilOzetiGuncelle();
 
 }
@@ -39858,7 +39873,6 @@ body.abrTeamOpen>#teknikPanel{
 .abrTeamHeroCount b{font-size:27px;line-height:1;font-weight:950}
 .abrTeamHeroCount span{margin-top:5px;color:rgba(227,238,255,.72);font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 .abrTeamHeroActions{position:relative;z-index:1;margin-top:18px;display:grid;grid-template-columns:1fr auto;gap:9px}
-.abrTeamInviteShortcut{width:100%;margin:12px 0 0;padding:14px 15px;border:1px solid rgba(43,123,224,.14);border-radius:19px;display:flex;align-items:center;gap:12px;text-align:left;color:#15365f;background:linear-gradient(145deg,#fff,#eef6ff);box-shadow:0 10px 25px rgba(28,77,137,.09)}.abrTeamInviteShortcut:active{transform:scale(.985)}.abrTeamInviteShortcutIcon{flex:0 0 42px;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#172a48,#176fcf);box-shadow:0 8px 18px rgba(23,88,165,.20)}.abrTeamInviteShortcutIcon svg{width:23px;height:23px}.abrTeamInviteShortcutText{min-width:0;flex:1}.abrTeamInviteShortcutText b{display:block;font-size:13px;font-weight:950}.abrTeamInviteShortcutText span{display:block;margin-top:4px;color:#6d7f97;font-size:9px;line-height:1.35;font-weight:750}.abrTeamInviteShortcutArrow{font-size:22px;color:#2478d9}
 .abrTeamPrimary,.abrTeamSecondary,.abrTeamDanger,.abrTeamSoft{
   min-height:48px;
   border-radius:17px;
@@ -40390,7 +40404,6 @@ body.darkMode #abrTeamCenter .abrTeamTopAction,
 html.darkRoot #abrTeamCenter .abrTeamTopAction{color:#e8eef8;background:rgba(18,32,53,.88);border-color:rgba(143,166,199,.15);box-shadow:0 9px 22px rgba(0,0,0,.18)}
 body.darkMode #abrTeamCenter .abrTeamNav,
 html.darkRoot #abrTeamCenter .abrTeamNav{background:rgba(12,23,39,.91);border-color:rgba(139,163,197,.15);box-shadow:0 18px 44px rgba(0,0,0,.30)}
-body.darkMode #abrTeamCenter .abrTeamInviteShortcut,html.darkRoot #abrTeamCenter .abrTeamInviteShortcut{color:#eef5ff;border-color:rgba(116,149,192,.18);background:linear-gradient(145deg,#102138,#122a47)}body.darkMode #abrTeamCenter .abrTeamInviteShortcutText span,html.darkRoot #abrTeamCenter .abrTeamInviteShortcutText span{color:#94a8c1}
 body.darkMode #abrTeamCenter .abrTeamSegment,
 html.darkRoot #abrTeamCenter .abrTeamSegment,
 body.darkMode #abrTeamCenter .abrTeamSetupTabs,
@@ -41860,7 +41873,6 @@ function abrTeamRenderHome(){
       <div class="abrTeamHeroTop"><div><div class="abrTeamHeroKicker">${abrTeamEscape(team.name)}</div><h3>Saha hattı açık.</h3><p>${activeCount} aktif arıza • ${newCount} yeni kayıt • ${abrTeamState.members.filter(function(item){return item.state==='active'}).length} ekip üyesi</p></div><div class="abrTeamHeroCount"><b>${unread}</b><span>Okunmamış</span></div></div>
       <div class="abrTeamHeroActions"><button class="abrTeamPrimary" type="button" onclick="ekipYeniArizaAc()">+ Yeni Arıza Bildir</button><button class="abrTeamSecondary" type="button" onclick="ekipArizaYenile()" aria-label="Yenile">↻</button></div>
     </section>
-    ${abrTeamMembershipOwner()?'<button class="abrTeamInviteShortcut" type="button" onclick="ekipArizaGorunum(\'team\')"><span class="abrTeamInviteShortcutIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.5 11.2a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4ZM3.5 19.5a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15 10.5h5.5M17.8 7.7v5.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span><span class="abrTeamInviteShortcutText"><b>Personel Davet Et</b><span>Ekip kodunu oluştur, paylaş ve katılma isteklerini onayla.</span></span><span class="abrTeamInviteShortcutArrow">›</span></button>':''}
     <div class="abrTeamSegment"><button class="${abrTeamState.filter==='active'?'is-active':''}" type="button" onclick="ekipArizaFiltre('active')">Aktif ${activeCount}</button><button class="${abrTeamState.filter==='all'?'is-active':''}" type="button" onclick="ekipArizaFiltre('all')">Tümü ${abrTeamState.reports.length}</button><button class="${abrTeamState.filter==='resolved'?'is-active':''}" type="button" onclick="ekipArizaFiltre('resolved')">Çözüldü</button></div>
     <div class="abrTeamList">${reports.length?reports.map(abrTeamReportCard).join(""):`<div class="abrTeamEmpty"><div class="abrTeamEmptyIcon" aria-hidden="true">✓</div><b>${abrTeamState.filter==='resolved'?'Çözülmüş kayıt yok':'Aktif arıza bulunmuyor'}</b><p>Yeni bir arıza geldiğinde burada ekibinle birlikte takip edebilirsin.</p><button class="abrTeamSoft" type="button" onclick="ekipYeniArizaAc()">Arıza Bildir</button></div>`}</div>`;
 }
@@ -42079,20 +42091,18 @@ function abrTeamStatusChoicesHtml(current){
   }).join("");
 }
 function abrTeamRenderTeam(){
-  abrTeamSetChrome("Personel yönetimi",true,"team");
+  abrTeamSetChrome("Ekip durumu",true,"team");
   const body = abrTeamEl("abrTeamBody");
   if(!body)return;
   const active = abrTeamState.members.filter(function(item){return item.state === "active"}).sort(function(a,b){return a.role==='owner'?-1:b.role==='owner'?1:0});
   const pending = abrTeamState.members.filter(function(item){return item.state === "pending"});
   const team = abrTeamActiveTeam();
-  const knownCode = abrTeamKnownCode(abrTeamState.teamId);
   const ownMember=abrTeamOwnMember();
   const ownStatus=abrTeamMemberStatusInfo(ownMember&&ownMember.availability_status);
   const anonymousAccount=!!(abrTeamState.user&&(abrTeamState.user.is_anonymous===true||(abrTeamState.user.app_metadata&&abrTeamState.user.app_metadata.provider==="anonymous")));
   body.innerHTML = `
     ${abrTeamSwitchHtml()}
-    <div class="abrTeamPageHead"><span>${abrTeamEscape(team.name)}</span><h3>Personel ve davetler</h3><p>Yeni personel kodu paylaş; istekleri onayla ve ekibin durumunu gör.</p></div>
-    ${abrTeamMembershipOwner()?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Personel daveti</span><b>Saha personeli paylaşım kodu</b></div></div>${knownCode?'<div class="abrTeamCodeKnown">'+abrTeamEscape(knownCode)+'</div>':'<div class="abrTeamPrivacy" style="margin:0 0 11px"><i>i</i><span>Mevcut kod bu cihazda kayıtlı değil. Yeni bir kod belirleyebilirsin.</span></div>'}<div class="abrTeamCodeBox"><label class="abrTeamField"><span>Yeni personel kodu</span><input id="abrTeamNewCode" maxlength="32" autocapitalize="characters" placeholder="En az 6 karakter"></label><div class="abrTeamCodeActions"><button type="button" onclick="ekipKodUret()" aria-label="Kod üret">↻</button><button type="button" onclick="ekipKoduPaylas()" aria-label="Kodu paylaş">↗</button></div></div><button class="abrTeamSoft" style="width:100%;margin-top:10px" type="button" onclick="ekipKoduYenile()">Yeni Kodu Etkinleştir</button><div class="abrTeamPrivacy"><i>!</i><span>Personel bu kodla istek gönderir; Firma Yetkilisi onaylamadan ekibe giremez. Eski kod değişince hemen geçersiz olur.</span></div></section>`:''}
+    <div class="abrTeamPageHead"><span>${abrTeamEscape(team.name)}</span><h3>Personel durumu</h3><p>Ekibin müsaitlik durumunu ve aktif saha personelini gör.</p></div>
     ${anonymousAccount?'<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Hesap güvenliği</span><b>Personel hesabını kalıcılaştır</b></div></div><div class="abrTeamPrivacy" style="margin:0 0 11px"><i>i</i><span>Telefon veya tarayıcı değişse de ekip üyeliğini korumak için e-posta ve şifre oluştur.</span></div><button class="abrTeamPrimary" style="width:100%" type="button" onclick="abrSahaHesabiKalicilastir()">Kalıcı Saha Hesabı Oluştur</button></section>':''}
     <section class="abrTeamCard abrTeamStatusBoard"><div class="abrTeamCardTitle"><div><span>Benim durumum</span><b>${abrTeamState.statusWorking?'Güncelleniyor…':abrTeamEscape(ownStatus.label)}</b></div><div class="abrTeamCountPill">CANLI</div></div><div class="abrTeamStatusChoices">${abrTeamStatusChoicesHtml(ownStatus.key)}</div><span class="abrTeamStatusHint">Seçtiğin durum ekipteki tüm aktif üyelerde anlık görünür.</span></section>
     ${pending.length?`<section class="abrTeamCard"><div class="abrTeamCardTitle"><div><span>Onay bekliyor</span><b>Katılma istekleri</b></div><div class="abrTeamCountPill">${pending.length}</div></div><div class="abrTeamMemberList">${pending.map(function(item){return abrTeamMemberHtml(item,true)}).join("")}</div></section>`:''}
@@ -43234,6 +43244,60 @@ window.abrTeamAccessInfo=async function(createSession){
   await abrTeamInit(!!createSession);
   return abrTeamAccountAccessSnapshot();
 };
+function abrTeamInvitationMemberData(item){
+  const profile=abrTeamState.profiles[item.user_id]||{};
+  return {userId:item.user_id,role:item.role,state:item.state,name:abrTeamProfileName(item.user_id),phone:profile.phone||""};
+}
+async function abrTeamInvitationReady(){
+  await abrTeamInit(false);
+  if(abrTeamState.error)throw new Error(abrTeamState.error);
+  if(!abrTeamState.user||!abrTeamState.teamId)throw new Error("Firma ekip kaydı bulunamadı.");
+  if(!abrTeamMembershipOwner())throw new Error("Personel yönetimi yalnız Firma Yetkilisine açıktır.");
+  await abrTeamMembersLoad();
+}
+window.abrTeamInvitationSnapshot=async function(){
+  await abrTeamInvitationReady();
+  let memberLimit=7,subscriptionTier="starter",licenseExpiresAt=null;
+  try{
+    const capacity=await abrTeamState.client.rpc("get_team_capacity",{p_team_id:abrTeamState.teamId});
+    if(!capacity.error&&capacity.data){
+      const value=Array.isArray(capacity.data)?capacity.data[0]:capacity.data;
+      memberLimit=Math.max(1,Number(value.member_limit||value.limit)||7);
+      subscriptionTier=String(value.subscription_tier||value.tier||"starter");
+      licenseExpiresAt=value.license_expires_at||null;
+    }
+  }catch(error){}
+  return {
+    teamId:abrTeamState.teamId,
+    teamName:abrTeamActiveTeam().name||"Firma ekibi",
+    inviteCode:abrTeamKnownCode(abrTeamState.teamId)||"",
+    memberLimit:memberLimit,
+    subscriptionTier:subscriptionTier,
+    licenseExpiresAt:licenseExpiresAt,
+    members:abrTeamState.members.map(abrTeamInvitationMemberData)
+  };
+};
+window.abrTeamInvitationRotate=async function(code){
+  await abrTeamInvitationReady();
+  const normalized=abrTeamNormalizeCode(code);
+  if(normalized.length<6)throw new Error("Yeni kod en az 6 karakter olmalı.");
+  const response=await abrTeamState.client.rpc("rotate_team_code",{p_team_id:abrTeamState.teamId,p_new_code:normalized});
+  if(response.error)throw response.error;
+  abrTeamSaveCode(abrTeamState.teamId,normalized);
+  return window.abrTeamInvitationSnapshot();
+};
+window.abrTeamInvitationApprove=async function(userId){
+  await abrTeamInvitationReady();
+  const response=await abrTeamState.client.rpc("approve_team_member",{p_team_id:abrTeamState.teamId,p_user_id:userId});
+  if(response.error)throw response.error;
+  return window.abrTeamInvitationSnapshot();
+};
+window.abrTeamInvitationReject=async function(userId){
+  await abrTeamInvitationReady();
+  const response=await abrTeamState.client.rpc("reject_team_member",{p_team_id:abrTeamState.teamId,p_user_id:userId});
+  if(response.error)throw response.error;
+  return window.abrTeamInvitationSnapshot();
+};
 window.abrTeamCloudClient=async function(){return abrTeamEnsureClient()};
 window.abrTeamRecoveryApartments=function(){
   const userId=abrTeamState.user&&abrTeamState.user.id;
@@ -43242,6 +43306,68 @@ window.abrTeamRecoveryApartments=function(){
 };
 
 window.__abrTeamCenterVersion = "2.2.09";
+})();
+</script>
+
+<style id="abrPersonnelInviteStyle2261">
+.abrProfilePersonnelCard{width:100%;min-height:104px;margin:0 0 24px;padding:16px 17px;border:1px solid rgba(49,126,222,.18);border-radius:25px;display:flex;align-items:center;gap:14px;text-align:left;color:#13233d;background:linear-gradient(145deg,#fff,#edf6ff);box-shadow:0 14px 34px rgba(36,82,143,.11),inset 0 1px 0 #fff}.abrProfilePersonnelCard:active{transform:scale(.986)}.abrProfilePersonnelIcon{flex:0 0 54px;width:54px;height:54px;border-radius:18px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#142944,#1875d8);box-shadow:0 10px 22px rgba(25,95,176,.22)}.abrProfilePersonnelIcon svg{width:29px;height:29px}.abrProfilePersonnelText{min-width:0;flex:1}.abrProfilePersonnelText b{display:block;font-size:17px;font-weight:950;letter-spacing:-.025em}.abrProfilePersonnelText em{display:block;margin-top:5px;color:#71839b;font-size:11px;line-height:1.4;font-style:normal;font-weight:720}.abrProfilePersonnelCount{flex:0 0 auto;padding:8px 10px;border-radius:12px;color:#176fd2;background:#e6f1ff;font-size:11px;font-weight:950}.abrProfilePersonnelCard .profileDataHubArrow{flex:0 0 auto}
+#abrPersonnelInviteCenter{--pi-blue:#176fe8;--pi-navy:#10233f;--pi-muted:#718198;position:fixed;inset:0;z-index:1000020;display:none;overflow:hidden;color:#142039;background:linear-gradient(155deg,#f8faff,#eef4fc 55%,#f9fbff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}#abrPersonnelInviteCenter.is-open{display:block;animation:abrPersonnelInviteIn .2s ease-out}.abrPersonnelInviteShell{height:100%;height:100dvh;display:flex;flex-direction:column}.abrPersonnelInviteTop{flex:0 0 auto;padding:max(18px,env(safe-area-inset-top)) 18px 15px;border-bottom:1px solid rgba(102,132,171,.15);display:grid;grid-template-columns:46px 1fr 46px;align-items:center;background:rgba(248,251,255,.90);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}.abrPersonnelInviteBack{width:44px;height:44px;border:1px solid rgba(91,125,170,.16);border-radius:15px;color:#1c65ba;background:#fff;box-shadow:0 8px 20px rgba(37,70,112,.08);font-size:28px;line-height:1}.abrPersonnelInviteTitle{text-align:center}.abrPersonnelInviteTitle span{display:block;color:#2477dc;font-size:8px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}.abrPersonnelInviteTitle b{display:block;margin-top:4px;font-size:18px;font-weight:950;letter-spacing:-.03em}.abrPersonnelInviteTopSpacer{width:44px}.abrPersonnelInviteBody{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px 16px calc(30px + env(safe-area-inset-bottom))}.abrPersonnelInviteInner{width:min(100%,680px);margin:0 auto}.abrPersonnelHero{position:relative;overflow:hidden;padding:20px;border-radius:28px;color:#fff;background:radial-gradient(circle at 92% 5%,rgba(72,155,255,.38),transparent 35%),linear-gradient(140deg,#101f38,#174a83 70%,#1974cf);box-shadow:0 18px 38px rgba(24,72,132,.20)}.abrPersonnelHero:after{content:"";position:absolute;right:-45px;bottom:-72px;width:190px;height:190px;border:1px solid rgba(255,255,255,.12);border-radius:50%;box-shadow:0 0 0 34px rgba(255,255,255,.04),0 0 0 68px rgba(255,255,255,.025)}.abrPersonnelHeroTop{position:relative;z-index:1;display:flex;justify-content:space-between;gap:16px}.abrPersonnelHeroKicker{color:#8ac6ff;font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}.abrPersonnelHero h2{margin:7px 0 6px;font-size:26px;line-height:1.05;font-weight:950;letter-spacing:-.045em}.abrPersonnelHero p{margin:0;color:rgba(229,239,255,.76);font-size:11px;line-height:1.45;font-weight:700}.abrPersonnelCapacity{flex:0 0 78px;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:23px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}.abrPersonnelCapacity b{font-size:26px;line-height:1;font-weight:950}.abrPersonnelCapacity span{margin-top:6px;color:rgba(229,239,255,.70);font-size:7px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}.abrPersonnelProgress{position:relative;z-index:1;height:6px;margin-top:17px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.16)}.abrPersonnelProgress i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#fff,#8fd0ff)}
+.abrPersonnelCard{margin-top:14px;padding:17px;border:1px solid rgba(81,118,166,.14);border-radius:25px;background:rgba(255,255,255,.90);box-shadow:0 12px 30px rgba(37,68,108,.09),inset 0 1px 0 #fff}.abrPersonnelCardHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.abrPersonnelCardHead span{display:block;color:#2a76d3;font-size:8px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}.abrPersonnelCardHead b{display:block;margin-top:4px;font-size:17px;font-weight:950;letter-spacing:-.025em}.abrPersonnelPendingBadge{min-width:31px;padding:7px 9px;border-radius:11px;text-align:center;color:#b36b00;background:#fff2cf;font-size:10px;font-weight:950}.abrPersonnelInviteGrid{display:grid;grid-template-columns:136px 1fr;gap:15px;align-items:center}.abrPersonnelQr{width:136px;height:136px;padding:10px;border:1px solid rgba(53,119,207,.15);border-radius:22px;display:grid;place-items:center;background:#fff;box-shadow:0 9px 22px rgba(39,91,159,.10)}.abrPersonnelQr svg{width:100%;height:100%;display:block}.abrPersonnelQrFallback{color:#2b75d1;text-align:center;font-size:10px;font-weight:900}.abrPersonnelCode{font-size:23px;font-weight:950;letter-spacing:.07em;word-break:break-all}.abrPersonnelCodeHint{margin-top:7px;color:var(--pi-muted);font-size:10px;line-height:1.45;font-weight:700}.abrPersonnelActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.abrPersonnelButton{min-height:47px;padding:0 13px;border:0;border-radius:16px;color:#fff;background:linear-gradient(145deg,#132944,#1774d6);font-size:11px;font-weight:900}.abrPersonnelButton.is-soft{color:#225c9e;border:1px solid rgba(49,120,215,.15);background:#edf5ff}.abrPersonnelButton:disabled{opacity:.52}.abrPersonnelNewCode{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:13px}.abrPersonnelNewCode input{min-width:0;height:49px;padding:0 14px;border:1px solid rgba(86,122,170,.19);border-radius:16px;outline:0;color:#142039;background:#f7faff;font-size:14px;font-weight:900;text-transform:uppercase}.abrPersonnelNewCode input:focus{border-color:rgba(31,117,224,.62);box-shadow:0 0 0 4px rgba(31,117,224,.09)}.abrPersonnelGenerate{width:49px;height:49px;border:0;border-radius:16px;color:#176fcf;background:#e9f3ff;font-size:21px}.abrPersonnelPrivacy{margin-top:11px;padding:11px 12px;border-radius:15px;color:#667a95;background:#f2f7fd;font-size:9px;line-height:1.45;font-weight:720}.abrPersonnelMemberList{display:grid;gap:9px}.abrPersonnelMember{min-width:0;padding:12px;border:1px solid rgba(91,123,166,.13);border-radius:18px;display:flex;align-items:center;gap:11px;background:#f9fbfe}.abrPersonnelAvatar{flex:0 0 42px;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#244f82,#1c7ade);font-size:12px;font-weight:950}.abrPersonnelMemberText{min-width:0;flex:1}.abrPersonnelMemberText b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:950}.abrPersonnelMemberText span{display:block;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#7a899d;font-size:9px;font-weight:720}.abrPersonnelMemberRole{padding:6px 8px;border-radius:10px;color:#2767ad;background:#eaf3ff;font-size:8px;font-weight:900}.abrPersonnelMemberActions{display:flex;gap:6px}.abrPersonnelMemberActions button{height:34px;padding:0 10px;border:0;border-radius:11px;font-size:9px;font-weight:900}.abrPersonnelApprove{color:#0b8d4c;background:#e5f8ee}.abrPersonnelReject{color:#bf3049;background:#fff0f3}.abrPersonnelEmpty{padding:24px 15px;border:1px dashed rgba(78,121,176,.20);border-radius:19px;text-align:center;color:#7a899d;background:#f8fbff;font-size:10px;line-height:1.45;font-weight:750}.abrPersonnelLoading{min-height:56vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.abrPersonnelSpinner{width:46px;height:46px;margin-bottom:15px;border:4px solid rgba(42,117,211,.13);border-top-color:#2477dc;border-radius:50%;animation:abrPersonnelSpin .8s linear infinite}.abrPersonnelLoading b{font-size:16px;font-weight:950}.abrPersonnelLoading span{margin-top:6px;color:#7a899d;font-size:10px;font-weight:700}.abrPersonnelError{padding:20px;border:1px solid rgba(210,55,83,.15);border-radius:22px;text-align:center;color:#ab2841;background:#fff4f6;font-size:11px;font-weight:800}.abrPersonnelToast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));z-index:1000022;max-width:calc(100% - 32px);padding:12px 16px;border-radius:15px;transform:translate(-50%,18px);opacity:0;color:#fff;background:#142844;box-shadow:0 12px 32px rgba(16,35,63,.25);font-size:10px;font-weight:850;pointer-events:none;transition:.2s}.abrPersonnelToast.is-show{transform:translate(-50%,0);opacity:1}
+body.darkMode .abrProfilePersonnelCard,html.darkRoot .abrProfilePersonnelCard{color:#eef5ff;border-color:rgba(107,148,199,.18);background:linear-gradient(145deg,#102138,#122a47)}body.darkMode .abrProfilePersonnelText em,html.darkRoot .abrProfilePersonnelText em{color:#99abc1}body.darkMode #abrPersonnelInviteCenter,html.darkRoot #abrPersonnelInviteCenter{color:#eef5ff;background:linear-gradient(155deg,#0b1421,#101d2f)}body.darkMode #abrPersonnelInviteCenter .abrPersonnelInviteTop,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelInviteTop{background:rgba(12,24,40,.92)}body.darkMode #abrPersonnelInviteCenter .abrPersonnelInviteBack,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelInviteBack{color:#9dcdff;background:#172a43}body.darkMode #abrPersonnelInviteCenter .abrPersonnelCard,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelCard{background:#12233a;border-color:rgba(111,151,203,.18)}body.darkMode #abrPersonnelInviteCenter .abrPersonnelMember,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelMember,body.darkMode #abrPersonnelInviteCenter .abrPersonnelNewCode input,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelNewCode input{color:#eef5ff;background:#172941}body.darkMode #abrPersonnelInviteCenter .abrPersonnelPrivacy,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelPrivacy{color:#a8b8cc;background:#182c46}
+@keyframes abrPersonnelInviteIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes abrPersonnelSpin{to{transform:rotate(360deg)}}
+@media(max-width:420px){.abrPersonnelInviteGrid{grid-template-columns:112px 1fr}.abrPersonnelQr{width:112px;height:112px}.abrPersonnelCode{font-size:18px}.abrPersonnelActions{grid-template-columns:1fr}.abrPersonnelMember{align-items:flex-start;flex-wrap:wrap}.abrPersonnelMemberActions{width:100%;padding-left:53px}.abrPersonnelMemberActions button{flex:1}}
+</style>
+
+<section id="abrPersonnelInviteCenter" aria-hidden="true" aria-label="Personel Yönetimi">
+  <div class="abrPersonnelInviteShell" role="dialog" aria-modal="true" aria-labelledby="abrPersonnelInviteTitle">
+    <header class="abrPersonnelInviteTop">
+      <button class="abrPersonnelInviteBack" type="button" onclick="abrPersonelDavetMerkeziKapat()" aria-label="Profile dön">‹</button>
+      <div class="abrPersonnelInviteTitle"><span>Firma Yönetimi</span><b id="abrPersonnelInviteTitle">Personel Yönetimi</b></div>
+      <span class="abrPersonnelInviteTopSpacer" aria-hidden="true"></span>
+    </header>
+    <main class="abrPersonnelInviteBody"><div id="abrPersonnelInviteContent" class="abrPersonnelInviteInner"></div></main>
+  </div>
+  <div id="abrPersonnelInviteToast" class="abrPersonnelToast" role="status"></div>
+</section>
+
+<script id="abrPersonnelInviteScript2261">
+(function(){
+"use strict";
+let abrPersonnelData=null,abrPersonnelBusy=false,abrPersonnelToastTimer=0,abrPersonnelQrPromise=null;
+function el(id){return document.getElementById(id)}
+function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(char){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]})}
+function initials(name){return String(name||"E").trim().split(/\s+/).slice(0,2).map(function(part){return part.charAt(0)}).join("").toLocaleUpperCase("tr-TR")||"E"}
+function toast(message){const node=el("abrPersonnelInviteToast");if(!node)return;node.textContent=message;node.classList.add("is-show");clearTimeout(abrPersonnelToastTimer);abrPersonnelToastTimer=setTimeout(function(){node.classList.remove("is-show")},2300)}
+function errorText(error){const raw=String(error&&error.message||error||"İşlem tamamlanamadı.");if(/member limit|capacity|kontenjan|dolu/i.test(raw))return "Paket kullanıcı kapasitesi dolu. Yeni personel onaylamak için kapasiteyi yükseltmelisin.";if(/expired|license/i.test(raw))return "Firma lisansının süresi dolmuş. Personel onayı için lisansı yenilemelisin.";return raw.replace(/^.*?:\s*/,"")}
+function inviteUrl(code){const url=new URL(location.href);url.hash="";url.search="";url.searchParams.set("join",code);return url.href}
+function qrLoad(){if(typeof window.qrcode==="function")return Promise.resolve();if(abrPersonnelQrPromise)return abrPersonnelQrPromise;abrPersonnelQrPromise=new Promise(function(resolve,reject){const script=document.createElement("script");script.src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js";script.async=true;script.onload=resolve;script.onerror=function(){reject(new Error("QR bileşeni yüklenemedi."))};document.head.appendChild(script)});return abrPersonnelQrPromise}
+async function qrPaint(code){const target=el("abrPersonnelQr");if(!target||!code)return;try{await qrLoad();const qr=window.qrcode(0,"M");qr.addData(inviteUrl(code));qr.make();target.innerHTML=qr.createSvgTag({cellSize:5,margin:0,scalable:true})}catch(error){target.innerHTML='<div class="abrPersonnelQrFallback">QR hazırlanamadı<br>Bağlantıyı paylaşabilirsin.</div>'}}
+function memberHtml(member,pending){return '<div class="abrPersonnelMember"><span class="abrPersonnelAvatar">'+esc(initials(member.name))+'</span><span class="abrPersonnelMemberText"><b>'+esc(member.name||"Ekip üyesi")+'</b><span>'+esc(member.phone||"Telefon eklenmemiş")+'</span></span>'+(pending?'<span class="abrPersonnelMemberActions"><button class="abrPersonnelApprove" type="button" onclick="abrPersonelOnayla(\''+esc(member.userId)+'\')">Onayla</button><button class="abrPersonnelReject" type="button" onclick="abrPersonelReddet(\''+esc(member.userId)+'\')">Reddet</button></span>':'<span class="abrPersonnelMemberRole">'+(member.role==="owner"?"YETKİLİ":"PERSONEL")+'</span>')+'</div>'}
+function render(){
+  const content=el("abrPersonnelInviteContent");if(!content)return;
+  if(!abrPersonnelData){content.innerHTML='<div class="abrPersonnelLoading"><div class="abrPersonnelSpinner"></div><b>Personel bilgileri hazırlanıyor</b><span>Ekip üyeleri ve kullanıcı kapasitesi okunuyor.</span></div>';return}
+  const members=abrPersonnelData.members||[],active=members.filter(function(item){return item.state==="active"}),pending=members.filter(function(item){return item.state==="pending"});
+  const limit=Math.max(1,Number(abrPersonnelData.memberLimit)||7),used=active.length,ratio=Math.min(100,Math.round(used/limit*100)),code=abrPersonnelData.inviteCode||"";
+  content.innerHTML='<section class="abrPersonnelHero"><div class="abrPersonnelHeroTop"><div><div class="abrPersonnelHeroKicker">'+esc(abrPersonnelData.teamName)+'</div><h2>Ekibini tek yerden yönet.</h2><p>Davet bağlantısını paylaş, katılma isteklerini onayla ve kullanıcı kapasiteni takip et.</p></div><div class="abrPersonnelCapacity"><b>'+used+' / '+limit+'</b><span>Kullanıcı</span></div></div><div class="abrPersonnelProgress"><i style="width:'+ratio+'%"></i></div></section>'+
+  '<section class="abrPersonnelCard"><div class="abrPersonnelCardHead"><div><span>Hızlı Katılım</span><b>QR ve davet kodu</b></div></div>'+(code?'<div class="abrPersonnelInviteGrid"><div id="abrPersonnelQr" class="abrPersonnelQr"><div class="abrPersonnelSpinner" style="width:32px;height:32px;margin:0"></div></div><div><div class="abrPersonnelCode">'+esc(code)+'</div><div class="abrPersonnelCodeHint">Personel QR’ı taradığında uygulama açılır ve ekip kodu otomatik dolar.</div><div class="abrPersonnelActions"><button class="abrPersonnelButton" type="button" onclick="abrPersonelBaglantiPaylas()">Bağlantıyı Paylaş</button><button class="abrPersonnelButton is-soft" type="button" onclick="abrPersonelKoduKopyala()">Kodu Kopyala</button></div></div></div>':'<div class="abrPersonnelEmpty">Henüz bu cihazda kayıtlı bir davet kodu yok. Aşağıdan güvenli bir kod üretip etkinleştir.</div>')+
+  '<div class="abrPersonnelNewCode"><input id="abrPersonnelNewCode" maxlength="32" autocapitalize="characters" placeholder="Yeni davet kodu"><button class="abrPersonnelGenerate" type="button" onclick="abrPersonelKodUret()" aria-label="Kod üret">↻</button></div><button class="abrPersonnelButton is-soft" style="width:100%;margin-top:8px" type="button" onclick="abrPersonelKoduEtkinlestir()" '+(abrPersonnelBusy?'disabled':'')+'>Yeni Kodu Etkinleştir</button><div class="abrPersonnelPrivacy">Kod değiştirildiğinde eski bağlantı hemen geçersiz olur. Personel, Firma Yetkilisi onaylamadan aktif ekibe katılamaz.</div></section>'+
+  '<section class="abrPersonnelCard"><div class="abrPersonnelCardHead"><div><span>Onay Merkezi</span><b>Katılma istekleri</b></div><div class="abrPersonnelPendingBadge">'+pending.length+'</div></div>'+(pending.length?'<div class="abrPersonnelMemberList">'+pending.map(function(item){return memberHtml(item,true)}).join("")+'</div>':'<div class="abrPersonnelEmpty">Şu anda onay bekleyen personel yok.</div>')+'</section>'+
+  '<section class="abrPersonnelCard"><div class="abrPersonnelCardHead"><div><span>Aktif Kadro</span><b>Firma kullanıcıları</b></div><div class="abrPersonnelPendingBadge" style="color:#2369b3;background:#e9f3ff">'+used+' / '+limit+'</div></div><div class="abrPersonnelMemberList">'+active.map(function(item){return memberHtml(item,false)}).join("")+'</div></section>';
+  if(code)qrPaint(code);
+  const count=el("abrProfilePersonnelCount");if(count)count.textContent=used+" / "+limit;
+}
+async function load(){abrPersonnelData=null;render();try{if(typeof window.abrTeamInvitationSnapshot!=="function")throw new Error("Ekip bağlantısı hazır değil.");abrPersonnelData=await window.abrTeamInvitationSnapshot();render()}catch(error){const content=el("abrPersonnelInviteContent");if(content)content.innerHTML='<div class="abrPersonnelError">'+esc(errorText(error))+'<br><br><button class="abrPersonnelButton" type="button" onclick="abrPersonelDavetYenile()">Tekrar Dene</button></div>'}}
+async function copy(text){if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);return}const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();document.execCommand("copy");area.remove()}
+window.abrPersonelDavetMerkeziAc=function(){if(window.__abrAppRole==="personnel"){toast("Bu bölüm yalnız Firma Yetkilisine açıktır.");return}const center=el("abrPersonnelInviteCenter");if(center){center.classList.add("is-open");center.setAttribute("aria-hidden","false");document.documentElement.style.overflow="hidden"}load()};
+window.abrPersonelDavetMerkeziKapat=function(){const center=el("abrPersonnelInviteCenter");if(center){center.classList.remove("is-open");center.setAttribute("aria-hidden","true");document.documentElement.style.overflow=""}};
+window.abrPersonelDavetYenile=load;
+window.abrPersonelKodUret=function(){const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let code="AY-";for(let i=0;i<7;i++)code+=alphabet.charAt(Math.floor(Math.random()*alphabet.length));const input=el("abrPersonnelNewCode");if(input){input.value=code;input.focus()}};
+window.abrPersonelKoduEtkinlestir=async function(){const input=el("abrPersonnelNewCode"),code=String(input&&input.value||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR");if(code.length<6){toast("Kod en az 6 karakter olmalı.");return}if(abrPersonnelBusy)return;abrPersonnelBusy=true;render();try{abrPersonnelData=await window.abrTeamInvitationRotate(code);toast("Yeni davet kodu etkinleştirildi.")}catch(error){toast(errorText(error))}abrPersonnelBusy=false;render()};
+window.abrPersonelBaglantiPaylas=async function(){const code=abrPersonnelData&&abrPersonnelData.inviteCode;if(!code)return;const url=inviteUrl(code),text=abrPersonnelData.teamName+" ekibine katıl: "+url;try{if(navigator.share)await navigator.share({title:"Personel Daveti",text:text,url:url});else{await copy(text);toast("Davet bağlantısı kopyalandı.")}}catch(error){if(error&&error.name!=="AbortError")toast("Bağlantı paylaşılamadı.")}};
+window.abrPersonelKoduKopyala=async function(){const code=abrPersonnelData&&abrPersonnelData.inviteCode;if(!code)return;try{await copy(code);toast("Davet kodu kopyalandı.")}catch(error){toast("Kod kopyalanamadı.")}};
+window.abrPersonelOnayla=async function(userId){if(abrPersonnelBusy)return;abrPersonnelBusy=true;try{abrPersonnelData=await window.abrTeamInvitationApprove(userId);toast("Personel ekibe alındı.")}catch(error){toast(errorText(error))}abrPersonnelBusy=false;render()};
+window.abrPersonelReddet=async function(userId){if(abrPersonnelBusy)return;abrPersonnelBusy=true;try{abrPersonnelData=await window.abrTeamInvitationReject(userId);toast("Katılma isteği reddedildi.")}catch(error){toast(errorText(error))}abrPersonnelBusy=false;render()};
+window.abrProfilePersonnelCountRefresh=async function(){if(window.__abrAppRole==="personnel"||typeof window.abrTeamInvitationSnapshot!=="function")return;try{const data=await window.abrTeamInvitationSnapshot(),active=(data.members||[]).filter(function(item){return item.state==="active"}).length,count=el("abrProfilePersonnelCount");if(count)count.textContent=active+" / "+(data.memberLimit||7)}catch(error){}}
 })();
 </script>
 
@@ -43472,10 +43598,10 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.60";
+const ABR_ROLE_VERSION="2.2.61";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
 const ABR_BIO_TRUST_MS=12*60*60*1000;
-const abrRoleState={view:"boot",entryRole:"authority",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
+const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -43558,7 +43684,7 @@ function abrRoleRender(){
   }
   if(abrRoleState.view==="personnel-entry"){
     const profile=abrRoleProfile();
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Saha personeli</div><h1 id="abrRoleTitle">Ekibine katıl</h1><p>Firma yetkilisinin verdiği ekip kodunu yaz. İstek onaylanmadan firma alanı açılmaz.</p></div><form class="abrAccountForm" onsubmit="abrPersonelKatil(event)"><div class="abrPersonnelJoinNote"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Yetkili onayı gerekir</b>Katılma isteğin Firma Yetkilisinin ekranına düşer.</span></div><label class="abrAccountField"><span>Ad soyad</span><input id="abrPersonnelName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrPersonnelPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField"><span>Ekip kodu</span><input id="abrPersonnelCode" type="text" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Katılma İsteği Gönder</button><button class="abrAccountSecondary" type="button" onclick="abrSahaHesapGirisi()">Personel Hesabımla Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Geri Dön</button></div></form>'+abrRoleFooter();return
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Saha personeli</div><h1 id="abrRoleTitle">Ekibine katıl</h1><p>Firma yetkilisinin verdiği ekip kodunu yaz. İstek onaylanmadan firma alanı açılmaz.</p></div><form class="abrAccountForm" onsubmit="abrPersonelKatil(event)"><div class="abrPersonnelJoinNote"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Yetkili onayı gerekir</b>Katılma isteğin Firma Yetkilisinin ekranına düşer.</span></div><label class="abrAccountField"><span>Ad soyad</span><input id="abrPersonnelName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrPersonnelPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField"><span>Ekip kodu</span><input id="abrPersonnelCode" type="text" value="'+abrRoleEscape(abrRoleState.inviteCode||"")+'" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Katılma İsteği Gönder</button><button class="abrAccountSecondary" type="button" onclick="abrSahaHesapGirisi()">Personel Hesabımla Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Geri Dön</button></div></form>'+abrRoleFooter();return
   }
   if(abrRoleState.view==="pin"){
     const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
@@ -43635,6 +43761,8 @@ async function abrRoleSessionAccess(){
     abrRoleAccessCache(access,access.userEmail||"");return access;
   }catch(error){if(cached)return cached;throw error}
 }
+function abrRoleInviteCodeRead(){try{return String(new URL(location.href).searchParams.get("join")||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR").slice(0,32)}catch(error){return ""}}
+function abrRoleInviteCodeClear(){abrRoleState.inviteCode="";try{const url=new URL(location.href);url.searchParams.delete("join");history.replaceState(history.state,"",url.href)}catch(error){}}
 async function abrRoleBoot(){
   abrRoleState.busy=true;abrRoleState.busyTitle="Oturum kontrol ediliyor";abrRoleState.busyDetail="Bu cihazdaki güvenli giriş hazırlanıyor.";abrRoleState.error="";abrRoleRender();
   try{
@@ -43656,7 +43784,9 @@ async function abrRoleBoot(){
       }
       abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
     }
-    abrRoleState.view="entry";abrRoleRender();
+    const inviteCode=abrRoleInviteCodeRead();
+    if(inviteCode){abrRoleState.inviteCode=inviteCode;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}else abrRoleState.view="entry";
+    abrRoleRender();
   }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 }
 function abrRoleRelock(){
@@ -43723,8 +43853,8 @@ window.abrHesapGiris=async function(event){
 window.abrHesapGirisiGoster=function(){abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
 window.abrFirmaYetkilisiGirisi=function(){abrRoleState.entryRole="authority";abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
 window.abrSahaHesapGirisi=function(){abrRoleState.entryRole="personnel";abrRoleState.view="login";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
-window.abrRolSecimineDon=function(){abrRoleState.view="entry";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
-window.abrSahaPersoneliBaslat=function(){if(abrRoleState.busy)return;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrRolSecimineDon=function(){abrRoleInviteCodeClear();abrRoleState.view="entry";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
+window.abrSahaPersoneliBaslat=function(){if(abrRoleState.busy)return;abrRoleInviteCodeClear();abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry";abrRoleState.error="";abrRoleState.busy=false;abrRoleRender()};
 window.abrPersonelKatil=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
   const name=String(abrRoleEl("abrPersonnelName")&&abrRoleEl("abrPersonnelName").value||"").trim();
@@ -43742,7 +43872,7 @@ window.abrPersonelKatil=async function(event){
     const profileResponse=existing.data?await client.from("profiles").update({display_name:name,phone:phone||null}).eq("user_id",access.userId):await client.from("profiles").insert({user_id:access.userId,display_name:name,phone:phone||null});if(profileResponse.error)throw profileResponse.error;
     const response=await client.rpc("request_join_team",{p_invite_code:code});if(response.error)throw response.error;
     access=await window.abrTeamAccessInfo(false);if(!access||!access.hasMembership)throw new Error("Katılma isteği doğrulanamadı.");
-    abrRoleState.access=access;abrRoleState.session={userId:access.userId||null,userEmail:access.userEmail||null,userIsAnonymous:!!access.userIsAnonymous};abrRoleAccessCache(access,access.userEmail||"");
+    abrRoleState.access=access;abrRoleState.session={userId:access.userId||null,userEmail:access.userEmail||null,userIsAnonymous:!!access.userIsAnonymous};abrRoleAccessCache(access,access.userEmail||"");abrRoleInviteCodeClear();
     abrRoleEnter("personnel",access);
     setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc()}catch(openError){}},220);
   }catch(error){abrRoleState.busy=false;abrRoleState.view="personnel-entry";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
@@ -43797,7 +43927,7 @@ function abrRoleMarkPermissions(){
   document.querySelectorAll(".exPortfolioBottomItem,.exPortfolioChip,.infoCard,.detailReportCard,.receiptHistoryItem").forEach(function(element){if(/Tahsilat|Bakiye|Borç|Alacak|Ödeme|Cari|Makbuz/i.test(element.textContent||""))element.setAttribute("data-abr-finance","1")});
   document.querySelectorAll('[data-detail-tab="cari"],[data-detail-pane="cari"]').forEach(function(element){element.setAttribute("data-abr-finance","1")});
   document.querySelectorAll(".detailSubLine").forEach(function(element){if(/Borç|Bakiye|Alacak/i.test(element.textContent||""))element.setAttribute("data-abr-finance","1")});
-  document.querySelectorAll(".profileDataHubCard,.abrSystemSummaryCard").forEach(function(element){element.setAttribute("data-abr-admin-only","1")});
+  document.querySelectorAll(".profileDataHubCard,.abrSystemSummaryCard,.abrProfilePersonnelCard,.abrProfilePersonnelTitle").forEach(function(element){element.setAttribute("data-abr-admin-only","1")});
   document.querySelectorAll("[onclick]").forEach(function(element){const code=element.getAttribute("onclick")||"";if(/aySonuRapor|(?:^|\W)(?:yedekle|geriYukle|abrVeriMerkeziAc|exHybridLisansDurumu)\s*\(/.test(code))element.setAttribute("data-abr-admin-only","1");if(/(?:odeme|tahsilat|cari|eskiBakiye)/i.test(code))element.setAttribute("data-abr-finance","1")});
   const summaryTitle=document.querySelector(".abrMonthSummaryTitle b");if(summaryTitle)summaryTitle.textContent=window.__abrAppRole==="personnel"?"Saha Özeti":"İş ve Kasa Özeti";
 }
@@ -48042,7 +48172,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.60";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.61";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48333,6 +48463,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.61 — Profil içinde bağımsız personel yönetimi, QR daveti ve paket kullanıcı kapasitesi. */
 /* v2.2.60 — doğal hesap seçimi, kod doğrulamalı personel katılımı ve görünür personel daveti. */
 .abrNativeDetail2251 .cariBox.cariNative2258{
   margin:0!important;padding:16px!important;border:1px solid var(--nd-line)!important;
