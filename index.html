@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.69_BELGE_SABLONLARI_GIRIS_FIX -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.70_EPOSTA_PERSONEL_DAVETI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.69">
+<meta name="abr-app-version" content="v2.2.70">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.69</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.70</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.69";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22514,7 +22514,7 @@ placeholder="Bilgi yaz..."></textarea>
   </span>
   <span class="abrProfilePersonnelText">
     <b>Personel Yönetimi</b>
-    <em>Davet kodu ve QR oluştur, katılma isteklerini onayla.</em>
+    <em>E-posta veya QR ile davet et, katılma isteklerini onayla.</em>
   </span>
   <span id="abrProfilePersonnelCount" class="abrProfilePersonnelCount">— / 7</span>
   <span class="profileDataHubArrow" aria-hidden="true">›</span>
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.69";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43661,9 +43661,9 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.69";
+const ABR_ROLE_VERSION="2.2.70";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
-const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
+const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",inviteToken:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -43823,7 +43823,8 @@ async function abrRoleSessionAccess(){
   }catch(error){if(cached)return cached;throw error}
 }
 function abrRoleInviteCodeRead(){try{return String(new URL(location.href).searchParams.get("join")||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR").slice(0,32)}catch(error){return ""}}
-function abrRoleInviteCodeClear(){abrRoleState.inviteCode="";try{const url=new URL(location.href);url.searchParams.delete("join");history.replaceState(history.state,"",url.href)}catch(error){}}
+function abrRoleInviteTokenRead(){try{return String(new URL(location.href).searchParams.get("invite")||"").trim().slice(0,120)}catch(error){return ""}}
+function abrRoleInviteCodeClear(){abrRoleState.inviteCode="";abrRoleState.inviteToken="";try{const url=new URL(location.href);url.searchParams.delete("join");url.searchParams.delete("invite");history.replaceState(history.state,"",url.href)}catch(error){}}
 async function abrRoleBoot(){
   abrRoleState.busy=true;abrRoleState.busyTitle="Oturum kontrol ediliyor";abrRoleState.busyDetail="Bu cihazdaki güvenli giriş hazırlanıyor.";abrRoleState.error="";abrRoleRender();
   try{
@@ -43844,8 +43845,10 @@ async function abrRoleBoot(){
       abrBioTrustClear();
       abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
     }
-    const inviteCode=abrRoleInviteCodeRead();
-    if(inviteCode){abrRoleState.inviteCode=inviteCode;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}else abrRoleState.view="entry";
+    const inviteToken=abrRoleInviteTokenRead(),inviteCode=abrRoleInviteCodeRead();
+    if(inviteToken){abrRoleState.inviteToken=inviteToken;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
+    else if(inviteCode){abrRoleState.inviteCode=inviteCode;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
+    else abrRoleState.view="entry";
     abrRoleRender();
   }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 }
@@ -43929,8 +43932,9 @@ window.abrPersonelKatil=async function(event){
   const name=String(abrRoleEl("abrPersonnelName")&&abrRoleEl("abrPersonnelName").value||"").trim();
   const phone=String(abrRoleEl("abrPersonnelPhone")&&abrRoleEl("abrPersonnelPhone").value||"").trim();
   const code=String(abrRoleEl("abrPersonnelCode")&&abrRoleEl("abrPersonnelCode").value||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR");
+  const inviteToken=String(abrRoleState.inviteToken||"").trim();
   if(name.length<2){abrRoleState.error="Ad soyad en az 2 karakter olmalı.";abrRoleRender();return}
-  if(code.length<6){abrRoleState.error="Geçerli ekip kodunu yaz.";abrRoleRender();return}
+  if(!inviteToken&&code.length<6){abrRoleState.error="Geçerli ekip davetini kullan.";abrRoleRender();return}
   try{localStorage.setItem("profilAd",name);localStorage.setItem("profilTelefon",phone)}catch(storageError){}
   abrRoleState.busy=true;abrRoleState.busyTitle="Katılma isteği gönderiliyor";abrRoleState.busyDetail="Ekip kodu doğrulanıyor ve yetkili onayı hazırlanıyor.";abrRoleState.error="";abrRoleRender();
   try{
@@ -43939,7 +43943,7 @@ window.abrPersonelKatil=async function(event){
     const client=await window.abrTeamCloudClient();
     const existing=await client.from("profiles").select("user_id").eq("user_id",access.userId).maybeSingle();if(existing.error)throw existing.error;
     const profileResponse=existing.data?await client.from("profiles").update({display_name:name,phone:phone||null}).eq("user_id",access.userId):await client.from("profiles").insert({user_id:access.userId,display_name:name,phone:phone||null});if(profileResponse.error)throw profileResponse.error;
-    const response=await client.rpc("request_join_team",{p_invite_code:code});if(response.error)throw response.error;
+    const response=inviteToken?await client.rpc("accept_team_email_invite",{p_token:inviteToken,p_display_name:name,p_phone:phone||null}):await client.rpc("request_join_team",{p_invite_code:code});if(response.error)throw response.error;
     access=await window.abrTeamAccessInfo(false);if(!access||!access.hasMembership)throw new Error("Katılma isteği doğrulanamadı.");
     abrRoleState.access=access;abrRoleState.session={userId:access.userId||null,userEmail:access.userEmail||null,userIsAnonymous:!!access.userIsAnonymous};abrRoleAccessCache(access,access.userEmail||"");abrRoleInviteCodeClear();
     abrRoleEnter("personnel",access);
@@ -48243,7 +48247,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.69";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48534,6 +48538,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.70 — 24 saatlik tek kullanımlık e-posta personel daveti ve kodsuz katılım akışı. */
 /* v2.2.69 — Belge Şablonları çalışma zamanı yükleyicisinin kapanış işaretçisi onarıldı. */
 /* v2.2.68 — yalnız platform satıcısına açık firma, paket, lisans ve hesap durumu yönetim paneli. */
 /* v2.2.67 — satılabilir yeni firma kurulumu: firma alanı, yetkili hesabı, ekip ve özel davet kodu otomatik oluşturulur. */
@@ -48660,6 +48665,54 @@ body.darkMode .cariActionIcon2258.manage,html.darkRoot .cariActionIcon2258.manag
   .aiSheet,.checklistSheet,.legalSheet{animation:none!important;translate:none!important}
 }
 </style>
+<style id="abrEmailInviteStyle2270">
+.abrEmailInviteCard{margin-top:14px;padding:17px;border:1px solid rgba(55,126,218,.18);border-radius:24px;background:linear-gradient(145deg,#fff,#edf6ff);box-shadow:0 12px 28px rgba(31,76,137,.08)}.abrEmailInviteHead{display:flex;align-items:center;gap:11px}.abrEmailInviteIcon{flex:0 0 45px;width:45px;height:45px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#132b49,#1875d8);box-shadow:0 9px 20px rgba(22,91,174,.20)}.abrEmailInviteIcon svg{width:23px;height:23px}.abrEmailInviteTitle{min-width:0}.abrEmailInviteTitle small{display:block;color:#2477d5;font-size:7px;font-weight:950;letter-spacing:.15em;text-transform:uppercase}.abrEmailInviteTitle b{display:block;margin-top:4px;font-size:17px;font-weight:950;letter-spacing:-.025em}.abrEmailInviteTitle span{display:block;margin-top:4px;color:#74849a;font-size:9px;line-height:1.4;font-weight:700}.abrEmailInviteFields{display:grid;grid-template-columns:1fr 1.18fr;gap:8px;margin-top:14px}.abrEmailInviteField{display:grid;gap:5px}.abrEmailInviteField span{margin-left:2px;color:#6d7f97;font-size:7px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.abrEmailInviteField input{width:100%;height:47px;min-width:0;padding:0 13px;border:1px solid rgba(82,124,178,.20);border-radius:14px;outline:0;color:#142039;background:#f8fbff;font-size:12px;font-weight:750;box-sizing:border-box}.abrEmailInviteField input:focus{border-color:#67a5ef;box-shadow:0 0 0 4px rgba(31,117,224,.08)}.abrEmailInviteSend{width:100%;height:49px;margin-top:10px;border:0;border-radius:15px;color:#fff;background:linear-gradient(145deg,#132b49,#1875d8);box-shadow:0 10px 22px rgba(23,105,201,.18);font-size:11px;font-weight:900}.abrEmailInviteSend:disabled{opacity:.55}.abrEmailInviteInfo{display:flex;align-items:center;gap:7px;margin-top:10px;padding:9px 10px;border-radius:13px;color:#60748f;background:#edf4fd;font-size:8.5px;line-height:1.4;font-weight:700}.abrEmailInviteInfo i{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#23b66e;box-shadow:0 0 0 4px rgba(35,182,110,.10)}.abrEmailInviteSuccess{display:none;margin-top:10px;padding:10px 12px;border-radius:13px;color:#147746;background:#e5f8ee;font-size:9px;line-height:1.45;font-weight:800}.abrEmailInviteSuccess.is-show{display:block}.abrEmailInviteSecondaryLabel{margin:18px 2px 8px;color:#7b899d;font-size:8px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}.abrInviteVerified2270{margin:10px 0;padding:11px 12px;border:1px solid rgba(38,167,100,.18);border-radius:14px;color:#147746;background:#e9f9f0;font-size:10px;line-height:1.45;font-weight:800}.abrEmailHidden2270{display:none!important}body.darkMode .abrEmailInviteCard,html.darkRoot .abrEmailInviteCard{color:#eef5ff;border-color:rgba(107,148,199,.18);background:linear-gradient(145deg,#13243a,#122d4b)}body.darkMode .abrEmailInviteField input,html.darkRoot .abrEmailInviteField input{color:#eef5ff;border-color:#30465f;background:#101e31}body.darkMode .abrEmailInviteInfo,html.darkRoot .abrEmailInviteInfo{color:#a9b8cb;background:#182c46}
+@media(max-width:440px){.abrEmailInviteFields{grid-template-columns:1fr}}
+</style>
+<script id="abrEmailInviteScript2270">
+(function(){
+"use strict";
+let sending=false;
+function el(id){return document.getElementById(id)}
+function clean(value,max){return String(value||"").trim().slice(0,max||180)}
+function appUrl(){try{const url=new URL(location.href);url.search="";url.hash="";return url.href}catch(error){return location.origin+location.pathname}}
+function notify(message){const node=el("abrPersonnelInviteToast");if(!node)return;node.textContent=message;node.classList.add("is-show");clearTimeout(notify.timer);notify.timer=setTimeout(function(){node.classList.remove("is-show")},2300)}
+function personnelEnhance(){
+  const content=el("abrPersonnelInviteContent");if(!content||content.querySelector(".abrEmailInviteCard"))return;
+  const firstCard=content.querySelector(".abrPersonnelCard");if(!firstCard)return;
+  const card=document.createElement("section");card.className="abrEmailInviteCard";card.innerHTML='<div class="abrEmailInviteHead"><span class="abrEmailInviteIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5.5" width="17" height="13" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="m5.2 8 6.8 5 6.8-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="abrEmailInviteTitle"><small>Önerilen yöntem</small><b>E-posta ile personel davet et</b><span>24 saat geçerli, tek kullanımlık güvenli bağlantı gönder.</span></span></div><div class="abrEmailInviteFields"><label class="abrEmailInviteField"><span>Personel adı</span><input id="abrInvitePersonName" type="text" maxlength="60" autocomplete="name" placeholder="Ad Soyad"></label><label class="abrEmailInviteField"><span>E-posta</span><input id="abrInvitePersonEmail" type="email" maxlength="180" autocomplete="email" inputmode="email" placeholder="personel@firma.com"></label></div><button id="abrEmailInviteSend" class="abrEmailInviteSend" type="button" onclick="abrPersonelEpostaDavetGonder()">Güvenli Davet Gönder</button><div id="abrEmailInviteSuccess" class="abrEmailInviteSuccess"></div><div class="abrEmailInviteInfo"><i></i><span>Personel bağlantıya dokunur; ekip kodu görmeden katılma isteğini tamamlar.</span></div>';
+  firstCard.insertAdjacentElement("beforebegin",card);
+  const label=document.createElement("div");label.className="abrEmailInviteSecondaryLabel";label.textContent="Yüz yüze hızlı kurulum";firstCard.insertAdjacentElement("beforebegin",label);
+  const title=firstCard.querySelector(".abrPersonnelCardHead b");if(title)title.textContent="QR ile Katılım";
+  const code=firstCard.querySelector(".abrPersonnelCode");if(code)code.classList.add("abrEmailHidden2270");
+  const hint=firstCard.querySelector(".abrPersonnelCodeHint");if(hint)hint.textContent="Personel QR’ı taradığında güvenli katılım bağlantısı uygulamada otomatik açılır.";
+  const actions=firstCard.querySelectorAll(".abrPersonnelActions button");if(actions[0])actions[0].textContent="Davet Bağlantısını Paylaş";if(actions[1])actions[1].classList.add("abrEmailHidden2270");
+  const newCode=firstCard.querySelector(".abrPersonnelNewCode");if(newCode)newCode.classList.add("abrEmailHidden2270");
+  firstCard.querySelectorAll("button").forEach(function(button){if(/Yeni Kodu Etkinleştir/i.test(button.textContent||""))button.classList.add("abrEmailHidden2270")});
+  const privacy=firstCard.querySelector(".abrPersonnelPrivacy");if(privacy)privacy.textContent="QR ve paylaşılan bağlantı ekip kodunu otomatik taşır. Personel, Firma Yetkilisi onaylamadan aktif ekibe katılamaz.";
+}
+window.abrPersonelEpostaDavetGonder=async function(){
+  if(sending)return;const name=clean(el("abrInvitePersonName")&&el("abrInvitePersonName").value,60),email=clean(el("abrInvitePersonEmail")&&el("abrInvitePersonEmail").value,180).toLocaleLowerCase("tr-TR");
+  if(name.length<2){notify("Personelin adını yaz");return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){notify("Geçerli bir e-posta adresi yaz");return}
+  const button=el("abrEmailInviteSend"),success=el("abrEmailInviteSuccess");sending=true;if(button){button.disabled=true;button.textContent="Davet gönderiliyor..."}if(success)success.classList.remove("is-show");
+  try{
+    if(typeof window.abrTeamCloudClient!=="function")throw new Error("Güvenli ekip bağlantısı hazır değil.");const client=await window.abrTeamCloudClient();
+    const response=await client.functions.invoke("invite-personnel",{body:{email:email,display_name:name,app_url:appUrl()}});if(response.error)throw response.error;if(!response.data||response.data.ok!==true)throw new Error(response.data&&response.data.error||"Davet gönderilemedi.");
+    if(success){success.textContent=name+" için davet e-postası gönderildi. Bağlantı 24 saat geçerli.";success.classList.add("is-show")}if(el("abrInvitePersonEmail"))el("abrInvitePersonEmail").value="";if(el("abrInvitePersonName"))el("abrInvitePersonName").value="";notify("Personel daveti gönderildi");
+  }catch(error){notify(clean(error&&error.message||"Davet gönderilemedi.",220))}
+  sending=false;if(button){button.disabled=false;button.textContent="Güvenli Davet Gönder"}
+};
+function roleEnhance(){
+  let token="";try{token=clean(new URL(location.href).searchParams.get("invite"),120)}catch(error){}if(!token)return;
+  const input=el("abrPersonnelCode");if(!input)return;input.required=false;const field=input.closest(".abrAccountField");if(field)field.classList.add("abrEmailHidden2270");
+  const form=input.closest("form");if(form&&!form.querySelector(".abrInviteVerified2270")){const verified=document.createElement("div");verified.className="abrInviteVerified2270";verified.textContent="E-posta davetin doğrulandı. Bilgilerini tamamlayıp katılma isteğini gönder.";form.insertBefore(verified,form.firstChild)}
+  const head=document.querySelector("#abrRoleCard .abrRoleHead p"),message="Firma tarafından gönderilen güvenli davet bağlantısıyla devam ediyorsun.";if(head&&head.textContent!==message)head.textContent=message;
+}
+function start(){const personnel=el("abrPersonnelInviteContent"),role=el("abrRoleCard");if(personnel)new MutationObserver(personnelEnhance).observe(personnel,{childList:true,subtree:true});if(role)new MutationObserver(roleEnhance).observe(role,{childList:true,subtree:true});personnelEnhance();roleEnhance()}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+
 <style id="abrSellerPanelStyle2268">
 .abrSellerProfileCard{display:none;width:100%;min-height:92px;margin:0 0 24px;padding:15px 16px;border:1px solid rgba(33,112,215,.20);border-radius:22px;align-items:center;gap:13px;text-align:left;color:#14233c;background:linear-gradient(145deg,#f8fbff,#e9f4ff);box-shadow:0 12px 28px rgba(28,79,145,.09)}
 .abrSellerProfileCard.is-visible{display:flex}.abrSellerProfileIcon{flex:0 0 50px;width:50px;height:50px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#10243f,#1975d7);box-shadow:0 9px 20px rgba(20,86,166,.22)}.abrSellerProfileIcon svg{width:27px;height:27px}.abrSellerProfileText{min-width:0;flex:1}.abrSellerProfileText b{display:block;font-size:16px;font-weight:900}.abrSellerProfileText em{display:block;margin-top:4px;color:#718198;font-size:10px;line-height:1.4;font-style:normal;font-weight:650}.abrSellerProfileBadge{padding:7px 9px;border-radius:10px;color:#176fd2;background:#dfedff;font-size:8px;font-weight:900;letter-spacing:.08em}.abrSellerProfileArrow{color:#6c7e96;font-size:25px}
