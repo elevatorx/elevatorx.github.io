@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.67_YENI_FIRMA_KURULUMU -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.68_SATICI_YONETIM_PANELI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.67">
+<meta name="abr-app-version" content="v2.2.68">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.67</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.68</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.68";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.68";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -30814,8 +30814,6 @@ body.darkMode #abrDocumentCenter,html.darkRoot #abrDocumentCenter{background:#0b
 <\/script>
 
 -->
-</body>
-</html>
 
 `);
 
@@ -43661,7 +43659,7 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.67";
+const ABR_ROLE_VERSION="2.2.68";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
 const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
 window.__abrAppRole=null;
@@ -48243,7 +48241,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.68";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48534,6 +48532,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.68 — yalnız platform satıcısına açık firma, paket, lisans ve hesap durumu yönetim paneli. */
 /* v2.2.67 — satılabilir yeni firma kurulumu: firma alanı, yetkili hesabı, ekip ve özel davet kodu otomatik oluşturulur. */
 /* v2.2.66 — personel katılımı mevcut firma oturumundan ayrıldı; eski hesapla otomatik geri giriş engellendi. */
 /* v2.2.65 — hesap seçimi ekranında bekleyen biyometrik giriş iptal edilerek ekran geçişi sabitlendi. */
@@ -48658,5 +48657,72 @@ body.darkMode .cariActionIcon2258.manage,html.darkRoot .cariActionIcon2258.manag
   .aiSheet,.checklistSheet,.legalSheet{animation:none!important;translate:none!important}
 }
 </style>
+<style id="abrSellerPanelStyle2268">
+.abrSellerProfileCard{display:none;width:100%;min-height:92px;margin:0 0 24px;padding:15px 16px;border:1px solid rgba(33,112,215,.20);border-radius:22px;align-items:center;gap:13px;text-align:left;color:#14233c;background:linear-gradient(145deg,#f8fbff,#e9f4ff);box-shadow:0 12px 28px rgba(28,79,145,.09)}
+.abrSellerProfileCard.is-visible{display:flex}.abrSellerProfileIcon{flex:0 0 50px;width:50px;height:50px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#10243f,#1975d7);box-shadow:0 9px 20px rgba(20,86,166,.22)}.abrSellerProfileIcon svg{width:27px;height:27px}.abrSellerProfileText{min-width:0;flex:1}.abrSellerProfileText b{display:block;font-size:16px;font-weight:900}.abrSellerProfileText em{display:block;margin-top:4px;color:#718198;font-size:10px;line-height:1.4;font-style:normal;font-weight:650}.abrSellerProfileBadge{padding:7px 9px;border-radius:10px;color:#176fd2;background:#dfedff;font-size:8px;font-weight:900;letter-spacing:.08em}.abrSellerProfileArrow{color:#6c7e96;font-size:25px}
+#abrSellerCenter{--seller-blue:#176fe8;--seller-navy:#122642;--seller-ink:#14233c;--seller-muted:#718198;position:fixed;inset:0;z-index:1000030;display:none;overflow:hidden;color:var(--seller-ink);background:#f1f5fb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}#abrSellerCenter.is-open{display:block;animation:abrSellerOpen .2s ease-out}.abrSellerShell{height:100%;height:100dvh;display:flex;flex-direction:column}.abrSellerTop{flex:0 0 auto;padding:max(14px,env(safe-area-inset-top)) 16px 13px;border-bottom:1px solid #dfe6ef;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;background:rgba(248,251,255,.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}.abrSellerBack{width:42px;height:42px;border:1px solid #dfe6ef;border-radius:14px;color:#1768c5;background:#fff;font-size:27px;box-shadow:0 5px 16px rgba(21,54,96,.06)}.abrSellerTitle{text-align:center}.abrSellerTitle span{display:block;color:#2477dc;font-size:8px;font-weight:900;letter-spacing:.17em;text-transform:uppercase}.abrSellerTitle b{display:block;margin-top:3px;font-size:18px;font-weight:900}.abrSellerBody{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:16px 14px calc(28px + env(safe-area-inset-bottom))}.abrSellerInner{width:min(100%,760px);margin:0 auto}
+.abrSellerHero{position:relative;overflow:hidden;padding:19px;border-radius:24px;color:#fff;background:radial-gradient(circle at 94% 0,rgba(67,153,255,.40),transparent 37%),linear-gradient(140deg,#10223d,#16497f 68%,#1874d1);box-shadow:0 16px 34px rgba(20,70,130,.18)}.abrSellerHero:after{content:"";position:absolute;right:-70px;bottom:-100px;width:220px;height:220px;border:1px solid rgba(255,255,255,.11);border-radius:50%;box-shadow:0 0 0 36px rgba(255,255,255,.035),0 0 0 72px rgba(255,255,255,.02)}.abrSellerHeroTop{position:relative;z-index:1}.abrSellerHero small{color:#8fcaff;font-size:8px;font-weight:900;letter-spacing:.17em}.abrSellerHero h2{margin:6px 0 5px;font-size:25px;line-height:1.08;font-weight:900;letter-spacing:-.04em}.abrSellerHero p{margin:0;color:rgba(232,241,255,.75);font-size:10px;line-height:1.45;font-weight:650}.abrSellerStats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);margin-top:16px;padding:12px 0;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.08)}.abrSellerStat{padding:0 10px;border-right:1px solid rgba(255,255,255,.12)}.abrSellerStat:last-child{border-right:0}.abrSellerStat b{display:block;font-size:19px;font-weight:900;font-variant-numeric:tabular-nums}.abrSellerStat span{display:block;margin-top:3px;color:rgba(232,241,255,.66);font-size:7px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.abrSellerToolbar{display:flex;gap:8px;margin:13px 0}.abrSellerSearch{height:48px;min-width:0;flex:1;padding:0 15px;border:1px solid #dbe4ef;border-radius:15px;outline:0;color:var(--seller-ink);background:#fff;font-size:13px;font-weight:650;box-shadow:0 6px 18px rgba(24,58,102,.05)}.abrSellerSearch:focus{border-color:#69a7ef;box-shadow:0 0 0 4px rgba(23,111,232,.08)}.abrSellerRefresh{width:48px;height:48px;border:0;border-radius:15px;color:#176fd2;background:#dfedff;font-size:21px}.abrSellerList{display:grid;gap:10px}.abrSellerCompany{padding:15px;border:1px solid #dde5ef;border-radius:21px;background:#fff;box-shadow:0 8px 24px rgba(21,55,99,.06)}.abrSellerCompanyHead{display:flex;align-items:flex-start;gap:10px}.abrSellerCompanyAvatar{flex:0 0 43px;width:43px;height:43px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#173657,#1b77d4);font-size:13px;font-weight:900}.abrSellerCompanyTitle{min-width:0;flex:1}.abrSellerCompanyTitle b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;font-weight:900}.abrSellerCompanyTitle span{display:block;margin-top:4px;color:var(--seller-muted);font-size:9px;font-weight:650}.abrSellerStatus{padding:6px 9px;border-radius:10px;color:#16864b;background:#e5f8ee;font-size:8px;font-weight:900}.abrSellerStatus.is-paused{color:#a96600;background:#fff2d2}.abrSellerStatus.is-cancelled{color:#b72c45;background:#ffedf1}.abrSellerCompanyMeta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:13px;overflow:hidden;border:1px solid #e5eaf1;border-radius:14px;background:#e5eaf1}.abrSellerCompanyMeta span{padding:9px;background:#f7f9fc}.abrSellerCompanyMeta small{display:block;color:#8290a4;font-size:7px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.abrSellerCompanyMeta b{display:block;margin-top:4px;font-size:10px;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.abrSellerEdit{display:grid;grid-template-columns:1fr 1.1fr 1.15fr;gap:7px;margin-top:12px}.abrSellerField label{display:block;margin:0 0 5px 2px;color:#76869c;font-size:7px;font-weight:850;text-transform:uppercase;letter-spacing:.06em}.abrSellerField select,.abrSellerField input{width:100%;height:40px;padding:0 9px;border:1px solid #dce4ee;border-radius:12px;outline:0;color:#1a2b43;background:#f7f9fc;font-size:10px;font-weight:750;box-sizing:border-box}.abrSellerField input{font-variant-numeric:tabular-nums}.abrSellerSave{width:100%;height:43px;margin-top:9px;border:0;border-radius:13px;color:#fff;background:linear-gradient(145deg,#142d4c,#1774d5);font-size:10px;font-weight:900}.abrSellerSave:disabled{opacity:.55}.abrSellerEmpty,.abrSellerLoading,.abrSellerError{padding:38px 18px;border:1px dashed #ced9e7;border-radius:20px;text-align:center;color:#718198;background:rgba(255,255,255,.7);font-size:11px;line-height:1.5;font-weight:700}.abrSellerSpinner{width:36px;height:36px;margin:0 auto 12px;border:3px solid rgba(36,119,220,.14);border-top-color:#2477dc;border-radius:50%;animation:abrSellerSpin .75s linear infinite}.abrSellerToast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:1000032;max-width:calc(100% - 30px);padding:11px 15px;border-radius:13px;transform:translate(-50%,15px);opacity:0;color:#fff;background:#142844;box-shadow:0 12px 30px rgba(13,34,64,.24);font-size:10px;font-weight:800;pointer-events:none;transition:.2s}.abrSellerToast.is-show{opacity:1;transform:translate(-50%,0)}
+body.darkMode .abrSellerProfileCard,html.darkRoot .abrSellerProfileCard{color:#edf4ff;border-color:#29486c;background:linear-gradient(145deg,#13243a,#122d4b)}body.darkMode #abrSellerCenter,html.darkRoot #abrSellerCenter{--seller-ink:#eef4fc;--seller-muted:#9eacc0;background:#101a28}body.darkMode #abrSellerCenter .abrSellerTop,html.darkRoot #abrSellerCenter .abrSellerTop{border-color:#27384d;background:rgba(15,27,43,.93)}body.darkMode #abrSellerCenter .abrSellerBack,html.darkRoot #abrSellerCenter .abrSellerBack,body.darkMode #abrSellerCenter .abrSellerCompany,html.darkRoot #abrSellerCenter .abrSellerCompany{color:#eef4fc;border-color:#2a3c53;background:#17263a}body.darkMode #abrSellerCenter .abrSellerSearch,html.darkRoot #abrSellerCenter .abrSellerSearch,body.darkMode #abrSellerCenter .abrSellerField select,html.darkRoot #abrSellerCenter .abrSellerField select,body.darkMode #abrSellerCenter .abrSellerField input,html.darkRoot #abrSellerCenter .abrSellerField input{color:#eef4fc;border-color:#31445c;background:#122136}body.darkMode #abrSellerCenter .abrSellerCompanyMeta,html.darkRoot #abrSellerCenter .abrSellerCompanyMeta{border-color:#2a3b51;background:#2a3b51}body.darkMode #abrSellerCenter .abrSellerCompanyMeta span,html.darkRoot #abrSellerCenter .abrSellerCompanyMeta span{background:#132238}
+@keyframes abrSellerOpen{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes abrSellerSpin{to{transform:rotate(360deg)}}
+@media(max-width:430px){.abrSellerEdit{grid-template-columns:1fr 1fr}.abrSellerField:last-child{grid-column:1/-1}.abrSellerCompanyMeta{grid-template-columns:1fr 1fr}.abrSellerCompanyMeta span:last-child{grid-column:1/-1}.abrSellerHero h2{font-size:23px}}
+</style>
+
+<section id="abrSellerCenter" aria-hidden="true" aria-label="Satış Yönetimi">
+  <div class="abrSellerShell" role="dialog" aria-modal="true" aria-labelledby="abrSellerTitle">
+    <header class="abrSellerTop">
+      <button class="abrSellerBack" type="button" onclick="abrSellerKapat()" aria-label="Profile dön">‹</button>
+      <div class="abrSellerTitle"><span>Platform Yönetimi</span><b id="abrSellerTitle">Satış Yönetimi</b></div>
+      <span aria-hidden="true"></span>
+    </header>
+    <main class="abrSellerBody">
+      <div class="abrSellerInner">
+        <section class="abrSellerHero">
+          <div class="abrSellerHeroTop"><small>FİRMA PORTFÖYÜ</small><h2>Müşterilerini tek yerden yönet.</h2><p>Paket kapasitesi, lisans süresi ve hesap durumunu güvenle güncelle.</p></div>
+          <div class="abrSellerStats">
+            <div class="abrSellerStat"><b id="abrSellerCompanyCount">—</b><span>Firma</span></div>
+            <div class="abrSellerStat"><b id="abrSellerMemberCount">—</b><span>Kullanıcı</span></div>
+            <div class="abrSellerStat"><b id="abrSellerExpiringCount">—</b><span>Yaklaşan</span></div>
+          </div>
+        </section>
+        <div class="abrSellerToolbar">
+          <input id="abrSellerSearch" class="abrSellerSearch" type="search" placeholder="Firma veya yetkili ara..." oninput="abrSellerAra(this.value)">
+          <button class="abrSellerRefresh" type="button" onclick="abrSellerYenile()" aria-label="Listeyi yenile">↻</button>
+        </div>
+        <div id="abrSellerList" class="abrSellerList"><div class="abrSellerLoading"><div class="abrSellerSpinner"></div>Firmalar hazırlanıyor...</div></div>
+      </div>
+    </main>
+  </div>
+</section>
+<div id="abrSellerToast" class="abrSellerToast" role="status" aria-live="polite"></div>
+
+<script id="abrSellerPanelScript2268">
+(function(){
+"use strict";
+const state={allowed:false,checked:false,loading:false,companies:[],query:""};
+function el(id){return document.getElementById(id)}
+function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]})}
+function initials(value){const words=String(value||"Firma").trim().split(/\s+/).filter(Boolean);return (words.slice(0,2).map(function(x){return x.charAt(0)}).join("")||"F").toLocaleUpperCase("tr-TR")}
+function dateInput(value){if(!value)return "";const date=new Date(value);if(Number.isNaN(date.getTime()))return "";return date.toISOString().slice(0,10)}
+function dateLabel(value){if(!value)return "Süresiz";const date=new Date(value);if(Number.isNaN(date.getTime()))return "Süresiz";return date.toLocaleDateString("tr-TR",{day:"2-digit",month:"2-digit",year:"numeric"})}
+function statusLabel(value){return value==="paused"?"Duraklatıldı":value==="cancelled"?"İptal":"Aktif"}
+function toast(message){const node=el("abrSellerToast");if(!node)return;node.textContent=message;node.classList.add("is-show");clearTimeout(toast.timer);toast.timer=setTimeout(function(){node.classList.remove("is-show")},2300)}
+async function clientReady(){if(typeof window.abrTeamCloudClient!=="function")throw new Error("Güvenli bağlantı hazırlanamadı.");const client=await window.abrTeamCloudClient();const session=await client.auth.getSession();if(session.error)throw session.error;if(!session.data||!session.data.session)throw new Error("Önce firma hesabınla giriş yap.");return client}
+function addProfileCard(){let card=el("abrSellerProfileCard");if(!card){const personnel=document.querySelector("#profilPanel .abrProfilePersonnelCard");if(!personnel)return null;card=document.createElement("button");card.id="abrSellerProfileCard";card.className="abrSellerProfileCard";card.type="button";card.onclick=window.abrSellerAc;card.innerHTML='<span class="abrSellerProfileIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 11h2m4 0h2m-8 4h2m4 0h2m-6 5v-3h4v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="abrSellerProfileText"><b>Satış Yönetimi</b><em>Firma paketlerini, lisanslarını ve hesap durumlarını yönet.</em></span><span class="abrSellerProfileBadge">SATICI</span><span class="abrSellerProfileArrow" aria-hidden="true">›</span>';personnel.insertAdjacentElement("afterend",card)}return card}
+async function accessCheck(force){if(state.loading||state.checked&&!force)return state.allowed;state.loading=true;try{const client=await clientReady();const response=await client.rpc("is_platform_seller");if(response.error)throw response.error;state.allowed=response.data===true;state.checked=true}catch(error){state.allowed=false}finally{state.loading=false}const card=addProfileCard();if(card)card.classList.toggle("is-visible",state.allowed);return state.allowed}
+function filtered(){const q=state.query.toLocaleLowerCase("tr-TR").trim();if(!q)return state.companies;return state.companies.filter(function(item){return [item.team_name,item.owner_name,item.owner_phone].some(function(value){return String(value||"").toLocaleLowerCase("tr-TR").includes(q)})})}
+function stats(){const now=Date.now(),month=30*86400000;let members=0,expiring=0;state.companies.forEach(function(item){members+=Number(item.active_members)||0;if(item.license_expires_at){const left=new Date(item.license_expires_at).getTime()-now;if(left>=0&&left<=month)expiring++}});el("abrSellerCompanyCount").textContent=state.companies.length;el("abrSellerMemberCount").textContent=members;el("abrSellerExpiringCount").textContent=expiring}
+function render(){const list=el("abrSellerList");if(!list)return;stats();const rows=filtered();if(!rows.length){list.innerHTML='<div class="abrSellerEmpty">'+(state.query?"Aramana uyan firma bulunamadı.":"Henüz kayıtlı firma bulunmuyor.")+'</div>';return}list.innerHTML=rows.map(function(item){const id=esc(item.team_id),status=String(item.subscription_status||"active"),limit=Number(item.member_limit)||7;return '<article class="abrSellerCompany" data-team-id="'+id+'"><div class="abrSellerCompanyHead"><span class="abrSellerCompanyAvatar">'+esc(initials(item.team_name))+'</span><span class="abrSellerCompanyTitle"><b>'+esc(item.team_name||"İsimsiz Firma")+'</b><span>'+esc(item.owner_name||"Firma Yetkilisi")+(item.owner_phone?' · '+esc(item.owner_phone):'')+'</span></span><span class="abrSellerStatus '+(status!=="active"?'is-'+esc(status):'')+'">'+statusLabel(status)+'</span></div><div class="abrSellerCompanyMeta"><span><small>Kullanım</small><b>'+esc(item.active_members||0)+' / '+limit+' kişi</b></span><span><small>Bekleyen</small><b>'+esc(item.pending_members||0)+' istek</b></span><span><small>Lisans</small><b>'+dateLabel(item.license_expires_at)+'</b></span></div><div class="abrSellerEdit"><div class="abrSellerField"><label>Paket</label><select data-field="limit"><option value="7" '+(limit===7?'selected':'')+'>1–7 kişi</option><option value="15" '+(limit===15?'selected':'')+'>8–15 kişi</option><option value="30" '+(limit===30?'selected':'')+'>16–30 kişi</option></select></div><div class="abrSellerField"><label>Lisans bitişi</label><input data-field="expiry" type="date" value="'+dateInput(item.license_expires_at)+'"></div><div class="abrSellerField"><label>Hesap durumu</label><select data-field="status"><option value="active" '+(status==='active'?'selected':'')+'>Aktif</option><option value="paused" '+(status==='paused'?'selected':'')+'>Duraklatıldı</option><option value="cancelled" '+(status==='cancelled'?'selected':'')+'>İptal</option></select></div></div><button class="abrSellerSave" type="button" onclick="abrSellerFirmaKaydet(\''+id+'\',this)">Değişiklikleri Kaydet</button></article>'}).join("")}
+async function load(){const list=el("abrSellerList");if(list)list.innerHTML='<div class="abrSellerLoading"><div class="abrSellerSpinner"></div>Firmalar hazırlanıyor...</div>';try{const client=await clientReady();const response=await client.rpc("seller_list_companies");if(response.error)throw response.error;state.companies=Array.isArray(response.data)?response.data:[];render()}catch(error){if(list)list.innerHTML='<div class="abrSellerError">Firma listesi alınamadı.<br>'+esc(error&&error.message||"Bağlantını kontrol edip yeniden dene.")+'</div>'}}
+window.abrSellerAc=async function(){if(!(await accessCheck(true))){toast("Bu bölüm yalnız platform satıcısına açıktır");return}const center=el("abrSellerCenter");center.classList.add("is-open");center.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";await load()};
+window.abrSellerKapat=function(){const center=el("abrSellerCenter");center.classList.remove("is-open");center.setAttribute("aria-hidden","true");document.body.style.overflow=""};
+window.abrSellerYenile=load;
+window.abrSellerAra=function(value){state.query=String(value||"");render()};
+window.abrSellerFirmaKaydet=async function(teamId,button){const card=button&&button.closest(".abrSellerCompany");if(!card)return;const limit=Number(card.querySelector('[data-field="limit"]').value);const expiry=card.querySelector('[data-field="expiry"]').value;const status=card.querySelector('[data-field="status"]').value;button.disabled=true;button.textContent="Kaydediliyor...";try{const client=await clientReady();const response=await client.rpc("seller_update_company",{p_team_id:teamId,p_member_limit:limit,p_license_expires_at:expiry?new Date(expiry+"T23:59:59.999Z").toISOString():null,p_subscription_status:status});if(response.error)throw response.error;toast("Firma bilgileri güncellendi");await load()}catch(error){toast(error&&error.message||"Değişiklik kaydedilemedi");button.disabled=false;button.textContent="Değişiklikleri Kaydet"}};
+function profileWatch(){const panel=el("profilPanel");if(!panel)return;new MutationObserver(function(){if(panel.style.display!=="none")accessCheck(false)}).observe(panel,{attributes:true,attributeFilter:["style"]})}
+document.addEventListener("keydown",function(event){if(event.key==="Escape"&&el("abrSellerCenter").classList.contains("is-open"))window.abrSellerKapat()});
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){addProfileCard();profileWatch();setTimeout(function(){accessCheck(false)},1800)});else{addProfileCard();profileWatch();setTimeout(function(){accessCheck(false)},1800)}
+})();
+</script>
 </body>
 </html>
