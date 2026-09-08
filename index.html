@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.62_PAKET_YUKSELTME_AKISI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.63_PAKET_KARTI_MOBIL_DUZEN -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.62">
+<meta name="abr-app-version" content="v2.2.63">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.62</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.63</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.62";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.63";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.62";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.63";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43325,6 +43325,17 @@ body.darkMode .abrProfilePersonnelCard,html.darkRoot .abrProfilePersonnelCard{co
 body.darkMode #abrPersonnelInviteCenter .abrPersonnelUpgradeSheet,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelUpgradeSheet{background:#102039;border-color:rgba(119,154,199,.18)}body.darkMode #abrPersonnelInviteCenter .abrPersonnelPlan,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelPlan{color:#eef5ff;background:#172941;border-color:rgba(111,151,203,.18)}body.darkMode #abrPersonnelInviteCenter .abrPersonnelUpgradeFoot,html.darkRoot #abrPersonnelInviteCenter .abrPersonnelUpgradeFoot{color:#a9b7ca;background:#182c46}
 @keyframes abrPersonnelFade{from{opacity:0}to{opacity:1}}@keyframes abrPersonnelSheetUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 </style>
+<style id="abrPersonnelCapacityPolish2263">
+.abrPersonnelLimitAlert{display:block;padding:14px!important;border-radius:19px!important;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.07))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.abrPersonnelLimitAlertMain{display:flex;align-items:center;gap:11px;min-width:0}
+.abrPersonnelLimitAlertIcon{flex:0 0 42px;width:42px;height:42px;border:1px solid rgba(255,255,255,.15);border-radius:14px;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.11)}
+.abrPersonnelLimitAlertIcon svg{width:23px;height:23px;display:block}
+.abrPersonnelLimitAlertText{display:block;min-width:0;text-align:left}
+.abrPersonnelLimitAlertText b{font-size:12px!important;line-height:1.25!important;white-space:normal!important}
+.abrPersonnelLimitAlertText span{margin-top:4px!important;font-size:9px!important;line-height:1.42!important;white-space:normal!important}
+.abrPersonnelLimitAlert>button{display:block!important;width:100%!important;max-width:none!important;height:45px!important;margin:12px 0 0!important;padding:0 14px!important;border-radius:14px!important;white-space:nowrap!important;text-align:center!important}
+@media(max-width:390px){.abrPersonnelLimitAlert{padding:13px!important}.abrPersonnelLimitAlertIcon{flex-basis:39px;width:39px;height:39px}.abrPersonnelLimitAlertText b{font-size:11px!important}.abrPersonnelLimitAlertText span{font-size:8.5px!important}}
+</style>
 
 <section id="abrPersonnelInviteCenter" aria-hidden="true" aria-label="Personel Yönetimi">
   <div class="abrPersonnelInviteShell" role="dialog" aria-modal="true" aria-labelledby="abrPersonnelInviteTitle">
@@ -43371,7 +43382,7 @@ function render(){
   if(!abrPersonnelData){content.innerHTML='<div class="abrPersonnelLoading"><div class="abrPersonnelSpinner"></div><b>Personel bilgileri hazırlanıyor</b><span>Ekip üyeleri ve kullanıcı kapasitesi okunuyor.</span></div>';return}
   const members=abrPersonnelData.members||[],active=members.filter(function(item){return item.state==="active"}),pending=members.filter(function(item){return item.state==="pending"});
   const limit=Math.max(1,Number(abrPersonnelData.memberLimit)||7),used=active.length,ratio=Math.min(100,Math.round(used/limit*100)),code=abrPersonnelData.inviteCode||"",capacityFull=used>=limit;
-  content.innerHTML='<section class="abrPersonnelHero"><div class="abrPersonnelHeroTop"><div><div class="abrPersonnelHeroKicker">'+esc(abrPersonnelData.teamName)+'</div><h2>Ekibini tek yerden yönet.</h2><p>Davet bağlantısını paylaş, katılma isteklerini onayla ve kullanıcı kapasiteni takip et.</p></div><div class="abrPersonnelCapacity"><b>'+used+' / '+limit+'</b><span>Kullanıcı</span></div></div><div class="abrPersonnelProgress"><i style="width:'+ratio+'%"></i></div>'+(capacityFull?'<div class="abrPersonnelLimitAlert"><span class="abrPersonnelLimitAlertText"><b>Kullanıcı kapasitesi doldu</b><span>Yeni personeli onaylamak için firma kapasitesini yükselt.</span></span><button type="button" onclick="abrPaketYukseltmeAc()">Paketi Yükselt</button></div>':'')+'</section>'+
+  content.innerHTML='<section class="abrPersonnelHero"><div class="abrPersonnelHeroTop"><div><div class="abrPersonnelHeroKicker">'+esc(abrPersonnelData.teamName)+'</div><h2>Ekibini tek yerden yönet.</h2><p>Davet bağlantısını paylaş, katılma isteklerini onayla ve kullanıcı kapasiteni takip et.</p></div><div class="abrPersonnelCapacity"><b>'+used+' / '+limit+'</b><span>Kullanıcı</span></div></div><div class="abrPersonnelProgress"><i style="width:'+ratio+'%"></i></div>'+(capacityFull?'<div class="abrPersonnelLimitAlert"><div class="abrPersonnelLimitAlertMain"><span class="abrPersonnelLimitAlertIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 17V7m0 0L8.5 10.5M12 7l3.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="abrPersonnelLimitAlertText"><b>Kullanıcı kapasitesi doldu</b><span>Yeni personeli onaylamak için firma kapasitesini yükselt.</span></span></div><button type="button" onclick="abrPaketYukseltmeAc()">Paketi Yükselt</button></div>':'')+'</section>'+
   '<section class="abrPersonnelCard"><div class="abrPersonnelCardHead"><div><span>Hızlı Katılım</span><b>QR ve davet kodu</b></div></div>'+(code?'<div class="abrPersonnelInviteGrid"><div id="abrPersonnelQr" class="abrPersonnelQr"><div class="abrPersonnelSpinner" style="width:32px;height:32px;margin:0"></div></div><div><div class="abrPersonnelCode">'+esc(code)+'</div><div class="abrPersonnelCodeHint">Personel QR’ı taradığında uygulama açılır ve ekip kodu otomatik dolar.</div><div class="abrPersonnelActions"><button class="abrPersonnelButton" type="button" onclick="abrPersonelBaglantiPaylas()">Bağlantıyı Paylaş</button><button class="abrPersonnelButton is-soft" type="button" onclick="abrPersonelKoduKopyala()">Kodu Kopyala</button></div></div></div>':'<div class="abrPersonnelEmpty">Henüz bu cihazda kayıtlı bir davet kodu yok. Aşağıdan güvenli bir kod üretip etkinleştir.</div>')+
   '<div class="abrPersonnelNewCode"><input id="abrPersonnelNewCode" maxlength="32" autocapitalize="characters" placeholder="Yeni davet kodu"><button class="abrPersonnelGenerate" type="button" onclick="abrPersonelKodUret()" aria-label="Kod üret">↻</button></div><button class="abrPersonnelButton is-soft" style="width:100%;margin-top:8px" type="button" onclick="abrPersonelKoduEtkinlestir()" '+(abrPersonnelBusy?'disabled':'')+'>Yeni Kodu Etkinleştir</button><div class="abrPersonnelPrivacy">Kod değiştirildiğinde eski bağlantı hemen geçersiz olur. Personel, Firma Yetkilisi onaylamadan aktif ekibe katılamaz.</div></section>'+
   '<section class="abrPersonnelCard"><div class="abrPersonnelCardHead"><div><span>Onay Merkezi</span><b>Katılma istekleri</b></div><div class="abrPersonnelPendingBadge">'+pending.length+'</div></div>'+(pending.length?'<div class="abrPersonnelMemberList">'+pending.map(function(item){return memberHtml(item,true,capacityFull)}).join("")+'</div>':'<div class="abrPersonnelEmpty">Şu anda onay bekleyen personel yok.</div>')+'</section>'+
@@ -43635,7 +43646,7 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.62";
+const ABR_ROLE_VERSION="2.2.63";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
 const ABR_BIO_TRUST_MS=12*60*60*1000;
 const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0};
@@ -48209,7 +48220,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.62";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.63";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48500,6 +48511,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.63 — paket kapasite uyarısının mobil yerleşimi ve buton hizası düzeltildi. */
 /* v2.2.62 — kapasite doluluk uyarısı ve fiyat göstermeyen WhatsApp paket yükseltme talebi. */
 /* v2.2.61 — Profil içinde bağımsız personel yönetimi, QR daveti ve paket kullanıcı kapasitesi. */
 /* v2.2.60 — doğal hesap seçimi, kod doğrulamalı personel katılımı ve görünür personel daveti. */
