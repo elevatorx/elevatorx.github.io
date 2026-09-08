@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.66_PERSONEL_OTURUM_AYRIMI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.67_YENI_FIRMA_KURULUMU -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.66">
+<meta name="abr-app-version" content="v2.2.67">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.66</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.67</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -40889,9 +40889,12 @@ function abrTeamKnownCode(teamId){
   return abrTeamTrim(settings.teamCodes && settings.teamCodes[teamId],32);
 }
 function abrTeamNormalizeCode(value){return abrTeamTrim(value,32).replace(/\s+/g,"").toLocaleUpperCase("tr-TR")}
-function abrTeamGenerateCode(){
+function abrTeamGenerateCode(teamName){
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let out = "AY-";
+  const words=abrTeamTrim(teamName||"",80).toLocaleUpperCase("tr-TR").replace(/[^A-ZÇĞİÖŞÜ0-9\s]/g,"").split(/\s+/).filter(Boolean);
+  let prefix=words.slice(0,2).map(function(word){return word.charAt(0)}).join("").replace(/[^A-Z0-9]/g,"");
+  if(prefix.length<2)prefix="EK";
+  let out = prefix.slice(0,3)+"-";
   try{
     const values = new Uint32Array(7);
     crypto.getRandomValues(values);
@@ -43191,7 +43194,9 @@ window.abrTeamCredentialSetup=async function(details){
   const phone=abrTeamTrim(details&&details.phone,40);
   const email=abrTeamTrim(details&&details.email,180).toLocaleLowerCase("tr-TR");
   const password=String(details&&details.password||"");
+  const companyName=abrTeamTrim(details&&details.company_name,80);
   if(name.length<2)throw new Error("Ad soyad en az 2 karakter olmalı.");
+  if(companyName.length<2)throw new Error("Firma adı en az 2 karakter olmalı.");
   if(!/^\S+@\S+\.\S+$/.test(email))throw new Error("Geçerli bir e-posta adresi yaz.");
   if(password.length<8)throw new Error("Şifre en az 8 karakter olmalı.");
   const client=await abrTeamEnsureClient();
@@ -43202,6 +43207,16 @@ window.abrTeamCredentialSetup=async function(details){
     localStorage.setItem("profilTelefon",phone);
   }catch(error){}
   await abrTeamProfileSync();
+  await abrTeamMembershipsLoad();
+  if(!abrTeamState.memberships.length){
+    const inviteCode=abrTeamGenerateCode(companyName);
+    const teamResponse=await abrTeamState.client.rpc("create_team",{p_team_name:companyName,p_invite_code:inviteCode});
+    if(teamResponse.error)throw teamResponse.error;
+    const teamId=typeof teamResponse.data==="string"?teamResponse.data:teamResponse.data&&teamResponse.data.id;
+    if(teamId){abrTeamSaveCode(teamId,inviteCode);abrTeamSettingsPatch({activeTeamId:teamId})}
+    await abrTeamMembershipsLoad();
+  }
+  try{localStorage.setItem("profilFirma",companyName)}catch(error){}
   let licenseNumber="",deviceCode="";
   try{
     const licenseStore=JSON.parse(localStorage.getItem("elevatorx_google_license_v1480")||"null");
@@ -43646,7 +43661,7 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.66";
+const ABR_ROLE_VERSION="2.2.67";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
 const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
 window.__abrAppRole=null;
@@ -43750,7 +43765,7 @@ function abrRoleRender(){
   }
   if(abrRoleState.view==="setup"){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">İlk kullanım</div><h1 id="abrRoleTitle">Hesabını oluştur</h1><p>Bir kez e-posta ve şifre belirle; sonraki açılışlarda normal giriş yap.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Bu cihazdaki ekip üyeliğin, sohbetlerin ve mevcut kayıtların aynı kullanıcıda korunur.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField"><span>Ad soyad</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Yeni firma kurulumu</div><h1 id="abrRoleTitle">Firma alanını oluştur</h1><p>Firma ve yetkili bilgilerini gir; ekibin, başlangıç paketin ve davet kodun otomatik hazırlansın.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Her firma ayrı ve boş bir çalışma alanıyla başlar. Başka firmaların apartman, cari veya personel kayıtları aktarılmaz.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField is-wide"><span>Firma adı</span><input id="abrSetupCompany" type="text" value="" maxlength="80" autocomplete="organization" placeholder="Örn. ABC Asansör" required></label><label class="abrAccountField"><span>Firma yetkilisi</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Firmayı ve Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
   }
   const store=abrRoleStoreGet();const accountEntry=window.__exLicenseAccountEntry===true;const personnelLogin=abrRoleState.entryRole==="personnel";
   const alternateAction=personnelLogin?'<button class="abrAccountTextButton" type="button" onclick="abrSahaPersoneliBaslat()">Ekip koduyla ilk kez katıl</button>':(accountEntry?'<button class="abrAccountTextButton" type="button" onclick="abrAktivasyonaDon()">Yeni hesap / aktivasyon kodu</button>':'<button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button>');
@@ -43945,10 +43960,12 @@ window.abrNormalGiriseDon=function(){abrRoleState.view="login";abrRoleState.erro
 window.abrIlkHesapKur=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
   const name=String(abrRoleEl("abrSetupName")&&abrRoleEl("abrSetupName").value||"").trim();const phone=String(abrRoleEl("abrSetupPhone")&&abrRoleEl("abrSetupPhone").value||"").trim();const email=String(abrRoleEl("abrSetupEmail")&&abrRoleEl("abrSetupEmail").value||"").trim().toLocaleLowerCase("tr-TR");const password=String(abrRoleEl("abrSetupPassword")&&abrRoleEl("abrSetupPassword").value||"");const again=String(abrRoleEl("abrSetupPasswordAgain")&&abrRoleEl("abrSetupPasswordAgain").value||"");
+  const companyName=String(abrRoleEl("abrSetupCompany")&&abrRoleEl("abrSetupCompany").value||"").trim();
+  if(companyName.length<2){abrRoleState.error="Firma adı en az 2 karakter olmalı.";abrRoleRender();return}
   if(password!==again){abrRoleState.error="Yazdığın şifreler birbiriyle aynı değil.";abrRoleRender();return}
   abrRoleStorePatch({lastEmail:email});
   abrRoleState.busy=true;abrRoleState.busyTitle="Hesap oluşturuluyor";abrRoleState.busyDetail="Mevcut ekip kaydın güvenli giriş hesabına bağlanıyor.";abrRoleState.error="";abrRoleRender();
-  try{if(typeof window.abrTeamCredentialSetup!=="function")throw new Error("Hesap kurulum bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSetup({name:name,phone:phone,email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+  try{if(typeof window.abrTeamCredentialSetup!=="function")throw new Error("Hesap kurulum bağlantısı bulunamadı.");const access=await window.abrTeamCredentialSetup({company_name:companyName,name:name,phone:phone,email:email,password:password});abrRoleFinish(access,email)}catch(error){abrRoleState.busy=false;abrRoleState.view="setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 };
 window.abrAppRoleGet=function(){return window.__abrAppRole||null};
 window.abrRolDegistir=async function(){
@@ -48226,7 +48243,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.67";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48517,6 +48534,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.67 — satılabilir yeni firma kurulumu: firma alanı, yetkili hesabı, ekip ve özel davet kodu otomatik oluşturulur. */
 /* v2.2.66 — personel katılımı mevcut firma oturumundan ayrıldı; eski hesapla otomatik geri giriş engellendi. */
 /* v2.2.65 — hesap seçimi ekranında bekleyen biyometrik giriş iptal edilerek ekran geçişi sabitlendi. */
 /* v2.2.64 — Face ID iptalinde geçiş engellendi; her açılışta Face ID veya doğru PIN zorunlu. */
