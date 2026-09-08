@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.65_HESAP_SECIMI_SABIT -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.66_PERSONEL_OTURUM_AYRIMI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.65">
+<meta name="abr-app-version" content="v2.2.66">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.65</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.66</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.65";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.65";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43646,9 +43646,9 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.65";
+const ABR_ROLE_VERSION="2.2.66";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
-const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0};
+const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -43729,7 +43729,7 @@ function abrRoleRender(){
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">AY Asansör</div><h1 id="abrRoleTitle">Hesabını seç</h1><p>Giriş türünü seç; gerçek yetkin ekip hesabından güvenle doğrulanır.</p></div><div class="abrRoleEntryChoices"><button class="abrRoleEntryChoice is-authority" type="button" onclick="abrFirmaYetkilisiGirisi()"><span class="abrRoleEntryChoiceIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="abrRoleEntryChoiceText"><b>Firma Yetkilisi</b><span>Firma hesabına gir, ekibini ve mali kayıtlarını yönet.</span><span class="abrRoleEntryChoiceMeta">Yönetim hesabı</span></span><span class="abrRoleEntryChoiceArrow">›</span></button><button class="abrRoleEntryChoice" type="button" onclick="abrSahaPersoneliBaslat()"><span class="abrRoleEntryChoiceIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.5 11.2a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4ZM3.5 19.5a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15 10.5h5.5M17.8 7.7v5.6M14.5 17h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span><span class="abrRoleEntryChoiceText"><b>Saha Personeli</b><span>Personel hesabınla gir veya firma koduyla katıl.</span><span class="abrRoleEntryChoiceMeta">Saha hesabı</span></span><span class="abrRoleEntryChoiceArrow">›</span></button></div>'+abrRoleErrorHtml()+abrRoleFooter();return
   }
   if(abrRoleState.view==="personnel-entry"){
-    const profile=abrRoleProfile();
+    const profile=abrRoleState.freshPersonnel?{name:"",phone:""}:abrRoleProfile();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Saha personeli</div><h1 id="abrRoleTitle">Ekibine katıl</h1><p>Firma yetkilisinin verdiği ekip kodunu yaz. İstek onaylanmadan firma alanı açılmaz.</p></div><form class="abrAccountForm" onsubmit="abrPersonelKatil(event)"><div class="abrPersonnelJoinNote"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Yetkili onayı gerekir</b>Katılma isteğin Firma Yetkilisinin ekranına düşer.</span></div><label class="abrAccountField"><span>Ad soyad</span><input id="abrPersonnelName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrPersonnelPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField"><span>Ekip kodu</span><input id="abrPersonnelCode" type="text" value="'+abrRoleEscape(abrRoleState.inviteCode||"")+'" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Katılma İsteği Gönder</button><button class="abrAccountSecondary" type="button" onclick="abrSahaHesapGirisi()">Personel Hesabımla Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Geri Dön</button></div></form>'+abrRoleFooter();return
   }
   if(abrRoleState.view==="pin"){
@@ -43901,7 +43901,14 @@ window.abrHesapGirisiGoster=function(){abrRoleState.view="login";abrRoleState.er
 window.abrFirmaYetkilisiGirisi=function(){abrRoleCancelPendingAuth();abrRoleState.entryRole="authority";abrRoleState.view="login";abrRoleState.error="";abrRoleRender()};
 window.abrSahaHesapGirisi=function(){abrRoleCancelPendingAuth();abrRoleState.entryRole="personnel";abrRoleState.view="login";abrRoleState.error="";abrRoleRender()};
 window.abrRolSecimineDon=function(){abrRoleCancelPendingAuth();abrRoleInviteCodeClear();abrRoleState.view="entry";abrRoleState.error="";abrRoleRender()};
-window.abrSahaPersoneliBaslat=function(){if(abrRoleState.busy)return;abrRoleCancelPendingAuth();abrRoleInviteCodeClear();abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry";abrRoleState.error="";abrRoleRender()};
+window.abrSahaPersoneliBaslat=async function(){
+  if(abrRoleState.busy)return;
+  abrRoleCancelPendingAuth();const attempt=abrRoleState.authAttempt;abrRoleInviteCodeClear();abrRoleState.entryRole="personnel";abrRoleState.freshPersonnel=true;abrRoleState.access=null;abrRoleState.session=null;
+  abrRoleState.view="personnel-entry";abrRoleState.busy=true;abrRoleState.busyTitle="Personel girişi hazırlanıyor";abrRoleState.busyDetail="Bu cihazdaki önceki firma oturumu güvenle kapatılıyor.";abrRoleState.error="";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
+  if(attempt!==abrRoleState.authAttempt)return;
+  abrRoleState.busy=false;abrRoleState.view="personnel-entry";abrRoleRender();
+};
 window.abrPersonelKatil=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
   const name=String(abrRoleEl("abrPersonnelName")&&abrRoleEl("abrPersonnelName").value||"").trim();
@@ -48219,7 +48226,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.65";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.66";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48510,6 +48517,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.66 — personel katılımı mevcut firma oturumundan ayrıldı; eski hesapla otomatik geri giriş engellendi. */
 /* v2.2.65 — hesap seçimi ekranında bekleyen biyometrik giriş iptal edilerek ekran geçişi sabitlendi. */
 /* v2.2.64 — Face ID iptalinde geçiş engellendi; her açılışta Face ID veya doğru PIN zorunlu. */
 /* v2.2.63 — paket kapasite uyarısının mobil yerleşimi ve buton hizası düzeltildi. */
