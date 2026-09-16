@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.70_EPOSTA_PERSONEL_DAVETI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.71_PWA_IOS_KURULUM_REHBERI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.70">
+<meta name="abr-app-version" content="v2.2.71">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.70</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.71</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -48247,7 +48247,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.70";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48778,6 +48778,54 @@ window.abrSellerFirmaKaydet=async function(teamId,button){const card=button&&but
 function profileWatch(){const panel=el("profilPanel");if(!panel)return;new MutationObserver(function(){if(panel.style.display!=="none")accessCheck(false)}).observe(panel,{attributes:true,attributeFilter:["style"]})}
 document.addEventListener("keydown",function(event){if(event.key==="Escape"&&el("abrSellerCenter").classList.contains("is-open"))window.abrSellerKapat()});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){addProfileCard();profileWatch();setTimeout(function(){accessCheck(false)},1800)});else{addProfileCard();profileWatch();setTimeout(function(){accessCheck(false)},1800)}
+})();
+</script>
+
+<!-- v2.2.71 — iPhone Safari için tek seferlik PWA kurulum rehberi. -->
+<style id="abrIosInstallGuideStyle2271">
+#abrIosInstallGuide{position:fixed;inset:0;z-index:2147483640;display:none;align-items:flex-end;justify-content:center;padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif}body.abrIosInstallGuideOpen{overflow:hidden!important}
+#abrIosInstallGuide.is-open{display:flex}.abrIosInstallBackdrop{position:absolute;inset:0;background:rgba(5,13,27,.52);-webkit-backdrop-filter:blur(13px);backdrop-filter:blur(13px);animation:abrIosGuideFade .22s ease-out both}.abrIosInstallSheet{position:relative;width:min(100%,470px);overflow:hidden;border:1px solid rgba(255,255,255,.82);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,248,254,.98));box-shadow:0 28px 90px rgba(3,14,34,.32);animation:abrIosGuideUp .34s cubic-bezier(.2,.78,.24,1) both;color:#13213a}.abrIosInstallAccent{height:5px;background:linear-gradient(90deg,#102b52,#1977eb)}.abrIosInstallHead{display:flex;align-items:flex-start;gap:13px;padding:20px 19px 13px}.abrIosInstallAppIcon{flex:0 0 54px;width:54px;height:54px;border-radius:17px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#112b50,#1a78e6);box-shadow:0 11px 25px rgba(21,105,211,.25)}.abrIosInstallAppIcon svg{width:28px;height:28px}.abrIosInstallTitle{min-width:0;flex:1}.abrIosInstallTitle small{display:block;color:#2376d9;font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.abrIosInstallTitle h2{margin:5px 0 5px;font-size:22px;line-height:1.07;font-weight:920;letter-spacing:-.045em}.abrIosInstallTitle p{margin:0;color:#738198;font-size:11px;line-height:1.45;font-weight:650}.abrIosInstallClose{flex:0 0 34px;width:34px;height:34px;border:1px solid #e0e7f1;border-radius:50%;display:grid;place-items:center;padding:0;color:#66758b;background:#f6f8fb;font-size:20px;line-height:1}.abrIosInstallSteps{display:grid;gap:8px;padding:0 18px 17px}.abrIosInstallStep{display:grid;grid-template-columns:37px minmax(0,1fr) auto;align-items:center;gap:11px;min-height:62px;padding:10px 12px;border:1px solid #e6ecf4;border-radius:18px;background:#fff}.abrIosInstallNumber{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;color:#176ed3;background:#eaf3ff;font-size:12px;font-weight:950}.abrIosInstallStepText b{display:block;font-size:13px;font-weight:900}.abrIosInstallStepText span{display:block;margin-top:3px;color:#7a879a;font-size:9.5px;line-height:1.35;font-weight:650}.abrIosInstallGlyph{width:31px;height:31px;display:grid;place-items:center;color:#1772dc}.abrIosInstallGlyph svg{width:23px;height:23px}.abrIosInstallActions{display:grid;grid-template-columns:.75fr 1.25fr;gap:8px;padding:0 18px 18px}.abrIosInstallBtn{min-height:50px;border:0;border-radius:16px;padding:0 13px;font-size:12px;font-weight:900}.abrIosInstallBtn.secondary{color:#53647d;background:#edf2f8}.abrIosInstallBtn.primary{color:#fff;background:linear-gradient(135deg,#112c52,#1778e9);box-shadow:0 10px 24px rgba(24,110,218,.22)}.abrIosInstallFoot{padding:12px 18px calc(13px + env(safe-area-inset-bottom,0px));border-top:1px solid #e7edf5;color:#8490a1;background:rgba(239,244,251,.75);font-size:8.5px;line-height:1.4;text-align:center;font-weight:700}
+body.darkMode #abrIosInstallGuide .abrIosInstallSheet,html.darkRoot #abrIosInstallGuide .abrIosInstallSheet{border-color:rgba(255,255,255,.10);color:#f4f8ff;background:linear-gradient(180deg,#172438,#101b2b)}body.darkMode #abrIosInstallGuide .abrIosInstallTitle p,html.darkRoot #abrIosInstallGuide .abrIosInstallTitle p,body.darkMode #abrIosInstallGuide .abrIosInstallStepText span,html.darkRoot #abrIosInstallGuide .abrIosInstallStepText span{color:#9eacc0}body.darkMode #abrIosInstallGuide .abrIosInstallStep,html.darkRoot #abrIosInstallGuide .abrIosInstallStep{border-color:#2a3b52;background:#18273a}body.darkMode #abrIosInstallGuide .abrIosInstallClose,html.darkRoot #abrIosInstallGuide .abrIosInstallClose{border-color:#314158;color:#b5c0cf;background:#1b2a3e}body.darkMode #abrIosInstallGuide .abrIosInstallBtn.secondary,html.darkRoot #abrIosInstallGuide .abrIosInstallBtn.secondary{color:#c3cedd;background:#25364c}body.darkMode #abrIosInstallGuide .abrIosInstallFoot,html.darkRoot #abrIosInstallGuide .abrIosInstallFoot{border-color:#29394e;color:#8f9db0;background:#0e1928}
+@keyframes abrIosGuideFade{from{opacity:0}to{opacity:1}}@keyframes abrIosGuideUp{from{opacity:0;transform:translateY(34px) scale(.98)}to{opacity:1;transform:none}}@media(max-width:370px){.abrIosInstallHead{padding-left:15px;padding-right:15px}.abrIosInstallSteps,.abrIosInstallActions{padding-left:14px;padding-right:14px}.abrIosInstallTitle h2{font-size:20px}.abrIosInstallStep{grid-template-columns:34px minmax(0,1fr)}}@media(prefers-reduced-motion:reduce){.abrIosInstallBackdrop,.abrIosInstallSheet{animation:none}}
+</style>
+
+<section id="abrIosInstallGuide" aria-hidden="true">
+  <button class="abrIosInstallBackdrop" type="button" aria-label="Kurulum rehberini kapat"></button>
+  <div class="abrIosInstallSheet" role="dialog" aria-modal="true" aria-labelledby="abrIosInstallTitle">
+    <div class="abrIosInstallAccent"></div>
+    <header class="abrIosInstallHead">
+      <span class="abrIosInstallAppIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8"/><path d="M9 6h6M9 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="abrIosInstallTitle"><small>HIZLI ERİŞİM</small><h2 id="abrIosInstallTitle">Uygulamayı iPhone’una ekle</h2><p>Safari çubuğu olmadan tam ekran açılır ve ana ekranından tek dokunuşla ulaşılır.</p></span>
+      <button id="abrIosInstallClose" class="abrIosInstallClose" type="button" aria-label="Kapat">×</button>
+    </header>
+    <div class="abrIosInstallSteps">
+      <div class="abrIosInstallStep"><span class="abrIosInstallNumber">1</span><span class="abrIosInstallStepText"><b>Paylaş düğmesine dokun</b><span>Safari’nin alt araç çubuğundaki paylaş simgesini aç.</span></span><span class="abrIosInstallGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15V3m0 0L8 7m4-4 4 4M6 10H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="abrIosInstallStep"><span class="abrIosInstallNumber">2</span><span class="abrIosInstallStepText"><b>Ana Ekrana Ekle’yi seç</b><span>Paylaş menüsünü aşağı kaydırıp bu seçeneğe dokun.</span></span><span class="abrIosInstallGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></div>
+      <div class="abrIosInstallStep"><span class="abrIosInstallNumber">3</span><span class="abrIosInstallStepText"><b>Sağ üstten Ekle’ye bas</b><span>Uygulama simgesi iPhone ana ekranına yerleşir.</span></span><span class="abrIosInstallGlyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </div>
+    <div class="abrIosInstallActions"><button id="abrIosInstallLater" class="abrIosInstallBtn secondary" type="button">Şimdi Değil</button><button id="abrIosInstallDone" class="abrIosInstallBtn primary" type="button">Anladım</button></div>
+    <div class="abrIosInstallFoot">Bu bilgilendirme yalnızca Safari’de ve uygulama ana ekrana ekli değilken bir kez gösterilir.</div>
+  </div>
+</section>
+
+<script id="abrIosInstallGuideScript2271">
+(function(){
+"use strict";
+const KEY="abrIosInstallGuideSeen_v1";
+let lastFocus=null;
+function el(id){return document.getElementById(id)}
+function isIos(){const ua=navigator.userAgent||"";return /iPad|iPhone|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
+function isSafari(){const ua=navigator.userAgent||"";return /Safari/i.test(ua)&&!/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo/i.test(ua)}
+function isStandalone(){return navigator.standalone===true||(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)}
+function hasSeen(){try{return localStorage.getItem(KEY)==="1"}catch(error){return false}}
+function remember(){try{localStorage.setItem(KEY,"1")}catch(error){}}
+function open(){const guide=el("abrIosInstallGuide");if(!guide||guide.classList.contains("is-open"))return;lastFocus=document.activeElement;guide.classList.add("is-open");guide.setAttribute("aria-hidden","false");document.body.classList.add("abrIosInstallGuideOpen");setTimeout(function(){const close=el("abrIosInstallClose");if(close)close.focus()},60)}
+function close(){const guide=el("abrIosInstallGuide");if(!guide)return;remember();guide.classList.remove("is-open");guide.setAttribute("aria-hidden","true");document.body.classList.remove("abrIosInstallGuideOpen");if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus()}
+function eligible(){return isIos()&&isSafari()&&!isStandalone()&&!hasSeen()}
+function init(){const guide=el("abrIosInstallGuide");if(!guide)return;[el("abrIosInstallClose"),el("abrIosInstallLater"),el("abrIosInstallDone"),guide.querySelector(".abrIosInstallBackdrop")].forEach(function(node){if(node)node.addEventListener("click",close)});document.addEventListener("keydown",function(event){if(event.key==="Escape"&&guide.classList.contains("is-open"))close()});if(eligible())setTimeout(function(){if(eligible())open()},4200)}
+window.abrIosInstallGuideOpen=function(){if(!isStandalone())open()};
+window.abrIosInstallGuideReset=function(){try{localStorage.removeItem(KEY)}catch(error){}};
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
 </body>
