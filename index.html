@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.72_IOS_MAKBUZ_YAZDIRMA_DUZELTMESI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.74_MAKBUZ_PDF_ONIZLEME_PAYLASIMI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.72">
+<meta name="abr-app-version" content="v2.2.74">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.72</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.74</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23385,40 +23385,18 @@ btn.style.opacity = "0.75";
 },120);
 return false;
 };
-window.elevatorXReportPrint = async function(button){
+window.elevatorXReportPrint = function(button){
 var oldText = button && button.textContent;
 try{
-var ua = navigator.userAgent || "";
-var ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-if(ios && navigator.share && window.File){
-if(button){ button.disabled = true; button.textContent = "Paylaşım hazırlanıyor..."; }
-var copy = document.documentElement.cloneNode(true);
-copy.querySelectorAll("script,.screenTop,.actionBar,.actions").forEach(function(node){ node.remove(); });
-var extra = copy.ownerDocument.createElement("style");
-extra.textContent = "html,body{background:#fff!important}.paper{box-shadow:none!important}.screenTop,.actionBar,.actions{display:none!important}";
-copy.querySelector("head").appendChild(extra);
-var content = "<!DOCTYPE html>" + copy.outerHTML;
-var fileName = (document.title || "Asansor-Makbuzu").replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ_-]+/g,"-").replace(/^-+|-+$/g,"") + ".html";
-var file = new File([content], fileName, {type:"text/html"});
-var payload = {title:document.title || "Asansör Makbuzu", text:"Makbuzu yazdırabilir veya Dosyalar'a kaydedebilirsin.", files:[file]};
-if(!navigator.canShare || navigator.canShare({files:[file]})){
-await navigator.share(payload);
-if(button){ button.disabled = false; button.textContent = oldText; }
-return false;
-}
-}
-}catch(error){
-if(error && error.name === "AbortError"){
-if(button){ button.disabled = false; button.textContent = oldText; }
-return false;
-}
-}
-if(button){ button.disabled = true; button.textContent = "Yazdırma açılıyor..."; }
+try{ localStorage.setItem("abrReceiptPrintReturnUntil_v1", String(Date.now() + 600000)); }catch(ignore){}
+if(button){ button.disabled = true; button.textContent = "PDF önizleme açılıyor..."; }
 try{ window.focus(); }catch(e){}
-setTimeout(function(){
-try{ window.print(); }catch(e){ try{ alert("Yazdırma ekranı açılamadı. Bu belgeyi Safari'de açıp Paylaş menüsünden Yazdır'ı seç."); }catch(ignore){} }
+window.print();
+setTimeout(function(){if(button){ button.disabled = false; button.textContent = oldText; }},250);
+}catch(error){
 if(button){ button.disabled = false; button.textContent = oldText; }
-},180);
+try{ alert("PDF önizlemesi açılamadı. Makbuzu Safari'de açıp Paylaş menüsünden Yazdır'ı seç."); }catch(ignore){}
+}
 return false;
 };
 window.addEventListener("pageshow", function(){
@@ -34554,7 +34532,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="screenTop">
 <button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
-<button class="screenBtn" onclick="return elevatorXReportPrint(this)">Paylaş / Yazdır</button>
+<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF / Paylaş</button>
 </div>
 
 <div class="paper">
@@ -34618,7 +34596,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 
-<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF / Paylaş / Yazdır</button></div>
+<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Önizleme / Paylaş</button></div>
 </body>
 </html>
 `);
@@ -44044,9 +44022,17 @@ function abrRoleMarkPermissions(){
 }
 function abrRoleIdentityPaint(role,access){const label=role==="admin"?"Firma Yetkilisi":"Saha Personeli";const subtitle=abrRoleEl("abrRoleSwitchSubtitle");if(subtitle)subtitle.textContent=label+" · Güvenli oturumu kapat";const meta=document.querySelector(".exHybridProfileMeta");if(meta){let badge=abrRoleEl("abrRoleActiveBadge");if(!badge){badge=document.createElement("span");badge.id="abrRoleActiveBadge";badge.className="abrRoleModeBadge";meta.appendChild(badge)}badge.textContent=label}if(access&&access.profileName){try{const name=document.querySelector(".exHybridProfileName");if(name)name.textContent=access.profileName}catch(error){}}}
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000)abrRoleRelock();abrRoleState.hiddenAt=0});
+function abrRoleConsumeReceiptPrintReturn(){
+  try{
+    const key="abrReceiptPrintReturnUntil_v1";const until=Number(localStorage.getItem(key)||0);
+    if(until>Date.now()){localStorage.removeItem(key);return true}
+    if(until)localStorage.removeItem(key);
+  }catch(error){}
+  return false
+}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000&&!abrRoleConsumeReceiptPrintReturn())abrRoleRelock();abrRoleState.hiddenAt=0});
 window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
-window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
+window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(abrRoleConsumeReceiptPrintReturn()){abrRoleState.hiddenAt=0;return}if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
@@ -48283,7 +48269,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48574,6 +48560,8 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
+/* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
 /* v2.2.72 — iPhone PWA içinde tahsilat makbuzu Paylaş / Yazdır akışı düzeltildi. */
 /* v2.2.71 — iPhone Safari için tek seferlik Ana Ekrana Ekle rehberi. */
 /* v2.2.70 — 24 saatlik tek kullanımlık e-posta personel daveti ve kodsuz katılım akışı. */
