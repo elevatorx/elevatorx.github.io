@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.71_PWA_IOS_KURULUM_REHBERI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.72_IOS_MAKBUZ_YAZDIRMA_DUZELTMESI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.71">
+<meta name="abr-app-version" content="v2.2.72">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.71</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.72</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23383,6 +23383,42 @@ btn.style.opacity = "0.75";
 }
 }catch(e){}
 },120);
+return false;
+};
+window.elevatorXReportPrint = async function(button){
+var oldText = button && button.textContent;
+try{
+var ua = navigator.userAgent || "";
+var ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+if(ios && navigator.share && window.File){
+if(button){ button.disabled = true; button.textContent = "Paylaşım hazırlanıyor..."; }
+var copy = document.documentElement.cloneNode(true);
+copy.querySelectorAll("script,.screenTop,.actionBar,.actions").forEach(function(node){ node.remove(); });
+var extra = copy.ownerDocument.createElement("style");
+extra.textContent = "html,body{background:#fff!important}.paper{box-shadow:none!important}.screenTop,.actionBar,.actions{display:none!important}";
+copy.querySelector("head").appendChild(extra);
+var content = "<!DOCTYPE html>" + copy.outerHTML;
+var fileName = (document.title || "Asansor-Makbuzu").replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ_-]+/g,"-").replace(/^-+|-+$/g,"") + ".html";
+var file = new File([content], fileName, {type:"text/html"});
+var payload = {title:document.title || "Asansör Makbuzu", text:"Makbuzu yazdırabilir veya Dosyalar'a kaydedebilirsin.", files:[file]};
+if(!navigator.canShare || navigator.canShare({files:[file]})){
+await navigator.share(payload);
+if(button){ button.disabled = false; button.textContent = oldText; }
+return false;
+}
+}
+}catch(error){
+if(error && error.name === "AbortError"){
+if(button){ button.disabled = false; button.textContent = oldText; }
+return false;
+}
+}
+if(button){ button.disabled = true; button.textContent = "Yazdırma açılıyor..."; }
+try{ window.focus(); }catch(e){}
+setTimeout(function(){
+try{ window.print(); }catch(e){ try{ alert("Yazdırma ekranı açılamadı. Bu belgeyi Safari'de açıp Paylaş menüsünden Yazdır'ı seç."); }catch(ignore){} }
+if(button){ button.disabled = false; button.textContent = oldText; }
+},180);
 return false;
 };
 window.addEventListener("pageshow", function(){
@@ -34518,7 +34554,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="screenTop">
 <button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
-<button class="screenBtn" onclick="window.print()">Yazdır</button>
+<button class="screenBtn" onclick="return elevatorXReportPrint(this)">Paylaş / Yazdır</button>
 </div>
 
 <div class="paper">
@@ -34582,7 +34618,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 
-<div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF / Paylaş / Yazdır</button></div>
 </body>
 </html>
 `);
@@ -48247,7 +48283,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.71";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.72";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48538,6 +48574,8 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.72 — iPhone PWA içinde tahsilat makbuzu Paylaş / Yazdır akışı düzeltildi. */
+/* v2.2.71 — iPhone Safari için tek seferlik Ana Ekrana Ekle rehberi. */
 /* v2.2.70 — 24 saatlik tek kullanımlık e-posta personel daveti ve kodsuz katılım akışı. */
 /* v2.2.69 — Belge Şablonları çalışma zamanı yükleyicisinin kapanış işaretçisi onarıldı. */
 /* v2.2.68 — yalnız platform satıcısına açık firma, paket, lisans ve hesap durumu yönetim paneli. */
