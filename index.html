@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.74_MAKBUZ_PDF_ONIZLEME_PAYLASIMI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.75_GERCEK_PDF_MAKBUZ_ONIZLEMESI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.74">
+<meta name="abr-app-version" content="v2.2.75">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.74</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.75</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23385,17 +23385,35 @@ btn.style.opacity = "0.75";
 },120);
 return false;
 };
-window.elevatorXReportPrint = function(button){
+function elevatorXLoadPdfLibrary(src,ready){
+return new Promise(function(resolve,reject){
+try{if(ready()){resolve();return}}catch(e){}
+var existing=document.querySelector('script[data-elevatorx-pdf="'+src+'"]');
+if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return}
+var script=document.createElement("script");script.src=src;script.async=true;script.dataset.elevatorxPdf=src;
+script.onload=function(){resolve()};script.onerror=function(){reject(new Error("PDF bileşeni yüklenemedi"))};document.head.appendChild(script);
+});
+}
+window.elevatorXReportPrint = async function(button){
 var oldText = button && button.textContent;
 try{
 try{ localStorage.setItem("abrReceiptPrintReturnUntil_v1", String(Date.now() + 600000)); }catch(ignore){}
-if(button){ button.disabled = true; button.textContent = "PDF önizleme açılıyor..."; }
-try{ window.focus(); }catch(e){}
-window.print();
-setTimeout(function(){if(button){ button.disabled = false; button.textContent = oldText; }},250);
+if(button){ button.disabled = true; button.textContent = "PDF hazırlanıyor..."; }
+await elevatorXLoadPdfLibrary("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",function(){return typeof window.html2canvas==="function"});
+await elevatorXLoadPdfLibrary("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",function(){return !!(window.jspdf&&window.jspdf.jsPDF)});
+var paper=document.querySelector(".paper");if(!paper)throw new Error("Makbuz sayfası bulunamadı");
+var canvas=await window.html2canvas(paper,{scale:Math.min(2,Math.max(1,window.devicePixelRatio||1)),backgroundColor:"#ffffff",useCORS:true,logging:false,scrollX:0,scrollY:0});
+var Pdf=window.jspdf&&window.jspdf.jsPDF;if(!Pdf)throw new Error("PDF bileşeni hazırlanamadı");
+var pdf=new Pdf({orientation:"portrait",unit:"mm",format:"a4",compress:true});
+var pageWidth=210,pageHeight=297,imgHeight=canvas.height*pageWidth/canvas.width,pageCount=Math.max(1,Math.ceil(imgHeight/pageHeight));
+var image=canvas.toDataURL("image/jpeg",0.92);
+for(var page=0;page<pageCount;page++){if(page>0)pdf.addPage();pdf.addImage(image,"JPEG",0,-page*pageHeight,pageWidth,imgHeight,undefined,"FAST")}
+var blob=pdf.output("blob"),url=URL.createObjectURL(blob);
+try{sessionStorage.setItem("abrReceiptPdfPreview_v1",url)}catch(ignore){}
+window.location.href=url;
 }catch(error){
 if(button){ button.disabled = false; button.textContent = oldText; }
-try{ alert("PDF önizlemesi açılamadı. Makbuzu Safari'de açıp Paylaş menüsünden Yazdır'ı seç."); }catch(ignore){}
+try{ alert("PDF hazırlanamadı. İnternet bağlantını kontrol edip tekrar dene."); }catch(ignore){}
 }
 return false;
 };
@@ -34532,7 +34550,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="screenTop">
 <button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
-<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF / Paylaş</button>
+<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF Önizleme</button>
 </div>
 
 <div class="paper">
@@ -34596,7 +34614,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 
-<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Önizleme / Paylaş</button></div>
+<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Hazırla / Paylaş</button></div>
 </body>
 </html>
 `);
@@ -48269,7 +48287,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.74";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48560,6 +48578,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
 /* v2.2.72 — iPhone PWA içinde tahsilat makbuzu Paylaş / Yazdır akışı düzeltildi. */
