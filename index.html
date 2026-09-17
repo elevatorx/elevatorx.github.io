@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.77_BAKIM_RAPORU_PDF_PAYLASIM -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.78_BAKIM_CARI_BORC_DUZELTMESI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.77">
+<meta name="abr-app-version" content="v2.2.78">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.77</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.78</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -24570,7 +24570,7 @@ return parca[2] + "." + parca[1] + "." + parca[0];
 
 }
 
-function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak,tutar){
+function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak,tutar,createdAt){
 
 let key = bakimTarihKey(tarih);
 let kayitTutari = Number(tutar || 0);
@@ -24581,6 +24581,9 @@ return;
 
 if(gorulen[key]){
 let mevcut = liste.find(function(k){ return k && k.key === key; });
+if(mevcut && createdAt && (!mevcut.createdAt || Date.parse(createdAt) < Date.parse(mevcut.createdAt))){
+mevcut.createdAt = createdAt;
+}
 if(mevcut && Number(mevcut.tutar || 0) <= 0 && kayitTutari > 0){
 mevcut.tutar = kayitTutari;
 }
@@ -24593,6 +24596,7 @@ liste.push({
 key:key,
 tarih:bakimTarihGoster(key),
 kaynak:kaynak || "",
+createdAt:createdAt || "",
 tutar:kayitTutari > 0 ? kayitTutari : 0
 });
 
@@ -24623,7 +24627,8 @@ liste,
 gorulen,
 k.tarih || k.bakimTarihi || k.date || k.createdAt,
 "bakimKayitlari",
-k.tutar || k.ucret || k.bakimUcreti || 0
+k.tutar || k.ucret || k.bakimUcreti || 0,
+k.createdAt || ""
 );
 });
 }
@@ -24631,7 +24636,7 @@ k.tutar || k.ucret || k.bakimUcreti || 0
 if(Array.isArray(a.bakimChecklist)){
 a.bakimChecklist.forEach(function(k){
 if(!k) return;
-bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist",k.tutar || 0);
+bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist",k.tutar || 0,k.createdAt || "");
 });
 }
 
@@ -24783,6 +24788,7 @@ tip:"Bakım",
 tarih:k.tarih || "-",
 aciklama:"Aylık bakım ücreti",
 tutar:ucret,
+createdAt:k.createdAt || "",
 key:k.key
 });
 });
@@ -24811,6 +24817,7 @@ kalemler.push({
 tip:k.tip || "Bakım",
 tarih:k.tarih || "-",
 aciklama:k.aciklama || "Aylık bakım ücreti",
+createdAt:k.createdAt || "",
 tutar:Number(k.tutar || 0)
 });
 });
@@ -24827,6 +24834,7 @@ kalemler.push({
 tip:"Parça",
 tarih:(p && p.tarih) || "-",
 aciklama:"Parça değişimi: " + ((p && p.ad) || "Parça") + adet + not,
+createdAt:p.createdAt || "",
 tutar:tutar
 });
 });
@@ -24841,6 +24849,7 @@ kalemler.push({
 tip:"Eski Bakiye",
 tarih:(b && b.tarih) || "-",
 aciklama:(b && b.aciklama) ? b.aciklama : "Eski bakiye",
+createdAt:b.createdAt || "",
 tutar:tutar
 });
 });
@@ -24859,9 +24868,23 @@ let kapanisKey = bakimTarihKey(a && a.odemeTarihi);
 let kapanisMahsubu = 0;
 
 if(kapanisKey && odemeler.length){
+/* v2.2.78 — Kapanıştan sonra eklenen kayıtları eski kapanışa mahsup etme.
+   Saat bilgisi bulunmayan eski kayıtlarda yalnız önceki günler uyumluluğa girer. */
+let kapanisOdemeleri = odemeler.filter(function(o){return bakimTarihKey(o.tarih) === kapanisKey;});
+let kesinKapanislar = kapanisOdemeleri.filter(function(o){return o.kalanBorc === 0;});
+let kapanisZamani = (kesinKapanislar.length ? kesinKapanislar : kapanisOdemeleri).reduce(function(t,o){
+return Math.max(t,Date.parse(o.createdAt || "") || 0);
+},0);
 let kapanisaKadarBorc = kalemler.reduce(function(t,k){
 let key = bakimTarihKey(k && k.tarih);
-return t + ((!key || key <= kapanisKey) ? Number(k && k.tutar ? k.tutar : 0) : 0);
+let kayitZamani = Date.parse(k && k.createdAt || "") || 0;
+let kapanistanOnce = (!key || key < kapanisKey);
+if(kayitZamani && kapanisZamani){
+kapanistanOnce = (!key || key <= kapanisKey) && kayitZamani <= kapanisZamani;
+}else if(key === kapanisKey){
+kapanistanOnce = false;
+}
+return t + (kapanistanOnce ? Number(k && k.tutar ? k.tutar : 0) : 0);
 },0);
 
 let kapanisaKadarTahsilat = odemeler.reduce(function(t,o){
@@ -34733,6 +34756,22 @@ cari.kalanPozitif > 0
   ? `${tutarFormat(cari.alacak)} fazla ödeme bulunmaktadır.`
   : "Cari hesap bakiyesi kapalıdır.");
 
+/* v2.2.78 — Tahsilat ve eski kapanış mahsubundan sonra kalan borcu ayır. */
+let raporBakimAyi = bakimTarihKey(bakimTarihi).slice(0,7);
+let raporMahsup = Math.max(0,Number(cari.toplam || 0) + Number(cari.kapanisMahsubu || 0));
+let raporBuBakimBorc = 0;
+(cari.kalemler || []).filter(function(k){return Number(k.tutar || 0) > 0;}).slice().sort(function(x,y){
+return bakimTarihKey(x.tarih).localeCompare(bakimTarihKey(y.tarih));
+}).forEach(function(k){
+let tutar = Number(k.tutar || 0);
+let karsilanan = Math.min(tutar,raporMahsup);
+raporMahsup -= karsilanan;
+if(k.tip === "Bakım" && bakimTarihKey(k.tarih).slice(0,7) === raporBakimAyi){
+raporBuBakimBorc += tutar - karsilanan;
+}
+});
+raporBuBakimBorc = Math.min(cari.kalanPozitif,Math.max(0,raporBuBakimBorc));
+let raporOncekiBorc = Math.max(0,cari.kalanPozitif - raporBuBakimBorc);
 let cariSonOdeme = cari.sonOdeme || "-";
 
 let teknikNot = a.not && String(a.not).trim()
@@ -34947,11 +34986,11 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 <div class="financeGrid">
 <div class="financeItem"><span>Aylık Bakım</span><b>${ayHtml(tutarFormat(cari.anlasmaUcreti))}</b></div>
-<div class="financeItem"><span>Toplam Tahsilat</span><b>${ayHtml(tutarFormat(cari.toplam))}</b></div>
+<div class="financeItem"><span>Önceki / Diğer Borç</span><b>${ayHtml(tutarFormat(raporOncekiBorc))}</b></div>
 <div class="financeItem debt"><span>Açık Borç</span><b>${ayHtml(tutarFormat(cari.kalanPozitif))}</b></div>
 <div class="financeItem"><span>Son Ödeme</span><b>${ayHtml(cariSonOdeme)}</b></div>
 </div>
-<div class="financeNote">Bu alan bilgilendirme amaçlıdır; ödeme makbuzu yerine geçmez.</div>
+<div class="financeNote">Bu bakımın kalan borcu: ${ayHtml(tutarFormat(raporBuBakimBorc))} • Toplam tahsilat: ${ayHtml(tutarFormat(cari.toplam))}. Önceki / diğer açık borç, bu bakım dışındaki ödenmemiş bakım, parça ve devreden borçları kapsar. Bu alan ödeme makbuzu yerine geçmez.</div>
 </div>
 
 <div class="section">
@@ -48364,7 +48403,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48656,6 +48695,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
+/* v2.2.78 — Kapanış mahsubunda kayıt saati kontrolü eklendi; tahsilat sonrası bakım ve devreden borç korunur, bakım raporunda önceki/diğer açık borç ve bu bakımın kalan borcu ayrılır. */
 /* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
