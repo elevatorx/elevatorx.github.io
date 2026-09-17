@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.80_SABIT_PORTFOY_ARAMA -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.81_PROFIL_GORSELI_PDF_GUVENLIGI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.80">
+<meta name="abr-app-version" content="v2.2.81">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.80</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.81</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -30670,7 +30670,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="header">
 <div class="brand">
-<img src="${pdfLogo}">
+<img src="${ayHtml(pdfLogo)}">
 <div>
 <div class="brandTitle">${pdfFirma}</div>
 <div class="brandSub">Asansör Bakım & Revizyon • Asansör sicil kartı</div>
@@ -31428,7 +31428,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="header">
 <div class="brand">
-<img src="${pdfLogo}">
+<img src="${ayHtml(pdfLogo)}">
 <div>
 <div class="brandTitle">${pdfFirma}</div>
 <div class="brandSub">Asansör Bakım & Revizyon • Parça değişim geçmişi</div>
@@ -33112,20 +33112,39 @@ bakimChecklistAc(i);
 
 
 
-function pdfProfilLogo(){
-let kayitli = localStorage.getItem("profilePhoto");
+/* v2.2.81 — Yedek ve PDF profil görsellerinde yalnız raster veri URL'leri kullanılır. */
+function abrProfilGorseliGuvenliUrl(value){
+if(typeof value !== "string") return "";
+let kaynak = value.trim();
+let eslesme = /^data:image\/(png|jpeg|jpg|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/i.exec(kaynak);
+if(!eslesme || eslesme[2].length % 4 !== 0) return "";
 
-if(kayitli && kayitli.trim()){
-return kayitli;
+let baslik;
+try{
+baslik = atob(eslesme[2].slice(0,32));
+}catch(err){
+return "";
 }
+
+let tur = eslesme[1].toLowerCase();
+let uygun =
+(tur === "png" && baslik.slice(0,8) === "\x89PNG\r\n\x1a\n") ||
+((tur === "jpeg" || tur === "jpg") && baslik.slice(0,3) === "\xff\xd8\xff") ||
+(tur === "gif" && (baslik.slice(0,6) === "GIF87a" || baslik.slice(0,6) === "GIF89a")) ||
+(tur === "webp" && baslik.slice(0,4) === "RIFF" && baslik.slice(8,12) === "WEBP");
+
+return uygun ? kaynak : "";
+}
+
+function pdfProfilLogo(){
+let kayitli = abrProfilGorseliGuvenliUrl(localStorage.getItem("profilePhoto"));
+if(kayitli) return kayitli;
 
 let img = document.getElementById("profilePhoto");
+let gorunen = abrProfilGorseliGuvenliUrl(img && img.src);
+if(gorunen) return gorunen;
 
-if(img && img.src){
-return img.src;
-}
-
-return typeof APP_LOGO !== "undefined" ? APP_LOGO : "";
+return abrProfilGorseliGuvenliUrl(typeof APP_LOGO !== "undefined" ? APP_LOGO : "");
 }
 
 function pdfFirmaBilgi(){
@@ -33404,7 +33423,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="topBand"></div>
 <div class="header">
   <div class="brand">
-    <img src="${pdfLogo}">
+    <img src="${ayHtml(pdfLogo)}">
     <div>
       <div class="brandTitle">${ayHtml(pdfFirma)}</div>
       <div class="brandSub">${ayHtml(APP_NAME)} • ${ayHtml(teklifAltBaslik)}</div>
@@ -34267,7 +34286,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="topBand"></div>
 <div class="header">
 <div class="brand">
-<img src="${pdfLogo}">
+<img src="${ayHtml(pdfLogo)}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Cari hesap özeti</div>
@@ -34608,7 +34627,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="inner">
 <div class="header">
 <div class="brand">
-<img class="logo" src="${pdfLogo}">
+<img class="logo" src="${ayHtml(pdfLogo)}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Dijital tahsilat makbuzu</div>
@@ -34933,7 +34952,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="inner">
 <div class="header">
 <div class="brand">
-<img class="logo" src="${pdfLogo}">
+<img class="logo" src="${ayHtml(pdfLogo)}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Asansör bakım servis raporu</div>
@@ -35392,7 +35411,7 @@ ${elevatorXPdfSafetyScript()}
   <div class="topBand"></div>
   <div class="header">
     <div class="brand">
-      <img src="${pdfLogo}">
+      <img src="${ayHtml(pdfLogo)}">
       <div><div class="brandTitle">${ayHtml(pdfFirma)}</div><div class="brandSub">Asansör Bakım & Revizyon • Yönetim faaliyet raporu</div></div>
     </div>
     <div class="reportMeta"><b>Rapor No:</b> ${ayHtml(raporNo)}<br><b>Rapor Tarihi:</b> ${ayHtml(bugun())}<br><b>Dönem:</b> ${ayHtml(rapor.donem.etiket)}</div>
@@ -36068,7 +36087,14 @@ if(normalizeSonucu.atlanan > 0){
 uyariSayisi += normalizeSonucu.atlanan;
 }
 
+let guvenliProfilFoto = abrProfilGorseliGuvenliUrl(yedek && yedek.profil && yedek.profil.profilFoto);
+let profilFotoGecersiz = !!(yedek && yedek.profil && yedek.profil.profilFoto && !guvenliProfilFoto);
+if(profilFotoGecersiz) uyariSayisi += 1;
+
 let onayMetni = yedekBilgiMetni(yedek,yeniData.length);
+if(profilFotoGecersiz){
+onayMetni += "\n\nProfil görseli geçersiz olduğu için aktarılmayacak. Mevcut görsel korunacak.";
+}
 
 if(yedek && yedek.surum){
 onayMetni = "Yedek sürümü: " + yedek.surum + "\n\n" + onayMetni;
@@ -36133,9 +36159,9 @@ localStorage.setItem("profilFirma",yedek.profil.firma || "");
 localStorage.setItem("profilBio",yedek.profil.bio || "");
 localStorage.setItem("profilTelefon",yedek.profil.telefon || "");
 
-if(yedek.profil.profilFoto){
-localStorage.setItem("profilePhoto",yedek.profil.profilFoto);
-if(window.profilePhoto) profilePhoto.src = yedek.profil.profilFoto;
+if(guvenliProfilFoto){
+localStorage.setItem("profilePhoto",guvenliProfilFoto);
+if(window.profilePhoto) profilePhoto.src = guvenliProfilFoto;
 }
 
 if(yedek.profil.kapakFoto){
@@ -48327,7 +48353,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48619,6 +48645,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
+/* v2.2.81 — Yedekten gelen profil görselinde raster veri URL ve dosya başlığı doğrulaması eklendi; geçersiz görsel mevcut fotoğrafı değiştirmez. PDF logo nitelikleri kaçırıldı ve eski güvensiz değerler için varsayılan logo kullanılır. */
 /* v2.2.80 — Portföy arama ve filtre çubuğu iPhone güvenli alanı ve menü payıyla üstte sabitlendi; liste çubuğun altında kayar. */
 /* v2.2.79 — Giriş yalnız hesap şifresine alındı; PIN / Face ID adımları ve açık uygulamada arka plan / PDF dönüşü kilidi kaldırıldı. Yeni belge açılışında şifre istenir. */
 /* v2.2.78 — Kapanış mahsubunda kayıt saati kontrolü eklendi; tahsilat sonrası bakım ve devreden borç korunur, bakım raporunda önceki/diğer açık borç ve bu bakımın kalan borcu ayrılır. */
