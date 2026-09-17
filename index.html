@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.78_BAKIM_CARI_BORC_DUZELTMESI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.79_SIFRE_ILE_OTURUM_GIRISI -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.78">
+<meta name="abr-app-version" content="v2.2.79">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.78</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.79</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43809,9 +43809,9 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.70";
+const ABR_ROLE_VERSION="2.2.79";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
-const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",inviteToken:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
+const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",inviteToken:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false,passwordVerified:false};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
@@ -43895,22 +43895,6 @@ function abrRoleRender(){
     const profile=abrRoleState.freshPersonnel?{name:"",phone:""}:abrRoleProfile();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Saha personeli</div><h1 id="abrRoleTitle">Ekibine katıl</h1><p>Firma yetkilisinin verdiği ekip kodunu yaz. İstek onaylanmadan firma alanı açılmaz.</p></div><form class="abrAccountForm" onsubmit="abrPersonelKatil(event)"><div class="abrPersonnelJoinNote"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Yetkili onayı gerekir</b>Katılma isteğin Firma Yetkilisinin ekranına düşer.</span></div><label class="abrAccountField"><span>Ad soyad</span><input id="abrPersonnelName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrPersonnelPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField"><span>Ekip kodu</span><input id="abrPersonnelCode" type="text" value="'+abrRoleEscape(abrRoleState.inviteCode||"")+'" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Katılma İsteği Gönder</button><button class="abrAccountSecondary" type="button" onclick="abrSahaHesapGirisi()">Personel Hesabımla Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Geri Dön</button></div></form>'+abrRoleFooter();return
   }
-  if(abrRoleState.view==="pin"){
-    const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
-    const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const bio=abrBioRecord(userId);const canOfferBio=abrBioApiAvailable();
-    const bioBlock=bio&&canOfferBio?'<div class="abrBioBlock"><button class="abrBioPrimary" type="button" onclick="abrFaceIdIleAc()">'+abrBioIconHtml()+'<span>Face ID ile Aç</span></button><div class="abrBioDivider"><span>veya PIN kullan</span></div></div>':'';
-    const bioSetup=!bio&&canOfferBio?'<button class="abrBioSetup" type="button" onclick="abrFaceIdKur()" '+(wait?'disabled':'')+'>Face ID’yi Bu Cihazda Etkinleştir</button>':'';
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">'+(bio?'Face ID ile aç':'PIN’ini gir')+'</h1><p>'+(bio?'Face ID ile tek dokunuşta aç veya 4 haneli PIN’inle devam et.':'4 haneli PIN’inle devam et; istersen bu cihaz için Face ID’yi etkinleştir.')+'</p></div>'+abrPinIdentityHtml()+bioBlock+'<form class="abrAccountForm" onsubmit="abrPinDogrula(event)">'+abrPinFieldHtml("abrDevicePin","4 haneli PIN","off")+(wait?'<p class="abrPinNote abrPinCooldown">Yeni deneme için '+wait+' saniye bekle.</p>':'')+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit" '+(wait?'disabled':'')+'>PIN ile Aç</button>'+bioSetup+'<button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">PIN’i unuttum / hesapla giriş</button></div></form>'+abrRoleFooter();
-    if(bio&&!abrRoleState.bioAutoTried){clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTimer=setTimeout(function(){if(abrRoleState.view==="pin"&&!abrRoleState.busy&&!abrRoleState.bioAutoTried&&typeof window.abrFaceIdIleAc==="function")window.abrFaceIdIleAc(true)},360)}
-    if(wait)setTimeout(function(){if(abrRoleState.view==="pin")abrRoleRender()},1000);else if(!bio)setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
-  }
-  if(abrRoleState.view==="bio-setup"){
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Biyometrik cihaz kilidi</div><h1 id="abrRoleTitle">Face ID’yi etkinleştir</h1><p>Bir sonraki açılıştan itibaren PIN yazmadan, iPhone’un güvenli Face ID ekranıyla devam edebilirsin.</p></div>'+abrPinIdentityHtml()+abrRoleErrorHtml()+'<div class="abrAccountHint"><i>i</i><span>Kayıt bu hesaba ve kullandığın internet adresine bağlanır. PIN’in yedek giriş yöntemi olarak kalır.</span></div><div class="abrAccountActions"><button class="abrBioPrimary" type="button" onclick="abrFaceIdKaydet()">'+abrBioIconHtml()+'<span>Face ID’yi Tanımla</span></button><button class="abrAccountTextButton" type="button" onclick="abrFaceIdKurulumIptal()">Şimdi değil</button></div>'+abrRoleFooter();return
-  }
-  if(abrRoleState.view==="pin-setup"){
-    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">4 haneli PIN oluştur</h1><p>Bundan sonra uygulamayı e-posta şifresi yerine bu PIN ile açabilirsin.</p></div><form class="abrAccountForm" onsubmit="abrPinOlustur(event)">'+abrPinIdentityHtml()+'<div class="abrPinSetupGrid">'+abrPinFieldHtml("abrNewPin","Yeni PIN","new-password")+abrPinFieldHtml("abrNewPinAgain","PIN tekrar","new-password")+'</div><p class="abrPinNote"><b>İpucu:</b> Kolay tahmin edilen 0000 veya 1234 gibi bir PIN kullanma. PIN yalnız bu cihazda geçerlidir.</p>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">PIN’i Kaydet</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">Farklı hesapla giriş yap</button></div></form>'+abrRoleFooter();
-    setTimeout(function(){const input=abrRoleEl("abrNewPin");if(input)input.focus()},80);return
-  }
   if(abrRoleState.view==="setup"){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Yeni firma kurulumu</div><h1 id="abrRoleTitle">Firma alanını oluştur</h1><p>Firma ve yetkili bilgilerini gir; ekibin, başlangıç paketin ve davet kodun otomatik hazırlansın.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Her firma ayrı ve boş bir çalışma alanıyla başlar. Başka firmaların apartman, cari veya personel kayıtları aktarılmaz.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField is-wide"><span>Firma adı</span><input id="abrSetupCompany" type="text" value="" maxlength="80" autocomplete="organization" placeholder="Örn. ABC Asansör" required></label><label class="abrAccountField"><span>Firma yetkilisi</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Firmayı ve Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
@@ -43955,7 +43939,7 @@ function abrRoleRefreshAfterBiometric(userId){
 function abrRoleFinish(access,email){
   abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.session={userId:access&&access.userId||null,userEmail:access&&access.userEmail||email||null,userIsAnonymous:false};abrRoleState.busy=false;abrRoleState.error="";
   if(!access||!access.userId){abrRoleState.view="login";abrRoleState.error="Hesap oturumu doğrulanamadı.";abrRoleRender();return}
-  if(!abrPinRecord(access.userId)){abrRoleState.view="pin-setup";abrRoleRender();return}
+  abrRoleState.passwordVerified=true;
   abrRoleSuccess(access);
 }
 async function abrRoleSessionAccess(){
@@ -43973,88 +43957,29 @@ async function abrRoleSessionAccess(){
 function abrRoleInviteCodeRead(){try{return String(new URL(location.href).searchParams.get("join")||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR").slice(0,32)}catch(error){return ""}}
 function abrRoleInviteTokenRead(){try{return String(new URL(location.href).searchParams.get("invite")||"").trim().slice(0,120)}catch(error){return ""}}
 function abrRoleInviteCodeClear(){abrRoleState.inviteCode="";abrRoleState.inviteToken="";try{const url=new URL(location.href);url.searchParams.delete("join");url.searchParams.delete("invite");history.replaceState(history.state,"",url.href)}catch(error){}}
+/* v2.2.79 — Şifre doğrulaması yalnız açık belge belleğinde tutulur.
+   Yeni açılış şifre ister; arka plan, PDF dönüşü ve bfcache tekrar kilitlemez. */
 async function abrRoleBoot(){
-  abrRoleState.busy=true;abrRoleState.busyTitle="Oturum kontrol ediliyor";abrRoleState.busyDetail="Bu cihazdaki güvenli giriş hazırlanıyor.";abrRoleState.error="";abrRoleRender();
-  try{
-    if(typeof window.abrTeamCredentialSessionInfo!=="function")throw new Error("Güvenli oturum bileşeni bulunamadı.");
-    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Oturum kontrolü zaman aşımına uğradı."))},14000)});
-    const session=await Promise.race([window.abrTeamCredentialSessionInfo(),timeout]);
-    abrRoleState.session=session||null;abrRoleState.busy=false;
-    if(session&&session.userId&&!session.userIsAnonymous){
-      try{if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin()}catch(cloudError){}
-      abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
-      if(!abrPinRecord(session.userId)){
-        try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
-        abrRoleState.session=null;abrRoleState.access=null;abrRoleState.view="login";abrRoleState.error="Bu cihazın PIN kaydı bulunamadı. Güvenlik için e-posta ve şifrenle yeniden giriş yap.";abrRoleRender();return;
-      }
-      abrPinSecurityLoad(session.userId);
-      // Eski sürümlerdeki uzun süreli cihaz güveni yeni bir kimlik doğrulama sayılmaz.
-      // Her açılışta başarılı Face ID veya doğru PIN zorunludur.
-      abrBioTrustClear();
-      abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
-    }
-    const inviteToken=abrRoleInviteTokenRead(),inviteCode=abrRoleInviteCodeRead();
-    if(inviteToken){abrRoleState.inviteToken=inviteToken;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
-    else if(inviteCode){abrRoleState.inviteCode=inviteCode;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
-    else abrRoleState.view="entry";
-    abrRoleRender();
-  }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+  if(abrRoleState.passwordVerified && window.__abrAppRole!==null)return;
+  abrRoleCancelPendingAuth();abrRoleState.busy=false;abrRoleState.error="";
+  const inviteToken=abrRoleInviteTokenRead(),inviteCode=abrRoleInviteCodeRead();
+  if(inviteToken || inviteCode){
+    abrRoleState.inviteToken=inviteToken;abrRoleState.inviteCode=inviteCode;
+    abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry";
+  }else{
+    const cached=abrRoleStoreGet().lastAccess;
+    abrRoleState.entryRole=cached && cached.teamRole && !["owner","admin","authority"].includes(cached.teamRole)?"personnel":"authority";
+    abrRoleState.view="login";
+  }
+  abrRoleRender();
 }
-function abrRoleRelock(){
-  if(window.__abrAppRole===null)return;
-  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId))return;
-  abrBioTrustClear();
-  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
-}
+function abrRoleRelock(){return;}
 window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
-window.abrPinRakam=function(input){if(!input)return;input.value=String(input.value||"").replace(/\D/g,"").slice(0,4)};
-window.abrFaceIdIleAc=async function(automatic){
-  if(abrRoleState.busy)return;const isAutomatic=automatic===true;if(isAutomatic&&abrRoleState.bioAutoTried)return;const attempt=++abrRoleState.authAttempt;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrBioRecord(userId);if(!record){abrRoleState.error="Bu hesap için Face ID kaydı bulunamadı.";abrRoleRender();return}if(isAutomatic)abrRoleState.bioAutoTried=true;
-  let request;try{request=abrBioCredentialGet(record)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="Face ID bekleniyor";abrRoleState.busyDetail="iPhone güvenli kimlik doğrulama ekranını açıyor.";abrRoleState.error="";abrRoleRender();
-  try{await request}catch(error){if(attempt!==abrRoleState.authAttempt)return;abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=isAutomatic&&String(error&&error.name||"")==="NotAllowedError"?"":abrBioErrorText(error);abrRoleRender();return}
-  if(attempt!==abrRoleState.authAttempt||abrRoleState.view!=="pin")return;
-  abrBioTrustClear();
-  const cached=abrRoleCachedAccess(userId);if(cached){abrRoleSuccess(cached,true);abrRoleRefreshAfterBiometric(userId);return}
-  try{const access=await abrRoleSessionAccess();if(attempt!==abrRoleState.authAttempt||abrRoleState.view!=="pin")return;abrRoleSuccess(access,true)}catch(error){if(attempt!==abrRoleState.authAttempt)return;abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
-};
-window.abrFaceIdKur=async function(){
-  if(abrRoleState.busy)return;const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
-  if(!/^\d{4}$/.test(pin)){abrRoleState.error="Face ID’yi açmak için önce 4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Face ID kurulumu için cihaz sahibi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
-  try{const digest=await abrPinHash(pin,record.salt,userId);if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);throw new Error(failure.lockedUntil>Date.now()?"Çok fazla yanlış PIN girildi. Biraz bekleyip tekrar dene.":"PIN yanlış.")}abrPinSecurityClear(userId);if(!await abrBioPlatformAvailable())throw new DOMException("Platform authenticator unavailable","NotSupportedError");abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error="";abrRoleRender()}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=/^(NotAllowedError|InvalidStateError|SecurityError|NotSupportedError|ConstraintError)$/.test(String(error&&error.name||""))?abrBioErrorText(error):abrRoleErrorText(error);abrRoleRender()}
-};
-window.abrFaceIdKaydet=async function(){
-  if(abrRoleState.busy)return;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const access=abrRoleState.access||abrRoleCachedAccess(userId)||{};let creation;
-  try{creation=abrBioCredentialCreate(access,userId)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="Face ID tanımlanıyor";abrRoleState.busyDetail="iPhone güvenli biyometrik kaydı oluşturuyor.";abrRoleState.error="";abrRoleRender();
-  try{await creation;abrBioTrustClear()}catch(error){abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
-  try{const verifiedAccess=await abrRoleSessionAccess();abrRoleSuccess(verifiedAccess)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
-};
-window.abrFaceIdKurulumIptal=function(){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error="";abrRoleRender()};
-window.abrPinOlustur=async function(event){
-  if(event)event.preventDefault();if(abrRoleState.busy)return;
-  const pin=String(abrRoleEl("abrNewPin")&&abrRoleEl("abrNewPin").value||"");const again=String(abrRoleEl("abrNewPinAgain")&&abrRoleEl("abrNewPinAgain").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
-  if(!/^\d{4}$/.test(pin)){abrRoleState.error="PIN tam olarak 4 rakam olmalı.";abrRoleRender();return}if(pin!==again){abrRoleState.error="Yazdığın PIN’ler birbiriyle aynı değil.";abrRoleRender();return}if(!userId){abrRoleState.error="Hesap oturumu bulunamadı. E-posta ve şifreyle yeniden giriş yap.";abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="PIN kaydediliyor";abrRoleState.busyDetail="PIN bu cihaza ve hesabına güvenle bağlanıyor.";abrRoleState.error="";abrRoleRender();
-  try{const salt=abrPinSalt();const hash=await abrPinHash(pin,salt,userId);const store=abrRoleStoreGet();store.devicePin={userId:userId,salt:salt,hash:hash,algorithm:"PBKDF2-SHA256-120000",createdAt:new Date().toISOString()};delete store.pinSecurity;abrRoleStoreSave(store);abrPinSecurityClear(userId);const access=abrRoleState.access&&abrRoleState.access.userId===userId&&!abrRoleState.access._sessionOnly?abrRoleState.access:await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin-setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
-};
-window.abrPinDogrula=async function(event){
-  if(event)event.preventDefault();if(abrRoleState.busy)return;
-  const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}
-  const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
-  if(!/^\d{4}$/.test(pin)){abrRoleState.error="4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.view="pin-setup";abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
-  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap bilgisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
-  try{
-    const digest=await abrPinHash(pin,record.salt,userId);
-    if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);if(failure.lockedUntil>Date.now())throw new Error(failure.failedCount>=10?"Çok fazla yanlış PIN girildi. 5 dakika bekle veya hesap şifrenle giriş yap.":"Çok fazla yanlış PIN girildi. 30 saniye bekle.");throw new Error("PIN yanlış.")}
-    abrPinSecurityClear(userId);abrBioTrustClear();const access=await abrRoleSessionAccess();abrRoleSuccess(access);
-  }catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender();if(abrRoleState.pinLockedUntil>Date.now())setTimeout(function(){if(abrRoleState.view==="pin"){abrRoleState.error="";abrRoleRender()}},30500)}
-};
-window.abrPinHesapGirisineDon=async function(){
-  if(abrRoleState.busy)return;abrPinClear();abrRoleState.busy=true;abrRoleState.busyTitle="Hesap girişi hazırlanıyor";abrRoleState.busyDetail="Cihaz PIN’i kaldırılıyor.";abrRoleState.error="";abrRoleRender();
-  try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
-  abrRoleState.session=null;abrRoleState.access=null;abrRoleState.busy=false;abrRoleState.view="login";abrRoleRender();
+/* Eski bağlantılar şifre ekranına yönlenir; PIN veya biyometri çalıştırılmaz. */
+window.abrFaceIdIleAc=window.abrFaceIdKur=window.abrFaceIdKaydet=window.abrFaceIdKurulumIptal=window.abrPinOlustur=window.abrPinDogrula=window.abrPinHesapGirisineDon=function(event){
+  if(event && typeof event.preventDefault==="function")event.preventDefault();
+  if(abrRoleState.passwordVerified && window.__abrAppRole!==null)return;
+  abrRoleCancelPendingAuth();abrRoleState.view="login";abrRoleState.error="";abrRoleRender();
 };
 window.abrHesapGiris=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
@@ -44069,7 +43994,7 @@ window.abrSahaHesapGirisi=function(){abrRoleCancelPendingAuth();abrRoleState.ent
 window.abrRolSecimineDon=function(){abrRoleCancelPendingAuth();abrRoleInviteCodeClear();abrRoleState.view="entry";abrRoleState.error="";abrRoleRender()};
 window.abrSahaPersoneliBaslat=async function(){
   if(abrRoleState.busy)return;
-  abrRoleCancelPendingAuth();const attempt=abrRoleState.authAttempt;abrRoleInviteCodeClear();abrRoleState.entryRole="personnel";abrRoleState.freshPersonnel=true;abrRoleState.access=null;abrRoleState.session=null;
+  abrRoleCancelPendingAuth();const attempt=abrRoleState.authAttempt;abrRoleInviteCodeClear();abrRoleState.passwordVerified=false;abrRoleState.entryRole="personnel";abrRoleState.freshPersonnel=true;abrRoleState.access=null;abrRoleState.session=null;
   abrRoleState.view="personnel-entry";abrRoleState.busy=true;abrRoleState.busyTitle="Personel girişi hazırlanıyor";abrRoleState.busyDetail="Bu cihazdaki önceki firma oturumu güvenle kapatılıyor.";abrRoleState.error="";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
   if(attempt!==abrRoleState.authAttempt)return;
@@ -44123,7 +44048,7 @@ window.abrAppRoleGet=function(){return window.__abrAppRole||null};
 window.abrRolDegistir=async function(){
   try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose()}catch(error){}
   try{if(typeof window.ekipArizaMerkeziKapat==="function")window.ekipArizaMerkeziKapat()}catch(error){}
-  abrPinClear();window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
+  abrRoleState.passwordVerified=false;abrRoleCancelPendingAuth();window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
   abrRoleState.view="login";abrRoleState.error="";abrRoleState.access=null;abrRoleState.busy=true;abrRoleState.busyTitle="Çıkış yapılıyor";abrRoleState.busyDetail="Güvenli oturum kapatılıyor.";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){abrRoleState.error=abrRoleErrorText(error)}
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
@@ -44164,9 +44089,8 @@ function abrRoleConsumeReceiptPrintReturn(){
   }catch(error){}
   return false
 }
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000&&!abrRoleConsumeReceiptPrintReturn())abrRoleRelock();abrRoleState.hiddenAt=0});
-window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
-window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(abrRoleConsumeReceiptPrintReturn()){abrRoleState.hiddenAt=0;return}if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
+document.addEventListener("visibilitychange",function(){abrRoleState.hiddenAt=0});
+window.addEventListener("pageshow",function(){abrRoleState.hiddenAt=0});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
@@ -48403,7 +48327,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48695,6 +48619,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
+/* v2.2.79 — Giriş yalnız hesap şifresine alındı; PIN / Face ID adımları ve açık uygulamada arka plan / PDF dönüşü kilidi kaldırıldı. Yeni belge açılışında şifre istenir. */
 /* v2.2.78 — Kapanış mahsubunda kayıt saati kontrolü eklendi; tahsilat sonrası bakım ve devreden borç korunur, bakım raporunda önceki/diğer açık borç ve bu bakımın kalan borcu ayrılır. */
 /* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
