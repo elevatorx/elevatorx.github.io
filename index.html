@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.76_ADLANDIRILMIS_PDF_DOGRUDAN_PAYLASIM -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.77_BAKIM_RAPORU_PDF_PAYLASIM -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.76">
+<meta name="abr-app-version" content="v2.2.77">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.76</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.77</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23414,7 +23414,7 @@ var pdf=new Pdf({orientation:"portrait",unit:"mm",format:"a4",compress:true});
 var pageWidth=184,imgHeight=canvas.height*pageWidth/canvas.width;
 var image=canvas.toDataURL("image/jpeg",0.92);
 pdf.addImage(image,"JPEG",13,Math.max(10,(297-imgHeight)/2),pageWidth,imgHeight,undefined,"FAST");
-var blob=pdf.output("blob"),match=String((document.querySelector(".meta")||{}).textContent||"").match(/Makbuz No:\s*([A-Z0-9-]+)/i),receiptNo=match&&match[1]?match[1]:"ODEME-MAKBUZU";
+var blob=pdf.output("blob"),metaText=String((document.querySelector(".meta")||{}).textContent||""),match=metaText.match(/(?:Makbuz|Rapor) No:\s*([A-Z0-9-]+)/i),receiptNo=match&&match[1]?match[1]:(/Bakım Servis Raporu/i.test(document.title)?"BAKIM-SERVIS-RAPORU":"ODEME-MAKBUZU");
 var file=new File([blob],receiptNo+".pdf",{type:"application/pdf"});window.__elevatorXPdfFile=file;
 if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){
 try{await navigator.share({files:[file],title:document.title||"Ödeme Makbuzu"});window.__elevatorXPdfFile=null;if(button){button.disabled=false;button.textContent=oldText}return false}catch(shareError){if(shareError&&shareError.name==="AbortError"){if(button){button.disabled=false;button.textContent=oldText}return false}if(shareError&&shareError.name==="NotAllowedError"){if(button){button.disabled=false;button.textContent="PDF hazır — paylaşmak için dokun"}return false}throw shareError}
@@ -34830,13 +34830,63 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 .signature{gap:6mm!important;margin-top:5mm!important}.signBox{font-size:6.8pt!important;padding-top:1.8mm!important}
 .footer{font-size:5.8pt!important;margin-top:3mm!important;padding-top:1.8mm!important}
 }
+body.elevatorXPdfCapture{width:210mm!important;height:260mm!important;background:#fff!important;overflow:hidden!important;margin:0!important;padding:0!important}
+body.elevatorXPdfCapture .screenTop,body.elevatorXPdfCapture .actionBar{display:none!important}
+body.elevatorXPdfCapture .paper{width:184mm!important;height:235mm!important;margin:7mm auto 0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important}
+body.elevatorXPdfCapture .accent{height:3mm!important}
+body.elevatorXPdfCapture .inner{padding:6.5mm 8mm!important;height:232mm!important;overflow:hidden!important}
+body.elevatorXPdfCapture .header{padding-bottom:3.5mm!important}
+body.elevatorXPdfCapture .logo{width:12mm!important;height:12mm!important;border-radius:3mm!important}
+body.elevatorXPdfCapture .brandTitle{font-size:15pt!important}
+body.elevatorXPdfCapture .brandSub{font-size:7.2pt!important}
+body.elevatorXPdfCapture .meta{font-size:7.3pt!important;line-height:1.25!important}
+body.elevatorXPdfCapture .titleRow{grid-template-columns:1fr 52mm!important;gap:3mm!important;margin:3.5mm 0 2.8mm!important}
+body.elevatorXPdfCapture .kicker{font-size:6.6pt!important;padding:1.8mm 3mm!important;margin-bottom:1.8mm!important}
+body.elevatorXPdfCapture .title{font-size:16.5pt!important}
+body.elevatorXPdfCapture .desc{font-size:7pt!important;line-height:1.25!important}
+body.elevatorXPdfCapture .statusBox{padding:3mm!important;border-radius:3.5mm!important}
+body.elevatorXPdfCapture .statusIcon{width:6.5mm!important;height:6.5mm!important;font-size:8pt!important}
+body.elevatorXPdfCapture .statusTitle{font-size:8.8pt!important}
+body.elevatorXPdfCapture .statusText{font-size:6.8pt!important;line-height:1.22!important}
+body.elevatorXPdfCapture .infoGrid{gap:1.8mm!important}
+body.elevatorXPdfCapture .infoCard{padding:2.1mm!important;border-radius:2.8mm!important}
+body.elevatorXPdfCapture .label{font-size:5.8pt!important;margin-bottom:.7mm!important}
+body.elevatorXPdfCapture .value{font-size:7.5pt!important}
+body.elevatorXPdfCapture .summary{gap:1.8mm!important;margin-top:1.8mm!important}
+body.elevatorXPdfCapture .summary .value{font-size:11pt!important}
+body.elevatorXPdfCapture .financeSection{margin-top:2.2mm!important;padding:2.2mm 2.6mm!important;border-radius:3.4mm!important}
+body.elevatorXPdfCapture .financeHead{margin-bottom:1.6mm!important}
+body.elevatorXPdfCapture .financeTitle{font-size:7.8pt!important}
+body.elevatorXPdfCapture .financeSub{font-size:5.8pt!important}
+body.elevatorXPdfCapture .financeStatus{font-size:5.8pt!important;padding:1.4mm 2.2mm!important}
+body.elevatorXPdfCapture .financeGrid{gap:1.5mm!important}
+body.elevatorXPdfCapture .financeItem{padding:1.7mm 1.8mm!important;border-radius:2.3mm!important}
+body.elevatorXPdfCapture .financeItem span{font-size:5.2pt!important;margin-bottom:.6mm!important}
+body.elevatorXPdfCapture .financeItem b{font-size:6.9pt!important}
+body.elevatorXPdfCapture .financeNote{margin-top:1.3mm!important;font-size:5.1pt!important}
+body.elevatorXPdfCapture .section{margin-top:2.2mm!important;border-radius:3.4mm!important}
+body.elevatorXPdfCapture .sectionHead{padding:2.2mm 2.8mm!important}
+body.elevatorXPdfCapture .sectionTitle{font-size:8pt!important}
+body.elevatorXPdfCapture .sectionMeta{font-size:6.5pt!important}
+body.elevatorXPdfCapture .checkWrap{gap:2mm!important;padding:2.2mm 2.8mm!important}
+body.elevatorXPdfCapture .checkCol{gap:1.2mm!important}
+body.elevatorXPdfCapture .checkCol li{padding:1.6mm 1.8mm 1.6mm 6.2mm!important;border-radius:2.4mm!important;font-size:6.7pt!important;line-height:1.18!important}
+body.elevatorXPdfCapture .checkCol li::before{left:1.8mm!important;width:3mm!important;height:3mm!important;font-size:5.5pt!important}
+body.elevatorXPdfCapture .noteGrid{gap:2mm!important;margin-top:2.2mm!important}
+body.elevatorXPdfCapture .noteCard,body.elevatorXPdfCapture .serviceCard{padding:2.4mm!important;border-radius:3.4mm!important}
+body.elevatorXPdfCapture .noteTitle{font-size:6.8pt!important;margin-bottom:.8mm!important}
+body.elevatorXPdfCapture .noteText,body.elevatorXPdfCapture .serviceRow{font-size:6.6pt!important;line-height:1.22!important}
+body.elevatorXPdfCapture .serviceRows{gap:1.2mm!important}
+body.elevatorXPdfCapture .signature{gap:6mm!important;margin-top:5mm!important}
+body.elevatorXPdfCapture .signBox{font-size:6.8pt!important;padding-top:1.8mm!important}
+body.elevatorXPdfCapture .footer{font-size:5.8pt!important;margin-top:3mm!important;padding-top:1.8mm!important}
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>Bakım Servis Raporu</h1>
-<button class="screenBtn" onclick="window.print()">Yazdır</button>
+<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF Paylaş</button>
 </div>
 
 <div class="paper">
@@ -34944,7 +34994,7 @@ ${pdfBelgeIbaresi ? `<div class="serviceRow"><span>Mesleki Belge</span><b>${ayHt
 </div>
 </div>
 
-<div class="actionBar"><button class="printBtn" onclick="window.print()">PDF / Yazdır</button></div>
+<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Olarak Paylaş</button></div>
 </body>
 </html>
 `);
@@ -48314,7 +48364,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.77";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48606,6 +48656,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
+/* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
