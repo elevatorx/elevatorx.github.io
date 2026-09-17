@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.75_GERCEK_PDF_MAKBUZ_ONIZLEMESI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.76_ADLANDIRILMIS_PDF_DOGRUDAN_PAYLASIM -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.75">
+<meta name="abr-app-version" content="v2.2.76">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.75</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.76</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23395,23 +23395,33 @@ script.onload=function(){resolve()};script.onerror=function(){reject(new Error("
 });
 }
 window.elevatorXReportPrint = async function(button){
-var oldText = button && button.textContent;
+var oldText = button && (button.dataset.elevatorXDefaultText || button.textContent);if(button&&!button.dataset.elevatorXDefaultText)button.dataset.elevatorXDefaultText=oldText;
 try{
 try{ localStorage.setItem("abrReceiptPrintReturnUntil_v1", String(Date.now() + 600000)); }catch(ignore){}
+if(window.__elevatorXPdfFile){
+if(button){button.disabled=true;button.textContent="Paylaşım açılıyor..."}
+try{await navigator.share({files:[window.__elevatorXPdfFile],title:document.title||"Ödeme Makbuzu"});window.__elevatorXPdfFile=null;if(button){button.disabled=false;button.textContent=oldText}return false}catch(shareAgainError){if(button){button.disabled=false;button.textContent=oldText}if(shareAgainError&&shareAgainError.name==="AbortError")return false;throw shareAgainError}
+}
 if(button){ button.disabled = true; button.textContent = "PDF hazırlanıyor..."; }
 await elevatorXLoadPdfLibrary("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",function(){return typeof window.html2canvas==="function"});
 await elevatorXLoadPdfLibrary("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",function(){return !!(window.jspdf&&window.jspdf.jsPDF)});
 var paper=document.querySelector(".paper");if(!paper)throw new Error("Makbuz sayfası bulunamadı");
+document.body.classList.add("elevatorXPdfCapture");await new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})});
 var canvas=await window.html2canvas(paper,{scale:Math.min(2,Math.max(1,window.devicePixelRatio||1)),backgroundColor:"#ffffff",useCORS:true,logging:false,scrollX:0,scrollY:0});
+document.body.classList.remove("elevatorXPdfCapture");
 var Pdf=window.jspdf&&window.jspdf.jsPDF;if(!Pdf)throw new Error("PDF bileşeni hazırlanamadı");
 var pdf=new Pdf({orientation:"portrait",unit:"mm",format:"a4",compress:true});
-var pageWidth=210,pageHeight=297,imgHeight=canvas.height*pageWidth/canvas.width,pageCount=Math.max(1,Math.ceil(imgHeight/pageHeight));
+var pageWidth=184,imgHeight=canvas.height*pageWidth/canvas.width;
 var image=canvas.toDataURL("image/jpeg",0.92);
-for(var page=0;page<pageCount;page++){if(page>0)pdf.addPage();pdf.addImage(image,"JPEG",0,-page*pageHeight,pageWidth,imgHeight,undefined,"FAST")}
-var blob=pdf.output("blob"),url=URL.createObjectURL(blob);
-try{sessionStorage.setItem("abrReceiptPdfPreview_v1",url)}catch(ignore){}
-window.location.href=url;
+pdf.addImage(image,"JPEG",13,Math.max(10,(297-imgHeight)/2),pageWidth,imgHeight,undefined,"FAST");
+var blob=pdf.output("blob"),match=String((document.querySelector(".meta")||{}).textContent||"").match(/Makbuz No:\s*([A-Z0-9-]+)/i),receiptNo=match&&match[1]?match[1]:"ODEME-MAKBUZU";
+var file=new File([blob],receiptNo+".pdf",{type:"application/pdf"});window.__elevatorXPdfFile=file;
+if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){
+try{await navigator.share({files:[file],title:document.title||"Ödeme Makbuzu"});window.__elevatorXPdfFile=null;if(button){button.disabled=false;button.textContent=oldText}return false}catch(shareError){if(shareError&&shareError.name==="AbortError"){if(button){button.disabled=false;button.textContent=oldText}return false}if(shareError&&shareError.name==="NotAllowedError"){if(button){button.disabled=false;button.textContent="PDF hazır — paylaşmak için dokun"}return false}throw shareError}
+}
+var link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=receiptNo+".pdf";document.body.appendChild(link);link.click();link.remove();if(button){button.disabled=false;button.textContent=oldText}
 }catch(error){
+document.body.classList.remove("elevatorXPdfCapture");
 if(button){ button.disabled = false; button.textContent = oldText; }
 try{ alert("PDF hazırlanamadı. İnternet bağlantını kontrol edip tekrar dene."); }catch(ignore){}
 }
@@ -34544,13 +34554,30 @@ html,body{width:210mm!important;height:260mm!important;background:#fff!important
 .signature{gap:6mm!important;margin-top:7mm!important}.signBox{font-size:7pt!important;padding-top:2mm!important}
 .footer{font-size:6pt!important;margin-top:5mm!important;padding-top:2mm!important}
 }
+body.elevatorXPdfCapture{width:210mm!important;background:#fff!important;margin:0!important;padding:0!important;overflow:hidden!important}
+body.elevatorXPdfCapture .screenTop,body.elevatorXPdfCapture .actionBar{display:none!important}
+body.elevatorXPdfCapture .paper{width:184mm!important;height:235mm!important;margin:0 auto!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important}
+body.elevatorXPdfCapture .accent{height:3mm!important}
+body.elevatorXPdfCapture .inner{padding:7mm 8mm!important;height:232mm!important;overflow:hidden!important}
+body.elevatorXPdfCapture .header{padding-bottom:4mm!important}
+body.elevatorXPdfCapture .logo{width:12mm!important;height:12mm!important;border-radius:3mm!important}
+body.elevatorXPdfCapture .brandTitle{font-size:15pt!important}body.elevatorXPdfCapture .brandSub{font-size:7.2pt!important}
+body.elevatorXPdfCapture .meta{font-size:7.4pt!important;line-height:1.25!important}
+body.elevatorXPdfCapture .hero{margin:4mm 0 3mm!important;padding:4mm!important;border-radius:4mm!important;grid-template-columns:1fr 45mm!important;gap:4mm!important}
+body.elevatorXPdfCapture .kicker{font-size:6.8pt!important;padding:2mm 3mm!important;margin-bottom:2mm!important}
+body.elevatorXPdfCapture .title{font-size:17pt!important}body.elevatorXPdfCapture .desc{font-size:7.4pt!important;line-height:1.25!important}
+body.elevatorXPdfCapture .amountBox{padding:3.2mm!important;border-radius:4mm!important}body.elevatorXPdfCapture .amountLabel{font-size:6pt!important;margin-bottom:1.2mm!important}body.elevatorXPdfCapture .amountValue{font-size:20pt!important}body.elevatorXPdfCapture .statusLine{font-size:7.2pt!important;margin-top:1.5mm!important}
+body.elevatorXPdfCapture .grid{gap:2mm!important;margin-top:2.5mm!important}body.elevatorXPdfCapture .card{padding:2.3mm!important;border-radius:3mm!important}body.elevatorXPdfCapture .label{font-size:6pt!important;margin-bottom:.8mm!important}body.elevatorXPdfCapture .value{font-size:8pt!important}
+body.elevatorXPdfCapture .note{padding:2.8mm 3mm!important;border-radius:3mm!important;margin-top:2.5mm!important}body.elevatorXPdfCapture .noteTitle{font-size:7pt!important;margin-bottom:.8mm!important}body.elevatorXPdfCapture .noteText{font-size:7.2pt!important;line-height:1.25!important}
+body.elevatorXPdfCapture .signature{gap:6mm!important;margin-top:7mm!important}body.elevatorXPdfCapture .signBox{font-size:7pt!important;padding-top:2mm!important}
+body.elevatorXPdfCapture .footer{font-size:6pt!important;margin-top:5mm!important;padding-top:2mm!important}
 </style>
 ${elevatorXPdfSafetyScript()}</head>
 <body>
 <div class="screenTop">
 <button class="screenBtn" onclick="return elevatorXReportBack()">← Geri</button>
 <h1>${makbuzBaslik}</h1>
-<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF Önizleme</button>
+<button class="screenBtn" onclick="return elevatorXReportPrint(this)">PDF Paylaş</button>
 </div>
 
 <div class="paper">
@@ -34614,7 +34641,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 </div>
 
-<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Hazırla / Paylaş</button></div>
+<div class="actionBar"><button class="printBtn" onclick="return elevatorXReportPrint(this)">PDF Olarak Paylaş</button></div>
 </body>
 </html>
 `);
@@ -48287,7 +48314,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.75";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.76";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48578,6 +48605,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
+/* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
