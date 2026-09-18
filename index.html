@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.78_MASAUSTU_PERFORMANS -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.79_MASAUSTU_HAFIF_MOD -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.78">
+<meta name="abr-app-version" content="v2.2.79">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.78</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.79</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -48373,7 +48373,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48661,9 +48661,23 @@ body.abrBakimView .exMaintAction{
 body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNativeDetail2251{--nd-surface:#182537;--nd-ink:#edf2fa;--nd-muted:#a2b0c3;--nd-line:#2a394d;--nd-soft:#101b2a}
 @media(max-width:360px){.abrNativeDetail2251 .exDetailActionPair{grid-template-columns:1fr!important}.abrNativeDetail2251 .detailTitle{font-size:24px!important}}
 </style>
-<style id="abrDesktopPerformance2278">
-/* v2.2.78 — Masaüstünde kart listesi GPU yükünü azaltır; mobil görünümü değiştirmez. */
+<style id="abrDesktopPerformance2279">
+/* v2.2.79 — Eski masaüstü bilgisayarlar için güçlü hafif mod; mobil görünümü değiştirmez. */
 @media (min-width:900px) and (pointer:fine){
+  html.appBooted,
+  html.appBooted body{
+    scroll-behavior:auto!important;
+  }
+  html.appBooted body *,
+  html.appBooted body *::before,
+  html.appBooted body *::after{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    animation:none!important;
+    transition-duration:.01ms!important;
+    transition-delay:0ms!important;
+    will-change:auto!important;
+  }
   .exPortfolioCard,
   #liste .aptCard{
     content-visibility:auto;
@@ -48687,6 +48701,24 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
     -webkit-backdrop-filter:none!important;
     backdrop-filter:none!important;
   }
+  .exDashHero::before,
+  .exDashOverviewIcon::after,
+  .toast::after{
+    display:none!important;
+  }
+  .exDashHero,
+  .exDashOverviewCard,
+  .exPortfolioHeader,
+  .exPortfolioCard,
+  .tabbar,
+  .searchArea,
+  .exPortfolioFilterState{
+    transform:none!important;
+    filter:none!important;
+  }
+  .tabbar::after{
+    filter:none!important;
+  }
 }
 </style>
 <style id="abrNativeCariAndTablet2258">
@@ -48695,6 +48727,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
 /* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
 /* v2.2.78 — Masaüstünde sürekli çalışan üç arayüz kontrolü olay bazlı hale getirildi; kart blur, giriş ve sonsuz durum animasyonları yalnızca masaüstünde hafifletildi. */
+/* v2.2.79 — Fareli geniş ekranlarda tüm sürekli animasyon, backdrop blur, uzun geçiş ve gereksiz GPU katmanları kapatıldı. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
