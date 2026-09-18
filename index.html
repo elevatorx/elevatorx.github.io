@@ -1,74 +1,10 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.82_HESAP_VERI_AYRIMI_PERSONEL_PDF_GUVENLIGI -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.78_MASAUSTU_PERFORMANS -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <!-- ELEVATORX_APP_PROJECT_PATH /app/ | EXISTING_DATA_SAME_ORIGIN -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-
-<script id="abrAccountDataScope2282">
-/* v2.2.82 — Hesaba ait cihaz kayıtlarını silmeden ayrı alanlarda tutar. */
-(function(){
-"use strict";
-const raw=window.localStorage;
-const OWNER="abrLegacyDataOwnerV2282",ACTIVE="abrAccountActiveUserV2282",PREFIX="abrAccountDataV2282:";
-const privateKeys=new Set([
-"apartmanlar","ayAutoBackupLatest","ayAutoBackupHistory","ayAutoBackupAt",
-"abrPreRestoreBackupV2017","abrSonSilinenApartmanV2017","elevatorxLastPreUpdateBackupJson","elevatorxLastPreUpdateBackupAt",
-"elevatorxLastAutoBackup","elevatorxLastManualBackupAt","elevatorxLastRestoreAt",
-"elevatorx_stock_inventory_v1506","elevatorx_professional_documents_v1511","elevatorx_installation_surveys_v1800",
-"abrDocumentArchiveV1","abrRideAnalysisRecordsV2215","elevatorXLuxTestsV1","elevatorXLuxLastDeviceV1","elevatorXLuxCameraCorrectionV1",
-"abrLastBulkApartmentImportV2219","abrCloudBackupMetaV2224","abrTeamCenterV2100",
-"profilAd","profilFirma","profilTelefon","profilBio","profilKuruldu","profilePhoto","coverPhoto",
-"abrProfileSetupDismissedV2237","abrBirthdayDayMonthV2234","abrBirthdaySeenV2234"
-]);
-function readJSON(key){try{return JSON.parse(raw.getItem(key)||"null")}catch(error){return null}}
-const saved=readJSON("sb-vfadlxuujqcpkckvwjbl-auth-token");
-const savedId=String(saved&&saved.user&&saved.user.id||"");
-let legacyOwner=raw.getItem(OWNER)||"";
-if(!legacyOwner){
-  const meta=readJSON("abrCloudBackupMetaV2224"),role=readJSON("abrRoleAccessV2200");
-  legacyOwner=String(meta&&meta.userId||savedId||role&&role.lastAccess&&role.lastAccess.userId||"");
-  if(legacyOwner)raw.setItem(OWNER,legacyOwner);
-}
-let userId=savedId,epoch=0;
-if(userId)raw.setItem(ACTIVE,userId);
-function privateKey(key){return privateKeys.has(String(key))||/^abrProfil/.test(String(key))}
-function owns(id){return !!userId&&(!id||id===userId)&&raw.getItem(ACTIVE)===userId}
-function assertCurrent(token){if(!owns()||(token!=null&&token!==epoch))throw new Error("Hesap değişti; önceki işlem durduruldu.")}
-function mapped(key){assertCurrent();return userId===legacyOwner?String(key):PREFIX+encodeURIComponent(userId)+":"+String(key)}
-const api={
-  getItem:function(key){if(!privateKey(key))return raw.getItem(key);return owns()?raw.getItem(mapped(key)):null},
-  setItem:function(key,value){return raw.setItem(privateKey(key)?mapped(key):key,value)},
-  removeItem:function(key){return raw.removeItem(privateKey(key)?mapped(key):key)},
-  user:function(){return userId},token:function(){return epoch},owns:owns,assertCurrent:assertCurrent,idbKey:mapped,
-  enter:function(id){
-    id=String(id||"");if(!id)throw new Error("Kayıtlar için doğrulanmış hesap gerekli.");
-    if(userId===id&&owns(id))return;
-    raw.setItem(ACTIVE,id);userId=id;epoch++;
-    window.__abrAppRole=null;
-    document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");
-    document.documentElement.classList.add("abr-role-locked");
-    window.dispatchEvent(new CustomEvent("abr-account-data-changed"));
-  },
-  leave:function(){
-    if(raw.getItem(ACTIVE)===userId)raw.removeItem(ACTIVE);
-    userId="";epoch++;window.dispatchEvent(new CustomEvent("abr-account-data-changed"));
-  }
-};
-window.abrAccountStorage=api;
-window.addEventListener("storage",function(event){
-  if(event.key!==ACTIVE||event.newValue===userId||!userId)return;
-  userId="";epoch++;window.__abrAppRole=null;
-  document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");
-  document.documentElement.classList.add("abr-role-locked");
-  window.dispatchEvent(new CustomEvent("abr-account-data-changed"));
-  const gate=document.getElementById("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
-  if(typeof window.abrNormalGiriseDon==="function")window.abrNormalGiriseDon();
-});
-})();
-
-</script>
 
 <script>
 
@@ -100,7 +36,7 @@ lastTouchEnd = now;
 })();
 
 
-const abrIlkTema = abrAccountStorage.getItem("tema") || "light";
+const abrIlkTema = localStorage.getItem("tema") || "light";
 const abrIlkSistemKoyu = abrIlkTema === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 if(abrIlkTema === "dark" || abrIlkSistemKoyu){
 document.documentElement.classList.add("darkRoot");
@@ -502,17 +438,17 @@ html.darkRoot .tabbar .tabItem.activeTab{
   }
   function getDeviceCode(){
     var c='';
-    try{ c = abrAccountStorage.getItem(LS_DEVICE) || ''; }catch(e){}
+    try{ c = localStorage.getItem(LS_DEVICE) || ''; }catch(e){}
     c = norm(c);
     if(!c || c.length < 10){
       c = randPart(4)+randPart(4)+randPart(4);
-      try{ abrAccountStorage.setItem(LS_DEVICE,c); }catch(e){}
+      try{ localStorage.setItem(LS_DEVICE,c); }catch(e){}
     }
     return c;
   }
-  function getStored(){ try{ return JSON.parse(abrAccountStorage.getItem(LS_LICENSE)||'null'); }catch(e){ return null; } }
-  function setStored(o){ try{ abrAccountStorage.setItem(LS_LICENSE, JSON.stringify(o)); }catch(e){} }
-  function clearStored(){ try{ abrAccountStorage.removeItem(LS_LICENSE); }catch(e){} }
+  function getStored(){ try{ return JSON.parse(localStorage.getItem(LS_LICENSE)||'null'); }catch(e){ return null; } }
+  function setStored(o){ try{ localStorage.setItem(LS_LICENSE, JSON.stringify(o)); }catch(e){} }
+  function clearStored(){ try{ localStorage.removeItem(LS_LICENSE); }catch(e){} }
   function localExpired(o){
     if(!o || !o.bitis) return false;
     var b=String(o.bitis||'').toLowerCase();
@@ -605,7 +541,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
     if(reset){
       reset.onclick=function(){
         if(confirm('Cihaz kodu yenilensin mi? Daha önce aktive edilmiş lisans varsa eşleşme bozulabilir.')){
-          try{ abrAccountStorage.removeItem(LS_DEVICE); abrAccountStorage.removeItem(LS_LICENSE); }catch(e){}
+          try{ localStorage.removeItem(LS_DEVICE); localStorage.removeItem(LS_LICENSE); }catch(e){}
           renderGate('Cihaz kodu yenilendi. Yeni kodu lisans tablosu için kullan.');
         }
       };
@@ -662,7 +598,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
     }catch(e){}
     if(!forceReset){
       try{
-        var accountStore=JSON.parse(abrAccountStorage.getItem('abrRoleAccessV2200')||'{}');
+        var accountStore=JSON.parse(localStorage.getItem('abrRoleAccessV2200')||'{}');
         if(accountStore && accountStore.lastEmail){ openAccountLogin(); return; }
       }catch(e){}
     }
@@ -719,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.82">
+<meta name="abr-app-version" content="v2.2.78">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -20612,8 +20548,8 @@ body.darkMode .abrProfileSetupSheet,html.darkRoot .abrProfileSetupSheet{backgrou
 (function(){
   function updateMenuProfile(){
     try{
-      var ad = (abrAccountStorage.getItem("profilAd") || "Uğur AY").trim();
-      var firma = (abrAccountStorage.getItem("profilFirma") || "AY ASANSÖR").trim();
+      var ad = (localStorage.getItem("profilAd") || "Uğur AY").trim();
+      var firma = (localStorage.getItem("profilFirma") || "AY ASANSÖR").trim();
       var adEl = document.getElementById("exHybridProfileName");
       var metaEl = document.getElementById("exHybridProfileMeta");
       if(adEl) adEl.textContent = ad || "Uğur AY";
@@ -20703,11 +20639,11 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   window.exHybridLisansDurumu = function(){
     window.exHybridMenuClose();
     try{
-      var device = abrAccountStorage.getItem("elevatorx_device_code_v1476") || "-";
+      var device = localStorage.getItem("elevatorx_device_code_v1476") || "-";
       var stored = null;
-      try{ stored = JSON.parse(abrAccountStorage.getItem("elevatorx_google_license_v1480") || "null"); }catch(e){}
+      try{ stored = JSON.parse(localStorage.getItem("elevatorx_google_license_v1480") || "null"); }catch(e){}
       var accountStore = null;
-      try{ accountStore = JSON.parse(abrAccountStorage.getItem("abrRoleAccessV2200") || "null"); }catch(e){}
+      try{ accountStore = JSON.parse(localStorage.getItem("abrRoleAccessV2200") || "null"); }catch(e){}
       var accountEmail = accountStore && accountStore.lastEmail ? accountStore.lastEmail : "";
 
       var licenseNo = stored && stored.lisans ? stored.lisans : (accountEmail || "-");
@@ -22166,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.82</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.78</div>
     </div>
   </div>
 </div>
@@ -22181,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22233,11 +22169,11 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       const splash = document.getElementById("splash");
       if(splash){ splash.classList.add("smartSplash"); }
 
-      const seen = abrAccountStorage.getItem(KEY) === SPLASH_VERSION;
+      const seen = localStorage.getItem(KEY) === SPLASH_VERSION;
       const delay = seen ? NORMAL_MS : FIRST_MS;
 
       setTimeout(function(){
-        abrAccountStorage.setItem(KEY, SPLASH_VERSION);
+        localStorage.setItem(KEY, SPLASH_VERSION);
         hideSplashSmart();
       }, delay);
 
@@ -22996,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -23073,7 +23009,7 @@ return true;
 });
 
 if(degisti){
-try{ abrAccountStorage.setItem("apartmanlar",JSON.stringify(data)); }catch(e){}
+try{ localStorage.setItem("apartmanlar",JSON.stringify(data)); }catch(e){}
 }
 })();
 
@@ -23112,7 +23048,7 @@ function abrStbDerinKopya(deger){
 function abrStbVeriOku(){
   let ham = "";
   try{
-    ham = abrAccountStorage.getItem("apartmanlar") || "";
+    ham = localStorage.getItem("apartmanlar") || "";
   }catch(err){
     window.__abrStbBootError = "Cihaz verisine erişilemedi";
     return [];
@@ -23136,7 +23072,7 @@ function abrStbVeriOku(){
     window.__abrStbBootError = err && err.message ? err.message : "Ana veri okunamadı";
 
     try{
-      let otomatik = JSON.parse(abrAccountStorage.getItem("ayAutoBackupLatest") || "null");
+      let otomatik = JSON.parse(localStorage.getItem("ayAutoBackupLatest") || "null");
       let kurtarilan = Array.isArray(otomatik)
         ? otomatik
         : (otomatik && Array.isArray(otomatik.apartmanlar) ? otomatik.apartmanlar : null);
@@ -23301,13 +23237,13 @@ function abrStbAnaVeriyiYaz(){
   }
 
   try{
-    abrAccountStorage.setItem("apartmanlar", json);
+    localStorage.setItem("apartmanlar", json);
     window.__abrStbLastSaveError = "";
     return true;
   }catch(err){
     try{
-      abrAccountStorage.removeItem(AUTO_YEDEK_HISTORY_KEY);
-      abrAccountStorage.setItem("apartmanlar", json);
+      localStorage.removeItem(AUTO_YEDEK_HISTORY_KEY);
+      localStorage.setItem("apartmanlar", json);
       window.__abrStbLastSaveError = "";
       return true;
     }catch(ikinciHata){
@@ -23586,7 +23522,7 @@ await Promise.all(names.map(function(name){ return caches.delete(name); }));
 }catch(e){}
 
 try{
-abrAccountStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
+localStorage.setItem("elevatorxLastHardRefresh", String(Date.now()));
 }catch(e){}
 
 let temizSurum = String(window.APP_VERSION || APP_VERSION || "v1.4.30").replace(/[^\d]/g,"") || String(Date.now());
@@ -23639,7 +23575,7 @@ let abrHapticLastAt = 0;
 
 function hapticAcikMi(){
 try{
-return abrAccountStorage.getItem(ABR_HAPTIC_KEY) !== "0";
+return localStorage.getItem(ABR_HAPTIC_KEY) !== "0";
 }catch(e){
 return true;
 }
@@ -23704,7 +23640,7 @@ aciklama.textContent = acik
 
 function hapticAyarDegistir(){
 let acik = !hapticAcikMi();
-try{ abrAccountStorage.setItem(ABR_HAPTIC_KEY,acik ? "1" : "0"); }catch(e){}
+try{ localStorage.setItem(ABR_HAPTIC_KEY,acik ? "1" : "0"); }catch(e){}
 hapticAyarGuncelle();
 if(acik) haptic("success");
 toast(acik ? "Dokunsal geri bildirim açıldı" : "Dokunsal geri bildirim kapatıldı");
@@ -23912,9 +23848,9 @@ let yedek = yedekVeriOlustur("guncelleme-oncesi");
 /* v1.4.21
    Güncelleme sırasında iOS'un JSON yedek dosyasını önizleme ekranında açmasını engellemek için
    otomatik dosya indirme kapatıldı. Yedek yine cihaz içinde güvenli olarak tutulur. */
-abrAccountStorage.setItem("elevatorxLastPreUpdateBackupJson", JSON.stringify(yedek));
-abrAccountStorage.setItem("elevatorxLastPreUpdateBackupAt", yedek.olusturmaTarihi);
-abrAccountStorage.setItem("elevatorxLastAutoBackup", JSON.stringify(yedek));
+localStorage.setItem("elevatorxLastPreUpdateBackupJson", JSON.stringify(yedek));
+localStorage.setItem("elevatorxLastPreUpdateBackupAt", yedek.olusturmaTarihi);
+localStorage.setItem("elevatorxLastAutoBackup", JSON.stringify(yedek));
 
 }catch(err){
 console.warn("Güncelleme öncesi cihaz içi yedek oluşturulamadı:",err);
@@ -23937,8 +23873,8 @@ toast("Güncelleme hazırlanıyor...");
 }catch(e){}
 
 try{
-abrAccountStorage.setItem("elevatorxUpdatingTo", String(yeniSurum || APP_VERSION));
-abrAccountStorage.setItem("elevatorxUpdateStartedAt", String(Date.now()));
+localStorage.setItem("elevatorxUpdatingTo", String(yeniSurum || APP_VERSION));
+localStorage.setItem("elevatorxUpdateStartedAt", String(Date.now()));
 }catch(e){}
 
 try{
@@ -24092,10 +24028,10 @@ let uzakSurum = await abrUzakSurumOku();
 if(!uzakSurum) return;
 
 try{
-let hedef = abrAccountStorage.getItem("elevatorxUpdatingTo") || "";
+let hedef = localStorage.getItem("elevatorxUpdatingTo") || "";
 if(hedef && hedef === APP_VERSION){
-abrAccountStorage.removeItem("elevatorxUpdatingTo");
-abrAccountStorage.removeItem("elevatorxUpdateStartedAt");
+localStorage.removeItem("elevatorxUpdatingTo");
+localStorage.removeItem("elevatorxUpdateStartedAt");
 }
 }catch(e){}
 
@@ -24143,11 +24079,11 @@ window.addEventListener("online",function(){ guncellemeKontrolEt(true); });
 function temaUygula(){
 
 let tema =
-abrAccountStorage.getItem("tema") || "light";
+localStorage.getItem("tema") || "light";
 
 if(!["light","system","dark"].includes(tema)){
 tema = "light";
-abrAccountStorage.setItem("tema",tema);
+localStorage.setItem("tema",tema);
 }
 
 let sistemKoyu = false;
@@ -24215,7 +24151,7 @@ function temaSec(yeniTema){
 if(!["light","system","dark"].includes(yeniTema)) return;
 
 haptic("light");
-abrAccountStorage.setItem("tema",yeniTema);
+localStorage.setItem("tema",yeniTema);
 temaUygula();
 
 toast(
@@ -24229,7 +24165,7 @@ yeniTema === "system"
 function temaDegistir(){
 
 let mevcut =
-abrAccountStorage.getItem("tema") || "light";
+localStorage.getItem("tema") || "light";
 
 let yeni =
 mevcut === "dark" ? "light" : "dark";
@@ -24246,7 +24182,7 @@ if(!window.matchMedia || abrTemaMediaQuery) return;
 abrTemaMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 let sistemTemaDegisti = function(){
-if((abrAccountStorage.getItem("tema") || "light") === "system"){
+if((localStorage.getItem("tema") || "light") === "system"){
 temaUygula();
 }
 };
@@ -24304,7 +24240,7 @@ function ustMarkaGorunurlukAyarla(goster){
 }
 
 function localVeriKaydet(){
-abrAccountStorage.setItem(
+localStorage.setItem(
 "apartmanlar",
 JSON.stringify(data)
 );
@@ -24634,7 +24570,7 @@ return parca[2] + "." + parca[1] + "." + parca[0];
 
 }
 
-function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak,tutar,createdAt){
+function bakimKayitTarihiEkle(liste,gorulen,tarih,kaynak,tutar){
 
 let key = bakimTarihKey(tarih);
 let kayitTutari = Number(tutar || 0);
@@ -24645,9 +24581,6 @@ return;
 
 if(gorulen[key]){
 let mevcut = liste.find(function(k){ return k && k.key === key; });
-if(mevcut && createdAt && (!mevcut.createdAt || Date.parse(createdAt) < Date.parse(mevcut.createdAt))){
-mevcut.createdAt = createdAt;
-}
 if(mevcut && Number(mevcut.tutar || 0) <= 0 && kayitTutari > 0){
 mevcut.tutar = kayitTutari;
 }
@@ -24660,7 +24593,6 @@ liste.push({
 key:key,
 tarih:bakimTarihGoster(key),
 kaynak:kaynak || "",
-createdAt:createdAt || "",
 tutar:kayitTutari > 0 ? kayitTutari : 0
 });
 
@@ -24691,8 +24623,7 @@ liste,
 gorulen,
 k.tarih || k.bakimTarihi || k.date || k.createdAt,
 "bakimKayitlari",
-k.tutar || k.ucret || k.bakimUcreti || 0,
-k.createdAt || ""
+k.tutar || k.ucret || k.bakimUcreti || 0
 );
 });
 }
@@ -24700,7 +24631,7 @@ k.createdAt || ""
 if(Array.isArray(a.bakimChecklist)){
 a.bakimChecklist.forEach(function(k){
 if(!k) return;
-bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist",k.tutar || 0,k.createdAt || "");
+bakimKayitTarihiEkle(liste,gorulen,k.tarih || k.createdAt,"checklist",k.tutar || 0);
 });
 }
 
@@ -24852,7 +24783,6 @@ tip:"Bakım",
 tarih:k.tarih || "-",
 aciklama:"Aylık bakım ücreti",
 tutar:ucret,
-createdAt:k.createdAt || "",
 key:k.key
 });
 });
@@ -24881,7 +24811,6 @@ kalemler.push({
 tip:k.tip || "Bakım",
 tarih:k.tarih || "-",
 aciklama:k.aciklama || "Aylık bakım ücreti",
-createdAt:k.createdAt || "",
 tutar:Number(k.tutar || 0)
 });
 });
@@ -24898,7 +24827,6 @@ kalemler.push({
 tip:"Parça",
 tarih:(p && p.tarih) || "-",
 aciklama:"Parça değişimi: " + ((p && p.ad) || "Parça") + adet + not,
-createdAt:p.createdAt || "",
 tutar:tutar
 });
 });
@@ -24913,7 +24841,6 @@ kalemler.push({
 tip:"Eski Bakiye",
 tarih:(b && b.tarih) || "-",
 aciklama:(b && b.aciklama) ? b.aciklama : "Eski bakiye",
-createdAt:b.createdAt || "",
 tutar:tutar
 });
 });
@@ -24932,23 +24859,9 @@ let kapanisKey = bakimTarihKey(a && a.odemeTarihi);
 let kapanisMahsubu = 0;
 
 if(kapanisKey && odemeler.length){
-/* v2.2.78 — Kapanıştan sonra eklenen kayıtları eski kapanışa mahsup etme.
-   Saat bilgisi bulunmayan eski kayıtlarda yalnız önceki günler uyumluluğa girer. */
-let kapanisOdemeleri = odemeler.filter(function(o){return bakimTarihKey(o.tarih) === kapanisKey;});
-let kesinKapanislar = kapanisOdemeleri.filter(function(o){return o.kalanBorc === 0;});
-let kapanisZamani = (kesinKapanislar.length ? kesinKapanislar : kapanisOdemeleri).reduce(function(t,o){
-return Math.max(t,Date.parse(o.createdAt || "") || 0);
-},0);
 let kapanisaKadarBorc = kalemler.reduce(function(t,k){
 let key = bakimTarihKey(k && k.tarih);
-let kayitZamani = Date.parse(k && k.createdAt || "") || 0;
-let kapanistanOnce = (!key || key < kapanisKey);
-if(kayitZamani && kapanisZamani){
-kapanistanOnce = (!key || key <= kapanisKey) && kayitZamani <= kapanisZamani;
-}else if(key === kapanisKey){
-kapanistanOnce = false;
-}
-return t + (kapanistanOnce ? Number(k && k.tutar ? k.tutar : 0) : 0);
+return t + ((!key || key <= kapanisKey) ? Number(k && k.tutar ? k.tutar : 0) : 0);
 },0);
 
 let kapanisaKadarTahsilat = odemeler.reduce(function(t,o){
@@ -26441,14 +26354,14 @@ stokEnvanteri:stokEnvanteriGet(),
 meslekiBelgeler:meslekiBelgelerGet(),
 montajKesifleri:montajKesifGet(),
 profil:{
-ad:abrAccountStorage.getItem("profilAd") || (typeof profilAd !== "undefined" ? profilAd.value : "") || "",
-firma:abrAccountStorage.getItem("profilFirma") || (typeof profilFirma !== "undefined" ? profilFirma.value : "") || "",
-telefon:abrAccountStorage.getItem("profilTelefon") || (typeof profilTelefon !== "undefined" ? profilTelefon.value : "") || "",
-bio:abrAccountStorage.getItem("profilBio") || (typeof profilBio !== "undefined" ? profilBio.value : "") || "",
-profilFoto:abrAccountStorage.getItem("profilePhoto") || "",
-kapakFoto:abrAccountStorage.getItem("coverPhoto") || ""
+ad:localStorage.getItem("profilAd") || (typeof profilAd !== "undefined" ? profilAd.value : "") || "",
+firma:localStorage.getItem("profilFirma") || (typeof profilFirma !== "undefined" ? profilFirma.value : "") || "",
+telefon:localStorage.getItem("profilTelefon") || (typeof profilTelefon !== "undefined" ? profilTelefon.value : "") || "",
+bio:localStorage.getItem("profilBio") || (typeof profilBio !== "undefined" ? profilBio.value : "") || "",
+profilFoto:localStorage.getItem("profilePhoto") || "",
+kapakFoto:localStorage.getItem("coverPhoto") || ""
 },
-tema:abrAccountStorage.getItem("tema") || "light"
+tema:localStorage.getItem("tema") || "light"
 };
 
 }
@@ -26566,7 +26479,7 @@ return yedekVeriOlustur("otomatik");
 function autoYedekBilgiGuncelle(){
 let el = document.getElementById("autoBackupInfo");
 if(!el) return;
-let son = abrAccountStorage.getItem("ayAutoBackupAt");
+let son = localStorage.getItem("ayAutoBackupAt");
 el.textContent = son
 ? formatAutoYedekZamani(son)
 : "Henüz oluşmadı";
@@ -26575,7 +26488,7 @@ el.textContent = son
 function disYedekBilgiGuncelle(){
 let el = document.getElementById("externalBackupInfo");
 if(!el) return;
-let son = abrAccountStorage.getItem("elevatorxLastManualBackupAt");
+let son = localStorage.getItem("elevatorxLastManualBackupAt");
 el.textContent = son
 ? formatAutoYedekZamani(son)
 : "Henüz dışarı aktarılmadı";
@@ -26588,7 +26501,7 @@ try{
   let tamJson = JSON.stringify(yedek);
 
   try{
-    abrAccountStorage.setItem(AUTO_YEDEK_KEY, tamJson);
+    localStorage.setItem(AUTO_YEDEK_KEY, tamJson);
   }catch(ilkHata){
     if(!sessiz) toast("Yeni yedek için alan yetersiz; eski kurtarma noktaları korundu");
     return false;
@@ -26600,7 +26513,7 @@ try{
   let gecmis = [];
 
   try{
-    gecmis = JSON.parse(abrAccountStorage.getItem(AUTO_YEDEK_HISTORY_KEY) || "[]");
+    gecmis = JSON.parse(localStorage.getItem(AUTO_YEDEK_HISTORY_KEY) || "[]");
     if(!Array.isArray(gecmis)) gecmis = [];
   }catch(err){
     gecmis = [];
@@ -26636,14 +26549,14 @@ try{
   let historySaved = false;
   while(gecmis.length && !historySaved){
     try{
-      abrAccountStorage.setItem(AUTO_YEDEK_HISTORY_KEY, JSON.stringify(gecmis));
+      localStorage.setItem(AUTO_YEDEK_HISTORY_KEY, JSON.stringify(gecmis));
       historySaved = true;
     }catch(historyErr){
       gecmis.pop();
     }
   }
 
-  abrAccountStorage.setItem("ayAutoBackupAt", yedek.olusturmaTarihi);
+  localStorage.setItem("ayAutoBackupAt", yedek.olusturmaTarihi);
   autoYedekBilgiGuncelle();
 
   if(!sessiz){
@@ -27574,9 +27487,9 @@ let exProfessionalDocPendingFile = null;
 
 function meslekiBelgeIdOlustur(){return "belge_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);}
 function meslekiBelgelerNormalize(liste){let gorulen=Object.create(null);return(Array.isArray(liste)?liste:[]).filter(function(b){return b&&typeof b==="object"&&!Array.isArray(b)}).map(function(b){if(!abrStbGuvenliIdMi(b.id)||gorulen[b.id])b.id=abrStbIdOlustur("blg");gorulen[b.id]=true;return b})}
-function meslekiBelgelerGet(){try{let liste=JSON.parse(abrAccountStorage.getItem(EX_PROFESSIONAL_DOCS_KEY)||"[]");return meslekiBelgelerNormalize(liste)}catch(e){return []}}
-function meslekiBelgelerSet(liste,yedekAl){let temiz=meslekiBelgelerNormalize(liste);abrAccountStorage.setItem(EX_PROFESSIONAL_DOCS_KEY,JSON.stringify(temiz));if(yedekAl!==false){try{autoYedekAl(true);}catch(e){}}meslekiBelgeProfilOzetiGuncelle();}
-async function meslekiBelgeDbSil(key){const token=abrAccountStorage.token();key=abrAccountStorage.idbKey(key);const db=await ayDbAc();abrAccountStorage.assertCurrent(token);return new Promise(function(resolve,reject){const tx=db.transaction(AY_DB_STORE,"readwrite");tx.objectStore(AY_DB_STORE).delete(key);tx.oncomplete=function(){resolve();};tx.onerror=function(){reject(tx.error);};});}
+function meslekiBelgelerGet(){try{let liste=JSON.parse(localStorage.getItem(EX_PROFESSIONAL_DOCS_KEY)||"[]");return meslekiBelgelerNormalize(liste)}catch(e){return []}}
+function meslekiBelgelerSet(liste,yedekAl){let temiz=meslekiBelgelerNormalize(liste);localStorage.setItem(EX_PROFESSIONAL_DOCS_KEY,JSON.stringify(temiz));if(yedekAl!==false){try{autoYedekAl(true);}catch(e){}}meslekiBelgeProfilOzetiGuncelle();}
+async function meslekiBelgeDbSil(key){const db=await ayDbAc();return new Promise(function(resolve,reject){const tx=db.transaction(AY_DB_STORE,"readwrite");tx.objectStore(AY_DB_STORE).delete(key);tx.oncomplete=function(){resolve();};tx.onerror=function(){reject(tx.error);};});}
 function meslekiBelgeGunFarki(tarih){let iso=muayeneTarihISO(tarih);if(!iso)return null;let hedef=new Date(iso+"T12:00:00");let bugunTarih=new Date(bugunISO()+"T12:00:00");return Math.ceil((hedef.getTime()-bugunTarih.getTime())/86400000);}
 function meslekiBelgeDurumu(belge){let fark=meslekiBelgeGunFarki(belge&&belge.gecerlilikTarihi);if(fark===null)return{key:"forever",text:"Süresiz / Tarih Yok",cls:"forever",rank:2};if(fark<0)return{key:"expired",text:"Süresi Doldu",cls:"expired",rank:0};if(fark<=60)return{key:"soon",text:fark===0?"Bugün Sona Eriyor":fark+" Gün Kaldı",cls:"soon",rank:1};return{key:"active",text:"Geçerli",cls:"active",rank:3};}
 function meslekiBelgeOzeti(){let liste=meslekiBelgelerGet();return{toplam:liste.length,yaklasan:liste.filter(function(b){return meslekiBelgeDurumu(b).key==="soon";}).length,dolan:liste.filter(function(b){return meslekiBelgeDurumu(b).key==="expired";}).length};}
@@ -28131,7 +28044,7 @@ async function meslekiBelgeDosyaGoruntule(id){let pencere=null;try{pencere=windo
 function meslekiBelgeBlobDataUrl(blob){return new Promise(function(resolve,reject){let reader=new FileReader();reader.onload=function(){resolve(reader.result);};reader.onerror=function(){reject(reader.error);};reader.readAsDataURL(blob);});}
 function meslekiBelgeDataUrlBlob(dataUrl){let parca=String(dataUrl||"").split(",");if(parca.length<2)return null;let mimeEslesme=parca[0].match(/data:([^;]+);base64/i);let mime=mimeEslesme?mimeEslesme[1]:"application/octet-stream";let binary=atob(parca[1]);let bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return new Blob([bytes],{type:mime});}
 async function meslekiBelgeYedekDosyalariOlustur(){let secili=meslekiBelgelerGet().filter(function(b){return!!b.dosyaVar&&!!b.dosyayiYedekle;});let sonuc=[];for(let belge of secili){try{let blob=await ayDbOku(EX_PROFESSIONAL_DOC_FILE_PREFIX+belge.id);if(!blob)continue;sonuc.push({id:belge.id,dosyaAdi:belge.dosyaAdi||"mesleki-belge",dosyaTipi:belge.dosyaTipi||blob.type||"application/octet-stream",veri:await meslekiBelgeBlobDataUrl(blob)});}catch(e){}}return sonuc;}
-async function meslekiBelgeYedektenDosyaYukle(liste){const batchToken=abrAccountStorage.token();if(!Array.isArray(liste))return;for(let dosya of liste){abrAccountStorage.assertCurrent(batchToken);try{if(!dosya||!dosya.id||!dosya.veri)continue;let blob=meslekiBelgeDataUrlBlob(dosya.veri);if(blob)await ayDbKaydet(EX_PROFESSIONAL_DOC_FILE_PREFIX+dosya.id,blob);}catch(e){}}}
+async function meslekiBelgeYedektenDosyaYukle(liste){if(!Array.isArray(liste))return;for(let dosya of liste){try{if(!dosya||!dosya.id||!dosya.veri)continue;let blob=meslekiBelgeDataUrlBlob(dosya.veri);if(blob)await ayDbKaydet(EX_PROFESSIONAL_DOC_FILE_PREFIX+dosya.id,blob);}catch(e){}}}
 
 
 function sozlesmeMevcut(a){
@@ -29036,7 +28949,7 @@ function exDashboardSelam(){
 
 function exDashboardKullaniciAdi(){
   try{
-    let ad = String(abrAccountStorage.getItem("profilAd") || "").trim();
+    let ad = String(localStorage.getItem("profilAd") || "").trim();
     if(!ad) return "";
     return ad.split(/\s+/)[0];
   }catch(e){
@@ -30734,7 +30647,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="header">
 <div class="brand">
-<img src="${ayHtml(pdfLogo)}">
+<img src="${pdfLogo}">
 <div>
 <div class="brandTitle">${pdfFirma}</div>
 <div class="brandSub">Asansör Bakım & Revizyon • Asansör sicil kartı</div>
@@ -30896,11 +30809,11 @@ body.darkMode #abrDocumentCenter,html.darkRoot #abrDocumentCenter{background:#0b
   function esc(value){return String(value==null?"":value).replace(/[&<>\"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[c]})}
   function today(){var d=new Date(),off=d.getTimezoneOffset();return new Date(d.getTime()-off*60000).toISOString().slice(0,10)}
   function dateLabel(value){if(!value)return "-";var p=String(value).split("-");return p.length===3?p[2]+"."+p[1]+"."+p[0]:value}
-  function profile(){try{var p=typeof profilBilgileri==="function"?profilBilgileri():{};p.logo=String(abrAccountStorage.getItem("abrProfilFirmaLogoV2237")||"").trim()||(typeof pdfProfilLogo==="function"?pdfProfilLogo():"");p.address=String(abrAccountStorage.getItem("abrProfilFirmaAdresiV2237")||"").trim();p.role=String(abrAccountStorage.getItem("abrProfilGorevV2237")||"").trim();p.city=[String(abrAccountStorage.getItem("abrProfilIlceV2237")||"").trim(),String(abrAccountStorage.getItem("abrProfilSehirV2237")||"").trim()].filter(Boolean).join(" / ");return p}catch(e){return{}}}
+  function profile(){try{var p=typeof profilBilgileri==="function"?profilBilgileri():{};p.logo=String(localStorage.getItem("abrProfilFirmaLogoV2237")||"").trim()||(typeof pdfProfilLogo==="function"?pdfProfilLogo():"");p.address=String(localStorage.getItem("abrProfilFirmaAdresiV2237")||"").trim();p.role=String(localStorage.getItem("abrProfilGorevV2237")||"").trim();p.city=[String(localStorage.getItem("abrProfilIlceV2237")||"").trim(),String(localStorage.getItem("abrProfilSehirV2237")||"").trim()].filter(Boolean).join(" / ");return p}catch(e){return{}}}
   function apartments(){try{return Array.isArray(data)?data:[]}catch(e){return[]}}
   function templateCards(){return Object.keys(templates).map(function(key){var t=templates[key];return '<button class="abrDocCard" type="button" onclick="belgeSablonDuzenle(\''+key+'\')"><span class="abrDocCardIcon">'+icon+'</span><b>'+esc(t.title)+'</b><small>'+esc(t.short)+'</small><span class="abrDocCardArrow">›</span></button>'}).join("")}
-  function loadArchive(){try{var parsed=JSON.parse(abrAccountStorage.getItem(archiveKey)||"[]");return Array.isArray(parsed)?parsed.filter(function(item){return item&&templates[item.type]}):[]}catch(e){return[]}}
-  function saveArchive(items){try{abrAccountStorage.setItem(archiveKey,JSON.stringify(items.slice(0,30)))}catch(e){}}
+  function loadArchive(){try{var parsed=JSON.parse(localStorage.getItem(archiveKey)||"[]");return Array.isArray(parsed)?parsed.filter(function(item){return item&&templates[item.type]}):[]}catch(e){return[]}}
+  function saveArchive(items){try{localStorage.setItem(archiveKey,JSON.stringify(items.slice(0,30)))}catch(e){}}
   function renderHistory(){var box=el("abrDocHistoryList"),count=el("abrDocHistoryCount"),items=loadArchive();if(!box)return;if(count)count.textContent=items.length+" belge";if(!items.length){box.innerHTML='<div class="abrDocEmpty">Hazırladığın belgeler burada düzenli şekilde saklanacak.</div>';return}box.innerHTML=items.slice(0,6).map(function(item){return '<article class="abrDocHistoryItem"><span class="abrDocHistoryMark">'+icon+'</span><span class="abrDocHistoryText"><b>'+esc(item.title)+'</b><small>'+esc(item.apartment||"Apartman seçilmedi")+' · '+esc(dateLabel(item.date))+'</small></span><button type="button" aria-label="Belgeyi aç" onclick="belgeSablonArsivAc(\''+esc(item.id)+'\')">›</button></article>'}).join("")}
   function fillApartmentSelect(){var select=el("abrDocApartment"),items=apartments();if(!select)return;select.innerHTML='<option value="">Apartman seç…</option>'+items.map(function(a,i){return '<option value="'+i+'">'+esc(a&&a.ad?a.ad:"İsimsiz apartman")+'</option>'}).join("")}
   function currentContext(){var idx=el("abrDocApartment").value,a=idx===""?{}:(apartments()[Number(idx)]||{}),p=profile();return{type:activeType,title:(templates[activeType]||{}).title||"Belge",apartment:a.ad||"",manager:el("abrDocManager").value.trim(),phone:el("abrDocPhone").value.trim(),date:el("abrDocDate").value,number:el("abrDocNumber").value.trim(),subject:el("abrDocSubject").value.trim(),note:el("abrDocNote").value.trim(),text:el("abrDocText").value.trim(),company:p.firma||"Asansör Bakım & Revizyon",technician:p.ad||"",companyPhone:p.telefon||"",companyLogo:p.logo||"",companyAddress:p.address||"",companyRole:p.role||"",companyCity:p.city||""}}
@@ -31492,7 +31405,7 @@ ${elevatorXPdfSafetyScript()}</head>
 
 <div class="header">
 <div class="brand">
-<img src="${ayHtml(pdfLogo)}">
+<img src="${pdfLogo}">
 <div>
 <div class="brandTitle">${pdfFirma}</div>
 <div class="brandSub">Asansör Bakım & Revizyon • Parça değişim geçmişi</div>
@@ -32859,7 +32772,7 @@ if(confirmButton) confirmButton.disabled = true;
 let silinen = abrStbDerinKopya(data[i]);
 
 try{
-abrAccountStorage.setItem("abrSonSilinenApartmanV2017", JSON.stringify({
+localStorage.setItem("abrSonSilinenApartmanV2017", JSON.stringify({
 silinmeTarihi:new Date().toISOString(),
 apartman:silinen
 }));
@@ -33176,48 +33089,29 @@ bakimChecklistAc(i);
 
 
 
-/* v2.2.81 — Yedek ve PDF profil görsellerinde yalnız raster veri URL'leri kullanılır. */
-function abrProfilGorseliGuvenliUrl(value){
-if(typeof value !== "string") return "";
-let kaynak = value.trim();
-let eslesme = /^data:image\/(png|jpeg|jpg|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/i.exec(kaynak);
-if(!eslesme || eslesme[2].length % 4 !== 0) return "";
-
-let baslik;
-try{
-baslik = atob(eslesme[2].slice(0,32));
-}catch(err){
-return "";
-}
-
-let tur = eslesme[1].toLowerCase();
-let uygun =
-(tur === "png" && baslik.slice(0,8) === "\x89PNG\r\n\x1a\n") ||
-((tur === "jpeg" || tur === "jpg") && baslik.slice(0,3) === "\xff\xd8\xff") ||
-(tur === "gif" && (baslik.slice(0,6) === "GIF87a" || baslik.slice(0,6) === "GIF89a")) ||
-(tur === "webp" && baslik.slice(0,4) === "RIFF" && baslik.slice(8,12) === "WEBP");
-
-return uygun ? kaynak : "";
-}
-
 function pdfProfilLogo(){
-let kayitli = abrProfilGorseliGuvenliUrl(abrAccountStorage.getItem("profilePhoto"));
-if(kayitli) return kayitli;
+let kayitli = localStorage.getItem("profilePhoto");
+
+if(kayitli && kayitli.trim()){
+return kayitli;
+}
 
 let img = document.getElementById("profilePhoto");
-let gorunen = abrProfilGorseliGuvenliUrl(img && img.src);
-if(gorunen) return gorunen;
 
-return abrProfilGorseliGuvenliUrl(typeof APP_LOGO !== "undefined" ? APP_LOGO : "");
+if(img && img.src){
+return img.src;
+}
+
+return typeof APP_LOGO !== "undefined" ? APP_LOGO : "";
 }
 
 function pdfFirmaBilgi(){
 let p = typeof profilBilgileri === "function"
 ? profilBilgileri()
 : {
-ad:(abrAccountStorage.getItem("profilAd") || "").trim(),
-firma:(abrAccountStorage.getItem("profilFirma") || "").trim(),
-telefon:(abrAccountStorage.getItem("profilTelefon") || "").trim()
+ad:(localStorage.getItem("profilAd") || "").trim(),
+firma:(localStorage.getItem("profilFirma") || "").trim(),
+telefon:(localStorage.getItem("profilTelefon") || "").trim()
 };
 
 return {
@@ -33487,7 +33381,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="topBand"></div>
 <div class="header">
   <div class="brand">
-    <img src="${ayHtml(pdfLogo)}">
+    <img src="${pdfLogo}">
     <div>
       <div class="brandTitle">${ayHtml(pdfFirma)}</div>
       <div class="brandSub">${ayHtml(APP_NAME)} • ${ayHtml(teklifAltBaslik)}</div>
@@ -34350,7 +34244,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="topBand"></div>
 <div class="header">
 <div class="brand">
-<img src="${ayHtml(pdfLogo)}">
+<img src="${pdfLogo}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Cari hesap özeti</div>
@@ -34691,7 +34585,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="inner">
 <div class="header">
 <div class="brand">
-<img class="logo" src="${ayHtml(pdfLogo)}">
+<img class="logo" src="${pdfLogo}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Dijital tahsilat makbuzu</div>
@@ -34759,9 +34653,6 @@ w.document.close();
 
 function pdf(i){
 
-const role=window.__abrAppRole;
-if(role!=="admin"&&role!=="personnel"){toast("Bakım raporu için giriş yap.");return;}
-const maliBilgiYetkisi=role==="admin";
 haptic("medium");
 
 let a = data[i];
@@ -34842,22 +34733,6 @@ cari.kalanPozitif > 0
   ? `${tutarFormat(cari.alacak)} fazla ödeme bulunmaktadır.`
   : "Cari hesap bakiyesi kapalıdır.");
 
-/* v2.2.78 — Tahsilat ve eski kapanış mahsubundan sonra kalan borcu ayır. */
-let raporBakimAyi = bakimTarihKey(bakimTarihi).slice(0,7);
-let raporMahsup = Math.max(0,Number(cari.toplam || 0) + Number(cari.kapanisMahsubu || 0));
-let raporBuBakimBorc = 0;
-(cari.kalemler || []).filter(function(k){return Number(k.tutar || 0) > 0;}).slice().sort(function(x,y){
-return bakimTarihKey(x.tarih).localeCompare(bakimTarihKey(y.tarih));
-}).forEach(function(k){
-let tutar = Number(k.tutar || 0);
-let karsilanan = Math.min(tutar,raporMahsup);
-raporMahsup -= karsilanan;
-if(k.tip === "Bakım" && bakimTarihKey(k.tarih).slice(0,7) === raporBakimAyi){
-raporBuBakimBorc += tutar - karsilanan;
-}
-});
-raporBuBakimBorc = Math.min(cari.kalanPozitif,Math.max(0,raporBuBakimBorc));
-let raporOncekiBorc = Math.max(0,cari.kalanPozitif - raporBuBakimBorc);
 let cariSonOdeme = cari.sonOdeme || "-";
 
 let teknikNot = a.not && String(a.not).trim()
@@ -35019,7 +34894,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="inner">
 <div class="header">
 <div class="brand">
-<img class="logo" src="${ayHtml(pdfLogo)}">
+<img class="logo" src="${pdfLogo}">
 <div>
 <div class="brandTitle">${ayHtml(pdfFirma)}</div>
 <div class="brandSub">${ayHtml(APP_NAME)} • Asansör bakım servis raporu</div>
@@ -35053,7 +34928,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="infoCard"><div class="label">Telefon</div><div class="value">${telefon}</div></div>
 <div class="infoCard"><div class="label">Bakım Günü</div><div class="value">${bakimGunu}</div></div>
 <div class="infoCard"><div class="label">Son Bakım Tarihi</div><div class="value">${sonBakim}</div></div>
-${maliBilgiYetkisi ? `<div class="infoCard"><div class="label">Bakım Ücreti</div><div class="value">${ucret}</div></div>` : ""}
+<div class="infoCard"><div class="label">Bakım Ücreti</div><div class="value">${ucret}</div></div>
 </div>
 
 <div class="summary">
@@ -35062,7 +34937,7 @@ ${maliBilgiYetkisi ? `<div class="infoCard"><div class="label">Bakım Ücreti</d
 <div class="infoCard"><div class="label">Durum</div><div class="value">Kayıtlı</div></div>
 </div>
 
-${maliBilgiYetkisi ? `<div class="financeSection ${cariDurumClass}">
+<div class="financeSection ${cariDurumClass}">
 <div class="financeHead">
 <div>
 <div class="financeTitle">Cari Durum / Borç Bilgisi</div>
@@ -35072,12 +34947,12 @@ ${maliBilgiYetkisi ? `<div class="financeSection ${cariDurumClass}">
 </div>
 <div class="financeGrid">
 <div class="financeItem"><span>Aylık Bakım</span><b>${ayHtml(tutarFormat(cari.anlasmaUcreti))}</b></div>
-<div class="financeItem"><span>Önceki / Diğer Borç</span><b>${ayHtml(tutarFormat(raporOncekiBorc))}</b></div>
+<div class="financeItem"><span>Toplam Tahsilat</span><b>${ayHtml(tutarFormat(cari.toplam))}</b></div>
 <div class="financeItem debt"><span>Açık Borç</span><b>${ayHtml(tutarFormat(cari.kalanPozitif))}</b></div>
 <div class="financeItem"><span>Son Ödeme</span><b>${ayHtml(cariSonOdeme)}</b></div>
 </div>
-<div class="financeNote">Bu bakımın kalan borcu: ${ayHtml(tutarFormat(raporBuBakimBorc))} • Toplam tahsilat: ${ayHtml(tutarFormat(cari.toplam))}. Önceki / diğer açık borç, bu bakım dışındaki ödenmemiş bakım, parça ve devreden borçları kapsar. Bu alan ödeme makbuzu yerine geçmez.</div>
-</div>` : ""}
+<div class="financeNote">Bu alan bilgilendirme amaçlıdır; ödeme makbuzu yerine geçmez.</div>
+</div>
 
 <div class="section">
 <div class="sectionHead">
@@ -35478,7 +35353,7 @@ ${elevatorXPdfSafetyScript()}
   <div class="topBand"></div>
   <div class="header">
     <div class="brand">
-      <img src="${ayHtml(pdfLogo)}">
+      <img src="${pdfLogo}">
       <div><div class="brandTitle">${ayHtml(pdfFirma)}</div><div class="brandSub">Asansör Bakım & Revizyon • Yönetim faaliyet raporu</div></div>
     </div>
     <div class="reportMeta"><b>Rapor No:</b> ${ayHtml(raporNo)}<br><b>Rapor Tarihi:</b> ${ayHtml(bugun())}<br><b>Dönem:</b> ${ayHtml(rapor.donem.etiket)}</div>
@@ -35604,7 +35479,7 @@ function stokIdOlustur(){
 
 function stokEnvanteriGet(){
   try{
-    let kayit = JSON.parse(abrAccountStorage.getItem(EX_STOCK_KEY) || "[]");
+    let kayit = JSON.parse(localStorage.getItem(EX_STOCK_KEY) || "[]");
     return stokEnvanteriNormalize(kayit);
   }catch(e){
     return [];
@@ -35633,7 +35508,7 @@ function stokEnvanteriNormalize(liste){
 
 function stokEnvanteriSet(liste, yedekAl){
   let temiz = stokEnvanteriNormalize(liste);
-  abrAccountStorage.setItem(EX_STOCK_KEY, JSON.stringify(temiz));
+  localStorage.setItem(EX_STOCK_KEY, JSON.stringify(temiz));
   if(yedekAl !== false){
     try{ autoYedekAl(true); }catch(e){}
   }
@@ -36090,7 +35965,7 @@ prefix:"asansor-bakim-revizyon-yedek",
 paylas:true
 });
 
-abrAccountStorage.setItem("elevatorxLastManualBackupAt", yedek.olusturmaTarihi);
+localStorage.setItem("elevatorxLastManualBackupAt", yedek.olusturmaTarihi);
 disYedekBilgiGuncelle();
 
 let bulutaKaydedildi = false;
@@ -36116,7 +35991,6 @@ toast("Yedek oluşturulamadı");
 
 
 function yedektenYukle(event){
-const restoreToken=abrAccountStorage.token();
 
 let file = event.target.files[0];
 
@@ -36146,7 +36020,6 @@ let uyariSayisi = 0;
 
 try{
 
-abrAccountStorage.assertCurrent(restoreToken);
 let yedek = JSON.parse(e.target.result);
 let hamData = abrStbYedekApartmanlariniAl(yedek);
 let normalizeSonucu = abrStbVeriyiNormalizeEt(abrStbDerinKopya(hamData));
@@ -36156,14 +36029,7 @@ if(normalizeSonucu.atlanan > 0){
 uyariSayisi += normalizeSonucu.atlanan;
 }
 
-let guvenliProfilFoto = abrProfilGorseliGuvenliUrl(yedek && yedek.profil && yedek.profil.profilFoto);
-let profilFotoGecersiz = !!(yedek && yedek.profil && yedek.profil.profilFoto && !guvenliProfilFoto);
-if(profilFotoGecersiz) uyariSayisi += 1;
-
 let onayMetni = yedekBilgiMetni(yedek,yeniData.length);
-if(profilFotoGecersiz){
-onayMetni += "\n\nProfil görseli geçersiz olduğu için aktarılmayacak. Mevcut görsel korunacak.";
-}
 
 if(yedek && yedek.surum){
 onayMetni = "Yedek sürümü: " + yedek.surum + "\n\n" + onayMetni;
@@ -36182,7 +36048,7 @@ return;
 }
 
 try{
-abrAccountStorage.setItem(
+localStorage.setItem(
 ABR_STB_PRE_RESTORE_KEY,
 JSON.stringify(yedekVeriOlustur("geri_yukleme_oncesi"))
 );
@@ -36209,36 +36075,32 @@ try{ meslekiBelgelerSet(yedek.meslekiBelgeler,false); }catch(err){ uyariSayisi +
 }
 
 if(yedek && Array.isArray(yedek.meslekiBelgeDosyalari)){
-abrAccountStorage.assertCurrent(restoreToken);
 try{ await meslekiBelgeYedektenDosyaYukle(yedek.meslekiBelgeDosyalari); }catch(err){ uyariSayisi += 1; }
 }
 
-abrAccountStorage.assertCurrent(restoreToken);
 if(yedek && Array.isArray(yedek.montajKesifleri)){
 try{ montajKesifSet(yedek.montajKesifleri,false); }catch(err){ uyariSayisi += 1; }
 }
 
 if(yedek && Array.isArray(yedek.montajKesifFotograflari)){
-abrAccountStorage.assertCurrent(restoreToken);
 try{ await montajKesifYedektenFotografYukle(yedek.montajKesifFotograflari); }catch(err){ uyariSayisi += 1; }
 }
 
-abrAccountStorage.assertCurrent(restoreToken);
 if(yedek && yedek.profil){
 
 try{
-abrAccountStorage.setItem("profilAd",yedek.profil.ad || "");
-abrAccountStorage.setItem("profilFirma",yedek.profil.firma || "");
-abrAccountStorage.setItem("profilBio",yedek.profil.bio || "");
-abrAccountStorage.setItem("profilTelefon",yedek.profil.telefon || "");
+localStorage.setItem("profilAd",yedek.profil.ad || "");
+localStorage.setItem("profilFirma",yedek.profil.firma || "");
+localStorage.setItem("profilBio",yedek.profil.bio || "");
+localStorage.setItem("profilTelefon",yedek.profil.telefon || "");
 
-if(guvenliProfilFoto){
-abrAccountStorage.setItem("profilePhoto",guvenliProfilFoto);
-if(window.profilePhoto) profilePhoto.src = guvenliProfilFoto;
+if(yedek.profil.profilFoto){
+localStorage.setItem("profilePhoto",yedek.profil.profilFoto);
+if(window.profilePhoto) profilePhoto.src = yedek.profil.profilFoto;
 }
 
 if(yedek.profil.kapakFoto){
-abrAccountStorage.setItem("coverPhoto",yedek.profil.kapakFoto);
+localStorage.setItem("coverPhoto",yedek.profil.kapakFoto);
 if(window.coverPhoto) coverPhoto.style.backgroundImage = `url('${yedek.profil.kapakFoto}')`;
 }
 
@@ -36255,14 +36117,14 @@ uyariSayisi += 1;
 
 if(yedek && yedek.tema){
 try{
-abrAccountStorage.setItem("tema",yedek.tema);
+localStorage.setItem("tema",yedek.tema);
 temaUygula();
 }catch(themeErr){
 uyariSayisi += 1;
 }
 }
 
-abrAccountStorage.setItem("elevatorxLastRestoreAt", new Date().toISOString());
+localStorage.setItem("elevatorxLastRestoreAt", new Date().toISOString());
 
 aktifDetay = null;
 profilPanel.style.display = "none";
@@ -36359,7 +36221,7 @@ let acik = data.reduce(function(t,a){
 return t + cariOzet(a).kalanPozitif;
 },0);
 
-let sonYedek = abrAccountStorage.getItem("ayAutoBackupAt");
+let sonYedek = localStorage.getItem("ayAutoBackupAt");
 let sonYedekText = "-";
 
 if(sonYedek){
@@ -38499,10 +38361,7 @@ reject(req.error);
 
 async function ayDbKaydet(key,value){
 
-const token=abrAccountStorage.token();
-key=abrAccountStorage.idbKey(key);
 const db = await ayDbAc();
-abrAccountStorage.assertCurrent(token);
 
 return new Promise((resolve,reject)=>{
 
@@ -38512,7 +38371,7 @@ db.transaction(AY_DB_STORE,"readwrite");
 tx.objectStore(AY_DB_STORE).put(value,key);
 
 tx.oncomplete = function(){
-try{abrAccountStorage.assertCurrent(token);resolve()}catch(error){reject(error)}
+resolve();
 };
 
 tx.onerror = function(){
@@ -38525,10 +38384,7 @@ reject(tx.error);
 
 async function ayDbOku(key){
 
-const token=abrAccountStorage.token();
-key=abrAccountStorage.idbKey(key);
 const db = await ayDbAc();
-abrAccountStorage.assertCurrent(token);
 
 return new Promise((resolve,reject)=>{
 
@@ -38539,7 +38395,7 @@ const req =
 tx.objectStore(AY_DB_STORE).get(key);
 
 req.onsuccess = function(){
-try{abrAccountStorage.assertCurrent(token);resolve(req.result)}catch(error){reject(error)}
+resolve(req.result);
 };
 
 req.onerror = function(){
@@ -38552,7 +38408,6 @@ reject(req.error);
 
 
 function imageDosyasiniKucult(file,maxWidth,maxHeight,quality,callback){
-const accountToken=abrAccountStorage.token();
 
 const reader = new FileReader();
 
@@ -38587,7 +38442,7 @@ ctx.drawImage(img,0,0,width,height);
 let dataUrl =
 canvas.toDataURL("image/jpeg",quality);
 
-if(abrAccountStorage.owns()&&abrAccountStorage.token()===accountToken)callback(dataUrl);
+callback(dataUrl);
 
 };
 
@@ -38601,7 +38456,6 @@ reader.readAsDataURL(file);
 
 
 function imageDosyasiniBlobYap(file,maxWidth,maxHeight,quality,callback){
-const accountToken=abrAccountStorage.token();
 
 const reader = new FileReader();
 
@@ -38635,7 +38489,7 @@ ctx.drawImage(img,0,0,width,height);
 
 canvas.toBlob(function(blob){
 
-if(abrAccountStorage.owns()&&abrAccountStorage.token()===accountToken)callback(blob);
+callback(blob);
 
 },"image/jpeg",quality);
 
@@ -38650,17 +38504,16 @@ reader.readAsDataURL(file);
 }
 
 function blobuGoster(key,blob){
-const scopeToken=abrAccountStorage.token();
 
 if(!blob) return;
 
 function uygulaGorsel(src){
 
-if(!src || !abrAccountStorage.owns() || abrAccountStorage.token()!==scopeToken) return;
+if(!src) return;
 
 if(key === "profilePhotoBlob"){
 profilePhoto.src = src;
-try{ abrAccountStorage.setItem("profilePhoto", src); }catch(err){}
+try{ localStorage.setItem("profilePhoto", src); }catch(err){}
 }
 
 if(key === "coverPhotoBlob"){
@@ -38668,7 +38521,7 @@ let kapak = document.getElementById("coverPhoto");
 if(kapak){
 kapak.style.backgroundImage = `url('${src}')`;
 }
-try{ abrAccountStorage.setItem("coverPhoto", src); }catch(err){}
+try{ localStorage.setItem("coverPhoto", src); }catch(err){}
 }
 
 }
@@ -38711,7 +38564,7 @@ try{
 const reader = new FileReader();
 reader.onload = function(e){
 if(e.target && e.target.result){
-abrAccountStorage.setItem("profilePhoto", e.target.result);
+localStorage.setItem("profilePhoto", e.target.result);
 }
 };
 reader.readAsDataURL(blob);
@@ -38767,10 +38620,10 @@ if(window.profilBio) profilBio.oninput = kaydetProfil;
 
 function profilBilgileri(){
 return {
-ad:(abrAccountStorage.getItem("profilAd") || (window.profilAd ? profilAd.value : "") || "").trim(),
-firma:(abrAccountStorage.getItem("profilFirma") || (window.profilFirma ? profilFirma.value : "") || "").trim(),
-telefon:(abrAccountStorage.getItem("profilTelefon") || (window.profilTelefon ? profilTelefon.value : "") || "").trim(),
-bio:(abrAccountStorage.getItem("profilBio") || (window.profilBio ? profilBio.value : "") || "").trim()
+ad:(localStorage.getItem("profilAd") || (window.profilAd ? profilAd.value : "") || "").trim(),
+firma:(localStorage.getItem("profilFirma") || (window.profilFirma ? profilFirma.value : "") || "").trim(),
+telefon:(localStorage.getItem("profilTelefon") || (window.profilTelefon ? profilTelefon.value : "") || "").trim(),
+bio:(localStorage.getItem("profilBio") || (window.profilBio ? profilBio.value : "") || "").trim()
 };
 }
 
@@ -38808,11 +38661,11 @@ toast("İsim soyisim girmen gerekiyor");
 return;
 }
 
-abrAccountStorage.setItem("profilAd",ad);
-abrAccountStorage.setItem("profilFirma",firma);
-abrAccountStorage.setItem("profilTelefon",telefon);
-abrAccountStorage.setItem("profilBio",bio);
-abrAccountStorage.setItem("profilKuruldu","1");
+localStorage.setItem("profilAd",ad);
+localStorage.setItem("profilFirma",firma);
+localStorage.setItem("profilTelefon",telefon);
+localStorage.setItem("profilBio",bio);
+localStorage.setItem("profilKuruldu","1");
 
 if(window.profilAd) profilAd.value = ad;
 if(window.profilFirma) profilFirma.value = firma;
@@ -38880,11 +38733,11 @@ hukukiKapat();
 
 function kaydetProfil(){
 
-if(window.profilAd) abrAccountStorage.setItem("profilAd",profilAd.value);
-if(window.profilFirma) abrAccountStorage.setItem("profilFirma",profilFirma.value);
-if(window.profilTelefon) abrAccountStorage.setItem("profilTelefon",profilTelefon.value);
-if(window.profilBio) abrAccountStorage.setItem("profilBio",profilBio.value);
-abrAccountStorage.setItem("profilKuruldu","1");
+if(window.profilAd) localStorage.setItem("profilAd",profilAd.value);
+if(window.profilFirma) localStorage.setItem("profilFirma",profilFirma.value);
+if(window.profilTelefon) localStorage.setItem("profilTelefon",profilTelefon.value);
+if(window.profilBio) localStorage.setItem("profilBio",profilBio.value);
+localStorage.setItem("profilKuruldu","1");
 autoYedekAl(true);
 autoYedekBilgiGuncelle();
 
@@ -38895,7 +38748,7 @@ window.addEventListener("load",()=>{
 abrStbStabiliteBaslat();
 temaUygula();
 autoYedekBilgiGuncelle();
-if(!abrAccountStorage.getItem(AUTO_YEDEK_KEY)){
+if(!localStorage.getItem(AUTO_YEDEK_KEY)){
 autoYedekAl(true);
 }
 
@@ -38920,7 +38773,7 @@ blobuGoster("profilePhotoBlob",blob);
 .catch(()=>{});
 
 const savedCover =
-abrAccountStorage.getItem("coverPhoto");
+localStorage.getItem("coverPhoto");
 
 if(savedCover){
 
@@ -38932,7 +38785,7 @@ document.getElementById(
 }
 
 let p1 =
-abrAccountStorage.getItem("profilePhoto");
+localStorage.getItem("profilePhoto");
 
 if(p1){
 
@@ -38941,7 +38794,7 @@ profilePhoto.src = p1;
 }
 
 let p3 =
-abrAccountStorage.getItem("profilAd");
+localStorage.getItem("profilAd");
 
 if(p3){
 
@@ -38950,7 +38803,7 @@ profilAd.value = p3;
 }
 
 let p4 =
-abrAccountStorage.getItem("profilFirma");
+localStorage.getItem("profilFirma");
 
 if(p4){
 
@@ -38959,7 +38812,7 @@ profilFirma.value = p4;
 }
 
 let p5 =
-abrAccountStorage.getItem("profilBio");
+localStorage.getItem("profilBio");
 
 if(p5){
 
@@ -38968,7 +38821,7 @@ profilBio.value = p5;
 }
 
 let p6 =
-abrAccountStorage.getItem("profilTelefon");
+localStorage.getItem("profilTelefon");
 
 if(p6 && window.profilTelefon){
 
@@ -39378,34 +39231,16 @@ document.addEventListener("DOMContentLoaded",function(){
 setTimeout(function(){
 try{ quickAddGuncelle(); }catch(e){}
 },250);
-setInterval(function(){
+document.addEventListener("visibilitychange",function(){
+if(document.visibilityState === "visible"){
 try{ quickAddGuncelle(); }catch(e){}
-},900);
+}
+});
+window.addEventListener("focus",function(){
+try{ quickAddGuncelle(); }catch(e){}
+});
 });
 
-
-window.addEventListener("abr-account-data-changed",function(){
-  const token=abrAccountStorage.token();
-  ["cariYonetimModalKapat","cariKayitEditorKapat","cariKayitSilOnayiKapat","eskiBakiyeModalKapat","tahsilatModalKapat","apartmanSilModalKapat","bakimChecklistKapat","meslekiBelgeFormKapat","meslekiBelgelerKapat","stokEnvanteriKapat","stokKalemFormKapat","stokHareketFormKapat","sozlesmeFormKapat","sozlesmeTakvimiKapat","muayeneFormKapat","montajKesifKapat","surusAnaliziKapat","luxKontroluKapat","topluListeAktarKapat","abrVeriMerkeziKapat","abrPersonelDavetMerkeziKapat","haritaMerkeziKapat","haritaKonumSeciciKapat","abrProfileSetupClose"].forEach(function(name){try{if(typeof window[name]==="function")window[name]()}catch(error){}});
-  data=abrStbVeriOku();editIndex=null;aktifDetay=null;aktifFiltre="all";
-  window.__abrStbLastGoodData=abrStbDerinKopya(data);
-  window.__abrStbLastSaveError="";
-  ["profilAd","profilFirma","profilTelefon","profilBio"].forEach(function(key){const field=document.getElementById(key);if(field)field.value=abrAccountStorage.getItem(key)||""});
-  const photo=document.getElementById("profilePhoto");if(photo)photo.src=abrAccountStorage.getItem("profilePhoto")||APP_LOGO;
-  const cover=document.getElementById("coverPhoto");if(cover)cover.style.backgroundImage="";
-  if(typeof exSurveyDraft!=="undefined"){exSurveyDraft=null;exSurveyEditingId=null;}
-  if(typeof exProfessionalDocPendingFile!=="undefined")exProfessionalDocPendingFile=null;
-  if(typeof abrBulkReset==="function"){abrBulkReset(false);window.topluListeAktarKapat()}
-  ["ad","yonetici","tel","ucret","bakimGunu","not","search"].forEach(function(id){const field=document.getElementById(id);if(field)field.value=""});
-  try{abrSharedGeciciTemizle(abrSharedDetailContext);abrSharedDetailContext=null;haritaFormKonumSifirla()}catch(error){}
-  try{anaSayfa()}catch(error){}
-  try{goster()}catch(error){}
-  try{profilAlanlariniDoldur();profilKontrolMerkeziGuncelle()}catch(error){}
-  if(abrAccountStorage.owns()){
-    ["profilePhotoBlob","coverPhotoBlob"].forEach(function(key){ayDbOku(key).then(function(blob){if(abrAccountStorage.token()===token&&blob)blobuGoster(key,blob)}).catch(function(){})});
-    const cached=abrAccountStorage.getItem("coverPhoto");if(cover&&cached)cover.style.backgroundImage="url('"+cached+"')";
-  }
-});
 </script>
 
 
@@ -39434,7 +39269,9 @@ window.addEventListener("abr-account-data-changed",function(){
       }
     }catch(e){}
 
-    setInterval(elevatorXProfilModeSync, 650);
+    document.addEventListener("visibilitychange", function(){
+      if(document.visibilityState === "visible") elevatorXProfilModeSync();
+    });
   });
 
   window.addEventListener("load", elevatorXProfilModeSync);
@@ -39522,7 +39359,9 @@ window.addEventListener("abr-account-data-changed",function(){
       }catch(e){}
     });
 
-    setInterval(ayTopSearchSync, 700);
+    document.addEventListener("visibilitychange", function(){
+      if(document.visibilityState === "visible") ayTopSearchSync();
+    });
   });
 
   window.addEventListener("load", ayTopSearchSync);
@@ -39615,8 +39454,8 @@ let exSurveyObjectUrls = [];
 function montajKesifId(){return "ksf_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
 function montajKesifBugun(){let d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function montajKesifNormalize(list){let gorulen=Object.create(null);return(Array.isArray(list)?list:[]).filter(function(k){return k&&typeof k==="object"&&!Array.isArray(k)}).map(function(k){if(!abrStbGuvenliIdMi(k.id)||gorulen[k.id])k.id=montajKesifId();gorulen[k.id]=true;let katGorulen=Object.create(null);(Array.isArray(k.katlar)?k.katlar:[]).forEach(function(f){if(!f||typeof f!=="object")return;if(!abrStbGuvenliIdMi(f.id)||katGorulen[f.id])f.id=montajKesifId();katGorulen[f.id]=true});let fotoGorulen=Object.create(null);(Array.isArray(k.photos)?k.photos:[]).forEach(function(p){if(!p||typeof p!=="object")return;if(!abrStbGuvenliIdMi(p.id)||fotoGorulen[p.id])p.id=montajKesifId();fotoGorulen[p.id]=true});return k})}
-function montajKesifGet(){try{let x=JSON.parse(abrAccountStorage.getItem(EX_SURVEY_KEY)||"[]");return montajKesifNormalize(x)}catch(e){return []}}
-function montajKesifSet(list,yedek){abrAccountStorage.setItem(EX_SURVEY_KEY,JSON.stringify(montajKesifNormalize(list)));if(yedek!==false){try{autoYedekAl(true)}catch(e){}}}
+function montajKesifGet(){try{let x=JSON.parse(localStorage.getItem(EX_SURVEY_KEY)||"[]");return montajKesifNormalize(x)}catch(e){return []}}
+function montajKesifSet(list,yedek){localStorage.setItem(EX_SURVEY_KEY,JSON.stringify(montajKesifNormalize(list)));if(yedek!==false){try{autoYedekAl(true)}catch(e){}}}
 function montajKesifSayi(v){let n=Number(String(v==null?"":v).replace(",","."));return Number.isFinite(n)?n:0}
 function montajKesifMm(v){let n=montajKesifSayi(v);return n?n.toLocaleString("tr-TR")+" mm":"-"}
 function montajKesifTemiz(v){return String(v==null?"":v).trim()}
@@ -39673,7 +39512,7 @@ function montajKesifSil(id){let k=montajKesifBul(id);if(!k)return;if(!confirm((k
 function montajKesifFotoSec(){let input=document.getElementById("exSurveyPhotoInput");if(input){input.value="";input.click()}}
 function montajKesifDosyaBlob(file){return new Promise(function(resolve,reject){if(typeof imageDosyasiniBlobYap!=="function"){reject(new Error("Görsel işleme kullanılamıyor"));return}imageDosyasiniBlobYap(file,1400,1100,.72,function(blob){blob?resolve(blob):reject(new Error("Fotoğraf işlenemedi"))})})}
 async function montajKesifFotoEkle(files){if(!exSurveyDraft)return;let arr=Array.from(files||[]);if(!arr.length)return;if(!Array.isArray(exSurveyDraft.photos))exSurveyDraft.photos=[];let kalan=Math.max(0,12-exSurveyDraft.photos.length);arr=arr.slice(0,kalan);if(!arr.length){toast("En fazla 12 fotoğraf eklenebilir");return}toast("Fotoğraflar hazırlanıyor...");for(let file of arr){try{let blob=await montajKesifDosyaBlob(file);let id=montajKesifId(),key="survey_photo_"+exSurveyDraft.id+"_"+id;await ayDbKaydet(key,blob);exSurveyDraft.photos.push({id:id,key:key,name:file.name||"Saha fotoğrafı",label:"Saha Fotoğrafı "+(exSurveyDraft.photos.length+1),createdAt:new Date().toISOString()})}catch(e){console.warn(e)}}montajKesifFormRender();toast("Fotoğraflar eklendi")}
-async function montajKesifFotoBlobSil(key){if(!key)return;const token=abrAccountStorage.token();key=abrAccountStorage.idbKey(key);const db=await ayDbAc();abrAccountStorage.assertCurrent(token);return new Promise(function(resolve,reject){let tx=db.transaction(AY_DB_STORE,"readwrite");tx.objectStore(AY_DB_STORE).delete(key);tx.oncomplete=function(){resolve()};tx.onerror=function(){reject(tx.error)}})}
+async function montajKesifFotoBlobSil(key){if(!key)return;const db=await ayDbAc();return new Promise(function(resolve,reject){let tx=db.transaction(AY_DB_STORE,"readwrite");tx.objectStore(AY_DB_STORE).delete(key);tx.oncomplete=function(){resolve()};tx.onerror=function(){reject(tx.error)}})}
 async function montajKesifFotoSil(id){if(!exSurveyDraft||!Array.isArray(exSurveyDraft.photos))return;let i=exSurveyDraft.photos.findIndex(function(x){return x&&x.id===id});if(i<0)return;let p=exSurveyDraft.photos[i];try{await montajKesifFotoBlobSil(p.key)}catch(e){}exSurveyDraft.photos.splice(i,1);montajKesifFormRender()}
 function montajKesifObjectUrlTemizle(){exSurveyObjectUrls.forEach(function(u){try{URL.revokeObjectURL(u)}catch(e){}});exSurveyObjectUrls=[]}
 async function montajKesifFotolariRender(){let grid=document.getElementById("exSurveyPhotoGrid");if(!grid||!exSurveyDraft)return;montajKesifObjectUrlTemizle();let photos=Array.isArray(exSurveyDraft.photos)?exSurveyDraft.photos:[];if(!photos.length){grid.innerHTML='<div class="exSurveyEmpty" style="grid-column:1/-1;padding:18px">Fotoğraf eklenmedi.</div>';return}grid.innerHTML=photos.map(function(p){return`<div class="exPhotoItem" data-photo="${p.id}"><span>${montajKesifHtml(p.label||p.name)}</span><button onclick="montajKesifFotoSil('${p.id}')">×</button></div>`}).join("");for(let p of photos){try{let blob=await ayDbOku(p.key);let box=grid.querySelector('[data-photo="'+p.id+'"]');if(blob&&box){let url=URL.createObjectURL(blob);exSurveyObjectUrls.push(url);let img=document.createElement("img");img.src=url;img.alt=p.label||"Saha fotoğrafı";box.prepend(img)}}catch(e){}}}
@@ -39886,7 +39725,7 @@ body > .header.headerClean .headerBrand{
 </head><body><section class="page"><div class="head"><div><div class="brand">Asansör Bakım &amp; Revizyon</div><div class="sub">Montaj & Keşif Ölçüm Dosyası</div></div><div class="tag">${montajKesifHtml(k.tur||"Keşif")}</div></div><div class="grid"><div class="box"><span>Proje</span><b>${montajKesifHtml(k.projeAdi||"-")}</b></div><div class="box"><span>Tarih</span><b>${montajKesifTarih(k.tarih)}</b></div><div class="box"><span>Yetkili</span><b>${montajKesifHtml(k.yetkili||"-")}</b></div><div class="box"><span>Telefon</span><b>${montajKesifHtml(k.telefon||"-")}</b></div><div class="box"><span>Ölçümü Alan</span><b>${montajKesifHtml(k.olcumuAlan||profil.ad||"-")}</b></div><div class="box"><span>Kapasite / Tahrik</span><b>${montajKesifHtml(k.kapasite||"-")} • ${montajKesifHtml(k.tahrik||"-")}</b></div></div><h2>Kuyu Ölçüleri</h2><div class="grid"><div class="box"><span>Genişlik × Derinlik</span><b>${montajKesifMm(q.genislik)} × ${montajKesifMm(q.derinlik)}</b></div><div class="box"><span>Kuyu Dibi / Son Kat</span><b>${montajKesifMm(q.kuyuDibi)} / ${montajKesifMm(q.sonKat)}</b></div><div class="box"><span>Seyir Mesafesi</span><b>${montajKesifMm(q.seyir)}</b></div><div class="box"><span>Karşı Ağırlık</span><b>${montajKesifHtml(q.karşıAgirlik||"-")}</b></div></div><h2>Otomatik Keşif Çizimi</h2><div class="drawings"><div class="drawing"><h3>Kuyu Planı</h3>${montajKesifPlanSvg(k)}</div><div class="drawing"><h3>Kat Kesiti</h3>${montajKesifKesitSvg(k)}</div></div><div class="alert">${eks.length?`Eksik kritik alanlar: ${montajKesifHtml(eks.join(" • "))}`:"Kritik kuyu ve kapı ölçüleri tamamlandı."}<br>Bu şema saha keşif özetidir; onaylı uygulama projesi yerine geçmez.</div><div class="foot"><span>${montajKesifHtml(profil.firma||"Asansör Bakım & Revizyon")}</span><span>Sürüm ${montajKesifHtml(typeof APP_VERSION!=="undefined"?APP_VERSION:"v1.8.00")}</span></div></section><section class="page"><div class="head"><div><div class="brand">Kat ve Kapı Ölçüleri</div><div class="sub">Kapı cephesi ve açılım yönleri</div></div><div class="tag">${montajKesifDurakSayisi(k)} Durak</div></div><h2>Kat Listesi</h2><table><thead><tr><th>#</th><th>Kat</th><th>Kat Yüksekliği</th><th>Kapı Ölçüsü</th><th>Cephe</th><th>Açılım</th><th>Durak</th></tr></thead><tbody>${rows}</tbody></table><h2>Adres</h2><div class="notes">${montajKesifHtml(k.adres||"-")}</div><h2>Genel Not</h2><div class="notes">${montajKesifHtml(k.not||"Not girilmedi")}</div><h2>Kuyu / Ray Notu</h2><div class="notes">${montajKesifHtml(q.rayNotu||"Not girilmedi")}</div><div class="foot"><span>Asansör Bakım & Revizyon Montaj & Keşif</span><span>${new Date().toLocaleDateString("tr-TR")}</span></div></section>${photoHtml}<div class="actions"><button onclick="window.print()">PDF Oluştur / Paylaş</button></div></body></html>`);w.document.close();toast("Montaj keşif PDF’i hazırlandı")}
 
 async function montajKesifYedekFotograflariOlustur(){let list=montajKesifGet(),out=[];for(let k of list){for(let p of (Array.isArray(k.photos)?k.photos:[])){try{let b=await ayDbOku(p.key);if(b)out.push({key:p.key,data:await montajKesifBlobDataUrl(b),type:b.type||"image/jpeg"})}catch(e){}}}return out}
-async function montajKesifYedektenFotografYukle(list){const batchToken=abrAccountStorage.token();if(!Array.isArray(list))return;for(let x of list){abrAccountStorage.assertCurrent(batchToken);try{if(!x||!x.key||!x.data)continue;let b=await (await fetch(x.data)).blob();abrAccountStorage.assertCurrent(batchToken);await ayDbKaydet(x.key,b)}catch(e){console.warn("Keşif fotoğrafı yüklenemedi",e)}}}
+async function montajKesifYedektenFotografYukle(list){if(!Array.isArray(list))return;for(let x of list){try{if(!x||!x.key||!x.data)continue;let b=await (await fetch(x.data)).blob();await ayDbKaydet(x.key,b)}catch(e){console.warn("Keşif fotoğrafı yüklenemedi",e)}}}
 
 document.addEventListener("DOMContentLoaded",function(){let input=document.getElementById("exSurveyPhotoInput");if(input)input.addEventListener("change",function(e){montajKesifFotoEkle(e.target.files)})});
 </script>
@@ -41143,7 +40982,7 @@ window.ekipUygulamaBildirimiAc = function(){
 };
 function abrTeamSettingsGet(){
   try{
-    const value = JSON.parse(abrAccountStorage.getItem(ABR_TEAM_LOCAL_KEY) || "{}");
+    const value = JSON.parse(localStorage.getItem(ABR_TEAM_LOCAL_KEY) || "{}");
     if(value && typeof value === "object"){
       if(!value.teamCodes || typeof value.teamCodes !== "object")value.teamCodes = {};
       return value;
@@ -41154,7 +40993,7 @@ function abrTeamSettingsGet(){
 function abrTeamSettingsPatch(patch){
   const current = abrTeamSettingsGet();
   Object.keys(patch || {}).forEach(function(key){current[key] = patch[key]});
-  try{abrAccountStorage.setItem(ABR_TEAM_LOCAL_KEY,JSON.stringify(current))}catch(e){}
+  try{localStorage.setItem(ABR_TEAM_LOCAL_KEY,JSON.stringify(current))}catch(e){}
   return current;
 }
 function abrTeamSaveCode(teamId,code){
@@ -41533,10 +41372,8 @@ async function abrTeamEnsureClient(){
   return abrTeamState.client;
 }
 async function abrTeamEnsureSession(createIfMissing){
-  const lookupToken=abrAccountStorage.token();
   const client = await abrTeamEnsureClient();
   let result = await client.auth.getSession();
-  if(abrAccountStorage.token()!==lookupToken)throw new Error("Hesap değişti; oturum kontrolü durduruldu.");
   if(result.error)throw result.error;
   let session = result.data && result.data.session;
   if(!session && createIfMissing){
@@ -41545,8 +41382,6 @@ async function abrTeamEnsureSession(createIfMissing){
     if(signed.error)throw signed.error;
     session = signed.data && signed.data.session;
   }
-  if(abrAccountStorage.token()!==lookupToken)throw new Error("Hesap değişti; oturum kontrolü durduruldu.");
-  if(session && session.user)abrAccountStorage.enter(session.user.id);
   abrTeamState.user = session && session.user || null;
   return abrTeamState.user;
 }
@@ -41554,58 +41389,50 @@ function abrTeamLocalProfile(){
   let name = "Teknisyen";
   let phone = "";
   try{
-    name = abrTeamTrim(abrAccountStorage.getItem("profilAd") || "Teknisyen",60) || "Teknisyen";
-    phone = abrTeamTrim(abrAccountStorage.getItem("profilTelefon") || "",40);
+    name = abrTeamTrim(localStorage.getItem("profilAd") || "Teknisyen",60) || "Teknisyen";
+    phone = abrTeamTrim(localStorage.getItem("profilTelefon") || "",40);
   }catch(e){}
   if(name.length < 2)name = "Teknisyen";
   return {name:name,phone:phone};
 }
 async function abrTeamProfileSync(){
   if(!abrTeamState.user)return;
-  const owner=abrTeamState.user.id,client=abrTeamState.client,token=abrAccountStorage.token();
-  if(!abrAccountStorage.owns(owner))return;
   const profile = abrTeamLocalProfile();
-  const existing = await client
+  const existing = await abrTeamState.client
     .from("profiles")
     .select("user_id")
-    .eq("user_id",owner)
+    .eq("user_id",abrTeamState.user.id)
     .maybeSingle();
-  abrAccountStorage.assertCurrent(token);
-  if(!abrAccountStorage.owns(owner))return;
   if(existing.error)throw existing.error;
   const response = existing.data
-    ? await client.from("profiles").update({
+    ? await abrTeamState.client.from("profiles").update({
         display_name:profile.name,
         phone:profile.phone || null
-      }).eq("user_id",owner)
-    : await client.from("profiles").insert({
-        user_id:owner,
+      }).eq("user_id",abrTeamState.user.id)
+    : await abrTeamState.client.from("profiles").insert({
+        user_id:abrTeamState.user.id,
         display_name:profile.name,
         phone:profile.phone || null
       });
-  abrAccountStorage.assertCurrent(token);
   if(response.error)throw response.error;
-  abrTeamState.profiles[owner] = {
-    user_id:owner,
+  abrTeamState.profiles[abrTeamState.user.id] = {
+    user_id:abrTeamState.user.id,
     display_name:profile.name,
     phone:profile.phone || null
   };
 }
 async function abrTeamMembershipsLoad(){
-  const loadToken=abrAccountStorage.token();
   const response = await abrTeamState.client
     .from("team_members")
     .select("team_id,user_id,role,state,joined_at,availability_status,availability_updated_at")
     .eq("user_id",abrTeamState.user.id)
     .order("joined_at",{ascending:true});
-  abrAccountStorage.assertCurrent(loadToken);
   if(response.error)throw response.error;
   const memberships = Array.isArray(response.data) ? response.data : [];
   const ids = memberships.map(function(item){return item.team_id}).filter(Boolean);
   let teams = [];
   if(ids.length){
     const teamResponse = await abrTeamState.client.from("teams").select("id,name,created_by,created_at").in("id",ids);
-    abrAccountStorage.assertCurrent(loadToken);
     if(teamResponse.error)throw teamResponse.error;
     teams = Array.isArray(teamResponse.data) ? teamResponse.data : [];
   }
@@ -41689,18 +41516,14 @@ function abrTeamLocalApartments(){
 }
 async function abrTeamApartmentsSync(force){
   if(!abrTeamState.teamId || !abrTeamState.user)return 0;
-  const owner=abrTeamState.user.id,teamId=abrTeamState.teamId,client=abrTeamState.client,token=abrAccountStorage.token();
-  if(!abrAccountStorage.owns(owner))return 0;
-  function check(){abrAccountStorage.assertCurrent(token);if(!abrAccountStorage.owns(owner)||abrTeamState.teamId!==teamId)throw new Error("Ekip hesabı değişti; aktarım durduruldu.")}
-  const last = Number(abrTeamState.syncedTeams[teamId] || 0);
+  const last = Number(abrTeamState.syncedTeams[abrTeamState.teamId] || 0);
   if(!force && Date.now()-last < 5*60*1000)return abrTeamLocalApartments().length;
   const local = abrTeamLocalApartments();
-  if(!local.length){abrTeamState.syncedTeams[teamId]=Date.now();return 0}
-  const currentResponse = await client
+  if(!local.length){abrTeamState.syncedTeams[abrTeamState.teamId]=Date.now();return 0}
+  const currentResponse = await abrTeamState.client
     .from("shared_apartments")
     .select("id,local_code,name,created_by")
-    .eq("team_id",teamId);
-  check();
+    .eq("team_id",abrTeamState.teamId);
   if(currentResponse.error)throw currentResponse.error;
   const current = Array.isArray(currentResponse.data) ? currentResponse.data : [];
   const currentMap = Object.create(null);
@@ -41711,66 +41534,56 @@ async function abrTeamApartmentsSync(force){
     const existing = currentMap[item.local_code];
     if(!existing){
       missing.push({
-        team_id:teamId,
+        team_id:abrTeamState.teamId,
         local_code:item.local_code,
         name:item.name,
-        created_by:owner
+        created_by:abrTeamState.user.id
       });
     }else if(existing.name !== item.name){
       updates.push({id:existing.id,name:item.name});
     }
   });
   for(let start=0;start<missing.length;start+=100){
-    check();
-    const insertResponse = await client.from("shared_apartments").insert(missing.slice(start,start+100));
+    const insertResponse = await abrTeamState.client.from("shared_apartments").insert(missing.slice(start,start+100));
     if(insertResponse.error && !/duplicate key/i.test(insertResponse.error.message || ""))throw insertResponse.error;
   }
   for(const item of updates){
-    check();
-    const updateResponse = await client.from("shared_apartments").update({name:item.name}).eq("id",item.id);
+    const updateResponse = await abrTeamState.client.from("shared_apartments").update({name:item.name}).eq("id",item.id);
     if(updateResponse.error)throw updateResponse.error;
   }
-  check();
-  abrTeamState.syncedTeams[teamId] = Date.now();
+  abrTeamState.syncedTeams[abrTeamState.teamId] = Date.now();
   return local.length;
 }
 async function abrTeamMembersLoad(){
-  const loadToken=abrAccountStorage.token();
   const response = await abrTeamState.client
     .from("team_members")
     .select("team_id,user_id,role,state,joined_at,availability_status,availability_updated_at")
     .eq("team_id",abrTeamState.teamId)
     .order("joined_at",{ascending:true});
-  abrAccountStorage.assertCurrent(loadToken);
   if(response.error)throw response.error;
   abrTeamState.members = Array.isArray(response.data) ? response.data : [];
   const ids = abrTeamState.members.map(function(item){return item.user_id}).filter(Boolean);
   if(!ids.length)return;
   const profiles = await abrTeamState.client.from("profiles").select("user_id,display_name,phone").in("user_id",ids);
-  abrAccountStorage.assertCurrent(loadToken);
   if(profiles.error)throw profiles.error;
   (profiles.data || []).forEach(function(profile){abrTeamState.profiles[profile.user_id]=profile});
 }
 async function abrTeamApartmentsLoad(){
-  const loadToken=abrAccountStorage.token();
   const response = await abrTeamState.client
     .from("shared_apartments")
     .select("id,team_id,local_code,name,assigned_to,created_by,updated_at")
     .eq("team_id",abrTeamState.teamId)
     .order("name",{ascending:true});
-  abrAccountStorage.assertCurrent(loadToken);
   if(response.error)throw response.error;
   abrTeamState.apartments = Array.isArray(response.data) ? response.data : [];
 }
 async function abrTeamReportsLoad(){
-  const loadToken=abrAccountStorage.token();
   const response = await abrTeamState.client
     .from("fault_reports")
     .select("id,team_id,apartment_id,apartment_code,apartment_name,description,priority,status,reporter_id,assigned_to,created_at,updated_at,resolved_at")
     .eq("team_id",abrTeamState.teamId)
     .order("updated_at",{ascending:false})
     .limit(150);
-  abrAccountStorage.assertCurrent(loadToken);
   if(response.error)throw response.error;
   abrTeamState.reports = Array.isArray(response.data) ? response.data : [];
   abrTeamState.reads = Object.create(null);
@@ -41781,20 +41594,17 @@ async function abrTeamReportsLoad(){
       .select("report_id,last_read_at")
       .eq("user_id",abrTeamState.user.id)
       .in("report_id",ids);
-    abrAccountStorage.assertCurrent(loadToken);
     if(reads.error)throw reads.error;
     (reads.data || []).forEach(function(item){abrTeamState.reads[item.report_id]=item.last_read_at});
   }
   abrTeamBadgeUpdate();
 }
 async function abrTeamMessagesLoad(reportId){
-  const loadToken=abrAccountStorage.token();
   const response = await abrTeamState.client
     .from("fault_messages")
     .select("id,report_id,sender_id,body,created_at")
     .eq("report_id",reportId)
     .order("created_at",{ascending:true});
-  abrAccountStorage.assertCurrent(loadToken);
   if(response.error)throw response.error;
   abrTeamState.messages = Array.isArray(response.data) ? response.data : [];
 }
@@ -41803,7 +41613,6 @@ function abrTeamChatSetupMissing(error){
   return /PGRST205|42P01|team_chat_messages|team_chat_reads|team-files|reply_to_id|audio_duration_ms|relation .* does not exist|schema cache/i.test(raw);
 }
 async function abrTeamChatLoad(){
-  const loadToken=abrAccountStorage.token();
   if(!abrTeamState.teamId || !abrTeamState.user)return;
   try{
     const response = await abrTeamState.client
@@ -41812,7 +41621,6 @@ async function abrTeamChatLoad(){
       .eq("team_id",abrTeamState.teamId)
       .order("created_at",{ascending:true})
       .limit(250);
-    abrAccountStorage.assertCurrent(loadToken);
     if(response.error)throw response.error;
     abrTeamState.chatMessages = Array.isArray(response.data) ? response.data : [];
     const readResponse = await abrTeamState.client
@@ -41821,13 +41629,11 @@ async function abrTeamChatLoad(){
       .eq("team_id",abrTeamState.teamId)
       .eq("user_id",abrTeamState.user.id)
       .maybeSingle();
-    abrAccountStorage.assertCurrent(loadToken);
     if(readResponse.error)throw readResponse.error;
     abrTeamState.chatReadAt = readResponse.data && readResponse.data.last_read_at || null;
     abrTeamState.chatReady = true;
     abrTeamState.chatError = null;
   }catch(error){
-    if(abrAccountStorage.token()!==loadToken||!abrAccountStorage.owns())return;
     abrTeamState.chatMessages=[];
     abrTeamState.chatReadAt=null;
     abrTeamState.chatReady=false;
@@ -41903,14 +41709,11 @@ function abrTeamBadgeUpdate(){
 
 async function abrTeamContextLoad(options){
   if(!abrTeamState.teamId)return;
-  const loadToken=abrAccountStorage.token();
   const shouldSync = !options || options.sync !== false;
   if(shouldSync){
     try{await abrTeamApartmentsSync(false)}catch(error){console.warn("Ekip apartman eşitlemesi atlandı",error)}
   }
-  abrAccountStorage.assertCurrent(loadToken);
   await Promise.all([abrTeamMembersLoad(),abrTeamApartmentsLoad(),abrTeamReportsLoad(),abrTeamChatLoad()]);
-  abrAccountStorage.assertCurrent(loadToken);
   abrTeamRealtimeSubscribe();
 }
 function abrTeamRealtimeNotice(kind,payload){
@@ -42016,27 +41819,21 @@ async function abrTeamInit(createSession){
     if(createSession && !abrTeamState.user && !abrTeamState.error)return abrTeamInit(true);
     return;
   }
-  let initToken=abrAccountStorage.token();
   abrTeamState.error = null;
   abrTeamState.initPromise = (async function(){
     try{
       abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
       const user = await abrTeamEnsureSession(!!createSession);
       if(!user)return;
-      initToken=abrAccountStorage.token();
       await abrTeamProfileSync();
-      abrAccountStorage.assertCurrent(initToken);
       await abrTeamMembershipsLoad();
-      abrAccountStorage.assertCurrent(initToken);
       abrTeamMembershipSubscribe();
       abrPushBindUser().then(function(){
         if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
       });
       if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
-      abrAccountStorage.assertCurrent(initToken);
       if(!abrTeamState.channel)abrTeamSetConnection(navigator.onLine === false ? "offline" : "online");
     }catch(error){
-      if(abrAccountStorage.token()!==initToken)return;
       abrTeamState.error = abrTeamErrorText(error);
       console.warn("Ekip Arıza Merkezi başlatılamadı",error);
       abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
@@ -42127,7 +41924,7 @@ function abrTeamRenderSetup(){
   if(!body)return;
   const profile = abrTeamLocalProfile();
   let firm = "Asansör Ekibi";
-  try{firm = abrTeamTrim(abrAccountStorage.getItem("profilFirma") || "Asansör Ekibi",80) || "Asansör Ekibi"}catch(e){}
+  try{firm = abrTeamTrim(localStorage.getItem("profilFirma") || "Asansör Ekibi",80) || "Asansör Ekibi"}catch(e){}
   const personnelMode = typeof window.abrAppRoleGet === "function" && window.abrAppRoleGet() === "personnel";
   if(personnelMode)abrTeamState.setupMode = "join";
   const create = !personnelMode && abrTeamState.setupMode === "create";
@@ -43396,7 +43193,7 @@ document.addEventListener("DOMContentLoaded",function(){
   }
   setTimeout(function(){
     let hasSession=false;
-    try{hasSession=!!abrAccountStorage.getItem(ABR_TEAM_AUTH_KEY)}catch(e){}
+    try{hasSession=!!localStorage.getItem(ABR_TEAM_AUTH_KEY)}catch(e){}
     if(!hasSession)return;
     abrTeamInit(false).then(function(){abrTeamBadgeUpdate()});
   },3200);
@@ -43446,7 +43243,6 @@ async function abrTeamAccountContextReset(logoutPush){
   abrTeamState.membershipChannel=null;
   abrTeamState.membershipUserId=null;
   abrTeamState.refreshing=false;
-  abrTeamState.syncedTeams=Object.create(null);
   abrTeamState.lastBadge=-1;
   abrTeamState.connection="idle";
   abrTeamState.pushBoundUserId=null;
@@ -43485,16 +43281,13 @@ async function abrTeamAccountFunctionError(error,fallback){
 }
 async function abrTeamAccountProfileHydrate(userId){
   if(!userId||!abrTeamState.client)return;
-  const token=abrAccountStorage.token();
-  if(!abrAccountStorage.owns(userId))return;
   try{
     const result=await abrTeamState.client.from("profiles").select("display_name,phone").eq("user_id",userId).maybeSingle();
-    abrAccountStorage.assertCurrent(token);
-    if(!abrAccountStorage.owns(userId)||result.error||!result.data)return;
+    if(result.error||!result.data)return;
     const name=abrTeamTrim(result.data.display_name,60);
     const phone=abrTeamTrim(result.data.phone,40);
-    if(name.length>=2)abrAccountStorage.setItem("profilAd",name);
-    abrAccountStorage.setItem("profilTelefon",phone);
+    if(name.length>=2)localStorage.setItem("profilAd",name);
+    localStorage.setItem("profilTelefon",phone);
   }catch(error){}
 }
 window.abrTeamCredentialSignIn=async function(credentials){
@@ -43506,7 +43299,6 @@ window.abrTeamCredentialSignIn=async function(credentials){
   const client=await abrTeamEnsureClient();
   const signed=await client.auth.signInWithPassword({email:email,password:password});
   if(signed.error)throw signed.error;
-  abrAccountStorage.enter(signed.data&&signed.data.user&&signed.data.user.id);
   await abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id);
   await abrTeamAccountContextReset(false);
   await abrTeamInit(false);
@@ -43526,15 +43318,11 @@ window.abrTeamCredentialSetup=async function(details){
   if(!/^\S+@\S+\.\S+$/.test(email))throw new Error("Geçerli bir e-posta adresi yaz.");
   if(password.length<8)throw new Error("Şifre en az 8 karakter olmalı.");
   const client=await abrTeamEnsureClient();
-  const prior=await client.auth.getSession();if(prior.error)throw prior.error;
-  const priorUser=prior.data&&prior.data.session&&prior.data.session.user;
-  if(priorUser&&priorUser.is_anonymous!==true&&!(priorUser.app_metadata&&priorUser.app_metadata.provider==="anonymous"))await window.abrTeamCredentialSignOut();
   const user=await abrTeamEnsureSession(true);
   if(!user)throw new Error("Cihaz hesabı hazırlanamadı.");
-  if(priorUser&&priorUser.is_anonymous!==true&&!(priorUser.app_metadata&&priorUser.app_metadata.provider==="anonymous")&&user.is_anonymous!==true&&!(user.app_metadata&&user.app_metadata.provider==="anonymous"))throw new Error("Eski oturum kapatılamadı; yeni firma kurulumu durduruldu.");
   try{
-    abrAccountStorage.setItem("profilAd",name);
-    abrAccountStorage.setItem("profilTelefon",phone);
+    localStorage.setItem("profilAd",name);
+    localStorage.setItem("profilTelefon",phone);
   }catch(error){}
   await abrTeamProfileSync();
   await abrTeamMembershipsLoad();
@@ -43546,12 +43334,12 @@ window.abrTeamCredentialSetup=async function(details){
     if(teamId){abrTeamSaveCode(teamId,inviteCode);abrTeamSettingsPatch({activeTeamId:teamId})}
     await abrTeamMembershipsLoad();
   }
-  try{abrAccountStorage.setItem("profilFirma",companyName)}catch(error){}
+  try{localStorage.setItem("profilFirma",companyName)}catch(error){}
   let licenseNumber="",deviceCode="";
   try{
-    const licenseStore=JSON.parse(abrAccountStorage.getItem("elevatorx_google_license_v1480")||"null");
+    const licenseStore=JSON.parse(localStorage.getItem("elevatorx_google_license_v1480")||"null");
     licenseNumber=abrTeamTrim(licenseStore&&licenseStore.lisans,120);
-    deviceCode=abrTeamTrim(abrAccountStorage.getItem("elevatorx_device_code_v1476")||"",80);
+    deviceCode=abrTeamTrim(localStorage.getItem("elevatorx_device_code_v1476")||"",80);
   }catch(error){}
   const invoked=await client.functions.invoke("account-access",{body:{email:email,password:password,display_name:name,phone:phone,license_number:licenseNumber,device_code:deviceCode}});
   if(invoked.error)throw new Error(await abrTeamAccountFunctionError(invoked.error,"Hesap kurulamadı."));
@@ -43581,9 +43369,8 @@ window.abrTeamCredentialSignOut=async function(){
   const client=await abrTeamEnsureClient();
   await abrTeamAccountPushLogout();
   const signed=await client.auth.signOut({scope:"local"});
-  if(signed&&signed.error){try{abrAccountStorage.removeItem(ABR_TEAM_AUTH_KEY)}catch(error){}}
+  if(signed&&signed.error){try{localStorage.removeItem(ABR_TEAM_AUTH_KEY)}catch(error){}}
   await abrTeamAccountContextReset(false);
-  abrAccountStorage.leave();
   return true;
 };
 window.abrTeamAccessInfo=async function(createSession){
@@ -43757,7 +43544,7 @@ window.abrPaketYukseltmeAc=function(){
 window.abrPaketYukseltmeKapat=function(){const overlay=el("abrPersonnelUpgrade");if(overlay){overlay.classList.remove("is-open");overlay.setAttribute("aria-hidden","true")}};
 window.abrPaketTalebiGonder=function(targetLimit){
   const limit=Number(targetLimit)||0,current=Math.max(1,Number(abrPersonnelData&&abrPersonnelData.memberLimit)||7);if(limit<=current){toast("Bu kapasite zaten hesabında aktif.");return}
-  const members=abrPersonnelData&&abrPersonnelData.members||[],used=members.filter(function(item){return item.state==="active"}).length,team=abrPersonnelData&&abrPersonnelData.teamName||"Firma ekibi";let authority="Firma Yetkilisi";try{authority=abrAccountStorage.getItem("profilAd")||authority}catch(error){}
+  const members=abrPersonnelData&&abrPersonnelData.members||[],used=members.filter(function(item){return item.state==="active"}).length,team=abrPersonnelData&&abrPersonnelData.teamName||"Firma ekibi";let authority="Firma Yetkilisi";try{authority=localStorage.getItem("profilAd")||authority}catch(error){}
   const message="Merhaba, paket yükseltme talebi oluşturuyorum.\n\nFirma: "+team+"\nFirma yetkilisi: "+authority+"\nMevcut kullanım: "+used+" / "+current+" kullanıcı\nTalep edilen kapasite: "+limit+" kullanıcı\n\nUygunluk ve yıllık ücret bilgisini iletebilir misiniz?";
   window.abrPaketYukseltmeKapat();window.open("https://wa.me/905412654308?text="+encodeURIComponent(message),"_blank","noopener,noreferrer");
 };
@@ -43827,9 +43614,9 @@ document.documentElement.classList.add("abr-role-locked");
 
 function abrRoleEl(id){return document.getElementById(id)}
 function abrRoleEscape(value){return String(value==null?"":value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-function abrRoleStoreGet(){try{const value=JSON.parse(abrAccountStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(e){return {}}}
-function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{abrAccountStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(e){}return value}
-function abrRoleDeviceCode(){try{return abrAccountStorage.getItem("elevatorx_device_code_v1476")||"ABR-DEVICE"}catch(e){return "ABR-DEVICE"}}
+function abrRoleStoreGet(){try{const value=JSON.parse(localStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(e){return {}}}
+function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(e){}return value}
+function abrRoleDeviceCode(){try{return localStorage.getItem("elevatorx_device_code_v1476")||"ABR-DEVICE"}catch(e){return "ABR-DEVICE"}}
 async function abrRolePinHash(pin){
   const source=abrRoleDeviceCode()+":"+String(pin||"")+":ABR-V2200";
   if(window.crypto&&crypto.subtle&&window.TextEncoder){
@@ -43841,7 +43628,7 @@ async function abrRolePinHash(pin){
   for(let i=0;i<source.length;i++){hash^=source.charCodeAt(i);hash=Math.imul(hash,16777619)}
   return "fallback-"+(hash>>>0).toString(16);
 }
-function abrRoleProfileName(){try{return String(abrAccountStorage.getItem("profilAd")||"Uygulama kullanıcısı").trim()||"Uygulama kullanıcısı"}catch(e){return "Uygulama kullanıcısı"}}
+function abrRoleProfileName(){try{return String(localStorage.getItem("profilAd")||"Uygulama kullanıcısı").trim()||"Uygulama kullanıcısı"}catch(e){return "Uygulama kullanıcısı"}}
 function abrRoleHeader(){return '<div class="abrRoleBrand"><div class="abrRoleBrandIcon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4.5h10v15H7z" stroke="currentColor" stroke-width="1.8"/><path d="m9.2 7.3 2.8-2.8 2.8 2.8M9.2 16.7l2.8 2.8 2.8-2.8M15.2 9.5h.01M15.2 12h.01M15.2 14.5h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="abrRoleBrandText"><span>ASANSÖR</span><b>Bakım &amp; Revizyon</b></div></div>'}
 function abrRoleFooter(){return '<div class="abrRoleFoot"><i></i>Lisans doğrulandı • Güvenli rol girişi</div>'}
 function abrRoleRender(){
@@ -43992,20 +43779,20 @@ body.darkMode .abrRoleEntryChoice,html.darkRoot .abrRoleEntryChoice,body.darkMod
 (function(){
 "use strict";
 const ABR_ROLE_KEY="abrRoleAccessV2200";
-const ABR_ROLE_VERSION="2.2.79";
+const ABR_ROLE_VERSION="2.2.70";
 const ABR_FIRM_AUTHORITY_IDS=["ce228b33-25a0-42f8-a81c-ca7ab0ac2e7f","c4044a1b-2042-484b-83e4-7e65e427bb3a"];
-const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",inviteToken:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false,passwordVerified:false};
+const abrRoleState={view:"boot",entryRole:"authority",inviteCode:"",inviteToken:"",busy:true,busyTitle:"Oturum kontrol ediliyor",busyDetail:"Bu cihazdaki güvenli giriş hazırlanıyor.",error:"",access:null,session:null,successRole:null,wrongPinCount:0,pinLockedUntil:0,hiddenAt:0,bioAutoTried:false,bioAutoTimer:0,authAttempt:0,freshPersonnel:false};
 window.__abrAppRole=null;
 document.documentElement.classList.add("abr-role-locked");
 
 function abrRoleEl(id){return document.getElementById(id)}
 function abrRoleEscape(value){return String(value==null?"":value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-function abrRoleStoreGet(){try{const value=JSON.parse(abrAccountStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
-function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{abrAccountStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(error){}return value}
-function abrRoleStoreSave(value){try{abrAccountStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
-function abrRoleProfile(){let name="Uygulama kullanıcısı",phone="";try{name=String(abrAccountStorage.getItem("profilAd")||name).trim()||name;phone=String(abrAccountStorage.getItem("profilTelefon")||"").trim()}catch(error){}return {name:name,phone:phone}}
+function abrRoleStoreGet(){try{const value=JSON.parse(localStorage.getItem(ABR_ROLE_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
+function abrRoleStorePatch(patch){const value=abrRoleStoreGet();Object.keys(patch||{}).forEach(function(key){value[key]=patch[key]});try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value))}catch(error){}return value}
+function abrRoleStoreSave(value){try{localStorage.setItem(ABR_ROLE_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
+function abrRoleProfile(){let name="Uygulama kullanıcısı",phone="";try{name=String(localStorage.getItem("profilAd")||name).trim()||name;phone=String(localStorage.getItem("profilTelefon")||"").trim()}catch(error){}return {name:name,phone:phone}}
 function abrRoleInitials(name){return (String(name||"").trim().split(/\s+/).slice(0,2).map(function(part){return part.charAt(0)}).join("")||"U").toLocaleUpperCase("tr-TR")}
-function abrPinDeviceCode(){try{return String(abrAccountStorage.getItem("elevatorx_device_code_v1476")||"ABR-DEVICE")}catch(error){return "ABR-DEVICE"}}
+function abrPinDeviceCode(){try{return String(localStorage.getItem("elevatorx_device_code_v1476")||"ABR-DEVICE")}catch(error){return "ABR-DEVICE"}}
 function abrPinSalt(){const bytes=new Uint8Array(16);if(window.crypto&&typeof window.crypto.getRandomValues==="function")window.crypto.getRandomValues(bytes);else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);return Array.from(bytes).map(function(value){return value.toString(16).padStart(2,"0")}).join("")}
 async function abrPinHash(pin,salt,userId){
   const secret=String(pin||"");const context=String(userId||"")+":"+abrPinDeviceCode()+":"+String(salt||"")+":ABR-PIN-V2202";
@@ -44078,6 +43865,22 @@ function abrRoleRender(){
     const profile=abrRoleState.freshPersonnel?{name:"",phone:""}:abrRoleProfile();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Saha personeli</div><h1 id="abrRoleTitle">Ekibine katıl</h1><p>Firma yetkilisinin verdiği ekip kodunu yaz. İstek onaylanmadan firma alanı açılmaz.</p></div><form class="abrAccountForm" onsubmit="abrPersonelKatil(event)"><div class="abrPersonnelJoinNote"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.8 7.6-7 9.3-4.2-1.7-7-4.9-7-9.3V6l7-2.5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.3 12.1 11.2 14l3.7-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Yetkili onayı gerekir</b>Katılma isteğin Firma Yetkilisinin ekranına düşer.</span></div><label class="abrAccountField"><span>Ad soyad</span><input id="abrPersonnelName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrPersonnelPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField"><span>Ekip kodu</span><input id="abrPersonnelCode" type="text" value="'+abrRoleEscape(abrRoleState.inviteCode||"")+'" maxlength="32" autocapitalize="characters" autocomplete="off" placeholder="Örn. AY-7K4P2MX" required></label>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Katılma İsteği Gönder</button><button class="abrAccountSecondary" type="button" onclick="abrSahaHesapGirisi()">Personel Hesabımla Giriş Yap</button><button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Geri Dön</button></div></form>'+abrRoleFooter();return
   }
+  if(abrRoleState.view==="pin"){
+    const wait=Math.max(0,Math.ceil((abrRoleState.pinLockedUntil-Date.now())/1000));
+    const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const bio=abrBioRecord(userId);const canOfferBio=abrBioApiAvailable();
+    const bioBlock=bio&&canOfferBio?'<div class="abrBioBlock"><button class="abrBioPrimary" type="button" onclick="abrFaceIdIleAc()">'+abrBioIconHtml()+'<span>Face ID ile Aç</span></button><div class="abrBioDivider"><span>veya PIN kullan</span></div></div>':'';
+    const bioSetup=!bio&&canOfferBio?'<button class="abrBioSetup" type="button" onclick="abrFaceIdKur()" '+(wait?'disabled':'')+'>Face ID’yi Bu Cihazda Etkinleştir</button>':'';
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">'+(bio?'Face ID ile aç':'PIN’ini gir')+'</h1><p>'+(bio?'Face ID ile tek dokunuşta aç veya 4 haneli PIN’inle devam et.':'4 haneli PIN’inle devam et; istersen bu cihaz için Face ID’yi etkinleştir.')+'</p></div>'+abrPinIdentityHtml()+bioBlock+'<form class="abrAccountForm" onsubmit="abrPinDogrula(event)">'+abrPinFieldHtml("abrDevicePin","4 haneli PIN","off")+(wait?'<p class="abrPinNote abrPinCooldown">Yeni deneme için '+wait+' saniye bekle.</p>':'')+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit" '+(wait?'disabled':'')+'>PIN ile Aç</button>'+bioSetup+'<button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">PIN’i unuttum / hesapla giriş</button></div></form>'+abrRoleFooter();
+    if(bio&&!abrRoleState.bioAutoTried){clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTimer=setTimeout(function(){if(abrRoleState.view==="pin"&&!abrRoleState.busy&&!abrRoleState.bioAutoTried&&typeof window.abrFaceIdIleAc==="function")window.abrFaceIdIleAc(true)},360)}
+    if(wait)setTimeout(function(){if(abrRoleState.view==="pin")abrRoleRender()},1000);else if(!bio)setTimeout(function(){const input=abrRoleEl("abrDevicePin");if(input)input.focus()},80);return
+  }
+  if(abrRoleState.view==="bio-setup"){
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Biyometrik cihaz kilidi</div><h1 id="abrRoleTitle">Face ID’yi etkinleştir</h1><p>Bir sonraki açılıştan itibaren PIN yazmadan, iPhone’un güvenli Face ID ekranıyla devam edebilirsin.</p></div>'+abrPinIdentityHtml()+abrRoleErrorHtml()+'<div class="abrAccountHint"><i>i</i><span>Kayıt bu hesaba ve kullandığın internet adresine bağlanır. PIN’in yedek giriş yöntemi olarak kalır.</span></div><div class="abrAccountActions"><button class="abrBioPrimary" type="button" onclick="abrFaceIdKaydet()">'+abrBioIconHtml()+'<span>Face ID’yi Tanımla</span></button><button class="abrAccountTextButton" type="button" onclick="abrFaceIdKurulumIptal()">Şimdi değil</button></div>'+abrRoleFooter();return
+  }
+  if(abrRoleState.view==="pin-setup"){
+    card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Hızlı cihaz girişi</div><h1 id="abrRoleTitle">4 haneli PIN oluştur</h1><p>Bundan sonra uygulamayı e-posta şifresi yerine bu PIN ile açabilirsin.</p></div><form class="abrAccountForm" onsubmit="abrPinOlustur(event)">'+abrPinIdentityHtml()+'<div class="abrPinSetupGrid">'+abrPinFieldHtml("abrNewPin","Yeni PIN","new-password")+abrPinFieldHtml("abrNewPinAgain","PIN tekrar","new-password")+'</div><p class="abrPinNote"><b>İpucu:</b> Kolay tahmin edilen 0000 veya 1234 gibi bir PIN kullanma. PIN yalnız bu cihazda geçerlidir.</p>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">PIN’i Kaydet</button><button class="abrAccountTextButton" type="button" onclick="abrPinHesapGirisineDon()">Farklı hesapla giriş yap</button></div></form>'+abrRoleFooter();
+    setTimeout(function(){const input=abrRoleEl("abrNewPin");if(input)input.focus()},80);return
+  }
   if(abrRoleState.view==="setup"){
     const profile=abrRoleProfile();const store=abrRoleStoreGet();
     card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">Yeni firma kurulumu</div><h1 id="abrRoleTitle">Firma alanını oluştur</h1><p>Firma ve yetkili bilgilerini gir; ekibin, başlangıç paketin ve davet kodun otomatik hazırlansın.</p></div><form class="abrAccountForm" onsubmit="abrIlkHesapKur(event)"><div class="abrAccountHint"><i>i</i><span>Her firma ayrı ve boş bir çalışma alanıyla başlar. Başka firmaların apartman, cari veya personel kayıtları aktarılmaz.</span></div><div class="abrAccountSetupGrid"><label class="abrAccountField is-wide"><span>Firma adı</span><input id="abrSetupCompany" type="text" value="" maxlength="80" autocomplete="organization" placeholder="Örn. ABC Asansör" required></label><label class="abrAccountField"><span>Firma yetkilisi</span><input id="abrSetupName" type="text" value="'+abrRoleEscape(profile.name==="Uygulama kullanıcısı"?"":profile.name)+'" maxlength="60" autocomplete="name" required></label><label class="abrAccountField"><span>Telefon</span><input id="abrSetupPhone" type="tel" value="'+abrRoleEscape(profile.phone)+'" maxlength="40" autocomplete="tel"></label><label class="abrAccountField is-wide"><span>E-posta</span><input id="abrSetupEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label><div class="is-wide">'+abrRolePasswordField("abrSetupPassword","Şifre","new-password")+'</div><div class="is-wide">'+abrRolePasswordField("abrSetupPasswordAgain","Şifre tekrar","new-password")+'</div></div>'+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Firmayı ve Hesabı Oluştur</button><button class="abrAccountSecondary" type="button" onclick="abrNormalGiriseDon()">Giriş Ekranına Dön</button></div></form>'+abrRoleFooter();return
@@ -44115,14 +43918,14 @@ function abrRoleEnter(role,access){
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
 }
-function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";if(immediate===true){abrRoleEnter(role,access);return}abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success"&&abrAccountStorage.owns(access&&access.userId))abrRoleEnter(role,access)},650)}
+function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";if(immediate===true){abrRoleEnter(role,access);return}abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
 function abrRoleRefreshAfterBiometric(userId){
   Promise.resolve().then(function(){return abrRoleSessionAccess()}).then(function(access){if(!access||access.userId!==userId||window.__abrAppRole===null)return;const refreshedRole=abrRoleFromAccess(access);if(refreshedRole!==window.__abrAppRole)abrRoleEnter(refreshedRole,access);else{abrRoleState.access=access;abrRoleIdentityPaint(refreshedRole,access)}}).catch(function(){})
 }
 function abrRoleFinish(access,email){
   abrRoleAccessCache(access,email);abrRoleState.access=access;abrRoleState.session={userId:access&&access.userId||null,userEmail:access&&access.userEmail||email||null,userIsAnonymous:false};abrRoleState.busy=false;abrRoleState.error="";
   if(!access||!access.userId){abrRoleState.view="login";abrRoleState.error="Hesap oturumu doğrulanamadı.";abrRoleRender();return}
-  abrRoleState.passwordVerified=true;
+  if(!abrPinRecord(access.userId)){abrRoleState.view="pin-setup";abrRoleRender();return}
   abrRoleSuccess(access);
 }
 async function abrRoleSessionAccess(){
@@ -44140,29 +43943,88 @@ async function abrRoleSessionAccess(){
 function abrRoleInviteCodeRead(){try{return String(new URL(location.href).searchParams.get("join")||"").trim().replace(/\s+/g,"").toLocaleUpperCase("tr-TR").slice(0,32)}catch(error){return ""}}
 function abrRoleInviteTokenRead(){try{return String(new URL(location.href).searchParams.get("invite")||"").trim().slice(0,120)}catch(error){return ""}}
 function abrRoleInviteCodeClear(){abrRoleState.inviteCode="";abrRoleState.inviteToken="";try{const url=new URL(location.href);url.searchParams.delete("join");url.searchParams.delete("invite");history.replaceState(history.state,"",url.href)}catch(error){}}
-/* v2.2.79 — Şifre doğrulaması yalnız açık belge belleğinde tutulur.
-   Yeni açılış şifre ister; arka plan, PDF dönüşü ve bfcache tekrar kilitlemez. */
 async function abrRoleBoot(){
-  if(abrRoleState.passwordVerified && window.__abrAppRole!==null)return;
-  abrRoleCancelPendingAuth();abrRoleState.busy=false;abrRoleState.error="";
-  const inviteToken=abrRoleInviteTokenRead(),inviteCode=abrRoleInviteCodeRead();
-  if(inviteToken || inviteCode){
-    abrRoleState.inviteToken=inviteToken;abrRoleState.inviteCode=inviteCode;
-    abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry";
-  }else{
-    const cached=abrRoleStoreGet().lastAccess;
-    abrRoleState.entryRole=cached && cached.teamRole && !["owner","admin","authority"].includes(cached.teamRole)?"personnel":"authority";
-    abrRoleState.view="login";
-  }
-  abrRoleRender();
+  abrRoleState.busy=true;abrRoleState.busyTitle="Oturum kontrol ediliyor";abrRoleState.busyDetail="Bu cihazdaki güvenli giriş hazırlanıyor.";abrRoleState.error="";abrRoleRender();
+  try{
+    if(typeof window.abrTeamCredentialSessionInfo!=="function")throw new Error("Güvenli oturum bileşeni bulunamadı.");
+    const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Oturum kontrolü zaman aşımına uğradı."))},14000)});
+    const session=await Promise.race([window.abrTeamCredentialSessionInfo(),timeout]);
+    abrRoleState.session=session||null;abrRoleState.busy=false;
+    if(session&&session.userId&&!session.userIsAnonymous){
+      try{if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin()}catch(cloudError){}
+      abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
+      if(!abrPinRecord(session.userId)){
+        try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
+        abrRoleState.session=null;abrRoleState.access=null;abrRoleState.view="login";abrRoleState.error="Bu cihazın PIN kaydı bulunamadı. Güvenlik için e-posta ve şifrenle yeniden giriş yap.";abrRoleRender();return;
+      }
+      abrPinSecurityLoad(session.userId);
+      // Eski sürümlerdeki uzun süreli cihaz güveni yeni bir kimlik doğrulama sayılmaz.
+      // Her açılışta başarılı Face ID veya doğru PIN zorunludur.
+      abrBioTrustClear();
+      abrRoleState.bioAutoTried=false;clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.view="pin";abrRoleRender();return;
+    }
+    const inviteToken=abrRoleInviteTokenRead(),inviteCode=abrRoleInviteCodeRead();
+    if(inviteToken){abrRoleState.inviteToken=inviteToken;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
+    else if(inviteCode){abrRoleState.inviteCode=inviteCode;abrRoleState.entryRole="personnel";abrRoleState.view="personnel-entry"}
+    else abrRoleState.view="entry";
+    abrRoleRender();
+  }catch(error){abrRoleState.busy=false;abrRoleState.view="login";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
 }
-function abrRoleRelock(){return;}
+function abrRoleRelock(){
+  if(window.__abrAppRole===null)return;
+  const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;if(!abrPinRecord(userId))return;
+  abrBioTrustClear();
+  window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;abrRoleState.view="pin";abrRoleState.busy=false;abrRoleState.error="";abrRoleState.wrongPinCount=0;abrRoleState.pinLockedUntil=0;abrRoleRender();
+}
 window.abrSifreGoster=function(inputId,button){const input=abrRoleEl(inputId);if(!input)return;const visible=input.type==="text";input.type=visible?"password":"text";if(button){button.classList.toggle("is-visible",!visible);button.setAttribute("aria-label",visible?"Şifreyi göster":"Şifreyi gizle")}input.focus()};
-/* Eski bağlantılar şifre ekranına yönlenir; PIN veya biyometri çalıştırılmaz. */
-window.abrFaceIdIleAc=window.abrFaceIdKur=window.abrFaceIdKaydet=window.abrFaceIdKurulumIptal=window.abrPinOlustur=window.abrPinDogrula=window.abrPinHesapGirisineDon=function(event){
-  if(event && typeof event.preventDefault==="function")event.preventDefault();
-  if(abrRoleState.passwordVerified && window.__abrAppRole!==null)return;
-  abrRoleCancelPendingAuth();abrRoleState.view="login";abrRoleState.error="";abrRoleRender();
+window.abrPinRakam=function(input){if(!input)return;input.value=String(input.value||"").replace(/\D/g,"").slice(0,4)};
+window.abrFaceIdIleAc=async function(automatic){
+  if(abrRoleState.busy)return;const isAutomatic=automatic===true;if(isAutomatic&&abrRoleState.bioAutoTried)return;const attempt=++abrRoleState.authAttempt;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrBioRecord(userId);if(!record){abrRoleState.error="Bu hesap için Face ID kaydı bulunamadı.";abrRoleRender();return}if(isAutomatic)abrRoleState.bioAutoTried=true;
+  let request;try{request=abrBioCredentialGet(record)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="Face ID bekleniyor";abrRoleState.busyDetail="iPhone güvenli kimlik doğrulama ekranını açıyor.";abrRoleState.error="";abrRoleRender();
+  try{await request}catch(error){if(attempt!==abrRoleState.authAttempt)return;abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=isAutomatic&&String(error&&error.name||"")==="NotAllowedError"?"":abrBioErrorText(error);abrRoleRender();return}
+  if(attempt!==abrRoleState.authAttempt||abrRoleState.view!=="pin")return;
+  abrBioTrustClear();
+  const cached=abrRoleCachedAccess(userId);if(cached){abrRoleSuccess(cached,true);abrRoleRefreshAfterBiometric(userId);return}
+  try{const access=await abrRoleSessionAccess();if(attempt!==abrRoleState.authAttempt||abrRoleState.view!=="pin")return;abrRoleSuccess(access,true)}catch(error){if(attempt!==abrRoleState.authAttempt)return;abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrFaceIdKur=async function(){
+  if(abrRoleState.busy)return;const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
+  if(!/^\d{4}$/.test(pin)){abrRoleState.error="Face ID’yi açmak için önce 4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Face ID kurulumu için cihaz sahibi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
+  try{const digest=await abrPinHash(pin,record.salt,userId);if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);throw new Error(failure.lockedUntil>Date.now()?"Çok fazla yanlış PIN girildi. Biraz bekleyip tekrar dene.":"PIN yanlış.")}abrPinSecurityClear(userId);if(!await abrBioPlatformAvailable())throw new DOMException("Platform authenticator unavailable","NotSupportedError");abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error="";abrRoleRender()}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=/^(NotAllowedError|InvalidStateError|SecurityError|NotSupportedError|ConstraintError)$/.test(String(error&&error.name||""))?abrBioErrorText(error):abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrFaceIdKaydet=async function(){
+  if(abrRoleState.busy)return;const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const access=abrRoleState.access||abrRoleCachedAccess(userId)||{};let creation;
+  try{creation=abrBioCredentialCreate(access,userId)}catch(error){abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="Face ID tanımlanıyor";abrRoleState.busyDetail="iPhone güvenli biyometrik kaydı oluşturuyor.";abrRoleState.error="";abrRoleRender();
+  try{await creation;abrBioTrustClear()}catch(error){abrRoleState.busy=false;abrRoleState.view="bio-setup";abrRoleState.error=abrBioErrorText(error);abrRoleRender();return}
+  try{const verifiedAccess=await abrRoleSessionAccess();abrRoleSuccess(verifiedAccess)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrFaceIdKurulumIptal=function(){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error="";abrRoleRender()};
+window.abrPinOlustur=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const pin=String(abrRoleEl("abrNewPin")&&abrRoleEl("abrNewPin").value||"");const again=String(abrRoleEl("abrNewPinAgain")&&abrRoleEl("abrNewPinAgain").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;
+  if(!/^\d{4}$/.test(pin)){abrRoleState.error="PIN tam olarak 4 rakam olmalı.";abrRoleRender();return}if(pin!==again){abrRoleState.error="Yazdığın PIN’ler birbiriyle aynı değil.";abrRoleRender();return}if(!userId){abrRoleState.error="Hesap oturumu bulunamadı. E-posta ve şifreyle yeniden giriş yap.";abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN kaydediliyor";abrRoleState.busyDetail="PIN bu cihaza ve hesabına güvenle bağlanıyor.";abrRoleState.error="";abrRoleRender();
+  try{const salt=abrPinSalt();const hash=await abrPinHash(pin,salt,userId);const store=abrRoleStoreGet();store.devicePin={userId:userId,salt:salt,hash:hash,algorithm:"PBKDF2-SHA256-120000",createdAt:new Date().toISOString()};delete store.pinSecurity;abrRoleStoreSave(store);abrPinSecurityClear(userId);const access=abrRoleState.access&&abrRoleState.access.userId===userId&&!abrRoleState.access._sessionOnly?abrRoleState.access:await abrRoleSessionAccess();abrRoleSuccess(access)}catch(error){abrRoleState.busy=false;abrRoleState.view="pin-setup";abrRoleState.error=abrRoleErrorText(error);abrRoleRender()}
+};
+window.abrPinDogrula=async function(event){
+  if(event)event.preventDefault();if(abrRoleState.busy)return;
+  const now=Date.now();if(abrRoleState.pinLockedUntil>now){abrRoleRender();return}
+  const pin=String(abrRoleEl("abrDevicePin")&&abrRoleEl("abrDevicePin").value||"");const userId=abrRoleState.session&&abrRoleState.session.userId||abrRoleState.access&&abrRoleState.access.userId||null;const record=abrPinRecord(userId);
+  if(!/^\d{4}$/.test(pin)){abrRoleState.error="4 haneli PIN’ini yaz.";abrRoleRender();return}if(!record){abrRoleState.view="pin-setup";abrRoleState.error="Bu hesap için cihaz PIN’i bulunamadı.";abrRoleRender();return}
+  abrRoleState.busy=true;abrRoleState.busyTitle="PIN doğrulanıyor";abrRoleState.busyDetail="Cihaz kilidi ve hesap bilgisi kontrol ediliyor.";abrRoleState.error="";abrRoleRender();
+  try{
+    const digest=await abrPinHash(pin,record.salt,userId);
+    if(!abrPinSafeEqual(digest,record.hash)){const failure=abrPinSecurityFail(userId);if(failure.lockedUntil>Date.now())throw new Error(failure.failedCount>=10?"Çok fazla yanlış PIN girildi. 5 dakika bekle veya hesap şifrenle giriş yap.":"Çok fazla yanlış PIN girildi. 30 saniye bekle.");throw new Error("PIN yanlış.")}
+    abrPinSecurityClear(userId);abrBioTrustClear();const access=await abrRoleSessionAccess();abrRoleSuccess(access);
+  }catch(error){abrRoleState.busy=false;abrRoleState.view="pin";abrRoleState.error=abrRoleErrorText(error);abrRoleRender();if(abrRoleState.pinLockedUntil>Date.now())setTimeout(function(){if(abrRoleState.view==="pin"){abrRoleState.error="";abrRoleRender()}},30500)}
+};
+window.abrPinHesapGirisineDon=async function(){
+  if(abrRoleState.busy)return;abrPinClear();abrRoleState.busy=true;abrRoleState.busyTitle="Hesap girişi hazırlanıyor";abrRoleState.busyDetail="Cihaz PIN’i kaldırılıyor.";abrRoleState.error="";abrRoleRender();
+  try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
+  abrRoleState.session=null;abrRoleState.access=null;abrRoleState.busy=false;abrRoleState.view="login";abrRoleRender();
 };
 window.abrHesapGiris=async function(event){
   if(event)event.preventDefault();if(abrRoleState.busy)return;
@@ -44177,7 +44039,7 @@ window.abrSahaHesapGirisi=function(){abrRoleCancelPendingAuth();abrRoleState.ent
 window.abrRolSecimineDon=function(){abrRoleCancelPendingAuth();abrRoleInviteCodeClear();abrRoleState.view="entry";abrRoleState.error="";abrRoleRender()};
 window.abrSahaPersoneliBaslat=async function(){
   if(abrRoleState.busy)return;
-  abrRoleCancelPendingAuth();const attempt=abrRoleState.authAttempt;abrRoleInviteCodeClear();abrRoleState.passwordVerified=false;abrRoleState.entryRole="personnel";abrRoleState.freshPersonnel=true;abrRoleState.access=null;abrRoleState.session=null;
+  abrRoleCancelPendingAuth();const attempt=abrRoleState.authAttempt;abrRoleInviteCodeClear();abrRoleState.entryRole="personnel";abrRoleState.freshPersonnel=true;abrRoleState.access=null;abrRoleState.session=null;
   abrRoleState.view="personnel-entry";abrRoleState.busy=true;abrRoleState.busyTitle="Personel girişi hazırlanıyor";abrRoleState.busyDetail="Bu cihazdaki önceki firma oturumu güvenle kapatılıyor.";abrRoleState.error="";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){}
   if(attempt!==abrRoleState.authAttempt)return;
@@ -44191,11 +44053,11 @@ window.abrPersonelKatil=async function(event){
   const inviteToken=String(abrRoleState.inviteToken||"").trim();
   if(name.length<2){abrRoleState.error="Ad soyad en az 2 karakter olmalı.";abrRoleRender();return}
   if(!inviteToken&&code.length<6){abrRoleState.error="Geçerli ekip davetini kullan.";abrRoleRender();return}
+  try{localStorage.setItem("profilAd",name);localStorage.setItem("profilTelefon",phone)}catch(storageError){}
   abrRoleState.busy=true;abrRoleState.busyTitle="Katılma isteği gönderiliyor";abrRoleState.busyDetail="Ekip kodu doğrulanıyor ve yetkili onayı hazırlanıyor.";abrRoleState.error="";abrRoleRender();
   try{
     if(typeof window.abrTeamAccessInfo!=="function"||typeof window.abrTeamCloudClient!=="function")throw new Error("Ekip bağlantısı bulunamadı.");
     let access=await window.abrTeamAccessInfo(true);if(!access||!access.userId)throw new Error("Personel oturumu oluşturulamadı.");
-    abrAccountStorage.setItem("profilAd",name);abrAccountStorage.setItem("profilTelefon",phone);
     const client=await window.abrTeamCloudClient();
     const existing=await client.from("profiles").select("user_id").eq("user_id",access.userId).maybeSingle();if(existing.error)throw existing.error;
     const profileResponse=existing.data?await client.from("profiles").update({display_name:name,phone:phone||null}).eq("user_id",access.userId):await client.from("profiles").insert({user_id:access.userId,display_name:name,phone:phone||null});if(profileResponse.error)throw profileResponse.error;
@@ -44231,7 +44093,7 @@ window.abrAppRoleGet=function(){return window.__abrAppRole||null};
 window.abrRolDegistir=async function(){
   try{if(typeof window.exHybridMenuClose==="function")window.exHybridMenuClose()}catch(error){}
   try{if(typeof window.ekipArizaMerkeziKapat==="function")window.ekipArizaMerkeziKapat()}catch(error){}
-  abrRoleState.passwordVerified=false;abrRoleCancelPendingAuth();window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
+  abrPinClear();window.__abrAppRole=null;document.documentElement.classList.remove("abr-role-admin","abr-role-personnel");document.documentElement.classList.add("abr-role-locked");const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","false");
   abrRoleState.view="login";abrRoleState.error="";abrRoleState.access=null;abrRoleState.busy=true;abrRoleState.busyTitle="Çıkış yapılıyor";abrRoleState.busyDetail="Güvenli oturum kapatılıyor.";abrRoleRender();
   try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(error){abrRoleState.error=abrRoleErrorText(error)}
   abrRoleState.session=null;abrRoleState.busy=false;abrRoleRender();
@@ -44266,14 +44128,15 @@ function abrRoleIdentityPaint(role,access){const label=role==="admin"?"Firma Yet
 document.addEventListener("DOMContentLoaded",function(){abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleBoot();if(typeof MutationObserver==="function"){let timer=0;const observer=new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(abrRoleMarkPermissions,30)});observer.observe(document.body,{childList:true,subtree:true})}},{once:true});
 function abrRoleConsumeReceiptPrintReturn(){
   try{
-    const key="abrReceiptPrintReturnUntil_v1";const until=Number(abrAccountStorage.getItem(key)||0);
-    if(until>Date.now()){abrAccountStorage.removeItem(key);return true}
-    if(until)abrAccountStorage.removeItem(key);
+    const key="abrReceiptPrintReturnUntil_v1";const until=Number(localStorage.getItem(key)||0);
+    if(until>Date.now()){localStorage.removeItem(key);return true}
+    if(until)localStorage.removeItem(key);
   }catch(error){}
   return false
 }
-document.addEventListener("visibilitychange",function(){abrRoleState.hiddenAt=0});
-window.addEventListener("pageshow",function(){abrRoleState.hiddenAt=0});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){abrRoleState.hiddenAt=Date.now();return}if(abrRoleState.hiddenAt&&Date.now()-abrRoleState.hiddenAt>=10000&&!abrRoleConsumeReceiptPrintReturn())abrRoleRelock();abrRoleState.hiddenAt=0});
+window.addEventListener("pagehide",function(){abrRoleState.hiddenAt=Date.now()});
+window.addEventListener("pageshow",function(event){if(!event.persisted)return;if(abrRoleConsumeReceiptPrintReturn()){abrRoleState.hiddenAt=0;return}if(window.__abrAppRole!==null)abrRoleRelock();else{clearTimeout(abrRoleState.bioAutoTimer);abrRoleState.bioAutoTried=false;document.documentElement.classList.add("abr-role-locked");abrRoleRender()}});
 window.__abrRoleEntryVersion=ABR_ROLE_VERSION;
 })();
 </script>
@@ -44292,27 +44155,23 @@ let abrCloudWorking=false;
 let abrCloudRestoring=false;
 let abrCloudArchiveAvailable=true;
 
-function abrCloudMetaGet(){try{const value=JSON.parse(abrAccountStorage.getItem(ABR_CLOUD_META_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
-function abrCloudMetaSet(value){try{abrAccountStorage.setItem(ABR_CLOUD_META_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
+function abrCloudMetaGet(){try{const value=JSON.parse(localStorage.getItem(ABR_CLOUD_META_KEY)||"{}");return value&&typeof value==="object"?value:{}}catch(error){return {}}}
+function abrCloudMetaSet(value){try{localStorage.setItem(ABR_CLOUD_META_KEY,JSON.stringify(value&&typeof value==="object"?value:{}))}catch(error){}}
 function abrCloudMetaMerge(patch){const value=abrCloudMetaGet();Object.keys(patch||{}).forEach(function(key){if(typeof patch[key]==="undefined")delete value[key];else value[key]=patch[key]});abrCloudMetaSet(value);return value}
 function abrCloudDate(value){if(!value)return "Henüz alınmadı";try{return new Date(value).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(error){return "Henüz alınmadı"}}
 function abrCloudStatus(text,state){const el=document.getElementById("cloudBackupInfo");if(el){el.textContent=text||"Henüz alınmadı";el.dataset.state=state||""}}
 function abrCloudStatusRefresh(){const meta=abrCloudMetaGet();if(meta.error){abrCloudStatus("Bağlantı bekleniyor","error");return}if(meta.warning){abrCloudStatus(meta.warning,"warning");return}abrCloudStatus(meta.updatedAt?abrCloudDate(meta.updatedAt):"Henüz alınmadı",meta.updatedAt?"ok":"")}
 window.abrCloudStatusRefresh=abrCloudStatusRefresh;
 async function abrCloudContext(){
-  const contextToken=abrAccountStorage.token();
   if(typeof window.abrTeamCloudClient!=="function")throw new Error("Hesap bağlantısı hazır değil.");
   const client=await window.abrTeamCloudClient();
   const result=await client.auth.getSession();
-  abrAccountStorage.assertCurrent(contextToken);
   if(result.error)throw result.error;
   const session=result.data&&result.data.session;
   const user=session&&session.user;
   if(!user||user.is_anonymous===true||(user.app_metadata&&user.app_metadata.provider==="anonymous"))throw new Error("Bulut yedeği için hesapla giriş yap.");
-  if(!abrAccountStorage.owns(user.id))throw new Error("Bu hesaba ait cihaz kayıtları hazır değil.");
-  return {client:client,user:user,scopeToken:abrAccountStorage.token()};
+  return {client:client,user:user};
 }
-function abrCloudScopeCheck(context){abrAccountStorage.assertCurrent(context.scopeToken);if(!abrAccountStorage.owns(context.user.id))throw new Error("Bulut hesabı değişti; işlem durduruldu.")}
 function abrCloudPayload(){
   let backup=typeof yedekVeriOlustur==="function"?yedekVeriOlustur("bulut"):{};
   if(typeof abrStbYedekHafiflet==="function")backup=abrStbYedekHafiflet(backup);
@@ -44361,10 +44220,8 @@ function abrCloudNewestHealthy(candidates){
   return{payload:selected.payload,date:selected.date,source:selected.source,stats:selected.stats,usedFallback:selected!==newest,fallbackReason:fallbackReason,newestDate:newest.date}
 }
 async function abrCloudArchiveRows(context,limit){
-  abrCloudScopeCheck(context);
   if(!abrCloudArchiveAvailable)return [];
   const response=await context.client.from(ABR_CLOUD_ARCHIVE_TABLE).select("id,payload,record_count,app_version,backup_kind,stats,created_at,content_hash").eq("user_id",context.user.id).order("created_at",{ascending:false}).limit(Math.max(1,Number(limit||12)));
-  abrCloudScopeCheck(context);
   if(response.error){if(abrCloudArchiveMissing(response.error)){abrCloudArchiveAvailable=false;return []}throw response.error}
   return Array.isArray(response.data)?response.data:[]
 }
@@ -44375,17 +44232,14 @@ async function abrCloudRestoreSelection(context,remote){
   return abrCloudNewestHealthy(candidates)
 }
 async function abrCloudArchivePrune(context){
-  abrCloudScopeCheck(context);
   try{
     const response=await context.client.from(ABR_CLOUD_ARCHIVE_TABLE).select("id").eq("user_id",context.user.id).order("created_at",{ascending:false}).range(ABR_CLOUD_ARCHIVE_LIMIT,ABR_CLOUD_ARCHIVE_LIMIT+199);
-    abrCloudScopeCheck(context);
-  if(response.error)throw response.error;
+    if(response.error)throw response.error;
     const ids=(Array.isArray(response.data)?response.data:[]).map(function(row){return row&&row.id}).filter(Boolean);
-    if(ids.length){abrCloudScopeCheck(context);const removed=await context.client.from(ABR_CLOUD_ARCHIVE_TABLE).delete().eq("user_id",context.user.id).in("id",ids);if(removed.error)throw removed.error}
+    if(ids.length){const removed=await context.client.from(ABR_CLOUD_ARCHIVE_TABLE).delete().eq("user_id",context.user.id).in("id",ids);if(removed.error)throw removed.error}
   }catch(error){console.warn("Eski bulut arşivleri temizlenemedi:",error)}
 }
 async function abrCloudArchiveSave(context,payload,kind,force){
-  abrCloudScopeCheck(context);
   const snapshot=abrCloudPayloadCopy(payload);if(!snapshot||!Array.isArray(snapshot.apartmanlar)||snapshot.apartmanlar.length===0)return false;
   const signature=String(abrCloudPayloadSignature(snapshot)||"");if(!signature)return false;
   const meta=abrCloudMetaGet();const now=Date.now();const last=abrCloudArchiveTime(meta.lastSnapshotAt);const automatic=abrCloudArchiveKind(kind)==="automatic";
@@ -44393,7 +44247,6 @@ async function abrCloudArchiveSave(context,payload,kind,force){
   const json=JSON.stringify(snapshot);if(json.length>ABR_CLOUD_MAX_BYTES)throw new Error("Bulut arşivi 8 MB sınırını aşıyor.");
   const stats=abrCloudStats(snapshot);const record={user_id:context.user.id,payload:snapshot,record_count:stats.apartments,app_version:typeof APP_VERSION!=="undefined"?String(APP_VERSION):"",backup_kind:abrCloudArchiveKind(kind),content_hash:signature,stats:stats};
   const response=await context.client.from(ABR_CLOUD_ARCHIVE_TABLE).insert(record);
-  abrCloudScopeCheck(context);
   if(response.error&&String(response.error.code||"")!=="23505"){
     if(abrCloudArchiveMissing(response.error)){abrCloudArchiveAvailable=false;abrCloudMetaMerge({warning:"Bulut arşivi kurulumu gerekli",archiveReady:false});return false}
     abrCloudMetaMerge({warning:"Bulut arşivi bağlantı bekliyor",archiveReady:false});throw response.error
@@ -44407,15 +44260,13 @@ function abrCloudPayloadCandidates(remote){
 }
 function abrCloudBestPayload(remote){return abrCloudPayloadCandidates(remote).sort(function(a,b){const sa=abrCloudStats(a),sb=abrCloudStats(b);return sb.quality-sa.quality||String(b.olusturmaTarihi||"").localeCompare(String(a.olusturmaTarihi||""))})[0]||null}
 async function abrCloudRemote(context){
-  abrCloudScopeCheck(context);
   const response=await context.client.from(ABR_CLOUD_TABLE).select("payload,record_count,app_version,updated_at").eq("user_id",context.user.id).maybeSingle();
-  abrCloudScopeCheck(context);
   if(response.error)throw response.error;
   return response.data||null;
 }
 function abrCloudApply(payload){
   if(!payload||!Array.isArray(payload.apartmanlar))throw new Error("Bulut yedeği geçersiz.");
-  try{abrAccountStorage.setItem(ABR_STB_PRE_RESTORE_KEY,JSON.stringify(yedekVeriOlustur("geri_yukleme_oncesi")))}catch(preError){}
+  try{localStorage.setItem(ABR_STB_PRE_RESTORE_KEY,JSON.stringify(yedekVeriOlustur("geri_yukleme_oncesi")))}catch(preError){}
   const normalized=abrStbVeriyiNormalizeEt(abrStbDerinKopya(payload.apartmanlar));
   const oldData=data;
   data=normalized.data;
@@ -44425,12 +44276,12 @@ function abrCloudApply(payload){
   if(Array.isArray(payload.meslekiBelgeler)&&typeof meslekiBelgelerSet==="function")meslekiBelgelerSet(payload.meslekiBelgeler,false);
   if(Array.isArray(payload.montajKesifleri)&&typeof montajKesifSet==="function")montajKesifSet(payload.montajKesifleri,false);
   if(payload.profil){
-    abrAccountStorage.setItem("profilAd",payload.profil.ad||"");
-    abrAccountStorage.setItem("profilFirma",payload.profil.firma||"");
-    abrAccountStorage.setItem("profilTelefon",payload.profil.telefon||"");
-    abrAccountStorage.setItem("profilBio",payload.profil.bio||"");
+    localStorage.setItem("profilAd",payload.profil.ad||"");
+    localStorage.setItem("profilFirma",payload.profil.firma||"");
+    localStorage.setItem("profilTelefon",payload.profil.telefon||"");
+    localStorage.setItem("profilBio",payload.profil.bio||"");
   }
-  if(payload.tema)abrAccountStorage.setItem("tema",payload.tema);
+  if(payload.tema)localStorage.setItem("tema",payload.tema);
   try{if(typeof profilAlanlariniDoldur==="function")profilAlanlariniDoldur()}catch(error){}
   try{if(typeof temaUygula==="function")temaUygula()}catch(error){}
   try{if(typeof autoYedekAl==="function")autoYedekAl(true)}catch(error){}
@@ -44457,14 +44308,12 @@ async function abrCloudSave(force,kind){
   if(abrCloudWorking||abrCloudRestoring||navigator.onLine===false)return false;
   kind=abrCloudArchiveKind(kind||(force?"manual":"automatic"));
   abrCloudWorking=true;abrCloudStatus("Buluta kaydediliyor…","working");
-  const operationToken=abrAccountStorage.token();
   try{
     const context=await abrCloudContext();
     const payload=abrCloudPayload();
     const count=abrCloudRecordCount(payload);
     if(count===0){abrCloudStatusRefresh();return false}
     const remote=await abrCloudRemote(context);
-    abrCloudScopeCheck(context);
     const localStats=abrCloudStats(payload);
     const remoteBest=abrCloudBestPayload(remote);
     const remoteStats=abrCloudStats(remoteBest);
@@ -44481,19 +44330,15 @@ async function abrCloudSave(force,kind){
     const json=JSON.stringify(payload);
     if(json.length>ABR_CLOUD_MAX_BYTES)throw new Error("Bulut yedeği 8 MB sınırını aşıyor. Fotoğraf ve dosyaları dış yedekte sakla.");
     const now=new Date().toISOString();
-    abrCloudScopeCheck(context);
     const response=await context.client.from(ABR_CLOUD_TABLE).upsert({user_id:context.user.id,payload:payload,record_count:count,app_version:typeof APP_VERSION!=="undefined"?String(APP_VERSION):"",updated_at:now},{onConflict:"user_id"});
-    abrCloudScopeCheck(context);
     if(response.error)throw response.error;
     try{await abrCloudArchiveSave(context,payload,kind,force===true)}catch(archiveError){console.warn("Bulut arşivi kaydedilemedi:",archiveError)}
-    abrCloudScopeCheck(context);
     abrCloudMetaMerge({userId:context.user.id,updatedAt:now,recordCount:count,error:""});
     abrCloudStatus(abrCloudDate(now),"ok");
     return true;
   }catch(error){
-    if(abrAccountStorage.token()!==operationToken||!abrAccountStorage.owns())return false;
     abrCloudMetaMerge({error:String(error&&error.message||error||"Bulut yedeği alınamadı")});abrCloudStatus("Bağlantı bekleniyor","error");console.warn("Bulut yedeği alınamadı:",error);return false;
-  }finally{if(abrAccountStorage.token()===operationToken)abrCloudWorking=false}
+  }finally{abrCloudWorking=false}
 }
 window.abrCloudBackupSchedule=function(){
   clearTimeout(abrCloudTimer);
@@ -44507,17 +44352,14 @@ window.abrCloudBackupNow=async function(kind){
 window.abrCloudRestoreAfterLogin=async function(){
   if(abrCloudRestoring)return false;
   abrCloudRestoring=true;abrCloudStatus("Bulut kontrol ediliyor…","working");
-  const operationToken=abrAccountStorage.token();
   try{
     const context=await abrCloudContext();
     const remote=await abrCloudRemote(context);
     const selection=await abrCloudRestoreSelection(context,remote);
-    abrCloudScopeCheck(context);
     const bestRemote=selection&&selection.payload;
     const bestDate=selection&&selection.date||remote&&remote.updated_at||"";
     if(bestRemote){try{await abrCloudArchiveSave(context,bestRemote,"migration",false)}catch(archiveError){console.warn("Mevcut bulut yedeği arşive aktarılamadı:",archiveError)}}
-    abrCloudScopeCheck(context);
-    const localCount=Array.isArray(data)?data.length:0;
+    const localCount=Array.isArray(window.data)?window.data.length:(Array.isArray(data)?data.length:0);
     if(bestRemote&&abrCloudRecordCount(bestRemote)>0&&localCount===0){
       const count=abrCloudApply(bestRemote);
       abrCloudMetaMerge({userId:context.user.id,updatedAt:bestDate,recordCount:count,error:""});
@@ -44538,7 +44380,6 @@ window.abrCloudRestoreAfterLogin=async function(){
     else abrCloudStatus("Henüz alınmadı","");
     return false;
   }catch(error){
-    if(abrAccountStorage.token()!==operationToken||!abrAccountStorage.owns())return false;
     try{
       const localCount=Array.isArray(data)?data.length:0;
       if(localCount===0&&typeof window.abrTeamRecoveryApartments==="function"){
@@ -44547,17 +44388,15 @@ window.abrCloudRestoreAfterLogin=async function(){
       }
     }catch(recoveryError){}
     abrCloudMetaMerge({error:String(error&&error.message||error||"Bulut yedeği okunamadı")});abrCloudStatus("Kurulum / bağlantı gerekli","error");console.warn("Bulut yedeği okunamadı:",error);return false;
-  }finally{if(abrAccountStorage.token()===operationToken)abrCloudRestoring=false}
+  }finally{abrCloudRestoring=false}
 };
 window.abrBulutYedegiGeriYukle=async function(){
   if(abrCloudRestoring||abrCloudWorking)return;
   abrCloudRestoring=true;abrCloudStatus("Bulut yedeği okunuyor…","working");
-  const operationToken=abrAccountStorage.token();
   try{
     const context=await abrCloudContext();const remote=await abrCloudRemote(context);
     const selection=await abrCloudRestoreSelection(context,remote);const bestRemote=selection&&selection.payload;
     if(!selection||!bestRemote||abrCloudRecordCount(bestRemote)===0){if(typeof toast==="function")toast("Bu hesapta sağlam bulut yedeği bulunamadı");abrCloudStatusRefresh();return}
-    abrCloudScopeCheck(context);
     const remoteStats=selection.stats||abrCloudStats(bestRemote);const localStats=abrCloudStats(abrCloudPayload());
     if(localStats.quality>remoteStats.quality){
       if(typeof toast==="function")toast("Yükleme engellendi: bu cihazdaki kayıtlar bulut yedeğinden daha dolu");
@@ -44568,12 +44407,11 @@ window.abrBulutYedegiGeriYukle=async function(){
     const detail=remoteStats.payments+" ödeme • "+remoteStats.maintenance+" bakım • "+remoteStats.oldBalances+" eski bakiye\n"+balanceText+" açık bakiye";
     const fallbackNote=selection.usedFallback?"\n\nEn son kayıt eksik bulunduğu için sistem otomatik olarak bir önceki sağlam yedeği seçti.":"";
     if(!confirm("En son sağlam bulut yedeği geri yüklensin mi?\n"+abrCloudDate(selection.date)+" • "+count+" apartman\n\n"+detail+fallbackNote+"\n\nMevcut durum işlemden önce ayrıca korunacak.")){abrCloudStatusRefresh();return}
-    abrCloudScopeCheck(context);
     const restored=abrCloudApply(bestRemote);
     abrCloudMetaMerge({userId:context.user.id,updatedAt:selection.date,recordCount:restored,error:""});abrCloudStatus(abrCloudDate(selection.date),"ok");
     if(typeof toast==="function")toast(restored+" apartman en son sağlam bulut yedeğinden geri yüklendi");
-  }catch(error){if(abrAccountStorage.token()!==operationToken)return;abrCloudStatus("Geri yüklenemedi","error");if(typeof toast==="function")toast(String(error&&error.message||"Bulut yedeği geri yüklenemedi"))}
-  finally{if(abrAccountStorage.token()===operationToken)abrCloudRestoring=false}
+  }catch(error){abrCloudStatus("Geri yüklenemedi","error");if(typeof toast==="function")toast(String(error&&error.message||"Bulut yedeği geri yüklenemedi"))}
+  finally{abrCloudRestoring=false}
 };
 function abrLocalRecoveryCandidates(){
   const candidates=[];const seen=Object.create(null);
@@ -44587,8 +44425,8 @@ function abrLocalRecoveryCandidates(){
     const signature=abrCloudPayloadSignature(payload);if(!signature||seen[signature])return;seen[signature]=true;
     candidates.push({source:source,payload:payload,date:payload.olusturmaTarihi||date||"",stats:abrCloudStats(payload)});
   }
-  try{const history=JSON.parse(abrAccountStorage.getItem(AUTO_YEDEK_HISTORY_KEY)||"[]");if(Array.isArray(history))history.forEach(function(item,index){add("Otomatik yedek "+(index+1),item&&item.veri,item&&item.olusturmaTarihi)})}catch(error){}
-  [[AUTO_YEDEK_KEY,"Son otomatik yedek"],[ABR_STB_PRE_RESTORE_KEY,"Geri yükleme öncesi"],["elevatorxLastPreUpdateBackupJson","Güncelleme öncesi"],["elevatorxLastAutoBackup","Son güvenli yedek"]].forEach(function(entry){try{add(entry[1],abrAccountStorage.getItem(entry[0]),"")}catch(error){}});
+  try{const history=JSON.parse(localStorage.getItem(AUTO_YEDEK_HISTORY_KEY)||"[]");if(Array.isArray(history))history.forEach(function(item,index){add("Otomatik yedek "+(index+1),item&&item.veri,item&&item.olusturmaTarihi)})}catch(error){}
+  [[AUTO_YEDEK_KEY,"Son otomatik yedek"],[ABR_STB_PRE_RESTORE_KEY,"Geri yükleme öncesi"],["elevatorxLastPreUpdateBackupJson","Güncelleme öncesi"],["elevatorxLastAutoBackup","Son güvenli yedek"]].forEach(function(entry){try{add(entry[1],localStorage.getItem(entry[0]),"")}catch(error){}});
   return candidates.sort(function(a,b){return b.stats.quality-a.stats.quality||String(b.date||"").localeCompare(String(a.date||""))});
 }
 window.abrYerelYedekKurtar=function(){
@@ -44606,10 +44444,7 @@ window.abrYerelYedekKurtar=function(){
 };
 document.addEventListener("DOMContentLoaded",abrCloudStatusRefresh,{once:true});
 window.__abrCloudBackupVersion="2.2.33";
-window.addEventListener("abr-account-data-changed",function(){clearTimeout(abrCloudTimer);abrCloudWorking=false;abrCloudRestoring=false;abrCloudArchiveAvailable=true;abrCloudStatusRefresh()});
 })();
-
-
 </script>
 
 <script id="exRideAnalysisScriptV2220">
@@ -44646,8 +44481,6 @@ function exRideFormat(value,digits){ return exRideNumber(value).toLocaleString("
 function exRideEscape(value){ return String(value==null?"":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]}); }
 function exRideId(){ return "ride_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8); }
 
-window.addEventListener("abr-account-data-changed",function(){exRideState.current=null;exRideState.samples=[];exRideState.graph=[]});
-
 function exRideHorizontalLock(){
   let screen=document.querySelector("#exRideModal .exRideScreen");
   if(!screen) return;
@@ -44660,14 +44493,14 @@ function exRideHorizontalLock(){
 
 function exRideRecordsGet(){
   try{
-    let parsed=JSON.parse(abrAccountStorage.getItem(EX_RIDE_KEY)||"[]");
+    let parsed=JSON.parse(localStorage.getItem(EX_RIDE_KEY)||"[]");
     return Array.isArray(parsed)?parsed:[];
   }catch(error){ return []; }
 }
 
 function exRideRecordsSet(records){
   try{
-    abrAccountStorage.setItem(EX_RIDE_KEY,JSON.stringify((records||[]).slice(0,EX_RIDE_MAX_RECORDS)));
+    localStorage.setItem(EX_RIDE_KEY,JSON.stringify((records||[]).slice(0,EX_RIDE_MAX_RECORDS)));
     return true;
   }catch(error){
     try{ if(typeof toast==="function") toast("Sürüş testi kaydedilemedi"); }catch(_){}
@@ -45173,7 +45006,6 @@ const EX_LUX_POINTS={
 };
 
 let exLuxState={current:null,photoBlob:null,photoUrl:"",fixturePlan:null,loading:false};
-window.addEventListener("abr-account-data-changed",function(){exLuxState.current=null;exLuxState.photoBlob=null;exLuxState.fixturePlan=null;exLuxState.loading=false;exLuxPhotoPreviewClear()});
 
 function exLuxEl(id){return document.getElementById(id);}
 function exLuxHtml(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
@@ -45186,16 +45018,16 @@ function exLuxToday(){let d=new Date(Date.now()-new Date().getTimezoneOffset()*6
 function exLuxDateLabel(value){if(!value)return"-";let d=new Date(value+"T12:00:00");return Number.isNaN(d.getTime())?String(value):d.toLocaleDateString("tr-TR");}
 
 function exLuxRecordsGet(){
-  try{let parsed=JSON.parse(abrAccountStorage.getItem(EX_LUX_KEY)||"[]");return Array.isArray(parsed)?parsed:[];}catch(error){return[];}
+  try{let parsed=JSON.parse(localStorage.getItem(EX_LUX_KEY)||"[]");return Array.isArray(parsed)?parsed:[];}catch(error){return[];}
 }
 
 function exLuxRecordsSet(records){
-  try{abrAccountStorage.setItem(EX_LUX_KEY,JSON.stringify((records||[]).slice(0,EX_LUX_MAX_RECORDS)));return true;}
+  try{localStorage.setItem(EX_LUX_KEY,JSON.stringify((records||[]).slice(0,EX_LUX_MAX_RECORDS)));return true;}
   catch(error){try{if(typeof toast==="function")toast("Lux kayıt alanı dolu; eski kayıtları yedekleyip temizle");}catch(_){}return false;}
 }
 
-function exLuxLastDeviceGet(){try{let p=JSON.parse(abrAccountStorage.getItem(EX_LUX_DEVICE_KEY)||"{}");return p&&typeof p==="object"?p:{};}catch(error){return{};}}
-function exLuxLastDeviceSet(result){try{abrAccountStorage.setItem(EX_LUX_DEVICE_KEY,JSON.stringify({device:result.device||"",calibrationDate:result.calibrationDate||""}));}catch(error){}}
+function exLuxLastDeviceGet(){try{let p=JSON.parse(localStorage.getItem(EX_LUX_DEVICE_KEY)||"{}");return p&&typeof p==="object"?p:{};}catch(error){return{};}}
+function exLuxLastDeviceSet(result){try{localStorage.setItem(EX_LUX_DEVICE_KEY,JSON.stringify({device:result.device||"",calibrationDate:result.calibrationDate||""}));}catch(error){}}
 
 function exLuxApartmentOptions(){
   let select=exLuxEl("exLuxApartment");if(!select)return;
@@ -45693,13 +45525,13 @@ window.luxKameraOlcumuBaslat=async function(){
 };
 
 window.luxKameraKalibrasyonuDegisti=function(value){
-  let correction=Number(value)||1;try{abrAccountStorage.setItem(EX_LUX_CAMERA_CORRECTION_KEY,String(correction));}catch(error){}
+  let correction=Number(value)||1;try{localStorage.setItem(EX_LUX_CAMERA_CORRECTION_KEY,String(correction));}catch(error){}
   window.__exLuxCameraMeta=null;cameraStatus("Kamera düzeltme katsayısı "+String(correction).replace(".",",")+" olarak ayarlandı. Yeni ölçüm başlat.");
 };
 
 function cameraResetUi(){
   cameraStop(false);cameraProgress(0);window.__exLuxCameraMeta=null;
-  let correction=1;try{correction=Number(abrAccountStorage.getItem(EX_LUX_CAMERA_CORRECTION_KEY)||1)||1;}catch(error){}
+  let correction=1;try{correction=Number(localStorage.getItem(EX_LUX_CAMERA_CORRECTION_KEY)||1)||1;}catch(error){}
   let select=cameraEl("exLuxCameraCalibration");if(select){let values=Array.from(select.options).map(function(option){return Number(option.value);});let closest=values.reduce(function(a,b){return Math.abs(b-correction)<Math.abs(a-correction)?b:a;},1);select.value=String(closest);}
   let device=cameraEl("exLuxDevice");if(device)device.value="Telefon arka kamerası · yaklaşık";
 };
@@ -45953,7 +45785,7 @@ function abrBulkReset(keepUndo){
 }
 function abrBulkUndoGet(){
   try{
-    var parsed = JSON.parse(abrAccountStorage.getItem(ABR_BULK_UNDO_KEY) || "null");
+    var parsed = JSON.parse(localStorage.getItem(ABR_BULK_UNDO_KEY) || "null");
     return parsed && Array.isArray(parsed.ids) && parsed.ids.length ? parsed : null;
   }catch(error){ return null; }
 }
@@ -46434,7 +46266,6 @@ function abrBulkOpenReview(rows,sourceName){
 }
 
 window.topluListeDosyaSec = async function(files){
-  const readToken=abrAccountStorage.token();
   var file = files && files[0];
   if(!file || abrBulkState.busy) return;
   if(file.size > ABR_BULK_MAX_FILE){ abrBulkToast("Dosya en fazla 22 MB olabilir");return; }
@@ -46448,7 +46279,6 @@ window.topluListeDosyaSec = async function(files){
   try{
     if(isText){
       var plain = await file.text();
-    abrAccountStorage.assertCurrent(readToken);
       abrBulkState.rawText = plain;
       var textRows = abrBulkRowsFromText(plain);
       textRows.forEach(function(row){ row.confidence = 82; });
@@ -46457,7 +46287,6 @@ window.topluListeDosyaSec = async function(files){
       return;
     }
     var source = isPdf ? await abrBulkPdfSource(file) : {text:"",canvas:await abrBulkImageCanvas(file)};
-    abrAccountStorage.assertCurrent(readToken);
     if(source.text){
       abrBulkState.rawText = source.text;
       var pdfRows = abrBulkRowsFromText(source.text);
@@ -46470,20 +46299,17 @@ window.topluListeDosyaSec = async function(files){
     var enhanced = abrBulkEnhanceCanvas(source.canvas);
     abrBulkProgress("OCR hazırlanıyor",25,true);
     var ocr = await abrBulkOcr(enhanced);
-    abrAccountStorage.assertCurrent(readToken);
     abrBulkState.rawText = ocr.text;
     var rows = abrBulkRowsFromTsv(ocr.tsv,ocr.text,ocr.width);
     if(!rows.length) throw new Error("Fotoğrafta okunabilir apartman satırı bulunamadı");
     abrBulkOpenReview(rows,file.name || "Fotoğraf listesi");
   }catch(error){
-    if(abrAccountStorage.token()!==readToken)return;
     console.warn("Toplu liste aktarma hatası",error);
     abrBulkProgress("",0,false);
     abrBulkToast(error && error.message ? error.message : "Liste okunamadı");
     var paste = abrBulkEl("abrBulkPasteText");
     if(paste && abrBulkState.rawText) paste.value = abrBulkState.rawText;
   }finally{
-    if(abrAccountStorage.token()!==readToken)return;
     abrBulkState.busy = false;
     var camera = abrBulkEl("abrBulkCameraInput");
     var gallery = abrBulkEl("abrBulkGalleryInput");
@@ -46581,7 +46407,7 @@ window.topluListeyiKaydet = function(){
     records.forEach(function(record){ data.push(record); });
     if(typeof kaydet !== "function" || !kaydet()) throw new Error("Apartman kayıtları yazılamadı");
     try{
-      abrAccountStorage.setItem(ABR_BULK_UNDO_KEY,JSON.stringify({batchId:batchId,ids:ids,names:records.map(function(record){return record.ad;}),createdAt:new Date().toISOString()}));
+      localStorage.setItem(ABR_BULK_UNDO_KEY,JSON.stringify({batchId:batchId,ids:ids,names:records.map(function(record){return record.ad;}),createdAt:new Date().toISOString()}));
     }catch(error){}
     var resultTitle = abrBulkEl("abrBulkResultTitle");
     var resultText = abrBulkEl("abrBulkResultText");
@@ -46616,7 +46442,7 @@ window.topluListeSonAktarimiGeriAl = function(){
     if(undo.ids.indexOf(data[i] && data[i].id) >= 0){ data.splice(i,1);removed++; }
   }
   if(removed && typeof kaydet === "function" && !kaydet()){ abrBulkToast("Geri alma kaydedilemedi");return; }
-  try{ abrAccountStorage.removeItem(ABR_BULK_UNDO_KEY); }catch(error){}
+  try{ localStorage.removeItem(ABR_BULK_UNDO_KEY); }catch(error){}
   abrBulkState.undoArmedUntil = 0;
   abrBulkUndoRender();
   abrBulkHaptic("warning");
@@ -46750,7 +46576,7 @@ function today(){const value=new Date();return{day:value.getDate(),month:value.g
 function leap(year){return year%4===0&&(year%100!==0||year%400===0)}
 function readBirthday(){
   try{
-    const value=JSON.parse(abrAccountStorage.getItem(BIRTHDAY_KEY)||"null");
+    const value=JSON.parse(localStorage.getItem(BIRTHDAY_KEY)||"null");
     const day=Number(value&&value.day),month=Number(value&&value.month);
     if(month>=1&&month<=12&&day>=1&&day<=MAX_DAYS[month-1])return{day:day,month:month}
   }catch(error){}
@@ -46763,7 +46589,7 @@ function matchesToday(value,current){
 }
 function nameForGreeting(){
   const input=el("profilAd");
-  const raw=String(input&&input.value||abrAccountStorage.getItem("profilAd")||"").trim();
+  const raw=String(input&&input.value||localStorage.getItem("profilAd")||"").trim();
   return raw?raw.split(/\s+/)[0]:"değerli kullanıcı"
 }
 function paintExperience(){
@@ -46830,13 +46656,13 @@ function confetti(){
 function showCelebration(mode){
   const celebration=el("abrBirthdayCelebration"),greeting=el("abrBirthdayGreeting"),kicker=el("abrBirthdayKicker");if(!celebration)return;
   if(!BIRTHDAY_CELEBRATION_ENABLED){
-    if(mode!=="preview")abrAccountStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
+    if(mode!=="preview")localStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
     paintExperience();pulse("light");return
   }
   if(greeting)greeting.textContent="İyi ki doğdun, "+nameForGreeting()+"!";
   if(kicker)kicker.textContent=mode==="preview"?"SÜRPRİZ ÖNİZLEMESİ":"BUGÜN SENİN GÜNÜN";
   celebration.classList.add("is-open");celebration.setAttribute("aria-hidden","false");
-  if(mode!=="preview")abrAccountStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
+  if(mode!=="preview")localStorage.setItem(BIRTHDAY_SEEN_KEY,today().key);
   paintExperience();confetti();pulse("medium");window.setTimeout(function(){pulse("light")},180);
   window.setTimeout(function(){const button=celebration.querySelector(".abrBirthdayThanks");if(button)button.focus({preventScroll:true})},120)
 }
@@ -46845,7 +46671,7 @@ function applyToday(forcePopup){
   if(!previewActive)document.body.classList.toggle("abrBirthdayMode",isBirthday);
   refreshReplayCard();
   paintExperience();
-  if(!isBirthday||(!forcePopup&&abrAccountStorage.getItem(BIRTHDAY_SEEN_KEY)===current.key))return;
+  if(!isBirthday||(!forcePopup&&localStorage.getItem(BIRTHDAY_SEEN_KEY)===current.key))return;
   window.clearTimeout(autoTimer);
   (function waitForApp(){
     if(!matchesToday(readBirthday(),today()))return;
@@ -46863,11 +46689,11 @@ window.abrBirthdaySettingsClose=function(){setModal(false)};
 window.abrBirthdaySettingsSave=function(){
   const day=Number(el("abrBirthdayDay")&&el("abrBirthdayDay").value),month=Number(el("abrBirthdayMonth")&&el("abrBirthdayMonth").value);
   if(!(month>=1&&month<=12&&day>=1&&day<=MAX_DAYS[month-1])){notify("Geçerli bir gün ve ay seç");return}
-  abrAccountStorage.setItem(BIRTHDAY_KEY,JSON.stringify({day:day,month:month}));refreshStatus();setModal(false);pulse("success");
-  if(matchesToday({day:day,month:month},today())){abrAccountStorage.removeItem(BIRTHDAY_SEEN_KEY);applyToday(true)}else{applyToday(false);notify("Doğum günü sürprizi kaydedildi")}
+  localStorage.setItem(BIRTHDAY_KEY,JSON.stringify({day:day,month:month}));refreshStatus();setModal(false);pulse("success");
+  if(matchesToday({day:day,month:month},today())){localStorage.removeItem(BIRTHDAY_SEEN_KEY);applyToday(true)}else{applyToday(false);notify("Doğum günü sürprizi kaydedildi")}
 };
 window.abrBirthdaySettingsRemove=function(){
-  abrAccountStorage.removeItem(BIRTHDAY_KEY);abrAccountStorage.removeItem(BIRTHDAY_SEEN_KEY);setModal(false);window.abrBirthdayPreviewEnd();refreshStatus();notify("Doğum günü tarihi kaldırıldı");pulse("light")
+  localStorage.removeItem(BIRTHDAY_KEY);localStorage.removeItem(BIRTHDAY_SEEN_KEY);setModal(false);window.abrBirthdayPreviewEnd();refreshStatus();notify("Doğum günü tarihi kaldırıldı");pulse("light")
 };
 window.abrBirthdayPreviewStart=function(){
   previewActive=true;document.body.classList.add("abrBirthdayMode","abrBirthdayPreviewMode");paintExperience();setModal(false);showCelebration("preview")
@@ -46952,13 +46778,12 @@ window.__abrBirthdayVersion="2.2.41";
 "use strict";
 const K={birth:"abrProfilDogumTarihiV2237",role:"abrProfilGorevV2237",city:"abrProfilSehirV2237",district:"abrProfilIlceV2237",area:"abrProfilHizmetBolgesiV2237",address:"abrProfilFirmaAdresiV2237",logo:"abrProfilFirmaLogoV2237",signature:"abrProfilImzaV2237",dismissed:"abrProfileSetupDismissedV2237",birthday:"abrBirthdayDayMonthV2234"};
 let step=0,media={logo:"",signature:""},originalBirth="",autoTimer=0;
-window.addEventListener("abr-account-data-changed",function(){window.clearTimeout(autoTimer);media={logo:"",signature:""};originalBirth="";fill();refreshCta()});
 function el(id){return document.getElementById(id)}
 function value(id){return String(el(id)&&el(id).value||"").trim()}
 function setValue(id,v){const node=el(id);if(node)node.value=v||""}
 function notify(message){try{if(typeof window.toast==="function")window.toast(message)}catch(error){}}
 function pulse(type){try{if(typeof window.haptic==="function")window.haptic(type||"light")}catch(error){}}
-function existing(){return{ad:String(abrAccountStorage.getItem("profilAd")||"").trim(),firma:String(abrAccountStorage.getItem("profilFirma")||"").trim(),telefon:String(abrAccountStorage.getItem("profilTelefon")||"").trim(),bio:String(abrAccountStorage.getItem("profilBio")||"").trim(),birth:String(abrAccountStorage.getItem(K.birth)||""),role:String(abrAccountStorage.getItem(K.role)||""),city:String(abrAccountStorage.getItem(K.city)||""),district:String(abrAccountStorage.getItem(K.district)||""),area:String(abrAccountStorage.getItem(K.area)||""),address:String(abrAccountStorage.getItem(K.address)||""),logo:String(abrAccountStorage.getItem(K.logo)||""),signature:String(abrAccountStorage.getItem(K.signature)||"")}}
+function existing(){return{ad:String(localStorage.getItem("profilAd")||"").trim(),firma:String(localStorage.getItem("profilFirma")||"").trim(),telefon:String(localStorage.getItem("profilTelefon")||"").trim(),bio:String(localStorage.getItem("profilBio")||"").trim(),birth:String(localStorage.getItem(K.birth)||""),role:String(localStorage.getItem(K.role)||""),city:String(localStorage.getItem(K.city)||""),district:String(localStorage.getItem(K.district)||""),area:String(localStorage.getItem(K.area)||""),address:String(localStorage.getItem(K.address)||""),logo:String(localStorage.getItem(K.logo)||""),signature:String(localStorage.getItem(K.signature)||"")}}
 function complete(p){p=p||existing();return!!(p.ad&&p.firma&&p.telefon&&p.role&&p.city)}
 function initials(){const raw=value("abrPsCompany")||value("abrPsName")||"AB";return raw.split(/\s+/).filter(Boolean).slice(0,2).map(function(part){return part.charAt(0).toLocaleUpperCase("tr-TR")}).join("")||"AB"}
 function paintMedia(kind){const data=media[kind],box=el(kind==="logo"?"abrPsLogoBox":"abrPsSignatureBox"),preview=el(kind==="logo"?"abrPsLogoPreview":"abrPsSignaturePreview");if(box)box.classList.toggle("has-image",!!data);if(preview){if(data)preview.src=data;else preview.removeAttribute("src")}}
@@ -46967,12 +46792,12 @@ function fill(){const p=existing();setValue("abrPsName",p.ad);setValue("abrPsBir
 function showStep(next){step=Math.max(0,Math.min(3,Number(next)||0));document.querySelectorAll("[data-abr-panel]").forEach(function(panel){panel.classList.toggle("is-active",Number(panel.dataset.abrPanel)===step)});document.querySelectorAll("[data-abr-step]").forEach(function(dot){const index=Number(dot.dataset.abrStep);dot.classList.toggle("is-active",index===step);dot.classList.toggle("is-done",index<step)});const back=el("abrProfileSetupBack"),skip=el("abrProfileSetupSkip"),nextButton=el("abrProfileSetupNext");if(back)back.hidden=step===0;if(skip)skip.hidden=step>0;if(nextButton)nextButton.textContent=step===3?"Kaydet ve Bitir":"Devam Et";const sheet=document.querySelector(".abrProfileSetupSheet");if(sheet)sheet.scrollTo({top:0,behavior:"smooth"});live()}
 function requireField(id,message){const node=el(id);if(value(id))return true;notify(message);if(node)node.focus();pulse("medium");return false}
 function validCurrent(){if(step===0){if(!requireField("abrPsName","İsim soyisim girmen gerekiyor"))return false;const birth=value("abrPsBirth");if(birth){const date=new Date(birth+"T12:00:00"),now=new Date();if(!date.getTime()||date>now||date.getFullYear()<1930){notify("Geçerli bir doğum tarihi seç");el("abrPsBirth").focus();return false}}}if(step===1){if(!requireField("abrPsCompany","Firma adını girmen gerekiyor"))return false;if(!requireField("abrPsPhone","Telefon numaranı girmen gerekiyor"))return false;if(!requireField("abrPsRole","Görevini seçmen veya yazman gerekiyor"))return false}if(step===2&&!requireField("abrPsCity","Hizmet verdiğin şehri girmen gerekiyor"))return false;return true}
-function setOrRemove(key,v){if(v)abrAccountStorage.setItem(key,v);else abrAccountStorage.removeItem(key)}
-function save(){abrAccountStorage.setItem("profilAd",value("abrPsName"));abrAccountStorage.setItem("profilFirma",value("abrPsCompany"));abrAccountStorage.setItem("profilTelefon",value("abrPsPhone"));abrAccountStorage.setItem("profilBio",value("abrPsBio"));abrAccountStorage.setItem("profilKuruldu","1");setOrRemove(K.birth,value("abrPsBirth"));setOrRemove(K.role,value("abrPsRole"));setOrRemove(K.city,value("abrPsCity"));setOrRemove(K.district,value("abrPsDistrict"));setOrRemove(K.area,value("abrPsServiceArea"));setOrRemove(K.address,value("abrPsAddress"));let mediaSaved=true;try{setOrRemove(K.logo,media.logo);setOrRemove(K.signature,media.signature)}catch(error){mediaSaved=false}const birth=value("abrPsBirth");if(birth){const parts=birth.split("-");abrAccountStorage.setItem(K.birthday,JSON.stringify({day:Number(parts[2]),month:Number(parts[1])}))}else if(originalBirth){abrAccountStorage.removeItem(K.birthday)}abrAccountStorage.removeItem(K.dismissed);const map={profilAd:"abrPsName",profilFirma:"abrPsCompany",profilTelefon:"abrPsPhone",profilBio:"abrPsBio"};Object.keys(map).forEach(function(target){const node=el(target);if(node)node.value=value(map[target])});if(typeof window.profilKontrolMerkeziGuncelle==="function")window.profilKontrolMerkeziGuncelle();if(typeof window.abrBirthdayRefresh==="function")window.abrBirthdayRefresh();refreshCta();close(false);notify(mediaSaved?"Firma kartın hazır":"Firma kartın kaydedildi; logo veya imza için cihaz alanı yetmedi");pulse("success")}
-function close(dismiss){const modal=el("abrProfileSetup2237");if(!modal)return;if(dismiss&&!complete())abrAccountStorage.setItem(K.dismissed,"1");modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");document.body.classList.remove("abrProfileSetupOpen");refreshCta()}
+function setOrRemove(key,v){if(v)localStorage.setItem(key,v);else localStorage.removeItem(key)}
+function save(){localStorage.setItem("profilAd",value("abrPsName"));localStorage.setItem("profilFirma",value("abrPsCompany"));localStorage.setItem("profilTelefon",value("abrPsPhone"));localStorage.setItem("profilBio",value("abrPsBio"));localStorage.setItem("profilKuruldu","1");setOrRemove(K.birth,value("abrPsBirth"));setOrRemove(K.role,value("abrPsRole"));setOrRemove(K.city,value("abrPsCity"));setOrRemove(K.district,value("abrPsDistrict"));setOrRemove(K.area,value("abrPsServiceArea"));setOrRemove(K.address,value("abrPsAddress"));let mediaSaved=true;try{setOrRemove(K.logo,media.logo);setOrRemove(K.signature,media.signature)}catch(error){mediaSaved=false}const birth=value("abrPsBirth");if(birth){const parts=birth.split("-");localStorage.setItem(K.birthday,JSON.stringify({day:Number(parts[2]),month:Number(parts[1])}))}else if(originalBirth){localStorage.removeItem(K.birthday)}localStorage.removeItem(K.dismissed);const map={profilAd:"abrPsName",profilFirma:"abrPsCompany",profilTelefon:"abrPsPhone",profilBio:"abrPsBio"};Object.keys(map).forEach(function(target){const node=el(target);if(node)node.value=value(map[target])});if(typeof window.profilKontrolMerkeziGuncelle==="function")window.profilKontrolMerkeziGuncelle();if(typeof window.abrBirthdayRefresh==="function")window.abrBirthdayRefresh();refreshCta();close(false);notify(mediaSaved?"Firma kartın hazır":"Firma kartın kaydedildi; logo veya imza için cihaz alanı yetmedi");pulse("success")}
+function close(dismiss){const modal=el("abrProfileSetup2237");if(!modal)return;if(dismiss&&!complete())localStorage.setItem(K.dismissed,"1");modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");document.body.classList.remove("abrProfileSetupOpen");refreshCta()}
 function open(){window.clearTimeout(autoTimer);fill();showStep(0);const modal=el("abrProfileSetup2237");if(!modal)return;modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");document.body.classList.add("abrProfileSetupOpen");window.setTimeout(function(){const field=el("abrPsName");if(field)field.focus({preventScroll:true})},180);pulse("light")}
 function refreshCta(){const p=existing(),cta=el("abrProfileSetupCta"),meta=el("abrProfileExtraMeta");if(cta)cta.hidden=complete(p);if(meta){const items=[p.role,[p.district,p.city].filter(Boolean).join(" / "),p.area].filter(Boolean);meta.innerHTML="";items.forEach(function(text){const chip=document.createElement("span");chip.textContent=text;meta.appendChild(chip)});meta.hidden=!items.length}}
-function maybeOpen(){refreshCta();if(complete()||abrAccountStorage.getItem(K.dismissed)==="1")return;window.clearTimeout(autoTimer);(function wait(){const root=document.documentElement;if(root.classList.contains("abr-role-locked")||root.classList.contains("abr-splash-active")){autoTimer=window.setTimeout(wait,650);return}autoTimer=window.setTimeout(open,450)})()}
+function maybeOpen(){refreshCta();if(complete()||localStorage.getItem(K.dismissed)==="1")return;window.clearTimeout(autoTimer);(function wait(){const root=document.documentElement;if(root.classList.contains("abr-role-locked")||root.classList.contains("abr-splash-active")){autoTimer=window.setTimeout(wait,650);return}autoTimer=window.setTimeout(open,450)})()}
 function readImage(file,kind){if(!file)return;if(file.size>8*1024*1024){notify("Görsel 8 MB'dan küçük olmalı");return}const done=function(data){media[kind]=data||"";paintMedia(kind);live();pulse("light")};if(typeof window.imageDosyasiniKucult==="function")window.imageDosyasiniKucult(file,kind==="logo"?360:640,kind==="logo"?360:240,.72,done);else{const reader=new FileReader();reader.onload=function(){done(String(reader.result||""))};reader.readAsDataURL(file)}}
 window.abrProfileSetupOpen=open;window.abrProfileSetupClose=close;window.abrProfileSetupMaybeOpen=maybeOpen;window.abrProfileSetupRefreshCTA=refreshCta;
 document.addEventListener("DOMContentLoaded",function(){const birth=el("abrPsBirth");if(birth)birth.max=new Date().toISOString().slice(0,10);document.querySelectorAll("#abrProfileSetup2237 input,#abrProfileSetup2237 textarea").forEach(function(node){node.addEventListener("input",live)});document.querySelectorAll("[data-abr-step]").forEach(function(node){node.addEventListener("click",function(){const target=Number(node.dataset.abrStep);if(target<=step||validCurrent())showStep(target)})});el("abrProfileSetupNext").addEventListener("click",function(){if(!validCurrent())return;if(step<3)showStep(step+1);else save()});el("abrProfileSetupBack").addEventListener("click",function(){showStep(step-1)});el("abrProfileSetupSkip").addEventListener("click",function(){close(true)});el("abrPsLogoInput").addEventListener("change",function(event){readImage(event.target.files&&event.target.files[0],"logo");event.target.value=""});el("abrPsSignatureInput").addEventListener("change",function(event){readImage(event.target.files&&event.target.files[0],"signature");event.target.value=""});el("abrPsLogoRemove").addEventListener("click",function(){media.logo="";paintMedia("logo");live()});el("abrPsSignatureRemove").addEventListener("click",function(){media.signature="";paintMedia("signature");live()});el("abrProfileSetup2237").addEventListener("click",function(event){if(event.target===this)close(true)});refreshCta();maybeOpen()});
@@ -48548,7 +48373,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.78";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48836,16 +48661,40 @@ body.abrBakimView .exMaintAction{
 body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNativeDetail2251{--nd-surface:#182537;--nd-ink:#edf2fa;--nd-muted:#a2b0c3;--nd-line:#2a394d;--nd-soft:#101b2a}
 @media(max-width:360px){.abrNativeDetail2251 .exDetailActionPair{grid-template-columns:1fr!important}.abrNativeDetail2251 .detailTitle{font-size:24px!important}}
 </style>
+<style id="abrDesktopPerformance2278">
+/* v2.2.78 — Masaüstünde kart listesi GPU yükünü azaltır; mobil görünümü değiştirmez. */
+@media (min-width:900px) and (pointer:fine){
+  .exPortfolioCard,
+  #liste .aptCard{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 170px;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  .exPortfolioCard{
+    animation:none!important;
+  }
+  .exPortfolioCard.statusWaiting:before,
+  .exPortfolioCard.statusToday:before,
+  .exPortfolioCard.statusOverdue:before{
+    animation:none!important;
+    filter:none!important;
+    transform:none!important;
+    opacity:1!important;
+  }
+  .tabbar,
+  .exPortfolioFilterState{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
+</style>
 <style id="abrNativeCariAndTablet2258">
 /* v2.2.58 — cari hesabı tek bakışlık yerel uygulama kartına dönüştürür. */
 /* v2.2.59 — firma yetkilisi / saha personeli rol ayrımı ve mali erişim koruması. */
 /* v2.2.76 — Makbuz PDF’i tek A4 sayfaya alındı; doğru dosya adıyla doğrudan paylaşım eklendi ve blob bağlantısı kaldırıldı. */
-/* v2.2.82 — Hesaba ait liste, profil, yerel yedekler ve dosyalar silinmeden ayrı alanlarda tutulur; hesap değişiminde eski aktarım işlemleri durdurulur. Personel bakım PDF’inde bakım ücreti ve cari/borç bölümü üretilmez; yetkili raporu korunur. */
-/* v2.2.81 — Yedekten gelen profil görselinde raster veri URL ve dosya başlığı doğrulaması eklendi; geçersiz görsel mevcut fotoğrafı değiştirmez. PDF logo nitelikleri kaçırıldı ve eski güvensiz değerler için varsayılan logo kullanılır. */
-/* v2.2.80 — Portföy arama ve filtre çubuğu iPhone güvenli alanı ve menü payıyla üstte sabitlendi; liste çubuğun altında kayar. */
-/* v2.2.79 — Giriş yalnız hesap şifresine alındı; PIN / Face ID adımları ve açık uygulamada arka plan / PDF dönüşü kilidi kaldırıldı. Yeni belge açılışında şifre istenir. */
-/* v2.2.78 — Kapanış mahsubunda kayıt saati kontrolü eklendi; tahsilat sonrası bakım ve devreden borç korunur, bakım raporunda önceki/diğer açık borç ve bu bakımın kalan borcu ayrılır. */
 /* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
+/* v2.2.78 — Masaüstünde sürekli çalışan üç arayüz kontrolü olay bazlı hale getirildi; kart blur, giriş ve sonsuz durum animasyonları yalnızca masaüstünde hafifletildi. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
@@ -49130,37 +48979,16 @@ function el(id){return document.getElementById(id)}
 function isIos(){const ua=navigator.userAgent||"";return /iPad|iPhone|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
 function isSafari(){const ua=navigator.userAgent||"";return /Safari/i.test(ua)&&!/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo/i.test(ua)}
 function isStandalone(){return navigator.standalone===true||(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)}
-function hasSeen(){try{return abrAccountStorage.getItem(KEY)==="1"}catch(error){return false}}
-function remember(){try{abrAccountStorage.setItem(KEY,"1")}catch(error){}}
+function hasSeen(){try{return localStorage.getItem(KEY)==="1"}catch(error){return false}}
+function remember(){try{localStorage.setItem(KEY,"1")}catch(error){}}
 function open(){const guide=el("abrIosInstallGuide");if(!guide||guide.classList.contains("is-open"))return;lastFocus=document.activeElement;guide.classList.add("is-open");guide.setAttribute("aria-hidden","false");document.body.classList.add("abrIosInstallGuideOpen");setTimeout(function(){const close=el("abrIosInstallClose");if(close)close.focus()},60)}
 function close(){const guide=el("abrIosInstallGuide");if(!guide)return;remember();guide.classList.remove("is-open");guide.setAttribute("aria-hidden","true");document.body.classList.remove("abrIosInstallGuideOpen");if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus()}
 function eligible(){return isIos()&&isSafari()&&!isStandalone()&&!hasSeen()}
 function init(){const guide=el("abrIosInstallGuide");if(!guide)return;[el("abrIosInstallClose"),el("abrIosInstallLater"),el("abrIosInstallDone"),guide.querySelector(".abrIosInstallBackdrop")].forEach(function(node){if(node)node.addEventListener("click",close)});document.addEventListener("keydown",function(event){if(event.key==="Escape"&&guide.classList.contains("is-open"))close()});if(eligible())setTimeout(function(){if(eligible())open()},4200)}
 window.abrIosInstallGuideOpen=function(){if(!isStandalone())open()};
-window.abrIosInstallGuideReset=function(){try{abrAccountStorage.removeItem(KEY)}catch(error){}};
+window.abrIosInstallGuideReset=function(){try{localStorage.removeItem(KEY)}catch(error){}};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
-
-<style id="abrStickyPortfolioSearch2280">
-/* v2.2.80 — Yalnız portföy araması; mevcut arama ve filtre olayları korunur. */
-body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) .container > #searchArea.searchRow{
-  position:-webkit-sticky!important;
-  position:sticky!important;
-  top:calc(72px + env(safe-area-inset-top,0px))!important;
-  z-index:100!important;
-  background:var(--abr-ui-surface-raised,#fff)!important;
-}
-body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) .container > #filterPanel.filterPanel{
-  position:-webkit-sticky!important;
-  position:sticky!important;
-  top:calc(139px + env(safe-area-inset-top,0px))!important;
-  z-index:99!important;
-  max-height:45vh;
-  overflow-y:auto;
-  background:var(--abr-ui-surface-raised,#fff)!important;
-}
-
-</style>
 </body>
 </html>
