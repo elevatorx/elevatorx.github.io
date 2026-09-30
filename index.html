@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.88_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.89_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.88">
+<meta name="abr-app-version" content="v2.2.89">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.88</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.89</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.89";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.89";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -29010,7 +29010,7 @@ function exDashboardSonIslemHtml(){
         <span class="exDashFinanceActivityDot"></span>
         <div class="exDashFinanceActivityMain">
           <small>Son hareket</small>
-          <b>Henüz işlem kaydı yok</b>
+          <b class="abrActivityViewport"><span class="abrActivityText">Henüz işlem kaydı yok</span></b>
         </div>
         <time>—</time>
       </div>
@@ -29022,7 +29022,7 @@ function exDashboardSonIslemHtml(){
       <span class="exDashFinanceActivityDot"></span>
       <div class="exDashFinanceActivityMain">
         <small>Son hareket</small>
-        <b>${ayHtml(String(son.ad || "-"))} • ${ayHtml(String(son.islem || "").replace(/\s*\(.*?\)/,""))}</b>
+        <b class="abrActivityViewport"><span class="abrActivityText">${ayHtml(String(son.ad || "-"))} • ${ayHtml(String(son.islem || "").replace(/\s*\(.*?\)/,""))}</span></b>
       </div>
       <time>${ayHtml(son.tarih || "—")}</time>
     </div>
@@ -48387,7 +48387,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.89";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -49194,7 +49194,7 @@ body.darkMode #abrRoleGate .abrRoleBusy>span,html.darkRoot #abrRoleGate .abrRole
 </style>
 
 <style id="abrIosSettingsDark2288">
-/* v2.2.88 — iOS Settings reference: black canvas, grouped gray surfaces. */
+/* v2.2.89 — iOS Settings reference: black canvas, grouped gray surfaces. */
 @media screen {
 html.darkRoot,body.darkMode,html.darkRoot body {
  color-scheme:dark;
@@ -49250,5 +49250,70 @@ body.darkMode.profileMode #profilPanel,html.darkRoot body.profileMode #profilPan
 :is(body.darkMode,html.darkRoot body) .tabbar .tabItem.activeTab{color:#ffffff!important}
 }
 </style>
+
+<style id="abrActivityScroll2289">
+@media screen {
+#liste .exDashFinanceActivityMain .abrActivityViewport{min-width:0;overflow:hidden!important;text-overflow:clip!important;white-space:nowrap!important}
+#liste .abrActivityText{display:inline-block;max-width:none;white-space:nowrap;vertical-align:top}
+}
+@media(prefers-reduced-motion:reduce){#liste .exDashFinanceActivityMain .abrActivityViewport{overflow-x:auto!important;scrollbar-width:none}#liste .abrActivityViewport::-webkit-scrollbar{display:none}}
+@media print{.abrActivityViewport{white-space:normal!important;overflow:visible!important}.abrActivityText{white-space:normal!important;transform:none!important}}
+</style>
+<script id="abrActivityScroll2289Script">
+(function(){
+'use strict';
+var states=new Map(),frame=0;
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+function sync(state){
+ if(!state.animation)return;
+ if(state.held||!state.visible||document.hidden||reduced.matches)state.animation.pause();
+ else state.animation.play();
+}
+function measure(state){
+ var distance=Math.max(0,state.text.scrollWidth-state.viewport.clientWidth);
+ if(distance===state.distance&&!!state.animation===(distance>1&&!reduced.matches))return;
+ state.distance=distance;
+ if(state.animation){state.animation.cancel();state.animation=null;}
+ if(distance<=1||reduced.matches||!state.text.animate)return;
+ var duration=4000+distance/24*1000;
+ state.animation=state.text.animate([
+  {transform:'translateX(0)',offset:0},
+  {transform:'translateX(0)',offset:2000/duration},
+  {transform:'translateX(-'+distance+'px)',offset:1-2000/duration},
+  {transform:'translateX(-'+distance+'px)',offset:1}
+ ],{duration:duration,iterations:Infinity,easing:'linear'});
+ sync(state);
+}
+var resize=window.ResizeObserver?new ResizeObserver(schedule):null;
+var intersection=window.IntersectionObserver?new IntersectionObserver(function(entries){entries.forEach(function(entry){var state=states.get(entry.target);if(state){state.visible=entry.isIntersecting;sync(state);}});}):null;
+function release(){states.forEach(function(state){if(state.held){state.held=false;sync(state);}});}
+function scan(){
+ frame=0;
+ states.forEach(function(state,node){if(!node.isConnected){if(state.animation)state.animation.cancel();if(resize){resize.unobserve(node);resize.unobserve(state.text);}if(intersection)intersection.unobserve(node);states.delete(node);}});
+ document.querySelectorAll('#liste .abrActivityViewport').forEach(function(node){
+  var state=states.get(node);
+  if(!state){
+   var text=node.querySelector('.abrActivityText');if(!text)return;
+   state={viewport:node,text:text,distance:-1,animation:null,held:false,visible:!intersection};states.set(node,state);
+   node.addEventListener('pointerdown',function(){state.held=true;sync(state);},{passive:true});
+   if(resize){resize.observe(node);resize.observe(text);}if(intersection)intersection.observe(node);
+  }
+  measure(state);
+ });
+}
+function schedule(){if(!frame)frame=requestAnimationFrame(scan);}
+function init(){
+ var list=document.getElementById('liste');if(!list)return;
+ new MutationObserver(schedule).observe(list,{childList:true,subtree:true,characterData:true});
+ window.addEventListener('resize',schedule,{passive:true});
+ window.addEventListener('pointerup',release,{passive:true});window.addEventListener('pointercancel',release,{passive:true});window.addEventListener('blur',release);
+ document.addEventListener('visibilitychange',function(){states.forEach(sync);});
+ if(reduced.addEventListener)reduced.addEventListener('change',schedule);else if(reduced.addListener)reduced.addListener(schedule);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(schedule);
+ schedule();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
 </body>
 </html>
