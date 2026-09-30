@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.85_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.86_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.85">
+<meta name="abr-app-version" content="v2.2.86">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.85</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.86</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.85";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.86";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.85";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.86";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -41400,10 +41400,14 @@ async function abrTeamProfileSync(){
   const profile = abrTeamLocalProfile();
   const existing = await abrTeamState.client
     .from("profiles")
-    .select("user_id")
+    .select("user_id,display_name,phone")
     .eq("user_id",abrTeamState.user.id)
     .maybeSingle();
   if(existing.error)throw existing.error;
+  if(existing.data && existing.data.display_name===profile.name && (existing.data.phone||"")===(profile.phone||"")){
+    abrTeamState.profiles[abrTeamState.user.id]={user_id:abrTeamState.user.id,display_name:profile.name,phone:profile.phone||null};
+    return;
+  }
   const response = existing.data
     ? await abrTeamState.client.from("profiles").update({
         display_name:profile.name,
@@ -43290,20 +43294,29 @@ async function abrTeamAccountProfileHydrate(userId){
     localStorage.setItem("profilTelefon",phone);
   }catch(error){}
 }
+window.abrLoginTimings=[];
+async function abrLoginTimedStep(stage,operation){
+  const start=performance.now();let ok=false;
+  try{const result=await operation();ok=true;return result}finally{
+    window.abrLoginTimings.push({stage:stage,ms:Math.round(performance.now()-start),ok:ok});
+    if(window.abrLoginTimings.length>30)window.abrLoginTimings.shift();
+  }
+}
 window.abrTeamCredentialSignIn=async function(credentials){
   if(navigator.onLine===false)throw new Error("Giriş yapmak için internet bağlantısı gerekli.");
   const email=abrTeamTrim(credentials&&credentials.email,180).toLocaleLowerCase("tr-TR");
   const password=String(credentials&&credentials.password||"");
   if(!/^\S+@\S+\.\S+$/.test(email))throw new Error("Geçerli bir e-posta adresi yaz.");
   if(password.length<8)throw new Error("Şifre en az 8 karakter olmalı.");
-  const client=await abrTeamEnsureClient();
-  const signed=await client.auth.signInWithPassword({email:email,password:password});
+  window.abrLoginTimings=[];
+  const client=await abrLoginTimedStep("client",function(){return abrTeamEnsureClient()});
+  const signed=await abrLoginTimedStep("password-auth",function(){return client.auth.signInWithPassword({email:email,password:password})});
   if(signed.error)throw signed.error;
-  await abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id);
+  await abrLoginTimedStep("profile-read",function(){return abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id)});
   await abrTeamAccountContextReset(false);
-  await abrTeamInit(false);
+  await abrLoginTimedStep("team-init",function(){return abrTeamInit(false)});
   if(abrTeamState.error)throw new Error(abrTeamState.error);
-  if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin();
+  if(typeof window.abrCloudRestoreAfterLogin==="function")await abrLoginTimedStep("cloud-restore",function(){return window.abrCloudRestoreAfterLogin()});
   return abrTeamAccountAccessSnapshot();
 };
 window.abrTeamCredentialSetup=async function(details){
@@ -43919,7 +43932,7 @@ function abrRoleEnter(role,access){
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
 }
-function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";if(immediate===true){abrRoleEnter(role,access);return}abrRoleState.view="success";abrRoleRender();setTimeout(function(){if(abrRoleState.view==="success")abrRoleEnter(role,access)},650)}
+function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="ready";abrRoleEnter(role,access)}
 function abrRoleRefreshAfterBiometric(userId){
   Promise.resolve().then(function(){return abrRoleSessionAccess()}).then(function(access){if(!access||access.userId!==userId||window.__abrAppRole===null)return;const refreshedRole=abrRoleFromAccess(access);if(refreshedRole!==window.__abrAppRole)abrRoleEnter(refreshedRole,access);else{abrRoleState.access=access;abrRoleIdentityPaint(refreshedRole,access)}}).catch(function(){})
 }
@@ -43935,7 +43948,7 @@ async function abrRoleSessionAccess(){
   try{
     if(typeof window.abrTeamAccessInfo!=="function")throw new Error("Ekip bilgisi okunamadı.");
     const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Ekip kontrolü zaman aşımına uğradı."))},14000)});
-    const access=await Promise.race([window.abrTeamAccessInfo(false),timeout]);
+    const access=await abrLoginTimedStep("team-access",function(){return Promise.race([window.abrTeamAccessInfo(false),timeout])});
     if(!access||access.error)throw new Error(access&&access.error||"Ekip bilgisi alınamadı.");
     if(userId&&access.userId!==userId)throw new Error("Cihazdaki hesap oturumu değişmiş. E-posta ve şifreyle yeniden giriş yap.");
     abrRoleAccessCache(access,access.userEmail||"");return access;
@@ -48374,7 +48387,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.85";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.86";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
