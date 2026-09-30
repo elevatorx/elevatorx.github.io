@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.82_MOBIL_YEREL_GORUNUM -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.83_COG_LOGIN -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.82">
+<meta name="abr-app-version" content="v2.2.83">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.82</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.83</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.83";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.83";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43852,7 +43852,8 @@ function abrRoleErrorHtml(){return abrRoleState.error?'<p class="abrRoleError" r
 function abrRoleRender(){
   const card=abrRoleEl("abrRoleCard");if(!card)return;
   card.classList.toggle("is-entry",abrRoleState.view==="entry");
-  if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrRoleSpinner"></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip bilgileri doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
+  card.classList.toggle("is-busy",!!abrRoleState.busy);
+  if(abrRoleState.busy){card.innerHTML=abrRoleHeader()+'<div class="abrRoleBusy"><div class="abrCogLoader" aria-hidden="true"><div class="abrCog abrCogMain"><i></i><i></i><i></i><span></span></div><div class="abrCog abrCogLeft"><i></i><i></i><i></i><span></span></div><div class="abrCog abrCogRight"><i></i><i></i><i></i><span></span></div></div><b>'+abrRoleEscape(abrRoleState.busyTitle||"Giriş yapılıyor")+'</b><span>'+abrRoleEscape(abrRoleState.busyDetail||"Hesap ve ekip bilgileri doğrulanıyor.")+'</span></div>'+abrRoleFooter();return}
   if(abrRoleState.view==="success"){
     const access=abrRoleState.access||{};const accountLabel=access.teamName||"Hesap doğrulandı";
     const roleLabel=abrRoleFromAccess(access)==="admin"?"Firma Yetkilisi":"Saha Personeli";
@@ -48373,7 +48374,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.83";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -49135,6 +49136,40 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
   body.darkMode #abrRoleGate .abrAccountField input,html.darkRoot #abrRoleGate .abrAccountField input,body.darkMode #abrRoleGate .abrAccountSecondary,html.darkRoot #abrRoleGate .abrAccountSecondary,body.darkMode #abrRoleGate .abrRoleEntryChoice,html.darkRoot #abrRoleGate .abrRoleEntryChoice{background:#1b283a!important;color:#edf2fa!important;border-color:#344155!important}
   body.darkMode #abrRoleGate .abrAccountField>span,html.darkRoot #abrRoleGate .abrAccountField>span,body.darkMode #abrRoleGate .abrPinField>span,html.darkRoot #abrRoleGate .abrPinField>span{color:#aebbd0!important}
   @media(max-height:640px){#abrRoleGate .abrRoleBrand{margin-bottom:18px!important}#abrRoleGate .abrRoleBrandFullLogo{width:130px!important;max-height:65px!important}#abrRoleGate .abrRoleHead{padding-bottom:18px!important}}
+}
+</style>
+<style id="abrCogLogin2283">
+/* v2.2.83 — Giriş doğrulamasına uygulama renklerinde dişli animasyonu. */
+#abrRoleGate .abrRoleCard.is-busy .abrRoleBrand{
+  justify-content:center!important;margin:0 auto 12px!important;text-align:center!important;
+}
+#abrRoleGate .abrRoleCard.is-busy .abrRoleBrandFullLogo{
+  width:min(62vw,230px)!important;max-height:128px!important;object-position:center!important;
+}
+#abrRoleGate .abrRoleCard.is-busy .abrRoleBusy{
+  min-height:0!important;flex:1!important;justify-content:center!important;padding-bottom:5vh!important;
+}
+#abrRoleGate .abrCogLoader{position:relative;width:126px;height:108px;margin:0 auto 19px}
+#abrRoleGate .abrCog{position:absolute;transform-origin:50% 50%;filter:drop-shadow(0 7px 11px rgba(20,54,91,.13))}
+#abrRoleGate .abrCog i{position:absolute;inset:0;border-radius:18%;background:currentColor}
+#abrRoleGate .abrCog i:nth-child(2){transform:rotate(60deg)}
+#abrRoleGate .abrCog i:nth-child(3){transform:rotate(120deg)}
+#abrRoleGate .abrCog span{position:absolute;inset:29%;z-index:2;border-radius:50%;background:#f5f6f9;box-shadow:inset 0 2px 5px rgba(12,35,63,.12)}
+#abrRoleGate .abrCogMain{left:33px;top:2px;width:67px;height:67px;color:#18385d;animation:abrCogTurn 3.6s linear infinite}
+#abrRoleGate .abrCogLeft{left:6px;top:56px;width:49px;height:49px;color:#2f80d7;animation:abrCogTurnBack 2.65s linear infinite}
+#abrRoleGate .abrCogRight{right:5px;top:59px;width:43px;height:43px;color:#ff7518;animation:abrCogTurnBack 2.3s linear infinite}
+#abrRoleGate .abrRoleBusy>b{margin-top:0!important;font-size:19px!important;font-weight:650!important;letter-spacing:-.25px!important}
+#abrRoleGate .abrRoleBusy>span{margin-top:7px!important;font-size:12px!important;font-weight:400!important;color:#7b8799!important}
+body.darkMode #abrRoleGate .abrCog span,html.darkRoot #abrRoleGate .abrCog span{background:#111b29}
+body.darkMode #abrRoleGate .abrCogMain,html.darkRoot #abrRoleGate .abrCogMain{color:#78aeea}
+body.darkMode #abrRoleGate .abrRoleBusy>span,html.darkRoot #abrRoleGate .abrRoleBusy>span{color:#9ba9bc!important}
+@keyframes abrCogTurn{to{transform:rotate(360deg)}}
+@keyframes abrCogTurnBack{to{transform:rotate(-360deg)}}
+@media(prefers-reduced-motion:reduce){#abrRoleGate .abrCog{animation-duration:8s!important}}
+@media screen and (max-height:640px){
+  #abrRoleGate .abrRoleCard.is-busy .abrRoleBrandFullLogo{width:180px!important;max-height:92px!important}
+  #abrRoleGate .abrRoleCard.is-busy .abrRoleBusy{padding-bottom:0!important}
+  #abrRoleGate .abrCogLoader{transform:scale(.86);margin-bottom:10px}
 }
 </style>
 </body>
