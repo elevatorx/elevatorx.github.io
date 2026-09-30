@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.87_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.88_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.87">
+<meta name="abr-app-version" content="v2.2.88">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.87</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.88</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.87";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.87";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -48387,7 +48387,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.87";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.88";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -49193,52 +49193,61 @@ body.darkMode #abrRoleGate .abrRoleBusy>span,html.darkRoot #abrRoleGate .abrRole
 }
 </style>
 
-<style id="abrCharcoalDark2287">
-/* v2.2.87 — Neutral dark surfaces, restrained blue accents. */
+<style id="abrIosSettingsDark2288">
+/* v2.2.88 — iOS Settings reference: black canvas, grouped gray surfaces. */
 @media screen {
 html.darkRoot,body.darkMode,html.darkRoot body {
  color-scheme:dark;
- --abr-ui-canvas:#101012;--abr-ui-canvas-top:#101012;
- --abr-ui-surface:#1c1c1f;--abr-ui-surface-soft:#252528;--abr-ui-surface-raised:#1c1c1f;
- --abr-ui-ink:#f3f3f5;--abr-ui-ink-2:#c5c5cc;--abr-ui-ink-3:#a2a2ac;
- --abr-ui-border:#303034;--abr-ui-border-strong:#434349;
- --abr-ui-primary:#80b4ff;--abr-ui-primary-strong:#a4c9ff;--abr-ui-primary-soft:#253247;
- --mn-surface:#1c1c1f;--mn-ink:#f3f3f5;--mn-muted:#a2a2ac;--mn-line:#303034;--mn-soft:#252528;
- background:#101012!important;color:#f3f3f5;
+ --abr-ui-canvas:#000000;--abr-ui-canvas-top:#000000;
+ --abr-ui-surface:#1c1c1e;--abr-ui-surface-soft:#2c2c2e;--abr-ui-surface-raised:#1c1c1e;
+ --abr-ui-ink:#ffffff;--abr-ui-ink-2:#d1d1d6;--abr-ui-ink-3:#98989e;
+ --abr-ui-border:#38383a;--abr-ui-border-strong:#48484a;
+ --abr-ui-primary:#0a84ff;--abr-ui-primary-strong:#80b4ff;--abr-ui-primary-soft:#242426;
+ --mn-surface:#1c1c1e;--mn-ink:#ffffff;--mn-muted:#98989e;--mn-line:#38383a;--mn-soft:#2c2c2e;
+ background:#000000!important;color:#ffffff;
 }
-html.darkRoot body::after,body.darkMode::after{background:linear-gradient(180deg,rgba(16,16,18,0),rgba(16,16,18,.94) 60%,#101012)!important}
-:is(body.darkMode,html.darkRoot body) #splash{background:#101012!important}
-:is(body.darkMode,html.darkRoot body) :is(.card,.aptCard,.emptyBox,.detailHero,.profileBox,.infoCard,.statCard,.appearanceCard,.abrSystemSummaryCard,.profileDataHubCard,.abrProfilePersonnelCard,.abrSellerProfileCard,.abrMonthSummary,.exPortfolioCard){background:#1c1c1f!important;border-color:#303034!important;box-shadow:none!important;color:#f3f3f5!important}
-:is(body.darkMode,html.darkRoot body) :is(input,textarea,select,#searchArea.searchRow,.filterPanel,.exHybridMenuBtn){background:#252528!important;border-color:#303034!important;color:#f3f3f5!important;box-shadow:none!important}
+html.darkRoot body::after,body.darkMode::after{background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.94) 60%,#000000)!important}
+:is(body.darkMode,html.darkRoot body) #splash{background:#000000!important}
+:is(body.darkMode,html.darkRoot body) :is(.card,.aptCard,.emptyBox,.detailHero,.profileBox,.infoCard,.statCard,.appearanceCard,.abrSystemSummaryCard,.profileDataHubCard,.abrProfilePersonnelCard,.abrSellerProfileCard,.abrMonthSummary,.exPortfolioCard){background:#1c1c1e!important;border-color:#38383a!important;box-shadow:none!important;color:#ffffff!important}
+:is(body.darkMode,html.darkRoot body) :is(input,textarea,select,#searchArea.searchRow,.filterPanel,.exHybridMenuBtn){background:#2c2c2e!important;border-color:#38383a!important;color:#ffffff!important;box-shadow:none!important}
 :is(body.darkMode,html.darkRoot body) #searchArea :is(#arama,.filterBtn){background:transparent!important}
-:is(body.darkMode,html.darkRoot body) #arama::placeholder{color:#a2a2ac!important}
-:is(body.darkMode,html.darkRoot body) #liste>.exDashHero{background:#20242b!important;border:1px solid #343940!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body) #liste :is(.exDashHeroTitle,.exDashHeroScore b){color:#f3f3f5!important}
-:is(body.darkMode,html.darkRoot body) #liste :is(.exDashHeroSub,.exDashHeroScore span){color:#b2b5bd!important}
-:is(body.darkMode,html.darkRoot body) #liste .exDashProgress{background:#393e47!important}
-:is(body.darkMode,html.darkRoot body) #liste .exDashProgressFill{background:#80b4ff!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body) #liste .exPortfolioAvatar{background:#29292e!important;color:#a2a2ac!important}
-:is(body.darkMode,html.darkRoot body) #liste .exPortfolioMeta span[onclick]{color:#80b4ff!important}
+:is(body.darkMode,html.darkRoot body) #arama::placeholder{color:#98989e!important}
+:is(body.darkMode,html.darkRoot body) #liste>.exDashHero{background:#1c1c1e!important;border:1px solid #38383a!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body) #liste :is(.exDashHeroTitle,.exDashHeroScore b){color:#ffffff!important}
+:is(body.darkMode,html.darkRoot body) #liste :is(.exDashHeroSub,.exDashHeroScore span){color:#98989e!important}
+:is(body.darkMode,html.darkRoot body) #liste .exDashProgress{background:#38383a!important}
+:is(body.darkMode,html.darkRoot body) #liste .exDashProgressFill{background:#0a84ff!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body) #liste .exPortfolioAvatar{background:#2c2c2e!important;color:#98989e!important}
+:is(body.darkMode,html.darkRoot body) #liste .exPortfolioMeta span[onclick]{color:#0a84ff!important}
 :is(body.darkMode,html.darkRoot body) #liste .exPortfolioChips .exPortfolioChip{background:#20372d!important;color:#9bdbb2!important;border-color:#304d3c!important;box-shadow:none!important}
-body.darkMode.profileMode #profilPanel,html.darkRoot body.profileMode #profilPanel{background:#101012!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .abrProfileNativeNav2253{background:rgba(16,16,18,.94)!important;border-color:#303034!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .abrProfileNativeNav2253 button{background:#252528!important;border-color:#303034!important;color:#80b4ff!important;border-radius:12px!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel :is(.profileIdentityCard,.profileStatsFour){background:#1c1c1f!important;border-color:#303034!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel :is(.profileBio,.profileStatsFour .profileStatCard){background:transparent!important;border-color:#303034!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .profileBio{background:#252528!important;color:#c5c5cc!important}
-:is(body.darkMode,html.darkRoot body) .abrProfileExtraMeta span{background:#29292e!important;color:#c5c5cc!important;font-weight:650!important}
-:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelCount,.abrSellerProfileBadge){background:#253247!important;color:#a4c9ff!important}
-:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelIcon,.abrSellerProfileIcon,.profileDataHubIcon){background:#253247!important;color:#a4c9ff!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelText em,.abrSellerProfileText em,.profileDataHubText em){color:#a2a2ac!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel>.coverArea{height:112px!important;max-width:440px!important;margin-left:auto!important;margin-right:auto!important;width:calc(100% - 32px)!important;background:#1c1c1f!important;border-color:#303034!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .coverPhoto[style*="background-image"]{background-color:#1c1c1f!important;background-size:contain!important}
+body.darkMode.profileMode #profilPanel,html.darkRoot body.profileMode #profilPanel{background:#000000!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .abrProfileNativeNav2253{background:rgba(0,0,0,.94)!important;border-color:#38383a!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .abrProfileNativeNav2253 button{background:#2c2c2e!important;border-color:#38383a!important;color:#0a84ff!important;border-radius:12px!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel :is(.profileIdentityCard,.profileStatsFour){background:#1c1c1e!important;border-color:#38383a!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel :is(.profileBio,.profileStatsFour .profileStatCard){background:transparent!important;border-color:#38383a!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .profileBio{background:#2c2c2e!important;color:#d1d1d6!important}
+:is(body.darkMode,html.darkRoot body) .abrProfileExtraMeta span{background:#2c2c2e!important;color:#d1d1d6!important;font-weight:650!important}
+:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelCount,.abrSellerProfileBadge){background:#242426!important;color:#80b4ff!important}
+:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelIcon,.abrSellerProfileIcon,.profileDataHubIcon){background:#242426!important;color:#80b4ff!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelText em,.abrSellerProfileText em,.profileDataHubText em){color:#98989e!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel>.coverArea{height:112px!important;max-width:440px!important;margin-left:auto!important;margin-right:auto!important;width:calc(100% - 32px)!important;background:#1c1c1e!important;border-color:#38383a!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .coverPhoto[style*="background-image"]{background-color:#1c1c1e!important;background-size:contain!important}
 :is(body.darkMode,html.darkRoot body).profileMode #profilPanel .coverPhoto:after{background:none!important}
-:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .coverEdit{background:#29292e!important;color:#80b4ff!important;border-color:#434349!important;box-shadow:none!important}
-:is(body.darkMode,html.darkRoot body) .tabbar{height:62px!important;min-height:62px!important;padding:4px!important;border:1px solid #343439!important;background:rgba(28,28,31,.96)!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important;border-radius:20px!important}
-:is(body.darkMode,html.darkRoot body) .tabbar::after{top:4px!important;left:4px!important;width:calc((100% - 8px)/2)!important;height:52px!important;background:#253247!important;box-shadow:none!important;border-radius:16px!important}
-:is(body.darkMode,html.darkRoot body) .tabbar .tabItem{height:52px!important;min-height:52px!important;background:transparent!important;box-shadow:none!important;color:#a2a2ac!important}
-:is(body.darkMode,html.darkRoot body) .tabbar .tabItem.activeTab{background:transparent!important;color:#a4c9ff!important}
-:is(body.darkMode,html.darkRoot body) #detayPanel .abrNativeDetail2251{--nd-surface:#1c1c1f;--nd-ink:#f3f3f5;--nd-muted:#a2a2ac;--nd-line:#303034;--nd-soft:#252528}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel .coverEdit{background:#2c2c2e!important;color:#0a84ff!important;border-color:#48484a!important;box-shadow:none!important}
+:is(body.darkMode,html.darkRoot body) .tabbar{height:62px!important;min-height:62px!important;padding:4px!important;border:1px solid #38383a!important;background:rgba(28,28,30,.96)!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important;border-radius:20px!important}
+:is(body.darkMode,html.darkRoot body) .tabbar::after{top:4px!important;left:4px!important;width:calc((100% - 8px)/2)!important;height:52px!important;background:#242426!important;box-shadow:none!important;border-radius:16px!important}
+:is(body.darkMode,html.darkRoot body) .tabbar .tabItem{height:52px!important;min-height:52px!important;background:transparent!important;box-shadow:none!important;color:#98989e!important}
+:is(body.darkMode,html.darkRoot body) .tabbar .tabItem.activeTab{background:transparent!important;color:#ffffff!important}
+:is(body.darkMode,html.darkRoot body) #detayPanel .abrNativeDetail2251{--nd-surface:#1c1c1e;--nd-ink:#ffffff;--nd-muted:#98989e;--nd-line:#38383a;--nd-soft:#2c2c2e}
+
+:is(body.darkMode,html.darkRoot body) #liste>.exDashHero{border:0!important;border-radius:24px!important}
+:is(body.darkMode,html.darkRoot body) #liste>.abrMonthSummary{border:0!important;border-radius:24px!important}
+:is(body.darkMode,html.darkRoot body) #liste>.exPortfolioHeader+.exPortfolioCard{border-top-left-radius:24px!important;border-top-right-radius:24px!important}
+:is(body.darkMode,html.darkRoot body) #liste>.exPortfolioCard:last-child{border-bottom-left-radius:24px!important;border-bottom-right-radius:24px!important}
+:is(body.darkMode,html.darkRoot body).profileMode #profilPanel :is(.profileIdentityCard,.profileStatsFour,.abrProfilePersonnelCard,.abrSellerProfileCard,.profileDataHubCard,.appearanceCard){border:0!important;border-radius:24px!important}
+:is(body.darkMode,html.darkRoot body) :is(.abrProfilePersonnelIcon,.abrSellerProfileIcon,.profileDataHubIcon){background:#2c2c2e!important;color:#0a84ff!important}
+:is(body.darkMode,html.darkRoot body) :is(.profileDataHubArrow,.exPortfolioArrow){color:#636366!important}
+:is(body.darkMode,html.darkRoot body) .tabbar .tabItem.activeTab{color:#ffffff!important}
 }
 </style>
 </body>
