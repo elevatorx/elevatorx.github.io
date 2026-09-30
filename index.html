@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.81_MOBIL_YEREL_GORUNUM -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.82_MOBIL_YEREL_GORUNUM -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.81">
+<meta name="abr-app-version" content="v2.2.82">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.81</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.82</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -43887,7 +43887,7 @@ function abrRoleRender(){
   }
   const store=abrRoleStoreGet();const accountEntry=window.__exLicenseAccountEntry===true;const personnelLogin=abrRoleState.entryRole==="personnel";
   const alternateAction=personnelLogin?'<button class="abrAccountTextButton" type="button" onclick="abrSahaPersoneliBaslat()">Ekip koduyla ilk kez katıl</button>':(accountEntry?'<button class="abrAccountTextButton" type="button" onclick="abrAktivasyonaDon()">Yeni hesap / aktivasyon kodu</button>':'<button class="abrAccountTextButton" type="button" onclick="abrIlkKurulumAc()">İlk kez giriş yapıyorum</button>');
-  card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">'+(personnelLogin?'Saha personeli girişi':'Firma yetkilisi girişi')+'</div><h1 id="abrRoleTitle">Hesabına giriş yap</h1><p>E-posta ve şifrenle devam et. Yetkin ekip üyeliğinden otomatik doğrulanır.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button>'+alternateAction+'<button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Hesap seçimine dön</button></div></form>'+abrRoleFooter();
+  card.innerHTML=abrRoleHeader()+'<div class="abrRoleHead"><div class="abrRoleKicker">'+(personnelLogin?'Saha personeli girişi':'Firma yetkilisi girişi')+'</div><h1 id="abrRoleTitle">Hoş geldin</h1><p>Hesabına giriş yaparak devam et.</p></div><form class="abrAccountForm" onsubmit="abrHesapGiris(event)"><label class="abrAccountField"><span>E-posta</span><input id="abrLoginEmail" type="email" value="'+abrRoleEscape(store.lastEmail||'')+'" maxlength="180" inputmode="email" autocapitalize="none" autocomplete="username" required></label>'+abrRolePasswordField("abrLoginPassword","Şifre","current-password")+abrRoleErrorHtml()+'<div class="abrAccountActions"><button class="abrAccountPrimary" type="submit">Giriş Yap</button>'+alternateAction+'<button class="abrAccountTextButton" type="button" onclick="abrRolSecimineDon()">Hesap seçimine dön</button></div></form>'+abrRoleFooter();
 }
 function abrRoleRepairText(value){
   let text=String(value==null?"":value);
@@ -48373,7 +48373,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.81";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.82";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -49095,6 +49095,46 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
   .tabbar .tabItem .tabText{font-weight:600!important;font-size:12px!important}
   .tabbar .tabItem.activeTab .tabIcon{animation:none!important}
   #liste [data-abr-count]{animation:none!important}
+}
+</style>
+<style id="abrMobileInteraction2282">
+/* Kartlar uzun basıldığında metin seçimi yerine uygulama davranışını korur. */
+#liste .exPortfolioCard,#liste .exPortfolioCard *{
+  -webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;
+}
+#liste .exPortfolioCard input,#liste .exPortfolioCard textarea,#liste .exPortfolioCard [contenteditable="true"]{
+  -webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;
+}
+@media screen and (max-width:600px){
+  #abrRoleGate{background:#f5f6f9!important;color:#182338!important}
+  body.darkMode #abrRoleGate,html.darkRoot #abrRoleGate{background:#111b29!important;color:#edf2fa!important}
+  #abrRoleGate .abrRoleCard{padding:calc(env(safe-area-inset-top,0px) + 28px) 24px calc(env(safe-area-inset-bottom,0px) + 24px)!important;gap:0!important}
+  #abrRoleGate .abrRoleBrand{justify-content:flex-start!important;margin:0 auto 32px!important}
+  #abrRoleGate .abrRoleBrandFullLogo{width:156px!important;max-height:90px!important;object-position:left center!important}
+  #abrRoleGate .abrRoleHead{padding:0 0 26px!important;text-align:left!important}
+  #abrRoleGate .abrRoleKicker{font-size:11px!important;font-weight:500!important;letter-spacing:.04em!important;color:#64748b!important}
+  #abrRoleGate .abrRoleHead h1{margin:9px 0 10px!important;font-size:28px!important;font-weight:650!important;line-height:1.2!important;letter-spacing:-.7px!important}
+  #abrRoleGate .abrRoleHead p{max-width:340px!important;margin:0!important;font-size:14px!important;font-weight:400!important;line-height:1.55!important;color:#738095!important}
+  #abrRoleGate .abrAccountForm{gap:19px!important}
+  #abrRoleGate .abrAccountField>span,#abrRoleGate .abrPinField>span{margin:0 0 8px!important;font-size:12px!important;font-weight:500!important;letter-spacing:0!important;text-transform:none!important;color:#526078!important}
+  #abrRoleGate .abrAccountField input{height:54px!important;padding:0 14px!important;border:1px solid #dfe4ec!important;border-radius:12px!important;background:#fff!important;color:#182338!important;font-size:16px!important;font-weight:400!important;box-shadow:none}
+  #abrRoleGate .abrAccountField input.has-toggle{padding-right:58px!important}
+  #abrRoleGate .abrAccountField input:focus{border-color:#367bc4!important;box-shadow:0 0 0 3px rgba(54,123,196,.1)!important}
+  #abrRoleGate .abrAccountPasswordToggle{top:5px!important;right:5px!important;width:44px!important;height:44px!important;border-radius:9px!important;background:transparent!important;color:#64748b!important}
+  #abrRoleGate .abrAccountActions{gap:12px!important;margin-top:5px!important}
+  #abrRoleGate .abrAccountPrimary,#abrRoleGate .abrAccountSecondary{min-height:52px!important;border-radius:12px!important;font-size:15px!important;font-weight:600!important;line-height:1.3!important;box-shadow:none!important}
+  #abrRoleGate .abrAccountPrimary{background:#18385d!important;color:#fff!important}
+  #abrRoleGate .abrAccountSecondary{border:1px solid #dfe4ec!important;background:#fff!important;color:#33465f!important}
+  #abrRoleGate .abrAccountTextButton{min-height:44px!important;padding:10px 12px!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:10px!important;font-size:13px!important;font-weight:500!important;color:#3b6d9f!important}
+  #abrRoleGate .abrRoleCard>.abrRoleFoot{margin-top:auto!important;padding-top:28px!important;border:0!important;font-size:10px!important;font-weight:400!important;letter-spacing:0!important;color:#8994a5!important}
+  #abrRoleGate .abrRoleCard.is-entry{justify-content:center!important}
+  #abrRoleGate .abrRoleCard.is-entry>.abrRoleFoot{margin-top:28px!important;padding-top:0!important}
+  #abrRoleGate .abrRoleEntryChoice{border-radius:14px!important;background:#fff!important;box-shadow:none!important;border:1px solid #e1e6ee!important}
+  #abrRoleGate .abrRoleEntryChoiceText b{font-weight:600!important}
+  #abrRoleGate .abrRoleEntryChoiceText span{font-weight:400!important;line-height:1.5!important}
+  body.darkMode #abrRoleGate .abrAccountField input,html.darkRoot #abrRoleGate .abrAccountField input,body.darkMode #abrRoleGate .abrAccountSecondary,html.darkRoot #abrRoleGate .abrAccountSecondary,body.darkMode #abrRoleGate .abrRoleEntryChoice,html.darkRoot #abrRoleGate .abrRoleEntryChoice{background:#1b283a!important;color:#edf2fa!important;border-color:#344155!important}
+  body.darkMode #abrRoleGate .abrAccountField>span,html.darkRoot #abrRoleGate .abrAccountField>span,body.darkMode #abrRoleGate .abrPinField>span,html.darkRoot #abrRoleGate .abrPinField>span{color:#aebbd0!important}
+  @media(max-height:640px){#abrRoleGate .abrRoleBrand{margin-bottom:18px!important}#abrRoleGate .abrRoleBrandFullLogo{width:130px!important;max-height:65px!important}#abrRoleGate .abrRoleHead{padding-bottom:18px!important}}
 }
 </style>
 </body>
