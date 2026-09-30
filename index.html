@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.79_MASAUSTU_HAFIF_MOD -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.2.80_MOBIL_YEREL_GORUNUM -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.2.79">
+<meta name="abr-app-version" content="v2.2.80">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22102,7 +22102,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.2.79</div>
+      <div class="exLaunchVersion" data-splash-version>v2.2.80</div>
     </div>
   </div>
 </div>
@@ -22117,7 +22117,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22932,7 +22932,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -30856,6 +30856,79 @@ body.darkMode #abrDocumentCenter,html.darkRoot #abrDocumentCenter{background:#0b
 <\/script>
 
 -->
+<style id="abrMobileNative2280">
+/* v2.2.80 — Mobil portföy: düz yüzeyler, okunaklı satırlar, sessiz hareket. */
+@media screen and (max-width:600px){
+  html.appBooted:not(.darkRoot),body.appBooted:not(.darkMode){background:#f2f3f7!important}
+  body{--mn-surface:#fff;--mn-ink:#182338;--mn-muted:#738095;--mn-line:#e7eaf0;--mn-soft:#edf2f8}
+  body.darkMode,html.darkRoot body{--mn-surface:#182231;--mn-ink:#edf2fa;--mn-muted:#a1aec0;--mn-line:#2b3747;--mn-soft:#223248}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden)>.header.headerClean{padding-left:68px!important;background:transparent!important;box-shadow:none!important;border:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .abrPortfolioHeaderTitle b{font-size:25px!important;font-weight:700!important;letter-spacing:-.7px!important}
+  .abrPortfolioHeaderTitle span{font-size:10px!important;font-weight:500!important;letter-spacing:0!important;color:var(--mn-muted)!important}
+  .exHybridMenuBtn{border:0!important;background:var(--mn-surface)!important;box-shadow:none!important;border-radius:50%!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  body:not(.profileMode):not(.abrDetailFullscreen2252)>.container{padding-left:18px!important;padding-right:18px!important;box-sizing:border-box!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea.searchRow{background:var(--mn-soft)!important;border:0!important;box-shadow:none!important;border-radius:12px!important;margin-bottom:18px!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea #arama{font-size:16px!important;font-weight:400!important;color:var(--mn-ink)!important}
+  body:not(.profileMode):not(.abrBakimView):not(.topSearchHidden) #searchArea .filterBtn{background:transparent!important;box-shadow:none!important;border:0!important}
+  #liste>.exDashHero{background:#17365b!important;padding:17px 16px!important;border:0!important;border-radius:16px!important;box-shadow:none!important;margin-bottom:18px!important;filter:none!important;animation:none!important}
+  #liste>.exDashHero::before,#liste>.exDashHero::after{display:none!important}
+  #liste .exDashHeroTitle{font-size:18px!important;font-weight:650!important;line-height:1.25!important;letter-spacing:-.35px!important}
+  #liste .exDashHeroSub{font-size:12px!important;font-weight:400!important;line-height:1.5!important;color:#c6d6e8!important;max-width:none!important;margin-top:6px!important}
+  #liste .exDashHeroScore{width:52px!important;min-width:52px!important;height:52px!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;animation:none!important}
+  #liste .exDashHeroScore b{font-size:23px!important;font-weight:600!important}
+  #liste .exDashHeroScore span{font-size:8px!important;font-weight:500!important;letter-spacing:0!important}
+  #liste .exDashProgress{margin-top:14px!important}
+  #liste .exDashProgressFill{background:#87baff!important;box-shadow:none!important;transition:none!important}
+  #liste>.abrMonthSummary--operational{background:var(--mn-surface)!important;border:0!important;border-radius:16px!important;box-shadow:none!important;padding:16px!important;margin-bottom:23px!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  #liste .abrMonthSummaryHead{border:0!important;padding-bottom:12px!important}
+  #liste .abrMonthSummaryIcon{display:none!important}
+  #liste .abrMonthSummaryTitle>div>span{font-size:10px!important;font-weight:500!important;letter-spacing:0!important;color:var(--mn-muted)!important}
+  #liste .abrMonthSummaryTitle b{font-size:14px!important;font-weight:600!important;color:var(--mn-ink)!important}
+  #liste .abrMonthSummaryPeriod{background:transparent!important;font-size:10px!important;font-weight:400!important;color:var(--mn-muted)!important}
+  #liste .abrMonthSummaryStats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;border:0!important}
+  #liste .abrMonthSummaryStat{padding:12px 0!important;text-align:left!important;border:0!important;min-width:0!important}
+  #liste .abrMonthSummaryStat:nth-child(even){padding-left:18px!important;border-left:1px solid var(--mn-line)!important}
+  #liste .abrMonthSummaryStat:nth-child(n+3){border-top:1px solid var(--mn-line)!important}
+  #liste .abrMonthSummaryStat b,#liste .abrMonthSummaryStat b.money{font-size:20px!important;line-height:1.2!important;font-weight:650!important;letter-spacing:-.4px!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  #liste .abrMonthSummaryStat span{font-size:11px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;color:var(--mn-muted)!important;margin-top:5px!important}
+  #liste .abrMonthSummaryBottom--activity{border-top:1px solid var(--mn-line)!important;margin-top:2px!important;padding-top:12px!important}
+  #liste .exDashFinanceActivityMain small{font-size:10px!important;font-weight:500!important;letter-spacing:0!important}
+  #liste .exDashFinanceActivityMain b{font-size:11px!important;font-weight:400!important;line-height:1.5!important}
+  #liste>.exPortfolioHeader{margin:0 0 10px!important;padding:0 2px!important}
+  #liste .exPortfolioHeader h2{font-size:19px!important;font-weight:650!important;letter-spacing:-.4px!important;color:var(--mn-ink)!important}
+  #liste .exPortfolioHeader h2 b{font-size:12px!important;font-weight:500!important;border:0!important;box-shadow:none!important;background:transparent!important;color:var(--mn-muted)!important;padding:0 6px!important;min-width:0!important}
+  #liste>.exPortfolioCard{margin:0!important;padding:16px 14px!important;background:var(--mn-surface)!important;border:0!important;border-bottom:1px solid var(--mn-line)!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;animation:none!important;transform:none!important;filter:none!important}
+  #liste>.exPortfolioHeader+.exPortfolioCard{border-radius:16px 16px 0 0!important}
+  #liste>.exPortfolioCard:last-child{border-bottom:0!important;border-radius:0 0 16px 16px!important}
+  #liste>.exPortfolioHeader+.exPortfolioCard:last-child{border-radius:16px!important}
+  #liste>.exPortfolioCard::before,#liste>.exPortfolioCard::after{display:none!important}
+  #liste .exPortfolioTop{grid-template-columns:32px minmax(0,1fr) auto!important;gap:10px!important;align-items:start!important}
+  #liste .exPortfolioAvatar{width:32px!important;height:36px!important;border:0!important;border-radius:9px!important;background:var(--mn-soft)!important;color:#6482a6!important;box-shadow:none!important}
+  #liste .exPortfolioAvatarSvg{width:21px!important;height:21px!important}
+  #liste .exPortfolioName{font-size:16px!important;font-weight:600!important;line-height:1.3!important;letter-spacing:-.2px!important;white-space:normal!important;overflow-wrap:anywhere!important;color:var(--mn-ink)!important}
+  #liste .exPortfolioIdentityLine{flex-wrap:wrap!important;gap:5px!important;margin-top:5px!important}
+  #liste .exPortfolioCode{padding:0!important;border:0!important;border-radius:0!important;min-height:0!important;font-size:10px!important;letter-spacing:.02em!important;font-weight:400!important;background:transparent!important;color:var(--mn-muted)!important}
+  #liste .exPortfolioIdentityLine .exPortfolioChip{font-size:9px!important;font-weight:500!important;padding:3px 5px!important;min-height:0!important;border:0!important;border-radius:4px!important;box-shadow:none!important}
+  #liste .exPortfolioStatus{font-size:10px!important;font-weight:500!important;min-height:0!important;padding:5px 7px!important;border-radius:6px!important;border:0!important;box-shadow:none!important;max-width:86px!important;white-space:normal!important;text-align:center!important;line-height:1.3!important}
+  #liste .exPortfolioMeta{margin:7px 0 0 42px!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;font-size:11px!important;font-weight:400!important;color:var(--mn-muted)!important}
+  #liste .exPortfolioMeta span{line-height:1.4!important;min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  #liste .exPortfolioMeta span[onclick]{min-height:34px!important;align-items:center!important;color:#3476b9!important}
+  #liste .exPortfolioMeta i{display:none!important}
+  #liste .exPortfolioChips{margin:5px 0 0 42px!important;flex-wrap:wrap!important}
+  #liste .exPortfolioChips .exPortfolioChip{font-weight:500!important;box-shadow:none!important}
+  #liste .exPortfolioBottom{margin-top:8px!important;padding:0 0 0 42px!important;border:0!important;gap:7px!important}
+  #liste .exPortfolioBottomItem span{font-size:9px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;color:var(--mn-muted)!important}
+  #liste .exPortfolioBottomItem b{font-size:11px!important;font-weight:500!important;line-height:1.4!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  #liste .exPortfolioArrow{font-size:21px!important;color:#a6b2c2!important}
+  #liste>.exPortfolioCard:active{background:var(--mn-soft)!important}
+  #liste>.exDashEmpty{background:var(--mn-surface)!important;border:0!important;border-radius:16px!important;padding:30px 20px!important;color:var(--mn-muted)!important;box-shadow:none!important;font-size:13px!important;line-height:1.6!important}
+  .tabbar,body.exShowYeniTab .tabbar,body:not(.exShowYeniTab) .tabbar{background:var(--mn-surface)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 4px 16px rgba(16,32,54,.08)!important;border:1px solid var(--mn-line)!important;border-radius:18px!important}
+  .tabbar::after{animation:none!important;background:#18385d!important;box-shadow:none!important;border-radius:13px!important}
+  .tabbar .tabItem .tabText{font-weight:600!important;font-size:12px!important}
+  .tabbar .tabItem.activeTab .tabIcon{animation:none!important}
+  #liste [data-abr-count]{animation:none!important}
+}
+</style>
 </body>
 </html>
 
@@ -48373,7 +48446,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.79";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.2.80";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -48728,6 +48801,7 @@ body.darkMode #detayPanel .abrNativeDetail2251,html.darkRoot #detayPanel .abrNat
 /* v2.2.77 — Bakım servis raporundaki iPhone PWA uyumsuz Yazdır akışı, tek sayfalık gerçek PDF oluşturma ve doğrudan paylaşım sistemiyle değiştirildi. */
 /* v2.2.78 — Masaüstünde sürekli çalışan üç arayüz kontrolü olay bazlı hale getirildi; kart blur, giriş ve sonsuz durum animasyonları yalnızca masaüstünde hafifletildi. */
 /* v2.2.79 — Fareli geniş ekranlarda tüm sürekli animasyon, backdrop blur, uzun geçiş ve gereksiz GPU katmanları kapatıldı. */
+/* v2.2.80 — Mobil portföy sade yüzeyler, kompakt bakım özeti ve ayraçlı apartman satırlarıyla yenilendi. */
 /* v2.2.75 — iPhone PWA için makbuz ekranından gerçek PDF üretimi ve PDF önizlemesi eklendi. */
 /* v2.2.74 — Makbuz paylaşımı HTML dosyası yerine iPhone PDF / yazdırma önizlemesine döndürüldü. */
 /* v2.2.73 — Makbuz yazdırma önizlemesinden dönüşte gereksiz PIN / Face ID kilidi kaldırıldı. */
