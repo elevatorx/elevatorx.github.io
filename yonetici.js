@@ -5,7 +5,6 @@ let client,user=null,apartments=[],current=null,reports=[],signup=false,recovery
 const uuid=()=>crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
 let visibleLimit=6;
 let view='overview',reportFilter='active',reportsReady=false,reportsError='',photoEpoch=0;
-let pdfOpenEpoch=0,pendingPdfWindow=null;
 let receipts=[],receiptsReady=false,receiptsError='',receiptLimit=6;
 let invite='';try{const fragment=new URLSearchParams(location.hash.slice(1));const token=fragment.get('davet');if(token&&/^[a-f0-9]{64}$/.test(token)){sessionStorage.setItem('abrManagerInvite',token);history.replaceState(null,'',location.pathname+location.search);}invite=sessionStorage.getItem('abrManagerInvite')||'';}catch(e){}
 try{recovery=new URLSearchParams(location.hash.slice(1)).get('type')==='recovery';}catch(e){}
@@ -48,13 +47,13 @@ function renderOverview(){
  let reportSummary=reportsError?'Bildirimler yüklenemedi':!reportsReady?'Bildirimler yükleniyor…':active.length?active.length+' açık bildiriminiz var':'Açık arıza bildiriminiz yok';
  const reportHint=reportsError?'Yeniden denemek için dokunun':!reportsReady?'Lütfen bekleyin':featured?esc(categories[featured.category]||'Arıza bildirimi')+' · '+esc(labels[featured.status]||'Bildirildi'):'Geçmiş bildirimlerinizi görebilirsiniz';
  const expanded=$('buildingInfo')&&$('buildingInfo').open;
- $('overview').innerHTML='<div class="home-actions"><button id="homeReport" type="button" class="btn home-primary"><span class="action-symbol" aria-hidden="true">+</span><span><b>Arıza bildir</b><small>Sorunu yazın, isterseniz fotoğraf ekleyin</small></span><span aria-hidden="true">›</span></button><button id="homeReports" type="button" class="home-row"><span><b>Bildirimlerimi gör</b><small>'+reportSummary+'</small><small class="latest-status">'+reportHint+'</small></span><span aria-hidden="true">›</span></button>'+(number?'<a class="home-row home-call" href="tel:'+esc(number)+'"><span><b>Firmayı ara</b><small>'+esc(s.company||'Bakım firmanız')+'</small></span><span aria-hidden="true">›</span></a>':'<div class="home-row"><span><b>'+esc(s.company||'Bakım firmanız')+'</b><small>Telefon numarası henüz paylaşılmadı.</small></span></div>')+'<button id="homeReceipts" type="button" class="home-row"><span><b>Makbuzlarım</b><small>Ödeme makbuzlarını PDF olarak açın</small></span><span aria-hidden="true">›</span></button></div><section class="home-maintenance"><span>Son bakım</span><b>'+esc(date(s.last_maintenance))+'</b><small>'+(thisMonth?'Bu ayın bakımı kaydedildi':'Bu ay için tamamlanmış bakım bilgisi paylaşılmadı')+'</small></section><details id="buildingInfo" class="building-info"'+(expanded?' open':'')+'><summary>Muayene bilgileri</summary><div class="inspection-grid"><div><span>Muayene etiketi</span><b class="inspection-tag '+labelClass+'">'+esc(labelNames[rawLabel]||'Paylaşılmadı')+'</b></div><div><span>Sonraki muayene</span><b>'+esc(date(s.inspection_date))+'</b></div></div></details><div class="overview-foot"><button type="button" class="textbtn" id="overviewRefresh">Bilgileri yenile</button><span>v2.3.07</span></div>';
+ $('overview').innerHTML='<div class="home-actions"><button id="homeReport" type="button" class="btn home-primary"><span class="action-symbol" aria-hidden="true">+</span><span><b>Arıza bildir</b><small>Sorunu yazın, isterseniz fotoğraf ekleyin</small></span><span aria-hidden="true">›</span></button><button id="homeReports" type="button" class="home-row"><span><b>Bildirimlerimi gör</b><small>'+reportSummary+'</small><small class="latest-status">'+reportHint+'</small></span><span aria-hidden="true">›</span></button>'+(number?'<a class="home-row home-call" href="tel:'+esc(number)+'"><span><b>Firmayı ara</b><small>'+esc(s.company||'Bakım firmanız')+'</small></span><span aria-hidden="true">›</span></a>':'<div class="home-row"><span><b>'+esc(s.company||'Bakım firmanız')+'</b><small>Telefon numarası henüz paylaşılmadı.</small></span></div>')+'<button id="homeReceipts" type="button" class="home-row"><span><b>Makbuzlarım</b><small>Ödeme makbuzlarını PDF olarak açın</small></span><span aria-hidden="true">›</span></button></div><section class="home-maintenance"><span>Son bakım</span><b>'+esc(date(s.last_maintenance))+'</b><small>'+(thisMonth?'Bu ayın bakımı kaydedildi':'Bu ay için tamamlanmış bakım bilgisi paylaşılmadı')+'</small></section><details id="buildingInfo" class="building-info"'+(expanded?' open':'')+'><summary>Muayene bilgileri</summary><div class="inspection-grid"><div><span>Muayene etiketi</span><b class="inspection-tag '+labelClass+'">'+esc(labelNames[rawLabel]||'Paylaşılmadı')+'</b></div><div><span>Sonraki muayene</span><b>'+esc(date(s.inspection_date))+'</b></div></div></details><div class="overview-foot"><button type="button" class="textbtn" id="overviewRefresh">Bilgileri yenile</button><span>v2.3.08</span></div>';
  $('homeReport').addEventListener('click',()=>$('reportOpen').click());$('homeReceipts').addEventListener('click',()=>switchView('receipts'));
  $('homeReports').addEventListener('click',()=>{if(reportsError){load();return;}reportFilter='all';visibleLimit=6;renderReports();switchView('reports');});
  $('overviewRefresh').addEventListener('click',load);switchView(view);
 }
 
-function resetReceipts(){pdfOpenEpoch++;if(pendingPdfWindow){try{pendingPdfWindow.close();}catch(e){}pendingPdfWindow=null;}receipts=[];receiptsReady=false;receiptsError='';receiptLimit=6;if($('receipts'))$('receipts').replaceChildren();}
+function resetReceipts(){closeReceiptPdf();receipts=[];receiptsReady=false;receiptsError='';receiptLimit=6;if($('receipts'))$('receipts').replaceChildren();}
 const money=value=>new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(Number(value)||0);
 const receiptKind=r=>r.advance?'Erken tahsilat / avans':({bakim:'Bakım ödemesi',parca:'Parça / işlem ödemesi',cari:'Ödeme'})[r.kind]||'Ödeme';
 async function loadReceipts(ticket=epoch){
@@ -69,22 +68,60 @@ function renderReceipts(){
  receipts.slice(0,receiptLimit).forEach(item=>{const r=item.receipt||{},b=document.createElement('button');b.type='button';b.className='receipt-row';b.innerHTML='<span><b>'+esc(receiptKind(r))+'</b><small>'+esc(date(r.date))+'</small><span class="receipt-description">'+esc(r.description||'Ödeme kaydı')+'</span></span><span><b>'+esc(money(r.amount))+'</b><small>'+ (item.pdf_path?'PDF’yi aç ›':'PDF hazırlanıyor') +'</small></span>';b.addEventListener('click',()=>receiptDetail(item));host.appendChild(b);});
  if(receipts.length>receiptLimit){const b=document.createElement('button');b.type='button';b.className='load-more';b.textContent='Diğer '+(receipts.length-receiptLimit)+' makbuzu göster';b.addEventListener('click',()=>{receiptLimit+=6;renderReceipts();});host.appendChild(b);}
 }
+let pdfOpenEpoch=0,pdfTask=null,pdfRenderTask=null,pdfFile=null,pdfZoom=1,pdfItem=null,pdfLoading=false,pdfLastFocus=null;
+function pdfWait(promise,ms=30000){let timer;return Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('PDF zamanında yüklenemedi.')),ms);})]).finally(()=>clearTimeout(timer));}
+function closeReceiptPdf(){
+ pdfOpenEpoch++;pdfLoading=false;pdfItem=null;pdfFile=null;
+ if(pdfRenderTask){try{pdfRenderTask.cancel();}catch(e){}pdfRenderTask=null;}
+ if(pdfTask){try{Promise.resolve(pdfTask.destroy()).catch(()=>{});}catch(e){}pdfTask=null;}
+ $('receiptPdfPages').replaceChildren();$('receiptPdfModal').hidden=true;$('receiptPdfShare').disabled=true;
+ document.querySelector('.shell').inert=false;$('bottom').inert=false;
+ if($('reportModal').hidden&&$('detailModal').hidden)document.body.style.overflow='';
+ if(pdfLastFocus&&pdfLastFocus.isConnected)pdfLastFocus.focus();pdfLastFocus=null;
+}
+function receiptPdfZoom(value){
+ pdfZoom=Math.min(3,Math.max(1,value));$('receiptPdfZoomValue').textContent=Math.round(pdfZoom*100)+'%';
+ const width=Math.max(240,$('receiptPdfScroll').clientWidth-32);
+ document.querySelectorAll('#receiptPdfPages canvas').forEach(canvas=>{canvas.style.width=Math.round(width*pdfZoom)+'px';canvas.style.height='auto';});
+ $('receiptPdfZoomOut').disabled=pdfZoom<=1;$('receiptPdfZoomIn').disabled=pdfZoom>=3;
+}
 async function receiptDetail(item){
  if(!current||!user||!receipts.some(r=>r.id===item.id))return;
- if(!item.pdf_path){message('appError','Bu makbuzun PDF’si henüz paylaşılmadı. Firmanız uygulamayı açıp makbuzları eşitlediğinde burada açabilirsiniz.',false);return;}
- const ticket=++pdfOpenEpoch,apartmentId=current.id,userId=user.id;
- if(pendingPdfWindow){try{pendingPdfWindow.close();}catch(e){}}
- const w=window.open('about:blank','_blank');pendingPdfWindow=w;
- if(w){w.opener=null;w.document.open();w.document.write('<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Makbuz PDF</title></head><body style="font:18px system-ui;padding:32px">Makbuz PDF açılıyor…</body></html>');w.document.close();}
- message('appError','Makbuz PDF açılıyor…',false);
+ closeReceiptPdf();pdfLastFocus=document.activeElement;pdfItem=item;pdfLoading=true;pdfZoom=1;
+ const ticket=pdfOpenEpoch,apartmentId=current.id,userId=user.id;
+ const active=()=>ticket===pdfOpenEpoch&&current?.id===apartmentId&&user?.id===userId;
+ $('receiptPdfModal').hidden=false;document.body.style.overflow='hidden';document.querySelector('.shell').inert=true;$('bottom').inert=true;
+ $('receiptPdfSubtitle').textContent=receiptKind(item.receipt||{})+' · '+date(item.receipt?.date);
+ $('receiptPdfStatus').textContent='Makbuz yükleniyor…';$('receiptPdfStatus').hidden=false;$('receiptPdfRetry').hidden=true;$('receiptPdfShare').disabled=true;receiptPdfZoom(1);$('receiptPdfClose').focus();
+ if(!item.pdf_path){$('receiptPdfStatus').textContent='PDF henüz paylaşılmadı. Firmanız makbuzları eşitledikten sonra burada görünür.';$('receiptPdfRetry').hidden=false;pdfLoading=false;return;}
  try{
-  const result=await client.storage.from('manager-receipts').createSignedUrl(item.pdf_path,300);
-  if(ticket!==pdfOpenEpoch||!current||current.id!==apartmentId||!user||user.id!==userId){if(w)try{w.close();}catch(e){}return;}
-  if(result.error)throw result.error;
-  const url=new URL(result.data?.signedUrl);if(url.protocol!=='https:')throw new Error('PDF bağlantısı geçersiz.');
-  if(w&&!w.closed){w.location.replace(url.href);pendingPdfWindow=null;message('appError','');}
-  else{pendingPdfWindow=null;photoEpoch++;$('detailTitle').textContent='Makbuz PDF';$('detailBody').replaceChildren();const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.className='btn block';link.textContent='PDF’yi aç';$('detailBody').appendChild(link);openModal('detailModal');message('appError','');}
- }catch(e){if(w)try{w.close();}catch(ignore){}if(ticket!==pdfOpenEpoch)return;pendingPdfWindow=null;message('appError','Makbuz PDF açılamadı. Yenile düğmesine basıp tekrar deneyin.');}
+  const [download,pdfjs]=await pdfWait(Promise.all([client.storage.from('manager-receipts').download(item.pdf_path),import('./makbuz-pdf.mjs?v=6.3.289')]));
+  if(!active())return;if(download.error)throw download.error;
+  const blob=download.data;if(!blob||blob.size<=0||blob.size>8388608)throw new Error('PDF dosyası geçersiz.');
+  const bytes=new Uint8Array(await pdfWait(blob.arrayBuffer()));if(!active())return;
+  if(String.fromCharCode(...bytes.slice(0,5))!=='%PDF-')throw new Error('PDF dosyası geçersiz.');
+  const file=new File([blob],'Odeme-Makbuzu-'+String(item.receipt?.date||'').replace(/[^0-9-]/g,'')+'.pdf',{type:'application/pdf'});
+  pdfjs.GlobalWorkerOptions.workerSrc=new URL('./makbuz-pdf.worker.mjs?v=6.3.289',location.href).href;
+  const task=pdfjs.getDocument({data:bytes,isEvalSupported:false,useWasm:false,isImageDecoderSupported:false});pdfTask=task;
+  const pdf=await pdfWait(task.promise);if(!active())return;
+  if(pdf.numPages<1||pdf.numPages>10)throw new Error('Makbuz sayfa sayısı geçersiz.');
+  for(let n=1;n<=pdf.numPages;n++){
+   const page=await pdfWait(pdf.getPage(n));if(!active())return;
+   const base=page.getViewport({scale:1}),width=Math.max(240,$('receiptPdfScroll').clientWidth-32),viewport=page.getViewport({scale:width/base.width});
+   const resolution=Math.min(2,Math.max(1,window.devicePixelRatio||1));
+   const canvas=document.createElement('canvas');canvas.width=Math.floor(viewport.width*resolution);canvas.height=Math.floor(viewport.height*resolution);canvas.setAttribute('role','img');canvas.setAttribute('aria-label','Ödeme makbuzu, sayfa '+n+'/'+pdf.numPages);canvas.style.width=Math.floor(viewport.width)+'px';canvas.style.height='auto';$('receiptPdfPages').appendChild(canvas);
+   const render=page.render({canvasContext:canvas.getContext('2d'),viewport,transform:resolution===1?null:[resolution,0,0,resolution,0,0]});pdfRenderTask=render;
+   await pdfWait(render.promise);if(!active())return;pdfRenderTask=null;
+  }
+  pdfFile=file;$('receiptPdfStatus').hidden=true;$('receiptPdfShare').disabled=false;pdfLoading=false;receiptPdfZoom(1);
+ }catch(e){if(!active())return;if(pdfRenderTask){try{pdfRenderTask.cancel();}catch(ignore){}pdfRenderTask=null;}if(pdfTask){try{Promise.resolve(pdfTask.destroy()).catch(()=>{});}catch(ignore){}pdfTask=null;}$('receiptPdfPages').replaceChildren();pdfFile=null;pdfLoading=false;$('receiptPdfStatus').hidden=false;$('receiptPdfStatus').textContent='Makbuz yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.';$('receiptPdfRetry').hidden=false;}
+}
+async function shareReceiptPdf(){
+ const file=pdfFile,ticket=pdfOpenEpoch;if(!file)return;
+ try{
+  if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({files:[file],title:'Ödeme makbuzu'});return;}
+  const url=URL.createObjectURL(file),link=document.createElement('a');link.href=url;link.download=file.name;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+ }catch(e){if(ticket!==pdfOpenEpoch||e?.name==='AbortError')return;$('receiptPdfStatus').hidden=false;$('receiptPdfStatus').textContent='Paylaşım açılamadı. PDF paylaş düğmesine tekrar dokunun.';}
 }
 async function loadReports(ticket){
  if(!current)return;const id=current.id;
@@ -103,7 +140,7 @@ function renderReports(){
  if(list.length>visibleLimit){const more=document.createElement('button');more.type='button';more.className='load-more';more.textContent='Diğer '+(list.length-visibleLimit)+' bildirimi göster';more.addEventListener('click',()=>{visibleLimit+=6;renderReports();});el.appendChild(more);}
 }
 function openModal(id){lastFocus=document.activeElement;$(id).hidden=false;document.body.style.overflow='hidden';$(id).querySelector('button').focus();}
-function closeModal(id){if(!$(id))return;if(id==='detailModal')photoEpoch++;$(id).hidden=true;if($('reportModal').hidden&&$('detailModal').hidden){document.body.style.overflow='';if(lastFocus&&lastFocus.isConnected)lastFocus.focus();}}
+function closeModal(id){if(!$(id))return;if(id==='detailModal')photoEpoch++;$(id).hidden=true;if($('reportModal').hidden&&$('detailModal').hidden&&$('receiptPdfModal').hidden){document.body.style.overflow='';if(lastFocus&&lastFocus.isConnected)lastFocus.focus();}}
 async function detail(r){
  if(!current)return;const ap=current.id,ticket=epoch,photoTicket=++photoEpoch;
  openModal('detailModal');$('detailTitle').textContent=categories[r.category]||'Bildirim takibi';
@@ -150,10 +187,11 @@ $('logout').addEventListener('click',async()=>{if(submitting)return;const r=awai
 $('refresh').addEventListener('click',load);$('receiptRefresh').addEventListener('click',()=>loadReceipts());$('apartmentSelect').addEventListener('change',async e=>{if(submitting)return;epoch++;if($('photoViewer').open)$('photoViewer').close();$('photoImage').removeAttribute('src');current=apartments.find(a=>a.id===e.target.value)||null;resetReceipts();reports=[];reportsReady=false;reportsError='';renderReports();savedFault=null;requestId=null;['files','description','category','priority'].forEach(id=>$(id).disabled=false);$('faultForm').reset();closeModal('reportModal');closeModal('detailModal');if(current){renderOverview();try{await Promise.allSettled([loadReports(epoch),loadReceipts(epoch)]);}catch(error){message('appError',errorText(error));}}});
 $('reportOpen').addEventListener('click',()=>{if(!current)return;const p=phone(current.snapshot.phone);$('emergencyCall').removeAttribute('href');if(p)$('emergencyCall').href='tel:'+p;openModal('reportModal');});$('reportClose').addEventListener('click',()=>{if(!submitting)closeModal('reportModal');});$('detailClose').addEventListener('click',()=>closeModal('detailModal'));$('faultForm').addEventListener('submit',submitFault);
 $('files').addEventListener('change',()=>{if(savedFault){message('faultError','Eksik fotoğraf gönderimini tamamlayana kadar seçili fotoğrafları değiştirmeyin.');return;}$('fileInfo').textContent=$('files').files.length+' fotoğraf seçildi · en fazla 4';});
-window.addEventListener('online',load);document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});setInterval(()=>{if(!submitting&&$('reportModal').hidden&&$('detailModal').hidden)load();},30000);
-document.addEventListener('keydown',e=>{if($('photoViewer').open)return;const modal=!$('reportModal').hidden?$('reportModal'):!$('detailModal').hidden?$('detailModal'):null;if(!modal)return;if(e.key==='Escape'&&!submitting){closeModal(modal.id);return;}if(e.key==='Tab'){const items=Array.from(modal.querySelectorAll('button,input,select,textarea,a[href]')).filter(n=>!n.disabled);const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+window.addEventListener('online',load);document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});setInterval(()=>{if(!submitting&&$('reportModal').hidden&&$('detailModal').hidden&&$('receiptPdfModal').hidden)load();},30000);
+document.addEventListener('keydown',e=>{if($('photoViewer').open)return;const modal=!$('receiptPdfModal').hidden?$('receiptPdfModal'):!$('reportModal').hidden?$('reportModal'):!$('detailModal').hidden?$('detailModal'):null;if(!modal)return;if(e.key==='Escape'&&!submitting){if(modal.id==='receiptPdfModal')closeReceiptPdf();else closeModal(modal.id);return;}if(e.key==='Tab'){const items=Array.from(modal.querySelectorAll('button,input,select,textarea,a[href]')).filter(n=>!n.disabled);const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{switchView(b.dataset.view);window.scrollTo(0,0);}));
  document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{reportFilter=b.dataset.filter;visibleLimit=6;renderReports();}));
  $('photoClose').addEventListener('click',()=>$('photoViewer').close());$('photoViewer').addEventListener('click',e=>{if(e.target===$('photoViewer'))$('photoViewer').close();});
+ $('receiptPdfClose').addEventListener('click',closeReceiptPdf);$('receiptPdfShare').addEventListener('click',shareReceiptPdf);$('receiptPdfZoomOut').addEventListener('click',()=>receiptPdfZoom(pdfZoom-.5));$('receiptPdfZoomIn').addEventListener('click',()=>receiptPdfZoom(pdfZoom+.5));$('receiptPdfRetry').addEventListener('click',async()=>{if(pdfLoading||!pdfItem)return;const id=pdfItem.id,ticket=pdfOpenEpoch;await loadReceipts();if(ticket!==pdfOpenEpoch||$('receiptPdfModal').hidden)return;const item=receipts.find(r=>r.id===id);if(item)receiptDetail(item);});window.addEventListener('resize',()=>{if(!$('receiptPdfModal').hidden)receiptPdfZoom(pdfZoom);});
  init().catch(e=>message('authError',errorText(e)));
 })();
