@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.24_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.25_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.24">
+<meta name="abr-app-version" content="v2.3.25">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.24</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.25</div>
       <div class="abrDeveloperSplash">Tavşanlı Ay Asansör tarafından geliştirilmiştir.</div>
     </div>
   </div>
@@ -22184,7 +22184,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.24";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.25";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22596,6 +22596,9 @@ placeholder="Bilgi yaz..."></textarea>
 
 
 
+<div class="profileSectionTitle">Finans</div>
+<div class="abrProfileGroup abrProfileFinanceGroup"><button id="abrFinanceProfileButton" class="profileDataHubCard" type="button" onclick="abrFirmaFinansiAc()"><span class="profileDataHubIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M7 14h3M16 14h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="profileDataHubText"><b>Firma Finansı</b><em>Gelir, gider, hesaplar ve ödemeler</em></span><span class="profileDataHubArrow" aria-hidden="true">›</span></button></div>
+
 <div class="profileSectionTitle abrSettingsSectionTitle">Uygulama Ayarları</div>
 
 <div class="appearanceCard appearancePickerCard abrUnifiedSettingsCard">
@@ -22999,7 +23002,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.24";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.25";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -26423,6 +26426,7 @@ toplamTahsilat:tahsilat,
 acikBakiye:acikBakiye,
 apartmanlar:data,
 stokEnvanteri:stokEnvanteriGet(),
+firmaFinansi:typeof abrFinanceGet === "function" ? abrFinanceGet() : (JSON.parse(localStorage.getItem("abrCompanyFinanceV1") || "null")),
 meslekiBelgeler:meslekiBelgelerGet(),
 montajKesifleri:montajKesifGet(),
 profil:{
@@ -36068,6 +36072,7 @@ let uyariSayisi = 0;
 try{
 
 let yedek = JSON.parse(e.target.result);
+if(yedek && yedek.firmaFinansi)abrFinanceValidate(yedek.firmaFinansi);
 let hamData = abrStbYedekApartmanlariniAl(yedek);
 let normalizeSonucu = abrStbVeriyiNormalizeEt(abrStbDerinKopya(hamData));
 let yeniData = normalizeSonucu.data;
@@ -36112,6 +36117,10 @@ throw new Error("Geri yüklenen apartman verisi cihazda saklanamadı");
 }
 
 window.__abrStbLastGoodData = abrStbDerinKopya(data);
+
+if(yedek && yedek.firmaFinansi){
+try{ abrFinanceSet(yedek.firmaFinansi,false); }catch(err){ uyariSayisi += 1; }
+}
 
 if(yedek && Array.isArray(yedek.stokEnvanteri)){
 try{ stokEnvanteriSet(yedek.stokEnvanteri,false); }catch(err){ uyariSayisi += 1; }
@@ -44444,11 +44453,13 @@ async function abrCloudRemote(context){
 function abrCloudApply(payload){
   if(!payload||!Array.isArray(payload.apartmanlar))throw new Error("Bulut yedeği geçersiz.");
   try{localStorage.setItem(ABR_STB_PRE_RESTORE_KEY,JSON.stringify(yedekVeriOlustur("geri_yukleme_oncesi")))}catch(preError){}
+  if(payload.firmaFinansi)abrFinanceValidate(payload.firmaFinansi);
   const normalized=abrStbVeriyiNormalizeEt(abrStbDerinKopya(payload.apartmanlar));
   const oldData=data;
   data=normalized.data;
   if(!abrStbAnaVeriyiYaz()){data=oldData;throw new Error("Bulut yedeği cihazda saklanamadı.")}
   window.__abrStbLastGoodData=abrStbDerinKopya(data);
+  if(payload.firmaFinansi)abrFinanceSet(payload.firmaFinansi,false);
   if(Array.isArray(payload.stokEnvanteri)&&typeof stokEnvanteriSet==="function")stokEnvanteriSet(payload.stokEnvanteri,false);
   if(Array.isArray(payload.meslekiBelgeler)&&typeof meslekiBelgelerSet==="function")meslekiBelgelerSet(payload.meslekiBelgeler,false);
   if(Array.isArray(payload.montajKesifleri)&&typeof montajKesifSet==="function")montajKesifSet(payload.montajKesifleri,false);
@@ -48550,7 +48561,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.24";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.25";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50145,7 +50156,7 @@ body.darkMode #abrTechDialog,html.darkRoot #abrTechDialog{background:#172237;col
 <dialog id="abrTechViewer" aria-label="Teknik fotoğraf"><img id="abrTechViewerImg" alt=""><button type="button" onclick="document.getElementById('abrTechViewer').close()">Kapat</button></dialog>
 
 <script>
-/* v2.3.24 — Apartment technical card, additive local record. */
+/* v2.3.25 — Apartment technical card, additive local record. */
 const abrTechGroups=[
  ['Temel bilgiler',[['brand','Marka'],['serial','Seri numarası'],['year','Montaj yılı','number',1900,2100],['stops','Durak sayısı','number',1,200],['capacity','Kapasite (kg)','number',1,100000],['people','Kişi sayısı','number',1,1000]]],
  ['Sistem ve donanım',[['system','Sistem','select'],['controller','Kumanda kartı'],['drive','Sürücü marka / model'],['motor','Motor marka / model']]],
@@ -50170,7 +50181,7 @@ document.addEventListener('DOMContentLoaded',function(){document.getElementById(
 
 </script>
 
-<!-- Firma imzası v2.3.24: yalnızca görsel kimlik, veri ve yetki akışları değişmez. -->
+<!-- Firma imzası v2.3.25: yalnızca görsel kimlik, veri ve yetki akışları değişmez. -->
 <style id="abrDeveloperBrandStyle">
 .abrDeveloperSplash{max-width:290px;margin:12px auto 0;padding:0 12px;color:#667085;font:500 11px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.01em}
 #abrRoleGate .abrRoleFoot.abrDeveloperLoginFooter{display:flex!important;flex-direction:column!important;gap:10px!important;text-align:center;line-height:1.5!important}
@@ -50211,7 +50222,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperLocation">Tavşanlı · Kütahya</p>
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.24</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.25</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
@@ -50223,7 +50234,7 @@ function abrDeveloperAboutOpen(){
 
 
 <style id="abrGroupedDrawerStyle2323">
-/* v2.3.24: gruplu yan menü, mevcut menü eylemleri korunur. */
+/* v2.3.25: gruplu yan menü, mevcut menü eylemleri korunur. */
 body #exHybridDrawer{width:min(348px,88vw)!important;padding:calc(20px + env(safe-area-inset-top,0px)) 20px 28px!important;background:#fcfcfd!important;border-right:1px solid #e9ecf0!important;box-shadow:16px 0 50px #10182820!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#222933!important}
 body #exHybridBackdrop{background:#18233545!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important}
 #exHybridDrawer .abrDrawerHead{min-height:60px!important;margin:0 0 18px!important;padding:0!important;gap:16px!important;justify-content:space-between!important}
@@ -50393,5 +50404,138 @@ body.profileMode #profilPanel.abrProfileCompact224 :is(.profileIdentityCard,.pro
 }
 
 </style>
+
+<style id="abrFinanceStyle">
+#abrFinance{--ff-bg:#f5f7fa;--ff-card:#fff;--ff-text:#202a38;--ff-muted:#748092;--ff-line:#e6ebf1;--ff-blue:#2676d5;--ff-soft:#edf4fd;--ff-green:#17815b;--ff-red:#b9414e;position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;padding:0;background:var(--ff-bg);color:var(--ff-text);z-index:200000;overflow:auto;font-family:inherit;box-sizing:border-box}
+#abrFinance:not([open]){display:none}#abrFinance::backdrop{background:#18213080}#abrFinance *,#abrFinanceForm *{box-sizing:border-box}
+#abrFinance button,#abrFinance input,#abrFinance select,#abrFinance textarea,#abrFinanceForm button,#abrFinanceForm input,#abrFinanceForm select{font:inherit;letter-spacing:normal}
+#abrFinance button,#abrFinanceForm button{cursor:pointer;box-shadow:none;text-transform:none;min-height:44px}
+#abrFinance .ff-nav{position:sticky;top:0;z-index:2;background:var(--ff-bg);padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ff-line)}
+#abrFinance .ff-back{border:0;background:var(--ff-card);color:var(--ff-blue);border-radius:12px;width:44px;padding:0;font-size:27px}#abrFinance .ff-nav strong{font-size:18px;font-weight:650}#abrFinance .ff-nav small{display:block;color:var(--ff-muted);font-size:12px;margin-top:3px}
+#abrFinance .ff-body{max-width:680px;margin:auto;padding:22px 16px calc(28px + env(safe-area-inset-bottom,0px))}#abrFinance .ff-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}#abrFinance h2{font-size:26px;letter-spacing:-.8px;margin:0 0 6px;font-weight:700}#abrFinance p{margin:0;color:var(--ff-muted);font-size:13px;line-height:1.6}
+#abrFinance .ff-month{background:var(--ff-card);color:var(--ff-text);border:1px solid var(--ff-line);padding:9px 8px;min-width:0;width:143px;border-radius:10px;font-size:13px;min-height:44px}
+#abrFinance .ff-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:4px;background:var(--ff-line);border-radius:12px;gap:2px;margin-bottom:20px}#abrFinance .ff-tabs button{border:0;border-radius:9px;background:transparent;color:var(--ff-muted);font-size:12px;padding:9px 3px;min-width:0;font-weight:600}#abrFinance .ff-tabs button[aria-selected=true]{background:var(--ff-card);color:var(--ff-blue)}
+#abrFinance .ff-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}#abrFinance .ff-stat{background:var(--ff-card);border:1px solid var(--ff-line);padding:15px 11px;border-radius:14px;min-width:0}#abrFinance .ff-stat small{display:block;color:var(--ff-muted);font-size:11px;margin-bottom:9px}#abrFinance .ff-stat b{font-size:18px;letter-spacing:-.6px;display:block;overflow-wrap:anywhere}#abrFinance .ff-income{color:var(--ff-green)}#abrFinance .ff-expense{color:var(--ff-red)}
+#abrFinance .ff-caption{font-size:12px;margin:0 0 20px}#abrFinance .ff-actions{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}#abrFinance .ff-primary,#abrFinance .ff-secondary{border:0;border-radius:11px;padding:11px 16px;font-size:13px;font-weight:650;background:var(--ff-blue);color:#fff;flex:1;min-width:100px}#abrFinance .ff-secondary{background:var(--ff-soft);color:var(--ff-blue)}
+#abrFinance .ff-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 10px}#abrFinance h3{font-size:15px;margin:0;font-weight:650}#abrFinance .ff-textbutton{border:0;background:transparent;color:var(--ff-blue);font-size:12px;padding:0 6px}
+#abrFinance .ff-card{background:var(--ff-card);border:1px solid var(--ff-line);border-radius:15px;overflow:hidden;margin-bottom:12px}#abrFinance .ff-row{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--ff-text);width:100%;text-align:left;border:0;border-bottom:1px solid var(--ff-line);background:transparent;border-radius:0;min-width:0}#abrFinance .ff-row:last-child{border-bottom:0}#abrFinance .ff-row-main{flex:1;min-width:0}#abrFinance .ff-row strong{display:block;font-weight:600;font-size:14px;overflow-wrap:anywhere}#abrFinance .ff-row small{display:block;color:var(--ff-muted);font-size:11px;line-height:1.6;margin-top:4px;overflow-wrap:anywhere}#abrFinance .ff-row-amount{text-align:right;flex-shrink:0;font-size:14px;font-weight:650;max-width:45%;overflow-wrap:anywhere}
+#abrFinance .ff-empty{padding:25px 18px;text-align:center;color:var(--ff-muted);font-size:13px;line-height:1.7}#abrFinance .ff-empty strong{display:block;color:var(--ff-text);margin-bottom:5px}#abrFinance .ff-balances{display:grid;grid-template-columns:1fr 1fr;gap:10px}#abrFinance .ff-account{padding:18px;background:var(--ff-card);border:1px solid var(--ff-line);border-radius:15px;min-width:0}#abrFinance .ff-account small{color:var(--ff-muted);font-size:12px}#abrFinance .ff-account b{display:block;font-size:24px;margin:10px 0;letter-spacing:-.7px;overflow-wrap:anywhere}#abrFinance .ff-account button{font-size:12px;color:var(--ff-blue);border:0;background:transparent;padding:0;text-align:left}
+#abrFinance .ff-notice{padding:13px 15px;border-radius:12px;background:var(--ff-soft);color:var(--ff-blue);font-size:12px;line-height:1.7;margin:14px 0}#abrFinance .ff-urgent{color:var(--ff-red)}#abrFinance .ff-paid{color:var(--ff-green)}#abrFinance .ff-search{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:8px;margin:0 0 15px}#abrFinance .ff-search input,#abrFinance .ff-search select{width:100%;min-width:0;background:var(--ff-card);color:var(--ff-text);border:1px solid var(--ff-line);border-radius:10px;padding:11px;font-size:13px;min-height:44px}
+#abrFinance .ff-bar{height:5px;border-radius:5px;background:var(--ff-line);margin-top:9px;overflow:hidden}#abrFinance .ff-bar i{display:block;height:100%;background:var(--ff-blue);border-radius:5px}#abrFinance .ff-footer{font-size:11px;text-align:center;color:var(--ff-muted);padding:14px 0}
+#abrFinanceForm{--ff-card:#fff;--ff-text:#202a38;--ff-muted:#748092;--ff-line:#e6ebf1;--ff-blue:#2676d5;width:calc(100% - 24px);max-width:480px;max-height:calc(100% - 32px);margin:auto;padding:0;border:1px solid var(--ff-line);border-radius:22px;background:var(--ff-card);color:var(--ff-text);z-index:200001;font-family:inherit;overflow:auto}#abrFinanceForm:not([open]){display:none}#abrFinanceForm::backdrop{background:rgba(12,24,42,.48);backdrop-filter:blur(5px)}#abrFinanceForm .ff-form-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 10px}#abrFinanceForm h2{margin:0;font-size:21px;letter-spacing:-.5px}#abrFinanceForm .ff-close{border:0;width:44px;padding:0;border-radius:12px;color:var(--ff-muted);background:var(--ff-line);font-size:24px}#abrFinanceForm form{padding:10px 20px 20px}#abrFinanceForm label{display:block;font-size:12px;font-weight:600;margin:0 0 15px}#abrFinanceForm input,#abrFinanceForm select{display:block;width:100%;min-width:0;margin-top:6px;padding:12px;border:1px solid var(--ff-line);border-radius:11px;background:var(--ff-card);color:var(--ff-text);font-size:16px;min-height:46px}#abrFinanceForm .ff-form-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}#abrFinanceForm .ff-hint{color:var(--ff-muted);font-size:12px;line-height:1.7;margin:0 0 15px}#abrFinanceForm .ff-error{color:#ba3949;font-size:13px;margin:0 0 12px}#abrFinanceForm .ff-submit{width:100%;border:0;border-radius:12px;padding:13px;background:var(--ff-blue);color:#fff;font-size:15px;font-weight:650}#abrFinanceForm .ff-delete{width:100%;border:0;background:transparent;color:#ba3949;font-size:13px;padding:10px;margin-top:8px}#abrFinanceForm [hidden]{display:none!important}
+body.darkMode #abrFinance{--ff-bg:#171b22;--ff-card:#222730;--ff-text:#e8edf5;--ff-muted:#9aa6b8;--ff-line:#343c49;--ff-blue:#82b4ff;--ff-soft:#283a53;--ff-green:#6fd1a4;--ff-red:#ff98a4}body.darkMode #abrFinanceForm{--ff-card:#222730;--ff-text:#e8edf5;--ff-muted:#9aa6b8;--ff-line:#343c49;--ff-blue:#2676d5}
+@media(min-width:600px){#abrFinance .ff-stat b{font-size:25px}#abrFinance .ff-summary{gap:12px}#abrFinance .ff-stat{padding:20px}#abrFinance .ff-tabs button{font-size:14px}}@media(max-width:350px){#abrFinance .ff-body{padding-left:12px;padding-right:12px}#abrFinance .ff-stat{padding:12px 8px}#abrFinance .ff-stat b{font-size:16px}#abrFinance .ff-heading{align-items:flex-start}#abrFinance h2{font-size:23px}#abrFinance .ff-month{width:130px}#abrFinance .ff-account b{font-size:21px}}
+
+body.darkMode #abrFinance .ff-primary{background:#2676d5}
+#abrFinanceForm #ffCategoryLabel{grid-column:1 / -1}
+
+</style>
+<dialog id="abrFinance" aria-labelledby="abrFinanceTitle">
+<header class="ff-nav"><button class="ff-back" type="button" data-ff="close" aria-label="Profile dön">‹</button><div><strong id="abrFinanceTitle">Firma Finansı</strong><small>Gelir, gider ve ödeme takibi</small></div></header>
+<main class="ff-body"><div class="ff-heading"><div><h2>Paranın akışı</h2><p id="ffPeriodLabel">Bu ayın özeti</p></div><input id="ffMonth" class="ff-month" type="month" aria-label="Finans raporu ayı"></div>
+<nav class="ff-tabs" role="tablist" aria-label="Finans bölümleri"><button role="tab" aria-selected="true" data-tab="overview">Özet</button><button role="tab" aria-selected="false" data-tab="moves">Hareketler</button><button role="tab" aria-selected="false" data-tab="bills">Ödemeler</button><button role="tab" aria-selected="false" data-tab="accounts">Hesaplar</button></nav><div id="ffContent" role="tabpanel"></div><div class="ff-footer">Firma kayıtlarına göre hesaplanır.</div></main>
+</dialog>
+<dialog id="abrFinanceForm" aria-labelledby="ffFormTitle"><header class="ff-form-head"><h2 id="ffFormTitle">Gider ekle</h2><button type="button" class="ff-close" data-ff="cancel" aria-label="Finans formunu kapat">×</button></header>
+<form id="ffForm"><p id="ffFormHint" class="ff-hint"></p><label id="ffTitleLabel">Açıklama<input id="ffTitle" maxlength="140" placeholder="Örn. Kapı motoru alımı" required></label><div class="ff-form-pair"><label id="ffAmountLabel">Tutar (₺)<input id="ffAmount" type="text" inputmode="decimal" placeholder="0,00" required autocomplete="off"></label><label id="ffDateLabel"><span id="ffDateText">İşlem tarihi</span><input id="ffDate" type="date" required></label></div><div class="ff-form-pair"><label id="ffAccountLabel"><span id="ffAccountText">Hesap</span><select id="ffAccount"><option value="cash">Kasa</option><option value="bank">Banka</option></select></label><label id="ffCategoryLabel">Kategori<select id="ffCategory"><option>Parça ve malzeme</option><option>Yakıt</option><option>Personel</option><option>Kira ve faturalar</option><option>Araç ve ulaşım</option><option>Diğer</option></select></label><label id="ffDestinationLabel" hidden>Aktarılan hesap<select id="ffDestination"><option value="bank">Banka</option><option value="cash">Kasa</option></select></label></div><label id="ffSupplierLabel" hidden>Tedarikçi / alacaklı<input id="ffSupplier" maxlength="100" placeholder="Firma veya kişi adı"></label><p id="ffFormError" class="ff-error" role="alert"></p><button id="ffSubmit" class="ff-submit" type="submit">Kaydet</button><button id="ffDelete" class="ff-delete" type="button" hidden>Kaydı sil</button></form></dialog>
+
+<script id="abrFinanceScript">
+/* Firma Finansı v1 — tutarlar kuruş olarak tutulur; tahsilatlar kaynak kayıtlardan okunur. */
+function abrFinanceDefault(){return {version:1,accounts:[{id:'cash',opening:0},{id:'bank',opening:0}],transactions:[],obligations:[],paymentAccounts:{}};}
+function abrFinanceValidate(value){
+ if(!value||value.version!==1||!Array.isArray(value.accounts)||!Array.isArray(value.transactions)||!Array.isArray(value.obligations)||!value.paymentAccounts||Array.isArray(value.paymentAccounts)||typeof value.paymentAccounts!=='object')throw new Error('Finans kaydı okunamadı; mevcut kayıt korundu.');
+ const v=JSON.parse(JSON.stringify(value)),acc=new Set(['cash','bank']),ids=new Set();
+ const date=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&new Date(s+'T12:00:00Z').toISOString().slice(0,10)===s;
+ const money=n=>Number.isSafeInteger(n)&&Math.abs(n)<=10000000000000;
+ if(v.accounts.length!==2||!['cash','bank'].every(id=>v.accounts.filter(a=>a.id===id).length===1)||v.accounts.some(a=>!money(a.opening)))throw new Error('Finans hesap bilgisi geçersiz.');
+ v.transactions.forEach(t=>{if(!t||typeof t.id!=='string'||ids.has(t.id)||!['income','expense','transfer'].includes(t.type)||!money(t.amount)||t.amount<=0||!acc.has(t.account)||!date(t.date)||typeof t.title!=='string'||(t.type==='transfer'&&(!acc.has(t.destination)||t.destination===t.account)))throw new Error('Finans hareketi geçersiz.');ids.add(t.id);});
+ ids.clear();v.obligations.forEach(b=>{if(!b||typeof b.id!=='string'||ids.has(b.id)||!money(b.amount)||b.amount<=0||!acc.has(b.account)||!date(b.due)||typeof b.title!=='string'||!['pending','paid'].includes(b.status))throw new Error('Bekleyen ödeme kaydı geçersiz.');if(b.status==='paid'&&!v.transactions.some(t=>t.id===b.transactionId&&t.billId===b.id&&t.type==='expense'&&t.amount===b.amount))throw new Error('Ödeme ve gider kaydı eşleşmiyor.');ids.add(b.id);});
+ if(Object.values(v.paymentAccounts).some(x=>!acc.has(x)))throw new Error('Tahsilat hesap eşleştirmesi geçersiz.');return v;
+}
+function abrFinanceGet(){const raw=localStorage.getItem('abrCompanyFinanceV1');return raw?abrFinanceValidate(JSON.parse(raw)):abrFinanceDefault();}
+function abrFinanceSet(value,backup=true){const v=abrFinanceValidate(value);localStorage.setItem('abrCompanyFinanceV1',JSON.stringify(v));if(backup){try{autoYedekAl(true);}catch(e){}try{window.dispatchEvent(new CustomEvent('abrFinanceSaved'));}catch(e){}}return v;}
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),root=$('abrFinance'),formDialog=$('abrFinanceForm'),key='abrCompanyFinanceV1';let tab='overview',edit=null,returnFocus=null,search='',filter='all';
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=c=>(c/100).toLocaleString('tr-TR',{minimumFractionDigits:c%100?2:0,maximumFractionDigits:2})+' ₺';
+const account=id=>id==='bank'?'Banka':'Kasa';
+const dateLabel=s=>s?new Date(s+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'short',year:'numeric'}):'Tarih belirtilmedi';
+const uid=()=> 'fin_'+(globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'_'+Math.random().toString(36).slice(2));
+function dateKey(s){try{const p=typeof tarihParcala==='function'?tarihParcala(s):null;if(!p)return '';const k=String(p.yil).padStart(4,'0')+'-'+String(p.ay).padStart(2,'0')+'-'+String(p.gun).padStart(2,'0');return new Date(k+'T12:00:00Z').toISOString().slice(0,10)===k?k:'';}catch(e){return '';}}
+function parseMoney(s,signed=false){s=String(s).trim().replace(/\s/g,'');if(/^[-+]?\d{1,3}(\.\d{3})+(,\d{1,2})?$/.test(s))s=s.replace(/\./g,'').replace(',','.');else if(/^[-+]?\d+([,.]\d{1,2})?$/.test(s))s=s.replace(',','.');else throw new Error('Tutarı 1250 veya 1.250,50 şeklinde gir.');const n=Math.round(Number(s)*100);if(!Number.isSafeInteger(n)||Math.abs(n)>10000000000000||(!signed&&n<=0))throw new Error('Geçerli, sıfırdan büyük bir tutar gir.');return n;}
+function payments(v){const result=[],seen=new Set();(typeof data!=='undefined'&&Array.isArray(data)?data:[]).forEach((a,ai)=>{(Array.isArray(a.odemeler)?a.odemeler:[]).forEach((o,oi)=>{if(!o||typeof o!=='object')return;const n=Math.round(Number(o.tutar)*100);if(!Number.isSafeInteger(n)||n<=0)return;const ref='pay:'+String(a.id||'apt_'+ai)+':'+String(o.id||'legacy_'+oi+'_'+o.tarih+'_'+o.tutar);if(seen.has(ref))return;seen.add(ref);result.push({id:ref,auto:true,type:'income',amount:n,date:dateKey(o.tarih),title:a.ad||'Apartman tahsilatı',category:'Apartman tahsilatı',note:o.aciklama||o.kalem||'Tahsilat',account:v.paymentAccounts[ref]||'cash'});});});return result;}
+function moves(v){return payments(v).concat(v.transactions).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||String(b.createdAt||'').localeCompare(String(a.createdAt||'')));}
+function balances(v){const b={cash:v.accounts.find(a=>a.id==='cash').opening,bank:v.accounts.find(a=>a.id==='bank').opening};moves(v).filter(t=>t.date&&t.date<=today()).forEach(t=>{b[t.account]+=t.type==='income'?t.amount:-t.amount;if(t.type==='transfer')b[t.destination]+=t.amount;});return b;}
+function monthly(v,month){const all=moves(v).filter(t=>t.date.slice(0,7)===month);return {all,income:all.filter(t=>t.type==='income').reduce((n,t)=>n+t.amount,0),expense:all.filter(t=>t.type==='expense').reduce((n,t)=>n+t.amount,0)};}
+function notice(message){if(typeof toast==='function')toast(message);}
+function save(v){try{abrFinanceSet(v);return true;}catch(e){$('ffFormError').textContent=e.message==='Finans kaydı okunamadı; mevcut kayıt korundu.'?e.message:'Kayıt yapılamadı. Depolama alanını veya kayıt bilgilerini kontrol et.';return false;}}
+function empty(title,description){return '<div class="ff-empty"><strong>'+esc(title)+'</strong>'+esc(description)+'</div>';}
+function actions(){return '<div class="ff-actions"><button type="button" class="ff-primary" data-ff="expense">+ Gider ekle</button><button type="button" class="ff-secondary" data-ff="income">+ Diğer gelir</button></div>';}
+function row(t){return '<button type="button" class="ff-row" data-ff="move" data-id="'+esc(t.id)+'"><span class="ff-row-main"><strong>'+esc(t.title)+'</strong><small>'+esc(dateLabel(t.date))+' · '+esc(account(t.account))+'<br>'+esc(t.auto?'Apartman tahsilatı · '+t.note:t.type==='transfer'?'Hesaplar arası transfer':t.category||'Diğer')+'</small></span><span class="ff-row-amount '+(t.type==='income'?'ff-income':t.type==='expense'?'ff-expense':'')+'">'+(t.type==='income'?'+':t.type==='expense'?'−':'')+money(t.amount)+'</span></button>';}
+function billRow(b){const overdue=b.status==='pending'&&b.due<today();return '<button type="button" class="ff-row" data-ff="bill" data-id="'+esc(b.id)+'"><span class="ff-row-main"><strong>'+esc(b.title)+'</strong><small>'+esc(b.supplier||'Tedarikçi belirtilmedi')+'<br>Vade: '+esc(dateLabel(b.due))+' · <span class="'+(b.status==='paid'?'ff-paid':overdue?'ff-urgent':'')+'">'+(b.status==='paid'?'Ödendi':overdue?'Gecikti':'Bekliyor')+'</span></small></span><span class="ff-row-amount">'+money(b.amount)+'</span></button>';}
+function accountCards(v){const b=balances(v);return '<div class="ff-balances">'+['cash','bank'].map(id=>'<div class="ff-account"><small>'+account(id)+'</small><b>'+money(b[id])+'</b><button data-ff="opening" data-id="'+id+'">Başlangıç bakiyesi</button></div>').join('')+'</div>';}
+function render(){if(!root.open)return;let v;try{v=abrFinanceGet();}catch(e){$('ffContent').innerHTML=empty('Finans kayıtları açılamadı','Kayıt değiştirilmedi. Yedekleri yönet bölümünden sağlam bir yedeğe dön.');return;}
+ const month=$('ffMonth').value||today().slice(0,7),m=monthly(v,month),pending=v.obligations.filter(b=>b.status==='pending').sort((a,b)=>a.due.localeCompare(b.due));
+ $('ffPeriodLabel').textContent=new Date(month+'-01T12:00:00').toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
+ root.querySelectorAll('[data-tab]').forEach(b=>{b.setAttribute('aria-selected',String(b.dataset.tab===tab));b.setAttribute('tabindex',b.dataset.tab===tab?'0':'-1');});
+ let html='';
+ if(tab==='overview'){
+ html='<div class="ff-summary"><div class="ff-stat"><small>Gelir</small><b class="ff-income">'+money(m.income)+'</b></div><div class="ff-stat"><small>Gider</small><b class="ff-expense">'+money(m.expense)+'</b></div><div class="ff-stat"><small>Nakit farkı</small><b>'+money(m.income-m.expense)+'</b></div></div><p class="ff-caption">Gelir − gider. Hesaplar arası transferler bu özete dahil edilmez.</p>'+actions()+'<div class="ff-section-head"><h3>Hesaplardaki bakiye</h3><button class="ff-textbutton" data-ff="accounts">Hesaplar ›</button></div>'+accountCards(v)+'<div class="ff-section-head"><h3>Bekleyen ödemeler</h3><button class="ff-textbutton" data-ff="bills">Tümü ›</button></div><div class="ff-card">'+(pending.length?'<div class="ff-row"><span class="ff-row-main"><strong>'+pending.length+' ödeme bekliyor</strong><small>'+pending.filter(b=>b.due<today()).length+' gecikmiş · tüm vadeler</small></span><span class="ff-row-amount">'+money(pending.reduce((n,b)=>n+b.amount,0))+'</span></div>'+pending.slice(0,2).map(billRow).join(''):empty('Bekleyen ödeme yok','Tedarikçi borçlarını ve ödeme tarihlerini buradan takip et.'))+'</div><div class="ff-section-head"><h3>Son hareketler</h3><button class="ff-textbutton" data-ff="moves">Tümü ›</button></div><div class="ff-card">'+(m.all.length?m.all.slice(0,5).map(row).join(''):empty('Bu ay hareket yok','Apartman tahsilatları otomatik görünür. Giderlerini buradan ekleyebilirsin.'))+'</div>';
+ const cats={};m.all.filter(t=>t.type==='expense').forEach(t=>{cats[t.category||'Diğer']=(cats[t.category||'Diğer']||0)+t.amount;});if(m.expense)html+='<div class="ff-section-head"><h3>Gider dağılımı</h3></div><div class="ff-card">'+Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,n])=>'<div class="ff-row"><div class="ff-row-main"><strong>'+esc(c)+'</strong><div class="ff-bar"><i style="width:'+Math.round(n/m.expense*100)+'%"></i></div></div><span class="ff-row-amount">'+money(n)+'</span></div>').join('')+'</div>';
+ }
+ if(tab==='moves'){html=actions()+'<div class="ff-search"><input id="ffSearch" type="search" placeholder="Hareket ara" aria-label="Finans hareketi ara" value="'+esc(search)+'"><select id="ffFilter" aria-label="Hareket türü">'+[['all','Tümü'],['income','Gelir'],['expense','Gider'],['transfer','Transfer']].map(([id,label])=>'<option value="'+id+'" '+(filter===id?'selected':'')+'>'+label+'</option>').join('')+'</select></div><div id="ffMovesList" class="ff-card"></div><p class="ff-caption">Apartman tahsilatına dokunarak Kasa / Banka hesabını seçebilirsin. Tutar ve tarih apartmanın cari kaydından gelir.</p>';}
+ if(tab==='bills'){const bills=v.obligations.slice().sort((a,b)=>(a.status==='paid')-(b.status==='paid')||a.due.localeCompare(b.due));html='<div class="ff-actions"><button class="ff-primary" data-ff="newbill">+ Ödeme planla</button></div><div class="ff-notice">Bu liste tüm vadeleri gösterir. “Ödendi” dediğinde aynı tutar bir kez gider olarak kaydolur.</div><div class="ff-card">'+(bills.length?bills.map(billRow).join(''):empty('Ödeme planı oluştur','Parça alımı, kira veya tedarikçi ödemesinin vadesini kaydet.'))+'</div>';}
+ if(tab==='accounts'){html=accountCards(v)+'<div class="ff-notice">Bakiyeler başlangıç tutarı ve bugüne kadar kaydedilen hareketlerden hesaplanır. Bankaya doğrudan bağlanmaz.<br>Hesabı seçilmemiş apartman tahsilatları Kasada görünür; Hareketler bölümünden Bankaya alabilirsin.</div><div class="ff-actions"><button class="ff-primary" data-ff="transfer">Hesaplar arası aktar</button></div><div class="ff-section-head"><h3>Bu ayın transferleri</h3></div><div class="ff-card">'+(m.all.some(t=>t.type==='transfer')?m.all.filter(t=>t.type==='transfer').map(row).join(''):empty('Transfer yok','Kasadan bankaya veya bankadan kasaya aktarım gelir / gider sayılmaz.'))+'</div>';}
+ const unknown=payments(v).filter(p=>!p.date).length;if(unknown)html+='<div class="ff-notice">'+unknown+' tahsilatın tarihi okunamadığı için hesaplamaya alınmadı. Apartmanın cari kaydından tarihini kontrol et.</div>';
+ $('ffContent').innerHTML=html;if(tab==='moves')renderMoves(v,month);
+}
+function renderMoves(v=abrFinanceGet(),month=$('ffMonth').value){const list=monthly(v,month).all.filter(t=>(filter==='all'||t.type===filter)&&[t.title,t.note,t.category].join(' ').toLocaleLowerCase('tr-TR').includes(search.toLocaleLowerCase('tr-TR')));$('ffMovesList').innerHTML=list.length?list.map(row).join(''):empty('Hareket bulunamadı','Ayı veya filtreyi değiştirerek diğer kayıtları görebilirsin.');}
+function fields(type){const auto=type==='auto',opening=type==='opening',bill=type==='bill',settle=type==='settle',transfer=type==='transfer';
+ ['Title','Date','Account','Category','Destination','Supplier'].forEach(n=>$( 'ff'+n+'Label').hidden=false);
+ $('ffTitleLabel').hidden=auto||opening;$('ffTitle').required=!auto&&!opening;
+ $('ffDateLabel').hidden=auto||opening;$('ffDate').required=!auto&&!opening;
+ $('ffAmountLabel').hidden=auto;$('ffAmount').required=!auto;
+ $('ffAccountLabel').hidden=opening;$('ffCategoryLabel').hidden=auto||opening||transfer||type==='income';
+ $('ffDestinationLabel').hidden=!transfer;$('ffSupplierLabel').hidden=!bill;
+ $('ffDateText').textContent=bill?'Son ödeme tarihi':'İşlem tarihi';$('ffAccountText').textContent=transfer?'Çıkan hesap':'Hesap';
+ $('ffDate').max=bill?'':today();$('ffTitle').readOnly=settle;$('ffAmount').readOnly=settle;
+ $('ffCategory').innerHTML=(type==='income'?['Diğer gelir']:['Parça ve malzeme','Yakıt','Personel','Kira ve faturalar','Araç ve ulaşım','Diğer']).map(x=>'<option>'+x+'</option>').join('');
+}
+function openForm(type,id){let v;try{v=abrFinanceGet();}catch(e){notice(e.message);return;}const t=id?moves(v).find(t=>t.id===id):null,b=id?v.obligations.find(b=>b.id===id):null;
+ if(type==='move'){if(!t)return;type=t.auto?'auto':t.type;if(t.billId){openForm('bill',t.billId);return;}}
+ if(type==='bill'&&b?.status==='paid'){type='paidbill';}
+ if(type==='newbill')type='bill';edit={type,id:id||'',record:t||b||null};$('ffForm').reset();$('ffFormError').textContent='';fields(type);$('ffDate').value=t?.date||b?.due||today();$('ffAmount').value=((t?.amount||b?.amount||0)/100)||'';$('ffTitle').value=t?.title||b?.title||'';$('ffAccount').value=t?.account||b?.account||'cash';$('ffDestination').value=t?.destination||'bank';$('ffCategory').value=t?.category||b?.category||'Parça ve malzeme';$('ffSupplier').value=b?.supplier||'';
+ const titles={expense:'Gider ekle',income:'Diğer gelir ekle',transfer:'Hesaplar arası aktar',bill:'Ödeme planla',settle:'Ödemeyi tamamla',auto:'Tahsilat hesabı',opening:'Başlangıç bakiyesi',paidbill:'Ödeme tamamlandı'};
+ $('ffFormTitle').textContent=(id&&['income','expense','transfer','bill'].includes(type)?'Kaydı düzenle':titles[type]);$('ffFormHint').textContent=type==='income'?'Apartman tahsilatını burada yeniden ekleme; cari kayıtlarından otomatik gelir.':type==='auto'?t.title+' · '+money(t.amount)+' · '+dateLabel(t.date)+' — yalnızca paranın geldiği hesabı seç.':type==='opening'?'Bu tutar, kayıtlı hareketler başlamadan önce hesabında olan paradır. Güncel bakiyeye tüm kayıtlı hareketler ayrıca eklenir.':type==='transfer'?'Bu işlem yalnızca iki hesabın bakiyesini değiştirir.':type==='settle'?'Ödeme bir kez gider olarak kaydolacak. Ödediğin hesabı ve tarihi seç.':type==='bill'?'Ödemeyi planlamak bakiyeyi değiştirmez. Para çıktığında “Ödendi” olarak kaydet.':type==='paidbill'?'Bu ödeme gider olarak kaydedildi. Geri alırsan gider kaydı kaldırılır ve ödeme yeniden bekleyenlere döner.':'';
+ if(type==='opening'){const a=v.accounts.find(a=>a.id===id);if(!a)return;$('ffFormTitle').textContent=account(id)+' başlangıç bakiyesi';$('ffAmount').value=String(a.opening/100);}
+ if(type==='paidbill'){['Title','Amount','Date','Account','Category','Supplier'].forEach(n=>$('ff'+n+'Label').hidden=true);$('ffTitle').required=false;$('ffAmount').required=false;$('ffDate').required=false;$('ffFormHint').textContent=b.title+' · '+money(b.amount)+' — '+$('ffFormHint').textContent;}
+ $('ffSubmit').textContent=type==='paidbill'?'Ödemeyi geri al':type==='bill'&&id?'Değişiklikleri kaydet':type==='settle'?'Ödendi olarak kaydet':'Kaydet';
+ $('ffDelete').hidden=!id||!['expense','income','transfer','bill'].includes(type);
+ $('ffPayNow')?.remove();if(type==='bill'&&id){$('ffFormHint').insertAdjacentHTML('afterend','<button id="ffPayNow" type="button" class="ff-submit" style="margin-bottom:16px" data-ff="paynow">Ödendi olarak işaretle</button>');}else $('ffPayNow')?.remove();
+ returnFocus=document.activeElement;if(!formDialog.open)formDialog.showModal();setTimeout(()=> (type==='auto'?$('ffAccount'):type==='opening'?$('ffAmount'):type==='paidbill'?$('ffSubmit'):$('ffTitle')).focus(),0);
+}
+function closeForm(){$('ffPayNow')?.remove();if(formDialog.open)formDialog.close();returnFocus?.focus?.();}
+function submit(e){e.preventDefault();if(!edit)return;const {type,id}=edit;let v;try{v=abrFinanceGet();$('ffFormError').textContent='';const title=$('ffTitle').value.trim(),amount=type==='auto'||type==='paidbill'?0:parseMoney($('ffAmount').value,type==='opening'),date=$('ffDate').value,acc=$('ffAccount').value,dest=$('ffDestination').value;
+ if(!['auto','opening','paidbill'].includes(type)&&(!title||!dateKey(date)))throw new Error('Açıklama ve geçerli tarih gir.');if(!['auto','opening','paidbill','bill'].includes(type)&&date>today())throw new Error('Gerçekleşen işlem için gelecek tarih seçilemez. Vade için Ödeme planla seç.');
+ if(type==='auto'){v.paymentAccounts[id]=acc;}
+ else if(type==='opening'){v.accounts.find(a=>a.id===id).opening=amount;}
+ else if(type==='paidbill'){const b=v.obligations.find(b=>b.id===id);if(!b||b.status!=='paid')throw new Error('Ödeme durumu değişti; ekranı yeniden aç.');v.transactions=v.transactions.filter(t=>t.id!==b.transactionId);b.status='pending';delete b.transactionId;delete b.paidAt;}
+ else if(type==='settle'){const b=v.obligations.find(b=>b.id===id);if(!b||b.status!=='pending')throw new Error('Bu ödeme zaten tamamlandı.');const t={id:uid(),type:'expense',amount:b.amount,date,account:acc,title:b.title,category:b.category||'Diğer',billId:b.id,createdAt:new Date().toISOString()};v.transactions.push(t);b.status='paid';b.transactionId=t.id;b.paidAt=date;}
+ else if(type==='bill'){const b={id:id||uid(),title,amount,due:date,account:acc,supplier:$('ffSupplier').value.trim(),category:$('ffCategory').value,status:'pending',createdAt:edit.record?.createdAt||new Date().toISOString()};const i=v.obligations.findIndex(x=>x.id===id);if(i>=0){if(v.obligations[i].status!=='pending')throw new Error('Tamamlanan ödeme düzenlenemez.');v.obligations[i]=b;}else v.obligations.push(b);}
+ else {if(type==='transfer'&&acc===dest)throw new Error('Çıkan ve aktarılan hesap farklı olmalı.');const t={id:id||uid(),type,amount,date,account:acc,destination:type==='transfer'?dest:undefined,title,category:type==='income'?'Diğer gelir':$('ffCategory').value,createdAt:edit.record?.createdAt||new Date().toISOString()};const i=v.transactions.findIndex(x=>x.id===id);if(i>=0)v.transactions[i]=t;else v.transactions.push(t);}
+ if(!save(v))return;closeForm();render();notice(type==='paidbill'?'Ödeme bekleyenlere geri alındı':'Finans kaydı kaydedildi');
+ }catch(err){$('ffFormError').textContent=err.message||'Kayıt yapılamadı.';}}
+function deleteRecord(){if(!edit||!confirm('Bu finans kaydı silinsin mi? Apartman tahsilatları değişmez.'))return;const v=abrFinanceGet();if(edit.type==='bill')v.obligations=v.obligations.filter(b=>b.id!==edit.id);else v.transactions=v.transactions.filter(t=>t.id!==edit.id);if(save(v)){closeForm();render();notice('Finans kaydı silindi');}}
+window.abrFirmaFinansiAc=function(){if(!root.open)root.showModal();$('ffMonth').value=today().slice(0,7);tab='overview';search='';filter='all';render();};
+root.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.tab){tab=b.dataset.tab;render();return;}const action=b.dataset.ff;if(action==='close'){root.close();return;}if(['moves','bills','accounts'].includes(action)){tab=action;render();return;}if(action==='move')openForm('move',b.dataset.id);else if(action==='bill')openForm('bill',b.dataset.id);else if(['expense','income','transfer','newbill','opening'].includes(action))openForm(action,b.dataset.id);});
+root.querySelector('.ff-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const buttons=[...root.querySelectorAll('[data-tab]')],i=buttons.findIndex(b=>b.dataset.tab===tab),n=e.key==='Home'?0:e.key==='End'?3:(i+(e.key==='ArrowRight'?1:3))%4;tab=buttons[n].dataset.tab;render();buttons[n].focus();});
+root.addEventListener('input',e=>{if(e.target.id==='ffSearch'){search=e.target.value;renderMoves();}});root.addEventListener('change',e=>{if(e.target.id==='ffFilter'){filter=e.target.value;renderMoves();}});$('ffMonth').addEventListener('change',()=>{if(/^\d{4}-\d{2}$/.test($('ffMonth').value))render();});
+formDialog.addEventListener('click',e=>{const action=e.target.closest('[data-ff]')?.dataset.ff;if(action==='cancel')closeForm();if(action==='paynow'){const id=edit.id;$('ffPayNow')?.remove();openForm('settle',id);$('ffDate').value=today();}});$('ffForm').addEventListener('submit',submit);$('ffDelete').addEventListener('click',deleteRecord);
+formDialog.addEventListener('close',()=>{$('ffPayNow')?.remove();});window.addEventListener('storage',e=>{if(e.key===key||e.key==='apartmanlar')render();});window.addEventListener('abrDataSaved',render);
+window.abrFinanceModel={payments,balances,monthly,parseMoney,dateKey};
+})();
+
+</script>
 </body>
 </html>
