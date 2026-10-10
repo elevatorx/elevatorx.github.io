@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.16_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.18_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.16">
+<meta name="abr-app-version" content="v2.3.18">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22153,7 +22153,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.16</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.18</div>
     </div>
   </div>
 </div>
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.16";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.18";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22992,7 +22992,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.16";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.18";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -32630,35 +32630,11 @@ detayPanel.innerHTML = `
 
 <section class="exDetailTabPane exDetailTechnicalPane" data-detail-pane="teknik" role="tabpanel">
   <div class="exDetailPaneHint">
-    Teknik notlar, konum, muayene, sözleşme ve parça geçmişi bu bölümde.
+    Asansör bilgileri, fotoğraflar, konum, muayene ve parça geçmişi bu bölümde.
   </div>
 
-  <div class="exDetailTabSection">
-    <div class="exDetailSectionTitle">
-      <div>
-        <span>Apartman bilgileri</span>
-        <b>Teknik kart</b>
-      </div>
-      <button class="exDetailSectionButton" type="button" onclick="duzenle(${i})">Düzenle</button>
-    </div>
-
-    <div class="exDetailTechnicalInfo">
-      <div class="infoCard">
-        <span class="infoLabel">Apartman Kodu</span>
-        <span class="infoValue">${apartmanKodu(i)}</span>
-      </div>
-      <div class="infoCard">
-        <span class="infoLabel">Cari Durumu</span>
-        <span class="infoValue small">${ayHtml(cari.durum)}</span>
-      </div>
-    </div>
-
-    <div style="height:9px"></div>
-
-    <div class="exDetailNoteBox">
-      ${ayHtml(a.not || "Teknik not yok")}
-    </div>
-  </div>
+  ${abrTechHtml(a,i)}
+  <div class="exDetailNoteBox">${ayHtml(a.not || "Apartman notu yok")}</div>
 
   ${haritaApartmanDetayHtml(a,i)}
   ${muayeneDetayHtml(a,i)}
@@ -48567,7 +48543,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.16";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.18";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50151,6 +50127,39 @@ function init(){const root=document.createElement('div');root.id='abrMgrRoot';ro
 window.abrYoneticiErisimiAc=ownerOpen;window.abrYoneticiBildirimleriAc=inboxOpen;
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+</script>
+<style>
+.abrTechCard{margin-bottom:16px}.abrTechMuted{font-size:13px;color:#788397;line-height:1.6}.abrTechReadGroup h4{font-size:13px;color:#7b8799;margin:18px 0 9px}.abrTechReadGroup dl{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.abrTechReadGroup dl div{background:rgba(128,144,164,.07);padding:12px;border-radius:14px}.abrTechReadGroup dt{font-size:11px;color:#7b8799}.abrTechReadGroup dd{margin:5px 0 0;font-size:14px;font-weight:650;overflow-wrap:anywhere;white-space:pre-wrap}.abrTechPhotoGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}.abrTechPhotoGrid button{background:transparent;color:inherit;border:0;padding:0;text-align:left}.abrTechPhotoGrid img{width:100%;height:100px;object-fit:cover;border-radius:12px}.abrTechPhotoGrid span{font-size:11px;display:block;margin-top:5px}
+#abrTechDialog,#abrTechViewer{box-sizing:border-box;width:calc(100% - 24px);max-width:660px;max-height:calc(100dvh - 32px);padding:0;border:1px solid #dbe3ed;border-radius:24px;background:#f6f8fb;color:#182338;font-family:inherit;overscroll-behavior:contain}#abrTechDialog::backdrop,#abrTechViewer::backdrop{background:rgba(7,17,34,.65)}#abrTechDialog *{box-sizing:border-box}#abrTechForm{margin:0}.abrTechModalHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px;background:inherit;position:sticky;top:0;z-index:2;border-bottom:1px solid rgba(128,144,164,.2)}.abrTechModalHead h2{font-size:18px;margin:0}.abrTechModalHead p{font-size:12px;color:#7b8799;margin:5px 0 0}.abrTechModalHead button{flex:0 0 44px;width:44px!important;max-width:44px;padding:0;margin:0;border:0;background:transparent;color:inherit;font-size:27px;min-width:44px;min-height:44px}.abrTechFormBody{padding:18px}#abrTechFields fieldset{padding:16px;margin:0 0 18px;border:1px solid rgba(128,144,164,.25);border-radius:18px}#abrTechFields fieldset[hidden]{display:none}#abrTechFields legend{font-size:14px;font-weight:700;padding:0 6px}.abrTechFormGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.abrTechFormGrid label span{display:block;font-size:12px;color:#7b8799;margin-bottom:7px}.abrTechFormGrid input,.abrTechFormGrid select,.abrTechFormGrid textarea,#abrTechPhotoLabel{width:100%;min-height:46px;padding:11px;border:1px solid rgba(128,144,164,.3);border-radius:12px;background:#fff;color:#182338;font:inherit;font-size:16px}.abrTechWide{grid-column:1/-1}.abrTechPhotoControls{display:flex;flex-direction:column;gap:10px}.abrTechPhotoControls label{font-size:13px}#abrTechPhotos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}#abrTechPhotos img{width:100%;height:90px;object-fit:cover;border-radius:10px}#abrTechPhotos span{display:block;font-size:11px}#abrTechPhotos button{border:0;background:transparent;color:#cf403a;min-height:44px}.abrTechModalFoot{padding:16px 20px calc(16px + env(safe-area-inset-bottom));position:sticky;bottom:0;background:inherit;border-top:1px solid rgba(128,144,164,.2);display:flex;gap:10px}.abrTechModalFoot button{flex:1;min-height:48px;border:0;border-radius:14px;font:inherit;font-weight:700;background:#e4eaf2;color:#263956}.abrTechModalFoot button[type=submit]{background:#2376ed;color:#fff}.abrTechModalFoot button:disabled{opacity:.5}#abrTechError{font-size:13px;color:#c34332;line-height:1.5}#abrTechViewer{background:#0c1420;color:#fff;padding:12px}#abrTechViewer img{width:100%;max-height:75dvh;object-fit:contain}#abrTechViewer button{display:block;margin:8px auto;min-height:44px;padding:8px 25px;border:0;border-radius:12px}
+body.darkMode #abrTechDialog,html.darkRoot #abrTechDialog{background:#172237;color:#e7edf7}body.darkMode .abrTechFormGrid input,body.darkMode .abrTechFormGrid select,body.darkMode .abrTechFormGrid textarea,body.darkMode #abrTechPhotoLabel,html.darkRoot .abrTechFormGrid input,html.darkRoot .abrTechFormGrid select,html.darkRoot .abrTechFormGrid textarea,html.darkRoot #abrTechPhotoLabel{background:#0e192a;color:#e7edf7}@media(max-width:360px){.abrTechFormGrid,.abrTechReadGroup dl{grid-template-columns:1fr}.abrTechFormBody{padding:12px}}
+</style>
+<dialog id="abrTechDialog" aria-labelledby="abrTechTitle"><form id="abrTechForm"><header class="abrTechModalHead"><div><h2 id="abrTechTitle">Asansör bilgileri</h2><p>Alanlar isteğe bağlıdır.</p></div><button type="button" onclick="abrTechClose(false)" aria-label="Kapat">×</button></header><div class="abrTechFormBody"><div id="abrTechFields"></div><h3>Fotoğraflar</h3><p class="abrTechMuted">En fazla 3 fotoğraf. Fotoğraflar sıkıştırılarak kayıt ve yedeğe eklenir.</p><div class="abrTechPhotoControls"><label for="abrTechPhotoLabel">Fotoğraf konusu</label><select id="abrTechPhotoLabel"><option>Pano</option><option>Motor etiketi</option><option>Kapı mekanizması</option><option>Diğer</option></select><input id="abrTechPhotoInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" aria-label="Teknik fotoğraf ekle"></div><div id="abrTechPhotos"></div><p id="abrTechError" role="status" aria-live="polite"></p></div><footer class="abrTechModalFoot"><button type="button" onclick="abrTechClose(false)">Vazgeç</button><button id="abrTechSave" type="submit">Kaydet</button></footer></form></dialog>
+<dialog id="abrTechViewer" aria-label="Teknik fotoğraf"><img id="abrTechViewerImg" alt=""><button type="button" onclick="document.getElementById('abrTechViewer').close()">Kapat</button></dialog>
+
+<script>
+/* v2.3.18 — Apartment technical card, additive local record. */
+const abrTechGroups=[
+ ['Temel bilgiler',[['brand','Marka'],['serial','Seri numarası'],['year','Montaj yılı','number',1900,2100],['stops','Durak sayısı','number',1,200],['capacity','Kapasite (kg)','number',1,100000],['people','Kişi sayısı','number',1,1000]]],
+ ['Sistem ve donanım',[['system','Sistem','select'],['controller','Kumanda kartı'],['drive','Sürücü marka / model'],['motor','Motor marka / model']]],
+ ['Kapılar',[['door','Kabin kapısı marka / model'],['doorBoard','Kapı kartı'],['photocell','Fotosel marka / model']]],
+ ['Hidrolik bilgiler',[['unit','Hidrolik ünite marka / model'],['oil','Yağ türü'],['oilAmount','Yağ miktarı (litre)','number',0,10000]]],
+ ['Teknik not',[['notes','Teknik notlar','textarea']]]
+];
+let abrTechDraft=null,abrTechApartmentId=null,abrTechInitial='',abrTechBusy=false,abrTechReturnFocus=null;
+function abrTechEscape(value){return ayHtml(String(value==null?'':value));}
+function abrTechCard(a){return a&&a.technicalCard&&typeof a.technicalCard==='object'&&!Array.isArray(a.technicalCard)?a.technicalCard:{};}
+function abrTechPhotos(card){return (Array.isArray(card.photos)?card.photos:[]).filter(p=>p&&typeof p.src==='string'&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.src)&&p.src.length<=120000).slice(0,3);}
+function abrTechHtml(a,i){const c=abrTechCard(a);const rows=abrTechGroups.filter(g=>g[0]!=='Hidrolik bilgiler'||c.system==='hydraulic').map(g=>{const fields=g[1].filter(f=>String(c[f[0]]||'').trim());if(!fields.length)return '';return '<div class="abrTechReadGroup"><h4>'+g[0]+'</h4><dl>'+fields.map(f=>'<div><dt>'+f[1]+'</dt><dd>'+abrTechEscape(f[0]==='system'?({electric:'Elektrikli',hydraulic:'Hidrolik'}[c.system]||c.system):c[f[0]])+'</dd></div>').join('')+'</dl></div>';}).join('');return '<div class="exDetailTabSection abrTechCard"><div class="exDetailSectionTitle"><div><span>Asansör bilgileri</span><b>Teknik kart</b></div><button type="button" class="exDetailSectionButton" onclick="abrTechOpen('+i+')">'+(rows?'Düzenle':'Bilgi ekle')+'</button></div>'+(rows||'<p class="abrTechMuted">Asansörün kimliği, donanımı ve teknik notları burada. Bildiğin alanları doldurman yeterli.</p>')+'<div class="abrTechPhotoGrid">'+abrTechPhotos(c).map((p,n)=>'<button type="button" onclick="abrTechView('+i+','+n+')"><img src="'+p.src+'" alt="'+abrTechEscape(p.label||'Teknik fotoğraf')+'"><span>'+abrTechEscape(p.label||'Fotoğraf')+'</span></button>').join('')+'</div></div>';}
+function abrTechOpen(i){const a=data[i];if(!a)return;abrTechReturnFocus=document.activeElement;abrTechApartmentId=a.id;abrTechDraft=JSON.parse(JSON.stringify(abrTechCard(a)));abrTechDraft.photos=abrTechPhotos(abrTechDraft);abrTechInitial=JSON.stringify(abrTechDraft);document.getElementById('abrTechTitle').textContent=a.ad+' · Asansör bilgileri';const body=document.getElementById('abrTechFields');body.innerHTML=abrTechGroups.map((g,gi)=>'<fieldset '+(gi===3?'id="abrTechHydraulic"':'')+'><legend>'+g[0]+'</legend><div class="abrTechFormGrid">'+g[1].map(f=>{const id='abrTech_'+f[0],v=abrTechEscape(abrTechDraft[f[0]]||'');return '<label '+(f[2]==='textarea'?'class="abrTechWide"':'')+' for="'+id+'"><span>'+f[1]+'</span>'+(f[2]==='select'?'<select id="'+id+'" data-tech-field="'+f[0]+'"><option value="">Seçiniz</option><option value="electric">Elektrikli</option><option value="hydraulic">Hidrolik</option></select>':f[2]==='textarea'?'<textarea id="'+id+'" data-tech-field="'+f[0]+'" maxlength="3000" rows="4">'+v+'</textarea>':'<input id="'+id+'" data-tech-field="'+f[0]+'" type="'+(f[2]||'text')+'" '+(f[2]==='number'?'min="'+f[3]+'" max="'+f[4]+'" step="'+(f[0]==='oilAmount'?'0.1':'1')+'"':'maxlength="160"')+' value="'+v+'">')+'</label>';}).join('')+'</div></fieldset>').join('');document.getElementById('abrTech_system').value=abrTechDraft.system||'';document.getElementById('abrTechError').textContent='';abrTechHydraulic();abrTechRenderPhotos();document.getElementById('abrTechDialog').showModal();}
+function abrTechHydraulic(){document.getElementById('abrTechHydraulic').hidden=document.getElementById('abrTech_system').value!=='hydraulic';}
+function abrTechCollect(){document.querySelectorAll('[data-tech-field]').forEach(n=>abrTechDraft[n.dataset.techField]=n.value.trim());}
+function abrTechClose(force){if(abrTechBusy)return;abrTechCollect();if(!force&&JSON.stringify(abrTechDraft)!==abrTechInitial&&!confirm('Kaydedilmemiş değişiklikler var. Vazgeçilsin mi?'))return;document.getElementById('abrTechDialog').close();abrTechDraft=null;abrTechApartmentId=null;if(abrTechReturnFocus&&abrTechReturnFocus.isConnected)abrTechReturnFocus.focus();}
+function abrTechRenderPhotos(){document.getElementById('abrTechPhotos').innerHTML=abrTechDraft.photos.map((p,n)=>'<div><img src="'+p.src+'" alt="'+abrTechEscape(p.label)+'"><span>'+abrTechEscape(p.label)+'</span><button type="button" data-remove-tech-photo="'+n+'" aria-label="'+abrTechEscape(p.label)+' fotoğrafını kaldır">Kaldır</button></div>').join('');document.getElementById('abrTechPhotoInput').disabled=abrTechBusy||abrTechDraft.photos.length>=3;document.getElementById('abrTechSave').disabled=abrTechBusy;}
+async function abrTechAddPhoto(file){if(!file||!abrTechDraft||abrTechBusy)return;const error=document.getElementById('abrTechError');if(!/^image\/(jpeg|png|webp|heic|heif)$/.test(file.type)||file.size>20*1024*1024){error.textContent='JPEG, PNG veya desteklenen bir fotoğraf seç (en fazla 20 MB).';return;}if(abrTechDraft.photos.length>=3)return;abrTechBusy=true;abrTechRenderPhotos();error.textContent='Fotoğraf hazırlanıyor…';let url;try{url=URL.createObjectURL(file);const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});let edge=1100,src='';for(let attempt=0;attempt<7;attempt++){const scale=Math.min(1,edge/Math.max(img.naturalWidth,img.naturalHeight));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);src=canvas.toDataURL('image/jpeg',.72);if(src.length<=120000)break;edge=Math.round(edge*.78);}if(src.length>120000)throw new Error();abrTechDraft.photos.push({label:document.getElementById('abrTechPhotoLabel').value,src:src});error.textContent='';}catch(e){error.textContent='Fotoğraf açılamadı. JPEG veya PNG olarak yeniden seç.';}finally{if(url)URL.revokeObjectURL(url);abrTechBusy=false;abrTechRenderPhotos();}}
+function abrTechSave(){if(abrTechBusy||!abrTechDraft)return;const form=document.getElementById('abrTechForm');if(!form.reportValidity())return;abrTechCollect();const i=data.findIndex(a=>a&&a.id===abrTechApartmentId);if(i<0){document.getElementById('abrTechError').textContent='Apartman artık bulunamıyor. Kartı kapatıp yeniden aç.';return;}const a=data[i],old=a.technicalCard;const next=JSON.parse(JSON.stringify(abrTechDraft));next.updatedAt=new Date().toISOString();a.technicalCard=next;try{localStorage.setItem('apartmanlar',JSON.stringify(data));}catch(e){if(old===undefined)delete a.technicalCard;else a.technicalCard=old;document.getElementById('abrTechError').textContent='Cihazda kayıt için alan yetmedi. Değişiklikler bu ekranda duruyor; fotoğraf sayısını azaltıp tekrar dene.';return;}if(!kaydet()){document.getElementById('abrTechError').textContent='Kayıt tamamlanamadı. Tekrar dene.';return;}abrTechClose(true);if(typeof aktifDetay!=='undefined'&&aktifDetay===i){detayAc(i);apartmanDetaySekmeAc('teknik',false);}toast('Asansör bilgileri kaydedildi');}
+function abrTechView(i,n){const p=abrTechPhotos(abrTechCard(data[i]))[n];if(!p)return;const modal=document.getElementById('abrTechViewer');document.getElementById('abrTechViewerImg').src=p.src;document.getElementById('abrTechViewerImg').alt=p.label||'Teknik fotoğraf';modal.showModal();}
+document.addEventListener('DOMContentLoaded',function(){document.getElementById('abrTechForm').addEventListener('submit',e=>{e.preventDefault();abrTechSave();});document.getElementById('abrTechFields').addEventListener('change',abrTechHydraulic);document.getElementById('abrTechPhotoInput').addEventListener('change',function(){const file=this.files[0];this.value='';abrTechAddPhoto(file);});document.getElementById('abrTechPhotos').addEventListener('click',e=>{const b=e.target.closest('[data-remove-tech-photo]');if(b&&!abrTechBusy){abrTechDraft.photos.splice(Number(b.dataset.removeTechPhoto),1);abrTechRenderPhotos();}});document.getElementById('abrTechDialog').addEventListener('cancel',e=>{e.preventDefault();abrTechClose(false);});});
 
 </script>
 </body>
