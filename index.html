@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.20_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.21_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.20">
+<meta name="abr-app-version" content="v2.3.21">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22153,7 +22153,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.20</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.21</div>
       <div class="abrDeveloperSplash">Tavşanlı Ay Asansör tarafından geliştirilmiştir.</div>
     </div>
   </div>
@@ -22169,7 +22169,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.20";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.21";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22994,7 +22994,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.20";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.21";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -33487,7 +33487,7 @@ ${eksikListesiHtml}
 
 <div class="footer">
   <div>${ayHtml(pdfFirma)}${pdfTel ? " • Tel: " + ayHtml(pdfTel) : ""}</div>
-  <div>${APP_NAME} ${APP_VERSION}</div>
+  <div>${APP_NAME} ${APP_VERSION}<br>Uygulama geliştiricisi: Tavşanlı Ay Asansör<br><a href="https://www.instagram.com/ayasansortavsanli/" style="color:inherit;text-decoration:none">Instagram: @ayasansortavsanli</a></div>
 </div>
 </div>
 <button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
@@ -34678,7 +34678,7 @@ ${elevatorXPdfSafetyScript()}</head>
 </div>
 
 <div class="footer">
-<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>Yeni domain ile eklenecek</div>
+<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>Uygulama geliştiricisi: Tavşanlı Ay Asansör<br><a href="https://www.instagram.com/ayasansortavsanli/" style="color:inherit;text-decoration:none">Instagram: @ayasansortavsanli</a></div>
 <div>Bu belge Asansör Bakım & Revizyon sistemi üzerinden oluşturulmuştur.</div>
 </div>
 </div>
@@ -35030,7 +35030,7 @@ ${pdfBelgeIbaresi ? `<div class="serviceRow"><span>Mesleki Belge</span><b>${ayHt
 </div>
 
 <div class="footer">
-<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>Yeni domain ile eklenecek</div>
+<div>© 2026 ${ayHtml(APP_NAME)} • Sürüm ${ayHtml(APP_VERSION)}<br>Uygulama geliştiricisi: Tavşanlı Ay Asansör<br><a href="https://www.instagram.com/ayasansortavsanli/" style="color:inherit;text-decoration:none">Instagram: @ayasansortavsanli</a></div>
 <div>Bu belge Asansör Bakım & Revizyon sistemi üzerinden oluşturulmuştur.</div>
 </div>
 </div>
@@ -48545,7 +48545,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.20";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.21";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50140,7 +50140,7 @@ body.darkMode #abrTechDialog,html.darkRoot #abrTechDialog{background:#172237;col
 <dialog id="abrTechViewer" aria-label="Teknik fotoğraf"><img id="abrTechViewerImg" alt=""><button type="button" onclick="document.getElementById('abrTechViewer').close()">Kapat</button></dialog>
 
 <script>
-/* v2.3.20 — Apartment technical card, additive local record. */
+/* v2.3.21 — Apartment technical card, additive local record. */
 const abrTechGroups=[
  ['Temel bilgiler',[['brand','Marka'],['serial','Seri numarası'],['year','Montaj yılı','number',1900,2100],['stops','Durak sayısı','number',1,200],['capacity','Kapasite (kg)','number',1,100000],['people','Kişi sayısı','number',1,1000]]],
  ['Sistem ve donanım',[['system','Sistem','select'],['controller','Kumanda kartı'],['drive','Sürücü marka / model'],['motor','Motor marka / model']]],
@@ -50165,7 +50165,7 @@ document.addEventListener('DOMContentLoaded',function(){document.getElementById(
 
 </script>
 
-<!-- Firma imzası v2.3.20: yalnızca görsel kimlik, veri ve yetki akışları değişmez. -->
+<!-- Firma imzası v2.3.21: yalnızca görsel kimlik, veri ve yetki akışları değişmez. -->
 <style id="abrDeveloperBrandStyle">
 .abrDeveloperSplash{max-width:290px;margin:12px auto 0;padding:0 12px;color:#667085;font:500 11px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.01em}
 #abrRoleGate .abrRoleFoot.abrDeveloperLoginFooter{display:flex!important;flex-direction:column!important;gap:10px!important;text-align:center;line-height:1.5!important}
@@ -50206,7 +50206,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperLocation">Tavşanlı · Kütahya</p>
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.20</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.21</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
