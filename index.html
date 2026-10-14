@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.38_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.39_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.38">
+<meta name="abr-app-version" content="v2.3.39">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.38</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.39</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.39";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22988,7 +22988,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.39";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -48581,7 +48581,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.39";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50684,7 +50684,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.38</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.39</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
@@ -50741,51 +50741,60 @@ body.profileMode #profilPanel.abrProfileCompact224 .profileFooter .abrDeveloperA
 </style>
 <!-- ABR_LEGAL_ACK_GATE_V2337_START -->
 <style id="abrLegalGateStyle">
-#abrLegalGate[hidden]{display:none!important}
-#abrLegalGate{position:fixed;inset:0;z-index:2147483646;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 18px calc(20px + env(safe-area-inset-bottom,0px));background:#eef2f7;overflow:auto;color:#1c293d;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#abrLegalGate[hidden],#abrLegalGate [hidden]{display:none!important}
+#abrLegalGate{--alg-bg:#f5f6f9;--alg-card:#fff;--alg-ink:#192335;--alg-muted:#778295;--alg-line:#e7ebf1;--alg-blue:#2469aa;position:fixed;inset:0;z-index:2147483646;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:center;padding:calc(30px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));background:var(--alg-bg);overflow:auto;overscroll-behavior:contain;color:var(--alg-ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 #abrLegalGate *{box-sizing:border-box}
-#abrLegalGate .alg-card{width:100%;max-width:460px;max-height:100%;overflow:auto;background:#fff;border:1px solid #dce3ed;border-radius:22px;padding:25px;box-shadow:0 16px 50px #14223d12}
-#abrLegalGate .alg-kicker{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:#537398;margin:0 0 12px}
-#abrLegalGate h2{font-size:25px;line-height:1.2;margin:0 0 12px;letter-spacing:-.6px}
-#abrLegalGate p{font-size:14px;line-height:1.65;margin:0 0 14px;color:#59677b}
-#abrLegalGate .alg-docs{display:grid;gap:8px;margin:20px 0}
-#abrLegalGate .alg-docs button,#abrLegalGate .alg-back{font:inherit;min-height:46px;border:1px solid #dbe4ee;border-radius:12px;background:#f7f9fc;color:#244f7a;text-align:left;padding:12px 14px;cursor:pointer}
-#abrLegalGate label{display:flex;gap:11px;align-items:flex-start;padding:12px 0;font-size:13px;line-height:1.6;cursor:pointer}
-#abrLegalGate input[type=checkbox]{width:21px;height:21px;flex:0 0 21px;margin:0;accent-color:#2366a5}
-#abrLegalGate .alg-submit{width:100%;min-height:48px;margin-top:14px;border:0;border-radius:12px;background:#205d94;color:white;font:inherit;font-size:15px;font-weight:650;cursor:pointer}
-#abrLegalGate .alg-submit:disabled{background:#dce4ed;color:#768397;cursor:default}
-#abrLegalGate .alg-note{font-size:11px;line-height:1.6;margin:14px 0 0}
-#abrLegalGate .alg-error{font-size:13px;color:#ae3131;margin:12px 0 0}
-#abrLegalGate .alg-body h4{font-size:16px;margin:22px 0 9px}
-#abrLegalGate .alg-body p,#abrLegalGate .alg-body li{font-size:13px;line-height:1.7;color:#4e5f74}
-#abrLegalGate .alg-body ul{padding-left:20px}
-#abrLegalGate .alg-body a{color:#2366a5;overflow-wrap:anywhere}
-#abrLegalGate .legalMeta{font-size:11px;color:#6a7c91;line-height:1.6;margin:15px 0}
-#abrLegalGate .alg-back{margin-bottom:18px;width:100%;position:sticky;top:0}
-#abrLegalGate [hidden]{display:none!important}
-#abrLegalGate :focus-visible{outline:3px solid #69a8e7;outline-offset:3px}
-html.darkRoot #abrLegalGate,body.darkMode #abrLegalGate{background:#121b28;color:#edf3fa}
-html.darkRoot #abrLegalGate .alg-card,body.darkMode #abrLegalGate .alg-card{background:#1b2737;border-color:#35465e}
-html.darkRoot #abrLegalGate p,body.darkMode #abrLegalGate p,html.darkRoot #abrLegalGate .alg-body li,body.darkMode #abrLegalGate .alg-body li{color:#bbc8da}
-html.darkRoot #abrLegalGate .alg-docs button,body.darkMode #abrLegalGate .alg-docs button,html.darkRoot #abrLegalGate .alg-back,body.darkMode #abrLegalGate .alg-back{background:#26374c;border-color:#40526b;color:#bcdcff}
-@media(max-height:650px){#abrLegalGate{align-items:flex-start;padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}#abrLegalGate .alg-card{padding:19px}#abrLegalGate h2{font-size:22px}}
+#abrLegalGate .alg-card{width:100%;max-width:420px;margin:auto 0;background:none;border:0;border-radius:0;padding:0;box-shadow:none;outline:0}
+#abrLegalGate .alg-symbol{display:grid;place-items:center;width:54px;height:54px;margin-bottom:24px;border-radius:17px;background:#e8eff8;color:var(--alg-blue)}
+#abrLegalGate .alg-symbol svg{width:27px;height:27px}
+#abrLegalGate .alg-kicker{font-size:11px;font-weight:600;letter-spacing:.2px;color:var(--alg-muted);margin:0 0 9px;text-transform:none}
+#abrLegalGate h2{font-size:29px;line-height:1.15;letter-spacing:-1px;font-weight:700;margin:0 0 14px;color:var(--alg-ink)}
+#abrLegalGate p{font-size:14px;line-height:1.65;margin:0 0 14px;color:var(--alg-muted)}
+#abrLegalGate .alg-docs{display:grid;gap:0;margin:26px 0 22px;background:var(--alg-card);border:1px solid var(--alg-line);border-radius:16px;overflow:hidden}
+#abrLegalGate .alg-docs button{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:16px;border:0;background:none;box-shadow:none;text-align:left;color:var(--alg-ink);font:inherit;font-size:14px;letter-spacing:-.1px;cursor:pointer;border-radius:0}
+#abrLegalGate .alg-docs button+button{border-top:1px solid var(--alg-line)}
+#abrLegalGate .alg-doc-icon{display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;border-radius:8px;background:#eef3f9;color:var(--alg-blue)}
+#abrLegalGate .alg-doc-icon svg{width:17px;height:17px}
+#abrLegalGate .alg-doc-label{flex:1}
+#abrLegalGate .alg-chevron{width:16px;height:16px;color:#9aa5b5;flex:0 0 16px}
+#abrLegalGate label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:12.5px;line-height:1.6;color:var(--alg-ink);cursor:pointer}
+#abrLegalGate input[type=checkbox]{-webkit-appearance:none;appearance:none;display:block;width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;border:1.5px solid #bac5d3;border-radius:7px;background:var(--alg-card);cursor:pointer;box-shadow:none}
+#abrLegalGate input[type=checkbox]:checked{background-color:var(--alg-blue);border-color:var(--alg-blue);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 12 4 4 8-8' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:20px;background-position:center;background-repeat:no-repeat}
+#abrLegalGate .alg-submit{width:100%;min-height:51px;margin-top:24px;padding:13px 18px;border:0;border-radius:14px;background:#203e60;color:#fff;font:inherit;font-size:14px;font-weight:600;box-shadow:none;cursor:pointer;transition:background .15s ease}
+#abrLegalGate .alg-submit:disabled{background:#e5e9f0;color:#98a3b2;cursor:default}
+#abrLegalGate .alg-note{font-size:10.5px;line-height:1.65;margin:17px 3px 0;color:var(--alg-muted)}
+#abrLegalGate .alg-error{font-size:12px;color:#b74545;margin:12px 0 0}
+#abrLegalGate .alg-back{display:inline-flex;align-items:center;min-height:44px;margin:0 0 20px;padding:6px 0;border:0;border-radius:0;background:none;color:var(--alg-blue);font:inherit;font-size:13px;font-weight:600;box-shadow:none;cursor:pointer}
+#abrLegalGate .alg-body h4{font-size:15px;line-height:1.4;font-weight:650;margin:24px 0 9px;color:var(--alg-ink)}
+#abrLegalGate .alg-body p,#abrLegalGate .alg-body li{font-size:13px;line-height:1.75;color:var(--alg-muted)}
+#abrLegalGate .alg-body ul{padding-left:19px}
+#abrLegalGate .alg-body a{color:var(--alg-blue);overflow-wrap:anywhere}
+#abrLegalGate .legalMeta{font-size:10px;line-height:1.6;color:var(--alg-muted);margin:0 0 22px}
+#abrLegalGate :focus-visible{outline:3px solid #83b3e0;outline-offset:3px}
+#abrLegalGate .alg-docs button:active{background:#eaf0f7}
+html.darkRoot #abrLegalGate,body.darkMode #abrLegalGate{--alg-bg:#111821;--alg-card:#1c2633;--alg-ink:#e9eff6;--alg-muted:#9aa9bc;--alg-line:#2b3747;--alg-blue:#8cbdf0}
+html.darkRoot #abrLegalGate .alg-symbol,body.darkMode #abrLegalGate .alg-symbol,html.darkRoot #abrLegalGate .alg-doc-icon,body.darkMode #abrLegalGate .alg-doc-icon{background:#26364a}
+html.darkRoot #abrLegalGate .alg-submit:disabled,body.darkMode #abrLegalGate .alg-submit:disabled{background:#263240;color:#718198}
+html.darkRoot #abrLegalGate .alg-docs button:active,body.darkMode #abrLegalGate .alg-docs button:active{background:#25364a}
+@media(max-width:350px){#abrLegalGate{padding-left:20px;padding-right:20px}#abrLegalGate h2{font-size:27px}#abrLegalGate .alg-docs button{font-size:13px;padding:14px}}
+@media(max-height:700px){#abrLegalGate{padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}#abrLegalGate .alg-symbol{width:44px;height:44px;margin-bottom:16px}#abrLegalGate .alg-docs{margin:20px 0 16px}#abrLegalGate .alg-docs button{min-height:53px}#abrLegalGate .alg-submit{margin-top:17px}}
 </style>
 <div id="abrLegalGate" hidden role="dialog" aria-modal="true" aria-labelledby="abrLegalGateTitle">
  <section class="alg-card" tabindex="-1">
   <div id="abrLegalGateMain">
-   <div class="alg-kicker">Asansör Bakım &amp; Revizyon</div>
-   <h2 id="abrLegalGateTitle">Devam etmeden önce</h2>
-   <p>Gizlilik ve kullanım metinleri güncellendi. Uygulamayı kullanmaya devam etmek için metinleri inceleyip aşağıdaki kutuları işaretle.</p>
+   <div class="alg-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 8 3v6c0 4-4.5 7.5-8 9-3.5-1.5-8-5-8-9V6l8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 12 2.3 2.3 4.7-4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="alg-kicker">Asansör Bakım &amp; Revizyon</div>
+   <h2 id="abrLegalGateTitle">Gizlilik ve kullanım</h2>
+   <p>Güncellenen metinleri incele.<br>Onayladıktan sonra kaldığın yerden devam et.</p>
    <div class="alg-docs">
-    <button type="button" data-alg-doc="privacy">Gizlilik Politikası <span aria-hidden="true">›</span></button>
-    <button type="button" data-alg-doc="terms">Kullanım Şartları <span aria-hidden="true">›</span></button>
-    <button type="button" data-alg-doc="kvkk">KVKK Aydınlatma Metni <span aria-hidden="true">›</span></button>
+    <button type="button" data-alg-doc="privacy"><span class="alg-doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7l4 4V20H7V3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3.5V8h4M10 12h5M10 15.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="alg-doc-label">Gizlilik Politikası</span><svg class="alg-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" data-alg-doc="terms"><span class="alg-doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7l4 4V20H7V3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3.5V8h4M10 12h5M10 15.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="alg-doc-label">Kullanım Şartları</span><svg class="alg-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" data-alg-doc="kvkk"><span class="alg-doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7l4 4V20H7V3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3.5V8h4M10 12h5M10 15.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="alg-doc-label">KVKK Aydınlatma Metni</span><svg class="alg-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
    </div>
    <label><input id="abrLegalTermsCheck" type="checkbox"><span>Kullanım Şartlarını okudum ve kabul ediyorum.</span></label>
    <label><input id="abrLegalReadCheck" type="checkbox"><span>Gizlilik Politikasını ve KVKK Aydınlatma Metnini okudum.</span></label>
-   <button id="abrLegalGateSubmit" class="alg-submit" type="button" disabled>Onayla ve devam et</button>
+   <button id="abrLegalGateSubmit" class="alg-submit" type="button" disabled>Devam et</button>
    <p class="alg-error" id="abrLegalGateError" role="alert" hidden></p>
-   <p class="alg-note">Bu işlem genel bir açık rıza değildir. Metinler inceleme taslağıdır; nihai hâle getirildiğinde yeniden sunulur. Okundu ve kabul bilgisi bu cihazda, mevcut hesap için saklanır.</p>
+   <p class="alg-note">Açık rıza yerine geçmez. Metinler inceleme taslağıdır; nihai sürüm yeniden sunulur. Onay bu cihaz ve hesap için saklanır.</p>
   </div>
   <div id="abrLegalGateDocument" hidden>
    <button class="alg-back" id="abrLegalGateBack" type="button">‹ Onay ekranına dön</button>
