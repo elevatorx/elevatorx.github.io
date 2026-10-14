@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.37_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.38_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.37">
+<meta name="abr-app-version" content="v2.3.38">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.37</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.38</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.37";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22988,7 +22988,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.37";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -48581,7 +48581,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.37";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.38";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50684,7 +50684,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.37</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.38</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
@@ -50817,7 +50817,14 @@ html.darkRoot #abrLegalGate .alg-docs button,body.darkMode #abrLegalGate .alg-do
  function reset(){terms.checked=false;read.checked=false;submit.disabled=true;error.hidden=true;main.hidden=false;viewer.hidden=true;gate.setAttribute('aria-labelledby','abrLegalGateTitle');card.scrollTop=0}
  function show(id){identity=id;reset();if(!active){focusBefore=document.activeElement;oldOverflow=document.body.style.overflow;active=true;gate.hidden=false;document.body.style.overflow='hidden';lock()}card.focus({preventScroll:true})}
  function hide(){if(!active)return;active=false;gate.hidden=true;for(const [el,value] of locked){el.inert=value}locked.clear();document.body.style.overflow=oldOverflow;if(focusBefore&&focusBefore.isConnected&&!focusBefore.inert)focusBefore.focus({preventScroll:true})}
- function check(){if(!document.documentElement.classList.contains('appBooted')||!docs())return;const id=account();if(accepted(id)){hide();return}if(!active||id!==identity)show(id)}
+ function ready(){
+  const root=document.documentElement;
+  if(!root.classList.contains('appBooted')||root.classList.contains('abr-role-locked')||root.classList.contains('ex-license-locked')||root.classList.contains('abr-splash-active'))return false;
+  const login=document.getElementById('abrRoleGate');
+  if(login&&login.getAttribute('aria-hidden')!=='true')return false;
+  return !!docs();
+ }
+ function check(){if(!ready()){hide();return}const id=account();if(accepted(id)){hide();return}if(!active||id!==identity)show(id)}
  function back(){main.hidden=false;viewer.hidden=true;gate.setAttribute('aria-labelledby','abrLegalGateTitle');card.scrollTop=0;if(docTrigger)docTrigger.focus({preventScroll:true})}
  gate.addEventListener('change',()=>{submit.disabled=!(terms.checked&&read.checked)});
  gate.querySelectorAll('[data-alg-doc]').forEach(button=>button.addEventListener('click',()=>{const d=docs()[button.dataset.algDoc];if(!d)return;docTrigger=button;document.getElementById('abrLegalGateDocumentTitle').textContent=d.title;document.getElementById('abrLegalGateDocumentBody').innerHTML=d.html;main.hidden=true;viewer.hidden=false;gate.setAttribute('aria-labelledby','abrLegalGateDocumentTitle');card.scrollTop=0;document.getElementById('abrLegalGateBack').focus({preventScroll:true})}));
@@ -50829,6 +50836,7 @@ html.darkRoot #abrLegalGate .alg-docs button,body.darkMode #abrLegalGate .alg-do
   catch(_){error.textContent='Onay bilgisi bu cihazda kaydedilemedi. Tarayıcı depolama ayarlarını kontrol edip yeniden dene.';error.hidden=false}
  });
  document.addEventListener('keydown',event=>{
+  if(active&&!ready())hide();
   if(!active)return;
   if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();if(!viewer.hidden)back();return}
   if(event.key!=='Tab')return;
@@ -50836,10 +50844,11 @@ html.darkRoot #abrLegalGate .alg-docs button,body.darkMode #abrLegalGate .alg-do
   if(!items.length){event.preventDefault();card.focus();return}
   const first=items[0],last=items[items.length-1];if(event.shiftKey&&(document.activeElement===first||!gate.contains(document.activeElement)||document.activeElement===card)){event.preventDefault();last.focus()}else if(!event.shiftKey&&(document.activeElement===last||!gate.contains(document.activeElement))){event.preventDefault();first.focus()}
  },true);
- ['click','pointerdown','touchstart','submit'].forEach(type=>document.addEventListener(type,event=>{if(active&&!gate.contains(event.target)){event.preventDefault();event.stopImmediatePropagation()}},{capture:true,passive:false}));
+ ['click','pointerdown','touchstart','submit'].forEach(type=>document.addEventListener(type,event=>{if(active&&!ready())hide();if(active&&!gate.contains(event.target)){event.preventDefault();event.stopImmediatePropagation()}},{capture:true,passive:false}));
  document.addEventListener('focusin',event=>{if(active&&!gate.contains(event.target))card.focus({preventScroll:true})});
  new MutationObserver(()=>{if(active)lock();check()}).observe(document.body,{childList:true});
  new MutationObserver(check).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+ const loginGate=document.getElementById('abrRoleGate');if(loginGate)new MutationObserver(check).observe(loginGate,{attributes:true,attributeFilter:['aria-hidden']});
  window.addEventListener('storage',check);window.addEventListener('pageshow',check);document.addEventListener('visibilitychange',check);
  setInterval(()=>{if(!document.hidden)check()},1000);
  check();
