@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.40_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.41_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.40">
+<meta name="abr-app-version" content="v2.3.41">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.40</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.41</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.40";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22990,7 +22990,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.40";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -41998,7 +41998,34 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-async function abrTeamInit(createSession){
+/* v2.3.41 — only membership verification is blocking on a populated device. */
+function abrLoginHasLocalRecords(){
+  try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
+}
+const abrLoginTeamWarmups=new Map();
+function abrLoginQueueTeamWarmup(userId){
+  if(!userId)return;
+  abrLoginTeamWarmups.set(userId,true);
+}
+function abrLoginFlushTeamWarmup(){
+  const userId=abrTeamState.user&&abrTeamState.user.id;
+  if(!userId||!abrLoginTeamWarmups.has(userId)||!window.__abrAppRole)return;
+  abrLoginTeamWarmups.delete(userId);
+  setTimeout(async function(){
+    if(!abrTeamState.user||abrTeamState.user.id!==userId||!window.__abrAppRole)return;
+    try{
+      await abrTeamProfileSync();
+      if(!abrTeamState.user||abrTeamState.user.id!==userId)return;
+      if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
+      if(abrTeamState.user&&abrTeamState.user.id===userId){
+        if(!abrTeamState.channel)abrTeamSetConnection(navigator.onLine===false?"offline":"online");
+        if(abrTeamState.open)abrTeamRender();
+      }
+    }catch(error){console.warn("Giriş sonrası ekip bilgileri yenilenemedi",error)}
+  },400);
+}
+window.addEventListener("abrRoleReady",abrLoginFlushTeamWarmup);
+async function abrTeamInit(createSession,options){
   if(abrTeamState.initPromise){
     await abrTeamState.initPromise;
     if(createSession && !abrTeamState.user && !abrTeamState.error)return abrTeamInit(true);
@@ -42010,13 +42037,15 @@ async function abrTeamInit(createSession){
       abrTeamSetConnection(navigator.onLine === false ? "offline" : "connecting");
       const user = await abrTeamEnsureSession(!!createSession);
       if(!user)return;
-      await abrTeamProfileSync();
+      const deferContext=!!(options&&options.deferContext&&abrLoginHasLocalRecords());
+      if(!deferContext)await abrTeamProfileSync();
       await abrTeamMembershipsLoad();
       abrTeamMembershipSubscribe();
       abrPushBindUser().then(function(){
         if(abrTeamState.open && abrTeamState.view === "settings")abrTeamRenderSettings();
       });
-      if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
+      if(deferContext){abrLoginQueueTeamWarmup(user.id);abrLoginFlushTeamWarmup()}
+      else if(abrTeamState.teamId)await abrTeamContextLoad({sync:true});
       if(!abrTeamState.channel)abrTeamSetConnection(navigator.onLine === false ? "offline" : "online");
     }catch(error){
       abrTeamState.error = abrTeamErrorText(error);
@@ -43399,6 +43428,7 @@ async function abrTeamAccountPushLogout(){
   abrTeamState.pushBoundUserId=null;
 }
 async function abrTeamAccountContextReset(logoutPush){
+  abrLoginTeamWarmups.clear();
   clearTimeout(abrTeamState.refreshTimer);
   clearTimeout(abrTeamState.membershipRefreshTimer);
   abrTeamState.refreshTimer=null;
@@ -43504,7 +43534,7 @@ window.abrTeamCredentialSignIn=async function(credentials){
   if(signed.error)throw signed.error;
   await abrLoginTimedStep("profile-read",function(){return abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id)});
   await abrTeamAccountContextReset(false);
-  await abrLoginTimedStep("team-init",function(){return abrTeamInit(false)});
+  await abrLoginTimedStep("team-access",function(){return abrTeamInit(false,{deferContext:true})});
   if(abrTeamState.error)throw new Error(abrTeamState.error);
   if(typeof window.abrCloudRestoreAfterLogin==="function")await abrLoginTimedStep("cloud-restore",function(){return window.abrCloudRestoreAfterLogin()});
   return abrTeamAccountAccessSnapshot();
@@ -43576,8 +43606,8 @@ window.abrTeamCredentialSignOut=async function(){
   await abrTeamAccountContextReset(false);
   return true;
 };
-window.abrTeamAccessInfo=async function(createSession){
-  await abrTeamInit(!!createSession);
+window.abrTeamAccessInfo=async function(createSession,options){
+  await abrTeamInit(!!createSession,options);
   return abrTeamAccountAccessSnapshot();
 };
 function abrTeamInvitationMemberData(item){
@@ -43864,6 +43894,7 @@ function abrRoleEnter(role,access){
   document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
+  window.dispatchEvent(new Event("abrRoleReady"));
   try{if(typeof haptic==="function")haptic("success")}catch(e){}
   if(role==="personnel"&&access&&!access.hasMembership){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(e){}},450)}
 }
@@ -44124,6 +44155,7 @@ function abrRoleEnter(role,access){
   document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
+  window.dispatchEvent(new Event("abrRoleReady"));
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
 }
 function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="ready";abrRoleEnter(role,access)}
@@ -44142,7 +44174,7 @@ async function abrRoleSessionAccess(){
   try{
     if(typeof window.abrTeamAccessInfo!=="function")throw new Error("Ekip bilgisi okunamadı.");
     const timeout=new Promise(function(_,reject){setTimeout(function(){reject(new Error("Ekip kontrolü zaman aşımına uğradı."))},14000)});
-    const access=await abrLoginTimedStep("team-access",function(){return Promise.race([window.abrTeamAccessInfo(false),timeout])});
+    const access=await abrLoginTimedStep("team-access",function(){return Promise.race([window.abrTeamAccessInfo(false,{deferContext:true}),timeout])});
     if(!access||access.error)throw new Error(access&&access.error||"Ekip bilgisi alınamadı.");
     if(userId&&access.userId!==userId)throw new Error("Cihazdaki hesap oturumu değişmiş. E-posta ve şifreyle yeniden giriş yap.");
     abrRoleAccessCache(access,access.userEmail||"");return access;
@@ -48583,7 +48615,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.40";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50359,7 +50391,7 @@ const financeOpen=window.abrFirmaFinansiAc;if(typeof financeOpen==='function')wi
 setTimeout(()=>silent(false),8000);setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine!==false)silent(false);},60000);
 window.addEventListener('online',()=>silent(true));document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')silent(false);});window.addEventListener('abrDataSaved',()=>{clearTimeout(rosterTimer);rosterTimer=setTimeout(()=>silent(true),5000);});
 // Cloud restore must never depend on a stale local bank cursor; all canonical events are reconciled again.
-const restore=window.abrCloudRestoreAfterLogin;if(typeof restore==='function')window.abrCloudRestoreAfterLogin=async function(...args){const r=await restore.apply(this,args);await silent(false);return r;};
+const restore=window.abrCloudRestoreAfterLogin;if(typeof restore==='function')window.abrCloudRestoreAfterLogin=async function(...args){const r=await restore.apply(this,args);Promise.resolve().then(()=>silent(false));return r;};
 window.abrAutoBankModel={apply,valid,existing,nameKey};
 })();
 
@@ -50686,7 +50718,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.40</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.41</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
