@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.41_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.42_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.41">
+<meta name="abr-app-version" content="v2.3.42">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.41</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.42</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22990,7 +22990,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -30930,6 +30930,72 @@ body.darkMode #abrDocumentCenter,html.darkRoot #abrDocumentCenter{background:#0b
 }
 
 
+function abrPartsReportRuntime(){
+ 'use strict';
+ let file=null,pending=null,sharing=false;
+ function el(id){return document.getElementById(id)}
+ function status(text){const node=el('abrPartsPdfStatus');if(node)node.textContent=text}
+ function buttons(busy){const main=el('abrPartsPdfShare'),download=el('abrPartsPdfDownload');if(main){main.disabled=busy;main.textContent=busy?'PDF hazırlanıyor…':file?'PDF paylaş':'PDF yeniden hazırla'}if(download)download.disabled=busy||!file}
+ function bounded(promise,ms,message){return new Promise(function(resolve,reject){const timer=setTimeout(()=>reject(new Error(message)),ms);Promise.resolve(promise).then(value=>{clearTimeout(timer);resolve(value)},error=>{clearTimeout(timer);reject(error)})})}
+ function library(src,ready){
+  if(ready())return Promise.resolve();
+  return bounded(new Promise(function(resolve,reject){const script=document.createElement('script');script.src=src;script.async=true;script.onload=()=>ready()?resolve():reject(new Error('PDF bileşeni başlatılamadı.'));script.onerror=()=>reject(new Error('PDF bileşeni yüklenemedi. İnternet bağlantını kontrol edip yeniden dene.'));document.head.appendChild(script)}),15000,'PDF bileşeni yüklenemedi. İnternet bağlantını kontrol edip yeniden dene.');
+ }
+ async function build(){
+  const paper=document.querySelector('.page');if(!paper)throw new Error('Parça raporu bulunamadı.');
+  await Promise.all([
+   library('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',()=>typeof window.html2canvas==='function'),
+   library('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',()=>!!(window.jspdf&&window.jspdf.jsPDF))
+  ]);
+  await Promise.all(Array.from(paper.querySelectorAll('img')).map(img=>bounded(new Promise(function(resolve,reject){if(img.complete){img.naturalWidth?resolve():reject(new Error('Rapor logosu yüklenemedi.'));return}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',()=>reject(new Error('Rapor logosu yüklenemedi.')),{once:true})}),8000,'Rapor logosu yüklenemedi.')));
+  if(document.fonts&&document.fonts.ready)await bounded(document.fonts.ready,8000,'Rapor yazıları hazırlanamadı.');
+  const box=paper.getBoundingClientRect(),width=Math.max(1,paper.scrollWidth,box.width),height=Math.max(1,paper.scrollHeight,box.height);
+  const scale=Math.min(2,Math.sqrt(8000000/(width*height)),14000/height,14000/width);
+  const canvas=await bounded(window.html2canvas(paper,{scale:scale,backgroundColor:'#ffffff',useCORS:true,logging:false,scrollX:0,scrollY:0}),25000,'PDF hazırlama zaman aşımına uğradı. Yeniden dene.');
+  if(!canvas.width||!canvas.height)throw new Error('Rapor görüntüsü hazırlanamadı.');
+  const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+  const contentWidth=184,contentHeight=271,chunkHeight=Math.max(1,Math.floor(canvas.width*contentHeight/contentWidth));
+  for(let top=0,page=0;top<canvas.height;top+=chunkHeight,page++){
+   const chunk=document.createElement('canvas');chunk.width=canvas.width;chunk.height=Math.min(chunkHeight,canvas.height-top);
+   const ctx=chunk.getContext('2d');if(!ctx)throw new Error('PDF görüntüsü işlenemedi.');
+   ctx.drawImage(canvas,0,top,canvas.width,chunk.height,0,0,chunk.width,chunk.height);
+   if(page)pdf.addPage();
+   pdf.addImage(chunk.toDataURL('image/jpeg',.94),'JPEG',13,13,contentWidth,chunk.height*contentWidth/chunk.width,undefined,'FAST');chunk.width=0;chunk.height=0;
+  }
+  const meta=String((document.querySelector('.reportMeta')||{}).textContent||''),match=meta.match(/Rapor No:\s*([A-Z0-9-]+)/i);
+  const blob=pdf.output('blob');if(!blob||!blob.size)throw new Error('PDF dosyası boş oluşturuldu.');
+  return new File([blob],(match?match[1]:'PARCA-DEGISIM-GECMISI')+'.pdf',{type:'application/pdf'});
+ }
+ async function prepare(){
+  if(file)return file;if(pending)return pending;
+  status('PDF dosyası hazırlanıyor…');buttons(true);
+  pending=build().then(function(result){file=result;status('PDF hazır. Paylaşabilir veya cihazına indirebilirsin.');return result}).catch(function(error){status(error&&error.message||'PDF hazırlanamadı. Yeniden dene.');return null}).finally(function(){pending=null;buttons(false)});
+  return pending;
+ }
+ function printReturn(){try{localStorage.setItem('abrReceiptPrintReturnUntil_v1',String(Date.now()+600000))}catch(_){} }
+ function download(){
+  if(!file)return false;printReturn();
+  try{const url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;a.textContent='PDF indir';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);status('PDF indirme isteği açıldı. Dosyalar / İndirilenler bölümünü kontrol edebilirsin.')}catch(_){status('PDF indirilemedi. Safari’de açıp tekrar dene.')}
+  return false;
+ }
+ // File generation happens before the tap: native sharing retains user activation.
+ window.abrPartsPdfShare=async function(){
+  if(sharing)return false;
+  if(!file){await prepare();return false}
+  let supported=typeof navigator.share==='function';
+  try{if(supported&&typeof navigator.canShare==='function')supported=navigator.canShare({files:[file]})}catch(_){supported=false}
+  if(!supported){download();return false}
+  sharing=true;printReturn();const button=el('abrPartsPdfShare');if(button){button.disabled=true;button.textContent='Paylaşım açılıyor…'}
+  try{await navigator.share({files:[file],title:'Parça Değişim Geçmişi'});status('Paylaşım işlemi tamamlandı.')}
+  catch(error){if(error&&error.name==='AbortError')status('Paylaşım iptal edildi. PDF hazır; yeniden paylaşabilirsin.');else status('Paylaşım açılamadı. Tekrar dokun veya “PDF indir” seçeneğini kullan.')}
+  finally{sharing=false;buttons(false)}
+  return false;
+ };
+ window.abrPartsPdfDownload=download;
+ function init(){prepare()}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+}
+
 function parcaGecmisiPdf(i){
 
 haptic("medium");
@@ -31461,7 +31527,9 @@ line-height:1.2!important;
 }
 </style>
 
-${elevatorXPdfSafetyScript()}</head>
+${elevatorXPdfSafetyScript()}
+<script>(${abrPartsReportRuntime.toString()})();<\/script>
+<style>.abrPartsPdfActions{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;background:#fff;border:1px solid #dce3ed;border-radius:16px;box-shadow:0 8px 30px #152a421a}.abrPartsPdfActions button{position:static;margin:0;padding:12px 16px;border:0;border-radius:11px;font:inherit;font-size:13px;font-weight:600;box-shadow:none;background:#edf3f8;color:#284767;min-height:44px}.abrPartsPdfActions #abrPartsPdfShare{background:#1769b0;color:#fff}.abrPartsPdfActions button:disabled{opacity:.5}.abrPartsPdfActions p{width:100%;margin:3px 0 0;text-align:center;font-size:11px;line-height:1.5;color:#65758a}body{padding-bottom:160px}@media print{.abrPartsPdfActions{display:none!important}}</style></head>
 <body>
 
 <button class="backBtn" onclick="return elevatorXReportBack()">← Geri</button>
@@ -31535,7 +31603,7 @@ ${satirlar}
 
 </div>
 
-<button class="printBtn" onclick="window.print()">PDF / Yazdır</button>
+<div class="abrPartsPdfActions"><button id="abrPartsPdfShare" type="button" onclick="return abrPartsPdfShare()" disabled>PDF hazırlanıyor…</button><button id="abrPartsPdfDownload" type="button" onclick="return abrPartsPdfDownload()" disabled>PDF indir</button><p id="abrPartsPdfStatus" role="status" aria-live="polite">PDF dosyası hazırlanıyor…</p></div>
 
 </body>
 </html>
@@ -41998,7 +42066,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.41 — only membership verification is blocking on a populated device. */
+/* v2.3.42 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -48615,7 +48683,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.41";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50718,7 +50786,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.41</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.42</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
