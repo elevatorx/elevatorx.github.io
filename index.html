@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.42_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.43_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.42">
+<meta name="abr-app-version" content="v2.3.43">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.42</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.43</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.43";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22990,7 +22990,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.43";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -30954,14 +30954,11 @@ function abrPartsReportRuntime(){
   const canvas=await bounded(window.html2canvas(paper,{scale:scale,backgroundColor:'#ffffff',useCORS:true,logging:false,scrollX:0,scrollY:0}),25000,'PDF hazırlama zaman aşımına uğradı. Yeniden dene.');
   if(!canvas.width||!canvas.height)throw new Error('Rapor görüntüsü hazırlanamadı.');
   const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
-  const contentWidth=184,contentHeight=271,chunkHeight=Math.max(1,Math.floor(canvas.width*contentHeight/contentWidth));
-  for(let top=0,page=0;top<canvas.height;top+=chunkHeight,page++){
-   const chunk=document.createElement('canvas');chunk.width=canvas.width;chunk.height=Math.min(chunkHeight,canvas.height-top);
-   const ctx=chunk.getContext('2d');if(!ctx)throw new Error('PDF görüntüsü işlenemedi.');
-   ctx.drawImage(canvas,0,top,canvas.width,chunk.height,0,0,chunk.width,chunk.height);
-   if(page)pdf.addPage();
-   pdf.addImage(chunk.toDataURL('image/jpeg',.94),'JPEG',13,13,contentWidth,chunk.height*contentWidth/chunk.width,undefined,'FAST');chunk.width=0;chunk.height=0;
-  }
+  // Match the other reports: fit the whole parts report on one A4 sheet.
+  const maxWidth=184,maxHeight=271;
+  const fit=Math.min(maxWidth/canvas.width,maxHeight/canvas.height);
+  const imageWidth=canvas.width*fit,imageHeight=canvas.height*fit;
+  pdf.addImage(canvas.toDataURL('image/jpeg',.94),'JPEG',(210-imageWidth)/2,13,imageWidth,imageHeight,undefined,'FAST');
   const meta=String((document.querySelector('.reportMeta')||{}).textContent||''),match=meta.match(/Rapor No:\s*([A-Z0-9-]+)/i);
   const blob=pdf.output('blob');if(!blob||!blob.size)throw new Error('PDF dosyası boş oluşturuldu.');
   return new File([blob],(match?match[1]:'PARCA-DEGISIM-GECMISI')+'.pdf',{type:'application/pdf'});
@@ -42066,7 +42063,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.42 — only membership verification is blocking on a populated device. */
+/* v2.3.43 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -48683,7 +48680,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.42";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.43";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50786,7 +50783,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.42</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.43</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
