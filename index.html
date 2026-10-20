@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.44_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.45_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -655,7 +655,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.44">
+<meta name="abr-app-version" content="v2.3.45">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22168,7 +22168,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.44</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.45</div>
     </div>
   </div>
 </div>
@@ -22183,7 +22183,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.44";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.45";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -22990,7 +22990,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.44";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.45";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -38100,12 +38100,40 @@ return `
 </div>`;
 }
 
+/* v2.3.45 — public manufacturer contacts checked against official pages on 20.10.2026. */
+const ABR_PANO_SERVICES=[
+ {id:'arkel',name:'Arkel',aliases:'arl arcode arcube armaxx adrive',phone:'+908503114243',display:'0850 311 42 43',kind:'Teknik servis',email:'destek@arkel.com.tr',source:'https://www.arkel.com.tr/iletisim',checked:'20.10.2026',hours:'Teknik servis saatleri resmî sayfada belirtilmemiş.'},
+ {id:'aybey',name:'Aybey',aliases:'act alc ae maestro aemaestro smart',phone:'+908503045055',display:'0850 304 50 55',kind:'Teknik destek',mobile:'+905469630053',mobileDisplay:'0546 963 00 53',whatsapp:'905469630053',whatsappKind:'WhatsApp teknik destek',email:'destek@aybey.com',source:'https://aybey.com/iletisim',whatsappSource:'https://aemaestro.com/tr',checked:'20.10.2026',hours:'Genel çalışma saatleri: Pzt–Cum 08:00–18:00. Teknik destek için ayrı saat belirtilmemiş.'},
+ {id:'konel',name:'Konel',aliases:'revo lc drive konelce',phone:'+908508880042',display:'0850 888 00 42',kind:'Genel iletişim',whatsapp:'905069084542',whatsappKind:'WhatsApp genel iletişim',source:'https://www.konelsan.com.tr/tr/iletisim',checked:'20.10.2026',hours:'Ayrı teknik servis telefonu ve servis saatleri yayımlanmamış; genel hattan teknik desteğe yönlendirme isteyebilirsin.'}
+];
+function abrPanoServiceHtml(service){
+ const esc=teknikSafeText;
+ const phoneIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 3 3 5-2 2c1.3 2.7 3.3 4.7 6 6l2-2 5 3-1 4C11 22 2 13 3 4l4-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+ return '<article class="abrPanoService" data-service-brand="'+esc(service.id)+'"><div class="abrPanoServiceTop"><strong>'+esc(service.name)+'</strong><span>'+esc(service.kind)+'</span></div><a class="abrPanoServicePhone" href="tel:'+service.phone+'" aria-label="'+esc(service.name+' '+service.kind+' '+service.display)+'">'+phoneIcon+'<span>'+service.display+'</span><small>Ara</small></a>'+
+ (service.mobile?'<a class="abrPanoServiceMobile" href="tel:'+service.mobile+'">Teknik destek GSM · '+service.mobileDisplay+'</a>':'')+
+ '<div class="abrPanoServiceActions">'+(service.whatsapp?'<a href="https://wa.me/'+service.whatsapp+'" target="_blank" rel="noopener noreferrer">'+esc(service.whatsappKind)+'</a>':'')+(service.email?'<a href="mailto:'+service.email+'">E-posta</a>':'')+'<a href="'+service.source+'" target="_blank" rel="noopener noreferrer">Resmî kaynak</a>'+(service.whatsappSource?'<a href="'+service.whatsappSource+'" target="_blank" rel="noopener noreferrer">WhatsApp kaynağı</a>':'')+'</div><p>'+esc(service.hours)+'</p><small class="abrPanoServiceDate">Resmî kaynak kontrolü: '+service.checked+'</small></article>';
+}
+function abrPanoServicesRender(query){
+ const list=document.getElementById('teknikListe');if(!list)return;
+ let host=document.getElementById('abrPanoServices');
+ if(!host){host=document.createElement('section');host.id='abrPanoServices';list.before(host)}
+ const view=String(teknikView||'home'),brand=view.indexOf('arkel')===0?'arkel':view.indexOf('konel')===0?'konel':view.indexOf('aybey')===0?'aybey':'';
+ if(view!=='home'&&!brand){host.hidden=true;return}
+ const q=String(query||'').toLocaleLowerCase('tr-TR');
+ const items=ABR_PANO_SERVICES.filter(s=>(!brand||s.id===brand)&&(!q||[s.name,s.kind,s.aliases,s.display,s.phone,s.mobileDisplay||'','servis teknik destek telefon whatsapp'].join(' ').toLocaleLowerCase('tr-TR').includes(q)));
+ if(!items.length){host.hidden=true;return}
+ const wasOpen=host.querySelector('details')&&host.querySelector('details').open;
+ host.hidden=false;
+ host.innerHTML='<details '+(brand||q||wasOpen?'open':'')+'><summary><span>Pano servis telefonları<small>'+items.length+' marka · Ara ve iletişime geç</small></span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="abrPanoServiceList">'+items.map(abrPanoServiceHtml).join('')+'</div></details>';
+}
+
 function teknikKutuphaneRender(){
 let listeEl = document.getElementById("teknikListe");
 let notice = document.getElementById("teknikNotice");
 if(!listeEl) return;
 
 let q = teknikQuery();
+abrPanoServicesRender(q);
 
 if(teknikView === "home"){
 teknikSetHeader("Teknik Kütüphane","Önce marka veya sistem seç; sonra kart, sürücü ve arıza kodlarına gir.","Saha Modu","← Profil");
@@ -42101,7 +42129,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.44 — only membership verification is blocking on a populated device. */
+/* v2.3.45 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -48718,7 +48746,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.44";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.45";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50821,7 +50849,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.44</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.45</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
@@ -51006,5 +51034,36 @@ html.darkRoot #abrLegalGate .alg-docs button:active,body.darkMode #abrLegalGate 
 </script>
 <!-- ABR_LEGAL_ACK_GATE_V2337_END -->
 
+<style id="abrPanoServicesStyle">
+#abrPanoServices[hidden]{display:none!important}
+#abrPanoServices{margin:0 0 16px;color:#203149}
+#abrPanoServices details{border:1px solid #dfe6ef;border-radius:16px;background:#fff;overflow:hidden}
+#abrPanoServices summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;min-height:64px;padding:15px 16px;cursor:pointer;font-size:14px;font-weight:650}
+#abrPanoServices summary::-webkit-details-marker{display:none}
+#abrPanoServices summary small{display:block;margin-top:4px;font-size:10.5px;color:#7a899d;font-weight:450}
+#abrPanoServices summary svg{width:18px;height:18px;color:#7a899d;transition:transform .15s}
+#abrPanoServices details[open]>summary svg{transform:rotate(90deg)}
+.abrPanoServiceList{border-top:1px solid #e8edf4}
+.abrPanoService{padding:16px;border-bottom:1px solid #e8edf4}
+.abrPanoService:last-child{border-bottom:0}
+.abrPanoServiceTop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.abrPanoServiceTop strong{font-size:15px}
+.abrPanoServiceTop>span{font-size:10px;color:#7a899d}
+.abrPanoServicePhone{display:flex;align-items:center;gap:10px;min-height:48px;margin:12px 0 6px;padding:10px 12px;border-radius:12px;background:#edf4fc;color:#215e98;text-decoration:none}
+.abrPanoServicePhone svg{width:19px;height:19px;flex:0 0 19px}
+.abrPanoServicePhone>span{flex:1;font-size:16px;font-weight:650;font-variant-numeric:tabular-nums}
+.abrPanoServicePhone small{font-size:12px;font-weight:600}
+.abrPanoServiceMobile{display:flex;align-items:center;min-height:44px;font-size:12px;color:#356c9e;text-decoration:none}
+.abrPanoServiceActions{display:flex;flex-wrap:wrap;gap:2px 14px}
+.abrPanoServiceActions a{display:inline-flex;align-items:center;min-height:44px;font-size:11px;color:#356c9e;text-decoration:none}
+.abrPanoService p{font-size:10.5px;line-height:1.6;color:#78889d;margin:7px 0}
+.abrPanoServiceDate{font-size:9.5px;color:#8a97a9}
+:is(body.darkMode,html.darkRoot body) #abrPanoServices{color:#e5edf7}
+:is(body.darkMode,html.darkRoot body) #abrPanoServices details{background:#1b2736;border-color:#334156}
+:is(body.darkMode,html.darkRoot body) :is(.abrPanoServiceList,.abrPanoService){border-color:#334156}
+:is(body.darkMode,html.darkRoot body) .abrPanoServicePhone{background:#243b55;color:#acd4ff}
+:is(body.darkMode,html.darkRoot body) :is(.abrPanoServiceMobile,.abrPanoServiceActions a){color:#acd4ff}
+:is(body.darkMode,html.darkRoot body) .abrPanoService p{color:#aab8ca}
+</style>
 </body>
 </html>
