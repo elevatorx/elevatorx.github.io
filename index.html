@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.48_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.49_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -669,7 +669,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.48">
+<meta name="abr-app-version" content="v2.3.49">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22218,7 +22218,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.48</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.49</div>
     </div>
   </div>
 </div>
@@ -22233,7 +22233,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.48";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -23038,7 +23038,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.48";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -38148,7 +38148,7 @@ return `
 </div>`;
 }
 
-/* v2.3.48 — public manufacturer contacts checked against official pages on 20.10.2026. */
+/* v2.3.49 — public manufacturer contacts checked against official pages on 20.10.2026. */
 const ABR_PANO_SERVICES=[
  {id:'arkel',name:'Arkel',aliases:'arl arcode arcube armaxx adrive',phone:'+908503114243',display:'0850 311 42 43',kind:'Teknik servis',email:'destek@arkel.com.tr',source:'https://www.arkel.com.tr/iletisim',checked:'20.10.2026',hours:'Teknik servis saatleri resmî sayfada belirtilmemiş.'},
  {id:'aybey',name:'Aybey',aliases:'act alc ae maestro aemaestro smart',phone:'+908503045055',display:'0850 304 50 55',kind:'Teknik destek',mobile:'+905469630053',mobileDisplay:'0546 963 00 53',whatsapp:'905469630053',whatsappKind:'WhatsApp teknik destek',email:'destek@aybey.com',source:'https://aybey.com/iletisim',whatsappSource:'https://aemaestro.com/tr',checked:'20.10.2026',hours:'Genel çalışma saatleri: Pzt–Cum 08:00–18:00. Teknik destek için ayrı saat belirtilmemiş.'},
@@ -42177,7 +42177,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.48 — only membership verification is blocking on a populated device. */
+/* v2.3.49 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -43594,7 +43594,7 @@ document.addEventListener("DOMContentLoaded",function(){
     let hasSession=false;
     try{hasSession=!!localStorage.getItem(ABR_TEAM_AUTH_KEY)}catch(e){}
     if(!hasSession)return;
-    abrTeamInit(false).then(function(){abrTeamBadgeUpdate()});
+    abrTeamInit(false,{deferContext:true}).then(function(){abrTeamBadgeUpdate()});
   },3200);
 });
 
@@ -43608,6 +43608,7 @@ async function abrTeamAccountPushLogout(){
 }
 async function abrTeamAccountContextReset(logoutPush){
   abrLoginTeamWarmups.clear();
+  if(typeof window.abrLoginCloudReset==="function")window.abrLoginCloudReset();
   clearTimeout(abrTeamState.refreshTimer);
   clearTimeout(abrTeamState.membershipRefreshTimer);
   abrTeamState.refreshTimer=null;
@@ -43701,6 +43702,40 @@ async function abrLoginTimedStep(stage,operation){
     if(window.abrLoginTimings.length>30)window.abrLoginTimings.shift();
   }
 }
+/* v2.3.49 — only populated devices defer the backup scan until authenticated entry. */
+let abrLoginCloudPending=null,abrLoginCloudGeneration=0,abrLoginCloudTimer=null;
+window.abrLoginCloudReset=function(){
+  abrLoginCloudGeneration++;
+  abrLoginCloudPending=null;
+  clearTimeout(abrLoginCloudTimer);
+};
+window.abrLoginRestoreAfterAccess=async function(userId){
+  if(typeof window.abrCloudRestoreAfterLogin!=="function")return false;
+  if(!userId || !abrLoginHasLocalRecords()){
+    return abrLoginTimedStep("cloud-restore",function(){return window.abrCloudRestoreAfterLogin()});
+  }
+  abrLoginCloudPending={userId:userId,generation:++abrLoginCloudGeneration};
+  return false;
+};
+window.addEventListener("abrRoleReady",function(event){
+  const pending=abrLoginCloudPending;
+  const userId=event.detail&&event.detail.userId;
+  if(!pending || pending.started || !userId || pending.userId!==userId)return;
+  clearTimeout(abrLoginCloudTimer);
+  abrLoginCloudTimer=setTimeout(async function(){
+    function current(){return abrLoginCloudPending===pending && abrLoginCloudGeneration===pending.generation && !!window.__abrAppRole;}
+    if(!current() || pending.started)return;
+    pending.started=true;
+    try{
+      // Recheck the session immediately before starting work for this account.
+      const session=await window.abrTeamCredentialSessionInfo();
+      if(!current() || !session || session.userId!==userId || session.userIsAnonymous)return;
+      await abrLoginTimedStep("cloud-after-entry",function(){return window.abrCloudRestoreAfterLogin()});
+    }catch(error){console.warn("Giriş sonrası bulut kontrolü tamamlanamadı",error);}
+    finally{if(abrLoginCloudPending===pending)abrLoginCloudPending=null;}
+  },250);
+});
+
 window.abrTeamCredentialSignIn=async function(credentials){
   if(navigator.onLine===false)throw new Error("Giriş yapmak için internet bağlantısı gerekli.");
   const email=abrTeamTrim(credentials&&credentials.email,180).toLocaleLowerCase("tr-TR");
@@ -43711,11 +43746,13 @@ window.abrTeamCredentialSignIn=async function(credentials){
   const client=await abrLoginTimedStep("client",function(){return abrTeamEnsureClient()});
   const signed=await abrLoginTimedStep("password-auth",function(){return client.auth.signInWithPassword({email:email,password:password})});
   if(signed.error)throw signed.error;
-  await abrLoginTimedStep("profile-read",function(){return abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id)});
   await abrTeamAccountContextReset(false);
-  await abrLoginTimedStep("team-access",function(){return abrTeamInit(false,{deferContext:true})});
+  const profileRead=function(){return abrLoginTimedStep("profile-read",function(){return abrTeamAccountProfileHydrate(signed.data&&signed.data.user&&signed.data.user.id)})};
+  const teamAccess=function(){return abrLoginTimedStep("team-access",function(){return abrTeamInit(false,{deferContext:true})})};
+  if(abrLoginHasLocalRecords())await Promise.all([profileRead(),teamAccess()]);
+  else{await profileRead();await teamAccess();}
   if(abrTeamState.error)throw new Error(abrTeamState.error);
-  if(typeof window.abrCloudRestoreAfterLogin==="function")await abrLoginTimedStep("cloud-restore",function(){return window.abrCloudRestoreAfterLogin()});
+  await window.abrLoginRestoreAfterAccess(abrTeamState.user&&abrTeamState.user.id);
   return abrTeamAccountAccessSnapshot();
 };
 window.abrTeamCredentialSetup=async function(details){
@@ -44073,7 +44110,7 @@ function abrRoleEnter(role,access){
   document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
-  window.dispatchEvent(new Event("abrRoleReady"));
+  window.dispatchEvent(new CustomEvent("abrRoleReady",{detail:{userId:access&&access.userId||null}}));
   try{if(typeof haptic==="function")haptic("success")}catch(e){}
   if(role==="personnel"&&access&&!access.hasMembership){setTimeout(function(){try{if(typeof window.ekipArizaMerkeziAc==="function")window.ekipArizaMerkeziAc();setTimeout(function(){if(typeof window.ekipKurulumSekmesi==="function")window.ekipKurulumSekmesi("join")},350)}catch(e){}},450)}
 }
@@ -44334,7 +44371,7 @@ function abrRoleEnter(role,access){
   document.documentElement.classList.add(role==="admin"?"abr-role-admin":"abr-role-personnel");
   const gate=abrRoleEl("abrRoleGate");if(gate)gate.setAttribute("aria-hidden","true");
   abrRoleMarkPermissions();abrRoleWrapAdminFunctions();abrRoleIdentityPaint(role,access);
-  window.dispatchEvent(new Event("abrRoleReady"));
+  window.dispatchEvent(new CustomEvent("abrRoleReady",{detail:{userId:access&&access.userId||null}}));
   try{if(typeof haptic==="function")haptic("success")}catch(error){}
 }
 function abrRoleSuccess(access,immediate){const role=abrRoleFromAccess(access);abrRoleState.access=access;abrRoleState.successRole=role;abrRoleState.busy=false;abrRoleState.error="";abrRoleState.view="ready";abrRoleEnter(role,access)}
@@ -44370,7 +44407,7 @@ async function abrRoleBoot(){
     const session=await Promise.race([window.abrTeamCredentialSessionInfo(),timeout]);
     abrRoleState.session=session||null;abrRoleState.busy=false;
     if(session&&session.userId&&!session.userIsAnonymous){
-      try{if(typeof window.abrCloudRestoreAfterLogin==="function")await window.abrCloudRestoreAfterLogin()}catch(cloudError){}
+      try{await window.abrLoginRestoreAfterAccess(session.userId)}catch(cloudError){}
       abrRoleState.access=abrRoleCachedAccess(session.userId)||{userId:session.userId,userEmail:session.userEmail||null,profileName:abrRoleProfile().name,hasMembership:false,membershipState:null,teamRole:null,_sessionOnly:true};
       if(!abrPinRecord(session.userId)){
         try{if(typeof window.abrTeamCredentialSignOut==="function")await window.abrTeamCredentialSignOut()}catch(signOutError){}
@@ -48794,7 +48831,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.48";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50897,7 +50934,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.48</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.49</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
