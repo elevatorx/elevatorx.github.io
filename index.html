@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.46_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.47_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -669,7 +669,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.46">
+<meta name="abr-app-version" content="v2.3.47">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -20389,6 +20389,42 @@ body.darkMode .abrManagerFaultDetail,html.darkRoot .abrManagerFaultDetail{backgr
 @media(min-width:640px){.abrManagerPhotos{grid-template-columns:repeat(3,minmax(0,1fr))}.abrPhotoThumb img{height:190px}}
 </style>
 <style id="abr-manager-layer-2302">body.abrTeamOpen.abrMgrOpen{touch-action:pan-y!important}body.abrMgrOpen #abrTeamCenter{pointer-events:none}#abrMgrRoot .mgr-body{touch-action:pan-y;-webkit-overflow-scrolling:touch}#abrMgrRoot .mgr-dialog{min-height:0}</style>
+
+<script id="abrOfflineOverlay2347">
+(function(){
+  'use strict';
+  let host=null;
+  function show(){
+    if(host && host.isConnected)return;
+    const parsed=new DOMParser().parseFromString("<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<meta name=\"theme-color\" content=\"#f5f6fa\">\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n<meta name=\"apple-mobile-web-app-title\" content=\"Asansör Bakım &amp; Revizyon\">\n<link rel=\"manifest\" href=\"manifest.webmanifest\">\n<title>Asansör Bakım &amp; Revizyon<\/title>\n<style>\n*{box-sizing:border-box}html{height:100%;background:#f5f6fa}body{margin:0;min-height:100%;min-height:100svh;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color:#19283e;padding:calc(32px + env(safe-area-inset-top)) 28px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;background:radial-gradient(ellipse at 100% 0%,#dce8f8,transparent 55%),#f5f6fa}header{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:1px}header svg{width:30px;height:40px;color:#ff6b00;flex-shrink:0}header small{display:block;font-size:10px;font-weight:500;letter-spacing:2px;color:#768295;margin-top:5px}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;max-width:380px;width:100%;margin:auto;padding:48px 0}main svg{width:64px;height:64px;color:#7186a0;margin-bottom:28px}h1{font-size:32px;line-height:1.15;letter-spacing:-1px;margin:0 0 16px;font-weight:750}p{font-size:16px;line-height:1.6;color:#6d798b;margin:0 0 28px}button{border:0;border-radius:16px;min-height:54px;background:#1b3b60;color:white;font:600 16px -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;width:100%;padding:16px;cursor:pointer}button:active{transform:scale(.98)}button:focus-visible{outline:3px solid #ff6b00;outline-offset:4px}#status{font-size:13px;line-height:1.5;color:#7c8797;margin-top:16px;min-height:40px}footer{font-size:12px;line-height:1.5;color:#8a94a3} @media(prefers-reduced-motion:reduce){button:active{transform:none}}\n<\/style><\/head><body>\n<header><svg viewBox=\"0 0 32 44\" fill=\"none\" aria-hidden=\"true\"><path d=\"M10 4H7a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h3m12-36h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4h-3M11 7l5-5 5 5M11 37l5 5 5-5\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><path d=\"M9 12h6v20H9zm8 0h6v20h-6z\" fill=\"currentColor\"/><\/svg><div>ASANSÖR<small>BAKIM &amp; REVİZYON<\/small><\/div><\/header>\n<main><svg viewBox=\"0 0 64 64\" fill=\"none\" aria-hidden=\"true\"><path d=\"M10 23a35 35 0 0 1 44 0M18 33a23 23 0 0 1 28 0m-20 9a10 10 0 0 1 12 0M9 9l46 46\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"51\" r=\"3\" fill=\"currentColor\"/><\/svg>\n<h1>İnternet bağlantısı yok.<\/h1>\n<p>Uygulamayı açmak için bağlantını kontrol et. Bağlantı geldiğinde kaldığın yerden devam edebilirsin.<\/p>\n<button type=\"button\" id=\"retry\">Tekrar dene<\/button>\n<div id=\"status\" role=\"status\" aria-live=\"polite\">Bu ekran kayıtlarını değiştirmez.<\/div><\/main>\n<footer>Asansör Bakım &amp; Revizyon<\/footer>\n<\/body><\/html>",'text/html');
+    host=document.createElement('div');
+    host.id='abrOfflineScreen';
+    host.style.cssText='position:fixed!important;inset:0!important;width:100%!important;height:100%!important;z-index:2147483647!important;display:block!important;background:#f5f6fa!important;';
+    const shadow=host.attachShadow({mode:'open'});
+    const style=document.createElement('style');
+    style.textContent=parsed.querySelector('style').textContent.replace(/body\{/g,'.abr-offline-page{')+' .abr-offline-page{height:100%;overflow-y:auto;}';
+    const page=document.createElement('div');
+    page.className='abr-offline-page';
+    page.innerHTML=parsed.body.innerHTML;
+    shadow.append(style,page);
+    page.querySelector('#retry').addEventListener('click',function(){
+      if(navigator.onLine===false){page.querySelector('#status').textContent='Bağlantı henüz yok. Wi-Fi veya mobil veriyi açıp tekrar dene.';return;}
+      page.querySelector('#status').textContent='Bağlantı kontrol ediliyor…';
+      window.location.reload();
+    });
+    // Outside body so login/consent/splash layers cannot cover or disable it.
+    document.documentElement.appendChild(host);
+    page.querySelector('#retry').focus({preventScroll:true});
+  }
+  function check(){if(navigator.onLine===false)show();}
+  window.addEventListener('offline',show);
+  window.addEventListener('online',function(){if(host && host.isConnected)window.location.reload();});
+  window.addEventListener('pageshow',check);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)check();});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',check,{once:true});
+  else check();
+})();
+</script>
 </head>
 
 <body>
@@ -22182,7 +22218,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.46</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.47</div>
     </div>
   </div>
 </div>
@@ -22197,7 +22233,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.46";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.47";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -23004,7 +23040,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.46";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.47";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -38114,7 +38150,7 @@ return `
 </div>`;
 }
 
-/* v2.3.46 — public manufacturer contacts checked against official pages on 20.10.2026. */
+/* v2.3.47 — public manufacturer contacts checked against official pages on 20.10.2026. */
 const ABR_PANO_SERVICES=[
  {id:'arkel',name:'Arkel',aliases:'arl arcode arcube armaxx adrive',phone:'+908503114243',display:'0850 311 42 43',kind:'Teknik servis',email:'destek@arkel.com.tr',source:'https://www.arkel.com.tr/iletisim',checked:'20.10.2026',hours:'Teknik servis saatleri resmî sayfada belirtilmemiş.'},
  {id:'aybey',name:'Aybey',aliases:'act alc ae maestro aemaestro smart',phone:'+908503045055',display:'0850 304 50 55',kind:'Teknik destek',mobile:'+905469630053',mobileDisplay:'0546 963 00 53',whatsapp:'905469630053',whatsappKind:'WhatsApp teknik destek',email:'destek@aybey.com',source:'https://aybey.com/iletisim',whatsappSource:'https://aemaestro.com/tr',checked:'20.10.2026',hours:'Genel çalışma saatleri: Pzt–Cum 08:00–18:00. Teknik destek için ayrı saat belirtilmemiş.'},
@@ -42143,7 +42179,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.46 — only membership verification is blocking on a populated device. */
+/* v2.3.47 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -48760,7 +48796,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.46";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.47";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50863,7 +50899,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.46</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.47</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
