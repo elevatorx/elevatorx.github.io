@@ -1,4 +1,4 @@
-<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.49_LINE_LOADER -->
+<!-- ASANSOR_BAKIM_REVIZYON_BUILD_v2.3.50_LINE_LOADER -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -669,7 +669,7 @@ html.darkRoot .tabbar .tabItem.activeTab{
 <meta name="apple-mobile-web-app-title" content="Asansör Bakım &amp; Revizyon">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="abr-app-version" content="v2.3.49">
+<meta name="abr-app-version" content="v2.3.50">
 <meta name="abr-ui-foundation" content="v2.2.49">
 <meta http-equiv="Expires" content="0">
 
@@ -22218,7 +22218,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
       <div class="abrNativeSubtitle">BAKIM &amp; REVİZYON</div>
       <div class="abrNativeTagline">İşini cebinden yönet</div>
       <div class="abrNativeLoader" aria-hidden="true"><span></span></div>
-      <div class="exLaunchVersion" data-splash-version>v2.3.49</div>
+      <div class="exLaunchVersion" data-splash-version>v2.3.50</div>
     </div>
   </div>
 </div>
@@ -22233,7 +22233,7 @@ ustMarkaGorunurlukAyarla(false); }catch(e){}
   document.documentElement.classList.remove("appBooted");
   document.documentElement.classList.add("abr-splash-active");
   if(document.body){ document.body.classList.remove("appBooted"); }
-  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
+  const SPLASH_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.50";
   const KEY = "elevatorxSmartSplashSeenVersion";
   const FIRST_MS = 2250;
   const NORMAL_MS = 1850;
@@ -23038,7 +23038,7 @@ const AUTO_YEDEK_LIMIT = 5;
 
 const APP_NAME = "Asansör Bakım & Revizyon";
 /* v2.2.42 — yeni hesap kurulumunda lisans doğrulama + üyelik zorunluluğu düzeltmesi */
-const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
+const APP_VERSION = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.50";
 window.APP_VERSION = APP_VERSION;
 
 /* v2.2.30 — profil üst alanını tek kimlik kartı ve kompakt özet şeridi olarak düzenle */
@@ -38148,7 +38148,7 @@ return `
 </div>`;
 }
 
-/* v2.3.49 — public manufacturer contacts checked against official pages on 20.10.2026. */
+/* v2.3.50 — public manufacturer contacts checked against official pages on 20.10.2026. */
 const ABR_PANO_SERVICES=[
  {id:'arkel',name:'Arkel',aliases:'arl arcode arcube armaxx adrive',phone:'+908503114243',display:'0850 311 42 43',kind:'Teknik servis',email:'destek@arkel.com.tr',source:'https://www.arkel.com.tr/iletisim',checked:'20.10.2026',hours:'Teknik servis saatleri resmî sayfada belirtilmemiş.'},
  {id:'aybey',name:'Aybey',aliases:'act alc ae maestro aemaestro smart',phone:'+908503045055',display:'0850 304 50 55',kind:'Teknik destek',mobile:'+905469630053',mobileDisplay:'0546 963 00 53',whatsapp:'905469630053',whatsappKind:'WhatsApp teknik destek',email:'destek@aybey.com',source:'https://aybey.com/iletisim',whatsappSource:'https://aemaestro.com/tr',checked:'20.10.2026',hours:'Genel çalışma saatleri: Pzt–Cum 08:00–18:00. Teknik destek için ayrı saat belirtilmemiş.'},
@@ -41406,6 +41406,8 @@ async function abrPushRefresh(){
   }
   return abrPushConnectionReady();
 }
+window.abrBirthdayPushContext=function(){return {client:abrTeamState.client,user:abrTeamState.user};};
+window.abrBirthdayPushBindUser=function(){return abrPushBindUser();};
 async function abrPushBindUser(){
   if(!abrTeamState.user)return false;
   if(abrTeamState.pushBindPromise)return abrTeamState.pushBindPromise;
@@ -42177,7 +42179,7 @@ async function abrTeamRealtimeRefresh(){
   finally{abrTeamState.refreshing=false}
 }
 
-/* v2.3.49 — only membership verification is blocking on a populated device. */
+/* v2.3.50 — only membership verification is blocking on a populated device. */
 function abrLoginHasLocalRecords(){
   try{return typeof data!=="undefined"&&Array.isArray(data)&&data.length>0}catch(error){return false}
 }
@@ -43702,7 +43704,7 @@ async function abrLoginTimedStep(stage,operation){
     if(window.abrLoginTimings.length>30)window.abrLoginTimings.shift();
   }
 }
-/* v2.3.49 — only populated devices defer the backup scan until authenticated entry. */
+/* v2.3.50 — only populated devices defer the backup scan until authenticated entry. */
 let abrLoginCloudPending=null,abrLoginCloudGeneration=0,abrLoginCloudTimer=null;
 window.abrLoginCloudReset=function(){
   abrLoginCloudGeneration++;
@@ -46989,6 +46991,7 @@ window.__abrDataHubVersion="2.2.33";
       <button class="abrBirthdayAction preview" type="button" onclick="abrBirthdayPreviewStart()">Sürprizi Önizle</button>
       <button class="abrBirthdayAction save" type="button" onclick="abrBirthdaySettingsSave()">Tarihi Kaydet</button>
     </div>
+    <button type="button" class="abrBirthdayRemove" id="abrBirthdayPushTest" onclick="abrBirthdayPushTest()">Test bildirimi gönder</button><p id="abrBirthdayPushStatus" style="font-size:12px;opacity:.7;text-align:center" aria-live="polite">Doğum gününde 09.00 · Yalnızca kendi hesabına</p>
     <button id="abrBirthdayRemove" class="abrBirthdayRemove" type="button" onclick="abrBirthdaySettingsRemove()">Kayıtlı Tarihi Kaldır</button>
   </section>
 </div>
@@ -47147,11 +47150,11 @@ window.abrBirthdaySettingsClose=function(){setModal(false)};
 window.abrBirthdaySettingsSave=function(){
   const day=Number(el("abrBirthdayDay")&&el("abrBirthdayDay").value),month=Number(el("abrBirthdayMonth")&&el("abrBirthdayMonth").value);
   if(!(month>=1&&month<=12&&day>=1&&day<=MAX_DAYS[month-1])){notify("Geçerli bir gün ve ay seç");return}
-  localStorage.setItem(BIRTHDAY_KEY,JSON.stringify({day:day,month:month}));refreshStatus();setModal(false);pulse("success");
+  localStorage.setItem(BIRTHDAY_KEY,JSON.stringify({day:day,month:month}));if(window.abrBirthdayPushSync)window.abrBirthdayPushSync(true,false);refreshStatus();setModal(false);pulse("success");
   if(matchesToday({day:day,month:month},today())){localStorage.removeItem(BIRTHDAY_SEEN_KEY);applyToday(true)}else{applyToday(false);notify("Doğum günü sürprizi kaydedildi")}
 };
 window.abrBirthdaySettingsRemove=function(){
-  localStorage.removeItem(BIRTHDAY_KEY);localStorage.removeItem(BIRTHDAY_SEEN_KEY);setModal(false);window.abrBirthdayPreviewEnd();refreshStatus();notify("Doğum günü tarihi kaldırıldı");pulse("light")
+  localStorage.removeItem(BIRTHDAY_KEY);localStorage.removeItem(BIRTHDAY_SEEN_KEY);if(window.abrBirthdayPushSync)window.abrBirthdayPushSync(true,true);setModal(false);window.abrBirthdayPreviewEnd();refreshStatus();notify("Doğum günü tarihi kaldırıldı");pulse("light")
 };
 window.abrBirthdayPreviewStart=function(){
   previewActive=true;document.body.classList.add("abrBirthdayMode","abrBirthdayPreviewMode");paintExperience();setModal(false);showCelebration("preview")
@@ -47251,7 +47254,7 @@ function showStep(next){step=Math.max(0,Math.min(3,Number(next)||0));document.qu
 function requireField(id,message){const node=el(id);if(value(id))return true;notify(message);if(node)node.focus();pulse("medium");return false}
 function validCurrent(){if(step===0){if(!requireField("abrPsName","İsim soyisim girmen gerekiyor"))return false;const birth=value("abrPsBirth");if(birth){const date=new Date(birth+"T12:00:00"),now=new Date();if(!date.getTime()||date>now||date.getFullYear()<1930){notify("Geçerli bir doğum tarihi seç");el("abrPsBirth").focus();return false}}}if(step===1){if(!requireField("abrPsCompany","Firma adını girmen gerekiyor"))return false;if(!requireField("abrPsPhone","Telefon numaranı girmen gerekiyor"))return false;if(!requireField("abrPsRole","Görevini seçmen veya yazman gerekiyor"))return false}if(step===2&&!requireField("abrPsCity","Hizmet verdiğin şehri girmen gerekiyor"))return false;return true}
 function setOrRemove(key,v){if(v)localStorage.setItem(key,v);else localStorage.removeItem(key)}
-function save(){localStorage.setItem("profilAd",value("abrPsName"));localStorage.setItem("profilFirma",value("abrPsCompany"));localStorage.setItem("profilTelefon",value("abrPsPhone"));localStorage.setItem("profilBio",value("abrPsBio"));localStorage.setItem("profilKuruldu","1");setOrRemove(K.birth,value("abrPsBirth"));setOrRemove(K.role,value("abrPsRole"));setOrRemove(K.city,value("abrPsCity"));setOrRemove(K.district,value("abrPsDistrict"));setOrRemove(K.area,value("abrPsServiceArea"));setOrRemove(K.address,value("abrPsAddress"));let mediaSaved=true;try{setOrRemove(K.logo,media.logo);setOrRemove(K.signature,media.signature)}catch(error){mediaSaved=false}const birth=value("abrPsBirth");if(birth){const parts=birth.split("-");localStorage.setItem(K.birthday,JSON.stringify({day:Number(parts[2]),month:Number(parts[1])}))}else if(originalBirth){localStorage.removeItem(K.birthday)}localStorage.removeItem(K.dismissed);const map={profilAd:"abrPsName",profilFirma:"abrPsCompany",profilTelefon:"abrPsPhone",profilBio:"abrPsBio"};Object.keys(map).forEach(function(target){const node=el(target);if(node)node.value=value(map[target])});if(typeof window.profilKontrolMerkeziGuncelle==="function")window.profilKontrolMerkeziGuncelle();if(typeof window.abrBirthdayRefresh==="function")window.abrBirthdayRefresh();refreshCta();close(false);notify(mediaSaved?"Firma kartın hazır":"Firma kartın kaydedildi; logo veya imza için cihaz alanı yetmedi");pulse("success")}
+function save(){localStorage.setItem("profilAd",value("abrPsName"));localStorage.setItem("profilFirma",value("abrPsCompany"));localStorage.setItem("profilTelefon",value("abrPsPhone"));localStorage.setItem("profilBio",value("abrPsBio"));localStorage.setItem("profilKuruldu","1");setOrRemove(K.birth,value("abrPsBirth"));setOrRemove(K.role,value("abrPsRole"));setOrRemove(K.city,value("abrPsCity"));setOrRemove(K.district,value("abrPsDistrict"));setOrRemove(K.area,value("abrPsServiceArea"));setOrRemove(K.address,value("abrPsAddress"));let mediaSaved=true;try{setOrRemove(K.logo,media.logo);setOrRemove(K.signature,media.signature)}catch(error){mediaSaved=false}const birth=value("abrPsBirth");if(birth){const parts=birth.split("-");localStorage.setItem(K.birthday,JSON.stringify({day:Number(parts[2]),month:Number(parts[1])}))}else if(originalBirth){localStorage.removeItem(K.birthday)}localStorage.removeItem(K.dismissed);const map={profilAd:"abrPsName",profilFirma:"abrPsCompany",profilTelefon:"abrPsPhone",profilBio:"abrPsBio"};Object.keys(map).forEach(function(target){const node=el(target);if(node)node.value=value(map[target])});if(typeof window.profilKontrolMerkeziGuncelle==="function")window.profilKontrolMerkeziGuncelle();if(typeof window.abrBirthdayRefresh==="function")window.abrBirthdayRefresh();if(window.abrBirthdayPushSync)window.abrBirthdayPushSync(true,!birth);refreshCta();close(false);notify(mediaSaved?"Firma kartın hazır":"Firma kartın kaydedildi; logo veya imza için cihaz alanı yetmedi");pulse("success")}
 function close(dismiss){const modal=el("abrProfileSetup2237");if(!modal)return;if(dismiss&&!complete())localStorage.setItem(K.dismissed,"1");modal.classList.remove("is-open");modal.setAttribute("aria-hidden","true");document.body.classList.remove("abrProfileSetupOpen");refreshCta()}
 function open(){window.clearTimeout(autoTimer);fill();showStep(0);const modal=el("abrProfileSetup2237");if(!modal)return;modal.classList.add("is-open");modal.setAttribute("aria-hidden","false");document.body.classList.add("abrProfileSetupOpen");window.setTimeout(function(){const field=el("abrPsName");if(field)field.focus({preventScroll:true})},180);pulse("light")}
 function refreshCta(){const p=existing(),cta=el("abrProfileSetupCta"),meta=el("abrProfileExtraMeta");if(cta)cta.hidden=complete(p);if(meta){const items=[p.role,[p.district,p.city].filter(Boolean).join(" / "),p.area].filter(Boolean);meta.innerHTML="";items.forEach(function(text){const chip=document.createElement("span");chip.textContent=text;meta.appendChild(chip)});meta.hidden=!items.length}}
@@ -48831,7 +48834,7 @@ body.abrBakimView .exMaintAction{
   }
 
   function start(){
-    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.49";
+    var version = (document.querySelector('meta[name="abr-app-version"]') || {}).content || "v2.3.50";
     document.querySelectorAll("[data-app-version]").forEach(function(node){
       node.textContent = "Sürüm " + version;
     });
@@ -50934,7 +50937,7 @@ body.darkMode .abrDeveloperAboutLabel small,html.darkRoot .abrDeveloperAboutLabe
   <p class="abrDeveloperDescription">Asansör bakım, revizyon ve saha takibi için Tavşanlı Ay Asansör tarafından geliştirilmiştir.</p>
   <a class="abrDeveloperInstagram" style="margin-bottom:10px" href="https://xn--tavsanlayasansor-gqc.com" target="_blank" rel="noopener noreferrer"><span><strong>Ay Asansör web sitesi</strong><span>tavsanlıayasansor.com</span></span><span aria-hidden="true">↗</span></a>
   <a class="abrDeveloperInstagram" href="https://www.instagram.com/ayasansortavsanli/" target="_blank" rel="noopener noreferrer"><span><strong>İletişim · Instagram</strong><span>@ayasansortavsanli</span></span><span aria-hidden="true">↗</span></a>
-  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.49</span></p>
+  <p class="abrDeveloperAboutVersion">Asansör Bakım &amp; Revizyon<br><span data-app-version>Sürüm v2.3.50</span></p>
  </div>
 </dialog>
 <script id="abrDeveloperBrandScript">
@@ -51150,5 +51153,41 @@ html.darkRoot #abrLegalGate .alg-docs button:active,body.darkMode #abrLegalGate 
 :is(body.darkMode,html.darkRoot body) :is(.abrPanoServiceMobile,.abrPanoServiceActions a){color:#acd4ff}
 :is(body.darkMode,html.darkRoot body) .abrPanoService p{color:#aab8ca}
 </style>
+
+<script id="abrBirthdayPush2350">
+(function(){
+'use strict';
+var ownerKey='abrBirthdayPushOwner2350',pendingKey='abrBirthdayPushPending2350',last='',busy=false;
+function state(){var s=typeof window.abrBirthdayPushContext==='function'?window.abrBirthdayPushContext():null;return s&&s.user&&s.client?s:null;}
+function status(text){var n=document.getElementById('abrBirthdayPushStatus');if(n)n.textContent=text;}
+async function invoke(body){var s=state();if(!s)throw Error('Önce hesabına giriş yap.');var r=await s.client.functions.invoke('birthday-push',{body:body});if(r.error||!r.data||!r.data.ok)throw Error(r.data&&r.data.error||'Bildirim bağlantısı tamamlanamadı.');return r.data;}
+window.abrBirthdayPushSync=async function(edited,clear){
+ var s=state();
+ if(edited){localStorage.setItem(pendingKey,JSON.stringify({clear:!!clear}));if(s)localStorage.setItem(ownerKey,s.user.id);}
+ if(!s||busy)return false;
+ var owner=localStorage.getItem(ownerKey),pending,pendingRaw=localStorage.getItem(pendingKey);try{pending=JSON.parse(pendingRaw||'null');}catch(e){}
+ if(owner&&owner!==s.user.id){status('Bu hesap için doğum tarihini kaydet.');return false;}
+ var b;try{b=JSON.parse(localStorage.getItem('abrBirthdayDayMonthV2234')||'null');}catch(e){}
+ var disabled=!!(pending&&pending.clear);
+ if(!b&&!disabled)return false;
+ var body={action:'sync',enabled:!disabled,day:b&&b.day,month:b&&b.month,name:localStorage.getItem('profilAd')||''};
+ var key=s.user.id+JSON.stringify(body);if(key===last&&!pending)return true;
+ busy=true;
+ try{await invoke(body);last=key;localStorage.setItem(ownerKey,s.user.id);if(localStorage.getItem(pendingKey)===pendingRaw)localStorage.removeItem(pendingKey);status(disabled?'Doğum günü bildirimi kapalı.':'Tarih hesabına kaydedildi · Doğum gününde 09.00');return true;}
+ catch(e){status(e.message+' Bağlantı gelince yeniden denenecek.');return false;}
+ finally{busy=false;}
+};
+window.abrBirthdayPushTest=async function(){
+ var b=document.getElementById('abrBirthdayPushTest');if(b)b.disabled=true;
+ try{if(!state())throw Error('Önce hesabına giriş yap.');status('Bildirim hesabın doğrulanıyor…');if(typeof window.abrBirthdayPushBindUser==='function')await window.abrBirthdayPushBindUser();await window.abrBirthdayPushSync();await invoke({action:'test'});status('Test bildirimi gönderim için kabul edildi. Telefonunu kontrol et.');}
+ catch(e){status(e.message);}
+ finally{if(b)b.disabled=false;}
+};
+setTimeout(function(){window.abrBirthdayPushSync();},5000);
+setInterval(function(){window.abrBirthdayPushSync();},60000);
+window.addEventListener('online',function(){window.abrBirthdayPushSync();});
+document.addEventListener('visibilitychange',function(){if(!document.hidden)window.abrBirthdayPushSync();});
+})();
+</script>
 </body>
 </html>
