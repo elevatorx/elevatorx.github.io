@@ -24462,6 +24462,8 @@ kalem:erkenTahsilat ? "Bakım öncesi erken tahsilat" : (o.kalem || ""),
 erkenTahsilat:erkenTahsilat,
 createdAt:o.createdAt || "",
 updatedAt:o.updatedAt || "",
+odemeOncesiNetBakiye:o.odemeOncesiNetBakiye == null ? null : Number(o.odemeOncesiNetBakiye),
+netBakiye:o.netBakiye == null ? null : Number(o.netBakiye),
 odemeOncesiBorc:
 o.odemeOncesiBorc === undefined || o.odemeOncesiBorc === null
 ? null
@@ -24961,17 +24963,18 @@ tutar:tutar
 let odemeler = odemeListesi(a);
 
 /*
-v2.0.32 cari kapanış uyumluluğu:
+Cari kapanış uyumluluğu — yalnız geçmiş bakım farkı:
 Eski sürümlerde tahsilat sırasında kapanmış bir cari, sonradan içeri alınan
 geçmiş bakım kaydı yüzünden yeniden borçlu görünmemelidir. Kapanış tarihinden
-önceki kalemlerle o tarihe kadarki tahsilat arasındaki fark mahsup edilir;
-kapanıştan sonraki gerçek bakım/parça kayıtları borç oluşturmaya devam eder.
+önceki bakım kalemleriyle o tarihe kadarki tahsilat arasındaki fark mahsup edilir.
+Parça ve eski bakiye bu uyumluluk hesabına girmez; aynı gün veya geçmiş
+tarihle eklenmiş olsalar da yalnız gerçek tahsilat ile kapanırlar.
 */
 let kapanisKey = bakimTarihKey(a && a.odemeTarihi);
 let kapanisMahsubu = 0;
 
 if(kapanisKey && odemeler.length){
-let kapanisaKadarBorc = kalemler.reduce(function(t,k){
+let kapanisaKadarBakim = bakimKalemleri.reduce(function(t,k){
 let key = bakimTarihKey(k && k.tarih);
 return t + ((!key || key <= kapanisKey) ? Number(k && k.tutar ? k.tutar : 0) : 0);
 },0);
@@ -24982,8 +24985,8 @@ return t + ((!key || key <= kapanisKey) ? Number(o && o.tutar ? o.tutar : 0) : 0
 },0);
 
 kapanisMahsubu = Math.min(
-Math.max(kapanisaKadarBorc - kapanisaKadarTahsilat,0),
-beklenenHam
+Math.max(kapanisaKadarBakim - kapanisaKadarTahsilat,0),
+bakimUcreti
 );
 
 if(kapanisMahsubu > 0){
@@ -24991,7 +24994,7 @@ beklenen = Math.max(beklenenHam - kapanisMahsubu,0);
 kalemler.push({
 tip:"Mahsup",
 tarih:bakimTarihGoster(kapanisKey),
-aciklama:"Önceki cari kapanış mahsubu",
+aciklama:"Önceki bakım kapanış mahsubu",
 tutar:-kapanisMahsubu
 });
 }
@@ -25632,6 +25635,8 @@ odeme.kalem = aciklama.trim();
 odeme.updatedAt = new Date().toISOString();
 delete odeme.odemeOncesiBorc;
 delete odeme.kalanBorc;
+delete odeme.odemeOncesiNetBakiye;
+delete odeme.netBakiye;
 
 if(!Array.isArray(a.kayitlar)){
 a.kayitlar = [];
@@ -26088,6 +26093,8 @@ kayit.kalem = aciklama;
 kayit.updatedAt = new Date().toISOString();
 delete kayit.odemeOncesiBorc;
 delete kayit.kalanBorc;
+delete kayit.odemeOncesiNetBakiye;
+delete kayit.netBakiye;
 
 if(kapanisKeyOnce && eskiOdemeKey && eskiOdemeKey <= kapanisKeyOnce){
 a.odemeTarihi = "";
@@ -29381,7 +29388,7 @@ if(filtreli.length === 0){
 
           <div class="exPortfolioBottomItem ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">
             <span>Bakiye</span>
-            <b>${ayHtml(tutarFormat(cari.kalanPozitif))}</b>
+            <b>${cari.alacak > 0 ? "+" + ayHtml(tutarFormat(cari.alacak)) + " alacak" : ayHtml(tutarFormat(cari.kalanPozitif))}</b>
           </div>
 
           <div class="exPortfolioArrow">›</div>
@@ -29592,7 +29599,7 @@ ${odemeBadge(a)}
 </div>
 <div class="aptPlanDate">Plan <b>${ayHtml(bakimPlanTarih(a))}</b></div>
 <div class="aptMoneyLine">${tutarFormat(cari.toplam)} / ${tutarFormat(cari.beklenen)}</div>
-<div class="aptBalanceLine ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">Kalan ${tutarFormat(cari.kalanPozitif)}</div>
+<div class="aptBalanceLine ${cari.kalanPozitif > 0 ? "moneyDebt" : "moneyOk"}">${cari.alacak > 0 ? "+" + tutarFormat(cari.alacak) + " alacak" : "Kalan " + tutarFormat(cari.kalanPozitif)}</div>
 </div>
 
 <div class="arrow aptArrowPremium">›</div>
@@ -33217,6 +33224,8 @@ function tahsilatKaydet(){
     a.sonOdemeTarihi = yeniOdeme.tarih;
 
     let yeniCari = cariOzet(a);
+    yeniOdeme.odemeOncesiNetBakiye = Number(cari.kalan || 0);
+    yeniOdeme.netBakiye = Number(yeniCari.kalan || 0);
     yeniOdeme.odemeOncesiBorc = Math.max(0,Number(cari.kalanPozitif || 0));
     yeniOdeme.kalanBorc = Math.max(0,Number(yeniCari.kalanPozitif || 0));
 
@@ -34666,14 +34675,19 @@ let aktifTutar = Math.max(0,Number((aktifOdeme && aktifOdeme.tutar) || 0));
 let kayitliOnce = aktifOdeme && aktifOdeme.odemeOncesiBorc !== undefined && aktifOdeme.odemeOncesiBorc !== null;
 let kayitliKalan = aktifOdeme && aktifOdeme.kalanBorc !== undefined && aktifOdeme.kalanBorc !== null;
 
-if(kayitliOnce && kayitliKalan){
-let once = Math.max(0,Number(aktifOdeme.odemeOncesiBorc || 0));
-let kalan = Math.max(0,Number(aktifOdeme.kalanBorc || 0));
-return {
-odemeOncesiBorc:once,
-kalanBorc:kalan,
-netBakiye:kalan
-};
+// Signed snapshots preserve credit as well as debt at the time of payment.
+if(aktifOdeme && aktifOdeme.netBakiye != null){
+let net = Number(aktifOdeme.netBakiye);
+let once = aktifOdeme.odemeOncesiNetBakiye != null
+? Number(aktifOdeme.odemeOncesiNetBakiye) : net + aktifTutar;
+return {odemeOncesiBorc:Math.max(0,once),kalanBorc:Math.max(0,net),netBakiye:net};
+}
+// Older receipts saved debt with credit clamped to zero. Recover the
+// overpayment from their original positive debt and payment amount.
+if(kayitliOnce && kayitliKalan && Number(aktifOdeme.odemeOncesiBorc) > 0){
+let once = Number(aktifOdeme.odemeOncesiBorc);
+let net = once - aktifTutar;
+return {odemeOncesiBorc:once,kalanBorc:Math.max(0,net),netBakiye:net};
 }
 
 let odemeler = Array.isArray(cari && cari.odemeler) ? cari.odemeler : odemeListesi(a);
@@ -34777,9 +34791,12 @@ let makbuzBakiye = odemeMakbuzuBakiyeHesapla(a,aktifOdeme,cari);
 let odemeOncesiBorc = makbuzBakiye.odemeOncesiBorc;
 let odemeSonrasiBakiye = makbuzBakiye.netBakiye;
 let kalanBorc = makbuzBakiye.kalanBorc;
+let makbuzAlacak = Math.max(0,-odemeSonrasiBakiye);
 let cariDurumu = "Cari tahsilat";
 
-if(erkenTahsilat){
+if(makbuzAlacak > 0){
+  cariDurumu = "Alacak: +" + tutarFormat(makbuzAlacak);
+}else if(erkenTahsilat){
   cariDurumu = "Erken tahsilat / avans";
 }else if(odemeOncesiBorc > 0){
   if(aktifTutar < odemeOncesiBorc){
@@ -34924,7 +34941,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="amountBox">
 <div class="amountLabel">Bu Tahsilat</div>
 <div class="amountValue">${tahsilEdilen}</div>
-<div class="statusLine ${kalanBorc > 0 ? "debt" : ""}">Kalan borç: ${ayHtml(tutarFormat(kalanBorc))}</div>
+<div class="statusLine ${kalanBorc > 0 ? "debt" : ""}">Kalan borç: ${ayHtml(tutarFormat(kalanBorc))}${makbuzAlacak > 0 ? " · Alacak: +" + ayHtml(tutarFormat(makbuzAlacak)) : ""}</div>
 </div>
 </div>
 
@@ -34936,7 +34953,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="card"><div class="label">İlgili İşlem</div><div class="value">${ilgiliIslem}</div></div>
 <div class="card"><div class="label">Bu Tahsilat</div><div class="value ok">${tahsilEdilen}</div></div>
 <div class="card"><div class="label">Ödeme Öncesi Borç</div><div class="value">${ayHtml(tutarFormat(odemeOncesiBorc))}</div></div>
-<div class="card"><div class="label">Kalan Borç</div><div class="value ${kalanBorc > 0 ? "debt" : "ok"}">${ayHtml(tutarFormat(kalanBorc))}</div></div>
+<div class="card"><div class="label">Kalan Borç / Alacak</div><div class="value ${kalanBorc > 0 ? "debt" : "ok"}">${ayHtml(tutarFormat(kalanBorc))}${makbuzAlacak > 0 ? " / +" + ayHtml(tutarFormat(makbuzAlacak)) + " alacak" : ""}</div></div>
 <div class="card"><div class="label">Ödeme Tarihi</div><div class="value">${odeme}</div></div>
 <div class="card"><div class="label">Cari Durumu</div><div class="value">${ayHtml(cariDurumu)}</div></div>
 </div>
@@ -35264,7 +35281,7 @@ ${elevatorXPdfSafetyScript()}</head>
 <div class="financeGrid">
 <div class="financeItem"><span>Aylık Bakım</span><b>${ayHtml(tutarFormat(cari.anlasmaUcreti))}</b></div>
 <div class="financeItem"><span>Toplam Tahsilat</span><b>${ayHtml(tutarFormat(cari.toplam))}</b></div>
-<div class="financeItem debt"><span>Açık Borç</span><b>${ayHtml(tutarFormat(cari.kalanPozitif))}</b></div>
+<div class="financeItem debt"><span>Açık Borç</span><b>${cari.alacak > 0 ? "+" + ayHtml(tutarFormat(cari.alacak)) + " alacak" : ayHtml(tutarFormat(cari.kalanPozitif))}</b></div>
 <div class="financeItem"><span>Son Ödeme</span><b>${ayHtml(cariSonOdeme)}</b></div>
 </div>
 <div class="financeNote">Bu alan bilgilendirme amaçlıdır; ödeme makbuzu yerine geçmez.</div>
@@ -50680,7 +50697,7 @@ function apply(events){const perform=()=>{errors=[];const disk=localStorage.getI
  odemeleriHazirla(a);const summary=cariOzet(a),date=tahsilatTarihKayitDegeri(e.payment_date),description='Yapı Kredi · '+e.sender_name+' · Gelen FAST · '+e.payment_time;
  const o={id:'bankauto_'+e.id,tutar:e.amount/100,tarih:date,aciklama:description,kalem:description,tip:e.payment_type,erkenTahsilat:summary.kalanPozitif<=0,createdAt:e.booked_at,odemeOncesiBorc:Math.max(0,Number(summary.kalanPozitif||0))};attach(o,e);a.odemeler.unshift(o);a.sonOdemeTarihi=date;
  // Keep historic closing adjustments intact; a receipt must not reopen old closed debt.
- const after=cariOzet(a);o.kalanBorc=Math.max(0,Number(after.kalanPozitif||0));if(after.kalanPozitif<=0&&after.toplam>0&&!a.odemeTarihi)a.odemeTarihi=date;
+ const after=cariOzet(a);o.odemeOncesiNetBakiye=Number(summary.kalan||0);o.netBakiye=Number(after.kalan||0);o.kalanBorc=Math.max(0,Number(after.kalanPozitif||0));if(after.kalanPozitif<=0&&after.toplam>0&&!a.odemeTarihi)a.odemeTarihi=date;
  if(!Array.isArray(a.kayitlar))a.kayitlar=[];a.kayitlar.push('Otomatik banka tahsilatı: '+money(e.amount)+' · '+e.sender_name+' ('+date+')');n++;
  }
  if(n&&!kaydet())throw new Error('Otomatik tahsilatlar cihazda saklanamadı. Sunucu kayıtları korundu.');return n;
